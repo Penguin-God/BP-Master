@@ -14,6 +14,8 @@ public class ChampionMastery
         this.champion = champion;
         this.level = level;
     }
+
+    public ChampionMastery GetClone() => new ChampionMastery(champion, level);
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "BP Master/PlayerSO")]
@@ -26,7 +28,7 @@ public class PlayerSO : ScriptableObject
     public string PlayerName => playerName;
 
     [SerializeField] ChampionMastery[] startMasteries;
-    public IReadOnlyList<ChampionMastery> StartMasteries => startMasteries;
+    public IReadOnlyList<ChampionMastery> StartMasteries => startMasteries.Select(x => x.GetClone()).ToArray();
 
     public int GetMasteryLevel(int chamId)
     {
