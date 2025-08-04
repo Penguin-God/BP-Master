@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public enum Team { Blue, Red}
+
 public class TeamSelectManager
 {
     readonly List<ChampionSO> bans = new();
