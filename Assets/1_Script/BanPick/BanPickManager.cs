@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 
-public enum Team { Blue, Red}
+public enum Team { Blue, Red }
 
 public class TeamSelectManager
 {
@@ -33,11 +32,11 @@ public readonly struct SelectData
 public class BanPickManager
 {
     public BanPcikPhase CurrentPhase {  get; private set; } = BanPcikPhase.Ban;
-    Queue<Team> banTurn;
-    Queue<Team> pickTurn;
+    readonly Queue<Team> banTurn;
+    readonly Queue<Team> pickTurn;
 
-    TeamSelectManager blue = new();
-    TeamSelectManager red = new();
+    readonly TeamSelectManager blue = new();
+    readonly TeamSelectManager red = new();
     readonly Dictionary<Team, TeamSelectManager> selectManagerDict = new();
     public HashSet<ChampionSO> selectedChampions = new();
 

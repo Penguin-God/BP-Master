@@ -2983,10 +2983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ab8c55b6c18df4ab37e30ce1e655b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  banTurnSO: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
-  pickTurnSO: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
+  banPickController: {fileID: 1420292362}
   championSelectionBtn: {fileID: 919244431}
-  currentPhase: 0
   bluePicks:
   - {fileID: 1795356418}
   - {fileID: 2043226576}
@@ -3636,6 +3634,7 @@ GameObject:
   - component: {fileID: 1420292360}
   - component: {fileID: 1420292359}
   - component: {fileID: 1420292361}
+  - component: {fileID: 1420292362}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3688,6 +3687,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 84391e4392860a345a2ad6403be1efca, type: 2}
   - {fileID: 11400000, guid: b968f3700ad9edb46ad3788d6cc3dd03, type: 2}
   championManager: {fileID: 0}
+--- !u!114 &1420292362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420292358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d42e54796fcf04ea44b772f5c8d1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  banTurnSO: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
+  pickTurnSO: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
 --- !u!1001 &1455117545
 PrefabInstance:
   m_ObjectHideFlags: 0

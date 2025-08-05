@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,29 +6,25 @@ using UnityEngine.UI;
 
 public enum BanPcikPhase { Ban = 0, Pick = 1, Swap = 2, Done = 3 }
 
-public class BanPickUI : MonoBehaviour
+// 세팅, view까지 얘 역할이 많다
+public class BanPickUI : MonoBehaviour, IBanPickAgent
 {
-    [SerializeField] DraftTurnSO banTurnSO;
-    [SerializeField] DraftTurnSO pickTurnSO;
+    [SerializeField] BanPickController banPickController;
     [SerializeField] Button championSelectionBtn;
-
-    [SerializeField] BanPcikPhase currentPhase = BanPcikPhase.Ban;
 
     [SerializeField] TextMeshProUGUI[] bluePicks;
     [SerializeField] TextMeshProUGUI[] redPicks;
-    readonly Dictionary<Team, TextMeshProUGUI[]> pickDict = new();
+    readonly Dictionary<Team, TextMeshProUGUI[]> pickTextDict = new();
 
     [SerializeField] ChampionSO currentSelectChampion = null;
     [SerializeField] TextMeshProUGUI selectChampionTxt;
     [SerializeField] ChampionSelectionUI championSelectionUI;
 
-    BanPickManager BanPickManager;
     void Start()
     {
-        BanPickManager = new BanPickManager(banTurnSO, pickTurnSO);
-
-        pickDict.Add(Team.Blue, bluePicks);
-        pickDict.Add(Team.Red, redPicks);
+        pickTextDict.Add(Team.Blue, bluePicks);
+        pickTextDict.Add(Team.Red, redPicks);
+        banPickController.OnSelectedChampion += DrawUI;
         championSelectionBtn.onClick.AddListener(NailDownChampion);
         championSelectionUI.DrawChampionsButton(SelectChampion);
     }
@@ -40,12 +37,22 @@ public class BanPickUI : MonoBehaviour
 
     void NailDownChampion()
     {
-        if (currentSelectChampion == null) return;
-
-        if(BanPickManager.TrySelect(currentSelectChampion, out SelectData data))
-        {
-            if(data.BanPcikPhase == BanPcikPhase.Pick)
-                pickDict[data.Team][data.Count - 1].text = data.Champion.ChampionName;
-        }
+        if (currentSelectChampion != null)
+            isSelect = true;
     }
+
+    void DrawUI(SelectData data)
+    {
+        if (data.BanPcikPhase == BanPcikPhase.Pick)
+            pickTextDict[data.Team][data.Count - 1].text = data.Champion.ChampionName;
+    }
+
+    bool isSelect;
+    public IEnumerator WaitSelect()
+    {
+        yield return new WaitUntil(() =>  isSelect);
+        isSelect = false;
+    }
+
+    public ChampionSO SelectChampion() => currentSelectChampion;
 }
