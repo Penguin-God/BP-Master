@@ -38,40 +38,40 @@ public class BanPickManager
 
     TeamSelectManager blue = new();
     TeamSelectManager red = new();
-    readonly Dictionary<Team, TeamSelectManager> selectManagerDick = new();
+    readonly Dictionary<Team, TeamSelectManager> selectManagerDict = new();
+    public HashSet<ChampionSO> selectedChampions = new();
 
     public BanPickManager(DraftTurnSO banTurnSO, DraftTurnSO pickTurnSO)
     {
         banTurn = new Queue<Team>(banTurnSO.Turns);
         pickTurn = new Queue<Team>(pickTurnSO.Turns);
-        selectManagerDick.Add(Team.Blue, blue);
-        selectManagerDick.Add(Team.Red, red);
+        selectManagerDict.Add(Team.Blue, blue);
+        selectManagerDict.Add(Team.Red, red);
     }
 
     public bool TrySelect(ChampionSO champion, out SelectData selectData)
     {
         selectData = new SelectData();
-        if (SelectConditoin(champion) == false) return false;
+        if (selectedChampions.Contains(champion)) return false;
 
         var phase = CurrentPhase;
+        selectedChampions.Add(champion);
         if (CurrentPhase == BanPcikPhase.Ban)
         {
             var team = ProgressGame(banTurn);
-            selectManagerDick[team].Ban(champion);
-            selectData = new SelectData(champion, team, phase, selectManagerDick[team].Baned.Count);
+            selectManagerDict[team].Ban(champion);
+            selectData = new SelectData(champion, team, phase, selectManagerDict[team].Baned.Count);
             return true;
         }
         else if (CurrentPhase == BanPcikPhase.Pick)
         {
             var team = ProgressGame(pickTurn);
-            selectManagerDick[team].Pick(champion);
-            selectData = new SelectData(champion, team, phase, selectManagerDick[team].Picks.Count);
+            selectManagerDict[team].Pick(champion);
+            selectData = new SelectData(champion, team, phase, selectManagerDict[team].Picks.Count);
             return true;
         }
         else return false;
     }
-
-    bool SelectConditoin(ChampionSO champion) => blue.Baned.Contains(champion) == false && blue.Picks.Contains(champion) == false && red.Baned.Contains(champion) == false && red.Picks.Contains(champion) == false;
 
     Team ProgressGame(Queue<Team> turns)
     {

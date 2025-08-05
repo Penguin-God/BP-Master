@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BanPcikPhase { Ban, Pick, Swap, Done }
+public enum BanPcikPhase { Ban = 0, Pick = 1, Swap = 2, Done = 3 }
 
 public class BanPickUI : MonoBehaviour
 {
