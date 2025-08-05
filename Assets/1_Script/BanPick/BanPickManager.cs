@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 
 public enum Team { Blue, Red }
 
-public class TeamSelectManager
+public class TeamSelectStorage
 {
     readonly List<ChampionSO> bans = new();
     public IReadOnlyList<ChampionSO> Baned => bans;
@@ -17,78 +16,70 @@ public class TeamSelectManager
 public readonly struct SelectData
 {
     public readonly ChampionSO Champion;
-    public readonly Team Team;
-    public readonly Team NextTeam;
-    public readonly BanPcikPhase NextPhase;
+    public readonly TurnInfo CurrentTurn;
+    public readonly TurnInfo NextTurn;
     public readonly int Count;
 
-    public SelectData(ChampionSO champion, Team team, Team nextTeam, BanPcikPhase phase, int count)
+    public SelectData(ChampionSO champion, TurnInfo currentTurn, TurnInfo nextTurn, int count)
     {
         Champion = champion;
-        Team = team;
-        NextTeam = nextTeam;
-        NextPhase = phase;
+        CurrentTurn = currentTurn;
+        NextTurn = nextTurn;
         Count = count;
+    }
+}
+
+public readonly struct TurnInfo
+{
+    public readonly Team Team;
+    public readonly BanPcikPhase Phase;
+
+    public TurnInfo(Team team, BanPcikPhase phase)
+    {
+        Team = team;
+        Phase = phase;
     }
 }
 
 public class BanPickManager
 {
-    public BanPcikPhase CurrentPhase {  get; private set; } = BanPcikPhase.Ban;
-    readonly Queue<Team> banTurn;
-    readonly Queue<Team> pickTurn;
-    readonly Queue<Team> allTurn;
+    public BanPcikPhase CurrentPhase => turnQueue.Count == 0 ? BanPcikPhase.Swap : turnQueue.Peek().Phase;
 
-    readonly TeamSelectManager blue = new();
-    readonly TeamSelectManager red = new();
-    readonly Dictionary<Team, TeamSelectManager> selectManagerDict = new();
-    public HashSet<ChampionSO> selectedChampions = new();
+    readonly Queue<TurnInfo> turnQueue = new();
+    readonly Dictionary<Team, TeamSelectStorage> storageDict = new();
+
+    readonly HashSet<ChampionSO> selected = new();
 
     public BanPickManager(DraftTurnSO banTurnSO, DraftTurnSO pickTurnSO)
     {
-        banTurn = new Queue<Team>(banTurnSO.Turns);
-        pickTurn = new Queue<Team>(pickTurnSO.Turns);
-        allTurn = new Queue<Team>(banTurn.Concat(pickTurnSO.Turns));
+        // ban, pick 순서대로 큐에 삽입
+        foreach (var team in banTurnSO.Turns) turnQueue.Enqueue(new TurnInfo(team, BanPcikPhase.Ban));
+        foreach (var team in pickTurnSO.Turns) turnQueue.Enqueue(new TurnInfo(team, BanPcikPhase.Pick));
 
-        selectManagerDict.Add(Team.Blue, blue);
-        selectManagerDict.Add(Team.Red, red);
+        storageDict.Add(Team.Blue, new TeamSelectStorage());
+        storageDict.Add(Team.Red, new TeamSelectStorage());
     }
 
-    public bool TrySelect(ChampionSO champion, out SelectData selectData)
+    public bool TrySelect(ChampionSO champ, out SelectData data)
     {
-        selectData = new SelectData();
-        if (selectedChampions.Contains(champion)) return false;
+        data = default;
+        if (selected.Contains(champ) || turnQueue.Count == 0) return false;
 
-        var phase = CurrentPhase;
-        selectedChampions.Add(champion);
-        if (CurrentPhase == BanPcikPhase.Ban)
-        {
-            var team = ProgressGame(banTurn);
-            selectManagerDict[team].Ban(champion);
-            selectData = new SelectData(champion, team, GetNextTeam(), phase, selectManagerDict[team].Baned.Count);
-            return true;
-        }
-        else if (CurrentPhase == BanPcikPhase.Pick)
-        {
-            var team = ProgressGame(pickTurn);
-            selectManagerDict[team].Pick(champion);
-            selectData = new SelectData(champion, team, GetNextTeam(), phase, selectManagerDict[team].Picks.Count);
-            return true;
-        }
-        else return false;
+        var turn = turnQueue.Dequeue();
+        var storage = storageDict[turn.Team];
+        var phase = turn.Phase;
+
+        // 행동 실행
+        selected.Add(champ);
+        if (phase == BanPcikPhase.Ban) storage.Ban(champ);
+        else if (phase == BanPcikPhase.Pick) storage.Pick(champ);
+
+        // SelectData 작성
+        int count = phase == BanPcikPhase.Ban ? storage.Baned.Count : storage.Picks.Count;
+
+        data = new SelectData(champ, new TurnInfo(turn.Team, phase), GetNextTurnInfo(), count);
+        return true;
     }
 
-    Team GetNextTeam()
-    {
-        if(allTurn.Count > 0) return allTurn.Peek();
-        else return Team.Blue;
-    }
-
-    Team ProgressGame(Queue<Team> turns)
-    {
-        Team result = turns.Dequeue();
-        allTurn.Dequeue();
-        if (turns.Count == 0) CurrentPhase++;
-        return result;
-    }
+    TurnInfo GetNextTurnInfo() => turnQueue.Count > 0 ? turnQueue.Peek() : default;
 }

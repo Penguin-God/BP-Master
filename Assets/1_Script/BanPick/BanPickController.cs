@@ -31,13 +31,13 @@ public class BanPickController : MonoBehaviour
         // 실패시 다시 돌림
         if (banPickManager.TrySelect(champion, out var data) == false)
         {
-            StartCoroutine(Co_BanPick(data.NextTeam));
+            StartCoroutine(Co_BanPick(data.NextTurn.Team));
             return;
         }
 
         OnSelectedChampion?.Invoke(data);
-        if (data.NextPhase < BanPcikPhase.Swap)
-            StartCoroutine(Co_BanPick(data.NextTeam));
+        if (data.NextTurn.Phase < BanPcikPhase.Swap)
+            StartCoroutine(Co_BanPick(data.NextTurn.Team));
     }
 
     IEnumerator Co_BanPick(Team team)

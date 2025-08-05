@@ -20,7 +20,7 @@ public class BanPickView : MonoBehaviour
 
     public void UpdatePickChampions(SelectData data)
     {
-        if (data.NextPhase == BanPcikPhase.Pick)
-            pickTextDict[data.Team][data.Count - 1].text = data.Champion.ChampionName;
+        if (data.CurrentTurn.Phase == BanPcikPhase.Pick)
+            pickTextDict[data.CurrentTurn.Team][data.Count - 1].text = data.Champion.ChampionName;
     }
 }
