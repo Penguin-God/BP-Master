@@ -1,10 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_BanPickAgent
+public class AI_BanPickAgent : IBanPickAgent
 {
-    public ChampionSO SelectChampion(IReadOnlyList<ChampionSO> champions)
+    readonly ChampionSelectStorage storage;
+    public AI_BanPickAgent(ChampionSelectStorage storage) => this.storage = storage;
+
+    public ChampionSO SelectChampion() => storage.SelectableChampions[Random.Range(0, storage.SelectableChampions.Count)];
+
+    public IEnumerator WaitSelect()
     {
-        return champions[Random.Range(0, champions.Count)];
+        yield return new WaitForSeconds(1.5f);
     }
 }

@@ -1,19 +1,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BanPickController : MonoBehaviour
 {
     BanPickManager banPickManager;
+    ChampionSelectStorage championStorage;
 
     public event Action<SelectData> OnSelectedChampion = null;
     [SerializeField] DraftTurnSO banTurnSO;
     [SerializeField] DraftTurnSO pickTurnSO;
     public Dictionary<Team, IBanPickAgent> agentDict = new();
+
     void Awake()
     {
         banPickManager = new BanPickManager(banTurnSO, pickTurnSO);
+    }
+
+    void Start()
+    {
+        championStorage = new ChampionSelectStorage(FindAnyObjectByType<ChampionManager>().AllChampion);
     }
 
     BanPickUI GetUserAgent() => FindAnyObjectByType<BanPickUI>();
@@ -21,7 +29,7 @@ public class BanPickController : MonoBehaviour
     public void ChioceTeam(Team team)
     {
         agentDict.Add(team, GetUserAgent());
-        if(team == Team.Blue) agentDict.Add(Team.Red, GetUserAgent());
+        if(team == Team.Blue) agentDict.Add(Team.Red, new AI_BanPickAgent(championStorage));
         else agentDict.Add(Team.Blue, GetUserAgent());
         StartCoroutine(Co_BanPick(Team.Blue));
     }
@@ -35,6 +43,7 @@ public class BanPickController : MonoBehaviour
             return;
         }
 
+        championStorage.SaveSelectChampion(champion);
         OnSelectedChampion?.Invoke(data);
         if (data.NextTurn.Phase < BanPcikPhase.Swap)
             StartCoroutine(Co_BanPick(data.NextTurn.Team));
@@ -44,5 +53,17 @@ public class BanPickController : MonoBehaviour
     {
         yield return agentDict[team].WaitSelect();
         SelectChampion(agentDict[team].SelectChampion());
+    }
+}
+
+public class ChampionSelectStorage
+{
+    HashSet<ChampionSO> selectableChampions;
+    public IReadOnlyList<ChampionSO> SelectableChampions => selectableChampions.ToArray();
+    public ChampionSelectStorage(IReadOnlyList<ChampionSO> champions) => selectableChampions = new HashSet<ChampionSO>(champions);
+
+    public void SaveSelectChampion(ChampionSO champion)
+    {
+        selectableChampions.Remove(champion);
     }
 }
