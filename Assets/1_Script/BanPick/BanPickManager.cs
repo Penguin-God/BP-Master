@@ -81,5 +81,5 @@ public class BanPickManager
         return true;
     }
 
-    TurnInfo GetNextTurnInfo() => turnQueue.Count > 0 ? turnQueue.Peek() : default;
+    TurnInfo GetNextTurnInfo() => turnQueue.Count == 0 ? new TurnInfo(0, BanPcikPhase.Swap) : turnQueue.Peek();
 }

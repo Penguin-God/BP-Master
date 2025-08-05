@@ -4193,7 +4193,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c3b4fd2eee97a043b94fca3771d4e33, type: 2}
   - {fileID: 11400000, guid: 84391e4392860a345a2ad6403be1efca, type: 2}
   - {fileID: 11400000, guid: b968f3700ad9edb46ad3788d6cc3dd03, type: 2}
-  championManager: {fileID: 0}
+  championManager: {fileID: 1420292359}
 --- !u!114 &1420292362
 MonoBehaviour:
   m_ObjectHideFlags: 0

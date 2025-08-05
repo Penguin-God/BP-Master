@@ -30,7 +30,7 @@ public class BanPickController : MonoBehaviour
     {
         agentDict.Add(team, GetUserAgent());
         if(team == Team.Blue) agentDict.Add(Team.Red, new AI_BanPickAgent(championStorage));
-        else agentDict.Add(Team.Blue, GetUserAgent());
+        else agentDict.Add(Team.Blue, new AI_BanPickAgent(championStorage));
         StartCoroutine(Co_BanPick(Team.Blue));
     }
 
@@ -47,6 +47,8 @@ public class BanPickController : MonoBehaviour
         OnSelectedChampion?.Invoke(data);
         if (data.NextTurn.Phase < BanPcikPhase.Swap)
             StartCoroutine(Co_BanPick(data.NextTurn.Team));
+        else
+            print("Done");
     }
 
     IEnumerator Co_BanPick(Team team)
