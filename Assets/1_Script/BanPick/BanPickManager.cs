@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public enum Team { Blue, Red }
 
@@ -17,14 +18,16 @@ public readonly struct SelectData
 {
     public readonly ChampionSO Champion;
     public readonly Team Team;
-    public readonly BanPcikPhase BanPcikPhase;
+    public readonly Team NextTeam;
+    public readonly BanPcikPhase NextPhase;
     public readonly int Count;
 
-    public SelectData(ChampionSO champion, Team team, BanPcikPhase phase, int count)
+    public SelectData(ChampionSO champion, Team team, Team nextTeam, BanPcikPhase phase, int count)
     {
         Champion = champion;
         Team = team;
-        BanPcikPhase = phase;
+        NextTeam = nextTeam;
+        NextPhase = phase;
         Count = count;
     }
 }
@@ -34,6 +37,7 @@ public class BanPickManager
     public BanPcikPhase CurrentPhase {  get; private set; } = BanPcikPhase.Ban;
     readonly Queue<Team> banTurn;
     readonly Queue<Team> pickTurn;
+    readonly Queue<Team> allTurn;
 
     readonly TeamSelectManager blue = new();
     readonly TeamSelectManager red = new();
@@ -44,6 +48,8 @@ public class BanPickManager
     {
         banTurn = new Queue<Team>(banTurnSO.Turns);
         pickTurn = new Queue<Team>(pickTurnSO.Turns);
+        allTurn = new Queue<Team>(banTurn.Concat(pickTurnSO.Turns));
+
         selectManagerDict.Add(Team.Blue, blue);
         selectManagerDict.Add(Team.Red, red);
     }
@@ -59,22 +65,29 @@ public class BanPickManager
         {
             var team = ProgressGame(banTurn);
             selectManagerDict[team].Ban(champion);
-            selectData = new SelectData(champion, team, phase, selectManagerDict[team].Baned.Count);
+            selectData = new SelectData(champion, team, GetNextTeam(), phase, selectManagerDict[team].Baned.Count);
             return true;
         }
         else if (CurrentPhase == BanPcikPhase.Pick)
         {
             var team = ProgressGame(pickTurn);
             selectManagerDict[team].Pick(champion);
-            selectData = new SelectData(champion, team, phase, selectManagerDict[team].Picks.Count);
+            selectData = new SelectData(champion, team, GetNextTeam(), phase, selectManagerDict[team].Picks.Count);
             return true;
         }
         else return false;
     }
 
+    Team GetNextTeam()
+    {
+        if(allTurn.Count > 0) return allTurn.Peek();
+        else return Team.Blue;
+    }
+
     Team ProgressGame(Queue<Team> turns)
     {
         Team result = turns.Dequeue();
+        allTurn.Dequeue();
         if (turns.Count == 0) CurrentPhase++;
         return result;
     }

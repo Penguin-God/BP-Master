@@ -12,6 +12,9 @@ public class BanPickUI : MonoBehaviour, IBanPickAgent
 
     [SerializeField] ChampionSO currentSelectChampion = null;
     [SerializeField] ChampionSelectionUI championSelectionUI;
+    [SerializeField] GameObject teamChoiceParent;
+    [SerializeField] Button blueButton;
+    [SerializeField] Button redButton;
 
     void Start()
     {
@@ -19,6 +22,15 @@ public class BanPickUI : MonoBehaviour, IBanPickAgent
         banPickController.OnSelectedChampion += view.UpdatePickChampions;
         championSelectionBtn.onClick.AddListener(NailDownChampion);
         championSelectionUI.DrawChampionsButton(SelectChampion);
+
+        blueButton.onClick.AddListener(() => ChoiceTeam(Team.Blue));
+        redButton.onClick.AddListener(() => ChoiceTeam(Team.Red));
+    }
+
+    void ChoiceTeam(Team team)
+    {
+        teamChoiceParent.SetActive(false);
+        banPickController.ChioceTeam(team);
     }
 
     void SelectChampion(ChampionSO champion)
