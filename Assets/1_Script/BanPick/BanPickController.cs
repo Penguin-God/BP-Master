@@ -30,19 +30,14 @@ public class BanPickController : MonoBehaviour
         StartCoroutine(Co_BanPick());
     }
 
-    void SelectChampion(int champion, BanPcikPhase phase, Team team)
-    {
-        championStorage.SaveSelectChampion(phase, team, champion);
-        OnSelectedChampion?.Invoke(new SelectData(champion, new TurnInfo(team, phase), championStorage.GetStorage(phase).GetCount(team)));
-    }
-
     IEnumerator Co_BanPick()
     {
+        // 이거 그냥 미리 정의 가능함
         yield return Co_SelectLoop(banTurnSO.Turns, BanPcikPhase.Ban);
-        phaseManager.Next();
+        phaseManager.ChangePhase(BanPcikPhase.Pick);
         yield return Co_SelectLoop(pickTurnSO.Turns, BanPcikPhase.Pick);
-        phaseManager.Next();
-        print("Swap");
+        phaseManager.ChangePhase(BanPcikPhase.Swap);
+        print(phaseManager.CurrentPhase);
     }
 
     IEnumerator Co_SelectLoop(IEnumerable<Team> teamSequnce, BanPcikPhase phase)
@@ -57,13 +52,21 @@ public class BanPickController : MonoBehaviour
         {
             yield return agentDict[team].Co_SelectWait();
             int selectId = agentDict[team].SelectChampion();
-            if (championStorage.SelectChampions.Contains(selectId) == false)
+            if (SelectCondition(selectId))
             {
                 SelectChampion(selectId, phase, team);
                 break;
             }
         }
     }
+
+    void SelectChampion(int champion, BanPcikPhase phase, Team team)
+    {
+        championStorage.SaveSelectChampion(phase, team, champion);
+        OnSelectedChampion?.Invoke(new SelectData(champion, new TurnInfo(team, phase), championStorage.GetStorage(phase).GetCount(team)));
+    }
+
+    bool SelectCondition(int id) => championStorage.SelectChampions.Contains(id) == false;
 }
 
 public class SelectAgent

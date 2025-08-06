@@ -1,13 +1,8 @@
 
 
-public enum BanPcikPhase { Ban = 0, Pick = 1, Swap = 2, Done = 3 }
+public enum BanPcikPhase { Ban, Pick, Swap, Done }
 public class PhaseManager
 {
-    public BanPcikPhase CurrentTurn { get; private set; } = BanPcikPhase.Ban;
-    public BanPcikPhase Next()
-    {
-        if (CurrentTurn != BanPcikPhase.Done)
-            CurrentTurn++;
-        return CurrentTurn;
-    }
+    public BanPcikPhase CurrentPhase { get; private set; } = BanPcikPhase.Ban;
+    public void ChangePhase(BanPcikPhase phase) => CurrentPhase = phase;
 }
