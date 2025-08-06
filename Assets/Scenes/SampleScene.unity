@@ -5121,6 +5121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c321727116314ed4587bd7726c5846c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championManager: {fileID: 1420292359}
   bluePicks:
   - {fileID: 1795356418}
   - {fileID: 2043226576}

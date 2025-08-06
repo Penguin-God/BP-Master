@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BanPickView : MonoBehaviour
 {
+    [SerializeField] ChampionManager championManager;
     [SerializeField] TextMeshProUGUI[] bluePicks;
     [SerializeField] TextMeshProUGUI[] redPicks;
     readonly Dictionary<Team, TextMeshProUGUI[]> pickTextDict = new();
@@ -21,6 +22,6 @@ public class BanPickView : MonoBehaviour
     public void UpdatePickChampions(SelectData data)
     {
         if (data.CurrentTurn.Phase == BanPcikPhase.Pick)
-            pickTextDict[data.CurrentTurn.Team][data.Count - 1].text = data.Champion.ChampionName;
+            pickTextDict[data.CurrentTurn.Team][data.Count - 1].text = championManager.GetChampionName(data.Id);
     }
 }

@@ -2,9 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BanPcikPhase { Ban = 0, Pick = 1, Swap = 2, Done = 3 }
-
-public class BanPickUI : MonoBehaviour, IBanPickAgent
+public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
 {
     BanPickView view;
     [SerializeField] BanPickController banPickController;
@@ -52,5 +50,5 @@ public class BanPickUI : MonoBehaviour, IBanPickAgent
         isSelect = false;
     }
 
-    public ChampionSO SelectChampion() => currentSelectChampion;
+    int ISelector.SelectChampion() => currentSelectChampion.Id;
 }

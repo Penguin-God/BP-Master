@@ -4,68 +4,110 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+public enum Team { Blue, Red }
+
 public class BanPickController : MonoBehaviour
 {
-    BanPickManager banPickManager;
-    ChampionSelectStorage championStorage;
+    PhaseManager phaseManager = new();
+    ChampionSelectStorage championStorage = new();
 
     public event Action<SelectData> OnSelectedChampion = null;
     [SerializeField] DraftTurnSO banTurnSO;
     [SerializeField] DraftTurnSO pickTurnSO;
-    public Dictionary<Team, IBanPickAgent> agentDict = new();
+    public Dictionary<Team, SelectAgent> agentDict = new();
 
-    void Awake()
-    {
-        banPickManager = new BanPickManager(banTurnSO, pickTurnSO);
-    }
-
-    void Start()
-    {
-        championStorage = new ChampionSelectStorage(FindAnyObjectByType<ChampionManager>().AllChampion);
-    }
-
-    BanPickUI GetUserAgent() => FindAnyObjectByType<BanPickUI>();
+    SelectAgent GetUserAgent() => new SelectAgent(FindAnyObjectByType<BanPickUI>(), FindAnyObjectByType<BanPickUI>());
 
     public void ChioceTeam(Team team)
     {
+        var ai = new AI_BanPickAgent(championStorage, FindAnyObjectByType<ChampionManager>().AllChampion.Select(x => x.Id));
+        SelectAgent ai_agent = new SelectAgent(ai, ai);
         agentDict.Add(team, GetUserAgent());
-        if(team == Team.Blue) agentDict.Add(Team.Red, new AI_BanPickAgent(championStorage));
-        else agentDict.Add(Team.Blue, new AI_BanPickAgent(championStorage));
-        StartCoroutine(Co_BanPick(Team.Blue));
+        if(team == Team.Blue) agentDict.Add(Team.Red, ai_agent);
+        else agentDict.Add(Team.Blue, ai_agent);
+
+        StartCoroutine(Co_BanPick());
     }
 
-    void SelectChampion(ChampionSO champion)
+    void SelectChampion(int champion, BanPcikPhase phase, Team team)
     {
-        // 실패시 다시 돌림
-        if (banPickManager.TrySelect(champion, out var data) == false)
+        championStorage.SaveSelectChampion(phase, team, champion);
+        OnSelectedChampion?.Invoke(new SelectData(champion, new TurnInfo(team, phase), championStorage.GetStorage(phase).GetCount(team)));
+    }
+
+    IEnumerator Co_BanPick()
+    {
+        yield return Co_SelectLoop(banTurnSO.Turns, BanPcikPhase.Ban);
+        phaseManager.Next();
+        yield return Co_SelectLoop(pickTurnSO.Turns, BanPcikPhase.Pick);
+        phaseManager.Next();
+        print("Swap");
+    }
+
+    IEnumerator Co_SelectLoop(IEnumerable<Team> teamSequnce, BanPcikPhase phase)
+    {
+        foreach (var item in teamSequnce)
+            yield return Co_SelectValidChampion(item, phase);
+    }
+
+    IEnumerator Co_SelectValidChampion(Team team, BanPcikPhase phase)
+    {
+        while (true)
         {
-            StartCoroutine(Co_BanPick(data.NextTurn.Team));
-            return;
+            yield return agentDict[team].Co_SelectWait();
+            int selectId = agentDict[team].SelectChampion();
+            if (championStorage.SelectChampions.Contains(selectId) == false)
+            {
+                SelectChampion(selectId, phase, team);
+                break;
+            }
         }
-
-        championStorage.SaveSelectChampion(champion);
-        OnSelectedChampion?.Invoke(data);
-        if (data.NextTurn.Phase < BanPcikPhase.Swap)
-            StartCoroutine(Co_BanPick(data.NextTurn.Team));
-        else
-            print("Done");
     }
+}
 
-    IEnumerator Co_BanPick(Team team)
+public class SelectAgent
+{
+    public SelectAgent(ISelector selector, ISelectWait selectWait)
     {
-        yield return agentDict[team].WaitSelect();
-        SelectChampion(agentDict[team].SelectChampion());
+        this.selector = selector;
+        this.selectWait = selectWait;
     }
+
+    ISelector selector;
+    ISelectWait selectWait;
+
+    public IEnumerator Co_SelectWait() => selectWait.WaitSelect();
+    public int SelectChampion() => selector.SelectChampion();
 }
 
 public class ChampionSelectStorage
 {
-    HashSet<ChampionSO> selectableChampions;
-    public IReadOnlyList<ChampionSO> SelectableChampions => selectableChampions.ToArray();
-    public ChampionSelectStorage(IReadOnlyList<ChampionSO> champions) => selectableChampions = new HashSet<ChampionSO>(champions);
+    HashSet<int> selectChampions = new();
+    readonly public TeamSelectStorage BansStorage = new();
+    readonly public TeamSelectStorage PickStorage = new();
 
-    public void SaveSelectChampion(ChampionSO champion)
+    public IReadOnlyList<int> SelectChampions => selectChampions.ToArray();
+    
+    public void SaveSelectChampion(BanPcikPhase phase, Team team, int id)
     {
-        selectableChampions.Remove(champion);
+        GetStorage(phase).Add(team, id);
+        selectChampions.Add(id);
     }
+
+    public TeamSelectStorage GetStorage(BanPcikPhase phase) => phase == BanPcikPhase.Ban ? BansStorage : PickStorage;
+}
+
+public class TeamSelectStorage
+{
+    Dictionary<Team, List<int>> storage = new();
+
+    public TeamSelectStorage()
+    {
+        storage.Add(Team.Blue, new List<int>());
+        storage.Add(Team.Red, new List<int>());
+    }
+
+    public void Add(Team team, int id) => storage[team].Add(id);
+    public int GetCount(Team team) => storage[team].Count;
 }
