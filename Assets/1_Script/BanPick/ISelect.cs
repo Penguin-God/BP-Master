@@ -10,7 +10,17 @@ public interface ISelector
     public int SelectChampion();
 }
 
-public interface ISelectStorage
+public class SelectAgent
 {
-    public void Save(int id);
+    public SelectAgent(ISelector selector, ISelectWait selectWait)
+    {
+        this.selector = selector;
+        this.selectWait = selectWait;
+    }
+
+    ISelector selector;
+    ISelectWait selectWait;
+
+    public IEnumerator Co_SelectWait() => selectWait.WaitSelect();
+    public int SelectChampion() => selector.SelectChampion();
 }
