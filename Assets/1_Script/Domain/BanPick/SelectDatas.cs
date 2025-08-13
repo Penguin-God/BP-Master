@@ -23,3 +23,17 @@ public readonly struct TurnInfo
         Phase = phase;
     }
 }
+
+public readonly struct SelectInfo
+{
+    public readonly Team Team;
+    public readonly SelectType Select;
+    public readonly int Id;
+
+    public SelectInfo(Team team, SelectType select, int id)
+    {
+        Team = team;
+        Select = select;
+        Id = id;
+    }
+}

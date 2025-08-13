@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AI_BanPickAgent : ISelectWait, ISelector
 {
-    readonly ChampionSelectStorage storage;
+    readonly GameSelectStorage storage;
     readonly IEnumerable<int> allChampions;
-    public AI_BanPickAgent(ChampionSelectStorage storage, IEnumerable<int> allChampions)
+    public AI_BanPickAgent(GameSelectStorage storage, IEnumerable<int> allChampions)
     {
         this.storage = storage;
         this.allChampions = allChampions;

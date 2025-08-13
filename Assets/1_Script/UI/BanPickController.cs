@@ -5,12 +5,10 @@ using System.Linq;
 using UnityEngine;
 
 
-public enum Team { Blue, Red }
-
 public class BanPickController : MonoBehaviour
 {
     PhaseManager phaseManager = new();
-    ChampionSelectStorage championStorage = new();
+    GameSelectStorage championStorage = new();
 
     public event Action<SelectData> OnSelectedChampion = null;
     [SerializeField] DraftTurnSO banTurnSO;
