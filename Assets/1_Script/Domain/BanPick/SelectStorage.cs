@@ -69,4 +69,9 @@ public class TeamBanPickStorage
 
     public void SaveSelect(SelectType select, int id) => storage[select].Add(id);
     public IReadOnlyList<int> GetStorage(SelectType select) => storage[select];
+
+    public void Swap(int index1, int index2)
+    {
+
+    }
 }
