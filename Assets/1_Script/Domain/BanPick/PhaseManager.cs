@@ -15,7 +15,11 @@ public class PhaseManager
 
     public GamePhase NextPhase()
     {
-        if (phases.Count == 0) return GamePhase.Done;
+        if (phases.Count == 0)
+        {
+            CurrentPhase = GamePhase.Done;
+            return GamePhase.Done;
+        }
         CurrentPhase = phases.Dequeue();
         return CurrentPhase;
     }
