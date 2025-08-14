@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -72,6 +73,9 @@ public class TeamBanPickStorage
 
     public void Swap(int index1, int index2)
     {
+        if (index1 == index2) return;
 
+        var list = storage[SelectType.Pick];
+        (list[index1], list[index2]) = (list[index2], list[index1]);
     }
 }

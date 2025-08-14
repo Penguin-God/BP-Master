@@ -25,7 +25,7 @@ public class SwapTests
         sut.Swap(index1, index2);
         
         var result = sut.GetStorage(SelectType.Pick);
-        Assert.AreEqual(expect1, result[expect2]);  // ← 스왑 후 index2 위치에는 원래 index1 값
-        Assert.AreEqual(expect2, result[expect1]);  // ← 스왑 후 index1 위치에는 원래 index2 값
+        Assert.AreEqual(expect1, result[index2]);  // ← 스왑 후 index2 위치에는 원래 index1 값
+        Assert.AreEqual(expect2, result[index1]);  // ← 스왑 후 index1 위치에는 원래 index2 값
     }
 }
