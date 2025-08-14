@@ -37,14 +37,20 @@ public class TeamSelectStorage
 public class GameBanPickStorage
 {
     readonly Dictionary<Team, TeamBanPickStorage> storage = new();
-
+    readonly HashSet<int> allSelecteds = new();
     public GameBanPickStorage()
     {
         storage.Add(Team.Red, new ());
         storage.Add(Team.Blue, new ());
     }
 
-    public void SaveSelect(SelectInfo info) => storage[info.Team].SaveSelect(info.Select, info.Id);
+    public bool SaveSelect(SelectInfo info)
+    {
+        if (allSelecteds.Add(info.Id) == false) return false;
+
+        storage[info.Team].SaveSelect(info.Select, info.Id);
+        return true;
+    }
     public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
 }
 
