@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BanPickController : MonoBehaviour
 {
-    PhaseManager phaseManager = new();
+    PhaseManager phaseManager = new (null); // 임시
     GameSelectStorage championStorage = new();
 
     public event Action<SelectData> OnSelectedChampion = null;
@@ -31,20 +31,20 @@ public class BanPickController : MonoBehaviour
     IEnumerator Co_BanPick()
     {
         // 이거 그냥 미리 정의 가능함
-        yield return Co_SelectLoop(banTurnSO.Turns, BanPcikPhase.Ban);
-        phaseManager.ChangePhase(BanPcikPhase.Pick);
-        yield return Co_SelectLoop(pickTurnSO.Turns, BanPcikPhase.Pick);
-        phaseManager.ChangePhase(BanPcikPhase.Swap);
+        yield return Co_SelectLoop(banTurnSO.Turns, GamePhase.Ban);
+        phaseManager.NextPhase(GamePhase.Pick);
+        yield return Co_SelectLoop(pickTurnSO.Turns, GamePhase.Pick);
+        phaseManager.NextPhase(GamePhase.Swap);
         print(phaseManager.CurrentPhase);
     }
 
-    IEnumerator Co_SelectLoop(IEnumerable<Team> teamSequnce, BanPcikPhase phase)
+    IEnumerator Co_SelectLoop(IEnumerable<Team> teamSequnce, GamePhase phase)
     {
         foreach (var item in teamSequnce)
             yield return Co_SelectValidChampion(item, phase);
     }
 
-    IEnumerator Co_SelectValidChampion(Team team, BanPcikPhase phase)
+    IEnumerator Co_SelectValidChampion(Team team, GamePhase phase)
     {
         while (true)
         {
@@ -58,7 +58,7 @@ public class BanPickController : MonoBehaviour
         }
     }
 
-    void SelectChampion(int champion, BanPcikPhase phase, Team team)
+    void SelectChampion(int champion, GamePhase phase, Team team)
     {
         championStorage.SaveSelectChampion(phase, team, champion);
         OnSelectedChampion?.Invoke(new SelectData(champion, new TurnInfo(team, phase), championStorage.GetStorage(phase).GetCount(team)));

@@ -9,13 +9,13 @@ public class GameSelectStorage
 
     public IReadOnlyList<int> SelectChampions => selectChampions.ToArray();
 
-    public void SaveSelectChampion(BanPcikPhase phase, Team team, int id)
+    public void SaveSelectChampion(GamePhase phase, Team team, int id)
     {
         GetStorage(phase).Add(team, id);
         selectChampions.Add(id);
     }
 
-    public TeamSelectStorage GetStorage(BanPcikPhase phase) => phase == BanPcikPhase.Ban ? BansStorage : PickStorage;
+    public TeamSelectStorage GetStorage(GamePhase phase) => phase == GamePhase.Ban ? BansStorage : PickStorage;
 }
 
 public enum Team { Blue, Red }

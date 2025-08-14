@@ -15,9 +15,9 @@ public readonly struct SelectData
 public readonly struct TurnInfo
 {
     public readonly Team Team;
-    public readonly BanPcikPhase Phase;
+    public readonly GamePhase Phase;
 
-    public TurnInfo(Team team, BanPcikPhase phase)
+    public TurnInfo(Team team, GamePhase phase)
     {
         Team = team;
         Phase = phase;
