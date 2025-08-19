@@ -16,14 +16,6 @@ public class PhaseData
 
 public class PhaseManager
 {
-    Queue<GamePhase> _phases = new();
-    
-    public PhaseManager(IReadOnlyList<GamePhase> phases)
-    {
-        this._phases = new Queue<GamePhase>(phases);
-        // CurrentPhase = this._phases.Dequeue();
-    }
-
     readonly Queue<PhaseData> phaseDatas;
     public PhaseManager(PhaseData[] phaseDatas)
     {
@@ -34,17 +26,7 @@ public class PhaseManager
 
     public PhaseData CurrentPhaseData { get; private set; } = null;
 
-    public GamePhase CurrentPhase;
-    public GamePhase NextPhase()
-    {
-        if (_phases.Count == 0)
-        {
-            CurrentPhase = GamePhase.Done;
-            return GamePhase.Done;
-        }
-        CurrentPhase = _phases.Dequeue();
-        return CurrentPhase;
-    }
+    public GamePhase CurrentPhase => CurrentPhaseData.GamePhase;
 
     public bool Next()
     {
@@ -55,8 +37,6 @@ public class PhaseManager
         if (CurrentPhaseData.Phase.IsDone)
             CurrentPhaseData = phaseDatas.Dequeue();
 
-        //if (CurrentPhaseData.Phase.IsDone)
-        //    CurrentPhaseData = new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Red, Team.Blue }));
         return true;
     }
 }

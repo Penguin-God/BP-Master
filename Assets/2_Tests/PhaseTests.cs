@@ -35,10 +35,10 @@ public class PhaseTests
 
 
         Assert.IsTrue(sut.Next());
-        Assert.AreEqual(GamePhase.Ban, sut.CurrentPhaseData.GamePhase);
+        Assert.AreEqual(GamePhase.Ban, sut.CurrentPhase);
         Assert.IsTrue(sut.Next());
 
-        Assert.AreEqual(GamePhase.Pick, sut.CurrentPhaseData.GamePhase);
+        Assert.AreEqual(GamePhase.Pick, sut.CurrentPhase);
 
         Assert.IsTrue(sut.Next());
         Assert.IsTrue(sut.Next());

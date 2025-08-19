@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BanPickController : MonoBehaviour
 {
-    PhaseManager phaseManager = new (new List<GamePhase>()); // 임시
+    PhaseManager phaseManager = new (null); // 임시
     GameSelectStorage championStorage = new();
 
     public event Action<SelectData> OnSelectedChampion = null;
@@ -35,7 +35,6 @@ public class BanPickController : MonoBehaviour
         // phaseManager.NextPhase(GamePhase.Pick);
         yield return Co_SelectLoop(pickTurnSO.Turns, GamePhase.Pick);
         // phaseManager.NextPhase(GamePhase.Swap);
-        print(phaseManager.CurrentPhase);
     }
 
     IEnumerator Co_SelectLoop(IEnumerable<Team> teamSequnce, GamePhase phase)
