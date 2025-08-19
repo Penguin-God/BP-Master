@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class CalculateTeamScoreTests
+public class CalculateScoreTests
 {
     [Test]
     public void 스탯_총합_구간별_보너스()
@@ -35,8 +35,28 @@ public class CalculateTeamScoreTests
 
     TeamScoreCalculator CreateScoreCalculator(SortedDictionary<int, int> rangeData = null, SortedDictionary<int, int> speedData = null)
     {
-        if(rangeData == null) rangeData = new SortedDictionary<int, int>();
-        if(speedData == null) speedData = new SortedDictionary<int, int>();
-        return new TeamScoreCalculator(rangeData, speedData);
+        rangeData ??= new SortedDictionary<int, int>();
+        speedData ??= new SortedDictionary<int, int>();
+        var statCal = new StatScoreCalculator(rangeData, speedData);
+        return new TeamScoreCalculator(statCal);
+    }
+
+    [Test]
+    [TestCase(0, 0, 0)]
+    [TestCase(17, 25, 150)]
+    [TestCase(12, 500, 100)]
+    [TestCase(21, 21, 160)]
+    public void 스탯_구간별_보너스(int range, int speed, int expected)
+    {
+        SortedDictionary<int, int> bonusData = new SortedDictionary<int, int>()
+        {
+            { 15, 50 },
+            { 20, 80 },
+            { 25, 100 }
+        };
+        StatScoreCalculator sut = new StatScoreCalculator(bonusData, bonusData);
+        int result = sut.CalculateScore(0, 0, range, speed);
+
+        Assert.AreEqual(expected, result);
     }
 }
