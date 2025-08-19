@@ -11,8 +11,7 @@ public class PhaseManager
     }
 
     public GamePhase CurrentPhase { get; private set; } = GamePhase.Ban;
-    public void NextPhase(GamePhase phase) => CurrentPhase = phase; // Áö¶ö
-
+    
     public GamePhase NextPhase()
     {
         if (phases.Count == 0)

@@ -32,9 +32,9 @@ public class BanPickController : MonoBehaviour
     {
         // 이거 그냥 미리 정의 가능함
         yield return Co_SelectLoop(banTurnSO.Turns, GamePhase.Ban);
-        phaseManager.NextPhase(GamePhase.Pick);
+        // phaseManager.NextPhase(GamePhase.Pick);
         yield return Co_SelectLoop(pickTurnSO.Turns, GamePhase.Pick);
-        phaseManager.NextPhase(GamePhase.Swap);
+        // phaseManager.NextPhase(GamePhase.Swap);
         print(phaseManager.CurrentPhase);
     }
 
