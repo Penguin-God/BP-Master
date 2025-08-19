@@ -59,4 +59,14 @@ public class CalculateScoreTests
 
         Assert.AreEqual(expected, result);
     }
+
+    [Test]
+    public void 점수는_공방과_보너스의_합()
+    {
+        StatScoreCalculator sut = new(new SortedDictionary<int, int>(), new SortedDictionary<int, int>());
+        
+        int result = sut.CalculateScore(80, 30, 0, 0);
+
+        Assert.AreEqual(110, result);
+    }
 }

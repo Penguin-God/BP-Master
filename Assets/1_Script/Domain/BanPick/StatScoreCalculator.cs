@@ -13,7 +13,7 @@ public class StatScoreCalculator
 
     public int CalculateScore(int attack, int defense, int ragne, int speed)
     {
-        return GetBonus(rangeBonusData, ragne) + GetBonus(speedBonusData, speed);
+        return attack + defense + GetBonus(rangeBonusData, ragne) + GetBonus(speedBonusData, speed);
     }
 
     int GetBonus(SortedDictionary<int, int> bands, int sum)
