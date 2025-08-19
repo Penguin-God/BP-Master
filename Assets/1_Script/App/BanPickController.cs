@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BanPickController : MonoBehaviour
 {
-    PhaseManager phaseManager = new (null); // 임시
+    PhaseManager phaseManager = new (new List<GamePhase>()); // 임시
     GameSelectStorage championStorage = new();
 
     public event Action<SelectData> OnSelectedChampion = null;
