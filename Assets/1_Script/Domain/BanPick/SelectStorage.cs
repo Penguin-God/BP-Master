@@ -19,7 +19,7 @@ public class GameSelectStorage
     public TeamSelectStorage GetStorage(GamePhase phase) => phase == GamePhase.Ban ? BansStorage : PickStorage;
 }
 
-public enum Team { Blue, Red }
+public enum Team { Blue, Red, All }
 public enum SelectType { Ban, Pick}
 public class TeamSelectStorage
 {
