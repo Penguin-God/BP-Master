@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 public class TeamScoreCalculator
 {
-    readonly StatScoreCalculator statScoreCalculator;
-    public TeamScoreCalculator(StatScoreCalculator statScoreCalculator)
+    readonly ChampionBonusCalculator championBonusCalculator;
+    readonly TeamBonusCalculator teamBonusCalculator;
+    public TeamScoreCalculator(ChampionBonusCalculator championBonusCalculator, TeamBonusCalculator teamBonusCalculator)
     {
-        this.statScoreCalculator = statScoreCalculator;
+        this.championBonusCalculator = championBonusCalculator;
+        this.teamBonusCalculator = teamBonusCalculator;
     }
 
     public int CalculateScore(IEnumerable<Champion> team)
     {
-        return statScoreCalculator.CalculateScore(team.Sum(x => x.Attack), team.Sum(x => x.Defense), team.Sum(x => x.Range), team.Sum(x => x.Speed));
+        return team.Sum(x => x.Attack + x.Defense) + teamBonusCalculator.CalculateTeamBonus(team) + team.Sum(x => championBonusCalculator.CalculateBonus(x));
     }
 }
