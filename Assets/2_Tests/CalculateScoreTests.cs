@@ -66,4 +66,16 @@ public class CalculateScoreTests
 
         Assert.AreEqual(250, result);
     }
+
+    [Test] 
+    public void 보너스는_구간별로()
+    {
+        SortedDictionary<int, int> bonusData = new SortedDictionary<int, int>();
+        bonusData.Add(300, 100);
+        bonusData.Add(400, 150);
+        var sut = new BonusCalculator(bonusData);
+
+        Assert.AreEqual(100, sut.CalculateBonus(300));
+        Assert.AreEqual(150, sut.CalculateBonus(400));
+    }
 }
