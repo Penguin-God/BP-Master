@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class CalculateScoreTests
+public class CalculateTeamScoreTests
 {
     [Test]
     public void Ω∫≈»_√—«’_±∏∞£∫∞_∫∏≥ Ω∫()
