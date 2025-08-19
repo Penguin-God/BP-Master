@@ -1,6 +1,3 @@
-
-
-using System;
 using System.Collections.Generic;
 
 public class Phase
@@ -12,13 +9,19 @@ public class Phase
     {
         this.gamePhase = gamePhase;
         this.teams = teams;
+        CurrentTeam = teams.Peek();
     }
 
-    public GamePhase CurrentTeam { get; set; }
-    public bool IsDone { get; private set; } = false;
+    public Team CurrentTeam { get; private set; }
+    public bool IsDone => teams.Count == 0;
 
     public bool Next()
     {
-        return false;
+        if(IsDone) return false;
+
+        teams.Dequeue();
+        if(IsDone == false)
+            CurrentTeam = teams.Peek();
+        return true;
     }
 }
