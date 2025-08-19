@@ -22,7 +22,7 @@ public class CalculateScoreTests
         TeamScoreCalculator sut = new();
         Champion[] team = new Champion[] { new Champion(10, 30), new Champion(20, 50) };
         
-        int result = sut.CalculateScore();
+        int result = sut.CalculateScore(team);
 
         Assert.AreEqual(110, result);
     }

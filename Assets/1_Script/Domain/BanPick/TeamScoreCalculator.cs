@@ -1,10 +1,10 @@
-using System;
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TeamScoreCalculator
 {
-    public int CalculateScore()
+    public int CalculateScore(IEnumerable<Champion> team)
     {
-        throw new NotImplementedException();
+        return team.Sum(x => x.Attack + x.Defense);
     }
 }
