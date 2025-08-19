@@ -46,7 +46,7 @@ public class CalculateScoreTests
     [TestCase(300, 300, 17, 25, 850)]
     [TestCase(1000, 1000, 12, 500, 2300)]
     [TestCase(0, 0, 21, 21, 160)]
-    public void 스탯_구간별_보너스(int attack, int defense, int range, int speed, int expected)
+    public void 점수는_공방과_보너스의_합(int attack, int defense, int range, int speed, int expected)
     {
         SortedDictionary<int, int> bonusData1 = new SortedDictionary<int, int>()
         {
@@ -68,14 +68,15 @@ public class CalculateScoreTests
     }
 
     [Test]
-    public void 점수는_공방과_보너스의_합()
+    public void 챔프_공방_스탯_구간별_보너스()
     {
-        var bonusData = new SortedDictionary<int, int>();
-        bonusData.Add(15, 50);
-        StatScoreCalculator sut = new(bonusData, bonusData, bonusData, bonusData);
-        
-        int result = sut.CalculateScore(80, 30, 15, 15);
+        SortedDictionary<int, int> bonusData = new SortedDictionary<int, int>();
+        bonusData.Add(300, 100);
+        bonusData.Add(400, 150);
+        var sut = new ChampionBonusCalculator(bonusData, bonusData);
 
-        Assert.AreEqual(310, result);
+        int result = sut.CalculateBonus(new Champion(300, 400, 0, 0));
+
+        Assert.AreEqual(250, result);
     }
 }
