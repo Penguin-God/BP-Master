@@ -5,7 +5,11 @@ using System.Collections.Generic;
 public class CalculateStatScoreTests
 {
     [Test]
-    public void 스탯_구간별_보너스()
+    [TestCase(0, 0, 0)]
+    [TestCase(17, 25, 150)]
+    [TestCase(12, 500, 100)]
+    [TestCase(21, 21, 160)]
+    public void 스탯_구간별_보너스(int range, int speed, int expected)
     {
         SortedDictionary<int, int> bonusData = new SortedDictionary<int, int>()
         {
@@ -14,8 +18,8 @@ public class CalculateStatScoreTests
             { 25, 100 }
         };
         StatScoreCalculator sut = new StatScoreCalculator(bonusData, bonusData);
-        int result = sut.CalculateScore(0, 0, 17, 25);
+        int result = sut.CalculateScore(0, 0, range, speed);
 
-        Assert.AreEqual(150, result);
+        Assert.AreEqual(expected, result);
     }
 }
