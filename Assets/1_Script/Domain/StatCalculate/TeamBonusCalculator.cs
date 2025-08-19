@@ -3,32 +3,22 @@ using System.Linq;
 
 public class TeamBonusCalculator
 {
-    readonly SortedDictionary<int, int> attackBonusData;
-    readonly SortedDictionary<int, int> defenseBonusData;
-    readonly SortedDictionary<int, int> rangeBonusData;
-    readonly SortedDictionary<int, int> speedBonusData;
+    readonly BonusCalculator attackBonusCalculator;
+    readonly BonusCalculator defenseBonusCalculator;
+    readonly BonusCalculator rangeBonusCalculator;
+    readonly BonusCalculator speedBonusCalculator;
 
-    public TeamBonusCalculator(SortedDictionary<int, int> attackBonusData, SortedDictionary<int, int> defenseBonusData, SortedDictionary<int, int> rangeBonusData, SortedDictionary<int, int> speedBonusData)
+    public TeamBonusCalculator(BonusCalculator bonusCalculator1, BonusCalculator bonusCalculator2, BonusCalculator bonusCalculator3, BonusCalculator bonusCalculator4)
     {
-        this.attackBonusData = attackBonusData;
-        this.defenseBonusData = defenseBonusData;
-        this.rangeBonusData = rangeBonusData;
-        this.speedBonusData = speedBonusData;
+        this.attackBonusCalculator = bonusCalculator1;
+        this.defenseBonusCalculator = bonusCalculator2;
+        this.rangeBonusCalculator = bonusCalculator3;
+        this.speedBonusCalculator = bonusCalculator4;
     }
 
     public int CalculateTeamBonus(IEnumerable<Champion> team)
     {
-        return GetBonus(attackBonusData, team.Sum(x => x.Attack)) + GetBonus(defenseBonusData, team.Sum(x => x.Defense)) + GetBonus(rangeBonusData, team.Sum(x => x.Range)) + GetBonus(speedBonusData, team.Sum(x => x.Speed));
-    }
-
-    int GetBonus(SortedDictionary<int, int> bands, int sum)
-    {
-        int bonus = 0;
-        foreach (var data in bands) // 제일 높은 값까지 갱신
-        {
-            if (sum >= data.Key) bonus = data.Value;
-            else break;
-        }
-        return bonus;
+        return attackBonusCalculator.CalculateBonus(team.Sum(x => x.Attack)) + defenseBonusCalculator.CalculateBonus(team.Sum(x => x.Defense)) 
+            + rangeBonusCalculator.CalculateBonus(team.Sum(x => x.Range)) + speedBonusCalculator.CalculateBonus(team.Sum(x => x.Speed));
     }
 }
