@@ -10,20 +10,27 @@ public class ActionAgent
         this.storage = storage;
     }
 
-    GamePhase phase;
-    public void OnRequestAction(GamePhase phase)
+    public void Ban(int id)
     {
-        this.phase = phase;
+        storage.SaveSelect(SelectType.Ban, id);
+        NotifyDone();
     }
 
-    public void Done()
+    public void Pick(int id)
     {
-        switch (phase)
-        {
-            case GamePhase.Ban: storage.SaveSelect(SelectType.Ban, 0); break;
-            case GamePhase.Pick: storage.SaveSelect(SelectType.Pick, 0); break;
-        }
-
-        OnActionDone?.Invoke();
+        storage.SaveSelect(SelectType.Pick, id);
+        NotifyDone();
     }
+
+    public void Swap(int index1, int index2)
+    {
+        storage.Swap(index1, index2);
+    }
+
+    public void SwapDone()
+    {
+        NotifyDone();
+    }
+
+    void NotifyDone() => OnActionDone?.Invoke();
 }
