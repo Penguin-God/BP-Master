@@ -33,5 +33,15 @@ public class AI_ActionTests
         CollectionAssert.Contains(ids, result);
     }
 
+    [Test]
+    public void AI는_바로_선택()
+    {
+        AI_Player sut = new();
+
+        sut.GetTurn(GamePhase.Ban, new ActionAgent(new()));
+
+
+    }
+
     Champion CreateChampion(int id) => new Champion(id, "", default);
 }
