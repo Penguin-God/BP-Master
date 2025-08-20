@@ -39,7 +39,7 @@ public class AI_ActionTests
         int count = 0;
         ActionAgent agent = new ActionAgent(new TeamBanPickStorage());
         agent.OnActionDone += () => count++;
-        AI_Agent sut = new(agent);
+        Agent sut = new(agent);
         sut.ActoinRequset(GamePhase.Ban);
 
         Assert.AreEqual(1, count);
