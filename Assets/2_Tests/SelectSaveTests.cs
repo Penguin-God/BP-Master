@@ -1,9 +1,7 @@
 using NUnit.Framework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 public class SelectSaveTests
@@ -17,7 +15,7 @@ public class SelectSaveTests
     {
         const int id = 3;
         var info = new SelectInfo(team, select, id);
-        GameBanPickStorage storage = new();
+        GameBanPickStorage storage = CreateStorage(id);
         storage.SaveSelect(info);
 
         Assert.AreEqual(id, storage.GetStorage(team, select)[0]);
@@ -25,12 +23,21 @@ public class SelectSaveTests
     }
 
     [Test]
+    public void 선택_가능한_챔들_반환()
+    {
+        GameBanPickStorage sut = CreateStorage(1, 2, 3);
 
-    public void 어떤_식으로든_중복_선택_불가()
+        sut.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, 1));
+
+        CollectionAssert.DoesNotContain(sut.SelectableIds, 1);
+    }
+
+    [Test]
+    public void 중복_선택_불가()
     {
         const int banId = 3;
         const int pickId = 3;
-        GameBanPickStorage storage = new();
+        GameBanPickStorage storage = CreateStorage(1, 2, 3);
         storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, banId));
         storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, pickId));
 
@@ -51,7 +58,7 @@ public class SelectSaveTests
     [TestCase(Team.Blue, new[] { 4, 9 })]
     public void 단일팀_연속선택_순서_및_내용_보장(Team team, int[] pickIds)
     {
-        var storage = new GameBanPickStorage();
+        var storage = CreateStorage(pickIds);
 
         foreach (var id in pickIds)
             storage.SaveSelect(new SelectInfo(team, SelectType.Pick, id));
@@ -65,7 +72,7 @@ public class SelectSaveTests
     [Test]
     public void 교차_선택_시_팀별_저장_보장()
     {
-        var storage = new GameBanPickStorage();
+        var storage = CreateStorage(101, 102, 201, 202);
 
         storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 101));
         storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 102));
@@ -91,7 +98,7 @@ public class SelectSaveTests
     [Test]
     public void Ban과Pick_순서_섞여도_간섭없음()
     {
-        var storage = new GameBanPickStorage();
+        var storage = CreateStorage(11, 22, 101, 102, 201);
 
         storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Ban, 11));
         storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 101));
@@ -104,4 +111,6 @@ public class SelectSaveTests
         CollectionAssert.AreEqual(new[] { 101, 102 }, storage.GetStorage(Team.Red, SelectType.Pick));
         CollectionAssert.AreEqual(new[] { 201 }, storage.GetStorage(Team.Blue, SelectType.Pick));
     }
+
+    GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,16 +39,29 @@ public class GameBanPickStorage
 {
     readonly Dictionary<Team, TeamBanPickStorage> storage = new();
     readonly HashSet<int> allSelecteds = new();
+    readonly HashSet<int> selectableIds = new();
+
+    public IReadOnlyList<int> SelectableIds => selectableIds.ToList();
+
     public GameBanPickStorage()
     {
         storage.Add(Team.Red, new ());
         storage.Add(Team.Blue, new ());
     }
 
+    public GameBanPickStorage(IEnumerable<int> allIds)
+    {
+        selectableIds = new HashSet<int>(allIds);
+        storage.Add(Team.Red, new());
+        storage.Add(Team.Blue, new());
+    }
+
     public bool SaveSelect(SelectInfo info)
     {
-        if (allSelecteds.Add(info.Id) == false) return false;
+        if(selectableIds.Contains(info.Id) == false) return false;
 
+        selectableIds.Remove(info.Id);
+        allSelecteds.Add(info.Id);
         storage[info.Team].SaveSelect(info.Select, info.Id);
         return true;
     }
