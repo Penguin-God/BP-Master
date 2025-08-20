@@ -33,5 +33,17 @@ public class AI_ActionTests
         CollectionAssert.Contains(ids, result);
     }
 
+    [Test]
+    public void Agnet는_수신자를_조작함()
+    {
+        int count = 0;
+        ActionAgent agent = new ActionAgent(new TeamBanPickStorage());
+        agent.OnActionDone += () => count++;
+        AI_Agent sut = new(agent);
+        sut.ActoinRequset(GamePhase.Ban);
+
+        Assert.AreEqual(1, count);
+    }
+
     Champion CreateChampion(int id) => new Champion(id, "", default);
 }
