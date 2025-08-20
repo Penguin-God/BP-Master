@@ -12,7 +12,7 @@ public class TeamScoreCalculator
         this.teamBonusCalculator = teamBonusCalculator;
     }
 
-    public int CalculateScore(IEnumerable<Champion> team)
+    public int CalculateScore(IEnumerable<ChampionStatData> team)
     {
         return team.Sum(x => x.Attack + x.Defense) + teamBonusCalculator.CalculateTeamBonus(team) + team.Sum(x => championBonusCalculator.CalculateBonus(x));
     }

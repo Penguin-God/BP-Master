@@ -18,7 +18,7 @@ public class CalculateScoreTests
         var champCal = new ChampionBonusCalculator(CreateBonusCalculator(100, 20), CreateBonusCalculator(100, 20));
         var teamCal = new TeamBonusCalculator(CreateBonusCalculator(300, 50), CreateBonusCalculator(300, 50), CreateBonusCalculator(20, 30), CreateBonusCalculator(20, 30));
         TeamScoreCalculator sut = new TeamScoreCalculator(champCal, teamCal);
-        Champion[] team = new Champion[] { new(150, 150, 10, 10), new(80, 200, 10, 15) };
+        ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10, 10), new(80, 200, 10, 15) };
 
         int result = sut.CalculateScore(team);
 
@@ -29,7 +29,7 @@ public class CalculateScoreTests
     [Test]
     public void ÆÀ_º¸³Ê½º´Â_½ºÅÈ_±¸°£_º¸³Ê½º_ÃÑÇÕ()
     {
-        Champion[] champions = new Champion[] { new(150, 150, 10, 10), new(200, 300, 10, 15) };
+        ChampionStatData[] champions = new ChampionStatData[] { new(150, 150, 10, 10), new(200, 300, 10, 15) };
 
         TeamBonusCalculator sut = new TeamBonusCalculator(
             CreateBonusCalculator(300, 50, 400, 80),
@@ -48,7 +48,7 @@ public class CalculateScoreTests
     {
         var sut = new ChampionBonusCalculator(CreateBonusCalculator(300, 100, 400, 150), CreateBonusCalculator(300, 100, 400, 150));
 
-        int result = sut.CalculateBonus(new Champion(300, 400, 0, 0));
+        int result = sut.CalculateBonus(new ChampionStatData(300, 400, 0, 0));
 
         Assert.AreEqual(250, result);
     }

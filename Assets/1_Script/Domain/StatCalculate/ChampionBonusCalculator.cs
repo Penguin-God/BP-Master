@@ -10,7 +10,7 @@ public class ChampionBonusCalculator
         this.defenseBonusCalculator = defenseBonusCalculator;
     }
 
-    public int CalculateBonus(Champion champion)
+    public int CalculateBonus(ChampionStatData champion)
     {
         return attackBonusCalculator.CalculateBonus(champion.Attack) + defenseBonusCalculator.CalculateBonus(champion.Defense);
     }
