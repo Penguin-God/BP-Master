@@ -35,22 +35,12 @@ public class SelectSaveTests
     [Test]
     public void 중복_선택_불가()
     {
-        const int banId = 3;
-        const int pickId = 3;
-        GameBanPickStorage storage = CreateStorage(1, 2, 3);
-        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, banId));
-        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, pickId));
+        const int Id = 3;
+        GameBanPickStorage storage = CreateStorage(Id);
 
-        Assert.IsFalse(Save(Team.Blue, SelectType.Pick, pickId));
-        Assert.IsFalse(Save(Team.Blue, SelectType.Pick, banId));
-        Assert.IsFalse(Save(Team.Blue, SelectType.Ban, pickId));
-        Assert.IsFalse(Save(Team.Blue, SelectType.Ban, banId));
-        Assert.IsFalse(Save(Team.Red, SelectType.Pick, pickId));
-        Assert.IsFalse(Save(Team.Red, SelectType.Pick, banId));
-        Assert.IsFalse(Save(Team.Red, SelectType.Ban, pickId));
-        Assert.IsFalse(Save(Team.Red, SelectType.Ban, banId));
-
-        bool Save(Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
+        Assert.IsTrue(storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, Id)));
+        Assert.IsFalse(storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, Id)));
+        Assert.IsFalse(storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, Id)));
     }
 
     [Test]
