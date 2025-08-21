@@ -21,14 +21,15 @@ public class MatchTests
         MatchManager sut = new(phaseManager, agentManager);
 
         sut.GameStart();
-
         Assert.AreEqual(Team.Blue, sut.CurrentTurn);
         Assert.AreEqual(GamePhase.Ban, sut.CurrentPhase);
 
         agentManager.Ban(Team.Blue, 0);
+
         Assert.AreEqual(Team.Red, sut.CurrentTurn);
 
         agentManager.Ban(Team.Red, 1);
+
         Assert.AreEqual(Team.Blue, sut.CurrentTurn);
         Assert.AreEqual(GamePhase.Pick, sut.CurrentPhase);
 
@@ -39,9 +40,11 @@ public class MatchTests
         Assert.AreEqual(GamePhase.Swap, sut.CurrentPhase);
 
         agentManager.SwapDone(Team.Blue);
+
         Assert.AreEqual(GamePhase.Swap, sut.CurrentPhase);
 
         agentManager.SwapDone(Team.Red);
+
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
     }
 }

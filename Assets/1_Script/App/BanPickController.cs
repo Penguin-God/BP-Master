@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BanPickController : MonoBehaviour
 {
-    PhaseManager phaseManager = new (null); // ÀÓ½Ã
+    PhaseManager phaseManager = new (null); // ì„ì‹œ
     GameSelectStorage championStorage = new();
 
     public event Action<SelectData> OnSelectedChampion = null;
@@ -30,7 +30,7 @@ public class BanPickController : MonoBehaviour
 
     IEnumerator Co_BanPick()
     {
-        // ÀÌ°Å ±×³É ¹Ì¸® Á¤ÀÇ °¡´ÉÇÔ
+        // ì´ê±° ê·¸ëƒ¥ ë¯¸ë¦¬ ì •ì˜ ê°€ëŠ¥í•¨
         yield return Co_SelectLoop(banTurnSO.Turns, GamePhase.Ban);
         // phaseManager.NextPhase(GamePhase.Pick);
         yield return Co_SelectLoop(pickTurnSO.Turns, GamePhase.Pick);

@@ -21,22 +21,32 @@ public class PhaseManager
     {
         this.phaseDatas = new Queue<PhaseData>(phaseDatas);
         this.phaseDatas.Enqueue(new PhaseData(GamePhase.Done, new Phase(new Team[] { Team.All })));
-        CurrentPhaseData = this.phaseDatas.Dequeue();
     }
 
     public PhaseData CurrentPhaseData { get; private set; } = null;
 
     public GamePhase CurrentPhase => CurrentPhaseData.GamePhase;
+    public Team CurrentTurn { get; private set; }
 
     public bool Next()
     {
         if (CurrentPhaseData.GamePhase == GamePhase.Done) return false;
-
-        CurrentPhaseData.Phase.Next();
+        
+        UnityEngine.Debug.Log(CurrentPhaseData.GamePhase);
+        UnityEngine.Debug.Log(CurrentPhaseData.Phase.IsDone);
 
         if (CurrentPhaseData.Phase.IsDone)
             CurrentPhaseData = phaseDatas.Dequeue();
 
+        UnityEngine.Debug.Log(CurrentPhaseData.GamePhase);
+        CurrentTurn = CurrentPhaseData.Phase.GetNext();
+
         return true;
+    }
+
+    public void GameStart()
+    {
+        CurrentTurn = CurrentPhaseData.Phase.PhaseStart();
+        CurrentPhaseData = phaseDatas.Dequeue();
     }
 }

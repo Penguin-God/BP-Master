@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class AgentManager
@@ -37,7 +37,12 @@ public class AgentManager
 
     void SaveSelect(SelectInfo selectInfo, GamePhase phase)
     {
-        if (currentPhase != phase || selectInfo.Team != currentTeam) return;
+
+        if (currentPhase != phase || selectInfo.Team != currentTeam)
+        {
+            UnityEngine.Debug.Log($"옳지 않은 접근{phase}, {selectInfo.Team}. 실제 {currentPhase}, {currentTeam}");
+            return;
+        }
 
         gameBanPickStorage.SaveSelect(selectInfo);
         OnActionDone?.Invoke();
