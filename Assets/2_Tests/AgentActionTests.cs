@@ -8,17 +8,17 @@ public class AgentActionTests
     [Test]
     public void 현재_턴_아닌_명령_무시()
     {
+        const int Id = 1;
+        (GameBanPickStorage storage, AgentManager sut) = CreateActors(Id);
         bool isDone = false;
-        var storage = new GameBanPickStorage(new int[] { 1, 2, 3 });
-        AgentManager sut = new(storage);
         sut.OnActionDone += () => isDone = true;
 
         sut.ChangePhase(GamePhase.Ban);
-        sut.Pick(Team.Blue, 1);
+        sut.Pick(Team.Blue, Id);
         Assert.IsFalse(isDone);
 
         sut.ChangePhase(GamePhase.Pick);
-        sut.Ban(Team.Blue, 1);
+        sut.Ban(Team.Blue, Id);
         Assert.IsFalse(isDone);
     }
 
@@ -26,8 +26,7 @@ public class AgentActionTests
     public void 픽_대행_후_알림()
     {
         bool isDone = false;
-        var storage = new GameBanPickStorage(new int[] { 1, 2, 3 });
-        AgentManager sut = new(storage);
+        (GameBanPickStorage storage, AgentManager sut) = CreateActors(1);
         sut.OnActionDone += () => isDone = true;
         sut.ChangePhase(GamePhase.Pick);
 
@@ -42,8 +41,7 @@ public class AgentActionTests
     public void 밴_대행_후_알림()
     {
         bool isDone = false;
-        var storage = new GameBanPickStorage(new int[] { 1, 2, 3 });
-        AgentManager sut = new(storage);
+        (GameBanPickStorage storage, AgentManager sut) = CreateActors(1);
         sut.OnActionDone += () => isDone = true;
         sut.ChangePhase(GamePhase.Ban);
 
@@ -58,7 +56,7 @@ public class AgentActionTests
     public void 스왑은_요청을_각_팀에_받아야_알림()
     {
         bool isDone = false;
-        AgentManager sut = new(new GameBanPickStorage(new int[] { 1, 2, 3 }));
+        AgentManager sut = new(new GameBanPickStorage(new int[] { }));
         sut.OnActionDone += () => isDone = true;
         sut.ChangePhase(GamePhase.Swap);
 
@@ -66,5 +64,15 @@ public class AgentActionTests
         Assert.IsFalse(isDone);
         sut.SwapDone(Team.Blue);
         Assert.IsTrue(isDone);
+    }
+
+
+
+
+    (GameBanPickStorage, AgentManager) CreateActors(int id)
+    {
+        var storage = new GameBanPickStorage(new int[] { id });
+        AgentManager sut = new(storage);
+        return (storage, sut);
     }
 }
