@@ -7,6 +7,20 @@ using UnityEngine.TestTools;
 public class AgentActionTests
 {
     [Test]
+    public void 에이전트_스왑은_요청을_각_팀에_받아야_넘어감()
+    {
+        bool isDone = false;
+        AgentManager sut = new(new ActionAgent(new()), new ActionAgent(new()), new GameBanPickStorage(new int[] { 1, 2, 3 }));
+        sut.OnActionDone += () => isDone = true;
+        sut.PhaseChange(GamePhase.Swap);
+
+        sut.SwapDone(Team.Red);
+        Assert.IsFalse(isDone);
+        sut.SwapDone(Team.Blue);
+        Assert.IsTrue(isDone);
+    }
+
+    [Test]
     public void 에이전트_밴_알림()
     {
         bool isDone = false;
