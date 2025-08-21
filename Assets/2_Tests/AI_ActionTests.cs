@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 public class AI_ActionTests
 {
     [Test]
-    public void AI´Â_ÁÖ¾îÁø_Ç®_¾È¿¡¼­¸¸_¼±ÅÃ()
+    public void AIëŠ”_ì£¼ì–´ì§„_í’€_ì•ˆì—ì„œë§Œ_ì„ íƒ()
     {
         IEnumerable<Champion> champions = new Champion[] { CreateChampion(1), CreateChampion(2), CreateChampion(3) };
         IEnumerable<int> ids = champions.Select(x => x.Id);
@@ -20,7 +20,7 @@ public class AI_ActionTests
     }
 
     [Test]
-    public void ·£´ı_¼±ÅÃ()
+    public void ëœë¤_ì„ íƒ()
     {
         IEnumerable<Champion> champions = new Champion[] { CreateChampion(1), CreateChampion(2), CreateChampion(3) };
         IEnumerable<int> ids = champions.Select(x => x.Id);

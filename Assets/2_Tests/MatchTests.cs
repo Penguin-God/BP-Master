@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 public class MatchTests
 {
     [Test]
-    public void ¸ÅÄ¡´Â_¼ø¼­´ë·Î_ÁøÇà()
+    public void ë§¤ì¹˜ëŠ”_ìˆœì„œëŒ€ë¡œ_ì§„í–‰()
     {
         AgentManager agentManager = new(new GameBanPickStorage(new int[] { }));
         

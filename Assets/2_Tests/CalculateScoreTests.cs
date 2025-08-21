@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 public class CalculateScoreTests
 {
     [Test]
-    public void Á¡¼ö´Â_°ø¹æ°ú_º¸³Ê½ºÀÇ_ÇÕ()
+    public void ì ìˆ˜ëŠ”_ê³µë°©ê³¼_ë³´ë„ˆìŠ¤ì˜_í•©()
     {
         SortedDictionary<int, int> teamBonusData1 = new SortedDictionary<int, int>();
         teamBonusData1.Add(300, 50);
@@ -27,7 +27,7 @@ public class CalculateScoreTests
     }
 
     [Test]
-    public void ÆÀ_º¸³Ê½º´Â_½ºÅÈ_±¸°£_º¸³Ê½º_ÃÑÇÕ()
+    public void íŒ€_ë³´ë„ˆìŠ¤ëŠ”_ìŠ¤íƒ¯_êµ¬ê°„_ë³´ë„ˆìŠ¤_ì´í•©()
     {
         ChampionStatData[] champions = new ChampionStatData[] { new(150, 150, 10, 10), new(200, 300, 10, 15) };
 
@@ -44,7 +44,7 @@ public class CalculateScoreTests
     }
 
     [Test]
-    public void Ã¨ÇÁ_°ø¹æ_½ºÅÈ_±¸°£º°_º¸³Ê½º()
+    public void ì±”í”„_ê³µë°©_ìŠ¤íƒ¯_êµ¬ê°„ë³„_ë³´ë„ˆìŠ¤()
     {
         var sut = new ChampionBonusCalculator(CreateBonusCalculator(300, 100, 400, 150), CreateBonusCalculator(300, 100, 400, 150));
 
@@ -63,7 +63,7 @@ public class CalculateScoreTests
     }
 
     [Test] 
-    public void º¸³Ê½º´Â_±¸°£º°·Î()
+    public void ë³´ë„ˆìŠ¤ëŠ”_êµ¬ê°„ë³„ë¡œ()
     {
         var sut = CreateBonusCalculator(300, 100, 400, 150);
 

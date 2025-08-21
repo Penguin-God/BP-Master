@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 public class PhaseTests
 {
     [Test]
-    public void ÅÏ_ÁøÇà¿¡_µû¶ó_ÆÀ°ú_³¡_¿©ºÎ_°»½Å()
+    public void í„´_ì§„í–‰ì—_ë”°ë¼_íŒ€ê³¼_ë_ì—¬ë¶€_ê°±ì‹ ()
     {
         Team[] teams = new Team[] { Team.Red, Team.Blue };
         Phase phase = new (teams);
@@ -23,7 +23,7 @@ public class PhaseTests
     }
 
     [Test]
-    public void ÅÏ_ÁøÇà¿¡_µû¶ó_ÆäÀÌÁî_°»½Å()
+    public void í„´_ì§„í–‰ì—_ë”°ë¼_í˜ì´ì¦ˆ_ê°±ì‹ ()
     {
         PhaseData[] phases = new PhaseData[]
         {

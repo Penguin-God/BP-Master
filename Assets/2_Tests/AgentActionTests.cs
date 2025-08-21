@@ -1,4 +1,4 @@
-using NUnit.Framework;
+ï»¿using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 public class AgentActionTests
 {
     [Test]
-    public void ÇöÀç_ÆÀ_¾Æ´Ñ_¸í·É_¹«½Ã()
+    public void í˜„ì¬_íŒ€_ì•„ë‹Œ_ëª…ë ¹_ë¬´ì‹œ()
     {
         const int Id = 1;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(Id);
@@ -19,7 +19,7 @@ public class AgentActionTests
     }
 
     [Test]
-    public void ÇöÀç_ÆäÀÌÁî_¾Æ´Ñ_¸í·É_¹«½Ã()
+    public void í˜„ì¬_í˜ì´ì¦ˆ_ì•„ë‹Œ_ëª…ë ¹_ë¬´ì‹œ()
     {
         const int Id = 1;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(Id);
@@ -36,7 +36,7 @@ public class AgentActionTests
     }
 
     [Test]
-    public void ÇÈ_´ëÇà_ÈÄ_¾Ë¸²()
+    public void í”½_ëŒ€í–‰_í›„_ì•Œë¦¼()
     {
         bool isDone = false;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(1);
@@ -51,7 +51,7 @@ public class AgentActionTests
     }
 
     [Test]
-    public void ¹ê_´ëÇà_ÈÄ_¾Ë¸²()
+    public void ë°´_ëŒ€í–‰_í›„_ì•Œë¦¼()
     {
         bool isDone = false;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(1);
@@ -66,7 +66,7 @@ public class AgentActionTests
     }
 
     [Test]
-    public void ½º¿ÒÀº_¿äÃ»À»_°¢_ÆÀ¿¡_¹Ş¾Æ¾ß_¾Ë¸²()
+    public void ìŠ¤ì™‘ì€_ìš”ì²­ì„_ê°_íŒ€ì—_ë°›ì•„ì•¼_ì•Œë¦¼()
     {
         bool isDone = false;
         AgentManager sut = new(new GameBanPickStorage(new int[] { }));

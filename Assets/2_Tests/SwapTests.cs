@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -9,7 +9,7 @@ public class SwapTests
     [TestCase(0, 3)]
     [TestCase(2, 3)]
     [TestCase(1, 0)]
-    public void ½º¿Ò_°ËÁõ(int index1, int index2)
+    public void ìŠ¤ì™‘_ê²€ì¦(int index1, int index2)
     {
         var sut = new TeamBanPickStorage();
         sut.SaveSelect(SelectType.Pick, 1);
@@ -25,7 +25,7 @@ public class SwapTests
         sut.Swap(index1, index2);
         
         var result = sut.GetStorage(SelectType.Pick);
-        Assert.AreEqual(expect1, result[index2]);  // ¡ç ½º¿Ò ÈÄ index2 À§Ä¡¿¡´Â ¿ø·¡ index1 °ª
-        Assert.AreEqual(expect2, result[index1]);  // ¡ç ½º¿Ò ÈÄ index1 À§Ä¡¿¡´Â ¿ø·¡ index2 °ª
+        Assert.AreEqual(expect1, result[index2]);  // â† ìŠ¤ì™‘ í›„ index2 ìœ„ì¹˜ì—ëŠ” ì›ë˜ index1 ê°’
+        Assert.AreEqual(expect2, result[index1]);  // â† ìŠ¤ì™‘ í›„ index1 ìœ„ì¹˜ì—ëŠ” ì›ë˜ index2 ê°’
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 public class TurnTests
 {
     [Test]
-    public void ¼ø¼­¿¡_¸Â°Ô_ÁøÇà()
+    public void ìˆœì„œì—_ë§ê²Œ_ì§„í–‰()
     {
         Team[] sequence = new Team[] { Team.Blue, Team.Red, Team.Red, Team.Blue };
         TurnManager sut = new TurnManager(sequence);

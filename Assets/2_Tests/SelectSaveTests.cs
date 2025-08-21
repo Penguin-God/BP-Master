@@ -1,4 +1,4 @@
-using NUnit.Framework;
+ï»¿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ public class SelectSaveTests
     }
 
     [Test]
-    public void ¼±ÅÃ_°¡´ÉÇÑ_Ã¨µé_¹İÈ¯()
+    public void ì„ íƒ_ê°€ëŠ¥í•œ_ì±”ë“¤_ë°˜í™˜()
     {
         GameBanPickStorage sut = CreateStorage(1, 2, 3);
 
@@ -33,7 +33,7 @@ public class SelectSaveTests
     }
 
     [Test]
-    public void Áßº¹_¼±ÅÃ_ºÒ°¡()
+    public void ì¤‘ë³µ_ì„ íƒ_ë¶ˆê°€()
     {
         const int Id = 3;
         GameBanPickStorage storage = CreateStorage(Id);
@@ -46,7 +46,7 @@ public class SelectSaveTests
     [Test]
     [TestCase(Team.Red, new[] { 3, 7 })]
     [TestCase(Team.Blue, new[] { 4, 9 })]
-    public void ´ÜÀÏÆÀ_¿¬¼Ó¼±ÅÃ_¼ø¼­_¹×_³»¿ë_º¸Àå(Team team, int[] pickIds)
+    public void ë‹¨ì¼íŒ€_ì—°ì†ì„ íƒ_ìˆœì„œ_ë°_ë‚´ìš©_ë³´ì¥(Team team, int[] pickIds)
     {
         var storage = CreateStorage(pickIds);
 
@@ -54,13 +54,13 @@ public class SelectSaveTests
             storage.SaveSelect(new SelectInfo(team, SelectType.Pick, id));
 
         var list = storage.GetStorage(team, SelectType.Pick);
-        Assert.AreEqual(pickIds.Length, list.Count, "ÀúÀå °³¼ö°¡ ÀÏÄ¡ÇØ¾ß ÇÕ´Ï´Ù.");
-        CollectionAssert.AreEqual(pickIds, list, "¼ø¼­ ¹× ³»¿ëÀÌ ÀÏÄ¡ÇØ¾ß ÇÕ´Ï´Ù.");
+        Assert.AreEqual(pickIds.Length, list.Count, "ì €ì¥ ê°œìˆ˜ê°€ ì¼ì¹˜í•´ì•¼ í•©ë‹ˆë‹¤.");
+        CollectionAssert.AreEqual(pickIds, list, "ìˆœì„œ ë° ë‚´ìš©ì´ ì¼ì¹˜í•´ì•¼ í•©ë‹ˆë‹¤.");
     }
 
 
     [Test]
-    public void ±³Â÷_¼±ÅÃ_½Ã_ÆÀº°_ÀúÀå_º¸Àå()
+    public void êµì°¨_ì„ íƒ_ì‹œ_íŒ€ë³„_ì €ì¥_ë³´ì¥()
     {
         var storage = CreateStorage(101, 102, 201, 202);
 
@@ -86,7 +86,7 @@ public class SelectSaveTests
 
 
     [Test]
-    public void Ban°úPick_¼ø¼­_¼¯¿©µµ_°£¼·¾øÀ½()
+    public void Banê³¼Pick_ìˆœì„œ_ì„ì—¬ë„_ê°„ì„­ì—†ìŒ()
     {
         var storage = CreateStorage(11, 22, 101, 102, 201);
 
