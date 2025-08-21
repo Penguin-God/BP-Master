@@ -8,8 +8,7 @@ public class MatchTests
     [Test]
     public void 매치는_순서대로_진행()
     {
-        ActionAgent blue = new ActionAgent(new ());
-        ActionAgent red = new ActionAgent(new ());
+        AgentManager agentManager = new(new GameBanPickStorage(new int[] { }));
         
         PhaseData[] phase = new PhaseData[]
         {
@@ -19,30 +18,30 @@ public class MatchTests
         };
         PhaseManager phaseManager = new(phase);
 
-        MatchManager sut = new(phaseManager, blue, red); // 시발 중복 방지 어디서 하노?
+        MatchManager sut = new(phaseManager, agentManager);
 
         sut.GameStart();
 
         Assert.AreEqual(Team.Blue, sut.CurrentTurn);
         Assert.AreEqual(GamePhase.Ban, sut.CurrentPhase);
 
-        blue.Ban(0);
+        agentManager.Ban(Team.Blue, 0);
         Assert.AreEqual(Team.Red, sut.CurrentTurn);
 
-        red.Ban(1);
+        agentManager.Ban(Team.Red, 1);
         Assert.AreEqual(Team.Blue, sut.CurrentTurn);
         Assert.AreEqual(GamePhase.Pick, sut.CurrentPhase);
 
-        blue.Pick(2);
-        red.Pick(3);
+        agentManager.Pick(Team.Blue, 2);
+        agentManager.Pick(Team.Red, 3);
 
         Assert.AreEqual(Team.All, sut.CurrentTurn);
         Assert.AreEqual(GamePhase.Swap, sut.CurrentPhase);
 
-        blue.SwapDone(); // swapdone에 문제
+        agentManager.SwapDone(Team.Blue);
         Assert.AreEqual(GamePhase.Swap, sut.CurrentPhase);
 
-        red.SwapDone();
+        agentManager.SwapDone(Team.Red);
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
     }
 }

@@ -3,14 +3,10 @@ using System.Collections.Generic;
 
 public class AgentManager
 {
-    private ActionAgent blue;
-    private ActionAgent red;
-    private GameBanPickStorage gameBanPickStorage;
+    readonly GameBanPickStorage gameBanPickStorage;
 
-    public AgentManager(ActionAgent blue, ActionAgent red, GameBanPickStorage gameBanPickStorage)
+    public AgentManager(GameBanPickStorage gameBanPickStorage)
     {
-        this.blue = blue;
-        this.red = red;
         this.gameBanPickStorage = gameBanPickStorage;
     }
 
@@ -18,7 +14,7 @@ public class AgentManager
     GamePhase currentPhase = GamePhase.Done;
     readonly HashSet<Team> swapSubmitted = new();
 
-    public void PhaseChange(GamePhase phase)
+    public void ChangePhase(GamePhase phase)
     {
         currentPhase = phase;
     }
