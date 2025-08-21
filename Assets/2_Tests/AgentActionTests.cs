@@ -1,13 +1,63 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
-using NUnit.Framework;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.TestTools;
 
 public class AgentActionTests
 {
     [Test]
-    public void 에이전트_스왑은_요청을_각_팀에_받아야_넘어감()
+    public void 현재_턴_아닌_명령_무시()
+    {
+        bool isDone = false;
+        var storage = new GameBanPickStorage(new int[] { 1, 2, 3 });
+        AgentManager sut = new(new ActionAgent(new()), new ActionAgent(new()), storage);
+        sut.OnActionDone += () => isDone = true;
+
+        sut.PhaseChange(GamePhase.Ban);
+        sut.Pick(Team.Blue, 1);
+        Assert.IsFalse(isDone);
+
+        sut.PhaseChange(GamePhase.Pick);
+        sut.Ban(Team.Blue, 1);
+        Assert.IsFalse(isDone);
+    }
+
+    [Test]
+    public void 픽_대행_후_알림()
+    {
+        bool isDone = false;
+        var storage = new GameBanPickStorage(new int[] { 1, 2, 3 });
+        AgentManager sut = new(new ActionAgent(new()), new ActionAgent(new()), storage);
+        sut.OnActionDone += () => isDone = true;
+        sut.PhaseChange(GamePhase.Pick);
+
+        sut.Pick(Team.Blue, 1);
+
+        Assert.AreEqual(1, storage.GetStorage(Team.Blue, SelectType.Pick).Count);
+        Assert.AreEqual(1, storage.GetStorage(Team.Blue, SelectType.Pick)[0]);
+        Assert.IsTrue(isDone);
+    }
+
+    [Test]
+    public void 밴_대행_후_알림()
+    {
+        bool isDone = false;
+        var storage = new GameBanPickStorage(new int[] { 1, 2, 3 });
+        AgentManager sut = new(new ActionAgent(new()), new ActionAgent(new()), storage);
+        sut.OnActionDone += () => isDone = true;
+        sut.PhaseChange(GamePhase.Ban);
+
+        sut.Ban(Team.Red, 1);
+
+        Assert.AreEqual(1, storage.GetStorage(Team.Red, SelectType.Ban).Count);
+        Assert.AreEqual(1, storage.GetStorage(Team.Red, SelectType.Ban)[0]);
+        Assert.IsTrue(isDone);
+    }
+
+    [Test]
+    public void 스왑은_요청을_각_팀에_받아야_알림()
     {
         bool isDone = false;
         AgentManager sut = new(new ActionAgent(new()), new ActionAgent(new()), new GameBanPickStorage(new int[] { 1, 2, 3 }));
