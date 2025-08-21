@@ -6,7 +6,20 @@ using UnityEngine.TestTools;
 public class AgentActionTests
 {
     [Test]
-    public void 현재_턴_아닌_명령_무시()
+    public void 현재_팀_아닌_명령_무시()
+    {
+        const int Id = 1;
+        (GameBanPickStorage storage, AgentManager sut) = CreateActors(Id);
+        bool isDone = false;
+        sut.OnActionDone += () => isDone = true;
+
+        sut.ChangePhase(GamePhase.Ban, Team.Red);
+        sut.Ban(Team.Blue, Id);
+        Assert.IsFalse(isDone);
+    }
+
+    [Test]
+    public void 현재_페이즈_아닌_명령_무시()
     {
         const int Id = 1;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(Id);
@@ -65,9 +78,6 @@ public class AgentActionTests
         sut.SwapDone(Team.Blue);
         Assert.IsTrue(isDone);
     }
-
-
-
 
     (GameBanPickStorage, AgentManager) CreateActors(int id)
     {
