@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 
 public class Phase
@@ -12,6 +13,14 @@ public class Phase
 
     public Team CurrentTeam { get; private set; }
     public bool IsDone => actionTeams.Count == 0;
+
+    public Team GetNext()
+    {
+        if(actionTeams.Count == 0)
+            throw new InvalidOperationException("턴이 없는데 턴을 달래");
+
+        return actionTeams.Dequeue();
+    }
 
     public bool Next()
     {
