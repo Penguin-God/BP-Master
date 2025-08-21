@@ -10,8 +10,6 @@ public class AI_ActionTests
     [Test]
     public void AI는_주어진_풀_안에서만_선택()
     {
-        GameBanPickStorage gameBanPickStorage = new GameBanPickStorage();
-
         IEnumerable<Champion> champions = new Champion[] { CreateChampion(1), CreateChampion(2), CreateChampion(3) };
         IEnumerable<int> ids = champions.Select(x => x.Id);
         RandomSelector sut = new();

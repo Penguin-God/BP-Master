@@ -43,12 +43,6 @@ public class GameBanPickStorage
 
     public IReadOnlyList<int> SelectableIds => selectableIds.ToList();
 
-    public GameBanPickStorage()
-    {
-        storage.Add(Team.Red, new ());
-        storage.Add(Team.Blue, new ());
-    }
-
     public GameBanPickStorage(IEnumerable<int> allIds)
     {
         selectableIds = new HashSet<int>(allIds);
