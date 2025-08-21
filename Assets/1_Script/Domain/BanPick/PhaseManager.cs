@@ -20,7 +20,7 @@ public class PhaseManager
     public PhaseManager(PhaseData[] phaseDatas)
     {
         this.phaseDatas = new Queue<PhaseData>(phaseDatas);
-        this.phaseDatas.Enqueue(new PhaseData(GamePhase.Done, null));
+        this.phaseDatas.Enqueue(new PhaseData(GamePhase.Done, new Phase(new Team[] { Team.All })));
         CurrentPhaseData = this.phaseDatas.Dequeue();
     }
 

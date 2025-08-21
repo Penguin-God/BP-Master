@@ -16,14 +16,14 @@ public class MatchManager
     void ProgressGame()
     {
         phaseManager.Next();
-        agentManager.ChangePhase(CurrentPhase);
+        agentManager.ChangePhase(CurrentPhase, CurrentTurn);
     }
 
-    public Team CurrentTurn => phaseManager.CurrentPhaseData.Phase.CurrentTeam; // 이게 맞노. 턴 검사 어디서 함? ㅋㅋ
+    public Team CurrentTurn => phaseManager.CurrentPhaseData.Phase.CurrentTeam;
     public GamePhase CurrentPhase => phaseManager.CurrentPhase;
 
     public void GameStart()
     {
-        agentManager.ChangePhase(CurrentPhase);
+        agentManager.ChangePhase(CurrentPhase, CurrentTurn);
     }
 }

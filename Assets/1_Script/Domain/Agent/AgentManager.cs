@@ -12,11 +12,13 @@ public class AgentManager
 
     public event Action OnActionDone;
     GamePhase currentPhase = GamePhase.Done;
+    Team currentTeam;
     readonly HashSet<Team> swapSubmitted = new();
 
-    public void ChangePhase(GamePhase phase)
+    public void ChangePhase(GamePhase phase, Team turn)
     {
         currentPhase = phase;
+        currentTeam = turn;
     }
 
     public void SwapDone(Team team)
@@ -35,7 +37,7 @@ public class AgentManager
 
     void SaveSelect(SelectInfo selectInfo, GamePhase phase)
     {
-        if (currentPhase != phase) return;
+        if (currentPhase != phase || selectInfo.Team != currentTeam) return;
 
         gameBanPickStorage.SaveSelect(selectInfo);
         OnActionDone?.Invoke();

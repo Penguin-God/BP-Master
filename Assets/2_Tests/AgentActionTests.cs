@@ -26,11 +26,11 @@ public class AgentActionTests
         bool isDone = false;
         sut.OnActionDone += () => isDone = true;
 
-        sut.ChangePhase(GamePhase.Ban);
+        sut.ChangePhase(GamePhase.Ban, Team.Blue);
         sut.Pick(Team.Blue, Id);
         Assert.IsFalse(isDone);
 
-        sut.ChangePhase(GamePhase.Pick);
+        sut.ChangePhase(GamePhase.Pick, Team.Blue);
         sut.Ban(Team.Blue, Id);
         Assert.IsFalse(isDone);
     }
@@ -41,7 +41,7 @@ public class AgentActionTests
         bool isDone = false;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(1);
         sut.OnActionDone += () => isDone = true;
-        sut.ChangePhase(GamePhase.Pick);
+        sut.ChangePhase(GamePhase.Pick, Team.Blue);
 
         sut.Pick(Team.Blue, 1);
 
@@ -56,7 +56,7 @@ public class AgentActionTests
         bool isDone = false;
         (GameBanPickStorage storage, AgentManager sut) = CreateActors(1);
         sut.OnActionDone += () => isDone = true;
-        sut.ChangePhase(GamePhase.Ban);
+        sut.ChangePhase(GamePhase.Ban, Team.Red);
 
         sut.Ban(Team.Red, 1);
 
@@ -71,7 +71,7 @@ public class AgentActionTests
         bool isDone = false;
         AgentManager sut = new(new GameBanPickStorage(new int[] { }));
         sut.OnActionDone += () => isDone = true;
-        sut.ChangePhase(GamePhase.Swap);
+        sut.ChangePhase(GamePhase.Swap, Team.All);
 
         sut.SwapDone(Team.Red);
         Assert.IsFalse(isDone);
