@@ -43,6 +43,6 @@ public class PhaseManager
     public void GameStart()
     {
         CurrentPhaseData = phaseDatas.Dequeue();
-        CurrentTurn = CurrentPhaseData.Phase.PhaseStart();
+        CurrentTurn = CurrentPhaseData.Phase.GetNext();
     }
 }

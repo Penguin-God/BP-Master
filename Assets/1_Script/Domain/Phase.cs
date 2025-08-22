@@ -11,8 +11,7 @@ public class Phase
     }
 
     public bool IsDone => actionTeams.Count == 0;
-    public Team PhaseStart() => GetNext();
-
+    
     public Team GetNext()
     {
         if(actionTeams.Count == 0)
