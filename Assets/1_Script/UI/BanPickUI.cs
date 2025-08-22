@@ -6,6 +6,7 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
 {
     BanPickView view;
     [SerializeField] BanPickController banPickController;
+    [SerializeField] MatchDI match;
     [SerializeField] Button championSelectionBtn;
 
     [SerializeField] ChampionSO currentSelectChampion = null;
@@ -28,7 +29,7 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
     void ChoiceTeam(Team team)
     {
         teamChoiceParent.SetActive(false);
-        banPickController.ChioceTeam(team);
+        match.GameStart(team);
     }
 
     void SelectChampion(ChampionSO champion)
