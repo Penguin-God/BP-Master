@@ -37,7 +37,6 @@ public class AgentManager
 
     void SaveSelect(SelectInfo selectInfo, GamePhase phase)
     {
-
         if (currentPhase != phase || selectInfo.Team != currentTeam)
         {
             UnityEngine.Debug.Log($"옳지 않은 접근{phase}, {selectInfo.Team}. 실제 {currentPhase}, {currentTeam}");

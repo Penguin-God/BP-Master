@@ -12,11 +12,17 @@ public class WaitAndSelectTests
         var storage = new GameBanPickStorage(new int[] { 1 });
         AgentManager agentManager = new AgentManager(storage);
         agentManager.OnActionDone += () => count++;
-        TimeAgent sut = new TimeAgent(agentManager);
+        TimeAgent sut = new GameObject().AddComponent<TimeAgent>();
+        sut.SetInfo(agentManager);
 
+        agentManager.ChangePhase(GamePhase.Ban, Team.Red);
         sut.RequestAction(GamePhase.Ban, Team.Red);
 
+        Assert.AreEqual(0, storage.GetStorage(Team.Red, SelectType.Ban).Count);
+        Assert.AreEqual(0, count);
         yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(1, storage.GetStorage(Team.Red, SelectType.Ban).Count);
         Assert.AreEqual(1, storage.GetStorage(Team.Red, SelectType.Ban)[0]);
         Assert.AreEqual(1, count);
     }
