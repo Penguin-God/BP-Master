@@ -47,4 +47,23 @@ public class MatchTests
 
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
     }
+
+    [Test]
+    public void 매치는_자동_진행()
+    {
+        DraftActionController draftController = new(new GameBanPickStorage(new int[] { 0, 1, 2, 3 }));
+
+        PhaseData[] phase = new PhaseData[]
+        {
+            new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
+            new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })),
+            new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
+        };
+        PhaseManager phaseManager = new(phase);
+
+        MatchManager sut = new(phaseManager, draftController, red, blue);
+
+        sut.GameStart();
+        Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
+    }
 }
