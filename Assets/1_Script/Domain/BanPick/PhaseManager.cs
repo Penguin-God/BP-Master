@@ -35,16 +35,16 @@ public class PhaseManager
         this.phaseDatas.Enqueue(new PhaseData(GamePhase.Done, new Phase(new Team[] { Team.All })));
     }
 
-    public PhaseData CurrentPhaseData { get; private set; } = null;
+    PhaseData currentPhaseData = null;
 
-    GamePhase CurrentPhase => CurrentPhaseData.GamePhase;
+    GamePhase CurrentPhase => currentPhaseData.GamePhase;
     public GameFlowData GetNextFlow()
     {
-        if(CurrentPhaseData == null || CurrentPhaseData.Phase.IsDone) 
-            CurrentPhaseData = phaseDatas.Dequeue();
+        if(currentPhaseData == null || currentPhaseData.Phase.IsDone) 
+            currentPhaseData = phaseDatas.Dequeue();
 
-        if (CurrentPhaseData.GamePhase == GamePhase.Done) return new GameFlowData(GamePhase.Done, Team.All);
+        if (CurrentPhase == GamePhase.Done) return new GameFlowData(GamePhase.Done, Team.All);
 
-        return new GameFlowData(CurrentPhase, CurrentPhaseData.Phase.GetNext());
+        return new GameFlowData(CurrentPhase, currentPhaseData.Phase.GetNext());
     }
 }
