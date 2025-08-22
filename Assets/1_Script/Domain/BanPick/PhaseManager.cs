@@ -54,6 +54,13 @@ public class PhaseManager
 
     public GameFlowData GetNextFlow()
     {
+        if(CurrentPhaseData == null)
+        {
+            CurrentPhaseData = phaseDatas.Dequeue();
+            CurrentTurn = CurrentPhaseData.Phase.GetNext();
+            return new GameFlowData(CurrentPhase, CurrentTurn);
+        }
+
         if (CurrentPhaseData.GamePhase == GamePhase.Done) return new GameFlowData(GamePhase.Done, Team.All);
 
         if (CurrentPhaseData.Phase.IsDone)

@@ -58,9 +58,9 @@ public class PhaseTests
             new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Red, Team.Blue })),
         };
 
-        PhaseManager sut = new(phases); sut.GameStart();
+        PhaseManager sut = new(phases);
 
-        // Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Red), sut.GetNextFlow());
+        Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Red), sut.GetNextFlow());
         Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Blue), sut.GetNextFlow());
         Assert.AreEqual(CreateFlow(GamePhase.Pick, Team.Red), sut.GetNextFlow());
         Assert.AreEqual(CreateFlow(GamePhase.Pick, Team.Blue), sut.GetNextFlow());
