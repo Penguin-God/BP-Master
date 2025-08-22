@@ -32,13 +32,9 @@ public class PhaseManager
     {
         if (CurrentPhaseData.GamePhase == GamePhase.Done) return false;
         
-        UnityEngine.Debug.Log(CurrentPhaseData.GamePhase);
-        UnityEngine.Debug.Log(CurrentPhaseData.Phase.IsDone);
-
         if (CurrentPhaseData.Phase.IsDone)
             CurrentPhaseData = phaseDatas.Dequeue();
 
-        UnityEngine.Debug.Log(CurrentPhaseData.GamePhase);
         CurrentTurn = CurrentPhaseData.Phase.GetNext();
 
         return true;
@@ -48,6 +44,5 @@ public class PhaseManager
     {
         CurrentPhaseData = phaseDatas.Dequeue();
         CurrentTurn = CurrentPhaseData.Phase.PhaseStart();
-        
     }
 }

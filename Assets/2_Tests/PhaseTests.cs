@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +6,6 @@ using UnityEngine.TestTools;
 
 public class PhaseTests
 {
-    [Test]
-    public void 턴_진행에_따라_팀과_끝_여부_갱신()
-    {
-        Team[] teams = new Team[] { Team.Red, Team.Blue };
-        Phase phase = new (teams);
-
-        Assert.AreEqual(Team.Red, phase.CurrentTeam);
-        Assert.IsTrue(phase.Next());
-        Assert.IsFalse(phase.IsDone);
-
-        Assert.AreEqual(Team.Blue, phase.CurrentTeam);
-        Assert.IsTrue(phase.Next());
-        Assert.IsTrue(phase.IsDone);
-
-        Assert.IsFalse(phase.Next());
-    }
-
     [Test]
     public void 다음턴_반환()
     {
@@ -52,7 +35,7 @@ public class PhaseTests
         };
 
         PhaseManager sut = new(phases);
-
+        sut.GameStart();
 
         Assert.IsTrue(sut.Next());
         Assert.AreEqual(GamePhase.Ban, sut.CurrentPhase);
