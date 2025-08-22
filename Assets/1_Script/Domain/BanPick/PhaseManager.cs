@@ -14,6 +14,18 @@ public class PhaseData
     }
 }
 
+public readonly struct GameFlowData
+{
+    public readonly GamePhase Phase;
+    public readonly Team Turn;
+
+    public GameFlowData(GamePhase phase, Team turn)
+    {
+        Phase = phase;
+        Turn = turn;
+    }
+}
+
 public class PhaseManager
 {
     readonly Queue<PhaseData> phaseDatas;
@@ -28,7 +40,7 @@ public class PhaseManager
     public GamePhase CurrentPhase => CurrentPhaseData.GamePhase;
     public Team CurrentTurn { get; private set; }
 
-    public bool Next()
+    public bool Next() // bool 리턴 절대 필요 없음
     {
         if (CurrentPhaseData.GamePhase == GamePhase.Done) return false;
         
@@ -39,6 +51,16 @@ public class PhaseManager
 
         return true;
     }
+
+    //public void Next()
+    //{
+    //    if (CurrentPhaseData.GamePhase == GamePhase.Done) return;
+
+    //    if (CurrentPhaseData.Phase.IsDone)
+    //        CurrentPhaseData = phaseDatas.Dequeue();
+
+    //    CurrentTurn = CurrentPhaseData.Phase.GetNext();
+    //}
 
     public void GameStart()
     {
