@@ -37,43 +37,14 @@ public class PhaseManager
 
     public PhaseData CurrentPhaseData { get; private set; } = null;
 
-    public GamePhase CurrentPhase => CurrentPhaseData.GamePhase;
-    public Team CurrentTurn { get; private set; }
-
-    public bool Next() // bool 리턴 절대 필요 없음
-    {
-        if (CurrentPhaseData.GamePhase == GamePhase.Done) return false;
-        
-        if (CurrentPhaseData.Phase.IsDone)
-            CurrentPhaseData = phaseDatas.Dequeue();
-
-        CurrentTurn = CurrentPhaseData.Phase.GetNext();
-
-        return true;
-    }
-
+    GamePhase CurrentPhase => CurrentPhaseData.GamePhase;
     public GameFlowData GetNextFlow()
     {
-        if(CurrentPhaseData == null)
-        {
+        if(CurrentPhaseData == null || CurrentPhaseData.Phase.IsDone) 
             CurrentPhaseData = phaseDatas.Dequeue();
-            CurrentTurn = CurrentPhaseData.Phase.GetNext();
-            return new GameFlowData(CurrentPhase, CurrentTurn);
-        }
 
         if (CurrentPhaseData.GamePhase == GamePhase.Done) return new GameFlowData(GamePhase.Done, Team.All);
 
-        if (CurrentPhaseData.Phase.IsDone)
-            CurrentPhaseData = phaseDatas.Dequeue();
-
-        CurrentTurn = CurrentPhaseData.Phase.GetNext();
-
-        return new GameFlowData(CurrentPhase, CurrentTurn);
-    }
-
-    public void GameStart()
-    {
-        CurrentPhaseData = phaseDatas.Dequeue();
-        CurrentTurn = CurrentPhaseData.Phase.GetNext();
+        return new GameFlowData(CurrentPhase, CurrentPhaseData.Phase.GetNext());
     }
 }

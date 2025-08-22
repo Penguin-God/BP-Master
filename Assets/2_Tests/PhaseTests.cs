@@ -26,30 +26,6 @@ public class PhaseTests
     }
 
     [Test]
-    public void 턴_진행에_따라_페이즈_갱신()
-    {
-        PhaseData[] phases = new PhaseData[]
-        {
-            new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Red, Team.Blue })),
-            new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Red, Team.Blue })),
-        };
-
-        PhaseManager sut = new(phases);
-        sut.GameStart();
-
-        Assert.IsTrue(sut.Next());
-        Assert.AreEqual(GamePhase.Ban, sut.CurrentPhase);
-        Assert.IsTrue(sut.Next());
-
-        Assert.AreEqual(GamePhase.Pick, sut.CurrentPhase);
-
-        Assert.IsTrue(sut.Next());
-        Assert.IsTrue(sut.Next());
-
-        Assert.IsFalse(sut.Next());
-    }
-
-    [Test]
     public void 다음_게임_흐름_반환()
     {
         PhaseData[] phases = new PhaseData[]

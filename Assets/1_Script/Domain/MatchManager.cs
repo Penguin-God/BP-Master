@@ -23,9 +23,5 @@ public class MatchManager
     public Team CurrentTurn => currentFlow.Turn;
     public GamePhase CurrentPhase => currentFlow.Phase;
 
-    public void GameStart()
-    {
-        phaseManager.GetNextFlow();
-        agentManager.ChangePhase(CurrentPhase, CurrentTurn);
-    }
+    public void GameStart() => ProgressGame();
 }
