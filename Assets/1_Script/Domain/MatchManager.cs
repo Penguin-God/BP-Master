@@ -15,13 +15,13 @@ public class MatchManager
 
     void ProgressGame()
     {
-        phaseManager.Next();
+        currentFlow = phaseManager.GetNextFlow();
         agentManager.ChangePhase(CurrentPhase, CurrentTurn);
     }
 
-    // public Team CurrentTurn => phaseManager.CurrentPhaseData.Phase.CurrentTeam;
-    public Team CurrentTurn => phaseManager.CurrentTurn;
-    public GamePhase CurrentPhase => phaseManager.CurrentPhase;
+    GameFlowData currentFlow;
+    public Team CurrentTurn => currentFlow.Turn;
+    public GamePhase CurrentPhase => currentFlow.Phase;
 
     public void GameStart()
     {
