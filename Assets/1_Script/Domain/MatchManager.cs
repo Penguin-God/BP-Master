@@ -1,4 +1,4 @@
-﻿
+
 
 public class MatchManager
 {
@@ -25,7 +25,8 @@ public class MatchManager
 
     public void GameStart()
     {
-        agentManager.ChangePhase(CurrentPhase, CurrentTurn);
         phaseManager.GameStart();
+        agentManager.ChangePhase(CurrentPhase, CurrentTurn);
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public enum GamePhase { Ban, Pick, Swap, Done }
 
@@ -46,7 +46,8 @@ public class PhaseManager
 
     public void GameStart()
     {
-        CurrentTurn = CurrentPhaseData.Phase.PhaseStart();
         CurrentPhaseData = phaseDatas.Dequeue();
+        CurrentTurn = CurrentPhaseData.Phase.PhaseStart();
+        
     }
 }
