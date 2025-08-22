@@ -12,7 +12,7 @@ public class ChampionManager : MonoBehaviour
         allChampion = LoadAllChampions();
     }
 
-    // ¸ðµç Ã¨ µ¥ÀÌÅÍ ´Ù µé°íÀÖ´Âµ¥ ¸øÃ£´Â°Ç ¸»µµ ¾ÈµÇ´Â »óÈ²ÀÌ¶ó First() »ç¿ë
+    // ëª¨ë“  ì±” ë°ì´í„° ë‹¤ ë“¤ê³ ìžˆëŠ”ë° ëª»ì°¾ëŠ”ê±´ ë§ë„ ì•ˆë˜ëŠ” ìƒí™©ì´ë¼ First() ì‚¬ìš©
     public ChampionSO GetChampionData(int id) => allChampion.First(x =>  x.Id == id);
     public string GetChampionName(int id) => GetChampionData(id).ChampionName;
 
