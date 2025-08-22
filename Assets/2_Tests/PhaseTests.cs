@@ -49,29 +49,30 @@ public class PhaseTests
         Assert.IsFalse(sut.Next());
     }
 
-    //[Test]
-    //public void 다음_게임_흐름_반환()
-    //{
-    //    PhaseData[] phases = new PhaseData[]
-    //    {
-    //        new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Red, Team.Blue })),
-    //        new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Red, Team.Blue })),
-    //    };
+    [Test]
+    public void 다음_게임_흐름_반환()
+    {
+        PhaseData[] phases = new PhaseData[]
+        {
+            new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Red, Team.Blue })),
+            new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Red, Team.Blue })),
+        };
 
-    //    PhaseManager sut = new(phases);
+        PhaseManager sut = new(phases); sut.GameStart();
 
-    //    GameFlowData result = sut.GetNextFlow();
-
-    //    Assert.AreEqual(GamePhase.Ban, sut.CurrentPhase);
-
-
-    //    Assert.AreEqual(GamePhase.Pick, sut.CurrentPhase);
-    //}
+        // Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Red), sut.GetNextFlow());
+        Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Blue), sut.GetNextFlow());
+        Assert.AreEqual(CreateFlow(GamePhase.Pick, Team.Red), sut.GetNextFlow());
+        Assert.AreEqual(CreateFlow(GamePhase.Pick, Team.Blue), sut.GetNextFlow());
+        Assert.AreEqual(CreateFlow(GamePhase.Done, Team.All), sut.GetNextFlow());
+    }
 
     [Test]
     public void 값이_같으면_동일()
     {
-        Assert.AreEqual(new GameFlowData(GamePhase.Ban, Team.Red), new GameFlowData(GamePhase.Ban, Team.Red));
-        Assert.AreNotEqual(new GameFlowData(GamePhase.Ban, Team.Red), new GameFlowData(GamePhase.Pick, Team.Red));
+        Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Red), CreateFlow(GamePhase.Ban, Team.Red));
+        Assert.AreNotEqual(CreateFlow(GamePhase.Ban, Team.Red), CreateFlow(GamePhase.Pick, Team.Red));
     }
+
+    GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 }

@@ -52,15 +52,17 @@ public class PhaseManager
         return true;
     }
 
-    //public void Next()
-    //{
-    //    if (CurrentPhaseData.GamePhase == GamePhase.Done) return;
+    public GameFlowData GetNextFlow()
+    {
+        if (CurrentPhaseData.GamePhase == GamePhase.Done) return new GameFlowData(GamePhase.Done, Team.All);
 
-    //    if (CurrentPhaseData.Phase.IsDone)
-    //        CurrentPhaseData = phaseDatas.Dequeue();
+        if (CurrentPhaseData.Phase.IsDone)
+            CurrentPhaseData = phaseDatas.Dequeue();
 
-    //    CurrentTurn = CurrentPhaseData.Phase.GetNext();
-    //}
+        CurrentTurn = CurrentPhaseData.Phase.GetNext();
+
+        return new GameFlowData(CurrentPhase, CurrentTurn);
+    }
 
     public void GameStart()
     {
