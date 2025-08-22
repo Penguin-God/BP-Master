@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +15,17 @@ public class BanPickController : MonoBehaviour
     [SerializeField] DraftTurnSO pickTurnSO;
     public Dictionary<Team, SelectAgent> agentDict = new();
 
-    SelectAgent GetUserAgent() => new SelectAgent(FindAnyObjectByType<BanPickUI>(), FindAnyObjectByType<BanPickUI>());
+    // SelectAgent GetUserAgent() => new SelectAgent(FindAnyObjectByType<BanPickUI>(), FindAnyObjectByType<BanPickUI>());
 
     public void ChioceTeam(Team team)
     {
-        var ai = new AI_BanPickAgent(championStorage, FindAnyObjectByType<ChampionManager>().AllChampion.Select(x => x.Id));
-        SelectAgent ai_agent = new SelectAgent(ai, ai);
-        agentDict.Add(team, GetUserAgent());
-        if(team == Team.Blue) agentDict.Add(Team.Red, ai_agent);
-        else agentDict.Add(Team.Blue, ai_agent);
+        //var ai = new AI_BanPickAgent(championStorage, FindAnyObjectByType<ChampionManager>().AllChampion.Select(x => x.Id));
+        //SelectAgent ai_agent = new SelectAgent(ai, ai);
+        //agentDict.Add(team, GetUserAgent());
+        //if(team == Team.Blue) agentDict.Add(Team.Red, ai_agent);
+        //else agentDict.Add(Team.Blue, ai_agent);
 
-        StartCoroutine(Co_BanPick());
+        //StartCoroutine(Co_BanPick());
     }
 
     IEnumerator Co_BanPick()

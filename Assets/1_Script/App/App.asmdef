@@ -1,0 +1,16 @@
+{
+    "name": "App",
+    "rootNamespace": "",
+    "references": [
+        "GUID:07b003c5450d2f840a353d27e010fd0a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
