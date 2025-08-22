@@ -1,22 +1,34 @@
 
-
 public class MatchManager
 {
-    readonly DraftActionController agentManager;
+    readonly DraftActionController draftController;
     readonly PhaseManager phaseManager;
 
-    public MatchManager(PhaseManager phaseManager, DraftActionController agentManager)
+    IActionHandler blue;
+    IActionHandler red;
+    public MatchManager(PhaseManager phaseManager, DraftActionController agentManager, IActionHandler blue, IActionHandler red)
     {
         this.phaseManager = phaseManager;
-        this.agentManager = agentManager;
+        this.draftController = agentManager;
+        this.blue = blue;
+        this.red = red;
 
-        this.agentManager.OnActionDone += ProgressGame;
+        this.draftController.OnActionDone += ProgressGame;
     }
 
     void ProgressGame()
     {
         currentFlow = phaseManager.GetNextFlow();
-        agentManager.ChangePhase(CurrentPhase, CurrentTurn);
+        draftController.ChangePhase(CurrentPhase, CurrentTurn);
+        switch (CurrentTurn)
+        {
+            case Team.Blue: blue.OnRequestAction(draftController, CurrentPhase); break;
+            case Team.Red: red.OnRequestAction(draftController, CurrentPhase); break;
+            case Team.All:
+                blue.OnRequestAction(draftController, CurrentPhase);
+                red.OnRequestAction(draftController, CurrentPhase);
+                break;
+        }
     }
 
     GameFlowData currentFlow;
