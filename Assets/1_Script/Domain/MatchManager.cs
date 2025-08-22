@@ -2,10 +2,10 @@
 
 public class MatchManager
 {
-    readonly AgentManager agentManager;
+    readonly DraftActionController agentManager;
     readonly PhaseManager phaseManager;
 
-    public MatchManager(PhaseManager phaseManager, AgentManager agentManager)
+    public MatchManager(PhaseManager phaseManager, DraftActionController agentManager)
     {
         this.phaseManager = phaseManager;
         this.agentManager = agentManager;

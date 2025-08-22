@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TimeAgent : MonoBehaviour
 {
-    private AgentManager agentManager;
+    private DraftActionController agentManager;
 
-    public void SetInfo(AgentManager agentManager)
+    public void SetInfo(DraftActionController agentManager)
     {
         this.agentManager = agentManager;
     }

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-public class AgentManager
+public class DraftActionController
 {
     readonly GameBanPickStorage gameBanPickStorage;
 
-    public AgentManager(GameBanPickStorage gameBanPickStorage)
+    public DraftActionController(GameBanPickStorage gameBanPickStorage)
     {
         this.gameBanPickStorage = gameBanPickStorage;
     }

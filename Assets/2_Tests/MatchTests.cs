@@ -8,7 +8,7 @@ public class MatchTests
     [Test]
     public void 매치는_순서대로_진행()
     {
-        AgentManager agentManager = new(new GameBanPickStorage(new int[] { 0, 1, 2, 3 }));
+        DraftActionController agentManager = new(new GameBanPickStorage(new int[] { 0, 1, 2, 3 }));
         
         PhaseData[] phase = new PhaseData[]
         {

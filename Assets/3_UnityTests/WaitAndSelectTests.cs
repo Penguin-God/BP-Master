@@ -10,7 +10,7 @@ public class WaitAndSelectTests
     {
         int count = 0;
         var storage = new GameBanPickStorage(new int[] { 1 });
-        AgentManager agentManager = new AgentManager(storage);
+        DraftActionController agentManager = new DraftActionController(storage);
         agentManager.OnActionDone += () => count++;
         TimeAgent sut = new GameObject().AddComponent<TimeAgent>();
         sut.SetInfo(agentManager);
