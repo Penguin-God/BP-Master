@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +14,7 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IActionHandler
     void Start()
     {
         view = GetComponentInChildren<BanPickView>();
-        banPickController.OnSelectedChampion += view.UpdatePickChampions;
+        // banPickController.OnSelectedChampion += view.UpdatePickChampions;
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
@@ -26,6 +25,11 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IActionHandler
         view.UpdateSelectChampion(champion);
     }
 
+    public void SetTeam(Team team)
+    {
+        this.team = team;
+    }
+
     Team team;
     void NailDownChampion() // 챔프 확정
     {
@@ -33,10 +37,14 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IActionHandler
 
         if (currentPhase == GamePhase.Ban)
         {
+            view.UpdateBanView(team, currentSelectChampion.Id); // 순서 커플링
             draftAction.Ban(team, currentSelectChampion.Id);
-            view.UpdateBanView(team, currentSelectChampion.Id);
         }
-        else if(currentPhase == GamePhase.Pick) draftAction.Pick(team, currentSelectChampion.Id);
+        else if (currentPhase == GamePhase.Pick)
+        {
+            view.UpdatePickView(team, currentSelectChampion.Id);
+            draftAction.Pick(team, currentSelectChampion.Id);
+        }
     }
 
     bool isSelect;

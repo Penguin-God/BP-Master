@@ -27,10 +27,15 @@ public class BanPickView : MonoBehaviour
 
     public void UpdateSelectChampion(ChampionSO champion) => selectChampionTxt.text = champion.ChampionName;
 
-    public void UpdatePickChampions(SelectData data)
+    public void UpdatePickView(SelectData data)
     {
         if (data.CurrentTurn.Phase == GamePhase.Pick)
             pickTextDict[data.CurrentTurn.Team][data.Count - 1].text = championManager.GetChampionName(data.Id);
+    }
+
+    public void UpdatePickView(Team team, int id)
+    {
+        pickTextDict[team][0].text = championManager.GetChampionName(id);
     }
 
     public void UpdateBanView(Team team, int id)

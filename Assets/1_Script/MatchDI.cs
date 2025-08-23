@@ -17,6 +17,7 @@ public class MatchDI : MonoBehaviour
         };
         PhaseManager phaseManager = new(phase);
 
+        BanPickUI.SetTeam(Team.Blue);
         MatchManager matchManager = new MatchManager(phaseManager, draftController, BanPickUI, BanPickUI);
 
         matchManager.GameStart();
