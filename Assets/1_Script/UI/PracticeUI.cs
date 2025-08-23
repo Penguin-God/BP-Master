@@ -4,13 +4,13 @@ using UnityEngine;
 public class PracticeUI : MonoBehaviour
 {
     [SerializeField] PlayerManager playerManager;
-    ChampionSelectionUI championSelectionUI;
+    ChampionDrawer championSelectionUI;
     PlayerSectionUI playerSectionUI;
     int currentPracticePlayer = -1;
 
     void Start()
     {
-        championSelectionUI = GetComponentInChildren<ChampionSelectionUI>(true);
+        championSelectionUI = GetComponentInChildren<ChampionDrawer>(true);
         playerSectionUI = GetComponentInChildren<PlayerSectionUI>(true);
         championSelectionUI.gameObject.SetActive(false);
         playerSectionUI.gameObject.SetActive(true);
@@ -24,7 +24,7 @@ public class PracticeUI : MonoBehaviour
         currentPracticePlayer = player.Id;
 
         championSelectionUI.gameObject.SetActive(true);
-        championSelectionUI.DrawChampionsButton(IncreasedMastery);
+        championSelectionUI.DrawChampionButtons(IncreasedMastery);
     }
 
 

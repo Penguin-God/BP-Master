@@ -6,30 +6,18 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
 {
     BanPickView view;
     [SerializeField] BanPickController banPickController;
-    [SerializeField] MatchDI match;
     [SerializeField] Button championSelectionBtn;
+    [SerializeField] ChampionDrawer buttonDrawer;
 
-    [SerializeField] ChampionSO currentSelectChampion = null;
-    [SerializeField] ChampionSelectionUI championSelectionUI;
-    [SerializeField] GameObject teamChoiceParent;
-    [SerializeField] Button blueButton;
-    [SerializeField] Button redButton;
+    ChampionSO currentSelectChampion = null;
+
 
     void Start()
     {
         view = GetComponentInChildren<BanPickView>();
         banPickController.OnSelectedChampion += view.UpdatePickChampions;
         championSelectionBtn.onClick.AddListener(NailDownChampion);
-        championSelectionUI.DrawChampionsButton(SelectChampion);
-
-        blueButton.onClick.AddListener(() => ChoiceTeam(Team.Blue));
-        redButton.onClick.AddListener(() => ChoiceTeam(Team.Red));
-    }
-
-    void ChoiceTeam(Team team)
-    {
-        teamChoiceParent.SetActive(false);
-        match.GameStart(team);
+        buttonDrawer.DrawChampionButtons(SelectChampion);
     }
 
     void SelectChampion(ChampionSO champion)
@@ -38,7 +26,7 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
         view.UpdateSelectChampion(champion);
     }
 
-    void NailDownChampion()
+    void NailDownChampion() // 챔프 확정
     {
         if (currentSelectChampion != null)
             isSelect = true;
