@@ -19,9 +19,26 @@ public class MatchTests
         };
         PhaseManager phaseManager = new(phase);
 
-        MatchManager sut = new(phaseManager, draftController, new TestActionHandler(Team.Blue, storage), new TestActionHandler(Team.Red, storage));
+        PhaseActionDispatcher blue = new PhaseActionDispatcher(Team.Blue, new FakeDraftExecutor(storage));
+        PhaseActionDispatcher red = new PhaseActionDispatcher(Team.Red, new FakeDraftExecutor(storage));
+
+        MatchManager sut = new(phaseManager, draftController, blue, red);
 
         sut.GameStart();
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
     }
+}
+
+public class FakeDraftExecutor : IDraftActionHandler
+{
+    readonly GameBanPickStorage storage;
+
+    public FakeDraftExecutor(GameBanPickStorage gameSelectStorage)
+    {
+        this.storage = gameSelectStorage;
+    }
+
+    public void OnRequestBan(Team team, DraftActionController draftAction) => draftAction.Ban(team, storage.SelectableIds[0]);
+    public void OnRequestPick(Team team, DraftActionController draftAction) => draftAction.Pick(team, storage.SelectableIds[0]);
+    public void OnRequestSwap(Team team, DraftActionController draftAction) => draftAction.SwapDone(team);
 }
