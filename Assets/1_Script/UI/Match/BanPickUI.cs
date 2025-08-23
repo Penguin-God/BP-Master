@@ -74,3 +74,55 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IActionHandler
     GamePhase currentPhase;
     DraftActionController draftAction;
 }
+
+
+public class BanPickUI_Controller
+{
+    ChampionSO currentSelectChampion = null;
+    BanPickView view;
+
+    public void SelectChampion(ChampionSO champion)
+    {
+        currentSelectChampion = champion;
+        view.UpdateSelectChampion(champion);
+    }
+
+    public void SetTeam(Team team)
+    {
+        this.team = team;
+    }
+
+    Team team;
+    void NailDownChampion() // 챔프 확정
+    {
+        if (currentSelectChampion == null) return;
+
+        if (currentPhase == GamePhase.Ban)
+        {
+            view.UpdateBanView(team, currentSelectChampion.Id); // 순서 커플링
+            draftAction.Ban(team, currentSelectChampion.Id);
+        }
+        else if (currentPhase == GamePhase.Pick)
+        {
+            view.UpdatePickView(team, currentSelectChampion.Id);
+            draftAction.Pick(team, currentSelectChampion.Id);
+        }
+    }
+
+    public void OnRequestAction(DraftActionController draftAction, GamePhase phase)
+    {
+        this.draftAction = draftAction;
+        currentPhase = phase;
+
+        switch (phase)
+        {
+            case GamePhase.Ban:
+            case GamePhase.Pick:
+                break;
+            case GamePhase.Swap: break;
+        }
+    }
+
+    GamePhase currentPhase;
+    DraftActionController draftAction;
+}
