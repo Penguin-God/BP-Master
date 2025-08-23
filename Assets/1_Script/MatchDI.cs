@@ -4,6 +4,7 @@ public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionManager champManager;
     [SerializeField] BanPickUI BanPickUI;
+    MatchManager matchManager;
     public void GameStart(Team playerTeam)
     {
         var storage = new GameBanPickStorage(champManager.AllId);
@@ -19,8 +20,13 @@ public class MatchDI : MonoBehaviour
 
         PhaseActionDispatcher blue = new PhaseActionDispatcher(Team.Blue, BanPickUI);
         PhaseActionDispatcher red = new PhaseActionDispatcher(Team.Red, BanPickUI); ;
-        MatchManager matchManager = new MatchManager(phaseManager, draftController, blue, red);
+        matchManager = new MatchManager(phaseManager, draftController, blue, red);
 
         matchManager.GameStart();
+    }
+
+    void Update()
+    {
+        if (matchManager != null &&  matchManager.CurrentPhase == GamePhase.Done) print("끝!!!!!!!!!!!!");
     }
 }

@@ -67,10 +67,10 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHand
         this.draftAction = draftAction;
     }
 
+
+    [SerializeField] Button swapDoneBtn;
     public void OnRequestSwap(Team team, DraftActionController draftAction)
     {
-        this.team = team;
-        currentPhase = GamePhase.Swap;
-        this.draftAction = draftAction;
+        swapDoneBtn.onClick.AddListener(() => draftAction.SwapDone(team));
     }
 }
