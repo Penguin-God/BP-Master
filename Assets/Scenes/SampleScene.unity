@@ -2646,7 +2646,7 @@ GameObject:
   - component: {fileID: 919244432}
   - component: {fileID: 919244431}
   m_Layer: 5
-  m_Name: ChampionSelectButton
+  m_Name: NailDownButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3254,8 +3254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   banPickController: {fileID: 1420292362}
-  championSelectionBtn: {fileID: 919244431}
-  buttonDrawer: {fileID: 1036369959}
+  nailDownBtn: {fileID: 919244431}
+  buttonDrawer: {fileID: 1081915727}
 --- !u!1001 &1236140465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4240,6 +4240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08c0b08665efa344881d3ec13785c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  champManager: {fileID: 1420292359}
+  BanPickUI: {fileID: 1213870346}
 --- !u!1001 &1455117545
 PrefabInstance:
   m_ObjectHideFlags: 0

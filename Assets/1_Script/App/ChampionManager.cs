@@ -6,6 +6,7 @@ public class ChampionManager : MonoBehaviour
 {
     [SerializeField] ChampionSO[] allChampion;
     public IReadOnlyList<ChampionSO> AllChampion => allChampion;
+    public IReadOnlyList<int> AllId => allChampion.Select(x => x.Id).ToList();
 
     void Awake()
     {

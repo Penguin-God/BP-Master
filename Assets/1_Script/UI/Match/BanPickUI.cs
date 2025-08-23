@@ -1,22 +1,22 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
+public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IActionHandler
 {
     BanPickView view;
     [SerializeField] BanPickController banPickController;
-    [SerializeField] Button championSelectionBtn;
+    [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
 
     ChampionSO currentSelectChampion = null;
-
 
     void Start()
     {
         view = GetComponentInChildren<BanPickView>();
         banPickController.OnSelectedChampion += view.UpdatePickChampions;
-        championSelectionBtn.onClick.AddListener(NailDownChampion);
+        nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
 
@@ -26,10 +26,14 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
         view.UpdateSelectChampion(champion);
     }
 
+    Team team;
     void NailDownChampion() // 챔프 확정
     {
-        if (currentSelectChampion != null)
-            isSelect = true;
+        if (currentSelectChampion == null) return;
+
+        print(currentSelectChampion.Id);
+        if (currentPhase == GamePhase.Ban) draftAction.Ban(team, currentSelectChampion.Id);
+        else if(currentPhase == GamePhase.Pick) draftAction.Pick(team, currentSelectChampion.Id);
     }
 
     bool isSelect;
@@ -40,4 +44,22 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector
     }
 
     int ISelector.SelectChampion() => currentSelectChampion.Id;
+
+    public void OnRequestAction(DraftActionController draftAction, GamePhase phase)
+    {
+        this.draftAction = draftAction;
+        currentPhase = phase;
+        
+        switch (phase)
+        {
+            case GamePhase.Ban:
+            case GamePhase.Pick:
+                nailDownBtn.gameObject.SetActive(true);
+                break;
+            case GamePhase.Swap:  break;
+        }
+    }
+
+    GamePhase currentPhase;
+    DraftActionController draftAction;
 }
