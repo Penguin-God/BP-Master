@@ -32,15 +32,17 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHand
     {
         if (currentSelectChampion == null) return;
 
+        Team prevTeam = team; // 명령시 team변수 갱신되서
         if (currentPhase == GamePhase.Ban)
         {
-            view.UpdateBanView(team, currentSelectChampion.Id); // 순서 커플링
-            draftAction.Ban(team, currentSelectChampion.Id);
+            if(draftAction.Ban(team, currentSelectChampion.Id))
+                view.UpdateBanView(prevTeam, currentSelectChampion.Id); // 순서 커플링
+            
         }
         else if (currentPhase == GamePhase.Pick)
         {
-            view.UpdatePickView(team, currentSelectChampion.Id);
-            draftAction.Pick(team, currentSelectChampion.Id);
+            if(draftAction.Pick(team, currentSelectChampion.Id))
+                view.UpdatePickView(prevTeam, currentSelectChampion.Id);
         }
     }
 
@@ -74,3 +76,4 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHand
         swapDoneBtn.onClick.AddListener(() => draftAction.SwapDone(team));
     }
 }
+    
