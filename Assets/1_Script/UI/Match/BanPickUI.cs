@@ -31,8 +31,11 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IActionHandler
     {
         if (currentSelectChampion == null) return;
 
-        print(currentSelectChampion.Id);
-        if (currentPhase == GamePhase.Ban) draftAction.Ban(team, currentSelectChampion.Id);
+        if (currentPhase == GamePhase.Ban)
+        {
+            draftAction.Ban(team, currentSelectChampion.Id);
+            view.UpdateBanView(team, currentSelectChampion.Id);
+        }
         else if(currentPhase == GamePhase.Pick) draftAction.Pick(team, currentSelectChampion.Id);
     }
 
