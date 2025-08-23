@@ -5,64 +5,42 @@ using UnityEngine.TestTools;
 
 public class DraftActionControllTests
 {
-    [Test]
-    public void 현재_팀_아닌_명령_무시()
-    {
-        const int Id = 1;
-        (GameBanPickStorage storage, DraftActionController sut) = CreateActors(Id);
-        bool isDone = false;
-        sut.OnActionDone += () => isDone = true;
-
-        sut.ChangePhase(GamePhase.Ban, Team.Red);
-        sut.Ban(Team.Blue, Id);
-        Assert.IsFalse(isDone);
-    }
-
-    [Test]
-    public void 현재_페이즈_아닌_명령_무시()
-    {
-        const int Id = 1;
-        (GameBanPickStorage storage, DraftActionController sut) = CreateActors(Id);
-        bool isDone = false;
-        sut.OnActionDone += () => isDone = true;
-
-        sut.ChangePhase(GamePhase.Ban, Team.Blue);
-        sut.Pick(Team.Blue, Id);
-        Assert.IsFalse(isDone);
-
-        sut.ChangePhase(GamePhase.Pick, Team.Blue);
-        sut.Ban(Team.Blue, Id);
-        Assert.IsFalse(isDone);
-    }
-
-    [Test]
-    public void 픽_대행_후_알림()
+    [TestCase(GamePhase.Ban, Team.Blue, SelectType.Ban)]
+    [TestCase(GamePhase.Ban, Team.Red, SelectType.Ban)]
+    [TestCase(GamePhase.Pick, Team.Blue, SelectType.Pick)]
+    [TestCase(GamePhase.Pick, Team.Red, SelectType.Pick)]
+    public void 올바른_페이즈와_팀이면_true와_알림(GamePhase phase, Team team, SelectType type)
     {
         bool isDone = false;
         (GameBanPickStorage storage, DraftActionController sut) = CreateActors(1);
         sut.OnActionDone += () => isDone = true;
-        sut.ChangePhase(GamePhase.Pick, Team.Blue);
 
-        sut.Pick(Team.Blue, 1);
+        sut.ChangePhase(phase, team);
+        bool result = (phase == GamePhase.Ban) ? sut.Ban(team, 1): sut.Pick(team, 1);
 
-        Assert.AreEqual(1, storage.GetStorage(Team.Blue, SelectType.Pick).Count);
-        Assert.AreEqual(1, storage.GetStorage(Team.Blue, SelectType.Pick)[0]);
+        Assert.IsTrue(result);
+        Assert.AreEqual(1, storage.GetStorage(team, type).Count);
+        Assert.AreEqual(1, storage.GetStorage(team, type)[0]);
         Assert.IsTrue(isDone);
     }
 
-    [Test]
-    public void 밴_대행_후_알림()
+    [TestCase(GamePhase.Ban, Team.Blue, Team.Red)] // 턴 Red인데 Blue가 Ban
+    [TestCase(GamePhase.Ban, Team.Red, Team.Blue)]
+    [TestCase(GamePhase.Pick, Team.Blue, Team.Red)]
+    [TestCase(GamePhase.Pick, Team.Red, Team.Blue)]
+    public void 잘못된_팀이면_false와_알림없음(GamePhase phase, Team currentTurn, Team wrongTeam)
     {
         bool isDone = false;
         (GameBanPickStorage storage, DraftActionController sut) = CreateActors(1);
         sut.OnActionDone += () => isDone = true;
-        sut.ChangePhase(GamePhase.Ban, Team.Red);
 
-        sut.Ban(Team.Red, 1);
+        sut.ChangePhase(phase, currentTurn);
+        bool result = (phase == GamePhase.Ban) ? sut.Ban(wrongTeam, 1) : sut.Pick(wrongTeam, 1);
 
-        Assert.AreEqual(1, storage.GetStorage(Team.Red, SelectType.Ban).Count);
-        Assert.AreEqual(1, storage.GetStorage(Team.Red, SelectType.Ban)[0]);
-        Assert.IsTrue(isDone);
+        Assert.IsFalse(result);
+        Assert.AreEqual(0, storage.GetStorage(wrongTeam, SelectType.Ban).Count);
+        Assert.AreEqual(0, storage.GetStorage(wrongTeam, SelectType.Pick).Count);
+        Assert.IsFalse(isDone);
     }
 
     [Test]

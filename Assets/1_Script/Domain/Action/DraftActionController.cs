@@ -32,18 +32,22 @@ public class DraftActionController
         }
     }
 
-    public void Ban(Team team, int id) => SaveSelect(new SelectInfo(team, SelectType.Ban, id), GamePhase.Ban);
-    public void Pick(Team team, int id) => SaveSelect(new SelectInfo(team, SelectType.Pick, id), GamePhase.Pick);
+    public bool Ban(Team team, int id) => SaveSelect(new SelectInfo(team, SelectType.Ban, id), GamePhase.Ban);
+    public bool Pick(Team team, int id) => SaveSelect(new SelectInfo(team, SelectType.Pick, id), GamePhase.Pick);
 
-    void SaveSelect(SelectInfo selectInfo, GamePhase phase)
+    bool SaveSelect(SelectInfo selectInfo, GamePhase phase)
     {
         if (currentPhase != phase || selectInfo.Team != currentTeam)
         {
             UnityEngine.Debug.Log($"옳지 않은 접근{phase}, {selectInfo.Team}. 실제 {currentPhase}, {currentTeam}");
-            return;
+            return false;
         }
 
-        gameBanPickStorage.SaveSelect(selectInfo);
-        OnActionDone?.Invoke();
+        if (gameBanPickStorage.SaveSelect(selectInfo))
+        {
+            OnActionDone?.Invoke();
+            return true;
+        }
+        else return false;
     }
 }
