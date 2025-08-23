@@ -5,16 +5,15 @@ using UnityEngine.UI;
 public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHandler
 {
     BanPickView view;
-    [SerializeField] BanPickController banPickController;
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
 
     ChampionSO currentSelectChampion = null;
 
-    void Start()
+    public void Init()
     {
+        gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
-        // banPickController.OnSelectedChampion += view.UpdatePickChampions;
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
@@ -36,8 +35,7 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHand
         if (currentPhase == GamePhase.Ban)
         {
             if(draftAction.Ban(team, currentSelectChampion.Id))
-                view.UpdateBanView(prevTeam, currentSelectChampion.Id); // 순서 커플링
-            
+                view.UpdateBanView(prevTeam, currentSelectChampion.Id);
         }
         else if (currentPhase == GamePhase.Pick)
         {

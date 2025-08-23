@@ -23,6 +23,7 @@ public class MatchDI : MonoBehaviour
         matchManager = new MatchManager(phaseManager, draftController, blue, red);
 
         matchManager.GameStart();
+        BanPickUI.Init();
     }
 
     void Update()
