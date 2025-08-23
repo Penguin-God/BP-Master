@@ -1,8 +1,7 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHandler
+public class BanPickUI : MonoBehaviour, IDraftActionHandler
 {
     BanPickView view;
     [SerializeField] Button nailDownBtn;
@@ -43,15 +42,6 @@ public class BanPickUI : MonoBehaviour, ISelectWait, ISelector, IDraftActionHand
                 view.UpdatePickView(prevTeam, currentSelectChampion.Id);
         }
     }
-
-    bool isSelect;
-    public IEnumerator WaitSelect()
-    {
-        yield return new WaitUntil(() =>  isSelect);
-        isSelect = false;
-    }
-
-    int ISelector.SelectChampion() => currentSelectChampion.Id;
 
     public void OnRequestBan(Team team, DraftActionController draftAction)
     {

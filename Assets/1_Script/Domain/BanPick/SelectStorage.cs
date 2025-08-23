@@ -1,39 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GameSelectStorage
+public readonly struct SelectInfo
 {
-    HashSet<int> selectChampions = new();
-    readonly public TeamSelectStorage BansStorage = new();
-    readonly public TeamSelectStorage PickStorage = new();
+    public readonly Team Team;
+    public readonly SelectType Select;
+    public readonly int Id;
 
-    public IReadOnlyList<int> SelectChampions => selectChampions.ToArray();
-
-    public void SaveSelectChampion(GamePhase phase, Team team, int id)
+    public SelectInfo(Team team, SelectType select, int id)
     {
-        GetStorage(phase).Add(team, id);
-        selectChampions.Add(id);
+        Team = team;
+        Select = select;
+        Id = id;
     }
-
-    public TeamSelectStorage GetStorage(GamePhase phase) => phase == GamePhase.Ban ? BansStorage : PickStorage;
 }
 
 public enum Team { Blue, Red, All }
 public enum SelectType { Ban, Pick}
-public class TeamSelectStorage
-{
-    Dictionary<Team, List<int>> storage = new();
-
-    public TeamSelectStorage()
-    {
-        storage.Add(Team.Blue, new List<int>());
-        storage.Add(Team.Red, new List<int>());
-    }
-
-    public void Add(Team team, int id) => storage[team].Add(id);
-    public int GetCount(Team team) => storage[team].Count;
-}
 
 public class GameBanPickStorage
 {
