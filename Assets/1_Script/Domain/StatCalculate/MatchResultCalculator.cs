@@ -16,9 +16,23 @@ public readonly struct MatchResult
 }
 
 public class MatchResultCalculator
-{ 
+{
+    readonly TeamScoreCalculator scoreCalculator;
+    public MatchResultCalculator(TeamScoreCalculator teamScoreCalculator) 
+    {
+        this.scoreCalculator = teamScoreCalculator;
+    }
+
     public MatchResult CalculateResult(IEnumerable<ChampionStatData> blue, IEnumerable<ChampionStatData> red)
     {
-        return default(MatchResult);
+        int blueScore = scoreCalculator.CalculateScore(blue);
+        int redScore = scoreCalculator.CalculateScore(red);
+
+        Team winner;
+        if (blueScore == redScore) winner = Team.All;
+        else if (blueScore > redScore) winner = Team.Blue;
+        else winner = Team.Red;
+
+        return new MatchResult(blueScore, redScore, winner);
     }
 }

@@ -6,37 +6,35 @@ using UnityEngine.TestTools;
 public class MatchResultCalculateTests
 {
     // 편의 헬퍼
-    private static ChampionStatData CreateStat(int atk, int def, int rng, int spd)
+    private static ChampionStatData CreateStat(int atk = 0, int def = 0, int rng = 0, int spd = 0)
         => new ChampionStatData(atk, def, rng, spd);
 
+    BonusCalculator CreateEmptyBonus() => new BonusCalculator(new System.Collections.Generic.SortedDictionary<int, int>());
+    TeamScoreCalculator CreateScoreCalculator()
+    {
+        return new TeamScoreCalculator(new ChampionBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus()),
+            new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+    }
     [Test]
     public void 다수_챔피언_스쿼드_결과()
     {
-        // Arrange
         var blue = new[]
         {
-            CreateStat(12, 4,  2, 5),
-            CreateStat(7,  9,  1, 3),
-            CreateStat(5,  5,  5, 5),
+            CreateStat(12, 4),
+            CreateStat(7,  8), 
         };
         var red = new[]
         {
-            CreateStat(10, 6,  3, 4),
-            CreateStat(6,  10, 2, 2),
-            CreateStat(8,  3,  4, 6),
+            CreateStat(10, 6),
+            CreateStat(10, 6),
         };
+        var sut = new MatchResultCalculator(CreateScoreCalculator());
 
-        // Act
-        MatchResult result = new MatchResultCalculator().CalculateResult(blue, red);
+        MatchResult result = sut.CalculateResult(blue, red);
 
-        // Assert (여기도 네가 기대값만 채우면 됨)
-        var expectedBlue = /* TODO */ 0;
-        var expectedRed = /* TODO */ 0;
-        var expectedWinner = /* TODO */ Team.Red; // 또는 Team.Blue / 무승부 값
-
-        Assert.AreEqual(expectedBlue, result.BlueScore);
-        Assert.AreEqual(expectedRed, result.RedScore);
-        Assert.AreEqual(expectedWinner, result.Winner);
+        Assert.AreEqual(31, result.BlueScore);
+        Assert.AreEqual(32, result.RedScore);
+        Assert.AreEqual(Team.Red, result.Winner);
     }
 
     [Test]
@@ -47,16 +45,10 @@ public class MatchResultCalculateTests
             CreateStat(10, 10, 3, 5),
             CreateStat(8,  12, 2, 6),
         };
+        var sut = new MatchResultCalculator(CreateScoreCalculator());
 
-        // Act
-        MatchResult result = new MatchResultCalculator().CalculateResult(team, team);
+        MatchResult result = sut.CalculateResult(team, team);
 
-        // Assert
-        var expectedBlue = /* TODO */ 0;
-        var expectedRed = /* TODO */ 0;
-        
-        Assert.AreEqual(expectedBlue, result.BlueScore);
-        Assert.AreEqual(expectedRed, result.RedScore);
         Assert.AreEqual(Team.All, result.Winner);
     }
 }
