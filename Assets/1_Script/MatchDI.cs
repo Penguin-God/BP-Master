@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -32,6 +33,12 @@ public class MatchDI : MonoBehaviour
     {
         if (matchManager != null &&  matchManager.CurrentPhase == GamePhase.Done)
         {
+            var blue = champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick));
+            var red = champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick));
+
+            print(champManager.GetChampionData(storage.GetStorage(Team.Blue, SelectType.Pick)[0]).ChampionName);
+            print(champManager.GetChampionData(storage.GetStorage(Team.Red, SelectType.Pick)[0]).ChampionName);
+
             //MatchResult result = new MatchResultCalculator().CalculateResult();
             //print(result.BlueScore);
             //print(result.RedScore);

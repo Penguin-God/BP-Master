@@ -8,4 +8,7 @@ public class ChampionSO : ScriptableObject
 
     [SerializeField] string championName;
     public string ChampionName => championName;
+
+    [SerializeField] ChampionStatData statData;
+    public ChampionStatData StatData => statData;
 }
