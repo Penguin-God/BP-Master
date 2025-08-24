@@ -13,7 +13,7 @@ public class BonusCalculator
     public int CalculateBonus(int value)
     {
         int bonus = 0;
-        foreach (var data in bounsData) // Á¦ÀÏ ³ôÀº °ª±îÁö °»½Å
+        foreach (var data in bounsData) // ì œì¼ ë†’ì€ ê°’ê¹Œì§€ ê°±ì‹ 
         {
             if (value >= data.Key) bonus = data.Value;
             else break;

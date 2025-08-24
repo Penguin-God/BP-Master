@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
-  m_Name: "\uC624\uB978"
+  m_Name: "\uCCA0\uC2DD"
   m_EditorClassIdentifier: 
-  id: 9
-  championName: "\uC624\uB978"
+  id: 18
+  championName: "\uCCA0\uC2DD"
+  attack: 120
+  defense: 100
+  range: 2
+  speed: 7

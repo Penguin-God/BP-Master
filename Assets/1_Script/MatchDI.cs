@@ -29,6 +29,7 @@ public class MatchDI : MonoBehaviour
         BanPickUI.Init();
     }
 
+    [SerializeField] BonusDataFactory bonusDataSO;
     void Update()
     {
         if (matchManager != null &&  matchManager.CurrentPhase == GamePhase.Done)
@@ -36,10 +37,8 @@ public class MatchDI : MonoBehaviour
             var blue = champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick));
             var red = champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick));
 
-            print(champManager.GetChampionData(storage.GetStorage(Team.Blue, SelectType.Pick)[0]).ChampionName);
-            print(champManager.GetChampionData(storage.GetStorage(Team.Red, SelectType.Pick)[0]).ChampionName);
-
-            //MatchResult result = new MatchResultCalculator().CalculateResult();
+            var calculator = new TeamScoreCalculator(bonusDataSO.ChampionBonus, bonusDataSO.TeamBonus);
+            MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue, red);
             //print(result.BlueScore);
             //print(result.RedScore);
             //print(result.Winner);
