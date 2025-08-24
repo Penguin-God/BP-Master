@@ -9,7 +9,7 @@ public struct BonusData
     public int Bonus;
 }
 
-[CreateAssetMenu(fileName = "BonusDataFactorySO", menuName = "Scriptable Objects/BonusDataSO")]
+[CreateAssetMenu(fileName = "BonusDataFactorySO", menuName = "BP Master/BonusFactorySO")]
 public class BonusDataFactory : ScriptableObject
 {
     [SerializeField] BonusDataSO champAttackBonus;
@@ -24,7 +24,7 @@ public class BonusDataFactory : ScriptableObject
     public TeamBonusCalculator TeamBonus => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, rangeBonus.Bonus, speedBonus.Bonus);
 }
 
-[CreateAssetMenu(fileName = "BonusDataSO", menuName = "Scriptable Objects/BonusDataSO")]
+[CreateAssetMenu(fileName = "BonusDataSO", menuName = "BP Master/BonusDataSO")]
 public class BonusDataSO : ScriptableObject
 {
     [SerializeField] BonusData[] bonusDatas;

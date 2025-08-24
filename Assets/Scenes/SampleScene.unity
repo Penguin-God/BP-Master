@@ -4485,6 +4485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   champManager: {fileID: 1420292359}
   BanPickUI: {fileID: 1213870346}
+  bonusDataSO: {fileID: 11400000, guid: 3ed54617ea912194c92454bc2563d3fe, type: 2}
 --- !u!1001 &1455117545
 PrefabInstance:
   m_ObjectHideFlags: 0

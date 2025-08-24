@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BonusDataFactorySO
+  m_EditorClassIdentifier: App::BonusDataFactory
+  champAttackBonus: {fileID: 11400000, guid: e1585175cc37f6047b66c70fdb6fe478, type: 2}
+  champDefenseBonus: {fileID: 11400000, guid: cc5893c222164c24b95ab22ca8556540, type: 2}
+  attackBonus: {fileID: 11400000, guid: fdc80c94301d82c48b6505e72c11fcd9, type: 2}
+  defenseBonus: {fileID: 11400000, guid: c6eb4d757c873dc42902c0a5b97f0b88, type: 2}
+  rangeBonus: {fileID: 11400000, guid: 41152e9e77ef735469e70136817d2d05, type: 2}
+  speedBonus: {fileID: 11400000, guid: 9f98033fb210bab409286547274e06c6, type: 2}
