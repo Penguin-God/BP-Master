@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionManager champManager;
     [SerializeField] BanPickUI BanPickUI;
     MatchManager matchManager;
+    GameBanPickStorage storage;
     public void GameStart(Team playerTeam)
     {
-        var storage = new GameBanPickStorage(champManager.AllId);
+        storage = new GameBanPickStorage(champManager.AllId);
         DraftActionController draftController = new(storage);
 
         PhaseData[] phase = new PhaseData[]
@@ -28,6 +30,12 @@ public class MatchDI : MonoBehaviour
 
     void Update()
     {
-        if (matchManager != null &&  matchManager.CurrentPhase == GamePhase.Done) print("끝!!!!!!!!!!!!");
+        if (matchManager != null &&  matchManager.CurrentPhase == GamePhase.Done)
+        {
+            //MatchResult result = new MatchResultCalculator().CalculateResult();
+            //print(result.BlueScore);
+            //print(result.RedScore);
+            //print(result.Winner);
+        }
     }
 }
