@@ -16,7 +16,7 @@ public class MatchDI : MonoBehaviour
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
-            new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })),
+            new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red, Team.Red, Team.Blue, Team.Blue, Team.Red})),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
         };
         PhaseManager phaseManager = new(phase);
@@ -39,9 +39,9 @@ public class MatchDI : MonoBehaviour
 
             var calculator = new TeamScoreCalculator(bonusDataSO.ChampionBonus, bonusDataSO.TeamBonus);
             MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue, red);
-            //print(result.BlueScore);
-            //print(result.RedScore);
-            //print(result.Winner);
+            print(result.BlueScore);
+            print(result.RedScore);
+            print(result.Winner);
         }
     }
 }
