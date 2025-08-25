@@ -26,7 +26,7 @@ public class PassiveExcuteTests
             self: new[] { CreateData(0) },
             opponent: new[] { CreateData(40), CreateData(50) }
         );
-        ActiveExcuter sut = new ActiveExcuter(result, new ITraitAction[] { new AttackWeaker(20) });
+        ActiveExcuter sut = new ActiveExcuter(result, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(20)) });
 
         sut.DoActive(1);
 

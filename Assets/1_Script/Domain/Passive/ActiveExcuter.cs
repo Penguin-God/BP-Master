@@ -13,6 +13,6 @@ public class ActiveExcuter
 
     public void DoActive(int target)
     {
-        statManager.ChangeSelectData(Side.Opponent, target, traits[0].Do);
+        statManager.ChangeSelectData(traits[0].TargetSide, target, traits[0].TraitAction.Do);
     }
 }
