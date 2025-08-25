@@ -3,18 +3,17 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class PassiveTests
+public class TraitActionTests
 {
     [Test]
     public void 공_감소()
     {
-        AttackWeaker sut = new(12);
-        var datas = new ChampionStatData[] { CreateStat(10), CreateStat(15) };
+        AttackWeaker sut = new(10);
+        var data = CreateStat(12);
 
-        ChampionStatData[] result = sut.Do(datas);
+        var result = sut.Do(data);
 
-        Assert.AreEqual(0, result[0].Attack);
-        Assert.AreEqual(3, result[1].Attack);
+        Assert.AreEqual(2, result.Attack);
     }
 
     [Test]
