@@ -15,6 +15,8 @@ public struct ChampionStatData
     }
 
     static int MinZero(int value) => 0 > value ? 0 : value;
+
+    public ChampionStatData ChangeAttack(int att) => new ChampionStatData(att, Defense, Range, Speed);
 }
 
 public class Champion
