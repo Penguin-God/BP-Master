@@ -1,19 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class ActiveExcuter
 {
-    Queue<IActivePassive> passives;
-
-    public ActiveExcuter(IEnumerable<IActivePassive> passives)
+    readonly StatManager statManager;
+    Trait[] traits;
+    public ActiveExcuter(StatManager statManager, IEnumerable<Trait> traits)
     {
-        this.passives = new Queue<IActivePassive>(passives);
+        this.traits = traits.ToArray();
+        this.statManager = statManager;
     }
 
-    public bool IsDone => passives.Count == 0;
-
-    public void Do(int target)
+    public void DoActive(int target)
     {
-        var passive = passives.Dequeue();
-        passive.Do(target);
+        statManager.ChangeSelectData(Side.Opponent, target, traits[0].Do);
     }
 }

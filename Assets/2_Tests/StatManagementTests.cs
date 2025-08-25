@@ -18,7 +18,7 @@ public class StatManagementTests
         );
 
         // act: 상대 측(index 1)의 공격력만 -12
-        sut.Update(Side.Opponent, 1, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Range, c.Speed));
+        sut.ChangeSelectData(Side.Opponent, 1, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Range, c.Speed));
 
         // assert: 타겟만 변경, 나머지는 그대로
         Assert.AreEqual(40, sut.Opponent[0].Attack);
@@ -37,7 +37,7 @@ public class StatManagementTests
         );
 
         // act: -999 시도 → ChampionStatData 생성자에서 0으로 클램프
-        sut.Update(Side.Self, 0, c => new ChampionStatData(c.Attack - 999, c.Defense, c.Range, c.Speed));
+        sut.ChangeSelectData(Side.Self, 0, c => new ChampionStatData(c.Attack - 999, c.Defense, c.Range, c.Speed));
 
         // assert
         Assert.AreEqual(0, sut.Self[0].Attack);
@@ -53,7 +53,7 @@ public class StatManagementTests
         );
 
         // act: Self 전원 공격력 -12 (음수는 구조체 생성자에서 0 클램프)
-        sut.UpdateAll(Side.Self, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Range, c.Speed));
+        sut.ChangeAll(Side.Self, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Range, c.Speed));
 
         // assert
         Assert.AreEqual(0, sut.Self[0].Attack); // 10 -> 0
