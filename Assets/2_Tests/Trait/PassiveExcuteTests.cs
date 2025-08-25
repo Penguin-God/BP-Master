@@ -6,13 +6,14 @@ using UnityEngine.TestTools;
 public class PassiveExcuteTests
 {
     [Test]
-    public void 액티브는_다_사용해야_넘어감()
+    public void 액티브는_다_사용하면_끝()
     {
-        ActiveExcuter sut = new(2);
+        ActiveExcuter sut = new(new IActivePassive[] { new SelectAttackWeaker(0), new SelectAttackWeaker(0) });
 
-        sut.Do();
-        sut.Do();
+        sut.Do(0);
+        Assert.IsFalse(sut.IsDone);
 
+        sut.Do(0);
         Assert.IsTrue(sut.IsDone);
     }
 }

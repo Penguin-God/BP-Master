@@ -1,19 +1,19 @@
-using System;
-using UnityEngine;
+using System.Collections.Generic;
 
 public class ActiveExcuter
 {
-    private int count;
+    Queue<IActivePassive> passives;
 
-    public ActiveExcuter(int v)
+    public ActiveExcuter(IEnumerable<IActivePassive> passives)
     {
-        this.count = v;
+        this.passives = new Queue<IActivePassive>(passives);
     }
 
-    public bool IsDone => count <= 0;
+    public bool IsDone => passives.Count == 0;
 
-    public void Do()
+    public void Do(int target)
     {
-        count--;
+        var passive = passives.Dequeue();
+        passive.Do(target);
     }
 }
