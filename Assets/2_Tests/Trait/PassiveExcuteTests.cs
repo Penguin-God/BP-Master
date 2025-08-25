@@ -8,15 +8,18 @@ public class PassiveExcuteTests
     ChampionStatData CreateData(int atk, int def = 0, int range = 0, int speed = 0) => new ChampionStatData(atk, def, range, speed);
 
     [Test]
-    public void 액티브는_다_사용하면_끝()
+    public void 액티브는_순서대로_적용되고_다_사용하면_끝()
     {
-        //ActiveExcuter sut = new(new IActivePassive[] { new SelectAttackWeaker(0), new SelectAttackWeaker(0) });
+        var statManager = new StatManager(self: new[] { CreateData(0) }, opponent: new[] { CreateData(50) });
+        ActiveExcuter sut = new ActiveExcuter(statManager, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(20)), new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(25)) });
 
-        //sut.Do(0);
-        //Assert.IsFalse(sut.IsDone);
+        sut.DoActive(0);
+        Assert.AreEqual(30, statManager.Opponent[0].Attack);
+        Assert.IsFalse(sut.IsDone);
 
-        //sut.Do(0);
-        //Assert.IsTrue(sut.IsDone);
+        sut.DoActive(0);
+        Assert.AreEqual(5, statManager.Opponent[0].Attack);
+        Assert.IsTrue(sut.IsDone);
     }
 
     [Test]

@@ -4,15 +4,18 @@ using System.Linq;
 public class ActiveExcuter
 {
     readonly StatManager statManager;
-    Trait[] traits;
+    Queue<Trait> traits;
     public ActiveExcuter(StatManager statManager, IEnumerable<Trait> traits)
     {
-        this.traits = traits.ToArray();
+        this.traits = new Queue<Trait>(traits);
         this.statManager = statManager;
     }
 
+    public bool IsDone => traits.Count == 0;
+
     public void DoActive(int target)
     {
-        statManager.ChangeSelectData(traits[0].TargetSide, target, traits[0].TraitAction.Do);
+        Trait trait = traits.Dequeue();
+        statManager.ChangeSelectData(trait.TargetSide, target, trait.TraitAction.Do);
     }
 }
