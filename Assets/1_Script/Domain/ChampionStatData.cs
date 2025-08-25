@@ -8,11 +8,13 @@ public struct ChampionStatData
     public int Speed { get; private set; }
     public ChampionStatData(int attack, int defense, int range, int speed)
     {
-        Attack = attack; 
-        Defense = defense;
-        Range = range;
-        Speed = speed;
+        Attack = MinZero(attack);
+        Defense = MinZero(defense);
+        Range = MinZero(range);
+        Speed = MinZero(speed);
     }
+
+    static int MinZero(int value) => 0 > value ? 0 : value;
 }
 
 public class Champion
