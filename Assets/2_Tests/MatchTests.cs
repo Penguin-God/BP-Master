@@ -19,7 +19,7 @@ public class MatchTests
         PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, new FakeActor());
         PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, new FakeActor());
 
-        MatchManager sut = new(phaseManager, blue, red);
+        MatchManager sut = new(phaseManager, new ActionEventBus(), blue, red);
 
         sut.GameStart();
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);

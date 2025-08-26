@@ -1,6 +1,4 @@
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class MatchDI : MonoBehaviour
 {
@@ -11,8 +9,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(champManager.AllId);
-        DraftActionController draftController = new(storage);
-
+        
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
@@ -21,12 +18,13 @@ public class MatchDI : MonoBehaviour
         };
         PhaseManager phaseManager = new(phase);
 
-        PhaseActionDispatcher blue = new PhaseActionDispatcher(Team.Blue, BanPickUI);
-        PhaseActionDispatcher red = new PhaseActionDispatcher(Team.Red, BanPickUI); ;
-        matchManager = new MatchManager(phaseManager, draftController, blue, red);
+        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, BanPickUI);
+        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, BanPickUI); ;
+        var bus = new ActionEventBus();
+        matchManager = new MatchManager(phaseManager, bus, blue, red);
 
         matchManager.GameStart();
-        BanPickUI.Init();
+        BanPickUI.Init(storage);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;

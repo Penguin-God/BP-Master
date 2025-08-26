@@ -1,33 +1,18 @@
 
 public class MatchManager
 {
-    readonly DraftActionController draftController;
     readonly PhaseManager phaseManager;
-    readonly ActionEventBus eventBus = new ActionEventBus();
-
-    readonly PhaseActionDispatcher blue;
-    readonly PhaseActionDispatcher red;
-
-    public MatchManager(PhaseManager phaseManager, DraftActionController draftController, PhaseActionDispatcher blueDispatcher, PhaseActionDispatcher redDispatcher)
-    {
-        this.phaseManager = phaseManager;
-        this.draftController = draftController;
-
-        this.blue = blueDispatcher;
-        this.red = redDispatcher;
-
-        this.draftController.OnActionDone += ProgressGame;
-    }
+    readonly ActionEventBus eventBus;
 
     PhaseActionRequestor _blue;
     PhaseActionRequestor _red;
-    public MatchManager(PhaseManager phaseManager, PhaseActionRequestor blueDispatcher, PhaseActionRequestor redDispatcher)
+    public MatchManager(PhaseManager phaseManager, ActionEventBus eventBus, PhaseActionRequestor blueDispatcher, PhaseActionRequestor redDispatcher)
     {
         this.phaseManager = phaseManager;
 
         this._blue = blueDispatcher;
         this._red = redDispatcher;
-
+        this.eventBus = eventBus;
         eventBus.OnActionDone += ProgressGame;
     }
 
