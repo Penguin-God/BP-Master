@@ -51,24 +51,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         }
     }
 
-    //public void OnRequestBan(Team team, DraftActionController draftAction)
-    //{
-    //    this.team = team;
-    //    currentPhase = GamePhase.Ban;
-    //    this.draftAction = draftAction;
-    //}
-
-    //public void OnRequestPick(Team team, DraftActionController draftAction)
-    //{
-    //    this.team = team;
-    //    currentPhase = GamePhase.Pick;
-    //    this.draftAction = draftAction;
-    //}
-
-    //public void OnRequestSwap(Team team, DraftActionController draftAction)
-    //{
-    //    swapDoneBtn.onClick.AddListener(() => draftAction.SwapDone(team));
-    //}
     ActionEventBus bus;
     public void OnRequestBan(Team team, ActionEventBus draftAction)
     {
