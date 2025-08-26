@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum Side { Self, Opponent, All }
 public class StatManager
 {
     ChampionStatData[] blue;
