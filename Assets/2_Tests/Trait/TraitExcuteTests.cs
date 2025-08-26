@@ -6,15 +6,15 @@ using UnityEngine.TestTools;
 public class TraitExcuteTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int range = 0, int speed = 0) => new ChampionStatData(atk, def, range, speed);
-    Trait CreateTrait(Side side, int amount) => new Trait(TraitType.Active, side, new AttackChanger(amount));
+    Trait CreateTrait(Side side, int amount) => new Trait(TraitType.Active, side, GetMinus(amount));
 
     [Test]
     public void 양팀_패시브_다_일괄_적용()
     {
         var statManager = new StatManager(blue: new[] { CreateData(50) }, red: new[] { CreateData(50) });
         PassiveExcutor sut = new(statManager,
-            new Trait[] { new Trait(TraitType.Passive, Side.Opponent, new AttackChanger(20)) },
-            new Trait[] { new Trait(TraitType.Passive, Side.Opponent, new AttackChanger(20)) }
+            new Trait[] { new Trait(TraitType.Passive, Side.Opponent, GetMinus(20)) },
+            new Trait[] { new Trait(TraitType.Passive, Side.Opponent, GetMinus(20)) }
             );
 
         sut.Do();
@@ -69,4 +69,16 @@ public class TraitExcuteTests
         Assert.AreEqual(40, result.Red[0].Attack);
         Assert.AreEqual(30, result.Red[1].Attack);
     }
+
+    AttackMinus GetMinus(int amount) => new AttackMinus(amount);
+}
+
+
+
+public class AttackMinus : ITraitAction
+{
+    readonly int Amount;
+    public AttackMinus(int amount) => Amount = amount;
+
+    public ChampionStatData Do(ChampionStatData stat) => stat.ChangeAttack(stat.Attack - Amount);
 }
