@@ -3,10 +3,25 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class PassiveExcuteTests
+public class TraitExcuteTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int range = 0, int speed = 0) => new ChampionStatData(atk, def, range, speed);
     Trait CreateTrait(Side side, int amount) => new Trait(TraitType.Active, side, new AttackWeaker(amount));
+
+    [Test]
+    public void 양팀_패시브_다_일괄_적용()
+    {
+        var statManager = new StatManager(blue: new[] { CreateData(50) }, red: new[] { CreateData(50) });
+        PassiveExcutor sut = new(statManager,
+            new Trait[] { new Trait(TraitType.Passive, Side.Opponent, new AttackWeaker(20)) },
+            new Trait[] { new Trait(TraitType.Passive, Side.Opponent, new AttackWeaker(20)) }
+            );
+
+        sut.Do();
+        Assert.AreEqual(30, statManager.Blue[0].Attack);
+        Assert.AreEqual(30, statManager.Red[0].Attack);
+    }
+
     [Test]
     public void 양팀_액티브_다_적용되면_끝()
     {
