@@ -1,9 +1,3 @@
-
-public interface ITraitAction
-{
-    public ChampionStatData Do(ChampionStatData stat);
-}
-
 public enum TraitType
 {
     Passive,

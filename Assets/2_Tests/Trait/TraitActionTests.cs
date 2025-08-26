@@ -8,7 +8,7 @@ public class TraitActionTests
     [Test]
     public void 공_감소()
     {
-        AttackWeaker sut = new(10);
+        AttackChanger sut = new(10);
         var data = CreateStat(12);
 
         var result = sut.Do(data);
