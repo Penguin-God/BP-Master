@@ -6,12 +6,12 @@ using UnityEngine.TestTools;
 public class PassiveExcuteTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int range = 0, int speed = 0) => new ChampionStatData(atk, def, range, speed);
-
+    Trait CreateTrait(Side side, int amount) => new Trait(TraitType.Active, side, new AttackWeaker(amount));
     [Test]
     public void 양팀_액티브_다_적용되면_끝()
     {
         var statManager = new StatManager(blue: new[] { CreateData(0) }, red: new[] { CreateData(50) });
-        ActiveExcuter sut = new ActiveExcuter(statManager, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(20)), new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(25)) });
+        ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20), CreateTrait(Side.Opponent, 25) });
 
         sut.DoActive(0);
         Assert.AreEqual(30, statManager.Red[0].Attack);
@@ -26,7 +26,7 @@ public class PassiveExcuteTests
     public void 액티브는_순서대로_적용되고_다_사용하면_끝()
     {
         var statManager = new StatManager(blue: new[] { CreateData(0) }, red: new[] { CreateData(50) });
-        ActiveExcuter sut = new ActiveExcuter(statManager, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(20)), new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(25)) });
+        ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20), CreateTrait(Side.Opponent, 25) });
 
         sut.DoActive(0);
         Assert.AreEqual(30, statManager.Red[0].Attack);
@@ -44,7 +44,7 @@ public class PassiveExcuteTests
             blue: new[] { CreateData(0) },
             red: new[] { CreateData(40), CreateData(50) }
         );
-        ActiveExcuter sut = new ActiveExcuter(result, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackWeaker(20)) });
+        ActiveExcuter sut = new ActiveExcuter(result, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) });
 
         sut.DoActive(1);
 
