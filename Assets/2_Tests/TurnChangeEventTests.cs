@@ -11,7 +11,7 @@ public class TurnChangeEventTests
         int count = 0;
         ActionEventBus sut = new();
         sut.ChangeTeam(Team.Blue);
-        sut.OnChangeTurn += () => count++;
+        sut.OnActionDone += () => count++;
 
         bool result = sut.ActionDone(Team.Blue);
 
@@ -25,7 +25,7 @@ public class TurnChangeEventTests
         int count = 0;
         ActionEventBus sut = new();
         sut.ChangeTeam(Team.Blue);
-        sut.OnChangeTurn += () => count++;
+        sut.OnActionDone += () => count++;
 
         bool result = sut.ActionDone(Team.Red);
 
@@ -39,7 +39,7 @@ public class TurnChangeEventTests
         int count = 0;
         ActionEventBus sut = new();
         sut.ChangeTeam(Team.All);
-        sut.OnChangeTurn += () => count++;
+        sut.OnActionDone += () => count++;
 
         Assert.IsFalse(sut.ActionDone(Team.Blue));
         Assert.IsTrue(sut.ActionDone(Team.Red));

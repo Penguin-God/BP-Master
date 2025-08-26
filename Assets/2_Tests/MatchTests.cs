@@ -8,9 +8,6 @@ public class MatchTests
     [Test]
     public void 매치는_자동_진행()
     {
-        var storage = new GameBanPickStorage(new int[] { 0, 1, 2, 3 });
-        DraftActionController draftController = new(storage);
-
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
@@ -19,26 +16,19 @@ public class MatchTests
         };
         PhaseManager phaseManager = new(phase);
 
-        PhaseActionDispatcher blue = new PhaseActionDispatcher(Team.Blue, new FakeDraftExecutor(storage));
-        PhaseActionDispatcher red = new PhaseActionDispatcher(Team.Red, new FakeDraftExecutor(storage));
+        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, new FakeActor());
+        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, new FakeActor());
 
-        MatchManager sut = new(phaseManager, draftController, blue, red);
+        MatchManager sut = new(phaseManager, blue, red);
 
         sut.GameStart();
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
     }
 }
 
-public class FakeDraftExecutor : IDraftActionHandler
+public class FakeActor : IActionHandler
 {
-    readonly GameBanPickStorage storage;
-
-    public FakeDraftExecutor(GameBanPickStorage gameSelectStorage)
-    {
-        this.storage = gameSelectStorage;
-    }
-
-    public void OnRequestBan(Team team, DraftActionController draftAction) => draftAction.Ban(team, storage.SelectableIds[0]);
-    public void OnRequestPick(Team team, DraftActionController draftAction) => draftAction.Pick(team, storage.SelectableIds[0]);
-    public void OnRequestSwap(Team team, DraftActionController draftAction) => draftAction.SwapDone(team);
+    public void OnRequestBan(Team team, ActionEventBus bus) => bus.ActionDone(team);
+    public void OnRequestPick(Team team, ActionEventBus bus) => bus.ActionDone(team);
+    public void OnRequestSwap(Team team, ActionEventBus bus) => bus.ActionDone(team);
 }

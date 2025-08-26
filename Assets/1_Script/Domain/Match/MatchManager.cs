@@ -3,6 +3,7 @@ public class MatchManager
 {
     readonly DraftActionController draftController;
     readonly PhaseManager phaseManager;
+    readonly ActionEventBus eventBus = new ActionEventBus();
 
     readonly PhaseActionDispatcher blue;
     readonly PhaseActionDispatcher red;
@@ -18,20 +19,32 @@ public class MatchManager
         this.draftController.OnActionDone += ProgressGame;
     }
 
+    PhaseActionRequestor _blue;
+    PhaseActionRequestor _red;
+    public MatchManager(PhaseManager phaseManager, PhaseActionRequestor blueDispatcher, PhaseActionRequestor redDispatcher)
+    {
+        this.phaseManager = phaseManager;
+
+        this._blue = blueDispatcher;
+        this._red = redDispatcher;
+
+        eventBus.OnActionDone += ProgressGame;
+    }
+
     void ProgressGame()
     {
         currentFlow = phaseManager.GetNextFlow();
-        draftController.ChangePhase(CurrentPhase, CurrentTurn);
+        eventBus.ChangeTeam(CurrentTurn);
 
         switch (CurrentTurn)
         {
             case Team.Blue:
-                blue.OnRequestAction(draftController, CurrentPhase); break;
+                _blue.OnRequestAction(eventBus, CurrentPhase); break;
             case Team.Red:
-                red.OnRequestAction(draftController, CurrentPhase); break;
+                _red.OnRequestAction(eventBus, CurrentPhase); break;
             case Team.All:
-                blue.OnRequestAction(draftController, CurrentPhase);
-                red.OnRequestAction(draftController, CurrentPhase);
+                _blue.OnRequestAction(eventBus, CurrentPhase);
+                _red.OnRequestAction(eventBus, CurrentPhase);
                 break;
         }
     }

@@ -5,7 +5,7 @@ public sealed class ActionEventBus
 {
     Team _currentTeam;
     readonly HashSet<Team> teamSubitted = new();
-    public event Action OnChangeTurn;
+    public event Action OnActionDone;
 
     public void ChangeTeam(Team team)
     {
@@ -20,7 +20,7 @@ public sealed class ActionEventBus
             teamSubitted.Add(actingTeam);
             if(teamSubitted.Contains(Team.Blue) && teamSubitted.Contains(Team.Red))
             {
-                OnChangeTurn?.Invoke();
+                OnActionDone?.Invoke();
                 teamSubitted.Clear();
                 return true;
             }
@@ -30,7 +30,7 @@ public sealed class ActionEventBus
         // 단일 팀일 경우
         if (actingTeam == _currentTeam)
         {
-            OnChangeTurn?.Invoke();
+            OnActionDone?.Invoke();
             return true;
         }
         else return false;
