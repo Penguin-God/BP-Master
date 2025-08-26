@@ -24,12 +24,12 @@ public class MatchManager
         switch (CurrentTurn)
         {
             case Team.Blue:
-                _blue.OnRequestAction(eventBus, CurrentPhase); break;
+                _blue.OnRequestAction(CurrentPhase); break;
             case Team.Red:
-                _red.OnRequestAction(eventBus, CurrentPhase); break;
+                _red.OnRequestAction(CurrentPhase); break;
             case Team.All:
-                _blue.OnRequestAction(eventBus, CurrentPhase);
-                _red.OnRequestAction(eventBus, CurrentPhase);
+                _blue.OnRequestAction(CurrentPhase);
+                _red.OnRequestAction(CurrentPhase);
                 break;
         }
     }

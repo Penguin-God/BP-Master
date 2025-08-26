@@ -9,11 +9,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     ChampionSO currentSelectChampion = null;
 
-    public void Init(GameBanPickStorage storage)
+    public void Init(GameBanPickStorage storage, ActionEventBus bus) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
         _storage = storage;
+        _bus = bus;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
@@ -38,7 +39,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
             if(_storage.SaveSelect(new SelectInfo(team, SelectType.Ban, currentSelectChampion.Id)))
             {
                 view.UpdateBanView(prevTeam, currentSelectChampion.Id);
-                bus.ActionDone(team);
+                _bus.ActionDone(team);
             }
         }
         else if (currentPhase == GamePhase.Pick)
@@ -46,30 +47,27 @@ public class BanPickUI : MonoBehaviour, IActionHandler
             if (_storage.SaveSelect(new SelectInfo(team, SelectType.Pick, currentSelectChampion.Id)))
             {
                 view.UpdatePickView(prevTeam, currentSelectChampion.Id);
-                bus.ActionDone(team);
+                _bus.ActionDone(team);
             }
         }
     }
 
-    ActionEventBus bus;
-    public void OnRequestBan(Team team, ActionEventBus draftAction)
+    ActionEventBus _bus;
+    public void OnRequestBan(Team team)
     {
         this.team = team;
-        bus = draftAction;
         currentPhase = GamePhase.Ban;
     }
 
-    public void OnRequestPick(Team team, ActionEventBus draftAction)
+    public void OnRequestPick(Team team)
     {
         this.team = team;
-        bus = draftAction;
         currentPhase = GamePhase.Pick;
     }
 
-    public void OnRequestSwap(Team team, ActionEventBus draftAction)
+    public void OnRequestSwap(Team team)
     {
-        bus = draftAction;
-        swapDoneBtn.onClick.AddListener(() => bus.ActionDone(team));
+        swapDoneBtn.onClick.AddListener(() => _bus.ActionDone(team));
     }
 
     [SerializeField] Button swapDoneBtn;

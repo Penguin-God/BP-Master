@@ -16,10 +16,11 @@ public class MatchTests
         };
         PhaseManager phaseManager = new(phase);
 
-        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, new FakeActor());
-        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, new FakeActor());
+        var bus = new ActionEventBus();
+        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, new FakeActor(bus));
+        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, new FakeActor(bus));
 
-        MatchManager sut = new(phaseManager, new ActionEventBus(), blue, red);
+        MatchManager sut = new(phaseManager, bus, blue, red);
 
         sut.GameStart();
         Assert.AreEqual(GamePhase.Done, sut.CurrentPhase);
@@ -28,7 +29,9 @@ public class MatchTests
 
 public class FakeActor : IActionHandler
 {
-    public void OnRequestBan(Team team, ActionEventBus bus) => bus.ActionDone(team);
-    public void OnRequestPick(Team team, ActionEventBus bus) => bus.ActionDone(team);
-    public void OnRequestSwap(Team team, ActionEventBus bus) => bus.ActionDone(team);
+    readonly ActionEventBus bus;
+    public FakeActor(ActionEventBus bus) => this.bus = bus;
+    public void OnRequestBan(Team team) => bus.ActionDone(team);
+    public void OnRequestPick(Team team) => bus.ActionDone(team);
+    public void OnRequestSwap(Team team) => bus.ActionDone(team);
 }

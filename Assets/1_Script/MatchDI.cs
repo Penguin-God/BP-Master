@@ -24,7 +24,7 @@ public class MatchDI : MonoBehaviour
         matchManager = new MatchManager(phaseManager, bus, blue, red);
 
         matchManager.GameStart();
-        BanPickUI.Init(storage);
+        BanPickUI.Init(storage, bus);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
