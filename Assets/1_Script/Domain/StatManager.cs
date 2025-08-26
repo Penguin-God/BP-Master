@@ -5,29 +5,26 @@ using System.Linq;
 public enum Side { Self, Opponent, All }
 public class StatManager
 {
-    ChampionStatData[] self;
-    ChampionStatData[] opponent;
-    public IReadOnlyList<ChampionStatData> Self => self;
-    public IReadOnlyList<ChampionStatData> Opponent => opponent;
+    ChampionStatData[] blue;
+    ChampionStatData[] red;
+    public IReadOnlyList<ChampionStatData> Blue => blue;
+    public IReadOnlyList<ChampionStatData> Red => red;
 
-    public StatManager(IEnumerable<ChampionStatData> self, IEnumerable<ChampionStatData> opponent)
+    public StatManager(IEnumerable<ChampionStatData> blue, IEnumerable<ChampionStatData> red)
     {
-        this.self = self.ToArray();
-        this.opponent = opponent.ToArray();
+        this.blue = blue.ToArray();
+        this.red = red.ToArray();
     }
 
-
-    public IReadOnlyList<ChampionStatData> GetData(Side side) => side == Side.Self ? self : opponent;
-
-    public void ChangeSelectData(Side side, int index, Func<ChampionStatData, ChampionStatData> mutator)
+    public void ChangeSelectData(Team team, int index, Func<ChampionStatData, ChampionStatData> mutator)
     {
-        var arr = side == Side.Self ? self : opponent;
+        var arr = team == Team.Blue ? blue : red;
         arr[index] = mutator(arr[index]);
     }
 
-    public void ChangeAll(Side side, Func<ChampionStatData, ChampionStatData> mutator)
+    public void ChangeAll(Team team, Func<ChampionStatData, ChampionStatData> mutator)
     {
-        if (side == Side.Self) self = self.Select(mutator).ToArray();
-        else if(side == Side.Opponent) opponent = opponent.Select(mutator).ToArray();
+        if (team == Team.Blue) blue = blue.Select(mutator).ToArray();
+        else if(team == Team.Red) red = red.Select(mutator).ToArray();
     }
 }

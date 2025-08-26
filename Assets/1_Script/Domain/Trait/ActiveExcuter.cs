@@ -14,6 +14,6 @@ public class ActiveExcuter
     public void DoActive(int target)
     {
         Trait trait = traits.Dequeue();
-        statManager.ChangeSelectData(trait.TargetSide, target, trait.TraitAction.Do);
+        // statManager.ChangeSelectData(trait.TargetSide, target, trait.TraitAction.Do);
     }
 }
