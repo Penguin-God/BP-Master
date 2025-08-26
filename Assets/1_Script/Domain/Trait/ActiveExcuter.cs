@@ -9,12 +9,7 @@ public class ActiveExcuter
     public ActiveExcuter(StatManager statManager, Team team, IEnumerable<Trait> traits)
     {
         this.traits = new Queue<Trait>(traits);
-        this.statManager = statManager;
-    }
-
-    public ActiveExcuter(StatManager statManager, IEnumerable<Trait> traits)
-    {
-        this.traits = new Queue<Trait>(traits);
+        Team = team;
         this.statManager = statManager;
     }
 

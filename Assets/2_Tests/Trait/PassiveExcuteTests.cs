@@ -10,15 +10,18 @@ public class PassiveExcuteTests
     [Test]
     public void 양팀_액티브_다_적용되면_끝()
     {
-        var statManager = new StatManager(blue: new[] { CreateData(0) }, red: new[] { CreateData(50) });
-        ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20), CreateTrait(Side.Opponent, 25) });
+        var statManager = new StatManager(blue: new[] { CreateData(50) }, red: new[] { CreateData(50) });
+        ActiveExcuterManager sut = new (
+            new ActiveExcuter(statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) }),
+            new ActiveExcuter(statManager, Team.Red, new Trait[] { CreateTrait(Side.Opponent, 20) })
+            );
 
-        sut.DoActive(0);
+        sut.DoActive(0, Team.Blue);
         Assert.AreEqual(30, statManager.Red[0].Attack);
         Assert.IsFalse(sut.IsDone);
 
-        sut.DoActive(0);
-        Assert.AreEqual(5, statManager.Red[0].Attack);
+        sut.DoActive(0, Team.Red);
+        Assert.AreEqual(30, statManager.Blue[0].Attack);
         Assert.IsTrue(sut.IsDone);
     }
 
@@ -26,7 +29,7 @@ public class PassiveExcuteTests
     public void 액티브는_순서대로_적용되고_다_사용하면_끝()
     {
         var statManager = new StatManager(blue: new[] { CreateData(0) }, red: new[] { CreateData(50) });
-        ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20), CreateTrait(Side.Opponent, 25) });
+        ActiveExcuter sut = new (statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20), CreateTrait(Side.Opponent, 25) });
 
         sut.DoActive(0);
         Assert.AreEqual(30, statManager.Red[0].Attack);
@@ -44,7 +47,7 @@ public class PassiveExcuteTests
             blue: new[] { CreateData(0) },
             red: new[] { CreateData(40), CreateData(50) }
         );
-        ActiveExcuter sut = new ActiveExcuter(result, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) });
+        ActiveExcuter sut = new (result, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) });
 
         sut.DoActive(1);
 
