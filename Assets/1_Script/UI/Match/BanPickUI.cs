@@ -70,6 +70,11 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         swapDoneBtn.onClick.AddListener(() => _bus.ActionDone(team));
     }
 
+    public void OnRequestActive(Team team)
+    {
+        throw new System.NotImplementedException();
+    }
+
     [SerializeField] Button swapDoneBtn;
 }
     

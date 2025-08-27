@@ -15,11 +15,12 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red, Team.Red, Team.Blue, Team.Blue, Team.Red})),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
+            new PhaseData(GamePhase.Active, new Phase(new Team[] { Team.Blue, Team.Red })),
         };
         PhaseManager phaseManager = new(phase);
 
         PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, BanPickUI);
-        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, BanPickUI); ;
+        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, BanPickUI);
         var bus = new ActionEventBus();
         matchManager = new MatchManager(phaseManager, bus, blue, red);
 

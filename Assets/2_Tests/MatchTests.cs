@@ -13,6 +13,7 @@ public class MatchTests
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
+            new PhaseData(GamePhase.Active, new Phase(new Team[] { Team.Blue, Team.Red })),
         };
         PhaseManager phaseManager = new(phase);
 
@@ -31,7 +32,9 @@ public class FakeActor : IActionHandler
 {
     readonly ActionEventBus bus;
     public FakeActor(ActionEventBus bus) => this.bus = bus;
+
     public void OnRequestBan(Team team) => bus.ActionDone(team);
     public void OnRequestPick(Team team) => bus.ActionDone(team);
     public void OnRequestSwap(Team team) => bus.ActionDone(team);
+    public void OnRequestActive(Team team) => bus.ActionDone(team);
 }

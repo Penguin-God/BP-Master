@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public enum GamePhase { Ban, Pick, Swap, Done }
+public enum GamePhase { Ban, Pick, Swap, Active, Done }
 
 public class PhaseData
 {
