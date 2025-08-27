@@ -33,12 +33,11 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     {
         if (currentSelectChampion == null) return;
 
-        Team prevTeam = team; // 명령시 team변수 갱신되서
         if (currentPhase == GamePhase.Ban)
         {
             if(_storage.SaveSelect(new SelectInfo(team, SelectType.Ban, currentSelectChampion.Id)))
             {
-                view.UpdateBanView(prevTeam, currentSelectChampion.Id);
+                view.UpdateBanView(team, currentSelectChampion.Id);
                 _bus.ActionDone(team);
             }
         }
@@ -46,7 +45,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         {
             if (_storage.SaveSelect(new SelectInfo(team, SelectType.Pick, currentSelectChampion.Id)))
             {
-                view.UpdatePickView(prevTeam, currentSelectChampion.Id);
+                view.UpdatePickView(team, currentSelectChampion.Id);
                 _bus.ActionDone(team);
             }
         }
@@ -72,7 +71,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     public void OnRequestActive(Team team)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     [SerializeField] Button swapDoneBtn;
