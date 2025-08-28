@@ -20,6 +20,8 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
 
+    public void SetActiveExcutor(ActiveExcuteManager activeExcuteManager) => activeExcutor = activeExcuteManager;
+
     void SelectChampion(ChampionSO champion)
     {
         currentSelectChampion = champion;
