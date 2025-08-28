@@ -1,18 +1,18 @@
 using System;
 
-public sealed class ActiveExcuterManager
+public sealed class ActiveExcuteManager
 {
     readonly ActiveExcuter _blue;
     readonly ActiveExcuter _red;
 
-    public ActiveExcuterManager(ActiveExcuter blue, ActiveExcuter red)
+    public ActiveExcuteManager(ActiveExcuter blue, ActiveExcuter red)
     {
-        _blue = blue ?? throw new ArgumentNullException(nameof(blue));
-        _red = red ?? throw new ArgumentNullException(nameof(red));
+        _blue = blue;
+        _red = red;
     }
 
     public bool IsDone => _blue.IsDone && _red.IsDone;
-
+    public bool IsTeamDone(Team team) => team == Team.Blue ? _blue.IsDone : _red.IsDone;
     public void DoActive(int targetIndex, Team actingTeam)
     {
         switch (actingTeam)

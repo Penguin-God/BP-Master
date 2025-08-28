@@ -69,9 +69,11 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         swapDoneBtn.onClick.AddListener(() => _bus.ActionDone(team));
     }
 
+    ActiveExcuteManager activeExcuter;
     public void OnRequestActive(Team team)
     {
-        
+        if (activeExcuter.IsDone)
+            _bus.ActionDone(team);
     }
 
     [SerializeField] Button swapDoneBtn;

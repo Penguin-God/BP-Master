@@ -26,18 +26,20 @@ public class TraitExcuteTests
     public void 양팀_액티브_다_적용되면_끝()
     {
         var statManager = new StatManager(blue: new[] { CreateData(50) }, red: new[] { CreateData(50) });
-        ActiveExcuterManager sut = new (
+        ActiveExcuteManager sut = new (
             new ActiveExcuter(statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) }),
             new ActiveExcuter(statManager, Team.Red, new Trait[] { CreateTrait(Side.Opponent, 20) })
             );
 
         sut.DoActive(0, Team.Blue);
         Assert.AreEqual(30, statManager.Red[0].Attack);
+        Assert.IsTrue(sut.IsTeamDone(Team.Blue));
         Assert.IsFalse(sut.IsDone);
 
         sut.DoActive(0, Team.Red);
         Assert.AreEqual(30, statManager.Blue[0].Attack);
         Assert.IsTrue(sut.IsDone);
+        Assert.IsTrue(sut.IsTeamDone(Team.Red));
     }
 
     [Test]
