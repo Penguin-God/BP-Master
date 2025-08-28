@@ -69,10 +69,20 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         swapDoneBtn.onClick.AddListener(() => _bus.ActionDone(team));
     }
 
-    ActiveExcuteManager activeExcuter;
+    ActiveExcuteManager activeExcutor;
     public void OnRequestActive(Team team)
     {
-        if (activeExcuter.IsDone)
+        this.team = team;
+        currentPhase = GamePhase.Active;
+    }
+
+    // 버튼 플러그해서 사용
+    public void Active(int index)
+    {
+        if (currentPhase != GamePhase.Active) return;
+
+        activeExcutor.DoActive(index, team);
+        if (activeExcutor.IsTeamDone(team))
             _bus.ActionDone(team);
     }
 
