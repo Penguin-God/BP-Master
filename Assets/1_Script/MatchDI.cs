@@ -4,8 +4,9 @@ public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionManager champManager;
     [SerializeField] BanPickUI BanPickUI;
-    MatchManager matchManager;
+    PhaseActionDispatcher matchManager;
     GameBanPickStorage storage;
+    PhaseManager phaseManager;
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(champManager.AllId);
@@ -17,13 +18,13 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
             new PhaseData(GamePhase.Active, new Phase(new Team[] { Team.Blue, Team.Red })),
         };
-        PhaseManager phaseManager = new(phase);
+        phaseManager = new(phase);
 
         PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, BanPickUI);
         PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, BanPickUI);
-        matchManager = new MatchManager(phaseManager, blue, red);
+        // matchManager = new PhaseActionDispatcher(blue, red);
 
-        matchManager.GameStart();
+        phaseManager.Start();
         BanPickUI.Init(storage, phaseManager);
     }
 
@@ -31,7 +32,7 @@ public class MatchDI : MonoBehaviour
     bool isActiveSet = false;
     void Update()
     {
-        if (matchManager != null && matchManager.CurrentPhase == GamePhase.Active && isActiveSet == false)
+        if (phaseManager != null && phaseManager.CurrentFlow.Phase == GamePhase.Active && isActiveSet == false)
         {
             StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));
             ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackChanger(-10)) });
@@ -41,7 +42,7 @@ public class MatchDI : MonoBehaviour
             isActiveSet = true;
         }
 
-        if (matchManager != null && matchManager.CurrentPhase == GamePhase.Done)
+        if (phaseManager != null && phaseManager.CurrentFlow.Phase == GamePhase.Done)
         {
             var blue = champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick));
             var red = champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick));

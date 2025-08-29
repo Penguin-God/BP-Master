@@ -29,30 +29,11 @@ public readonly struct GameFlowData
 
 public class PhaseManager
 {
-    //readonly Queue<PhaseData> phaseDatas;
-    //public PhaseManager(PhaseData[] phaseDatas)
-    //{
-    //    this.phaseDatas = new Queue<PhaseData>(phaseDatas);
-    //    this.phaseDatas.Enqueue(new PhaseData(GamePhase.Done, new Phase(new Team[] { Team.All })));
-    //}
-
-    //PhaseData currentPhaseData = null;
-
-    //GamePhase CurrentPhase => currentPhaseData.GamePhase;
-    //public GameFlowData GetNextFlow()
-    //{
-    //    if(currentPhaseData == null || currentPhaseData.Phase.IsDone) 
-    //        currentPhaseData = phaseDatas.Dequeue();
-
-    //    if (CurrentPhase == GamePhase.Done) return new GameFlowData(GamePhase.Done, Team.All);
-
-    //    return new GameFlowData(CurrentPhase, currentPhaseData.Phase.GetNext());
-    //}
-
-    private readonly Queue<PhaseData> _phases;
-    private PhaseData _current;
-    private Team _currentTurn;
-    private readonly HashSet<Team> _submittedInAll = new();
+    readonly Queue<PhaseData> _phases;
+    PhaseData _current;
+    Team _currentTurn => CurrentFlow.Turn;
+    public GameFlowData CurrentFlow { get; private set; }
+    readonly HashSet<Team> _submittedInAll = new();
 
     public event Action<GameFlowData> OnFlowChanged;
 
@@ -78,13 +59,11 @@ public class PhaseManager
             _submittedInAll.Add(actingTeam);
             if (_submittedInAll.Contains(Team.Blue) && _submittedInAll.Contains(Team.Red))
             {
-                _submittedInAll.Clear();
                 Advance();
+                _submittedInAll.Clear();
             }
         }
-
-        // 단일 팀 턴: 일치할 때만 진행
-        if (actingTeam == _currentTurn) Advance();
+        else if (actingTeam == _currentTurn) Advance();
     }
 
     void Advance()
@@ -92,7 +71,7 @@ public class PhaseManager
         // 현재 페이즈의 큐가 비었으면 다음 페이즈로 이동
         if (_current.Phase.IsDone) _current = _phases.Dequeue();
 
-        _currentTurn = _current.Phase.GetNext();
-        OnFlowChanged?.Invoke(new GameFlowData(_current.GamePhase, _currentTurn));
+        CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());
+        OnFlowChanged?.Invoke(CurrentFlow);
     }
 }
