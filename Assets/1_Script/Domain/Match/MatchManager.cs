@@ -13,13 +13,14 @@ public class MatchManager
         this._blue = blueDispatcher;
         this._red = redDispatcher;
         this.eventBus = eventBus;
-        eventBus.OnActionDone += ProgressGame;
+        // eventBus.OnActionDone += ProgressGame;
+        phaseManager.OnFlowChanged += UpdateFlow;
     }
 
     void ProgressGame()
     {
-        currentFlow = phaseManager.GetNextFlow();
-        eventBus.ChangeTeam(CurrentTurn);
+        // currentFlow = phaseManager.GetNextFlow();
+        // eventBus.ChangeTeam(CurrentTurn);
 
         switch (CurrentTurn)
         {
@@ -35,8 +36,15 @@ public class MatchManager
     }
 
     GameFlowData currentFlow;
+
+    void UpdateFlow(GameFlowData flow)
+    {
+        currentFlow = flow;
+        ProgressGame();
+    }
+
     public Team CurrentTurn => currentFlow.Turn;
     public GamePhase CurrentPhase => currentFlow.Phase;
 
-    public void GameStart() => ProgressGame();
+    public void GameStart() => phaseManager.Start();
 }

@@ -18,8 +18,8 @@ public class MatchTests
         PhaseManager phaseManager = new(phase);
 
         var bus = new ActionEventBus();
-        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, new FakeActor(bus));
-        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, new FakeActor(bus));
+        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, new FakeActor(phaseManager));
+        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, new FakeActor(phaseManager));
 
         MatchManager sut = new(phaseManager, bus, blue, red);
 
@@ -30,11 +30,11 @@ public class MatchTests
 
 public class FakeActor : IActionHandler
 {
-    readonly ActionEventBus bus;
-    public FakeActor(ActionEventBus bus) => this.bus = bus;
+    readonly PhaseManager bus;
+    public FakeActor(PhaseManager bus) => this.bus = bus;
 
-    public void OnRequestBan(Team team) => bus.ActionDone(team);
-    public void OnRequestPick(Team team) => bus.ActionDone(team);
-    public void OnRequestSwap(Team team) => bus.ActionDone(team);
-    public void OnRequestActive(Team team) => bus.ActionDone(team);
+    public void OnRequestBan(Team team) => bus.SubmitAction(team);
+    public void OnRequestPick(Team team) => bus.SubmitAction(team);
+    public void OnRequestSwap(Team team) => bus.SubmitAction(team);
+    public void OnRequestActive(Team team) => bus.SubmitAction(team);
 }
