@@ -9,20 +9,20 @@ public class PhaseActionDispatcher
         this._red = redHandler;
     }
 
-    public void ProgressGame(GameFlowData flow)
+    public void OnRequestAction(GameFlowData flow)
     {
         switch (flow.Turn)
         {
             case Team.Blue: OnRequestAction(_blue, flow); break;
             case Team.Red: OnRequestAction(_red, flow); break;
             case Team.All:
-                OnRequestAction(_blue, flow);
-                OnRequestAction(_red, flow);
+                OnRequestAction(_blue, new GameFlowData(flow.Phase, Team.Blue));
+                OnRequestAction(_red, new GameFlowData(flow.Phase, Team.Red));
                 break;
         }
     }
 
-    public void OnRequestAction(IActionHandler actionHandler, GameFlowData gameFlow)
+    void OnRequestAction(IActionHandler actionHandler, GameFlowData gameFlow)
     {
         switch (gameFlow.Phase)
         {

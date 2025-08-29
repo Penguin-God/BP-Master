@@ -4,7 +4,6 @@ public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionManager champManager;
     [SerializeField] BanPickUI BanPickUI;
-    PhaseActionDispatcher matchManager;
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     public void GameStart(Team playerTeam)
@@ -19,10 +18,7 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Active, new Phase(new Team[] { Team.Blue, Team.Red })),
         };
         phaseManager = new(phase);
-
-        PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, BanPickUI);
-        PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, BanPickUI);
-        // matchManager = new PhaseActionDispatcher(blue, red);
+        phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
 
         phaseManager.Start();
         BanPickUI.Init(storage, phaseManager);

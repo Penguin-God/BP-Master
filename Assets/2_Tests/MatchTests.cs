@@ -23,7 +23,7 @@ public class MatchTests
         IActionHandler red = new FakeActor(phaseManager);
 
         PhaseActionDispatcher sut = new(blue, red);
-        phaseManager.OnFlowChanged += sut.ProgressGame;
+        phaseManager.OnFlowChanged += sut.OnRequestAction;
         phaseManager.Start();
 
         Assert.AreEqual(GamePhase.Done, data.Phase);
@@ -34,7 +34,7 @@ public class MatchTests
     {
         var (blue, red, sut) = CreateArrange();
 
-        sut.ProgressGame(CreateData(GamePhase.Ban, Team.Blue));
+        sut.OnRequestAction(CreateData(GamePhase.Ban, Team.Blue));
 
         Assert.AreEqual(1, blue.Calls.Count);
         Assert.AreEqual(("Ban", Team.Blue), blue.Calls[0]);
@@ -47,7 +47,7 @@ public class MatchTests
     {
         var (blue, red, sut) = CreateArrange();
 
-        sut.ProgressGame(CreateData(GamePhase.Pick, Team.Red));
+        sut.OnRequestAction(CreateData(GamePhase.Pick, Team.Red));
 
         Assert.AreEqual(0, blue.Calls.Count);
 
@@ -60,13 +60,13 @@ public class MatchTests
     {
         var (blue, red, sut) = CreateArrange();
 
-        sut.ProgressGame(CreateData(GamePhase.Swap, Team.All));
+        sut.OnRequestAction(CreateData(GamePhase.Swap, Team.All));
 
         Assert.AreEqual(1, blue.Calls.Count);
-        Assert.AreEqual(("Swap", Team.All), blue.Calls[0]);
+        Assert.AreEqual(("Swap", Team.Blue), blue.Calls[0]);
 
         Assert.AreEqual(1, red.Calls.Count);
-        Assert.AreEqual(("Swap", Team.All), red.Calls[0]);
+        Assert.AreEqual(("Swap", Team.Red), red.Calls[0]);
     }
 
     [Test]
@@ -74,7 +74,7 @@ public class MatchTests
     {
         var (blue, red, sut) = CreateArrange();
 
-        sut.ProgressGame(CreateData(GamePhase.Done, Team.All));
+        sut.OnRequestAction(CreateData(GamePhase.Done, Team.All));
 
         Assert.AreEqual(0, blue.Calls.Count);
         Assert.AreEqual(0, red.Calls.Count);
@@ -108,10 +108,6 @@ public class FakeActor : IActionHandler
 
     public void OnRequestBan(Team team) => phaseManager.SubmitAction(team);
     public void OnRequestPick(Team team) => phaseManager.SubmitAction(team);
-    public void OnRequestSwap(Team team)
-    {
-        phaseManager.SubmitAction(Team.Red);
-        phaseManager.SubmitAction(Team.Blue);
-    }
+    public void OnRequestSwap(Team team) => phaseManager.SubmitAction(team);
     public void OnRequestActive(Team team) => phaseManager.SubmitAction(team);
 }
