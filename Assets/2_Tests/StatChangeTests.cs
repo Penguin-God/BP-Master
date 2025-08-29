@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class StatManagementTests
+public class StatChangeTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int range = 0, int speed = 0) => new ChampionStatData(atk, def, range, speed);
 
