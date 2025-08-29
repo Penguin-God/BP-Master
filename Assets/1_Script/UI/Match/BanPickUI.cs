@@ -9,12 +9,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     ChampionSO currentSelectChampion = null;
 
-    public void Init(GameBanPickStorage storage, ActionEventBus bus) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
+    public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
         _storage = storage;
-        _bus = bus;
+        phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
@@ -40,7 +40,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
             if(_storage.SaveSelect(new SelectInfo(team, SelectType.Ban, currentSelectChampion.Id)))
             {
                 view.UpdateBanView(team, currentSelectChampion.Id);
-                _bus.ActionDone(team);
+                phaseManager.SubmitAction(team);
             }
         }
         else if (currentPhase == GamePhase.Pick)
@@ -48,12 +48,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
             if (_storage.SaveSelect(new SelectInfo(team, SelectType.Pick, currentSelectChampion.Id)))
             {
                 view.UpdatePickView(team, currentSelectChampion.Id);
-                _bus.ActionDone(team);
+                phaseManager.SubmitAction(team);
             }
         }
     }
 
-    ActionEventBus _bus;
+    PhaseManager phaseManager;
     public void OnRequestBan(Team team)
     {
         this.team = team;
@@ -68,7 +68,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     public void OnRequestSwap(Team team)
     {
-        swapDoneBtn.onClick.AddListener(() => _bus.ActionDone(team));
+        swapDoneBtn.onClick.AddListener(() => phaseManager.SubmitAction(team));
     }
 
     ActiveExcuteManager activeExcutor;
@@ -85,7 +85,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
         activeExcutor.DoActive(index, team);
         if (activeExcutor.IsTeamDone(team))
-            _bus.ActionDone(team);
+            phaseManager.SubmitAction(team);
     }
 
     [SerializeField] Button swapDoneBtn;

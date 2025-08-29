@@ -21,11 +21,10 @@ public class MatchDI : MonoBehaviour
 
         PhaseActionRequestor blue = new PhaseActionRequestor(Team.Blue, BanPickUI);
         PhaseActionRequestor red = new PhaseActionRequestor(Team.Red, BanPickUI);
-        var bus = new ActionEventBus();
-        matchManager = new MatchManager(phaseManager, bus, blue, red);
+        matchManager = new MatchManager(phaseManager, blue, red);
 
         matchManager.GameStart();
-        BanPickUI.Init(storage, bus);
+        BanPickUI.Init(storage, phaseManager);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;

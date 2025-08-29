@@ -2,26 +2,18 @@
 public class MatchManager
 {
     readonly PhaseManager phaseManager;
-    readonly ActionEventBus eventBus;
-
     PhaseActionRequestor _blue;
     PhaseActionRequestor _red;
-    public MatchManager(PhaseManager phaseManager, ActionEventBus eventBus, PhaseActionRequestor blueDispatcher, PhaseActionRequestor redDispatcher)
+    public MatchManager(PhaseManager phaseManager, PhaseActionRequestor blueDispatcher, PhaseActionRequestor redDispatcher)
     {
         this.phaseManager = phaseManager;
-
         this._blue = blueDispatcher;
         this._red = redDispatcher;
-        this.eventBus = eventBus;
-        // eventBus.OnActionDone += ProgressGame;
         phaseManager.OnFlowChanged += UpdateFlow;
     }
 
     void ProgressGame()
     {
-        // currentFlow = phaseManager.GetNextFlow();
-        // eventBus.ChangeTeam(CurrentTurn);
-
         switch (CurrentTurn)
         {
             case Team.Blue:
