@@ -51,7 +51,7 @@ public class TraitExcuteTests
         Assert.AreEqual(30, statManager.Red[0].Attack);
         Assert.IsFalse(sut.IsDone);
 
-        sut.DoActive(0, new int[] { 0 });
+        sut.DoActive(1, new int[] { 0 });
         Assert.AreEqual(5, statManager.Red[0].Attack);
         Assert.IsTrue(sut.IsDone);
     }
@@ -65,9 +65,9 @@ public class TraitExcuteTests
         );
         ActiveExcuter sut = new (result, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) });
 
-        sut.DoActive(1, new int[] { 1 });
+        sut.DoActive(0, new int[] { 1 });
 
-        Assert.AreEqual(40, result.Red[0].Attack);
+        Assert.AreEqual(40, result.Red[0].Attack); // 40
         Assert.AreEqual(30, result.Red[1].Attack);
     }
 

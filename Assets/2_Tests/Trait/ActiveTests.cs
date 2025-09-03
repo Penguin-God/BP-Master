@@ -37,17 +37,17 @@ public class ActiveTests
 
         sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack); // 40 - 10 = 30
-        Assert.IsTrue(sut.IsUsedChampion(0));
+        Assert.IsTrue(sut.IsChampionUsed(0));
         Assert.IsFalse(sut.IsTeamDone());
 
         sut.DoActive(1, new int[] { 1 });
         Assert.AreEqual(35, statManager.Red[1].Attack); // 50 - 15 = 35
-        Assert.IsTrue(sut.IsUsedChampion(1));
+        Assert.IsTrue(sut.IsChampionUsed(1));
         Assert.IsFalse(sut.IsTeamDone());
 
         sut.DoActive(2, new int[] { 2 });
         Assert.AreEqual(40, statManager.Red[2].Attack); // 60 - 20 = 40
-        Assert.IsTrue(sut.IsUsedChampion(2));
+        Assert.IsTrue(sut.IsChampionUsed(2));
         Assert.IsTrue(sut.IsTeamDone()); // 모든 챔피언 사용 완료
     }
 
@@ -64,7 +64,7 @@ public class ActiveTests
 
         sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack);
-        Assert.IsTrue(sut.IsUsedChampion(0));
+        Assert.IsTrue(sut.IsChampionUsed(0));
 
         // 같은 챔피언 재사용 시도 - 효과 없어야 함
         sut.DoActive(0, new int[] { 0 });

@@ -12,13 +12,13 @@ public sealed class ActiveExcuteManager
     }
 
     public bool IsDone => _blue.IsDone && _red.IsDone;
-    public bool IsTeamDone(Team team) => team == Team.Blue ? _blue.IsDone : _red.IsDone;
-    public void DoActive(int targetIndex, Team actingTeam)
+    public bool IsTeamDone(Team team) => team == Team.Blue ? _blue.IsTeamDone() : _red.IsTeamDone();
+    public void DoActive(int championIndex, Team actingTeam, int[] targets = null)
     {
         switch (actingTeam)
         {
-            case Team.Blue: _blue.DoActive(targetIndex); break;
-            case Team.Red: _red.DoActive(targetIndex); break;
+            case Team.Blue: _blue.DoActive(championIndex, targets); break;
+            case Team.Red: _red.DoActive(championIndex, targets); break;
         }
     }
 }
