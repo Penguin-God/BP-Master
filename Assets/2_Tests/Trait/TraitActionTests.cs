@@ -18,5 +18,5 @@ public class TraitActionTests
         Assert.AreEqual(expected, result.Attack);
     }
 
-    ChampionStatData CreateStat(int att) => new ChampionStatData(att, 0, 0, 0);
+ChampionStatData CreateStat(int att) => new ChampionStatData(att, 0, 0);
 }

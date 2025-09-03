@@ -9,9 +9,8 @@ public class BonusDataFactory : ScriptableObject
 
     [SerializeField] BonusDataSO attackBonus;
     [SerializeField] BonusDataSO defenseBonus;
-    [SerializeField] BonusDataSO rangeBonus;
     [SerializeField] BonusDataSO speedBonus;
 
     public ChampionBonusCalculator ChampionBonus => new ChampionBonusCalculator(champAttackBonus.Bonus, champDefenseBonus.Bonus);
-    public TeamBonusCalculator TeamBonus => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, rangeBonus.Bonus, speedBonus.Bonus);
+    public TeamBonusCalculator TeamBonus => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, speedBonus.Bonus);
 }

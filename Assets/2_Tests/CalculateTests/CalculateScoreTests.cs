@@ -16,31 +16,31 @@ public class CalculateScoreTests
         teamBonusData2.Add(20, 30);
 
         var champCal = new ChampionBonusCalculator(CreateBonusCalculator(100, 20), CreateBonusCalculator(100, 20));
-        var teamCal = new TeamBonusCalculator(CreateBonusCalculator(300, 50), CreateBonusCalculator(300, 50), CreateBonusCalculator(20, 30), CreateBonusCalculator(20, 30));
+        var teamCal = new TeamBonusCalculator(CreateBonusCalculator(300, 50), CreateBonusCalculator(300, 50), CreateBonusCalculator(20, 30));
         TeamScoreCalculator sut = new TeamScoreCalculator(champCal, teamCal);
-        ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10, 10), new(80, 200, 10, 15) };
+        ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(80, 200, 15) };
 
         int result = sut.CalculateScore(team);
 
-        // 580 + 60 + 110
-        Assert.AreEqual(750, result);
+        // 580 + 80 + 60
+        Assert.AreEqual(720, result);
     }
 
     [Test]
     public void 팀_보너스는_스탯_구간_보너스_총합()
     {
-        ChampionStatData[] champions = new ChampionStatData[] { new(150, 150, 10, 10), new(200, 300, 10, 15) };
+        ChampionStatData[] champions = new ChampionStatData[] { new(150, 150, 10), new(200, 300, 15) };
 
         TeamBonusCalculator sut = new TeamBonusCalculator(
             CreateBonusCalculator(300, 50, 400, 80),
             CreateBonusCalculator(300, 50, 400, 80),
-            CreateBonusCalculator(15, 50, 20, 80, 25, 100),
             CreateBonusCalculator(15, 50, 20, 80, 25, 100)
             );
 
         int result = sut.CalculateTeamBonus(champions);
 
-        Assert.AreEqual(310, result);
+        // 50 + 80 + 100
+        Assert.AreEqual(230, result);
     }
 
     [Test]
@@ -48,7 +48,7 @@ public class CalculateScoreTests
     {
         var sut = new ChampionBonusCalculator(CreateBonusCalculator(300, 100, 400, 150), CreateBonusCalculator(300, 100, 400, 150));
 
-        int result = sut.CalculateBonus(new ChampionStatData(300, 400, 0, 0));
+        int result = sut.CalculateBonus(new ChampionStatData(300, 400, 0));
 
         Assert.AreEqual(250, result);
     }

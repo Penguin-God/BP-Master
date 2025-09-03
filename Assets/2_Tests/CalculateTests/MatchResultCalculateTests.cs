@@ -6,14 +6,14 @@ using UnityEngine.TestTools;
 public class MatchResultCalculateTests
 {
     // 편의 헬퍼
-    private static ChampionStatData CreateStat(int atk = 0, int def = 0, int rng = 0, int spd = 0)
-        => new ChampionStatData(atk, def, rng, spd);
+private static ChampionStatData CreateStat(int atk = 0, int def = 0, int spd = 0)
+        => new ChampionStatData(atk, def, spd);
 
     BonusCalculator CreateEmptyBonus() => new BonusCalculator(new System.Collections.Generic.SortedDictionary<int, int>());
     TeamScoreCalculator CreateScoreCalculator()
     {
         return new TeamScoreCalculator(new ChampionBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus()),
-            new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+            new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
     }
     [Test]
     public void 다수_챔피언_스쿼드_결과()
@@ -42,8 +42,8 @@ public class MatchResultCalculateTests
     {
         var team = new[]
         {
-            CreateStat(10, 10, 3, 5),
-            CreateStat(8,  12, 2, 6),
+            CreateStat(10, 10, 5),
+            CreateStat(8,  12, 6),
         };
         var sut = new MatchResultCalculator(CreateScoreCalculator());
 

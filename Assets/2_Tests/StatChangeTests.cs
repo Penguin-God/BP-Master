@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 public class StatChangeTests
 {
-    ChampionStatData CreateData(int atk, int def = 0, int range = 0, int speed = 0) => new ChampionStatData(atk, def, range, speed);
+ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new ChampionStatData(atk, def, speed);
 
     [Test]
     public void 지정한_측과_인덱스만_변경()
@@ -16,7 +16,7 @@ public class StatChangeTests
             red: new[] { CreateData(40), CreateData(50) }
         );
 
-        sut.ChangeSelectData(Team.Red, 1, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Range, c.Speed));
+        sut.ChangeSelectData(Team.Red, 1, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Speed));
 
         // assert: 타겟만 변경, 나머지는 그대로
         Assert.AreEqual(40, sut.Red[0].Attack);
@@ -34,7 +34,7 @@ public class StatChangeTests
         );
 
         // act: -999 시도
-        sut.ChangeSelectData(Team.Blue, 0, c => new ChampionStatData(c.Attack - 999, c.Defense, c.Range, c.Speed));
+        sut.ChangeSelectData(Team.Blue, 0, c => new ChampionStatData(c.Attack - 999, c.Defense, c.Speed));
 
         Assert.AreEqual(0, sut.Blue[0].Attack);
     }
@@ -47,7 +47,7 @@ public class StatChangeTests
             red: new[] { CreateData(30), CreateData(40) }
         );
 
-        sut.ChangeAll(Team.Blue, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Range, c.Speed));
+        sut.ChangeAll(Team.Blue, c => new ChampionStatData(c.Attack - 12, c.Defense, c.Speed));
 
         // assert
         Assert.AreEqual(0, sut.Blue[0].Attack); // 10 -> 0

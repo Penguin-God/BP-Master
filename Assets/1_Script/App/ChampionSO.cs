@@ -11,7 +11,6 @@ public class ChampionSO : ScriptableObject
 
     [SerializeField] int attack;
     [SerializeField] int defense;
-    [SerializeField] int range;
     [SerializeField] int speed;
-    public ChampionStatData StatData => new ChampionStatData(attack, defense, range, speed);
+    public ChampionStatData StatData => new ChampionStatData(attack, defense, speed);
 }
