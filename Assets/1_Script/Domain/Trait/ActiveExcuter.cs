@@ -39,53 +39,24 @@ public class ActiveExcuter
     {
         switch (trait.TargetSide)
         {
-            case Side.Self: ApplyToAllies(trait, targets); break;
-            case Side.Opponent: ApplyToOpponents(trait, targets); break;
+            case Side.Self: ApplyToSingleSide(trait, targets, Side.Self); break;
+            case Side.Opponent: ApplyToSingleSide(trait, targets, Side.Opponent); break;
             case Side.All: ApplyToAll(trait, targets); break;
         }
     }
 
-    void ApplyToAllies(Trait trait, int[] targets)
+    void ApplyToSingleSide(Trait trait, int[] targets, Side targetSide)
     {
-        if (targets == null || targets.Length == 0)
-            statManager.ChangeAll(Team, trait.TraitAction.Do);
-        else
-        {
-            // 지정된 아군들에게만 적용
-            foreach (int target in targets)
-                statManager.ChangeSelectData(Team, target, trait.TraitAction.Do);
-        }
-    }
-
-    void ApplyToOpponents(Trait trait, int[] targets)
-    {
-        Team opponentTeam = Team == Team.Blue ? Team.Red : Team.Blue;
-        
-        if (targets == null || targets.Length == 0)
-            statManager.ChangeAll(opponentTeam, trait.TraitAction.Do);
-        else
-        {
-            // 지정된 상대들에게만 적용
-            foreach (int target in targets)
-                statManager.ChangeSelectData(opponentTeam, target, trait.TraitAction.Do);
-        }
+        foreach (int index in targets)
+            statManager.ChangeSelectData(TeamSideConverter.GetTargetTeam(Team, targetSide), index, trait.TraitAction.Do);
     }
 
     void ApplyToAll(Trait trait, int[] targets)
     {
-        // Side.All은 모든 팀에게 적용 (현재는 사용되지 않지만 확장성을 위해)
-        if (targets == null || targets.Length == 0)
+        foreach (int target in targets)
         {
-            statManager.ChangeAll(Team.Blue, trait.TraitAction.Do);
-            statManager.ChangeAll(Team.Red, trait.TraitAction.Do);
-        }
-        else
-        {
-            foreach (int target in targets)
-            {
-                statManager.ChangeSelectData(Team.Blue, target, trait.TraitAction.Do);
-                statManager.ChangeSelectData(Team.Red, target, trait.TraitAction.Do);
-            }
+            statManager.ChangeSelectData(Team.Blue, target, trait.TraitAction.Do);
+            statManager.ChangeSelectData(Team.Red, target, trait.TraitAction.Do);
         }
     }
 }
