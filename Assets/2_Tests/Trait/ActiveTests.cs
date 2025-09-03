@@ -35,19 +35,19 @@ public class ActiveTests
 
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 
-        sut.DoActive(0);
+        sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack); // 40 - 10 = 30
-        Assert.IsTrue(sut.IsChampionUsed(0));
+        Assert.IsTrue(sut.IsUsedChampion(0));
         Assert.IsFalse(sut.IsTeamDone());
 
-        sut.DoActive(1);
+        sut.DoActive(1, new int[] { 1 });
         Assert.AreEqual(35, statManager.Red[1].Attack); // 50 - 15 = 35
-        Assert.IsTrue(sut.IsChampionUsed(1));
+        Assert.IsTrue(sut.IsUsedChampion(1));
         Assert.IsFalse(sut.IsTeamDone());
 
-        sut.DoActive(2);
+        sut.DoActive(2, new int[] { 2 });
         Assert.AreEqual(40, statManager.Red[2].Attack); // 60 - 20 = 40
-        Assert.IsTrue(sut.IsChampionUsed(2));
+        Assert.IsTrue(sut.IsUsedChampion(2));
         Assert.IsTrue(sut.IsTeamDone()); // 모든 챔피언 사용 완료
     }
 
@@ -62,12 +62,12 @@ public class ActiveTests
         var blueTraits = new Trait[] { CreateTrait(Side.Opponent, -10) };
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 
-        sut.DoActive(0);
+        sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack);
-        Assert.IsTrue(sut.IsChampionUsed(0));
+        Assert.IsTrue(sut.IsUsedChampion(0));
 
         // 같은 챔피언 재사용 시도 - 효과 없어야 함
-        sut.DoActive(0);
+        sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack); // 변화 없음
     }
 
@@ -84,10 +84,10 @@ public class ActiveTests
 
         ActiveExcuteManager sut = new ActiveExcuteManager(blueExcuter, redExcuter);
 
-        sut.DoActive(0, Team.Blue);
+        sut.DoActive(0, Team.Blue, new int[] { 0 });
         Assert.IsFalse(sut.IsDone);
 
-        sut.DoActive(0, Team.Red);
+        sut.DoActive(0, Team.Red, new int[] { 0 });
         Assert.IsTrue(sut.IsDone);
     }
 
@@ -108,7 +108,7 @@ public class ActiveTests
 
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 
-        sut.DoActive(0); // 아군 전체 버프
+        sut.DoActive(0); // 아군 전체 버프 (targets=null이면 전체)
 
         Assert.AreEqual(55, statManager.Blue[0].Attack); // 50 + 5
         Assert.AreEqual(65, statManager.Blue[1].Attack); // 60 + 5

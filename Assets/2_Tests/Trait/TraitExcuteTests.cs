@@ -5,7 +5,7 @@ using UnityEngine.TestTools;
 
 public class TraitExcuteTests
 {
-ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new ChampionStatData(atk, def, speed);
+    ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new ChampionStatData(atk, def, speed);
     Trait CreateTrait(Side side, int amount) => new Trait(TraitType.Active, side, GetMinus(amount));
 
     [Test]
@@ -31,12 +31,11 @@ ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new Champion
             new ActiveExcuter(statManager, Team.Red, new Trait[] { CreateTrait(Side.Opponent, 20) })
             );
 
-        sut.DoActive(0, Team.Blue);
+        sut.DoActive(0, Team.Blue, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack);
         Assert.IsTrue(sut.IsTeamDone(Team.Blue));
         Assert.IsFalse(sut.IsDone);
-
-        sut.DoActive(0, Team.Red);
+        sut.DoActive(0, Team.Red, new int[] { 0 });
         Assert.AreEqual(30, statManager.Blue[0].Attack);
         Assert.IsTrue(sut.IsDone);
         Assert.IsTrue(sut.IsTeamDone(Team.Red));
@@ -48,11 +47,11 @@ ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new Champion
         var statManager = new StatManager(blue: new[] { CreateData(0) }, red: new[] { CreateData(50) });
         ActiveExcuter sut = new (statManager, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20), CreateTrait(Side.Opponent, 25) });
 
-        sut.DoActive(0);
+        sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(30, statManager.Red[0].Attack);
         Assert.IsFalse(sut.IsDone);
 
-        sut.DoActive(0);
+        sut.DoActive(0, new int[] { 0 });
         Assert.AreEqual(5, statManager.Red[0].Attack);
         Assert.IsTrue(sut.IsDone);
     }
@@ -66,7 +65,7 @@ ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new Champion
         );
         ActiveExcuter sut = new (result, Team.Blue, new Trait[] { CreateTrait(Side.Opponent, 20) });
 
-        sut.DoActive(1);
+        sut.DoActive(1, new int[] { 1 });
 
         Assert.AreEqual(40, result.Red[0].Attack);
         Assert.AreEqual(30, result.Red[1].Attack);
