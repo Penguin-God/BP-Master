@@ -13,7 +13,7 @@ public sealed class ActiveExcuteManager
 
     public bool IsDone => _blue.IsDone && _red.IsDone;
     public bool IsTeamDone(Team team) => team == Team.Blue ? _blue.IsTeamDone() : _red.IsTeamDone();
-    public void DoActive(int championIndex, Team actingTeam, int[] targets = null)
+    public void DoActive(int championIndex, Team actingTeam, int[] targets)
     {
         switch (actingTeam)
         {

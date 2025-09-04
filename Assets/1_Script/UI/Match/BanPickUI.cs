@@ -83,7 +83,8 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     {
         if (currentPhase != GamePhase.Active) return;
 
-        activeExcutor.DoActive(index, team);
+        // 나중을 위한 것
+        // activeExcutor.DoActive(index, team);
         if (activeExcutor.IsTeamDone(team))
             phaseManager.SubmitAction(team);
     }
