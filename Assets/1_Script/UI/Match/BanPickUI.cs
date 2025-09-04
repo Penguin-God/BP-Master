@@ -7,7 +7,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
 
-    ChampionSO currentSelectChampion = null;
     SelectPresenter presenter = null;
     PhaseManager phaseManager;
     public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
@@ -26,19 +25,17 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     void SelectChampion(ChampionSO champion)
     {
-        currentSelectChampion = champion;
+        presenter.SelectChamp(champion.Id);
         view.UpdateSelectChampion(champion);
     }
 
     void NailDownChampion() // 챔프 확정
     {
-        if (currentSelectChampion == null) return;
+        int selectId = presenter.NailDownChampion();
+        if (selectId == -1) return;
 
-        //if (presenter.NailDownChampion(currentSelectChampion.Id))
-        //{
-        //    view.UpdateSelectView(PhaseToSelect(presenter.Phase), presenter.Turn, currentSelectChampion.Id);
-        //    phaseManager.SubmitAction(presenter.Turn);
-        //}
+        view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(presenter.Phase), presenter.Turn, selectId);
+        phaseManager.SubmitAction(presenter.Turn);
     }
 
     void ChangeFlow(Team team, GamePhase phase) => presenter.ChangeFlow(new GameFlowData(phase, team));
