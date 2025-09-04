@@ -24,7 +24,7 @@ public class PassiveExcutor
     {
         foreach (var trait in traits)
         {
-            var targetTeam = TeamSideConverter.GetTargetTeam(ownerTeam, trait.TargetSide);
+            var targetTeam = BanPickEnumCaster.GetTargetTeam(ownerTeam, trait.TargetSide);
             ApplyPassive(targetTeam, trait.TraitAction);
         }
     }

@@ -47,7 +47,7 @@ public class ActiveExcuter
     void ApplyToSingleSide(Trait trait, int[] targets, Side targetSide)
     {
         foreach (int index in targets)
-            statManager.ChangeSelectData(TeamSideConverter.GetTargetTeam(Team, targetSide), index, trait.TraitAction.Do);
+            statManager.ChangeSelectData(BanPickEnumCaster.GetTargetTeam(Team, targetSide), index, trait.TraitAction.Do);
     }
 
     void ApplyToAll(Trait trait, int[] targets)

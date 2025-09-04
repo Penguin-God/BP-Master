@@ -41,13 +41,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         //}
     }
 
-    SelectType PhaseToSelect(GamePhase phase)
-    {
-        if(phase == GamePhase.Pick) return SelectType.Pick;
-        else if(phase == GamePhase.Ban) return SelectType.Ban;
-        else throw new System.Exception($"밴과 픽 중 하나여야 함 : {phase}");
-    }
-
     void ChangeFlow(Team team, GamePhase phase) => presenter.ChangeFlow(new GameFlowData(phase, team));
     public void OnRequestBan(Team team) => ChangeFlow(team, GamePhase.Ban);
     public void OnRequestPick(Team team) => ChangeFlow(team, GamePhase.Pick);
