@@ -34,11 +34,11 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     {
         if (currentSelectChampion == null) return;
 
-        if (presenter.SelectChampion(currentSelectChampion.Id))
-        {
-            view.UpdateSelectView(PhaseToSelect(presenter.Phase), presenter.Turn, currentSelectChampion.Id);
-            phaseManager.SubmitAction(presenter.Turn);
-        }
+        //if (presenter.NailDownChampion(currentSelectChampion.Id))
+        //{
+        //    view.UpdateSelectView(PhaseToSelect(presenter.Phase), presenter.Turn, currentSelectChampion.Id);
+        //    phaseManager.SubmitAction(presenter.Turn);
+        //}
     }
 
     SelectType PhaseToSelect(GamePhase phase)
