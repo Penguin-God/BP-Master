@@ -8,12 +8,13 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     [SerializeField] ChampionDrawer buttonDrawer;
 
     ChampionSO currentSelectChampion = null;
-
+    SelectPresenter presenter = null;
     public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
         _storage = storage;
+        presenter = new SelectPresenter(storage);
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
@@ -35,21 +36,10 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     {
         if (currentSelectChampion == null) return;
 
-        if (currentPhase == GamePhase.Ban)
+        if (presenter.SelectChampion(currentPhase, team, currentSelectChampion.Id))
         {
-            if(_storage.SaveSelect(new SelectInfo(team, SelectType.Ban, currentSelectChampion.Id)))
-            {
-                view.UpdateSelectView(PhaseToSelect(currentPhase), team, currentSelectChampion.Id);
-                phaseManager.SubmitAction(team);
-            }
-        }
-        else if (currentPhase == GamePhase.Pick)
-        {
-            if (_storage.SaveSelect(new SelectInfo(team, SelectType.Pick, currentSelectChampion.Id)))
-            {
-                view.UpdateSelectView(PhaseToSelect(currentPhase), team, currentSelectChampion.Id);
-                phaseManager.SubmitAction(team);
-            }
+            view.UpdateSelectView(PhaseToSelect(currentPhase), team, currentSelectChampion.Id);
+            phaseManager.SubmitAction(team);
         }
     }
 
