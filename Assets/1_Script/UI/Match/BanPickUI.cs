@@ -39,7 +39,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         {
             if(_storage.SaveSelect(new SelectInfo(team, SelectType.Ban, currentSelectChampion.Id)))
             {
-                view.UpdateBanView(team, currentSelectChampion.Id);
+                view.UpdateSelectView(PhaseToSelect(currentPhase), team, currentSelectChampion.Id);
                 phaseManager.SubmitAction(team);
             }
         }
@@ -47,10 +47,17 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         {
             if (_storage.SaveSelect(new SelectInfo(team, SelectType.Pick, currentSelectChampion.Id)))
             {
-                view.UpdatePickView(team, currentSelectChampion.Id);
+                view.UpdateSelectView(PhaseToSelect(currentPhase), team, currentSelectChampion.Id);
                 phaseManager.SubmitAction(team);
             }
         }
+    }
+
+    SelectType PhaseToSelect(GamePhase phase)
+    {
+        if(phase == GamePhase.Pick) return SelectType.Pick;
+        else if(phase == GamePhase.Ban) return SelectType.Ban;
+        else throw new System.Exception($"밴과 픽 중 하나여야 함 : {phase}");
     }
 
     PhaseManager phaseManager;
