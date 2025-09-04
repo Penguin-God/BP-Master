@@ -14,11 +14,12 @@ public class SelectPresenter
 
     public int NailDownChampion()
     {
-        if (selectId == -1) return -1;
-
-        //if (currentFlowData.Phase == GamePhase.Ban) return storage.SaveSelect(new SelectInfo(currentFlowData.Turn, SelectType.Ban, selectId));
-        //else if (currentFlowData.Phase == GamePhase.Pick) return storage.SaveSelect(new SelectInfo(currentFlowData.Turn, SelectType.Pick, selectId));
-        //else return -1;
-        return 0;
+        if (storage.SaveSelect(new SelectInfo(Turn, BanPickEnumCaster.PhaseToSelect(Phase), selectId)))
+        {
+            int result = selectId;
+            selectId = -1;
+            return result;
+        }
+        else return -1;
     }
 }
