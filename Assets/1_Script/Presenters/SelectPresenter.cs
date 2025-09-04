@@ -4,6 +4,8 @@ public class SelectPresenter
 {
     readonly GameBanPickStorage storage;
     GameFlowData currentFlowData;
+    public GamePhase Phase => currentFlowData.Phase;
+    public Team Turn => currentFlowData.Turn;
     public SelectPresenter(GameBanPickStorage storage) => this.storage = storage;
 
     public void ChangeFlow(GameFlowData gameFlowData) => currentFlowData = gameFlowData;

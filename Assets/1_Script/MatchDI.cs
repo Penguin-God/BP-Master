@@ -20,8 +20,8 @@ public class MatchDI : MonoBehaviour
         phaseManager = new(phase);
         phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
 
+        BanPickUI.Init(storage, phaseManager); // start보다 먼저. 
         phaseManager.Start();
-        BanPickUI.Init(storage, phaseManager);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
