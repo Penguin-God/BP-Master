@@ -36,7 +36,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     {
         if (currentSelectChampion == null) return;
 
-        if (presenter.SelectChampion(currentPhase, team, currentSelectChampion.Id))
+        if (presenter.SelectChampion(currentSelectChampion.Id))
         {
             view.UpdateSelectView(PhaseToSelect(currentPhase), team, currentSelectChampion.Id);
             phaseManager.SubmitAction(team);

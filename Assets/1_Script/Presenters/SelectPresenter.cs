@@ -1,13 +1,17 @@
+using System;
+
 public class SelectPresenter
 {
     readonly GameBanPickStorage storage;
-    
+    GameFlowData currentFlowData;
     public SelectPresenter(GameBanPickStorage storage) => this.storage = storage;
 
-    public bool SelectChampion(GamePhase phase, Team team, int id)
+    public void ChangeFlow(GameFlowData gameFlowData) => currentFlowData = gameFlowData;
+
+    public bool SelectChampion(int id)
     {
-        if (phase == GamePhase.Ban) return storage.SaveSelect(new SelectInfo(team, SelectType.Ban, id));
-        else if (phase == GamePhase.Pick) return storage.SaveSelect(new SelectInfo(team, SelectType.Pick, id));
+        if (currentFlowData.Phase == GamePhase.Ban) return storage.SaveSelect(new SelectInfo(currentFlowData.Turn, SelectType.Ban, id));
+        else if (currentFlowData.Phase == GamePhase.Pick) return storage.SaveSelect(new SelectInfo(currentFlowData.Turn, SelectType.Pick, id));
         else return false;
     }
 }

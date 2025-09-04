@@ -11,12 +11,15 @@ public class SelectPresentTests
         GameBanPickStorage storage = new(new int[] { 1, 2, 3 });
         SelectPresenter sut = new(storage);
 
-        Assert.IsTrue(sut.SelectChampion(GamePhase.Pick, Team.Blue, 1));
+        sut.ChangeFlow(new GameFlowData(GamePhase.Pick, Team.Blue));
+        Assert.IsTrue(sut.SelectChampion(1));
         Assert.AreEqual(1, storage.GetStorage(Team.Blue, SelectType.Pick)[0]);
 
-        Assert.IsTrue(sut.SelectChampion(GamePhase.Ban, Team.Red, 2));
+        sut.ChangeFlow(new GameFlowData(GamePhase.Ban, Team.Red));
+        Assert.IsTrue(sut.SelectChampion(2));
         Assert.AreEqual(2, storage.GetStorage(Team.Red, SelectType.Ban)[0]);
 
-        Assert.IsFalse(sut.SelectChampion(GamePhase.Swap, Team.Red, 3));
+        sut.ChangeFlow(new GameFlowData(GamePhase.Swap, Team.Blue));
+        Assert.IsFalse(sut.SelectChampion(3));
     }
 }
