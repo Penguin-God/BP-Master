@@ -6,10 +6,10 @@ using UnityEngine.TestTools;
 public class SelectPresentTests
 {
     [Test]
-    public void 선택_후_확정()
+    public void 챔피언_선택_후_확정()
     {
         GameBanPickStorage storage = new(new int[] { 1, 2, 3 });
-        SelectPresenter sut = new(storage);
+        ChampionSelectPresenter sut = new(storage);
 
         sut.ChangeFlow(new GameFlowData(GamePhase.Pick, Team.Blue));
         sut.SelectChamp(1);

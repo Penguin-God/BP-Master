@@ -1,5 +1,5 @@
 
-public class SelectPresenter
+public class ChampionSelectPresenter
 {
     readonly GameBanPickStorage storage;
     GameFlowData currentFlowData;
@@ -7,7 +7,7 @@ public class SelectPresenter
 
     public GamePhase Phase => currentFlowData.Phase;
     public Team Turn => currentFlowData.Turn;
-    public SelectPresenter(GameBanPickStorage storage) => this.storage = storage;
+    public ChampionSelectPresenter(GameBanPickStorage storage) => this.storage = storage;
 
     public void ChangeFlow(GameFlowData gameFlowData) => currentFlowData = gameFlowData;
     public void SelectChamp(int id) => selectId = id;

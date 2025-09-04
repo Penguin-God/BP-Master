@@ -7,14 +7,14 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
 
-    SelectPresenter presenter = null;
+    ChampionSelectPresenter presenter = null;
     PhaseManager phaseManager;
     public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
 
-        presenter = new SelectPresenter(storage);
+        presenter = new ChampionSelectPresenter(storage);
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
