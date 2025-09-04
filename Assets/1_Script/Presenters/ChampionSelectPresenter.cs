@@ -2,19 +2,14 @@
 public class ChampionSelectPresenter
 {
     readonly GameBanPickStorage storage;
-    GameFlowData currentFlowData;
     int selectId = -1;
-
-    public GamePhase Phase => currentFlowData.Phase;
-    public Team Turn => currentFlowData.Turn;
     public ChampionSelectPresenter(GameBanPickStorage storage) => this.storage = storage;
 
-    public void ChangeFlow(GameFlowData gameFlowData) => currentFlowData = gameFlowData;
     public void SelectChamp(int id) => selectId = id;
 
-    public int NailDownChampion()
+    public int NailDownChampion(GameFlowData flow)
     {
-        if (storage.SaveSelect(new SelectInfo(Turn, BanPickEnumCaster.PhaseToSelect(Phase), selectId)))
+        if (storage.SaveSelect(new SelectInfo(flow.Turn, BanPickEnumCaster.PhaseToSelect(flow.Phase), selectId)))
         {
             int result = selectId;
             selectId = -1;

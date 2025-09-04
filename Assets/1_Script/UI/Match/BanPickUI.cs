@@ -31,14 +31,15 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     void NailDownChampion() // 챔프 확정
     {
-        int selectId = presenter.NailDownChampion();
+        int selectId = presenter.NailDownChampion(_currentFlow);
         if (selectId == -1) return;
 
-        view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(presenter.Phase), presenter.Turn, selectId);
-        phaseManager.SubmitAction(presenter.Turn);
+        view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(_currentFlow.Phase), _currentFlow.Turn, selectId);
+        phaseManager.SubmitAction(_currentFlow.Turn);
     }
 
-    void ChangeFlow(Team team, GamePhase phase) => presenter.ChangeFlow(new GameFlowData(phase, team));
+    GameFlowData _currentFlow;
+    void ChangeFlow(Team team, GamePhase phase) => _currentFlow = new GameFlowData(phase, team);
     public void OnRequestBan(Team team) => ChangeFlow(team, GamePhase.Ban);
     public void OnRequestPick(Team team) => ChangeFlow(team, GamePhase.Pick);
     public void OnRequestSwap(Team team)
@@ -52,12 +53,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     // 버튼 플러그해서 사용
     public void Active(int index)
     {
-        if (presenter.Phase != GamePhase.Active) return;
+        if (_currentFlow.Phase != GamePhase.Active) return;
 
         // 나중을 위한 것
         // activeExcutor.DoActive(index, team);
-        if (activeExcutor.IsTeamDone(presenter.Turn))
-            phaseManager.SubmitAction(presenter.Turn);
+        if (activeExcutor.IsTeamDone(_currentFlow.Turn))
+            phaseManager.SubmitAction(_currentFlow.Turn);
     }
 
     [SerializeField] Button swapDoneBtn;
