@@ -29,7 +29,13 @@ public class BanPickView : MonoBehaviour
 
     int blueIndex;
     int redIndex;
-    public void UpdatePickView(Team team, int id)
+    public void UpdateSelectView(SelectType selectType, Team team, int id)
+    {
+        if (selectType == SelectType.Pick) UpdatePickView(team, id);
+        else if(selectType == SelectType.Ban) UpdateBanView(team, id);
+    }
+
+    void UpdatePickView(Team team, int id)
     {
         if(team == Team.Red)
         {
@@ -44,7 +50,7 @@ public class BanPickView : MonoBehaviour
     }
 
     
-    public void UpdateBanView(Team team, int id)
+    void UpdateBanView(Team team, int id)
     {
         banTextDict[team].text += championManager.GetChampionName(id);
     }
