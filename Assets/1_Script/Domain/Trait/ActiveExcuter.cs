@@ -1,6 +1,5 @@
 using System.Linq;
 
-public enum Side { Self, Opponent, All }
 public class ActiveExcuter
 {
     readonly StatManager statManager;

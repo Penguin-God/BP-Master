@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 public class ActiveTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new ChampionStatData(atk, def, speed);
-    Trait CreateTrait(Side side, int amount) => new Trait(TraitType.Active, side, new TestAttackChanger(amount));
+Trait CreateTrait(Side side, int amount) => new Trait(side, new TestAttackChanger(amount));
 
     public class TestAttackChanger : ITraitAction
     {
@@ -94,7 +94,7 @@ public class ActiveTests
         );
 
         // Blue팀 챔피언0이 아군 전체 공격력 +5 스킬 보유
-        var blueTraits = new Trait[] { new Trait(TraitType.Active, Side.Self, new TestAttackChanger(5)), };
+        var blueTraits = new Trait[] { new Trait(Side.Self, new TestAttackChanger(5)), };
 
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 
@@ -115,7 +115,7 @@ public class ActiveTests
         );
 
         // Blue팀 챔피언0이 아군 전체 공격력 +5 스킬 보유
-        var blueTraits = new Trait[] { new Trait(TraitType.Active, Side.All, new TestAttackChanger(5)),};
+        var blueTraits = new Trait[] { new Trait(Side.All, new TestAttackChanger(5)),};
 
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 

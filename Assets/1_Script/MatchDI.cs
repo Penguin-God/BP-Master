@@ -31,8 +31,8 @@ public class MatchDI : MonoBehaviour
         if (phaseManager != null && phaseManager.CurrentFlow.Phase == GamePhase.Active && isActiveSet == false)
         {
             StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));
-            ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackChanger(-10)) });
-            ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(TraitType.Active, Side.Opponent, new AttackChanger(-10)) });
+            ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, new AttackChanger(-10)) });
+            ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, new AttackChanger(-10)) });
             ActiveExcuteManager activeExcuteManager = new ActiveExcuteManager(blueAct, redAct);
             BanPickUI.SetActiveExcutor(activeExcuteManager);
             isActiveSet = true;
