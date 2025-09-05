@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BanPickView : MonoBehaviour
 {
-    [SerializeField] ChampionManager championManager;
+    [SerializeField] ChampionManagerMono championManager;
     [SerializeField] TextMeshProUGUI[] bluePicks;
     [SerializeField] TextMeshProUGUI[] redPicks;
     readonly Dictionary<Team, TextMeshProUGUI[]> pickTextDict = new();

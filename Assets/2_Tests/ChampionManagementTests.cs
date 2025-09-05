@@ -1,12 +1,10 @@
 using NUnit.Framework;
-using System;
 using System.Collections;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 public class ChampionManagementTests
 {
-    ChampionManagerA manager;
+    ChampionManager manager;
     Champion[] testChampions;
 
     [SetUp]
@@ -21,7 +19,7 @@ public class ChampionManagementTests
             new Champion(5, "서포터", default)
         };
 
-        manager = new ChampionManagerA(testChampions);
+        manager = new ChampionManager(testChampions);
     }
 
     [Test]

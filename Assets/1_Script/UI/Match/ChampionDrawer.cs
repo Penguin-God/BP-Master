@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ChampionDrawer : MonoBehaviour
 {
-    [SerializeField] ChampionManager championManager;
+    [SerializeField] ChampionManagerMono championManager;
     [SerializeField] GameObject championBtn;
 
     public void DrawChampionButtons(UnityAction<ChampionSO> onclick)

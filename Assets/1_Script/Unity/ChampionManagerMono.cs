@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ChampionManager : MonoBehaviour
+public class ChampionManagerMono : MonoBehaviour
 {
     [SerializeField] ChampionSO[] allChampion;
     public IReadOnlyList<ChampionSO> AllChampion => allChampion;
