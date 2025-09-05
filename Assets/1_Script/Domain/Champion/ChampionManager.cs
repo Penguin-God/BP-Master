@@ -7,7 +7,7 @@ public class ChampionManager
     public IReadOnlyList<Champion> AllChampion => allChampion.ToArray();
     public IReadOnlyList<int> AllId => allChampion.Select(x => x.Id).ToList();
 
-    public ChampionManager(Champion[] champions) => allChampion = champions;
+    public ChampionManager(IEnumerable<Champion> champions) => allChampion = champions;
 
     public Champion GetChampion(int id) => allChampion.First(x => x.Id == id);
 
