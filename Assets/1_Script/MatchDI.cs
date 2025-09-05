@@ -32,8 +32,8 @@ public class MatchDI : MonoBehaviour
         {
             print("액티브");
             StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));
-            ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, new AttackChanger(-10)) });
-            ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, new AttackChanger(-10)) });
+            ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
+            ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
             ActiveExcuteManager activeExcuteManager = new ActiveExcuteManager(blueAct, redAct);
             BanPickUI.SetActiveExcutor(activeExcuteManager);
             isActiveSet = true;

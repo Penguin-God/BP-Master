@@ -12,14 +12,14 @@ public class ActiveTargetPresenter
         this.teamMembers = teamMembers;
     }
 
-    public IEnumerable<int> GetTargets(int id, Side side, TraitTargetType targetRange)
+    public IEnumerable<int> GetTargets(int id, Side side, TargetRange targetRange)
     {
         Team targetTeam = BanPickEnumCaster.GetTargetTeam(Team, side);
         // if (targetTeam == Team.All && targetRange == TraitTargetType.All) return teamMembers.Values.SelectMany(x => x).ToList(); // 당장은 무의미
         if (teamMembers[targetTeam].Contains(id) == false) return null;
 
-        if (targetRange == TraitTargetType.Single) return new int[] { id };
-        else if (targetRange == TraitTargetType.All) return teamMembers[targetTeam];
+        if (targetRange == TargetRange.Single) return new int[] { id };
+        else if (targetRange == TargetRange.All) return teamMembers[targetTeam];
         return null;
     }
 }

@@ -10,6 +10,8 @@ public class TraitControllerTests
     {
         TraitController sut = new TraitController();
 
-        // sut.GetChampTriat();
+        sut.GetChampTriat(1);
+
+
     }
 }

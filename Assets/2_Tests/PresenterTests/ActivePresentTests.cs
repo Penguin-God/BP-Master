@@ -23,8 +23,8 @@ public class ActivePresentTests
     {
         var sut = CreateTargetPersenter();
         
-        Assert.IsNull(sut.GetTargets(42, Side.Opponent, TraitTargetType.Single));
-        Assert.IsNull(sut.GetTargets(1, Side.Opponent, TraitTargetType.Single));
+        Assert.IsNull(sut.GetTargets(42, Side.Opponent, TargetRange.Single));
+        Assert.IsNull(sut.GetTargets(1, Side.Opponent, TargetRange.Single));
     }
 
     [Test]
@@ -32,8 +32,8 @@ public class ActivePresentTests
     {
         var sut = CreateTargetPersenter();
 
-        CollectionAssert.AreEqual(new int[] { 10 }, sut.GetTargets(10, Side.Opponent, TraitTargetType.Single));
-        CollectionAssert.AreEqual(new int[] { 2 }, sut.GetTargets(2, Side.Self, TraitTargetType.Single));
+        CollectionAssert.AreEqual(new int[] { 10 }, sut.GetTargets(10, Side.Opponent, TargetRange.Single));
+        CollectionAssert.AreEqual(new int[] { 2 }, sut.GetTargets(2, Side.Self, TargetRange.Single));
     }
 
     [Test]
@@ -41,7 +41,7 @@ public class ActivePresentTests
     {
         var sut = CreateTargetPersenter();
         
-        CollectionAssert.AreEqual(new int[] { 10, 11, 12 }, sut.GetTargets(10, Side.Opponent, TraitTargetType.All));
-        CollectionAssert.AreEqual(new int[] { 1, 2, 3 }, sut.GetTargets(2, Side.Self, TraitTargetType.All));
+        CollectionAssert.AreEqual(new int[] { 10, 11, 12 }, sut.GetTargets(10, Side.Opponent, TargetRange.All));
+        CollectionAssert.AreEqual(new int[] { 1, 2, 3 }, sut.GetTargets(2, Side.Self, TargetRange.All));
     }
 }

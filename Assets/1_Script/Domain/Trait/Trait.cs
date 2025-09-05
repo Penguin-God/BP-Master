@@ -1,5 +1,5 @@
 public enum Side { Self, Opponent, All }
-public enum TraitTargetType
+public enum TargetRange
 {
     None,
     Single,
@@ -8,11 +8,13 @@ public enum TraitTargetType
 public class Trait
 {
     public readonly Side TargetSide;
+    public readonly TargetRange TargetRange;
     public readonly ITraitAction TraitAction;
 
-    public Trait(Side targetSide, ITraitAction action)
+    public Trait(Side targetSide, TargetRange targetRange, ITraitAction action)
     {
         TargetSide = targetSide;
+        TargetRange = targetRange;
         TraitAction = action;
     }
 }

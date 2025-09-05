@@ -14,7 +14,7 @@ public class TestAttackChanger : ITraitAction
 public class ActiveTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new ChampionStatData(atk, def, speed);
-    Trait CreateTrait(Side side, int amount) => new Trait(side, new TestAttackChanger(amount));
+    Trait CreateTrait(Side side, int amount) => new Trait(side, TargetRange.None, new TestAttackChanger(amount));
 
     [Test]
     public void 각_팀_챔피언별로_스킬_사용_가능()
@@ -93,7 +93,7 @@ public class ActiveTests
         );
 
         // Blue팀 챔피언0이 아군 전체 공격력 +5 스킬 보유
-        var blueTraits = new Trait[] { new Trait(Side.Self, new TestAttackChanger(5)), };
+        var blueTraits = new Trait[] { new Trait(Side.Self, TargetRange.None, new TestAttackChanger(5)), };
 
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 
@@ -114,7 +114,7 @@ public class ActiveTests
         );
 
         // Blue팀 챔피언0이 아군 전체 공격력 +5 스킬 보유
-        var blueTraits = new Trait[] { new Trait(Side.All, new TestAttackChanger(5)),};
+        var blueTraits = new Trait[] { new Trait(Side.All, TargetRange.None, new TestAttackChanger(5)),};
 
         ActiveExcuter sut = new ActiveExcuter(statManager, Team.Blue, blueTraits);
 
