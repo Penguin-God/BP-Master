@@ -42,9 +42,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     void ChangeFlow(Team team, GamePhase phase) => _currentFlow = new GameFlowData(phase, team);
     public void OnRequestBan(Team team) => ChangeFlow(team, GamePhase.Ban);
     public void OnRequestPick(Team team) => ChangeFlow(team, GamePhase.Pick);
-    public void OnRequestSwap(Team team)
+    public void OnRequestSwap(Team team) => swapDoneBtn.onClick.AddListener(() => SwapDone(team));
+    void SwapDone(Team team)
     {
-        swapDoneBtn.onClick.AddListener(() => phaseManager.SubmitAction(team));
+        ChangeFlow(team, GamePhase.Swap);
+        if (_currentFlow.Phase == GamePhase.Swap)
+            phaseManager.SubmitAction(team);
     }
     public void OnRequestActive(Team team) => ChangeFlow(team, GamePhase.Active);
 
