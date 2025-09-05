@@ -22,11 +22,13 @@ public class Champion
     readonly public int Id;
     readonly public string Name;
     public ChampionStatData StatData { get; private set; }
+    readonly public Trait Trait;
 
-    public Champion(int id, string name, ChampionStatData statData)
+    public Champion(int id, string name, ChampionStatData statData, Trait trait)
     {
         Id = id;
         Name = name;
         StatData = statData;
+        Trait = trait;
     }
 }

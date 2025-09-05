@@ -7,16 +7,18 @@ public class ChampionManagementTests
     ChampionManager manager;
     Champion[] testChampions;
 
+    Champion CreateChamp(int id, string name) => new Champion(id, name, default, null);
+
     [SetUp]
     public void SetUp()
     {
         testChampions = new[]
         {
-            new Champion(1, "전사", default),
-            new Champion(2, "마법사", default),
-            new Champion(3, "암살자", default),
-            new Champion(4, "탱커", default),
-            new Champion(5, "서포터", default)
+            CreateChamp(1, "전사"),
+            CreateChamp(2, "마법사"),
+            CreateChamp(3, "암살자"),
+            CreateChamp(4, "탱커"),
+            CreateChamp(5, "서포터")
         };
 
         manager = new ChampionManager(testChampions);

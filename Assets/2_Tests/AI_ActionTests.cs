@@ -31,5 +31,5 @@ public class AI_ActionTests
         CollectionAssert.Contains(ids, result);
     }
 
-    Champion CreateChampion(int id) => new Champion(id, "", default);
+    Champion CreateChampion(int id) => new Champion(id, "", default, null);
 }
