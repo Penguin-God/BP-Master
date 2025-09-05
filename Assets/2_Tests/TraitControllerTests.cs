@@ -6,12 +6,13 @@ using UnityEngine.TestTools;
 public class TraitControllerTests
 {
     [Test]
-    public void 챔프_선택하면_특성_가져옴()
+    public void 특성_적용()
     {
         TraitController sut = new TraitController();
+        Champion champion = new Champion(0, "", default, null);
 
-        sut.GetChampTriat(1);
+        sut.ApplyTrait(new TestAttackChanger(10), new Champion[] { champion });
 
-
+        Assert.AreEqual(10, champion.StatData.Attack);
     }
 }
