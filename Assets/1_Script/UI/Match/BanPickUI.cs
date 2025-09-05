@@ -65,4 +65,3 @@ public class BanPickUI : MonoBehaviour, IActionHandler
             phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 }
-    
