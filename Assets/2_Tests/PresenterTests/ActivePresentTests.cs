@@ -13,7 +13,7 @@ public class ActivePresentTests
     {
         teamMembers = new Dictionary<Team, IReadOnlyList<Champion>>
         {
-            { Team.Blue, new List<Champion> { CreateChampion(1, Side.Opponent, TargetRange.Single), CreateChampion(2, Side.Opponent, TargetRange.Single) } },
+            { Team.Blue, new List<Champion> { CreateChampion(1, Side.Opponent, TargetRange.Single), CreateChampion(2, Side.Self, TargetRange.All) } },
             { Team.Red,  new List<Champion> { CreateChampion(11, Side.Opponent, TargetRange.Single), CreateChampion(12, Side.Opponent, TargetRange.Single) } }
         };
     }
@@ -32,32 +32,34 @@ public class ActivePresentTests
         Assert.IsNull(sut.GetTargetIds(11));
     }
 
-    //[Test]
-    //public void 잘못된_대상은_null_반환()
-    //{
-    //    var sut = CreateTargetPersenter();
+    [Test]
+    public void 잘못된_대상은_null_반환()
+    {
+        var sut = CreateTargetPersenter();
 
-    //    sut.SelectChamp(1);
+        sut.SelectChamp(1);
 
-    //    Assert.IsNull(sut.GetTargetIds(42));
-    //    Assert.IsNull(sut.GetTargetIds(1));
-    //}
+        Assert.IsNull(sut.GetTargetIds(42));
+        Assert.IsNull(sut.GetTargetIds(1));
+    }
 
-    //[Test]
-    //public void 싱글은_단일_대상_반환()
-    //{
-    //    var sut = CreateTargetPersenter();
+    [Test]
+    public void 싱글은_단일_대상_반환()
+    {
+        var sut = CreateTargetPersenter();
 
-    //    CollectionAssert.AreEqual(new int[] { 10 }, sut.GetTargets(10, Side.Opponent, TargetRange.Single));
-    //    CollectionAssert.AreEqual(new int[] { 2 }, sut.GetTargets(2, Side.Self, TargetRange.Single));
-    //}
+        sut.SelectChamp(1);
+        CollectionAssert.AreEqual(new int[] { 11 }, sut.GetTargetIds(11));
+        CollectionAssert.AreEqual(new int[] { 12 }, sut.GetTargetIds(12));
+    }
 
-    //[Test]
-    //public void All은_전체_반환()
-    //{
-    //    var sut = CreateTargetPersenter();
-        
-    //    CollectionAssert.AreEqual(new int[] { 10, 11, 12 }, sut.GetTargets(10, Side.Opponent, TargetRange.All));
-    //    CollectionAssert.AreEqual(new int[] { 1, 2, 3 }, sut.GetTargets(2, Side.Self, TargetRange.All));
-    //}
+    [Test]
+    public void All은_전체_반환()
+    {
+        var sut = CreateTargetPersenter();
+
+        sut.SelectChamp(2);
+
+        CollectionAssert.AreEqual(new int[] { 1, 2 }, sut.GetTargetIds(1));
+    }
 }

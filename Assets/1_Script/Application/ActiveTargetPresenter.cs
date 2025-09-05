@@ -6,6 +6,8 @@ public class ActiveTargetPresenter
     readonly Team Team;
     readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> teamMembers;
     Champion selectChamp;
+    Side TargetSide => selectChamp.Trait.TargetSide;
+    TargetRange TargetRange => selectChamp.Trait.TargetRange;
     public ActiveTargetPresenter(Team team, IReadOnlyDictionary<Team, IReadOnlyList<Champion>> teamMembers)
     {
         Team = team;
@@ -18,7 +20,12 @@ public class ActiveTargetPresenter
     {
         if (selectChamp == null) return null;
 
-        return new int[] { 11 };
+        Team targetTeam = BanPickEnumCaster.GetTargetTeam(Team, TargetSide);
+        if (teamMembers[targetTeam].Any(x => x.Id == id) == false) return null;
+
+        if (TargetRange == TargetRange.Single) return new int[] { id };
+        else if (TargetRange == TargetRange.All) return teamMembers[targetTeam].Select(x => x.Id);
+        else return null;
     }
 
     //public object GetTargetIds(int id)
