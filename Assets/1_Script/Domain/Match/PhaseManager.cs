@@ -31,7 +31,7 @@ public class PhaseManager
 {
     readonly Queue<PhaseData> _phases;
     PhaseData _current;
-    Team _currentTurn => CurrentFlow.Turn;
+    public Team CurrentTurn => CurrentFlow.Turn;
     public GameFlowData CurrentFlow { get; private set; }
     readonly HashSet<Team> _submittedInAll = new();
 
@@ -54,7 +54,7 @@ public class PhaseManager
     {
         if (_current.GamePhase == GamePhase.Done) return;
 
-        if (_currentTurn == Team.All) // Team.All: 양 팀 모두 접수되어야 진행
+        if (CurrentTurn == Team.All) // Team.All: 양 팀 모두 접수되어야 진행
         {
             _submittedInAll.Add(actingTeam);
             if (_submittedInAll.Contains(Team.Blue) && _submittedInAll.Contains(Team.Red))
@@ -63,7 +63,7 @@ public class PhaseManager
                 _submittedInAll.Clear();
             }
         }
-        else if (actingTeam == _currentTurn) Advance();
+        else if (actingTeam == CurrentTurn) Advance();
     }
 
     void Advance()

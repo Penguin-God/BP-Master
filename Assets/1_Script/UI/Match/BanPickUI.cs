@@ -31,37 +31,34 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     void NailDownChampion() // 챔프 확정
     {
-        int selectId = presenter.NailDownChampion(_currentFlow);
+        int selectId = presenter.NailDownChampion(phaseManager.CurrentFlow);
         if (selectId == -1) return;
 
-        view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(_currentFlow.Phase), _currentFlow.Turn, selectId);
-        phaseManager.SubmitAction(_currentFlow.Turn);
+        view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(phaseManager.CurrentFlow.Phase), phaseManager.CurrentTurn, selectId);
+        phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 
-    GameFlowData _currentFlow;
-    void ChangeFlow(Team team, GamePhase phase) => _currentFlow = new GameFlowData(phase, team);
-    public void OnRequestBan(Team team) => ChangeFlow(team, GamePhase.Ban);
-    public void OnRequestPick(Team team) => ChangeFlow(team, GamePhase.Pick);
+    public void OnRequestBan(Team team) {}
+    public void OnRequestPick(Team team) {}
     public void OnRequestSwap(Team team) => swapDoneBtn.onClick.AddListener(() => SwapDone(team));
     void SwapDone(Team team)
     {
-        ChangeFlow(team, GamePhase.Swap);
-        if (_currentFlow.Phase == GamePhase.Swap)
+        if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
             phaseManager.SubmitAction(team);
     }
-    public void OnRequestActive(Team team) => ChangeFlow(team, GamePhase.Active);
+    public void OnRequestActive(Team team) {}
 
     
     ActiveExcuteManager activeExcutor;
     // 버튼 플러그해서 사용
     public void Active(int index)
     {
-        if (_currentFlow.Phase != GamePhase.Active) return;
+        if (phaseManager.CurrentFlow.Phase != GamePhase.Active) return;
 
         // 나중을 위한 것
         // activeExcutor.DoActive(index, team);
-        if (activeExcutor.IsTeamDone(_currentFlow.Turn))
-            phaseManager.SubmitAction(_currentFlow.Turn);
+        if (activeExcutor.IsTeamDone(phaseManager.CurrentTurn))
+            phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 
     [SerializeField] Button swapDoneBtn;
