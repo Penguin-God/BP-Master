@@ -6,15 +6,43 @@ using UnityEngine.TestTools;
 
 public class ActivePresentTests
 {
-    [Test]
-    public void 타겟은_정해진_수_초과랑_중복_불가()
+    private IReadOnlyDictionary<Team, IReadOnlyList<int>> teamMembers;
+    ActiveTargetPresenter CreateSut() => new ActiveTargetPresenter(Team.Blue, teamMembers);
+    [SetUp]
+    public void SetUp()
     {
-        var presenter = new ActivePresenter();
-        presenter.SelectTrait(new Trait(Side.All, null), 2);
+        teamMembers = new Dictionary<Team, IReadOnlyList<int>>
+        {
+            { Team.Blue, new List<int> { 1, 2, 3 } },
+            { Team.Red,  new List<int> { 10, 11, 12 } }
+        };
+    }
 
-        Assert.IsTrue(presenter.AddTarget(6));
-        Assert.IsFalse(presenter.AddTarget(6)); // 중복 불가
-        Assert.IsTrue(presenter.AddTarget(4));
-        Assert.IsFalse(presenter.AddTarget(1)); // 타겟 끝
+    [Test]
+    public void 잘못된_대상은_null_반환()
+    {
+        var sut = CreateSut();
+        sut.SelectTrait(Side.Opponent, TraitTargetType.Single);
+
+        Assert.IsNull(sut.GetTargets(42));
+        Assert.IsNull(sut.GetTargets(1));
+    }
+
+    [Test]
+    public void 싱글은_단일_대상_반환()
+    {
+        var sut = CreateSut();
+        sut.SelectTrait(Side.Opponent, TraitTargetType.Single);
+
+        CollectionAssert.AreEqual(new int[] { 10 }, sut.GetTargets(10));
+    }
+
+    [Test]
+    public void All은_전체_반환()
+    {
+        var sut = CreateSut();
+        sut.SelectTrait(Side.Opponent, TraitTargetType.All);
+
+        CollectionAssert.AreEqual(new int[] { 10, 11, 12 }, sut.GetTargets(10));
     }
 }

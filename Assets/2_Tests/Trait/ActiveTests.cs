@@ -3,19 +3,18 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+public class TestAttackChanger : ITraitAction
+{
+    readonly int Amount;
+    public TestAttackChanger(int amount) => Amount = amount;
+
+    public ChampionStatData Do(ChampionStatData stat) => stat.ChangeAttack(stat.Attack + Amount);
+}
+
 public class ActiveTests
 {
     ChampionStatData CreateData(int atk, int def = 0, int speed = 0) => new ChampionStatData(atk, def, speed);
-Trait CreateTrait(Side side, int amount) => new Trait(side, new TestAttackChanger(amount));
-
-    public class TestAttackChanger : ITraitAction
-    {
-        readonly int Amount;
-        public TestAttackChanger(int amount) => Amount = amount;
-
-        public ChampionStatData Do(ChampionStatData stat) => stat.ChangeAttack(stat.Attack + Amount);
-    }
-
+    Trait CreateTrait(Side side, int amount) => new Trait(side, new TestAttackChanger(amount));
 
     [Test]
     public void 각_팀_챔피언별로_스킬_사용_가능()

@@ -1,8 +1,9 @@
 public enum Side { Self, Opponent, All }
 public enum TraitTargetType
 {
+    None,
     Single,
-    All
+    All,
 }
 public class Trait
 {
