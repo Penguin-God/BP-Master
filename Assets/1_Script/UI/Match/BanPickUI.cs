@@ -6,6 +6,8 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     BanPickView view;
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
+    [SerializeField] Button swapDoneBtn;
+    ActiveExcuteManager activeExcutor;
 
     ChampionSelectPresenter presenter = null;
     PhaseManager phaseManager;
@@ -48,8 +50,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     }
     public void OnRequestActive(Team team) {}
 
-    
-    ActiveExcuteManager activeExcutor;
     // 버튼 플러그해서 사용
     public void Active(int index)
     {
@@ -57,10 +57,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
         // 나중을 위한 것
         // activeExcutor.DoActive(index, team);
+
+        //pre.SelectChamp(2);
+        //pre.Use();
+        //pre.setTarget
         if (activeExcutor.IsTeamDone(phaseManager.CurrentTurn))
             phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
-
-    [SerializeField] Button swapDoneBtn;
 }
     

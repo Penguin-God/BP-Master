@@ -1,5 +1,9 @@
 public enum Side { Self, Opponent, All }
-
+public enum TraitTargetType
+{
+    Single,
+    All
+}
 public class Trait
 {
     public readonly Side TargetSide;
