@@ -1,8 +1,4 @@
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.TestTools;
 
 public class SelectSaveTests
 {
@@ -12,9 +8,9 @@ public class SelectSaveTests
         const int Id = 3;
         GameBanPickStorage storage = CreateStorage(Id);
 
-        Assert.IsTrue(storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, Id)));
-        Assert.IsFalse(storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, Id)));
-        Assert.IsFalse(storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, Id)));
+        Assert.IsTrue(Select(storage, Team.Blue, SelectType.Ban, Id));
+        Assert.IsFalse(Select(storage, Team.Blue, SelectType.Ban, Id));
+        Assert.IsFalse(Select(storage, Team.Red, SelectType.Pick, Id));
         CollectionAssert.DoesNotContain(storage.SelectableIds, Id);
     }
 
@@ -23,10 +19,10 @@ public class SelectSaveTests
     {
         var storage = CreateStorage(101, 102, 201, 202);
 
-        storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 101));
-        storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 102));
-        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, 201));
-        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, 202));
+        Select(storage, Team.Red, SelectType.Pick, 101);
+        Select(storage, Team.Red, SelectType.Pick, 102);
+        Select(storage, Team.Blue, SelectType.Pick, 201);
+        Select(storage, Team.Blue, SelectType.Pick, 202);
 
         var redList = storage.GetStorage(Team.Red, SelectType.Pick);
         var blueList = storage.GetStorage(Team.Blue, SelectType.Pick);
@@ -41,11 +37,11 @@ public class SelectSaveTests
     {
         var storage = CreateStorage(11, 22, 101, 102, 201);
 
-        storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Ban, 11));
-        storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 101));
-        storage.SaveSelect(new SelectInfo(Team.Red, SelectType.Pick, 102));
-        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Ban, 22));
-        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, 201));
+        Select(storage, Team.Red, SelectType.Ban, 11);
+        Select(storage, Team.Red, SelectType.Pick, 101);
+        Select(storage, Team.Red, SelectType.Pick, 102);
+        Select(storage, Team.Blue, SelectType.Ban, 22);
+        Select(storage, Team.Blue, SelectType.Pick, 201);
 
         CollectionAssert.AreEqual(new[] { 11 }, storage.GetStorage(Team.Red, SelectType.Ban));
         CollectionAssert.AreEqual(new[] { 22 }, storage.GetStorage(Team.Blue, SelectType.Ban));
@@ -53,5 +49,20 @@ public class SelectSaveTests
         CollectionAssert.AreEqual(new[] { 201 }, storage.GetStorage(Team.Blue, SelectType.Pick));
     }
 
+    [Test]
+    public void 픽_챔피언_반환()
+    {
+        var storage = CreateStorage(11, 22, 101, 102, 201);
+        Select(storage, Team.Blue, SelectType.Ban, 201);
+        Select(storage, Team.Blue, SelectType.Pick, 11);
+        Select(storage, Team.Blue, SelectType.Pick, 22);
+        Select(storage, Team.Red, SelectType.Pick, 101);
+        Select(storage, Team.Red, SelectType.Pick, 102);
+
+        CollectionAssert.AreEquivalent(new int[] { 11, 22}, storage.TeamPicks[Team.Blue]);
+        CollectionAssert.AreEquivalent(new int[] { 101, 102 }, storage.TeamPicks[Team.Red]);
+    }
+
+    bool Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
     GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
 }
