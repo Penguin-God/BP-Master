@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -39,8 +40,8 @@ public class ActivePresentTests
 
         sut.SelectChamp(1);
 
-        Assert.IsNull(sut.GetTargetIds(42));
-        Assert.IsNull(sut.GetTargetIds(1));
+        Assert.IsNull(sut.GetTargets(42));
+        Assert.IsNull(sut.GetTargets(1));
     }
 
     [Test]
@@ -49,8 +50,8 @@ public class ActivePresentTests
         var sut = CreateTargetPersenter();
 
         sut.SelectChamp(1);
-        CollectionAssert.AreEqual(new int[] { 11 }, sut.GetTargetIds(11));
-        CollectionAssert.AreEqual(new int[] { 12 }, sut.GetTargetIds(12));
+        Assert.AreEqual(11, sut.GetTargets(11).First().Id);
+        Assert.AreEqual(12, sut.GetTargets(12).First().Id);
     }
 
     [Test]
