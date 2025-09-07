@@ -65,7 +65,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     }
     public void OnRequestActive(Team team) { }
 
-    public void Active(int index) => traitPresenter.SelectChamp(index);
+    public void Active(int index) => traitPresenter.SelectTrait(phaseManager.CurrentTurn, index);
 
     public void SelectTraitChamp(int targetIndex)
     {

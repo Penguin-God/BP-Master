@@ -5,7 +5,7 @@ public class TraitTargetSeletor
     readonly int teamCount;
     public TraitTargetSeletor(int count) => teamCount = count;
 
-    public IEnumerable<int> GetTargetIds(Team targetTeam, TargetRange range, int targetIndex)
+    public IEnumerable<int> GetTargetIds(TargetRange range, int targetIndex)
     {
         switch (range)
         {

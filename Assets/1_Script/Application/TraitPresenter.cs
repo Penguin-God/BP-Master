@@ -4,15 +4,29 @@ using System.Linq;
 
 public class TraitPresenter
 {
-    readonly Team Team;
-    readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> teamMembers;
-    IReadOnlyList<Champion> allChampion => teamMembers.Values.SelectMany(x => x).ToList();
+    readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> championsByTeam;
+    readonly TraitTargetSeletor targetFinder;
     Champion selectChamp;
+    Team selectTeam;
 
-    public void SelectChamp(int id) => selectChamp = teamMembers[Team].First(x => x.Id == id);
+    public TraitPresenter(IReadOnlyDictionary<Team, IReadOnlyList<Champion>> traitsByTeam)
+    {
+        this.championsByTeam = traitsByTeam;
+        targetFinder = new TraitTargetSeletor(traitsByTeam[Team.Blue].Count);
+    }
+
+    public void SelectTrait(Team team, int index)
+    {
+        selectTeam = team;
+        selectChamp = championsByTeam[team][index];
+    }
 
     public bool UseTrait(int targetIndex)
     {
-        return false;
+        if (selectChamp == null) return false;
+
+        var targetIds = targetFinder.GetTargetIds(selectChamp.Trait.TargetRange, targetIndex);
+        new TraitController().ApplyTrait(selectChamp.Trait.TraitAction, targetIds.Select(x => championsByTeam[BanPickEnumCaster.GetTargetTeam(selectTeam, selectChamp.Trait.TargetSide)][x]));
+        return true;
     }
 }

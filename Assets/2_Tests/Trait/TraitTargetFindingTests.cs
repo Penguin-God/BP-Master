@@ -8,8 +8,8 @@ public class TraitTargetFindingTests
     {
         var sut = new TraitTargetSeletor(3);
 
-        Assert.AreEqual(1, sut.GetTargetIds(Team.Blue, TargetRange.Single, 1).First());
-        Assert.AreEqual(2, sut.GetTargetIds(Team.Red, TargetRange.Single, 2).First());
+        Assert.AreEqual(1, sut.GetTargetIds(TargetRange.Single, 1).First());
+        Assert.AreEqual(2, sut.GetTargetIds(TargetRange.Single, 2).First());
     }
 
     [Test]
@@ -17,6 +17,6 @@ public class TraitTargetFindingTests
     {
         var sut = new TraitTargetSeletor(3);
 
-        CollectionAssert.AreEqual(new int[] { 0, 1, 2 }, sut.GetTargetIds(Team.Red, TargetRange.All, 0));
+        CollectionAssert.AreEqual(new int[] { 0, 1, 2 }, sut.GetTargetIds(TargetRange.All, 0));
     }
 }
