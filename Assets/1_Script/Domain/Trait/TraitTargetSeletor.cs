@@ -1,0 +1,17 @@
+using System.Collections.Generic;
+using System.Linq;
+public class TraitTargetSeletor
+{
+    readonly int teamCount;
+    public TraitTargetSeletor(int count) => teamCount = count;
+
+    public IEnumerable<int> GetTargetIds(Team targetTeam, TargetRange range, int targetIndex)
+    {
+        switch (range)
+        {
+            case TargetRange.Single: return new int[] { targetIndex };
+            case TargetRange.All: return Enumerable.Range(0, teamCount);
+            default: return null;
+        }
+    }
+}
