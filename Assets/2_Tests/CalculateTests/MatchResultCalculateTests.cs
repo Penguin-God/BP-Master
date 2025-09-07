@@ -1,13 +1,8 @@
-using System.Collections;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class MatchResultCalculateTests
 {
-    // 편의 헬퍼
-private static ChampionStatData CreateStat(int atk = 0, int def = 0, int spd = 0)
-        => new ChampionStatData(atk, def, spd);
+    ChampionStatData CreateStat(int atk = 0, int def = 0, int spd = 0) => new ChampionStatData(atk, def, spd);
 
     BonusCalculator CreateEmptyBonus() => new BonusCalculator(new System.Collections.Generic.SortedDictionary<int, int>());
     TeamScoreCalculator CreateScoreCalculator()
