@@ -25,19 +25,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     }
 
     TraitPresenter traitPresenter;
-    public void Init(ChampionSelectPresenter championSelectPresenter, TraitPresenter activeTargetPresenter, PhaseManager pm)
-    {
-        gameObject.SetActive(true);
-        view = GetComponentInChildren<BanPickView>();
-        this.traitPresenter = activeTargetPresenter;
-        this.championSelectPresenter = championSelectPresenter;
-        phaseManager = pm;
-
-        nailDownBtn.onClick.AddListener(NailDownChampion);
-        buttonDrawer.DrawChampionButtons(SelectChampion);
-    }
-
-
     public void SetActiveExcutor(ActiveExcuteManager activeExcuteManager) => activeExcutor = activeExcuteManager;
 
     void SelectChampion(ChampionSO champion)
@@ -69,7 +56,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
     public void SelectTraitChamp(int targetIndex)
     {
-        //if(traitPresenter.UseTrait(targetIndex))
-        //    phaseManager.SubmitAction(phaseManager.CurrentTurn);
+        if (traitPresenter.UseTrait(targetIndex))
+            phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 }
