@@ -4,8 +4,7 @@ using System.Linq;
 public class TraitTargetFinder
 {
     readonly IReadOnlyDictionary<Team, IReadOnlyList<int>> teamMembers;
-    IReadOnlyList<int> all_Id => teamMembers.Values.SelectMany(x => x).ToList();
-
+    
     public TraitTargetFinder(IReadOnlyDictionary<Team, IReadOnlyList<int>> teamMembers) => this.teamMembers = teamMembers;
 
     public IEnumerable<int> GetTargets(Team targetTeam, TargetRange range, int targetId)

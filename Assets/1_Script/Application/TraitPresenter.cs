@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ActiveTargetPresenter
+public class TraitPresenter
 {
     readonly Team Team;
     readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> teamMembers;
@@ -9,13 +9,11 @@ public class ActiveTargetPresenter
     Champion selectChamp;
     Side TargetSide => selectChamp.Trait.TargetSide;
     TargetRange TargetRange => selectChamp.Trait.TargetRange;
-    public ActiveTargetPresenter(Team team, IReadOnlyDictionary<Team, IReadOnlyList<Champion>> teamMembers)
+    public TraitPresenter(Team team, IReadOnlyDictionary<Team, IReadOnlyList<Champion>> teamMembers)
     {
         Team = team;
         this.teamMembers = teamMembers;
     }
-
-    public void Cancle() => selectChamp = null;
 
     public IEnumerable<int> GetTargetIds(int id) => GetTargets(id)?.Select(x => x.Id);
     public IEnumerable<Champion> GetTargets(int id)

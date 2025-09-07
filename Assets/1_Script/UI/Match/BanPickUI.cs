@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,12 +24,12 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
 
-    ActiveTargetPresenter activeTargetPresenter;
-    public void Init(ChampionSelectPresenter championSelectPresenter, ActiveTargetPresenter activeTargetPresenter, PhaseManager pm)
+    TraitPresenter traitPresenter;
+    public void Init(ChampionSelectPresenter championSelectPresenter, TraitPresenter activeTargetPresenter, PhaseManager pm)
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
-        this.activeTargetPresenter = activeTargetPresenter;
+        this.traitPresenter = activeTargetPresenter;
         this.championSelectPresenter = championSelectPresenter;
         phaseManager = pm;
 
@@ -62,25 +63,13 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
             phaseManager.SubmitAction(team);
     }
-    public void OnRequestActive(Team team) {}
+    public void OnRequestActive(Team team) { }
 
-    // 버튼 플러그해서 사용
-    public void Active(int index)
+    public void Active(int index) => traitPresenter.SelectChamp(index);
+
+    public void SelectTraitChamp(int targetIndex)
     {
-        if (phaseManager.CurrentFlow.Phase != GamePhase.Active) return;
-
-        // 나중을 위한 것
-        // activeExcutor.DoActive(index, team);
-
-        //pre.SelectChamp(2);
-        //pre.Use();
-        //pre.setTarget
-        if (activeExcutor.IsTeamDone(phaseManager.CurrentTurn))
-            phaseManager.SubmitAction(phaseManager.CurrentTurn);
-    }
-
-    public void SelectTraitChamp(int index)
-    {
-
+        //if(traitPresenter.UseTrait(targetIndex))
+        //    phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 }
