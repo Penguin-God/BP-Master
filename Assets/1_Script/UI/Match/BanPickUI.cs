@@ -9,31 +9,45 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     [SerializeField] Button swapDoneBtn;
     ActiveExcuteManager activeExcutor;
 
-    ChampionSelectPresenter presenter = null;
+    ChampionSelectPresenter championSelectPresenter = null;
     PhaseManager phaseManager;
     public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
 
-        presenter = new ChampionSelectPresenter(storage);
+        championSelectPresenter = new ChampionSelectPresenter(storage);
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
 
+    ActiveTargetPresenter activeTargetPresenter;
+    public void Init(ChampionSelectPresenter championSelectPresenter, ActiveTargetPresenter activeTargetPresenter, PhaseManager pm)
+    {
+        gameObject.SetActive(true);
+        view = GetComponentInChildren<BanPickView>();
+        this.activeTargetPresenter = activeTargetPresenter;
+        this.championSelectPresenter = championSelectPresenter;
+        phaseManager = pm;
+
+        nailDownBtn.onClick.AddListener(NailDownChampion);
+        buttonDrawer.DrawChampionButtons(SelectChampion);
+    }
+
+
     public void SetActiveExcutor(ActiveExcuteManager activeExcuteManager) => activeExcutor = activeExcuteManager;
 
     void SelectChampion(ChampionSO champion)
     {
-        presenter.SelectChamp(champion.Id);
+        championSelectPresenter.SelectChamp(champion.Id);
         view.UpdateSelectChampion(champion);
     }
 
     void NailDownChampion() // 챔프 확정
     {
-        int selectId = presenter.NailDownChampion(phaseManager.CurrentFlow);
+        int selectId = championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
         if (selectId == -1) return;
 
         view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(phaseManager.CurrentFlow.Phase), phaseManager.CurrentTurn, selectId);
@@ -63,5 +77,10 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         //pre.setTarget
         if (activeExcutor.IsTeamDone(phaseManager.CurrentTurn))
             phaseManager.SubmitAction(phaseManager.CurrentTurn);
+    }
+
+    public void SelectTraitChamp(int index)
+    {
+
     }
 }
