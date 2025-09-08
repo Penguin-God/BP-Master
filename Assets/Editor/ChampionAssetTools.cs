@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 public static class ChampionAssetTools
 {
-    private const int START_ID = 1;   // ID ½ÃÀÛ°ª(ÇÊ¿äÇÏ¸é º¯°æ)
+    private const int START_ID = 1;   // ID ì‹œì‘ê°’(í•„ìš”í•˜ë©´ ë³€ê²½)
 
     [MenuItem("BP Master/Tools/Rename & Re-index ChampionSO Assets")]
     private static void RenameAndReindexChampionAssets()
     {
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-        // 1) Project Ã¢¿¡¼­ ¼±ÅÃµÈ Æú´õ È®ÀÎ
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 1) Project ì°½ì—ì„œ ì„ íƒëœ í´ë” í™•ì¸
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         var folders = Selection
             .GetFiltered<Object>(SelectionMode.Assets)
             .Select(AssetDatabase.GetAssetPath)
@@ -25,14 +25,14 @@ public static class ChampionAssetTools
         {
             EditorUtility.DisplayDialog(
                 "Champion Asset Tools",
-                "¸ÕÀú Project Ã¢¿¡¼­ ´ë»ó Æú´õ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä.",
-                "È®ÀÎ");
+                "ë¨¼ì € Project ì°½ì—ì„œ ëŒ€ìƒ í´ë”ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”.",
+                "í™•ì¸");
             return;
         }
 
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-        // 2) Æú´õ ³» ¸ğµç ChampionSO ¼öÁı
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 2) í´ë” ë‚´ ëª¨ë“  ChampionSO ìˆ˜ì§‘
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         var champions = new List<(ChampionSO so, string path)>();
 
         foreach (string folder in folders)
@@ -47,23 +47,23 @@ public static class ChampionAssetTools
 
         if (champions.Count == 0)
         {
-            EditorUtility.DisplayDialog("Champion Asset Tools", "ChampionSO°¡ ¹ß°ßµÇÁö ¾Ê¾Ò½À´Ï´Ù.", "È®ÀÎ");
+            EditorUtility.DisplayDialog("Champion Asset Tools", "ChampionSOê°€ ë°œê²¬ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.", "í™•ì¸");
             return;
         }
 
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-        // 3) championName À¸·Î ÆÄÀÏ ÀÌ¸§ º¯°æ
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 3) championName ìœ¼ë¡œ íŒŒì¼ ì´ë¦„ ë³€ê²½
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         int renameCount = 0;
         foreach (var (champion, oldPath) in champions)
         {
             string safeName = MakeSafeFileName(champion.ChampionName);
             string newPath = Path.Combine(Path.GetDirectoryName(oldPath)!, $"{safeName}.asset");
 
-            if (oldPath.Equals(newPath)) continue;                       // ÀÌ¹Ì °°Àº ÀÌ¸§ÀÌ¸é ½ºÅµ
+            if (oldPath.Equals(newPath)) continue;                       // ì´ë¯¸ ê°™ì€ ì´ë¦„ì´ë©´ ìŠ¤í‚µ
             if (AssetDatabase.LoadAssetAtPath<ChampionSO>(newPath) != null)
             {
-                Debug.LogWarning($"[SKIP] {champion.ChampionName} : °°Àº ÀÌ¸§ÀÇ ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+                Debug.LogWarning($"[SKIP] {champion.ChampionName} : ê°™ì€ ì´ë¦„ì˜ íŒŒì¼ì´ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
                 continue;
             }
 
@@ -72,16 +72,16 @@ public static class ChampionAssetTools
             else Debug.LogError($"[FAIL] {champion.ChampionName} : {err}");
         }
 
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-        // 4) ID ¼øÂ÷ ºÎ¿© (Á¤·Ä ¾øÀÌ, ¸®½ºÆ® ¼ø¼­ ±×´ë·Î)
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 4) ID ìˆœì°¨ ë¶€ì—¬ (ì •ë ¬ ì—†ì´, ë¦¬ìŠ¤íŠ¸ ìˆœì„œ ê·¸ëŒ€ë¡œ)
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         int nextId = START_ID;
         foreach (var (champion, _) in champions)
         {
-            // Undo Áö¿ø
+            // Undo ì§€ì›
             Undo.RecordObject(champion, "Re-index ChampionSO");
 
-            // id ÇÊµå´Â private ÀÌ¹Ç·Î reflection »ç¿ë
+            // id í•„ë“œëŠ” private ì´ë¯€ë¡œ reflection ì‚¬ìš©
             typeof(ChampionSO)
                 .GetField("id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                 ?.SetValue(champion, nextId);
@@ -90,19 +90,19 @@ public static class ChampionAssetTools
             nextId++;
         }
 
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
-        // 5) ÀúÀå & °á°ú ¾Ë¸²
-        // ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 5) ì €ì¥ & ê²°ê³¼ ì•Œë¦¼
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog(
-            "¿Ï·á",
-            $"{renameCount}°³ ÆÄÀÏ ÀÌ¸§ º¯°æ\n{champions.Count}°³ ID ºÎ¿© ¿Ï·á (½ÃÀÛ°ª {START_ID})",
-            "È®ÀÎ");
+            "ì™„ë£Œ",
+            $"{renameCount}ê°œ íŒŒì¼ ì´ë¦„ ë³€ê²½\n{champions.Count}ê°œ ID ë¶€ì—¬ ì™„ë£Œ (ì‹œì‘ê°’ {START_ID})",
+            "í™•ì¸");
     }
 
-    /** ÆÄÀÏ¸í¿¡ »ç¿ëÇÒ ¼ö ¾ø´Â ¹®ÀÚ Á¦°Å */
+    /** íŒŒì¼ëª…ì— ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” ë¬¸ì ì œê±° */
     private static string MakeSafeFileName(string raw)
     {
         var invalid = Path.GetInvalidFileNameChars();
