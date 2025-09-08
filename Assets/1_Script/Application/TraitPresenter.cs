@@ -7,6 +7,7 @@ public class TraitPresenter
     readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> championsByTeam;
     readonly TraitTargetSeletor targetFinder;
     Champion selectChamp;
+    public bool IsSelected => selectChamp != null;
     Team selectTeam;
 
     public TraitPresenter(IReadOnlyDictionary<Team, IReadOnlyList<Champion>> traitsByTeam)
@@ -23,7 +24,7 @@ public class TraitPresenter
 
     public bool UseTrait(int targetIndex)
     {
-        if (selectChamp == null) return false;
+        if (IsSelected == false) return false;
 
         var targetIds = targetFinder.GetTargetIds(selectChamp.Trait.TargetRange, targetIndex);
         new TraitController().ApplyTrait(selectChamp.Trait.TraitAction, targetIds.Select(x => championsByTeam[BanPickEnumCaster.GetTargetTeam(selectTeam, selectChamp.Trait.TargetSide)][x]));

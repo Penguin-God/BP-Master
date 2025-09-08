@@ -26,4 +26,17 @@ public class ActivePresentTests
         Assert.IsTrue(traitPresenter.UseTrait(0));
         Assert.AreEqual(10, data[Team.Red][0].StatData.Attack);
     }
+
+    [Test]
+    public void 선택_상태_반환()
+    {
+        var data = new Dictionary<Team, IReadOnlyList<Champion>>();
+        data.Add(Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
+        TraitPresenter traitPresenter = new TraitPresenter(data);
+
+        Assert.IsFalse(traitPresenter.IsSelected);
+        traitPresenter.SelectTrait(Team.Blue, 0);
+
+        Assert.IsTrue(traitPresenter.IsSelected);
+    }
 }
