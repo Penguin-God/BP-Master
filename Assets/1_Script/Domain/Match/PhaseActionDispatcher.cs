@@ -26,8 +26,6 @@ public class PhaseActionDispatcher
     {
         switch (gameFlow.Phase)
         {
-            case GamePhase.Ban: actionHandler.OnRequestBan(gameFlow.Turn); break;
-            case GamePhase.Pick: actionHandler.OnRequestPick(gameFlow.Turn); break;
             case GamePhase.Swap: actionHandler.OnRequestSwap(gameFlow.Turn); break;
             case GamePhase.Trait: actionHandler.OnRequestActive(gameFlow.Turn); break;
         }
