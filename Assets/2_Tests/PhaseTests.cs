@@ -1,7 +1,5 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class PhaseTests
 {
@@ -101,5 +99,79 @@ public class PhaseTests
 
         sut.SubmitAction(Team.Red);
         Assert.AreEqual(GamePhase.Done, currentFlow.Phase);  // Done으로 진행
+    }
+
+
+    [Test]
+    public void 페이즈별_이벤트_발생_확인()
+    {
+        var sut = new PhaseManager(new[]
+        {
+            CreateData(GamePhase.Ban, Team.Blue),
+            CreateData(GamePhase.Pick, Team.Red),
+            CreateData(GamePhase.Swap, Team.All),
+            CreateData(GamePhase.Trait, Team.Blue)
+        });
+
+        // 이벤트 수신 대기
+        var banEvents = new List<Team>();
+        var pickEvents = new List<Team>();
+        var swapEvents = new List<Team>();
+        var traitEvents = new List<Team>();
+        var doneEvents = new List<Team>();
+
+        sut.OnPhaseBan += (team) => banEvents.Add(team);
+        sut.OnPhasePick += (team) => pickEvents.Add(team);
+        sut.OnPhaseSwap += (team) => swapEvents.Add(team);
+        sut.OnPhaseTrait += (team) => traitEvents.Add(team);
+        sut.OnPhaseDone += (team) => doneEvents.Add(team);
+
+        // 테스트 실행
+        sut.Start(); // Ban/Blue 이벤트 발생
+        sut.SubmitAction(Team.Blue); // Pick/Red 이벤트 발생
+        sut.SubmitAction(Team.Blue);
+        sut.SubmitAction(Team.Red);
+        sut.SubmitAction(Team.Blue);
+        sut.SubmitAction(Team.Red); // Trait/Blue 이벤트 발생
+        sut.SubmitAction(Team.Blue); // Done/All 이벤트 발생
+
+
+        Assert.AreEqual(1, banEvents.Count);
+        Assert.AreEqual(Team.Blue, banEvents[0]);
+
+        Assert.AreEqual(1, pickEvents.Count);
+        Assert.AreEqual(Team.Red, pickEvents[0]);
+
+        Assert.AreEqual(1, swapEvents.Count);
+
+        Assert.AreEqual(Team.All, swapEvents[0]);
+        Assert.AreEqual(1, traitEvents.Count);
+
+        Assert.AreEqual(Team.Blue, traitEvents[0]);
+        Assert.AreEqual(Team.All, doneEvents[0]);
+
+        // 다른 이벤트들은 추가로 발생하지 않았음을 확인
+        Assert.AreEqual(1, banEvents.Count);
+        Assert.AreEqual(1, pickEvents.Count);
+        Assert.AreEqual(1, swapEvents.Count);
+        Assert.AreEqual(1, traitEvents.Count);
+        Assert.AreEqual(1, doneEvents.Count);
+    }
+
+    [Test]
+    public void 동일_페이즈_여러_턴_이벤트_발생()
+    {
+        var sut = new PhaseManager(new[] { CreateData(GamePhase.Ban, Team.Blue, Team.Red) });
+
+        var banEvents = new List<Team>();
+        sut.OnPhaseBan += (team) => banEvents.Add(team);
+
+        sut.Start(); // Blue 턴
+        sut.SubmitAction(Team.Blue); // Red 턴
+
+        // Ban 이벤트가 2번 발생해야 함
+        Assert.AreEqual(2, banEvents.Count);
+        Assert.AreEqual(Team.Blue, banEvents[0]);
+        Assert.AreEqual(Team.Red, banEvents[1]);
     }
 }

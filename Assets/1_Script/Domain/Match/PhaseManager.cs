@@ -36,6 +36,11 @@ public class PhaseManager
     readonly HashSet<Team> _submittedInAll = new();
 
     public event Action<GameFlowData> OnFlowChanged;
+    public event Action<Team> OnPhaseBan;
+    public event Action<Team> OnPhasePick;
+    public event Action<Team> OnPhaseSwap;
+    public event Action<Team> OnPhaseTrait;
+    public event Action<Team> OnPhaseDone;
 
     public PhaseManager(PhaseData[] phaseDatas)
     {
@@ -72,6 +77,20 @@ public class PhaseManager
         if (_current.Phase.IsDone) _current = _phases.Dequeue();
 
         CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());
+        
         OnFlowChanged?.Invoke(CurrentFlow);
+        InvokePhaseEvent(CurrentFlow.Phase, CurrentFlow.Turn);
+    }
+    
+    void InvokePhaseEvent(GamePhase phase, Team turn)
+    {
+        switch (phase)
+        {
+            case GamePhase.Ban:OnPhaseBan?.Invoke(turn); break;
+            case GamePhase.Pick:OnPhasePick?.Invoke(turn); break;
+            case GamePhase.Swap:OnPhaseSwap?.Invoke(turn); break;
+            case GamePhase.Trait:OnPhaseTrait?.Invoke(turn); break;
+            case GamePhase.Done:OnPhaseDone?.Invoke(turn); break;
+        }
     }
 }
