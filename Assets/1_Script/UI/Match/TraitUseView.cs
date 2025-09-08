@@ -26,9 +26,4 @@ public class TraitUseView : MonoBehaviour
     }
 
     void OnChampionButtonClicked(int index) => presenter.SelectTrait(currentTeam, index);
-
-    void OnTargetButtonClicked(int index)
-    {
-        presenter.UseTrait(index);
-    }
 }

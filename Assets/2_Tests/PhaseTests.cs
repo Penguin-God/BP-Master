@@ -124,7 +124,7 @@ public class PhaseTests
         sut.OnPhasePick += (team) => pickEvents.Add(team);
         sut.OnPhaseSwap += (team) => swapEvents.Add(team);
         sut.OnPhaseTrait += (team) => traitEvents.Add(team);
-        sut.OnPhaseDone += (team) => doneEvents.Add(team);
+        sut.OnPhaseDone += () => doneEvents.Add(Team.All);
 
         // 테스트 실행
         sut.Start(); // Ban/Blue 이벤트 발생
@@ -147,8 +147,7 @@ public class PhaseTests
         Assert.AreEqual(Team.All, swapEvents[0]);
         Assert.AreEqual(1, traitEvents.Count);
 
-        Assert.AreEqual(Team.Blue, traitEvents[0]);
-        Assert.AreEqual(Team.All, doneEvents[0]);
+        Assert.AreEqual(Team.Blue, traitEvents[0]); // 끝
 
         // 다른 이벤트들은 추가로 발생하지 않았음을 확인
         Assert.AreEqual(1, banEvents.Count);

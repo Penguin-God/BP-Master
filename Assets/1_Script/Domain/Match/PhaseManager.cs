@@ -40,7 +40,7 @@ public class PhaseManager
     public event Action<Team> OnPhasePick;
     public event Action<Team> OnPhaseSwap;
     public event Action<Team> OnPhaseTrait;
-    public event Action<Team> OnPhaseDone;
+    public event Action OnPhaseDone;
 
     public PhaseManager(PhaseData[] phaseDatas)
     {
@@ -90,7 +90,7 @@ public class PhaseManager
             case GamePhase.Pick:OnPhasePick?.Invoke(turn); break;
             case GamePhase.Swap:OnPhaseSwap?.Invoke(turn); break;
             case GamePhase.Trait:OnPhaseTrait?.Invoke(turn); break;
-            case GamePhase.Done:OnPhaseDone?.Invoke(turn); break;
+            case GamePhase.Done:OnPhaseDone?.Invoke(); break;
         }
     }
 }
