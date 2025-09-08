@@ -17,6 +17,7 @@ public class ChampionManagerMono : MonoBehaviour
     public ChampionSO GetChampionData(int id) => allChampion.First(x =>  x.Id == id);
     public IEnumerable<ChampionStatData> GetStats(IEnumerable<int> ids) => ids.Select(x => GetChampionData(x).StatData);
     public string GetChampionName(int id) => GetChampionData(id).ChampionName;
+    public Champion GetChampion(int id) => GetChampionData(id).CreateChampion();
 
     public static ChampionSO[] LoadAllChampions()
     {

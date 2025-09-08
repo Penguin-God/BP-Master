@@ -1,29 +1,52 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TraitUseView : MonoBehaviour
 {
-    [SerializeField] Button[] championButtons;
-    [SerializeField] Button[] targetButtons;
-    
+    [SerializeField] Button[] blueChamps;
+    [SerializeField] Button[] redChamps;
+    Dictionary<Team, Button[]> buttons = new();
+
     TraitPresenter presenter;
     Team currentTeam;
-    
-    public void Init(TraitPresenter presenter)
+    PhaseManager phaseManager;
+    public void Init(TraitPresenter presenter, PhaseManager phaseManager)
     {
-        this.presenter = presenter;
-        SetupChampionButtons();
+        gameObject.SetActive(true);
+        this.presenter = presenter;   
+        this.phaseManager = phaseManager;
     }
+
+    void Start()
+    {
+        buttons.Add(Team.Blue, blueChamps);
+        buttons.Add(Team.Red, redChamps);
+
+        SetupChampionButtons(blueChamps);
+        SetupChampionButtons(redChamps);
+    }
+
     public void ChangeTeam(Team team) => currentTeam = team;
 
-    void SetupChampionButtons()
+    void SetupChampionButtons(Button[] btns)
     {
-        for (int i = 0; i < championButtons.Length; i++)
+        for (int i = 0; i < btns.Length; i++)
         {
             int index = i; // 클로저 캡처 방지
-            championButtons[i].onClick.AddListener(() => OnChampionButtonClicked(index));
+            btns[i].onClick.AddListener(() => OnButtonClicked(index));
         }
     }
 
-    void OnChampionButtonClicked(int index) => presenter.SelectTrait(currentTeam, index);
+
+    void OnButtonClicked(int index)
+    {
+        print(index);
+        if(presenter.IsSelected)
+        {
+            if (presenter.UseTrait(index))
+                phaseManager.SubmitAction(currentTeam);
+        }
+        else presenter.SelectTrait(currentTeam, index);
+    }
 }

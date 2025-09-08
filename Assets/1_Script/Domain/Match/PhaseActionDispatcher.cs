@@ -20,7 +20,7 @@ public class PhaseActionDispatcher
         {
             case Team.Blue: OnRequestAction(_blue, flow); break;
             case Team.Red: OnRequestAction(_red, flow); break;
-            case Team.All:
+            case Team.All: // 이 로직 때문에 지금 못 지우는 중
                 OnRequestAction(_blue, new GameFlowData(flow.Phase, Team.Blue));
                 OnRequestAction(_red, new GameFlowData(flow.Phase, Team.Red));
                 break;

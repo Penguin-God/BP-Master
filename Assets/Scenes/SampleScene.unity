@@ -4045,7 +4045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ae2f2ebbccf3e4eaa7f4f0f7624fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championManager: {fileID: 0}
+  championManager: {fileID: 1420292359}
   championBtn: {fileID: 8033382642434502399, guid: a800959c5b01a5b46b9664e609b38648, type: 3}
 --- !u!1 &1081915725
 GameObject:
@@ -5100,19 +5100,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1366672695}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1420292358}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1366672695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5335,19 +5323,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1394800990}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1420292358}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1394800990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8094,7 +8070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2045637437
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8128,14 +8104,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e99fd077d5c8d94fa4197ad395cea69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championButtons:
-  - {fileID: 594065686}
-  - {fileID: 347748123}
-  - {fileID: 1608102558}
-  targetButtons:
+  blueChamps:
   - {fileID: 1174476477}
   - {fileID: 172225051}
   - {fileID: 1621628248}
+  redChamps:
+  - {fileID: 594065686}
+  - {fileID: 347748123}
+  - {fileID: 1608102558}
 --- !u!1001 &2068666418
 PrefabInstance:
   m_ObjectHideFlags: 0

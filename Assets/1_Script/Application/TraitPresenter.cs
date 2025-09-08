@@ -28,6 +28,8 @@ public class TraitPresenter
 
         var targetIds = targetFinder.GetTargetIds(selectChamp.Trait.TargetRange, targetIndex);
         new TraitController().ApplyTrait(selectChamp.Trait.TraitAction, targetIds.Select(x => championsByTeam[BanPickEnumCaster.GetTargetTeam(selectTeam, selectChamp.Trait.TargetSide)][x]));
+        UnityEngine.Debug.Log(selectChamp.Name);
+        selectChamp = null;
         return true;
     }
 }

@@ -40,4 +40,6 @@ public class ChampionSO : ScriptableObject
 
     [Header("특성")]
     [SerializeField] TraitData traitData;
+
+    public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.CreateTrait());
 }

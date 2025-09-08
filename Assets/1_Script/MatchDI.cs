@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -7,6 +9,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] TraitUseView traitUseView;
     GameBanPickStorage storage;
     PhaseManager phaseManager;
+    IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(champManager.AllId);
@@ -16,29 +19,44 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red, Team.Red, Team.Blue, Team.Blue, Team.Red})),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
-            new PhaseData(GamePhase.Trait, new Phase(new Team[] { Team.Blue, Team.Red })),
+            new PhaseData(GamePhase.Trait, new Phase(new Team[] { Team.Blue, Team.Red, Team.Blue, Team.Red, Team.Blue, Team.Red  })),
         };
         phaseManager = new(phase);
         phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
-        phaseManager.OnPhaseTrait += traitUseView.ChangeTeam;
+
+        phaseManager.OnPhaseSwap += Swap; 
         phaseManager.OnPhaseTrait += InitTrait;
         
         phaseManager.OnPhaseDone += OnDone;
 
         BanPickUI.Init(storage, phaseManager); // start보다 먼저. 
         phaseManager.Start();
+
     }
+
+    void Swap(Team team)
+    {
+        // 그냥 밴픽 끝나면 알아서 넣어주면 안되냐
+        pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => champManager.GetChampion(x)).ToList());
+    }
+
+    //void InitTrait(Team team)
+    //{
+    //    print("액티브");
+    //    StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));
+    //    ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
+    //    ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
+    //    ActiveExcuteManager activeExcuteManager = new ActiveExcuteManager(blueAct, redAct);
+    //}
 
     void InitTrait(Team team)
     {
-        print("액티브");
-        StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));
-        ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
-        ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
-        ActiveExcuteManager activeExcuteManager = new ActiveExcuteManager(blueAct, redAct);
+        traitUseView.Init(new TraitPresenter(pickChampions), phaseManager);
+        
+        traitUseView.ChangeTeam(team);
     }
 
-    void OnDone()
+    void OnDone() // pickChampions 사용
     {
         var blue = champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick));
         var red = champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick));

@@ -14,29 +14,19 @@ public class ActivePresentTests
     }
 
     [Test]
-    public void 선택한_특성_적용()
+    public void 선택한_특성_적용_후_특성_비우기()
     {
         Dictionary<Team, IReadOnlyList<Champion>> data = new();
         data.Add(Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
         data.Add(Team.Red, new Champion[] { new Champion(13, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
         TraitPresenter traitPresenter = new TraitPresenter(data);
 
+        Assert.IsFalse(traitPresenter.IsSelected);
         traitPresenter.SelectTrait(Team.Blue, 0);
+        Assert.IsTrue(traitPresenter.IsSelected);
 
         Assert.IsTrue(traitPresenter.UseTrait(0));
         Assert.AreEqual(10, data[Team.Red][0].StatData.Attack);
-    }
-
-    [Test]
-    public void 선택_상태_반환()
-    {
-        var data = new Dictionary<Team, IReadOnlyList<Champion>>();
-        data.Add(Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
-        TraitPresenter traitPresenter = new TraitPresenter(data);
-
         Assert.IsFalse(traitPresenter.IsSelected);
-        traitPresenter.SelectTrait(Team.Blue, 0);
-
-        Assert.IsTrue(traitPresenter.IsSelected);
     }
 }
