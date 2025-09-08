@@ -15,13 +15,14 @@ public class TraitPresenter
         targetFinder = new TraitTargetSeletor(traitsByTeam[Team.Blue].Count);
     }
 
+    // 함수 2개 숨기고 조건에 따라 Use실행하기
     public void SelectTrait(Team team, int index)
     {
         selectTeam = team;
         selectChamp = championsByTeam[team][index];
     }
 
-    public bool UseTrait(int targetIndex)
+    public bool UseTrait(int targetIndex) // 이벤트로 튕기기
     {
         if (IsSelected == false) return false;
 
