@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +7,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
     [SerializeField] Button swapDoneBtn;
-    ActiveExcuteManager activeExcutor;
-
+    
     ChampionSelectPresenter championSelectPresenter = null;
     PhaseManager phaseManager;
     public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
@@ -23,9 +21,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
     }
-
-    TraitPresenter traitPresenter;
-    public void SetActiveExcutor(ActiveExcuteManager activeExcuteManager) => activeExcutor = activeExcuteManager;
 
     void SelectChampion(ChampionSO champion)
     {
@@ -52,11 +47,9 @@ public class BanPickUI : MonoBehaviour, IActionHandler
     }
     public void OnRequestActive(Team team) { }
 
-    public void Active(int index) => traitPresenter.SelectTrait(phaseManager.CurrentTurn, index);
-
-    public void SelectTraitChamp(int targetIndex)
-    {
-        if (traitPresenter.UseTrait(targetIndex))
-            phaseManager.SubmitAction(phaseManager.CurrentTurn);
-    }
+    //public void SelectTraitChamp(int targetIndex)
+    //{
+    //    if (traitPresenter.UseTrait(targetIndex))
+    //        phaseManager.SubmitAction(phaseManager.CurrentTurn);
+    //}
 }

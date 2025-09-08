@@ -35,7 +35,6 @@ public class MatchDI : MonoBehaviour
             ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
             ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
             ActiveExcuteManager activeExcuteManager = new ActiveExcuteManager(blueAct, redAct);
-            BanPickUI.SetActiveExcutor(activeExcuteManager);
             isActiveSet = true;
         }
 
