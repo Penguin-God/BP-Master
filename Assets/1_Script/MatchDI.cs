@@ -40,15 +40,6 @@ public class MatchDI : MonoBehaviour
         pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => champManager.GetChampion(x)).ToList());
     }
 
-    //void InitTrait(Team team)
-    //{
-    //    print("액티브");
-    //    StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));
-    //    ActiveExcuter blueAct = new ActiveExcuter(statManager, Team.Blue, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
-    //    ActiveExcuter redAct = new ActiveExcuter(statManager, Team.Red, new Trait[] { new Trait(Side.Opponent, TargetRange.None, new AttackChanger(-10)) });
-    //    ActiveExcuteManager activeExcuteManager = new ActiveExcuteManager(blueAct, redAct);
-    //}
-
     void InitTrait(Team team)
     {
         traitUseView.Init(new TraitPresenter(pickChampions), phaseManager);

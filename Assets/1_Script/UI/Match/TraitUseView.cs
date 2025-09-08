@@ -23,24 +23,26 @@ public class TraitUseView : MonoBehaviour
         buttons.Add(Team.Blue, blueChamps);
         buttons.Add(Team.Red, redChamps);
 
-        SetupChampionButtons(blueChamps);
-        SetupChampionButtons(redChamps);
+        SetupChampionButtons(blueChamps, Team.Blue);
+        SetupChampionButtons(redChamps, Team.Red);
     }
 
     public void ChangeTeam(Team team) => currentTeam = team;
 
-    void SetupChampionButtons(Button[] btns)
+    void SetupChampionButtons(Button[] btns, Team buttonTeam)
     {
         for (int i = 0; i < btns.Length; i++)
         {
             int index = i; // 클로저 캡처 방지
-            btns[i].onClick.AddListener(() => OnButtonClicked(index));
+            btns[i].onClick.AddListener(() => OnButtonClicked(buttonTeam, index));
         }
     }
 
 
-    void OnButtonClicked(int index)
+    void OnButtonClicked(Team buttonTeam, int index)
     {
+        if (presenter.IsSelected == false && currentTeam != buttonTeam) return;
+
         print(index);
         if(presenter.IsSelected)
         {
