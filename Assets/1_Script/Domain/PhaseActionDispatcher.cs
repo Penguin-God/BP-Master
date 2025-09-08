@@ -16,7 +16,7 @@ public class PhaseActionRequestor
             case GamePhase.Ban: matchActionHandler.OnRequestBan(Team); break;
             case GamePhase.Pick: matchActionHandler.OnRequestPick(Team); break;
             case GamePhase.Swap: matchActionHandler.OnRequestSwap(Team); break;
-            case GamePhase.Active: matchActionHandler.OnRequestActive(Team); break;
+            case GamePhase.Trait: matchActionHandler.OnRequestActive(Team); break;
         }
     }
 }

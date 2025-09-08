@@ -15,7 +15,7 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red, Team.Red, Team.Blue, Team.Blue, Team.Red})),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
-            new PhaseData(GamePhase.Active, new Phase(new Team[] { Team.Blue, Team.Red })),
+            new PhaseData(GamePhase.Trait, new Phase(new Team[] { Team.Blue, Team.Red })),
         };
         phaseManager = new(phase);
         phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
@@ -28,7 +28,7 @@ public class MatchDI : MonoBehaviour
     bool isActiveSet = false;
     void Update()
     {
-        if (phaseManager != null && phaseManager.CurrentFlow.Phase == GamePhase.Active && isActiveSet == false)
+        if (phaseManager != null && phaseManager.CurrentFlow.Phase == GamePhase.Trait && isActiveSet == false)
         {
             print("액티브");
             StatManager statManager = new StatManager(champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick)), champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick)));

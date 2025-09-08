@@ -14,7 +14,7 @@ public class MatchTests
             new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
-            new PhaseData(GamePhase.Active, new Phase(new Team[] { Team.Blue, Team.Red })),
+            new PhaseData(GamePhase.Trait, new Phase(new Team[] { Team.Blue, Team.Red })),
         };
         GameFlowData data = default;
         PhaseManager phaseManager = new(phase);

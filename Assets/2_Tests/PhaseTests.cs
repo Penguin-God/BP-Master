@@ -27,7 +27,7 @@ public class PhaseTests
     }
 
     [Test]
-    public void 값이_같으면_동일()
+    public void GameFlowData_동치성()
     {
         Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Red), CreateFlow(GamePhase.Ban, Team.Red));
         Assert.AreNotEqual(CreateFlow(GamePhase.Ban, Team.Red), CreateFlow(GamePhase.Pick, Team.Red));
@@ -78,12 +78,8 @@ public class PhaseTests
     [Test]
     public void 잘못된_팀_제출시_이벤트_없음()
     {
-        var sut = new PhaseManager(new[]
-        {
-            CreateData(GamePhase.Ban, Team.Blue) // 요구 턴: Blue
-        });
-
-        sut.Start();        // 1회: Ban/Blue
+        var sut = new PhaseManager(new[] { CreateData(GamePhase.Ban, Team.Blue) }); // 요구 턴: Blue
+        sut.Start();
         int eventCount = 0;
         sut.OnFlowChanged += _ => eventCount++;
 
