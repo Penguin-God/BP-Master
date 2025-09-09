@@ -24,9 +24,9 @@ public class MatchDI : MonoBehaviour
         phaseManager = new(phase);
         phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
 
-        phaseManager.OnPhaseSwap += Swap; 
-        phaseManager.OnPhaseTrait += InitTrait;
+        phaseManager.OnPhaseSwap += Swap;
         
+
         phaseManager.OnPhaseDone += OnDone;
 
         BanPickUI.Init(storage, phaseManager); // start보다 먼저. 
@@ -38,13 +38,7 @@ public class MatchDI : MonoBehaviour
     {
         // 그냥 밴픽 끝나면 알아서 넣어주면 안되냐
         pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => champManager.GetChampion(x)).ToList());
-    }
-
-    void InitTrait(Team team)
-    {
-        traitUseView.Init(new TraitController(pickChampions), phaseManager);
-        
-        traitUseView.ChangeTeam(team);
+        traitUseView.Init(new TraitUsePresenter(new TraitController(pickChampions), phaseManager));
     }
 
     void OnDone() // pickChampions 사용

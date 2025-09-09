@@ -8,14 +8,12 @@ public class TraitUseView : MonoBehaviour
     [SerializeField] Button[] redChamps;
     Dictionary<Team, Button[]> buttons = new();
 
-    TraitController presenter;
-    Team currentTeam;
-    PhaseManager phaseManager;
-    public void Init(TraitController presenter, PhaseManager phaseManager)
+    TraitUsePresenter presenter;
+    
+    public void Init(TraitUsePresenter presenter)
     {
         gameObject.SetActive(true);
-        this.presenter = presenter;   
-        this.phaseManager = phaseManager;
+        this.presenter = presenter;
     }
 
     void Start()
@@ -27,8 +25,6 @@ public class TraitUseView : MonoBehaviour
         SetupChampionButtons(redChamps, Team.Red);
     }
 
-    public void ChangeTeam(Team team) => currentTeam = team;
-
     void SetupChampionButtons(Button[] btns, Team buttonTeam)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -39,15 +35,5 @@ public class TraitUseView : MonoBehaviour
     }
 
 
-    void OnButtonClicked(Team buttonTeam, int index)
-    {
-        if (presenter.IsSelected == false && currentTeam != buttonTeam) return;
-
-        if(presenter.IsSelected)
-        {
-            if (presenter.UseTrait(index))
-                phaseManager.SubmitAction(currentTeam);
-        }
-        else presenter.SelectTrait(currentTeam, index);
-    }
+    void OnButtonClicked(Team buttonTeam, int index) => presenter.ClickChampion(buttonTeam, index);
 }
