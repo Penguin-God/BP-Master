@@ -42,7 +42,7 @@ public class MatchDI : MonoBehaviour
 
     void InitTrait(Team team)
     {
-        traitUseView.Init(new TraitPresenter(pickChampions), phaseManager);
+        traitUseView.Init(new TraitController(pickChampions), phaseManager);
         
         traitUseView.ChangeTeam(team);
     }

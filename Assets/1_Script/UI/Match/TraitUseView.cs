@@ -8,10 +8,10 @@ public class TraitUseView : MonoBehaviour
     [SerializeField] Button[] redChamps;
     Dictionary<Team, Button[]> buttons = new();
 
-    TraitPresenter presenter;
+    TraitController presenter;
     Team currentTeam;
     PhaseManager phaseManager;
-    public void Init(TraitPresenter presenter, PhaseManager phaseManager)
+    public void Init(TraitController presenter, PhaseManager phaseManager)
     {
         gameObject.SetActive(true);
         this.presenter = presenter;   
@@ -43,7 +43,6 @@ public class TraitUseView : MonoBehaviour
     {
         if (presenter.IsSelected == false && currentTeam != buttonTeam) return;
 
-        print(index);
         if(presenter.IsSelected)
         {
             if (presenter.UseTrait(index))
