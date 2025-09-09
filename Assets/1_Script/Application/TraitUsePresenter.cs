@@ -1,5 +1,12 @@
 using System;
 
+public enum TraitClickResult
+{
+    Faild,
+    Select,
+    Use
+}
+
 public class TraitUsePresenter
 {
     readonly TraitController traitController;
@@ -18,14 +25,17 @@ public class TraitUsePresenter
 
     void UpdateTeam(Team team) => currentTeam = team;
 
-    public void ClickChampion(Team championTeam, int championIndex) // 나중에 결과 필요하면 Faild, Use, Select enum만들기
+    public TraitClickResult ClickChampion(Team championTeam, int championIndex) // 나중에 결과 필요하면 Faild, Use, Select enum만들기
     {
-        if (IsValidTarget(championTeam) == false) return;
+        if (IsValidTarget(championTeam) == false) return TraitClickResult.Faild;
 
-        if (traitController.IsSelected)
-            UseTrait(championIndex);
+        if (traitController.IsSelected) return UseTrait(championIndex);
         else
+        {
+            UnityEngine.Debug.Log(traitController.IsSelected);
             traitController.SelectTrait(currentTeam, championIndex);
+            return TraitClickResult.Select;
+        }
     }
 
     bool IsValidTarget(Team buttonTeam) // 나중에는 타겟 범위까지 판단해야 되긴해
@@ -33,9 +43,13 @@ public class TraitUsePresenter
         return (traitController.IsSelected == false && currentTeam == buttonTeam) || traitController.IsSelected;
     }
 
-    void UseTrait(int targetIndex)
+    TraitClickResult UseTrait(int targetIndex)
     {
         if (traitController.UseTrait(targetIndex))
+        {
             phaseManager.SubmitAction(currentTeam);
+            return TraitClickResult.Use;
+        }
+        else return TraitClickResult.Faild;
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class TraitUsePresenterTests
 {
     PhaseManager phaseManager;
-    TraitController traitController;
     TraitUsePresenter presenter;
 
     [SetUp]
@@ -18,22 +17,21 @@ public class TraitUsePresenterTests
             { Team.Blue, new List<Champion>{ blueChamp } },
             { Team.Red, new List<Champion>{ redChamp } }
         };
-        traitController = new TraitController(teams);
 
         phaseManager = new PhaseManager(new[] { new PhaseData(GamePhase.Trait, new Phase(new[] { Team.Blue, Team.Red })) });
-        presenter = new TraitUsePresenter(traitController, phaseManager);
+        presenter = new TraitUsePresenter(new TraitController(teams), phaseManager);
 
         phaseManager.Start();
     }
 
     [Test]
-    public void 같은_팀만_선택_가능()
+    public void 결과에_따라_enum반환()
     {
-        presenter.ClickChampion(Team.Red, 0);
-        Assert.IsFalse(traitController.IsSelected);
+        Assert.AreEqual(TraitClickResult.Faild, presenter.ClickChampion(Team.Red, 0));
 
-        presenter.ClickChampion(Team.Blue, 0);
-        Assert.IsTrue(traitController.IsSelected);
+        Assert.AreEqual(TraitClickResult.Select, presenter.ClickChampion(Team.Blue, 0));
+
+        Assert.AreEqual(TraitClickResult.Use, presenter.ClickChampion(Team.Blue, 0));
     }
 
     [Test]
