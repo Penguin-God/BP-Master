@@ -29,10 +29,10 @@ public class BanPickView : MonoBehaviour
 
     int blueIndex;
     int redIndex;
-    public void UpdateSelectView(SelectType selectType, Team team, int id)
+    public void UpdateSelectView(GamePhase phase, Team team, int id)
     {
-        if (selectType == SelectType.Pick) UpdatePickView(team, id);
-        else if(selectType == SelectType.Ban) UpdateBanView(team, id);
+        if (phase == GamePhase.Pick) UpdatePickView(team, id);
+        else if(phase == GamePhase.Ban) UpdateBanView(team, id);
     }
 
     void UpdatePickView(Team team, int id)

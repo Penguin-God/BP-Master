@@ -32,7 +32,6 @@ public class TraitUsePresenter
         if (traitController.IsSelected) return UseTrait(championIndex);
         else
         {
-            UnityEngine.Debug.Log(traitController.IsSelected);
             traitController.SelectTrait(currentTeam, championIndex);
             return TraitClickResult.Select;
         }

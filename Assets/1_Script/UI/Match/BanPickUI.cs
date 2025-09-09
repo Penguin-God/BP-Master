@@ -33,12 +33,10 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         int selectId = championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
         if (selectId == -1) return;
 
-        view.UpdateSelectView(BanPickEnumCaster.PhaseToSelect(phaseManager.CurrentFlow.Phase), phaseManager.CurrentTurn, selectId);
+        view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, selectId);
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 
-    public void OnRequestBan(Team team) {}
-    public void OnRequestPick(Team team) {}
     public void OnRequestSwap(Team team) => swapDoneBtn.onClick.AddListener(() => SwapDone(team));
     void SwapDone(Team team)
     {
@@ -46,10 +44,4 @@ public class BanPickUI : MonoBehaviour, IActionHandler
             phaseManager.SubmitAction(team);
     }
     public void OnRequestActive(Team team) { }
-
-    //public void SelectTraitChamp(int targetIndex)
-    //{
-    //    if (traitPresenter.UseTrait(targetIndex))
-    //        phaseManager.SubmitAction(phaseManager.CurrentTurn);
-    //}
 }
