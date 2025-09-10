@@ -1,7 +1,4 @@
-using System.Collections;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class TraitActionTests
 {
@@ -18,5 +15,31 @@ public class TraitActionTests
         Assert.AreEqual(expected, result.Attack);
     }
 
-ChampionStatData CreateStat(int att) => new ChampionStatData(att, 0, 0);
+    [Test]
+    [TestCase(5, 15)]
+    [TestCase(-3, 7)]
+    public void 방_변경(int amount, int expected)
+    {
+        DefenseChanger sut = new(amount);
+        var data = CreateStat(def: 10);
+
+        var result = sut.Do(data);
+
+        Assert.AreEqual(expected, result.Defense);
+    }
+
+    [Test]
+    [TestCase(2, 12)]
+    [TestCase(-5, 5)]
+    public void 속_변경(int amount, int expected)
+    {
+        SpeedChanger sut = new(amount);
+        var data = CreateStat(speed: 10);
+
+        var result = sut.Do(data);
+
+        Assert.AreEqual(expected, result.Speed);
+    }
+
+    ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }
