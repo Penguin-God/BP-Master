@@ -3,14 +3,27 @@ using NUnit.Framework;
 public class ChampionPresentTests
 {
     [Test]
-    public void 챔피언_기본정보가_텍스트로_출력된다()
+    public void 챔피언_스탯정보가_텍스트로_출력()
     {
         var sut = new ChampionPersenter();
 
-        ChampionViewModel result = sut.PresentStat(new ChampionStatData(10, 12, 6));
+        ChampionViewModel result = sut.Present(new ChampionStatData(10, 12, 6), default);
 
-        StringAssert.Contains("공격력 : 10", result.Attack);
-        StringAssert.Contains("방어력 : 12", result.Defense);
-        StringAssert.Contains("속도 : 6", result.Speed);
+        Assert.AreEqual("공격력 : 10", result.Attack);
+        Assert.AreEqual("방어력 : 12", result.Defense);
+        Assert.AreEqual("속도 : 6", result.Speed);
+    }
+
+    [Test]
+    public void 챔피언_특성정보_텍스트로_출력()
+    {
+        var sut = new ChampionPersenter();
+        
+        // 편의 함수
+        string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.Present(default, new TraitData(traitType, side, range, amount)).Trait;
+
+        Assert.AreEqual("아군 전체 공격력 10 증가", GetTraitText(TraitType.AttackChanger, Side.Self, TargetRange.All, 10));
+        Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10));
+        Assert.AreEqual("아군 단일 대상 속도 2 증가", GetTraitText(TraitType.SpeedChanger, Side.Self, TargetRange.Single, 2));
     }
 }

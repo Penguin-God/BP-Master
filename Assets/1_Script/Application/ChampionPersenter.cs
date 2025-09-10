@@ -1,3 +1,4 @@
+using System;
 
 public readonly struct ChampionViewModel
 {
@@ -15,12 +16,48 @@ public readonly struct ChampionViewModel
     }
 }
 
+public struct TraitData
+{
+    public readonly TraitType TraitType;
+    public readonly Side TargetSide;
+    public readonly TargetRange Range;
+    public readonly int Amount;
+
+    public TraitData(TraitType traitType, Side targetSide, TargetRange range, int amount)
+    {
+        TraitType = traitType;
+        TargetSide = targetSide;
+        Range = range;
+        Amount = amount;
+    }
+}
+
 public class ChampionPersenter
 {
-    public ChampionViewModel PresentStat(ChampionStatData stat) => new ChampionViewModel(
+    public ChampionViewModel Present(ChampionStatData stat, TraitData traitData) => new ChampionViewModel(
         $"공격력 : {stat.Attack}",
         $"방어력 : {stat.Defense}",
         $"속도 : {stat.Speed}",
-        ""
+        $"{BuildTargetText(traitData.TargetSide, traitData.Range)} {BuildTraitText(traitData.TraitType, traitData.Amount)}"
         );
+
+    string BuildTargetText(Side side, TargetRange range) => (side, range) switch
+    {
+        (Side.Self, TargetRange.Single) => "아군 단일 대상",
+        (Side.Self, TargetRange.All) => "아군 전체",
+        (Side.Opponent, TargetRange.Single) => "적군 단일 대상",
+        (Side.Opponent, TargetRange.All) => "적군 전체",
+        (Side.All, TargetRange.All) => "양팀 전체",
+        _ => "대상 없음"
+    };
+
+    string BuildTraitText(TraitType traitType, int amount) => (traitType) switch
+    {
+        TraitType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        _ => ""
+    };
+
+    string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
 }

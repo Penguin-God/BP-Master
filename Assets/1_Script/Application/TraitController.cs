@@ -1,6 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public enum TraitType
+{
+    None,
+    AttackChanger,
+    DefenseChanger,
+    SpeedChanger,
+}
+
 public class TraitController
 {
     readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> championsByTeam;

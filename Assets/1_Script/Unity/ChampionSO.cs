@@ -1,13 +1,7 @@
 using UnityEngine;
 
-enum TraitType
-{
-    None,
-    AttackChanger,
-}
-
 [System.Serializable]
-public class TraitData
+internal class TraitData
 {
     [SerializeField] TraitType traitType;
     [SerializeField] Side targetSide;
