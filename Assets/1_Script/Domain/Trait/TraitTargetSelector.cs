@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-public class TraitTargetSelector
+public class TraitTargetSelector // 여기에 Side랑 팀 받아서 타겟 리턴하는 경우도 추가하기
 {
     readonly int teamCount;
     public TraitTargetSelector(int count) => teamCount = count;
