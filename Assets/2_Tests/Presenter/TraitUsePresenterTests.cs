@@ -26,11 +26,11 @@ public class TraitUsePresenterTests
     [Test]
     public void 결과에_따라_enum반환()
     {
-        Assert.AreEqual(TraitClickResult.Faild, presenter.ClickChampion(Team.Red, 0));
+        Assert.AreEqual(TraitClickResult.Faild, presenter.ClickChampion(CreateSlot(Team.Red, 0)));
 
-        Assert.AreEqual(TraitClickResult.Select, presenter.ClickChampion(Team.Blue, 0));
+        Assert.AreEqual(TraitClickResult.Select, presenter.ClickChampion(CreateSlot(Team.Blue, 0)));
 
-        Assert.AreEqual(TraitClickResult.Use, presenter.ClickChampion(Team.Blue, 0));
+        Assert.AreEqual(TraitClickResult.Use, presenter.ClickChampion(CreateSlot(Team.Blue, 0)));
     }
 
     [Test]
@@ -39,9 +39,11 @@ public class TraitUsePresenterTests
         Team result = Team.Red;
         presenter.OnTraitUsed += _ => result = _;
 
-        presenter.ClickChampion(Team.Blue, 0);
-        presenter.ClickChampion(Team.Red, 0);
+        presenter.ClickChampion(CreateSlot(Team.Blue, 0)); // 선택
+        presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용
 
         Assert.AreEqual(Team.Blue, result);
     }
+
+    ChampionSlot CreateSlot(Team team, int index) => new ChampionSlot(team, index);
 }

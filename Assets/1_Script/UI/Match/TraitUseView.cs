@@ -35,5 +35,19 @@ public class TraitUseView : MonoBehaviour
     }
 
 
-    void OnButtonClicked(Team buttonTeam, int index) => presenter.ClickChampion(buttonTeam, index);
+    void OnButtonClicked(Team buttonTeam, int index)
+    {
+        var result = presenter.ClickChampion(new ChampionSlot(buttonTeam, index));
+        switch (result)
+        {
+            case TraitClickResult.Faild:
+                print("선택실패");
+                break;
+            case TraitClickResult.Select:
+                print(buttonTeam + " select");
+                break;
+            case TraitClickResult.Use:
+                break;
+        }
+    }
 }
