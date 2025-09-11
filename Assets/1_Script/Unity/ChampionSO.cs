@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-internal class TraitData
+public class TraitData
 {
     [SerializeField] TraitType traitType;
     [SerializeField] Side targetSide;
@@ -16,6 +16,8 @@ internal class TraitData
             default: return null;
         }
     }
+
+    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount);
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]
@@ -34,6 +36,6 @@ public class ChampionSO : ScriptableObject
 
     [Header("특성")]
     [SerializeField] TraitData traitData;
-
+    public TraitData TraitData => traitData;
     public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.CreateTrait());
 }

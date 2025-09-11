@@ -16,14 +16,14 @@ public readonly struct ChampionViewModel
     }
 }
 
-public struct TraitData
+public struct TraitUI_Data
 {
     public readonly TraitType TraitType;
     public readonly Side TargetSide;
     public readonly TargetRange Range;
     public readonly int Amount;
 
-    public TraitData(TraitType traitType, Side targetSide, TargetRange range, int amount)
+    public TraitUI_Data(TraitType traitType, Side targetSide, TargetRange range, int amount)
     {
         TraitType = traitType;
         TargetSide = targetSide;
@@ -34,7 +34,7 @@ public struct TraitData
 
 public class ChampionPersenter
 {
-    public ChampionViewModel Present(ChampionStatData stat, TraitData traitData) => new ChampionViewModel(
+    public ChampionViewModel Present(ChampionStatData stat, TraitUI_Data traitData) => new ChampionViewModel(
         $"공격력 : {stat.Attack}",
         $"방어력 : {stat.Defense}",
         $"속도 : {stat.Speed}",

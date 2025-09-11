@@ -28,12 +28,13 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         view.UpdateSelectChampion(champion);
     }
 
+    [SerializeField] ChampionManagerMono championManager;
     void NailDownChampion() // 챔프 확정
     {
         int selectId = championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
         if (selectId == -1) return;
 
-        view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, selectId);
+        view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 
