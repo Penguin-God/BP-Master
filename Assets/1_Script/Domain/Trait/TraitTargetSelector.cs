@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-public class TraitTargetSeletor
+public class TraitTargetSelector
 {
     readonly int teamCount;
-    public TraitTargetSeletor(int count) => teamCount = count;
+    public TraitTargetSelector(int count) => teamCount = count;
 
     public IEnumerable<int> GetTargetIds(TargetRange range, int targetIndex)
     {

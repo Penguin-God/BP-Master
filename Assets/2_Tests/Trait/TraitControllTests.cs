@@ -10,7 +10,7 @@ public class TraitControllTests
         data.Add(Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
         TraitController traitPresenter = new TraitController(data);
 
-        Assert.IsFalse(traitPresenter.UseTrait(1));
+        Assert.IsFalse(traitPresenter.UseTrait(Team.Blue, 1));
     }
 
     [Test]
@@ -25,7 +25,7 @@ public class TraitControllTests
         traitPresenter.SelectTrait(Team.Blue, 0);
         Assert.IsTrue(traitPresenter.IsSelected);
 
-        Assert.IsTrue(traitPresenter.UseTrait(0));
+        Assert.IsTrue(traitPresenter.UseTrait(Team.Blue, 0));
         Assert.AreEqual(10, data[Team.Red][0].StatData.Attack);
         Assert.IsFalse(traitPresenter.IsSelected);
     }

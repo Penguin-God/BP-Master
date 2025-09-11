@@ -43,7 +43,7 @@ public class TraitUsePresenter
 
     TraitClickResult UseTrait(int targetIndex)
     {
-        if (traitController.UseTrait(targetIndex))
+        if (traitController.UseTrait(currentTeam, targetIndex))
         {
             OnTraitUsed?.Invoke(currentTeam); // 시간 커플링
             phaseManager.SubmitAction(currentTeam);
