@@ -40,6 +40,7 @@ public class MatchDI : MonoBehaviour
         var presenter = new TraitUsePresenter(new TraitController(pickChampions), phaseManager);
         traitUseView.Init(presenter);
         presenter.OnTraitUsed += _ => banPickView.UpdateAllPick(pickChampions);
+        presenter.OnTraitUsed += _ => print(_);
     }
 
     void OnDone() // pickChampions 사용

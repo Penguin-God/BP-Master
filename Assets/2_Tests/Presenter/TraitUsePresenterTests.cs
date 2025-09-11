@@ -34,14 +34,14 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 선택_후_타겟_결정_시_특성_사용()
+    public void 특성_사용_후_이벤트()
     {
-        bool submitted = false;
-        presenter.OnTraitUsed += _ => submitted = true;
+        Team result = Team.Red;
+        presenter.OnTraitUsed += _ => result = _;
 
         presenter.ClickChampion(Team.Blue, 0);
         presenter.ClickChampion(Team.Red, 0);
 
-        Assert.IsTrue(submitted);
+        Assert.AreEqual(Team.Blue, result);
     }
 }
