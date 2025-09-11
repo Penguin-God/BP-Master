@@ -23,30 +23,32 @@ public class TraitUsePresenter
     }
 
     void UpdateTeam(Team team) => currentTeam = team;
-
-    public TraitClickResult ClickChampion(Team championTeam, int championIndex) // 나중에 결과 필요하면 Faild, Use, Select enum만들기
+    int selectIndex = -1;
+    bool IsSelect => selectIndex > -1;
+    public TraitClickResult ClickChampion(Team championTeam, int championIndex)
     {
         if (IsValidTarget(championTeam) == false) return TraitClickResult.Faild;
 
-        if (traitController.IsSelected) return UseTrait(championIndex);
+        if (IsSelect) return UseTrait(championIndex);
         else
         {
-            traitController.SelectTrait(currentTeam, championIndex);
+            selectIndex = championIndex;
             return TraitClickResult.Select;
         }
     }
-
+    
     bool IsValidTarget(Team buttonTeam) // 나중에는 타겟 범위까지 판단해야 되긴해
     {
-        return (traitController.IsSelected == false && currentTeam == buttonTeam) || traitController.IsSelected;
+        return (IsSelect == false && currentTeam == buttonTeam) || IsSelect;
     }
 
     TraitClickResult UseTrait(int targetIndex)
     {
-        if (traitController.UseTrait(currentTeam, targetIndex))
+        if (traitController.UseTrait(currentTeam, selectIndex, targetIndex))
         {
             OnTraitUsed?.Invoke(currentTeam); // 시간 커플링
             phaseManager.SubmitAction(currentTeam);
+            selectIndex = -1;
             return TraitClickResult.Use;
         }
         else return TraitClickResult.Faild;

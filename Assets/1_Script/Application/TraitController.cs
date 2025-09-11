@@ -13,8 +13,6 @@ public class TraitController
 {
     readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> championsByTeam;
     readonly TraitTargetSelector targetFinder;
-    Champion selectChamp;
-    public bool IsSelected => selectChamp != null;
     
     public TraitController(IReadOnlyDictionary<Team, IReadOnlyList<Champion>> traitsByTeam)
     {
@@ -22,18 +20,11 @@ public class TraitController
         targetFinder = new TraitTargetSelector(traitsByTeam[Team.Blue].Count);
     }
 
-    public void SelectTrait(Team team, int index)
+    public bool UseTrait(Team team, int traitIndex, int targetIndex)
     {
-        selectChamp = championsByTeam[team][index];
-    }
-
-    public bool UseTrait(Team team, int targetIndex)
-    {
-        if (IsSelected == false) return false;
-
-        var targetIds = targetFinder.GetTargetIds(selectChamp.Trait.TargetRange, targetIndex);
-        ExecuteTrait(selectChamp.Trait.TraitAction, targetIds.Select(x => championsByTeam[BanPickEnumCaster.GetTargetTeam(team, selectChamp.Trait.TargetSide)][x]));
-        selectChamp = null;
+        Trait trait = championsByTeam[team][targetIndex].Trait;
+        var targetIds = targetFinder.GetTargetIds(trait.TargetRange, targetIndex);
+        ExecuteTrait(trait.TraitAction, targetIds.Select(x => championsByTeam[BanPickEnumCaster.GetTargetTeam(team, trait.TargetSide)][x]));
         return true;
     }
 
