@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class TraitUsePresenterTests
 {
-    PhaseManager phaseManager;
     TraitUsePresenter presenter;
 
     [SetUp]
@@ -18,7 +17,7 @@ public class TraitUsePresenterTests
             { Team.Red, new List<Champion>{ redChamp } }
         };
 
-        phaseManager = new PhaseManager(new[] { new PhaseData(GamePhase.Trait, new Phase(new[] { Team.Blue, Team.Red })) });
+        var phaseManager = new PhaseManager(new[] { new PhaseData(GamePhase.Trait, new Phase(new[] { Team.Blue, Team.Red })) });
         presenter = new TraitUsePresenter(new TraitController(teams), phaseManager);
 
         phaseManager.Start();
@@ -38,7 +37,7 @@ public class TraitUsePresenterTests
     public void 선택_후_타겟_결정_시_특성_사용()
     {
         bool submitted = false;
-        phaseManager.OnFlowChanged += _ => submitted = true;
+        presenter.OnTraitUsed += _ => submitted = true;
 
         presenter.ClickChampion(Team.Blue, 0);
         presenter.ClickChampion(Team.Red, 0);

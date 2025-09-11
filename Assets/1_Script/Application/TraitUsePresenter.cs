@@ -13,7 +13,6 @@ public class TraitUsePresenter
     readonly PhaseManager phaseManager;
     Team currentTeam;
 
-    public event Action<Team, int> OnTraitSelected;
     public event Action<Team> OnTraitUsed;
 
     public TraitUsePresenter(TraitController traitController, PhaseManager phaseManager)
@@ -47,6 +46,7 @@ public class TraitUsePresenter
         if (traitController.UseTrait(targetIndex))
         {
             phaseManager.SubmitAction(currentTeam);
+            OnTraitUsed?.Invoke(currentTeam);
             return TraitClickResult.Use;
         }
         else return TraitClickResult.Faild;
