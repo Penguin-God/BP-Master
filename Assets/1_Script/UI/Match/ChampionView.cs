@@ -22,6 +22,14 @@ public class ChampionView : MonoBehaviour
         speedText.text = viewModel.Speed;
     }
 
+    public void UpdateStat(ChampionStatData statData)
+    {
+        var viewModel = championPersenter.Present(statData, default);
+        attackText.text = viewModel.Attack;
+        defenseText.text = viewModel.Defense;
+        speedText.text = viewModel.Speed;
+    }
+
     void ClearDisplay()
     {
         nameText.text = "챔피언 없음";
