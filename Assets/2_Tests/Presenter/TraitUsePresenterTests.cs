@@ -8,19 +8,15 @@ public class TraitUsePresenterTests
     [SetUp]
     public void SetUp()
     {
-        var blueChamp = new Champion(0, "", default, new Trait(Side.Self, TargetRange.Single, new TestAttackChanger(0)));
+        var blueChamp = new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(0)));
         var redChamp = new Champion(0, "", default, new Trait(Side.Self, TargetRange.Single, new TestAttackChanger(0)));
 
         var teams = new Dictionary<Team, IReadOnlyList<Champion>>
         {
-            { Team.Blue, new List<Champion>{ blueChamp } },
-            { Team.Red, new List<Champion>{ redChamp } }
-        };
-
-        var phaseManager = new PhaseManager(new[] { new PhaseData(GamePhase.Trait, new Phase(new[] { Team.Blue, Team.Red })) });
+            { Team.Blue, new List<Champion>{ blueChamp, blueChamp, blueChamp } },
+            { Team.Red, new List<Champion>{ redChamp, redChamp, redChamp } }
+        }; // 만들기 귀찮아서 복붙했는데 이럼 특성이 싹다 적용되긴해
         presenter = new TraitUsePresenter(new TraitController(teams));
-
-        // phaseManager.Start();
     }
 
     [Test]
@@ -47,5 +43,20 @@ public class TraitUsePresenterTests
         Assert.AreEqual(Team.Blue, result);
     }
 
+    [Test]
+    public void 선택_가능_슬롯들_반환()
+    {
+        presenter.ChangeTeam(Team.Blue);
+
+        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
+        presenter.ClickChampion(CreateSlot(Team.Blue, 0));
+        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Red, 0), CreateSlot(Team.Red, 1), CreateSlot(Team.Red, 2)), presenter.GetClickableSlots());
+        presenter.ClickChampion(CreateSlot(Team.Red, 0)); // 사용
+
+        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Red, 1), CreateSlot(Team.Red, 2)), presenter.GetClickableSlots());
+    }
+
+    ChampionSlot[] CreateSlots(params ChampionSlot[] slots) => slots;
     ChampionSlot CreateSlot(Team team, int index) => new ChampionSlot(team, index);
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public enum TraitClickResult
 {
@@ -22,20 +23,11 @@ public struct ChampionSlot
 public class TraitUsePresenter // 타겟들 다 포함
 {
     readonly TraitController traitController;
-    // readonly PhaseManager phaseManager;
     Team currentTeam = Team.All;
 
     public event Action<Team> OnTraitUsed;
 
-    //public TraitUsePresenter(TraitController traitController, PhaseManager phaseManager)
-    //{
-    //    this.traitController = traitController;
-    //    this.phaseManager = phaseManager;
-    //    phaseManager.OnPhaseTrait += UpdateTeam;
-    //}
-
     public TraitUsePresenter(TraitController traitController) => this.traitController = traitController;
-
     public void ChangeTeam(Team team) => currentTeam = team;
 
     ChampionSlot? selected; // 선택된 시전자
@@ -69,5 +61,10 @@ public class TraitUsePresenter // 타겟들 다 포함
             return TraitClickResult.Use;
         }
         else return TraitClickResult.Faild;
+    }
+
+    public IEnumerable<ChampionSlot> GetClickableSlots()
+    {
+        
     }
 }
