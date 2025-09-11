@@ -18,14 +18,15 @@ public class TraitUsePresenterTests
         };
 
         var phaseManager = new PhaseManager(new[] { new PhaseData(GamePhase.Trait, new Phase(new[] { Team.Blue, Team.Red })) });
-        presenter = new TraitUsePresenter(new TraitController(teams), phaseManager);
+        presenter = new TraitUsePresenter(new TraitController(teams));
 
-        phaseManager.Start();
+        // phaseManager.Start();
     }
 
     [Test]
     public void 결과에_따라_enum반환()
     {
+        presenter.ChangeTeam(Team.Blue);
         Assert.AreEqual(TraitClickResult.Faild, presenter.ClickChampion(CreateSlot(Team.Red, 0)));
 
         Assert.AreEqual(TraitClickResult.Select, presenter.ClickChampion(CreateSlot(Team.Blue, 0)));
@@ -38,6 +39,7 @@ public class TraitUsePresenterTests
     {
         Team result = Team.Red;
         presenter.OnTraitUsed += _ => result = _;
+        presenter.ChangeTeam(Team.Blue);
 
         presenter.ClickChampion(CreateSlot(Team.Blue, 0)); // 선택
         presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용

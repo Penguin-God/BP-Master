@@ -47,6 +47,7 @@ public class TraitUseView : MonoBehaviour
                 print(buttonTeam + " select");
                 break;
             case TraitClickResult.Use:
+                print(buttonTeam + " use");
                 break;
         }
     }

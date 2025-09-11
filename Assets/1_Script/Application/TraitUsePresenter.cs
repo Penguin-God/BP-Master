@@ -22,19 +22,21 @@ public struct ChampionSlot
 public class TraitUsePresenter // 타겟들 다 포함
 {
     readonly TraitController traitController;
-    readonly PhaseManager phaseManager;
-    Team currentTeam;
+    // readonly PhaseManager phaseManager;
+    Team currentTeam = Team.All;
 
     public event Action<Team> OnTraitUsed;
 
-    public TraitUsePresenter(TraitController traitController, PhaseManager phaseManager)
-    {
-        this.traitController = traitController;
-        this.phaseManager = phaseManager;
-        phaseManager.OnPhaseTrait += UpdateTeam;
-    }
+    //public TraitUsePresenter(TraitController traitController, PhaseManager phaseManager)
+    //{
+    //    this.traitController = traitController;
+    //    this.phaseManager = phaseManager;
+    //    phaseManager.OnPhaseTrait += UpdateTeam;
+    //}
 
-    void UpdateTeam(Team team) => currentTeam = team;
+    public TraitUsePresenter(TraitController traitController) => this.traitController = traitController;
+
+    public void ChangeTeam(Team team) => currentTeam = team;
 
     ChampionSlot? selected; // 선택된 시전자
     bool IsSelect => selected.HasValue;
@@ -62,8 +64,7 @@ public class TraitUsePresenter // 타겟들 다 포함
 
         if (traitController.UseTrait(currentTeam, sel.Index, targetSlot.Index))
         {
-            OnTraitUsed?.Invoke(currentTeam); // 시간 커플링
-            phaseManager.SubmitAction(currentTeam);
+            OnTraitUsed?.Invoke(currentTeam);
             selected = null;
             return TraitClickResult.Use;
         }
