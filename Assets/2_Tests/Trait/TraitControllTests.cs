@@ -29,4 +29,56 @@ public class TraitControllTests
         Assert.IsFalse(traitPresenter.UseTrait(Team.Blue, 0, 0));
         Assert.AreEqual(10, data[Team.Red][0].StatData.Attack);
     }
+
+    [Test]
+    public void 특성_시전자는_사용_플래그_true()
+    {
+        var data = new Dictionary<Team, IReadOnlyList<Champion>>
+        {
+            { Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) } },
+            { Team.Red,  new Champion[] { new Champion(13, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) } }
+        };
+        var sut = new TraitController(data);
+
+        // Blue 0번이 사용
+        Assert.IsTrue(sut.UseTrait(Team.Blue, 0, 0));
+
+        // 시전자 슬롯만 true
+        Assert.IsTrue(sut.IsTraitUsed(new ChampionSlot(Team.Blue, 0)));
+        Assert.IsFalse(sut.IsTraitUsed(new ChampionSlot(Team.Red, 0)));
+    }
+
+    [Test]
+    public void 버그_시연_시전자와_타겟_인덱스_달라질_때()
+    {
+        var data = new Dictionary<Team, IReadOnlyList<Champion>>
+        {
+            {
+                Team.Blue,
+                new Champion[]
+                {
+                    new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(5))),
+                    new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(11))),
+                }
+            },
+            {
+                Team.Red,
+                new Champion[]
+                {
+                    new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(999))) // 사용 안 됨
+                }
+            }
+        };
+
+        var sut = new TraitController(data);
+
+        Assert.IsTrue(sut.UseTrait(Team.Blue, traitIndex: 1, targetIndex: 0));
+
+        // ✅ 기대: Red[0] 공격력은 11이어야 함 (시전자 Blue[1]의 효과)
+        Assert.AreEqual(11, data[Team.Red][0].StatData.Attack);
+
+        // ✅ 기대: 사용 플래그는 Blue[1]만 true
+        Assert.IsFalse(sut.IsTraitUsed(new ChampionSlot(Team.Blue, 0)));
+        Assert.IsTrue(sut.IsTraitUsed(new ChampionSlot(Team.Blue, 1)));
+    }
 }

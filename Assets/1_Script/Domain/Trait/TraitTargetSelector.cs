@@ -28,9 +28,9 @@ public class TraitTargetSelector
         }
     }
 
-    public IEnumerable<ChampionSlot> GetTargetSlot(Team casterTeam, Side side, TargetRange range, ChampionSlot clickedSlot)
+    public IEnumerable<ChampionSlot> GetTargetSlot(Team team, Side side, TargetRange range, ChampionSlot clickedSlot)
     {
-        var expectedTeam = BanPickEnumCaster.GetTargetTeam(casterTeam, side);
+        var expectedTeam = BanPickEnumCaster.GetTargetTeam(team, side);
         if (clickedSlot.Team != expectedTeam) return null;
 
         switch (range)
