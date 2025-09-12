@@ -41,4 +41,8 @@ public class TraitController
         foreach (var champion in champions)
             champion.OnTrait(action);
     }
+
+    public int GetTeamSize(Team team) => championsByTeam[team].Count;
+
+    public Trait GetTrait(Team team, int index) => championsByTeam[team][index].Trait;
 }
