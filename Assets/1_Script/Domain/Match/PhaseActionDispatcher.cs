@@ -1,7 +1,6 @@
 public interface IActionHandler
 {
     public void OnRequestSwap(Team team);
-    public void OnRequestActive(Team team);
 }
 
 public class PhaseActionDispatcher
@@ -32,7 +31,6 @@ public class PhaseActionDispatcher
         switch (gameFlow.Phase)
         {
             case GamePhase.Swap: actionHandler.OnRequestSwap(gameFlow.Turn); break;
-            case GamePhase.Trait: actionHandler.OnRequestActive(gameFlow.Turn); break;
         }
     }
 }

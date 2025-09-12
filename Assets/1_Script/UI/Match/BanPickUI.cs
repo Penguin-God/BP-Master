@@ -44,5 +44,4 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
             phaseManager.SubmitAction(team);
     }
-    public void OnRequestActive(Team team) { }
 }

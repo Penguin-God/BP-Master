@@ -43,14 +43,4 @@ public class FakeActionHandler : IActionHandler
 {
     public readonly List<(string Method, Team Team)> Calls = new();
     public void OnRequestSwap(Team turnTeam) => Calls.Add(("Swap", turnTeam));
-    public void OnRequestActive(Team turnTeam) => Calls.Add(("Active", turnTeam));
-}
-
-public class FakeActor : IActionHandler
-{
-    readonly PhaseManager phaseManager;
-    public FakeActor(PhaseManager pm) => phaseManager = pm;
-
-    public void OnRequestSwap(Team team) => phaseManager.SubmitAction(team);
-    public void OnRequestActive(Team team) => phaseManager.SubmitAction(team);
 }

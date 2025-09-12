@@ -136,25 +136,16 @@ public class PhaseTests
         sut.SubmitAction(Team.Blue); // Done/All 이벤트 발생
 
 
-        Assert.AreEqual(1, banEvents.Count);
         Assert.AreEqual(Team.Blue, banEvents[0]);
-
-        Assert.AreEqual(1, pickEvents.Count);
         Assert.AreEqual(Team.Red, pickEvents[0]);
-
-        Assert.AreEqual(1, swapEvents.Count);
-
-        Assert.AreEqual(Team.All, swapEvents[0]);
-        Assert.AreEqual(1, traitEvents.Count);
-
-        Assert.AreEqual(Team.Blue, traitEvents[0]); // 끝
+        Assert.AreEqual(Team.Blue, traitEvents[0]);
 
         // 다른 이벤트들은 추가로 발생하지 않았음을 확인
         Assert.AreEqual(1, banEvents.Count);
         Assert.AreEqual(1, pickEvents.Count);
-        Assert.AreEqual(1, swapEvents.Count);
+        Assert.AreEqual(2, swapEvents.Count);
         Assert.AreEqual(1, traitEvents.Count);
-        Assert.AreEqual(1, doneEvents.Count);
+        Assert.AreEqual(2, doneEvents.Count);
     }
 
     [Test]
@@ -172,5 +163,18 @@ public class PhaseTests
         Assert.AreEqual(2, banEvents.Count);
         Assert.AreEqual(Team.Blue, banEvents[0]);
         Assert.AreEqual(Team.Red, banEvents[1]);
+    }
+
+    [Test]
+    public void All일_경우_모든_팀에_이벤트_호출()
+    {
+        var sut = new PhaseManager(new[] { CreateData(GamePhase.Swap, Team.All) });
+
+        int count = 0;
+        sut.OnPhaseSwap += (team) => count++;
+
+        sut.Start();
+
+        Assert.AreEqual(2, count);
     }
 }
