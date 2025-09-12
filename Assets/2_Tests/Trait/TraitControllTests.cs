@@ -1,6 +1,14 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 
+public class TestAttackChanger : ITraitAction
+{
+    readonly int Amount;
+    public TestAttackChanger(int amount) => Amount = amount;
+
+    public ChampionStatData Do(ChampionStatData stat) => stat.ChangeAttack(stat.Attack + Amount);
+}
+
 public class TraitControllTests
 {
     [Test]
