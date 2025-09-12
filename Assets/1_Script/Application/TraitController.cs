@@ -23,14 +23,14 @@ public class TraitController
         traitUseFlags = traitsByTeam.ToDictionary(x => x.Key, x => new bool[x.Value.Count]);
     }
 
-    public bool UseTrait(Team team, int traitIndex, int targetIndex)
+    public bool UseTrait(ChampionSlot traitSlot, ChampionSlot targetSlot)
     {
-        if (traitUseFlags[team][traitIndex] == true) return false;
-        
-        Trait trait = championsByTeam[team][traitIndex].Trait;
-        var targetIds = targetFinder.GetTargetIds(trait.TargetRange, targetIndex);
-        ExecuteTrait(trait.TraitAction, targetIds.Select(x => championsByTeam[BanPickEnumCaster.GetTargetTeam(team, trait.TargetSide)][x]));
-        traitUseFlags[team][traitIndex] = true;
+        if (traitUseFlags[traitSlot.Team][traitSlot.Index] == true) return false;
+
+        Trait trait = championsByTeam[traitSlot.Team][traitSlot.Index].Trait;
+        var targets = targetFinder.GetTargetSlots(traitSlot.Team, trait.TargetSide, trait.TargetRange, targetSlot);
+        ExecuteTrait(trait.TraitAction, targets.Select(x => championsByTeam[x.Team][x.Index]));
+        traitUseFlags[traitSlot.Team][traitSlot.Index] = true;
         return true;
     }
 

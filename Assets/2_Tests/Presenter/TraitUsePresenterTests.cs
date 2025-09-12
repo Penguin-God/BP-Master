@@ -27,7 +27,7 @@ public class TraitUsePresenterTests
 
         Assert.AreEqual(TraitClickResult.Select, presenter.ClickChampion(CreateSlot(Team.Blue, 0)));
 
-        Assert.AreEqual(TraitClickResult.Use, presenter.ClickChampion(CreateSlot(Team.Blue, 0)));
+        Assert.AreEqual(TraitClickResult.Use, presenter.ClickChampion(CreateSlot(Team.Red, 0)));
     }
 
     [Test]

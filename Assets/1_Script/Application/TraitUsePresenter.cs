@@ -42,7 +42,7 @@ public class TraitUsePresenter // 타겟들 다 포함
     {
         var sel = selected.Value;
 
-        if (traitController.UseTrait(currentTeam, sel.Index, targetSlot.Index))
+        if (traitController.UseTrait(selected.Value, targetSlot))
         {
             OnTraitUsed?.Invoke(currentTeam);
             selected = null;

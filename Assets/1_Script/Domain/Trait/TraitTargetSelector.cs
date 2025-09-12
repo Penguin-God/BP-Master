@@ -34,7 +34,11 @@ public class TraitTargetSelector
     public IEnumerable<ChampionSlot> GetTargetSlots(Team team, Side targetSide, TargetRange targetRange, ChampionSlot targetSlot)
     {
         var targetTeam = BanPickEnumCaster.GetTargetTeam(team, targetSide);
-        if (targetSlot.Team != targetTeam) return null;
+        if (targetSlot.Team != targetTeam)
+        {
+            UnityEngine.Debug.Log($"잘못된 팀 {targetTeam}");
+            return null;
+        }
 
         switch (targetRange)
         {
