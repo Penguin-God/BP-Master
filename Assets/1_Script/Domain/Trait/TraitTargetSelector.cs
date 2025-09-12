@@ -28,16 +28,5 @@ public class TraitTargetSelector
         }
     }
 
-    public IEnumerable<ChampionSlot> GetTargetSlot(Team team, Side side, TargetRange range, ChampionSlot clickedSlot)
-    {
-        var expectedTeam = BanPickEnumCaster.GetTargetTeam(team, side);
-        if (clickedSlot.Team != expectedTeam) return null;
-
-        switch (range)
-        {
-            case TargetRange.Single: return new[] { new ChampionSlot(expectedTeam, clickedSlot.Index) };
-            case TargetRange.All: return Enumerable.Range(0, teamCount).Select(i => new ChampionSlot(expectedTeam, i));
-            default: return null;
-        }
-    }
+    public IEnumerable<ChampionSlot> GetTargetableSlot(Team team, Side side) => Enumerable.Range(0, teamCount).Select(i => new ChampionSlot(BanPickEnumCaster.GetTargetTeam(team, side), i));
 }
