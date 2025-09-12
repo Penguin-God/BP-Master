@@ -22,7 +22,7 @@ public class TraitTargetFindingTests
     }
 
     [Test]
-    public void 적절한_팀_전체_반환()
+    public void 타겟_팀의_전체_슬롯_반환()
     {
         var sut = new TraitTargetSelector(3);
 

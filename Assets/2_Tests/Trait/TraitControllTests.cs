@@ -49,7 +49,7 @@ public class TraitControllTests
     }
 
     [Test]
-    public void 버그_시연_시전자와_타겟_인덱스_달라질_때()
+    public void 시전자와_타겟_인덱스_달라질_때()
     {
         var data = new Dictionary<Team, IReadOnlyList<Champion>>
         {

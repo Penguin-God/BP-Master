@@ -20,7 +20,7 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 결과에_따라_enum반환()
+    public void 클릭_결과에_따라_enum반환()
     {
         presenter.ChangeTeam(Team.Blue);
         Assert.AreEqual(TraitClickResult.Faild, presenter.ClickChampion(CreateSlot(Team.Red, 0)));
@@ -31,7 +31,7 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 특성_사용_후_이벤트()
+    public void 특성_사용_후_이벤트_호출()
     {
         Team result = Team.Red;
         presenter.OnTraitUsed += _ => result = _;
@@ -44,7 +44,7 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 선택_가능_슬롯들_반환()
+    public void 클릭_상태에_따라_선택_가능한_슬롯들_반환()
     {
         presenter.ChangeTeam(Team.Blue);
 
