@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ChampionManager
+public class ChampionManager // 얘 어따 쓰지? Storage받고 챔피언으로 바꾸는 작업할까
 {
     readonly IEnumerable<Champion> allChampion;
     public IReadOnlyList<Champion> AllChampion => allChampion.ToArray();

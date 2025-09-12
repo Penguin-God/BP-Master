@@ -28,7 +28,6 @@ public class TraitControllTests
         };
         var sut = new TraitController(data);
 
-        // Blue 0번이 사용
         Assert.IsTrue(sut.UseTrait(TestHelper.CreateBlueSlot(0), TestHelper.CreateRedSlot(0)));
 
         // 시전자 슬롯만 true

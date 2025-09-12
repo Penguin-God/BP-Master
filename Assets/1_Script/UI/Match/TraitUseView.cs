@@ -39,7 +39,7 @@ public class TraitUseView : MonoBehaviour
             item.enabled = false;
     }
 
-    public void UpdateTrait(Team team)
+    public void UpdateTrait(Team team) // ActiveButtons 발동 순간이 애매함
     {
         presenter.ChangeTeam(team);
         ActiveButtons();
