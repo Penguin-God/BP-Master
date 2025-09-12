@@ -1,22 +1,14 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 
-public class TestAttackChanger : ITraitAction
-{
-    readonly int Amount;
-    public TestAttackChanger(int amount) => Amount = amount;
-
-    public ChampionStatData Do(ChampionStatData stat) => stat.ChangeAttack(stat.Attack + Amount);
-}
-
 public class TraitControllTests
 {
     [Test]
     public void 선택한_특성_타겟에_적용()
     {
         Dictionary<Team, IReadOnlyList<Champion>> data = new();
-        data.Add(Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
-        data.Add(Team.Red, new Champion[] { new Champion(13, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
+        data.Add(Team.Blue, new Champion[] { TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 10) });
+        data.Add(Team.Red, new Champion[] { TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 10) });
         TraitController traitPresenter = new TraitController(data);
 
         Assert.IsTrue(traitPresenter.UseTrait(Team.Blue, 0, 0));
@@ -27,8 +19,8 @@ public class TraitControllTests
     public void 한_챔피언이_특성_중복_사용_불가()
     {
         Dictionary<Team, IReadOnlyList<Champion>> data = new();
-        data.Add(Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
-        data.Add(Team.Red, new Champion[] { new Champion(13, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) });
+        data.Add(Team.Blue, new Champion[] { TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 10) });
+        data.Add(Team.Red, new Champion[] { TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 10) });
         TraitController traitPresenter = new TraitController(data);
 
         Assert.IsTrue(traitPresenter.UseTrait(Team.Blue, 0, 0));
@@ -43,8 +35,8 @@ public class TraitControllTests
     {
         var data = new Dictionary<Team, IReadOnlyList<Champion>>
         {
-            { Team.Blue, new Champion[] { new Champion(3, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) } },
-            { Team.Red,  new Champion[] { new Champion(13, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(10))) } }
+            { Team.Blue, new Champion[] { TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 10) } },
+            { Team.Red,  new Champion[] { TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 10) } }
         };
         var sut = new TraitController(data);
 
@@ -52,8 +44,8 @@ public class TraitControllTests
         Assert.IsTrue(sut.UseTrait(Team.Blue, 0, 0));
 
         // 시전자 슬롯만 true
-        Assert.IsTrue(sut.IsTraitUsed(new ChampionSlot(Team.Blue, 0)));
-        Assert.IsFalse(sut.IsTraitUsed(new ChampionSlot(Team.Red, 0)));
+        Assert.IsTrue(sut.IsTraitUsed(TestHelper.CreateBlueSlot(0)));
+        Assert.IsFalse(sut.IsTraitUsed(TestHelper.CreateRedSlot(0)));
     }
 
     [Test]
@@ -65,15 +57,15 @@ public class TraitControllTests
                 Team.Blue,
                 new Champion[]
                 {
-                    new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(5))),
-                    new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(11))),
+                    TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 5),
+                    TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 11),
                 }
             },
             {
                 Team.Red,
                 new Champion[]
                 {
-                    new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.Single, new TestAttackChanger(999))) // 사용 안 됨
+                    TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.Single, 999) // 사용 안 됨
                 }
             }
         };
@@ -86,7 +78,7 @@ public class TraitControllTests
         Assert.AreEqual(11, data[Team.Red][0].StatData.Attack);
 
         // ✅ 기대: 사용 플래그는 Blue[1]만 true
-        Assert.IsFalse(sut.IsTraitUsed(new ChampionSlot(Team.Blue, 0)));
-        Assert.IsTrue(sut.IsTraitUsed(new ChampionSlot(Team.Blue, 1)));
+        Assert.IsFalse(sut.IsTraitUsed(TestHelper.CreateBlueSlot(0)));
+        Assert.IsTrue(sut.IsTraitUsed(TestHelper.CreateBlueSlot(1)));
     }
 }

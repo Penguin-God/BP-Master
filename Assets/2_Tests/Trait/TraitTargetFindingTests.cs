@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 public class TraitTargetFindingTests
@@ -25,12 +26,9 @@ public class TraitTargetFindingTests
     {
         var sut = new TraitTargetSelector(3);
 
-        CollectionAssert.AreEqual(CreateSlots(CreateSlot(Team.Red, 0), CreateSlot(Team.Red, 1), CreateSlot(Team.Red, 2)), sut.GetTargetableSlot(Team.Blue, Side.Opponent));
-        CollectionAssert.AreEqual(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), sut.GetTargetableSlot(Team.Blue, Side.Self));
-        CollectionAssert.AreEqual(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), sut.GetTargetableSlot(Team.Blue, Side.Self));
-        CollectionAssert.AreEqual(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), sut.GetTargetableSlot(Team.Red, Side.Opponent));
+        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Opponent));
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Red, Side.Opponent));
     }
-
-    ChampionSlot CreateSlot(Team team, int index) => new ChampionSlot(team, index);
-    ChampionSlot[] CreateSlots(params ChampionSlot[] slots) => slots;
 }

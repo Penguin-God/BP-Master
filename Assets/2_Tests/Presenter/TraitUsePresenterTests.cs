@@ -8,8 +8,8 @@ public class TraitUsePresenterTests
     [SetUp]
     public void SetUp()
     {
-        var blueChamp = new Champion(0, "", default, new Trait(Side.Opponent, TargetRange.All, new TestAttackChanger(0)));
-        var redChamp = new Champion(0, "", default, new Trait(Side.Self, TargetRange.Single, new TestAttackChanger(0)));
+        var blueChamp = TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0);
+        var redChamp = TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0);
 
         var teams = new Dictionary<Team, IReadOnlyList<Champion>>
         {
@@ -48,15 +48,13 @@ public class TraitUsePresenterTests
     {
         presenter.ChangeTeam(Team.Blue);
 
-        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());
         presenter.ClickChampion(CreateSlot(Team.Blue, 1));
-        UnityEngine.Debug.Log(presenter.GetClickableSlots());
-        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Red, 0), CreateSlot(Team.Red, 1), CreateSlot(Team.Red, 2)), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), presenter.GetClickableSlots());
         presenter.ClickChampion(CreateSlot(Team.Red, 0));
 
-        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
 
-    ChampionSlot[] CreateSlots(params ChampionSlot[] slots) => slots;
     ChampionSlot CreateSlot(Team team, int index) => new ChampionSlot(team, index);
 }
