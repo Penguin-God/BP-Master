@@ -4,10 +4,11 @@ using System.Linq;
 
 public class TraitTargetFindingTests
 {
+    TraitTargetSelector CreateSut(int count) => new TraitTargetSelector(count);
     [Test]
     public void 싱글은_단일_index_반환()
     {
-        var sut = new TraitTargetSelector(3);
+        var sut = CreateSut(3);
 
         Assert.AreEqual(1, sut.GetTargetIds(TargetRange.Single, 1).First());
         Assert.AreEqual(2, sut.GetTargetIds(TargetRange.Single, 2).First());
@@ -16,19 +17,39 @@ public class TraitTargetFindingTests
     [Test]
     public void All은_전체_index_반환()
     {
-        var sut = new TraitTargetSelector(3);
+        var sut = CreateSut(3);
 
         CollectionAssert.AreEqual(new int[] { 0, 1, 2 }, sut.GetTargetIds(TargetRange.All, 0));
     }
 
     [Test]
-    public void 타겟_팀의_전체_슬롯_반환()
+    public void 타겟_팀전체_슬롯_반환()
     {
-        var sut = new TraitTargetSelector(3);
+        var sut = CreateSut(3);
 
         CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Opponent));
         CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
         CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
         CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Red, Side.Opponent));
+    }
+
+    [Test]
+    public void 범위에_따른_타겟_슬롯들_반환()
+    {
+        var sut = CreateSut(3);
+
+        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetSlots(Team.Blue, Side.Opponent, TargetRange.All, TestHelper.CreateRedSlot(0)));
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(1), sut.GetTargetSlots(Team.Blue, Side.Self, TargetRange.Single, TestHelper.CreateBlueSlot(1)));
+
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetSlots(Team.Red, Side.Opponent, TargetRange.All, TestHelper.CreateBlueSlot(0)));
+    }
+
+    [Test]
+    public void 잘못된_타겟주면_null_반환()
+    {
+        var sut = CreateSut(3);
+
+        Assert.IsNull(sut.GetTargetSlots(Team.Blue, Side.Opponent, TargetRange.All, TestHelper.CreateBlueSlot(0)));
+        Assert.IsNull(sut.GetTargetSlots(Team.Red, Side.Self, TargetRange.Single, TestHelper.CreateBlueSlot(0)));
     }
 }

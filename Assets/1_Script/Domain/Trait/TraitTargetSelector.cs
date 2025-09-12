@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,4 +30,17 @@ public class TraitTargetSelector
     }
 
     public IEnumerable<ChampionSlot> GetTargetableSlot(Team team, Side side) => Enumerable.Range(0, teamCount).Select(i => new ChampionSlot(BanPickEnumCaster.GetTargetTeam(team, side), i));
+
+    public IEnumerable<ChampionSlot> GetTargetSlots(Team team, Side targetSide, TargetRange targetRange, ChampionSlot targetSlot)
+    {
+        var targetTeam = BanPickEnumCaster.GetTargetTeam(team, targetSide);
+        if (targetSlot.Team != targetTeam) return null;
+
+        switch (targetRange)
+        {
+            case TargetRange.Single:return new[] { new ChampionSlot(targetTeam, targetSlot.Index) };
+            case TargetRange.All: return Enumerable.Range(0, teamCount).Select(i => new ChampionSlot(targetTeam, i));
+            default: return null;
+        }
+    }
 }
