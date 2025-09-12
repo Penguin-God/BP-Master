@@ -1,6 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
-public class TraitTargetSelector // 여기에 Side랑 팀 받아서 타겟 리턴하는 경우도 추가하기
+
+public struct ChampionSlot
+{
+    public readonly Team Team;
+    public readonly int Index;
+
+    public ChampionSlot(Team team, int index)
+    {
+        Team = team;
+        Index = index;
+    }
+}
+
+public class TraitTargetSelector
 {
     readonly int teamCount;
     public TraitTargetSelector(int count) => teamCount = count;
@@ -11,6 +24,19 @@ public class TraitTargetSelector // 여기에 Side랑 팀 받아서 타겟 리�
         {
             case TargetRange.Single: return new int[] { targetIndex };
             case TargetRange.All: return Enumerable.Range(0, teamCount);
+            default: return null;
+        }
+    }
+
+    public IEnumerable<ChampionSlot> GetTargetSlot(Team casterTeam, Side side, TargetRange range, ChampionSlot clickedSlot)
+    {
+        var expectedTeam = BanPickEnumCaster.GetTargetTeam(casterTeam, side);
+        if (clickedSlot.Team != expectedTeam) return null;
+
+        switch (range)
+        {
+            case TargetRange.Single: return new[] { new ChampionSlot(expectedTeam, clickedSlot.Index) };
+            case TargetRange.All: return Enumerable.Range(0, teamCount).Select(i => new ChampionSlot(expectedTeam, i));
             default: return null;
         }
     }
