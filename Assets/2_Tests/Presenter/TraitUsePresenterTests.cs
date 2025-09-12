@@ -16,7 +16,7 @@ public class TraitUsePresenterTests
             { Team.Blue, new List<Champion>{ blueChamp, blueChamp, blueChamp } },
             { Team.Red, new List<Champion>{ redChamp, redChamp, redChamp } }
         }; // 만들기 귀찮아서 복붙했는데 이럼 특성이 싹다 적용되긴해
-        presenter = new TraitUsePresenter(new TraitController(teams), new TraitTargetSelector(3));
+        presenter = new TraitUsePresenter(new TraitController(teams));
     }
 
     [Test]
@@ -49,12 +49,12 @@ public class TraitUsePresenterTests
         presenter.ChangeTeam(Team.Blue);
 
         CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
-        presenter.ClickChampion(CreateSlot(Team.Blue, 0));
+        presenter.ClickChampion(CreateSlot(Team.Blue, 1));
         UnityEngine.Debug.Log(presenter.GetClickableSlots());
         CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Red, 0), CreateSlot(Team.Red, 1), CreateSlot(Team.Red, 2)), presenter.GetClickableSlots());
         presenter.ClickChampion(CreateSlot(Team.Red, 0));
 
-        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 1), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(CreateSlots(CreateSlot(Team.Blue, 0), CreateSlot(Team.Blue, 2)), presenter.GetClickableSlots());
     }
 
     ChampionSlot[] CreateSlots(params ChampionSlot[] slots) => slots;

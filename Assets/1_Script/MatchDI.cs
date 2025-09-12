@@ -40,9 +40,9 @@ public class MatchDI : MonoBehaviour
         // 그냥 밴픽 끝나면 알아서 넣어주면 안되냐
         pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => champManager.GetChampion(x)).ToList());
         var presenter = new TraitUsePresenter(new TraitController(pickChampions));
-        presenter.ChangeTeam(team);
-        phaseManager.OnPhaseTrait += presenter.ChangeTeam;
         traitUseView.Init(presenter);
+        phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
+        traitUseView.UpdateTrait(team);
         presenter.OnTraitUsed += phaseManager.SubmitAction;
         presenter.OnTraitUsed += _ => banPickView.UpdateAllPick(pickChampions);
         initTrait = true;

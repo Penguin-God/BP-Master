@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,15 +15,13 @@ public class TraitUseView : MonoBehaviour
     {
         gameObject.SetActive(true);
         this.presenter = presenter;
-    }
 
-    void Start()
-    {
         buttons.Add(Team.Blue, blueChamps);
         buttons.Add(Team.Red, redChamps);
 
         SetupChampionButtons(blueChamps, Team.Blue);
         SetupChampionButtons(redChamps, Team.Red);
+        InActiveAllBtns();
     }
 
     void SetupChampionButtons(Button[] btns, Team buttonTeam)
@@ -34,6 +33,24 @@ public class TraitUseView : MonoBehaviour
         }
     }
 
+    void InActiveAllBtns()
+    {
+        foreach (Button item in buttons.Values.SelectMany(x => x))
+            item.enabled = false;
+    }
+
+    public void UpdateTrait(Team team)
+    {
+        presenter.ChangeTeam(team);
+        ActiveButtons();
+    }
+
+    void ActiveButtons()
+    {
+        InActiveAllBtns();
+        foreach (var slot in presenter.GetClickableSlots())
+            buttons[slot.Team][slot.Index].enabled = true;
+    }
 
     void OnButtonClicked(Team buttonTeam, int index)
     {
@@ -45,9 +62,11 @@ public class TraitUseView : MonoBehaviour
                 break;
             case TraitClickResult.Select:
                 print(buttonTeam + " select");
+                ActiveButtons();
                 break;
             case TraitClickResult.Use:
                 print(buttonTeam + " use");
+                ActiveButtons();
                 break;
         }
     }

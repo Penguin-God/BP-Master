@@ -15,16 +15,7 @@ public class TraitUsePresenter // 타겟들 다 포함
     Team currentTeam = Team.All;
 
     public event Action<Team> OnTraitUsed;
-    readonly TraitTargetSelector targetSelector;
-    public TraitUsePresenter(TraitController traitController, TraitTargetSelector targetSelector)
-    {
-        this.traitController = traitController;
-        this.targetSelector = targetSelector;
-    }
-
-    public TraitUsePresenter(TraitController traitController)
-    {
-    }
+    public TraitUsePresenter(TraitController traitController) => this.traitController = traitController;
     public void ChangeTeam(Team team) => currentTeam = team;
 
     ChampionSlot? selected; // 선택된 시전자
@@ -62,18 +53,18 @@ public class TraitUsePresenter // 타겟들 다 포함
 
     public IEnumerable<ChampionSlot> GetClickableSlots()
     {
+        int size = traitController.GetTeamSize(currentTeam);
         // 선택 전: 현재 팀의 미사용 슬롯
         if (IsSelect == false)
         {
-            int size = traitController.GetTeamSize(currentTeam);
             return Enumerable.Range(0, size)
                              .Select(i => new ChampionSlot(currentTeam, i))
-                             .Where(slot => !traitController.IsTraitUsed(slot));
+                             .Where(slot => traitController.IsTraitUsed(slot) == false);
         }
 
-        // 선택 후: 시전자의 Trait(Side/Range)에 따라 타겟 후보 생성 → 미사용만
+        // 선택 후: 시전자의 TraitSide에 따라 타겟 후보 생성
         var sel = selected.Value;
         var trait = traitController.GetTrait(currentTeam, sel.Index);
-        return targetSelector.GetTargetableSlot(currentTeam, trait.TargetSide);
+        return new TraitTargetSelector(size).GetTargetableSlot(currentTeam, trait.TargetSide);
     }
 }
