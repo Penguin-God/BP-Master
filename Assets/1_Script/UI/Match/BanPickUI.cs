@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BanPickUI : MonoBehaviour, IActionHandler
+public class BanPickUI : MonoBehaviour
 {
     BanPickView view;
     [SerializeField] Button nailDownBtn;
@@ -45,7 +45,6 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         swapDoneBtn.onClick.AddListener(() => SwapDone(team));
     }
 
-    public void OnRequestSwap(Team team) { }//=> swapDoneBtn.onClick.AddListener(() => SwapDone(team));
     void SwapDone(Team team)
     {
         if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)

@@ -23,7 +23,6 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Trait, new Phase(new Team[] { Team.Blue, Team.Red, Team.Blue, Team.Red, Team.Blue, Team.Red  })),
         };
         phaseManager = new(phase);
-        phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
 
         phaseManager.OnPhaseSwap += BanPickUI.OnSwap;
         phaseManager.OnPhaseTrait += Trait;
