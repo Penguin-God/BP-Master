@@ -25,8 +25,8 @@ public class MatchDI : MonoBehaviour
         phaseManager = new(phase);
         phaseManager.OnFlowChanged += new PhaseActionDispatcher(BanPickUI, BanPickUI).OnRequestAction;
 
+        phaseManager.OnPhaseSwap += BanPickUI.OnSwap;
         phaseManager.OnPhaseTrait += Trait;
-        
         phaseManager.OnPhaseDone += OnDone;
 
         BanPickUI.Init(storage, phaseManager); // start보다 먼저. 

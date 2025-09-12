@@ -20,6 +20,7 @@ public class BanPickUI : MonoBehaviour, IActionHandler
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
+        swapDoneBtn.gameObject.SetActive(false);
     }
 
     void SelectChampion(ChampionSO champion)
@@ -38,7 +39,13 @@ public class BanPickUI : MonoBehaviour, IActionHandler
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
     }
 
-    public void OnRequestSwap(Team team) => swapDoneBtn.onClick.AddListener(() => SwapDone(team));
+    public void OnSwap(Team team)
+    {
+        swapDoneBtn.gameObject.SetActive(true);
+        swapDoneBtn.onClick.AddListener(() => SwapDone(team));
+    }
+
+    public void OnRequestSwap(Team team) { }//=> swapDoneBtn.onClick.AddListener(() => SwapDone(team));
     void SwapDone(Team team)
     {
         if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
