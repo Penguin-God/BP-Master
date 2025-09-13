@@ -15,7 +15,7 @@ public class BanPickView : MonoBehaviour
 
 
     
-    readonly TeamSlotCursor pickCursor = new TeamSlotCursor();
+    readonly TeamSlotIndexr pickCursor = new TeamSlotIndexr();
     void Start()
     {
         pickTextDict.Add(Team.Blue, bluePicks);
@@ -42,11 +42,7 @@ public class BanPickView : MonoBehaviour
             pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i].StatData);
     }
 
-    void UpdatePickView(Team team, ChampionSO champion)
-    {
-        var slot = pickCursor.GetNextSlot(team);
-        pickTextDict[team][slot.Index].UpdateDisplay(champion);
-    }
+    void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.GetNextIndex(team)].UpdateDisplay(champion);
 
     void UpdateBanView(Team team, ChampionSO champion)
     {

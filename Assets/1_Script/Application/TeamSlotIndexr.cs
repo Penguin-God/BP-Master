@@ -1,23 +1,23 @@
 using System;
 
-public class TeamSlotCursor
+public class TeamSlotIndexr
 {
     int blueIndex;
     int redIndex;
 
-    public ChampionSlot GetNextSlot(Team team)
+    public int GetNextIndex(Team team)
     {
         if (team == Team.Blue)
         {
-            var slot = new ChampionSlot(Team.Blue, blueIndex);
+            var result = blueIndex;
             blueIndex++;
-            return slot;
+            return result;
         }
         else if (team == Team.Red)
         {
-            var slot = new ChampionSlot(Team.Red, redIndex);
+            var result = redIndex;
             redIndex++;
-            return slot;
+            return result;
         }
 
         throw new ArgumentException($"Unknown team: {team}");
