@@ -14,8 +14,8 @@ public class BanPickView : MonoBehaviour
     readonly Dictionary<Team, TextMeshProUGUI> banTextDict = new();
 
 
-    [SerializeField] TextMeshProUGUI selectChampionTxt;
-    readonly TeamSlotCursor banPickPersenter = new TeamSlotCursor();
+    
+    readonly TeamSlotCursor pickCursor = new TeamSlotCursor();
     void Start()
     {
         pickTextDict.Add(Team.Blue, bluePicks);
@@ -26,9 +26,6 @@ public class BanPickView : MonoBehaviour
         blueBan.text = string.Empty;
         redBan.text = string.Empty;
     }
-
-    public void UpdateSelectChampion(ChampionSO champion) => selectChampionTxt.text = champion.ChampionName;
-
 
     public void UpdateSelectView(GamePhase phase, Team team, ChampionSO champion)
     {
@@ -47,7 +44,7 @@ public class BanPickView : MonoBehaviour
 
     void UpdatePickView(Team team, ChampionSO champion)
     {
-        var slot = banPickPersenter.GetNextSlot(team);
+        var slot = pickCursor.GetNextSlot(team);
         pickTextDict[team][slot.Index].UpdateDisplay(champion);
     }
 

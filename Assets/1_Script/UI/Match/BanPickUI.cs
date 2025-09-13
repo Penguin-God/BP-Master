@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,8 @@ public class BanPickUI : MonoBehaviour
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
     [SerializeField] Button swapDoneBtn;
-    
+    [SerializeField] TextMeshProUGUI selectChampionTxt;
+
     ChampionSelectPresenter championSelectPresenter = null;
     PhaseManager phaseManager;
     public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
@@ -26,7 +28,7 @@ public class BanPickUI : MonoBehaviour
     void SelectChampion(ChampionSO champion)
     {
         championSelectPresenter.SelectChamp(champion.Id);
-        view.UpdateSelectChampion(champion);
+        selectChampionTxt.text = champion.ChampionName;
     }
 
     [SerializeField] ChampionManagerMono championManager;
@@ -37,6 +39,7 @@ public class BanPickUI : MonoBehaviour
 
         view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
+        selectChampionTxt.text = string.Empty;
     }
 
     public void OnSwap(Team team)
