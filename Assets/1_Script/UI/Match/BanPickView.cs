@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ public class BanPickView : MonoBehaviour
 
 
     [SerializeField] TextMeshProUGUI selectChampionTxt;
-
+    readonly BanPickPersenter banPickPersenter = new BanPickPersenter();
     void Start()
     {
         pickTextDict.Add(Team.Blue, bluePicks);
@@ -26,13 +25,11 @@ public class BanPickView : MonoBehaviour
         banTextDict.Add(Team.Red, redBan);
         blueBan.text = string.Empty;
         redBan.text = string.Empty;
-
     }
 
     public void UpdateSelectChampion(ChampionSO champion) => selectChampionTxt.text = champion.ChampionName;
 
-    int blueIndex;
-    int redIndex;
+
     public void UpdateSelectView(GamePhase phase, Team team, ChampionSO champion)
     {
         if (phase == GamePhase.Pick) UpdatePickView(team, champion);
@@ -48,34 +45,10 @@ public class BanPickView : MonoBehaviour
             pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i].StatData);
     }
 
-    //void UpdatePickView(Team team, ChampionSO champion)
-    //{
-    //    if(team == Team.Red)
-    //    {
-    //        pickTextDict[team][redIndex].UpdateDisplay(champion);
-    //        redIndex++;
-    //    }
-    //    else if(team == Team.Blue)
-    //    {
-    //        pickTextDict[team][blueIndex].UpdateDisplay(champion);
-    //        blueIndex++;
-    //    }
-    //}
-
     void UpdatePickView(Team team, ChampionSO champion)
     {
-        if (team == Team.Red)
-        {
-            pickTextDict[team][redIndex].UpdateDisplay(champion);
-            redIndex++;
-        }
-        else if (team == Team.Blue)
-        {
-            pickTextDict[team][blueIndex].UpdateDisplay(champion);
-            blueIndex++;
-        }
-
-        // var slot = new Presenter().GetSlot(team);
+        var slot = banPickPersenter.GetNextSlot(team);
+        pickTextDict[team][slot.Index].UpdateDisplay(champion);
     }
 
     void UpdateBanView(Team team, ChampionSO champion)
