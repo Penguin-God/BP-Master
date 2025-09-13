@@ -19,7 +19,5 @@ public class TestAttackChanger : ITraitAction
     readonly int Amount;
     public TestAttackChanger(int amount) => Amount = amount;
 
-    public ChampionStatData Do(ChampionStatData stat) => stat.ChangeAttack(stat.Attack + Amount);
-
     public void Do(Champion target) => target.ChangeStat(target.StatData.ChangeAttack(target.StatData.Attack + Amount));
 }
