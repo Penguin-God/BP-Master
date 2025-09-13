@@ -3,37 +3,41 @@ using NUnit.Framework;
 public class TraitActionTests
 {
     [Test]
-    public void 챔피언_공_변경()
+    [TestCase(10, 21)]
+    [TestCase(-5, 6)]
+    public void 챔피언_공_변경(int amount, int expected)
     {
         var target = TestHelper.CreateStatChamp(11, 0, 0);
-        AttackChanger sut = new(10);
+        var sut = new AttackChanger(amount);
 
         sut.Do(target);
 
-        Assert.AreEqual(21, target.StatData.Attack);
+        Assert.AreEqual(expected, target.StatData.Attack);
     }
 
     [Test]
-    public void 챔피언_방_변경()
+    [TestCase(5, 15)]
+    [TestCase(-3, 7)]
+    public void 챔피언_방_변경(int amount, int expected)
     {
         var target = TestHelper.CreateStatChamp(0, 10, 0);
-        var sut = new DefenseChanger(5);
+        var sut = new DefenseChanger(amount);
 
         sut.Do(target);
 
-        Assert.AreEqual(15, target.StatData.Defense);
+        Assert.AreEqual(expected, target.StatData.Defense);
     }
 
     [Test]
-    public void 챔피언_속_변경()
+    [TestCase(3, 10)]
+    [TestCase(-2, 5)]
+    public void 챔피언_속_변경(int amount, int expected)
     {
         var target = TestHelper.CreateStatChamp(0, 0, 7);
-        var sut = new SpeedChanger(3);
+        var sut = new SpeedChanger(amount);
 
         sut.Do(target);
 
-        Assert.AreEqual(10, target.StatData.Speed);
+        Assert.AreEqual(expected, target.StatData.Speed);
     }
-
-    ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }
