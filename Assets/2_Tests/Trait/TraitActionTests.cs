@@ -16,6 +16,17 @@ public class TraitActionTests
     }
 
     [Test]
+    public void 챔피언_공_변경()
+    {
+        var target = new Champion(0, "", default, null);
+        AttackChanger sut = new(target, 10);
+
+        sut.Do();
+
+        Assert.AreEqual(10, target.StatData.Attack);
+    }
+
+    [Test]
     [TestCase(5, 15)]
     [TestCase(-3, 7)]
     public void 방_변경(int amount, int expected)
