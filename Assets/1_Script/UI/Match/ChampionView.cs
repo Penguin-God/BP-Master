@@ -15,7 +15,7 @@ public class ChampionView : MonoBehaviour
     ChampionPersenter championPersenter = new ChampionPersenter();
     public void UpdateDisplay(ChampionSO champion)
     {
-        var viewModel = championPersenter.Present(champion.StatData, champion.TraitData.CreateUI_Data());
+        var viewModel = championPersenter.CreateViewModel(champion.StatData, champion.TraitData.CreateUI_Data());
         nameText.text = champion.ChampionName;
         attackText.text = viewModel.Attack;
         defenseText.text = viewModel.Defense;
@@ -24,7 +24,7 @@ public class ChampionView : MonoBehaviour
 
     public void UpdateStat(ChampionStatData statData)
     {
-        var viewModel = championPersenter.Present(statData, default);
+        var viewModel = championPersenter.CreateViewModel(statData, default);
         attackText.text = viewModel.Attack;
         defenseText.text = viewModel.Defense;
         speedText.text = viewModel.Speed;

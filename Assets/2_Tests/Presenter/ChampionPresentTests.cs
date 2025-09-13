@@ -7,7 +7,7 @@ public class ChampionPresentTests
     {
         var sut = new ChampionPersenter();
 
-        ChampionViewModel result = sut.Present(new ChampionStatData(10, 12, 6), default);
+        ChampionViewModel result = sut.CreateViewModel(new ChampionStatData(10, 12, 6), default);
 
         Assert.AreEqual("공격력 : 10", result.Attack);
         Assert.AreEqual("방어력 : 12", result.Defense);
@@ -20,7 +20,7 @@ public class ChampionPresentTests
         var sut = new ChampionPersenter();
         
         // 편의 함수
-        string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.Present(default, new TraitUI_Data(traitType, side, range, amount)).Trait;
+        string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.CreateViewModel(default, new TraitUI_Data(traitType, side, range, amount)).Trait;
 
         Assert.AreEqual("아군 전체 공격력 10 증가", GetTraitText(TraitType.AttackChanger, Side.Self, TargetRange.All, 10));
         Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10));

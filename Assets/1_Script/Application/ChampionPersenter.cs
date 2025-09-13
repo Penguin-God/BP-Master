@@ -34,14 +34,14 @@ public struct TraitUI_Data
 
 public class ChampionPersenter
 {
-    public ChampionViewModel Present(ChampionStatData stat, TraitUI_Data traitData) => new ChampionViewModel(
+    public ChampionViewModel CreateViewModel(ChampionStatData stat, TraitUI_Data traitData) => new ChampionViewModel(
         $"공격력 : {stat.Attack}",
         $"방어력 : {stat.Defense}",
         $"속도 : {stat.Speed}",
-        $"{BuildTargetText(traitData.TargetSide, traitData.Range)} {BuildTraitText(traitData.TraitType, traitData.Amount)}"
+        $"{BuildTargetRuleText(traitData.TargetSide, traitData.Range)} {BuildTraitText(traitData.TraitType, traitData.Amount)}"
         );
 
-    string BuildTargetText(Side side, TargetRange range) => (side, range) switch
+    string BuildTargetRuleText(Side side, TargetRange range) => (side, range) switch
     {
         (Side.Self, TargetRange.Single) => "아군 단일 대상",
         (Side.Self, TargetRange.All) => "아군 전체",
