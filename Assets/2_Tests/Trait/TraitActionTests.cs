@@ -18,12 +18,12 @@ public class TraitActionTests
     [Test]
     public void 챔피언_공_변경()
     {
-        var target = new Champion(0, "", default, null);
-        AttackChanger sut = new(target, 10);
+        var target = TestHelper.CreateStatChamp(11, 0, 0);
+        AttackChanger sut = new(10);
 
-        sut.Do();
+        sut.Do(target);
 
-        Assert.AreEqual(10, target.StatData.Attack);
+        Assert.AreEqual(21, target.StatData.Attack);
     }
 
     [Test]
