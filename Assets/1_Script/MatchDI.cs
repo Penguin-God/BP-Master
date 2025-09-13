@@ -5,7 +5,7 @@ using UnityEngine;
 public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionManagerMono champManager;
-    [SerializeField] BanPickUI BanPickUI;
+    [SerializeField] ChampionSelectUI_Controller BanPickUI;
     [SerializeField] TraitUseView traitUseView;
     [SerializeField] BanPickView banPickView;
     GameBanPickStorage storage;

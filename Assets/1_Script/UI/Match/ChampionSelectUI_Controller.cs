@@ -2,12 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BanPickUI : MonoBehaviour
+public class ChampionSelectUI_Controller : MonoBehaviour
 {
     BanPickView view;
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
-    [SerializeField] Button swapDoneBtn;
     [SerializeField] TextMeshProUGUI selectChampionTxt;
 
     ChampionSelectPresenter championSelectPresenter = null;
@@ -42,6 +41,8 @@ public class BanPickUI : MonoBehaviour
         selectChampionTxt.text = string.Empty;
     }
 
+    // 나중에 따로 빠짐
+    [SerializeField] Button swapDoneBtn;
     public void OnSwap(Team team)
     {
         swapDoneBtn.gameObject.SetActive(true);
