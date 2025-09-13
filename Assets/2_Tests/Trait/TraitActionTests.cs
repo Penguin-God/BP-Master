@@ -41,5 +41,19 @@ public class TraitActionTests
         Assert.AreEqual(expected, result.Speed);
     }
 
+    [Test]
+    public void 방_100_미만이면_공격_감소()
+    {
+        Champion champion = new Champion(0, "", new ChampionStatData(100, 99, 0), null);
+        Champion champion2 = new Champion(0, "", new ChampionStatData(100, 120, 0), null);
+        TraitActor sut = new TraitActor(new TestAttackChanger(-20), new DefenseBelowCondition(100));
+
+        sut.DoTrait(champion);
+        sut.DoTrait(champion2);
+
+        Assert.AreEqual(80, champion.StatData.Attack);
+        Assert.AreEqual(100, champion2.StatData.Attack);
+    }
+
     ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }
