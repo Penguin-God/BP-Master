@@ -29,7 +29,6 @@ public class BanPickView : MonoBehaviour
 
     }
 
-    // 나중에 전부 깔기
     public void UpdateSelectChampion(ChampionSO champion) => selectChampionTxt.text = champion.ChampionName;
 
     int blueIndex;
@@ -49,21 +48,36 @@ public class BanPickView : MonoBehaviour
             pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i].StatData);
     }
 
+    //void UpdatePickView(Team team, ChampionSO champion)
+    //{
+    //    if(team == Team.Red)
+    //    {
+    //        pickTextDict[team][redIndex].UpdateDisplay(champion);
+    //        redIndex++;
+    //    }
+    //    else if(team == Team.Blue)
+    //    {
+    //        pickTextDict[team][blueIndex].UpdateDisplay(champion);
+    //        blueIndex++;
+    //    }
+    //}
+
     void UpdatePickView(Team team, ChampionSO champion)
     {
-        if(team == Team.Red)
+        if (team == Team.Red)
         {
             pickTextDict[team][redIndex].UpdateDisplay(champion);
             redIndex++;
         }
-        else if(team == Team.Blue)
+        else if (team == Team.Blue)
         {
             pickTextDict[team][blueIndex].UpdateDisplay(champion);
             blueIndex++;
         }
+
+        // var slot = new Presenter().GetSlot(team);
     }
 
-    
     void UpdateBanView(Team team, ChampionSO champion)
     {
         banTextDict[team].text += champion.ChampionName;
