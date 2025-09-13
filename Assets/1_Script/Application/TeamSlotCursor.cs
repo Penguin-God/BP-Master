@@ -1,6 +1,6 @@
 using System;
 
-public class BanPickPersenter
+public class TeamSlotCursor
 {
     int blueIndex;
     int redIndex;

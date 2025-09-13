@@ -15,7 +15,7 @@ public class BanPickView : MonoBehaviour
 
 
     [SerializeField] TextMeshProUGUI selectChampionTxt;
-    readonly BanPickPersenter banPickPersenter = new BanPickPersenter();
+    readonly TeamSlotCursor banPickPersenter = new TeamSlotCursor();
     void Start()
     {
         pickTextDict.Add(Team.Blue, bluePicks);

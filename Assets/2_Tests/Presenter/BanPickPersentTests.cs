@@ -5,7 +5,7 @@ public class BanPickPersentTests
     [Test]
     public void 현재_순서에_맞는_슬롯_반환()
     {
-        var sut = new BanPickPersenter();
+        var sut = new TeamSlotCursor();
 
         Assert.AreEqual(TestHelper.CreateBlueSlot(0), sut.GetNextSlot(Team.Blue));
         Assert.AreEqual(TestHelper.CreateRedSlot(0), sut.GetNextSlot(Team.Red));
