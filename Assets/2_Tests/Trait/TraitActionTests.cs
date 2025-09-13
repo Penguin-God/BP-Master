@@ -27,6 +27,28 @@ public class TraitActionTests
     }
 
     [Test]
+    public void 챔피언_방_변경()
+    {
+        var target = TestHelper.CreateStatChamp(0, 10, 0);
+        var sut = new DefenseChanger(5);
+
+        sut.Do(target);
+
+        Assert.AreEqual(15, target.StatData.Defense);
+    }
+
+    [Test]
+    public void 챔피언_속_변경()
+    {
+        var target = TestHelper.CreateStatChamp(0, 0, 7);
+        var sut = new SpeedChanger(3);
+
+        sut.Do(target);
+
+        Assert.AreEqual(10, target.StatData.Speed);
+    }
+
+    [Test]
     [TestCase(5, 15)]
     [TestCase(-3, 7)]
     public void 방_변경(int amount, int expected)
