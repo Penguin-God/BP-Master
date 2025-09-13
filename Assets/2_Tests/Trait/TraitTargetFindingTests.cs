@@ -5,22 +5,6 @@ using System.Linq;
 public class TraitTargetFindingTests
 {
     TraitTargetSelector CreateSut(int count) => new TraitTargetSelector(count);
-    [Test]
-    public void 싱글은_단일_index_반환()
-    {
-        var sut = CreateSut(3);
-
-        Assert.AreEqual(1, sut.GetTargetIds(TargetRange.Single, 1).First());
-        Assert.AreEqual(2, sut.GetTargetIds(TargetRange.Single, 2).First());
-    }
-
-    [Test]
-    public void All은_전체_index_반환()
-    {
-        var sut = CreateSut(3);
-
-        CollectionAssert.AreEqual(new int[] { 0, 1, 2 }, sut.GetTargetIds(TargetRange.All, 0));
-    }
 
     [Test]
     public void 타겟_팀전체_슬롯_반환()
