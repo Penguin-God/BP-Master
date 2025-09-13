@@ -39,7 +39,7 @@ public class TraitController
     void ExecuteTrait(ITraitAction action, IEnumerable<Champion> champions)
     {
         foreach (var champion in champions)
-            champion.OnTrait(action);
+            action.Do(champion);
     }
 
     public int GetTeamSize(Team team) => championsByTeam[team].Count;

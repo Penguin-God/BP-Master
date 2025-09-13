@@ -1,6 +1,7 @@
 public interface ITraitAction
 {
     public ChampionStatData Do(ChampionStatData stat);
+    public void Do(Champion target);
 }
 
 public class AttackChanger : ITraitAction

@@ -34,6 +34,5 @@ public class Champion
         Trait = trait;
     }
 
-    public void OnTrait(ITraitAction action) => StatData = action.Do(StatData);
     public void ChangeStat(ChampionStatData newStat) => StatData = newStat;
 }
