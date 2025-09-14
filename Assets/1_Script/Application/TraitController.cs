@@ -29,17 +29,17 @@ public class TraitController
 
         Champion champion = championsByTeam[traitSlot.Team][traitSlot.Index];
         var targets = targetFinder.GetTargetSlots(traitSlot.Team, champion.TraitTargetRule.TargetSide, champion.TraitTargetRule.TargetRange, targetSlot);
-        ExecuteTrait(champion.TraitExecutor.Action, targets.Select(x => championsByTeam[x.Team][x.Index]));
+        ExecuteTrait(champion.TraitExecutor, targets.Select(x => championsByTeam[x.Team][x.Index]));
         traitUseFlags[traitSlot.Team][traitSlot.Index] = true;
         return true;
     }
 
     public bool IsTraitUsed(ChampionSlot slot) => traitUseFlags[slot.Team][slot.Index];
 
-    void ExecuteTrait(ITraitAction action, IEnumerable<Champion> champions)
+    void ExecuteTrait(TraitExecutor executor, IEnumerable<Champion> champions)
     {
         foreach (var champion in champions)
-            action.Do(champion);
+            executor.ExecteTrait(champion);
     }
 
     public int GetTeamSize(Team team) => championsByTeam[team].Count;
