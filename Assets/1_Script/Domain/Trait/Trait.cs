@@ -19,3 +19,23 @@ public class Trait
         TraitAction = action;
     }
 }
+
+public class TraitExecutor
+{
+    readonly ITraitAction Action;
+    readonly TraitConditionType ConditionType;
+    readonly int Threshold;
+    readonly TraitConditionChecker conditionChecker = new TraitConditionChecker();
+    public TraitExecutor(ITraitAction traitAction, TraitConditionType traitConditionType, int threshold)
+    {
+        Action = traitAction;
+        ConditionType = traitConditionType;
+        Threshold = threshold;
+    }
+
+    public void OnTrait(Champion champion)
+    {
+        if (conditionChecker.CheckCondition(ConditionType, champion.StatData, Threshold))
+            Action.Do(champion);
+    }
+}

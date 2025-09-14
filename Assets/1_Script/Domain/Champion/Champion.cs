@@ -1,5 +1,3 @@
-
-
 public struct ChampionStatData
 {
     public int Attack { get; private set; }
