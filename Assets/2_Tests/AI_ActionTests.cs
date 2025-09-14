@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class AI_ActionTests
 {
@@ -31,5 +28,5 @@ public class AI_ActionTests
         CollectionAssert.Contains(ids, result);
     }
 
-    Champion CreateChampion(int id) => new Champion(id, "", default, null);
+    Champion CreateChampion(int id) => new Champion(id, "", default, default, null);
 }

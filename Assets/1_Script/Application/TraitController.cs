@@ -28,7 +28,7 @@ public class TraitController
         if (traitUseFlags[traitSlot.Team][traitSlot.Index] == true) return false;
 
         Trait trait = championsByTeam[traitSlot.Team][traitSlot.Index].Trait;
-        var targets = targetFinder.GetTargetSlots(traitSlot.Team, trait.TargetSide, trait.TargetRange, targetSlot);
+        var targets = targetFinder.GetTargetSlots(traitSlot.Team, trait.TargetRule.TargetSide, trait.TargetRule.TargetRange, targetSlot);
         ExecuteTrait(trait.TraitAction, targets.Select(x => championsByTeam[x.Team][x.Index]));
         traitUseFlags[traitSlot.Team][traitSlot.Index] = true;
         return true;

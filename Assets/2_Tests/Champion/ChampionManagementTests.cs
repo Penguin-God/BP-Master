@@ -7,7 +7,7 @@ public class ChampionManagementTests
     ChampionManager manager;
     Champion[] testChampions;
 
-    Champion CreateChamp(int id, string name) => new Champion(id, name, default, null);
+    Champion CreateChamp(int id, string name) => new Champion(id, name, default, default, null);
 
     [SetUp]
     public void SetUp()

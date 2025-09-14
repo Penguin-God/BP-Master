@@ -20,14 +20,12 @@ public readonly struct TraitTargetRule
 
 public class Trait
 {
-    public readonly Side TargetSide;
-    public readonly TargetRange TargetRange;
+    public readonly TraitTargetRule TargetRule;
     public readonly ITraitAction TraitAction;
 
     public Trait(Side targetSide, TargetRange targetRange, ITraitAction action)
     {
-        TargetSide = targetSide;
-        TargetRange = targetRange;
+        TargetRule = new TraitTargetRule(targetSide, targetRange);
         TraitAction = action;
     }
 }
