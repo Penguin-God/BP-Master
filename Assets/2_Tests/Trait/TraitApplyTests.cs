@@ -12,7 +12,7 @@ public class TraitApplyTests
         var action = new TestAttackChanger(5);
         var sut = new TraitExecutor(action, TraitConditionType.DefenseAtLeast, 50);
 
-        sut.OnTrait(champion);
+        sut.ExecteTrait(champion);
 
         Assert.AreEqual(15, champion.StatData.Attack);
     }
@@ -24,7 +24,7 @@ public class TraitApplyTests
         var action = new TestAttackChanger(5);
         var sut = new TraitExecutor(action, TraitConditionType.DefenseAtLeast, 50);
 
-        sut.OnTrait(champion);
+        sut.ExecteTrait(champion);
 
         Assert.AreEqual(10, champion.StatData.Attack);
     }

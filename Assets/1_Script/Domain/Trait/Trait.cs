@@ -6,6 +6,18 @@ public enum TargetRange
     All,
 }
 
+public readonly struct TraitTargetRule
+{
+    public readonly Side TargetSide;
+    public readonly TargetRange TargetRange;
+
+    public TraitTargetRule(Side targetSide, TargetRange targetRange)
+    {
+        TargetSide = targetSide;
+        TargetRange = targetRange;
+    }
+}
+
 public class Trait
 {
     public readonly Side TargetSide;
@@ -33,7 +45,7 @@ public class TraitExecutor
         Threshold = threshold;
     }
 
-    public void OnTrait(Champion champion)
+    public void ExecteTrait(Champion champion)
     {
         if (conditionChecker.CheckCondition(ConditionType, champion.StatData, Threshold))
             Action.Do(champion);
