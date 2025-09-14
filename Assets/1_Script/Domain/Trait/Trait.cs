@@ -18,18 +18,6 @@ public readonly struct TraitTargetRule
     }
 }
 
-public class Trait
-{
-    public readonly TraitTargetRule TargetRule;
-    public readonly ITraitAction TraitAction;
-
-    public Trait(Side targetSide, TargetRange targetRange, ITraitAction action)
-    {
-        TargetRule = new TraitTargetRule(targetSide, targetRange);
-        TraitAction = action;
-    }
-}
-
 public class TraitExecutor
 {
     readonly ITraitAction Action;

@@ -25,13 +25,6 @@ public class Champion
     readonly public TraitTargetRule TraitTargetRule;
     readonly public TraitExecutor TraitExecutor;
 
-    public Champion(int id, string name, ChampionStatData statData, Trait trait)
-    {
-        Id = id;
-        Name = name;
-        StatData = statData;
-    }
-
     public Champion(int id, string name, ChampionStatData statData, TraitTargetRule traitTargetRule, TraitExecutor traitExecutor)
     {
         Id = id;
