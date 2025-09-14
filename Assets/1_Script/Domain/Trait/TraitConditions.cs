@@ -1,24 +1,18 @@
 using System;
 
-public interface ITraitCondition
-{
-    bool Condition(ChampionStatData stat);
-}
-
-public class DefenseBelowCondition : ITraitCondition
-{
-    readonly int defenseThreshold;
-    public DefenseBelowCondition(int defenseThreshold) => this.defenseThreshold = defenseThreshold;
-    public bool Condition(ChampionStatData stat) => stat.Defense < defenseThreshold;
-}
-
 public enum TraitConditionType
 {
     None,
-    DefenseBelow, // 이하
-    DefenseAtLeast, // 이상
-}
 
+    DefenseBelow, // 이상
+    DefenseAtLeast, // 이하
+
+    AttackBelow,
+    AttackAtLeast,
+
+    SpeedBelow,
+    SpeedAtLeast
+}
 
 public class TraitConditionChecker
 {
@@ -26,7 +20,17 @@ public class TraitConditionChecker
     {
         return type switch
         {
+            TraitConditionType.None => true,
+
             TraitConditionType.DefenseBelow => data.Defense <= threshold,
+            TraitConditionType.DefenseAtLeast => data.Defense >= threshold,
+
+            TraitConditionType.AttackBelow => data.Attack <= threshold,
+            TraitConditionType.AttackAtLeast => data.Attack >= threshold,
+
+            TraitConditionType.SpeedBelow => data.Speed <= threshold,
+            TraitConditionType.SpeedAtLeast => data.Speed >= threshold,
+
             _ => throw new NotImplementedException($"Condition not implemented: {type}")
         };
     }
