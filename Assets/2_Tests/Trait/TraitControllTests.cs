@@ -62,4 +62,28 @@ public class TraitControllTests
         Assert.IsFalse(sut.IsTraitUsed(TestHelper.CreateBlueSlot(0)));
         Assert.IsTrue(sut.IsTraitUsed(TestHelper.CreateBlueSlot(1)));
     }
+
+    [Test]
+    public void 조건은_실시간_반영()
+    {
+        Dictionary<Team, IReadOnlyList<Champion>> data = new();
+        data.Add(Team.Blue, CreateTrait());
+        data.Add(Team.Red, CreateTrait());
+        TraitController traitPresenter = new TraitController(data);
+
+        Assert.IsTrue(traitPresenter.UseTrait(TestHelper.CreateBlueSlot(0), TestHelper.CreateRedSlot(0)));
+        Assert.AreEqual(15, data[Team.Red][0].StatData.Attack);
+        Assert.AreEqual(15, data[Team.Red][1].StatData.Attack);
+
+        // 사용은 되지만 조건이 안되서 적용 안됨
+        Assert.IsTrue(traitPresenter.UseTrait(TestHelper.CreateBlueSlot(1), TestHelper.CreateRedSlot(0)));
+        Assert.AreEqual(15, data[Team.Red][0].StatData.Attack);
+        Assert.AreEqual(15, data[Team.Red][1].StatData.Attack);
+
+        // 10이하면 공 15증가
+        Champion[] CreateTrait() => new Champion[] { 
+            TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10),
+            TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10)
+        };
+    }
 }
