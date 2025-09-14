@@ -27,9 +27,9 @@ public class TraitController
     {
         if (traitUseFlags[traitSlot.Team][traitSlot.Index] == true) return false;
 
-        Trait trait = championsByTeam[traitSlot.Team][traitSlot.Index].Trait;
-        var targets = targetFinder.GetTargetSlots(traitSlot.Team, trait.TargetRule.TargetSide, trait.TargetRule.TargetRange, targetSlot);
-        ExecuteTrait(trait.TraitAction, targets.Select(x => championsByTeam[x.Team][x.Index]));
+        Champion champion = championsByTeam[traitSlot.Team][traitSlot.Index];
+        var targets = targetFinder.GetTargetSlots(traitSlot.Team, champion.TraitTargetRule.TargetSide, champion.TraitTargetRule.TargetRange, targetSlot);
+        ExecuteTrait(champion.TraitExecutor.Action, targets.Select(x => championsByTeam[x.Team][x.Index]));
         traitUseFlags[traitSlot.Team][traitSlot.Index] = true;
         return true;
     }
@@ -44,5 +44,5 @@ public class TraitController
 
     public int GetTeamSize(Team team) => championsByTeam[team].Count;
 
-    public Trait GetTrait(Team team, int index) => championsByTeam[team][index].Trait;
+    public TraitTargetRule GetTargetRule(Team team, int index) => championsByTeam[team][index].TraitTargetRule;
 }

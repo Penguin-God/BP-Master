@@ -6,9 +6,7 @@ public static class TestHelper
     public static ChampionSlot CreateBlueSlot(int index) => new ChampionSlot(Team.Blue, index);
     public static ChampionSlot CreateRedSlot(int index) => new ChampionSlot(Team.Red, index);
 
-    public static Trait CreateTestTrait(Side side, TargetRange range, int amount) => new Trait(side, range, new TestAttackChanger(amount));
-    public static Champion CreateTraitChamp(Side side, TargetRange range, int amount) => new Champion(0, "", default, CreateTestTrait(side, range, amount));
-    // public static Champion CreateTraitChamp(Side side, TargetRange range, int amount) => new Champion(0, "", default, new TraitTargetRule(side, range), new TraitExecutor(new TestAttackChanger(amount), TraitConditionType.None, 0));
+    public static Champion CreateTraitChamp(Side side, TargetRange range, int amount) => new Champion(0, "", default, new TraitTargetRule(side, range), new TraitExecutor(new TestAttackChanger(amount), TraitConditionType.None, 0));
     public static Champion CreateStatChamp(int att, int def, int speed) => new Champion(0, "", new ChampionStatData(att, def, speed), default, null);
 
     public static IEnumerable<ChampionSlot> CreateBlueSlots(params int[] indexs) => indexs.Select(x => CreateBlueSlot(x));

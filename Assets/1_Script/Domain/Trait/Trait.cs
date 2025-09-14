@@ -32,7 +32,7 @@ public class Trait
 
 public class TraitExecutor
 {
-    readonly ITraitAction Action;
+    public readonly ITraitAction Action;
     readonly TraitConditionType ConditionType;
     readonly int Threshold;
     readonly TraitConditionChecker conditionChecker = new TraitConditionChecker();

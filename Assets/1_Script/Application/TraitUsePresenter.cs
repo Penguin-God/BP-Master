@@ -64,7 +64,7 @@ public class TraitUsePresenter // 타겟들 다 포함
 
         // 선택 후: 시전자의 TraitSide에 따라 타겟 후보 생성
         var sel = selected.Value;
-        var trait = traitController.GetTrait(currentTeam, sel.Index);
-        return new TraitTargetSelector(size).GetTargetableSlot(currentTeam, trait.TargetRule.TargetSide);
+        var targetSide = traitController.GetTargetRule(currentTeam, sel.Index).TargetSide;
+        return new TraitTargetSelector(size).GetTargetableSlot(currentTeam, targetSide);
     }
 }
