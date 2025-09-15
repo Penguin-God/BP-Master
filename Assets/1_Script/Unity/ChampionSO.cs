@@ -29,7 +29,7 @@ public class TraitData
         }
     }
 
-    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount);
+    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount, conditionType, threshold);
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]

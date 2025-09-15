@@ -22,13 +22,17 @@ public struct TraitUI_Data
     public readonly Side TargetSide;
     public readonly TargetRange Range;
     public readonly int Amount;
+    public readonly TraitConditionType ConditionType;
+    public readonly int Threshold;
 
-    public TraitUI_Data(TraitType traitType, Side targetSide, TargetRange range, int amount)
+    public TraitUI_Data(TraitType traitType, Side targetSide, TargetRange range, int amount, TraitConditionType conditionType, int threshold)
     {
         TraitType = traitType;
         TargetSide = targetSide;
         Range = range;
         Amount = amount;
+        ConditionType = conditionType;
+        Threshold = threshold;
     }
 }
 

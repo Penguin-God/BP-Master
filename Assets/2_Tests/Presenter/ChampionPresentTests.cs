@@ -15,12 +15,12 @@ public class ChampionPresentTests
     }
 
     [Test]
-    public void 챔피언_특성정보_텍스트로_출력()
+    public void 특성_타입에_맞는_텍스트_출력()
     {
         var sut = new ChampionPersenter();
         
         // 편의 함수
-        string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.CreateViewModel(default, new TraitUI_Data(traitType, side, range, amount)).Trait;
+        string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.CreateViewModel(default, new TraitUI_Data(traitType, side, range, amount, TraitConditionType.None, 0)).Trait;
 
         Assert.AreEqual("아군 전체 공격력 10 증가", GetTraitText(TraitType.AttackChanger, Side.Self, TargetRange.All, 10));
         Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10));
