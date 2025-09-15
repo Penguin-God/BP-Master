@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
-  m_Name: "\uACF5\uACA9 \uC870\uAC74 \uBC29\uD30C\uC790"
+  m_Name: "\uB0AE\uC740 \uBC29\uC5B4 \uC57D\uD654\uC220\uC0AC"
   m_EditorClassIdentifier: 
-  id: 2
-  championName: "\uACF5\uACA9 \uC870\uAC74 \uBC29\uD30C\uC790"
-  attack: 180
-  defense: 65
-  speed: 0
+  id: 5
+  championName: "\uB0AE\uC740 \uBC29\uC5B4 \uC57D\uD654\uC220\uC0AC"
+  attack: 160
+  defense: 80
+  speed: 2
   traitData:
     targetSide: 1
     range: 2
-    traitType: 2
+    traitType: 1
     amount: -40
-    conditionType: 3
+    conditionType: 1
     threshold: 100

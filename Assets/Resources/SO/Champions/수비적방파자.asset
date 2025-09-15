@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
   m_Name: "\uC218\uBE44\uC801\uBC29\uD30C\uC790"
   m_EditorClassIdentifier: 
-  id: 19
+  id: 26
   championName: "\uC218\uBE44\uC801\uBC29\uD30C\uC790"
   attack: 80
   defense: 160
-  speed: 0
+  speed: 4
   traitData:
     targetSide: 1
     range: 2
