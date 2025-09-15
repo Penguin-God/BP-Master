@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PracticeUI : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class PracticeUI : MonoBehaviour
     }
 
 
-    void IncreasedMastery(ChampionSO championSO)
+    void IncreasedMastery(ChampionSO championSO, Button btn)
     {
         playerSectionUI.gameObject.SetActive(true);
         playerManager.IncreasedMastery(currentPracticePlayer, championSO);

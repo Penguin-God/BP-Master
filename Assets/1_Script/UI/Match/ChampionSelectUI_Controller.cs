@@ -24,10 +24,21 @@ public class ChampionSelectUI_Controller : MonoBehaviour
         swapDoneBtn.gameObject.SetActive(false);
     }
 
-    void SelectChampion(ChampionSO champion)
+    Button selectBtn;
+    void SelectChampion(ChampionSO champion, Button button)
     {
         championSelectPresenter.SelectChamp(champion.Id);
         championFocusView.UpdateDisplay(champion);
+        selectBtn = button;
+    }
+
+    void InActiveSelectButton()
+    {
+        selectBtn.enabled = false;
+        var colors = selectBtn.colors;
+        colors.normalColor = new Color(0.5f, 0.5f, 0.5f); // 회색 톤
+        selectBtn.colors = colors;
+        selectBtn = null;
     }
 
     [SerializeField] ChampionManagerMono championManager;
@@ -39,6 +50,7 @@ public class ChampionSelectUI_Controller : MonoBehaviour
         view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
         championFocusView.ClearDisplay();
+        InActiveSelectButton();
     }
 
     // 나중에 따로 빠짐
