@@ -47,6 +47,6 @@ public class BanPickView : MonoBehaviour
     void UpdateBanView(Team team, ChampionSO champion)
     {
         banTextDict[team].text += champion.ChampionName;
-        banTextDict[team].text += '\n';
+        banTextDict[team].text += ", ";
     }
 }
