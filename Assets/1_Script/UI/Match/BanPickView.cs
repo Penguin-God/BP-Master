@@ -36,13 +36,13 @@ public class BanPickView : MonoBehaviour
     public void UpdateAllPick(IReadOnlyDictionary<Team, IReadOnlyList<Champion>> data)
     {
         for (int i = 0; i < data[Team.Blue].Count; i++)
-            pickTextDict[Team.Blue][i].UpdateStat(data[Team.Blue][i].StatData);
+            pickTextDict[Team.Blue][i].UpdateStat(data[Team.Blue][i]);
 
         for (int i = 0; i < data[Team.Red].Count; i++)
-            pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i].StatData);
+            pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i]);
     }
 
-    void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.GetNextIndex(team)].UpdateDisplay(champion);
+    void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.GetNextIndex(team)].UpdateStat(champion.CreateChampion());
 
     void UpdateBanView(Team team, ChampionSO champion)
     {

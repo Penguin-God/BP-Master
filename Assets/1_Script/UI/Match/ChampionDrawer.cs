@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ChampionDrawer : MonoBehaviour
 {
@@ -18,6 +19,32 @@ public class ChampionDrawer : MonoBehaviour
             var btn = Instantiate(championBtn, transform).GetComponent<Button>();
             btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
             btn.onClick.AddListener(() => onclick(data));
+        }
+    }
+
+    public void DrawChampionButtons(UnityAction<ChampionSO> onclick, UnityAction<ChampionSO> pointerEnter, UnityAction<ChampionSO> pinterExit)
+    {
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+
+        foreach (var data in championManager.AllChampion)
+        {
+            var championSO = data; // ★ 클로저 안전용 로컬 복사
+            var btn = Instantiate(championBtn, transform).GetComponent<Button>();
+            btn.GetComponentInChildren<TextMeshProUGUI>().text = championSO.ChampionName;
+
+            btn.onClick.AddListener(() => onclick?.Invoke(championSO));
+
+            var trigger = btn.gameObject.GetComponent<EventTrigger>();
+            if (trigger == null) trigger = btn.gameObject.AddComponent<EventTrigger>();
+
+            var enter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+            enter.callback.AddListener(_ => pointerEnter?.Invoke(championSO));
+            trigger.triggers.Add(enter);
+
+            var exit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+            exit.callback.AddListener(_ => pinterExit?.Invoke(championSO));
+            trigger.triggers.Add(exit);
         }
     }
 }

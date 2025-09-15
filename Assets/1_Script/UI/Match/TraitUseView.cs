@@ -10,7 +10,7 @@ public class TraitUseView : MonoBehaviour
     Dictionary<Team, Button[]> buttons = new();
 
     TraitUsePresenter presenter;
-    
+
     public void Init(TraitUsePresenter presenter)
     {
         gameObject.SetActive(true);

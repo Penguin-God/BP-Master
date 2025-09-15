@@ -30,6 +30,8 @@ public class MatchDI : MonoBehaviour
 
         BanPickUI.Init(storage, phaseManager); // start보다 먼저. 
         phaseManager.Start();
+
+        traitUseView.gameObject.SetActive(false);
     }
 
     bool initTrait;
