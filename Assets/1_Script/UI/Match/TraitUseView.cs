@@ -49,7 +49,7 @@ public class TraitUseView : MonoBehaviour
     {
         InActiveAllBtns();
         foreach (var slot in presenter.GetClickableSlots())
-            buttons[slot.Team][slot.Index].enabled = true;
+            buttons[slot.Team][slot.Index].enabled = true; // error
     }
 
     void OnButtonClicked(Team buttonTeam, int index)
