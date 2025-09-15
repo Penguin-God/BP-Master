@@ -7,7 +7,6 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     BanPickView view;
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
-    [SerializeField] TextMeshProUGUI selectChampionTxt;
     [SerializeField] ChampionView championFocusView;
 
     ChampionSelectPresenter championSelectPresenter = null;
@@ -21,17 +20,14 @@ public class ChampionSelectUI_Controller : MonoBehaviour
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
-        buttonDrawer.DrawChampionButtons(SelectChampion, FocusChamp, FocusExitChamp);
+        buttonDrawer.DrawChampionButtons(SelectChampion);
         swapDoneBtn.gameObject.SetActive(false);
     }
-
-    void FocusChamp(ChampionSO championSO) => championFocusView.UpdateDisplay(championSO);
-    void FocusExitChamp(ChampionSO championSO) => championFocusView.ClearDisplay();
 
     void SelectChampion(ChampionSO champion)
     {
         championSelectPresenter.SelectChamp(champion.Id);
-        selectChampionTxt.text = champion.ChampionName;
+        championFocusView.UpdateDisplay(champion);
     }
 
     [SerializeField] ChampionManagerMono championManager;
@@ -42,7 +38,7 @@ public class ChampionSelectUI_Controller : MonoBehaviour
 
         view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
-        selectChampionTxt.text = string.Empty;
+        championFocusView.ClearDisplay();
     }
 
     // 나중에 따로 빠짐
