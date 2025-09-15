@@ -49,4 +49,10 @@ public class BanPickView : MonoBehaviour
         banTextDict[team].text += champion.ChampionName;
         banTextDict[team].text += ", ";
     }
+
+    public void HideBan()
+    {
+        blueBan.gameObject.SetActive(false);
+        redBan.gameObject.SetActive(false);
+    }
 }

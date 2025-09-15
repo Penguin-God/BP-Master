@@ -57,13 +57,18 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     [SerializeField] Button swapDoneBtn;
     public void OnSwap(Team team)
     {
+        buttonDrawer.gameObject.SetActive(false);
         swapDoneBtn.gameObject.SetActive(true);
         swapDoneBtn.onClick.AddListener(() => SwapDone(team));
+        view.HideBan();
     }
 
     void SwapDone(Team team)
     {
         if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
+        {
             phaseManager.SubmitAction(team);
+            swapDoneBtn.gameObject.SetActive(false);
+        }
     }
 }
