@@ -35,8 +35,8 @@ public class TraitUseView : MonoBehaviour
 
     void InActiveAllBtns()
     {
-        foreach (Button item in buttons.Values.SelectMany(x => x))
-            item.enabled = false;
+        foreach (Button btn in buttons.Values.SelectMany(x => x))
+            InActiveButton(btn);
     }
 
     public void UpdateTrait(Team team) // ActiveButtons 발동 순간이 애매함
@@ -49,12 +49,13 @@ public class TraitUseView : MonoBehaviour
     {
         InActiveAllBtns();
         foreach (var slot in presenter.GetClickableSlots())
-            buttons[slot.Team][slot.Index].enabled = true; // error
+            ActiveButton(buttons[slot.Team][slot.Index]);
     }
 
     void OnButtonClicked(Team buttonTeam, int index)
     {
-        var result = presenter.ClickChampion(new ChampionSlot(buttonTeam, index));
+        var clickSlot = new ChampionSlot(buttonTeam, index);
+        var result = presenter.ClickChampion(clickSlot);
         switch (result)
         {
             case TraitClickResult.Faild:
@@ -69,5 +70,21 @@ public class TraitUseView : MonoBehaviour
                 ActiveButtons();
                 break;
         }
+    }
+
+    void ActiveButton(Button btn)
+    {
+        btn.enabled = true;
+        var colors = btn.colors;
+        colors.normalColor = new Color(1f, 1f, 1f);
+        btn.colors = colors;
+    }
+
+    void InActiveButton(Button btn)
+    {
+        btn.enabled = false;
+        var colors = btn.colors;
+        colors.normalColor = new Color(0.5f, 0.5f, 0.5f);
+        btn.colors = colors;
     }
 }
