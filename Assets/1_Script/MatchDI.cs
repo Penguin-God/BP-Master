@@ -8,6 +8,9 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionSelectUI_Controller BanPickUI;
     [SerializeField] TraitUseView traitUseView;
     [SerializeField] BanPickView banPickView;
+    [SerializeField] DraftTurnSO ban;
+    [SerializeField] DraftTurnSO pick;
+    [SerializeField] DraftTurnSO trait;
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
@@ -17,10 +20,10 @@ public class MatchDI : MonoBehaviour
         
         PhaseData[] phase = new PhaseData[]
         {
-            new PhaseData(GamePhase.Ban, new Phase(new Team[] { Team.Blue, Team.Red })),
-            new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red, Team.Red, Team.Blue, Team.Blue, Team.Red})),
+            new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
+            new PhaseData(GamePhase.Pick, new Phase(pick.Turns)),
             new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
-            new PhaseData(GamePhase.Trait, new Phase(new Team[] { Team.Blue, Team.Red, Team.Blue, Team.Red, Team.Blue, Team.Red  })),
+            new PhaseData(GamePhase.Trait, new Phase(trait.Turns)),
         };
         phaseManager = new(phase);
 

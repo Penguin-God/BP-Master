@@ -5267,7 +5267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nailDownBtn: {fileID: 919244431}
   buttonDrawer: {fileID: 1081915727}
-  selectChampionTxt: {fileID: 1650871914}
   championFocusView: {fileID: 1640189473}
   championManager: {fileID: 1420292359}
   swapDoneBtn: {fileID: 683827530}
@@ -6220,6 +6219,9 @@ MonoBehaviour:
   BanPickUI: {fileID: 1213870346}
   traitUseView: {fileID: 2045637438}
   banPickView: {fileID: 1919757232}
+  ban: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
+  pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
+  trait: {fileID: 11400000, guid: d038f885ef77efe498ecb1f882a1b41e, type: 2}
   bonusDataSO: {fileID: 11400000, guid: 3ed54617ea912194c92454bc2563d3fe, type: 2}
 --- !u!1001 &1455117545
 PrefabInstance:
@@ -8791,7 +8793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2045637437
 RectTransform:
   m_ObjectHideFlags: 0
