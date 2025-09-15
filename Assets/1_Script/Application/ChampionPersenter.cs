@@ -42,8 +42,21 @@ public class ChampionPersenter
         $"공격력 : {stat.Attack}",
         $"방어력 : {stat.Defense}",
         $"속도 : {stat.Speed}",
-        $"{BuildTargetRuleText(traitData.TargetSide, traitData.Range)} {BuildTraitText(traitData.TraitType, traitData.Amount)}"
-        );
+        BuildTargetText(traitData)
+    );
+
+    
+    string BuildTargetText(TraitUI_Data traitData)
+    {
+        var conditoin = BuildTraitConditionText(traitData.ConditionType, traitData.Threshold);
+        var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
+
+        var target = BuildTargetRuleText(traitData.TargetSide, traitData.Range);
+        var action = BuildTraitText(traitData.TraitType, traitData.Amount);
+        
+        // 조건이 있으면 "조건 + 공백"을 앞에 붙이고, 없으면 그대로
+        return $"{conditoin}{space}{target} {action}";
+    }
 
     string BuildTargetRuleText(Side side, TargetRange range) => (side, range) switch
     {
@@ -60,6 +73,19 @@ public class ChampionPersenter
         TraitType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        _ => ""
+    };
+
+
+    string BuildTraitConditionText(TraitConditionType conditionType, int threshold) => conditionType switch
+    {
+        TraitConditionType.None => "",
+        TraitConditionType.AttackAtLeast => $"공격력이 {threshold} 이상인",
+        TraitConditionType.AttackBelow => $"공격력이 {threshold} 이하인",
+        TraitConditionType.DefenseAtLeast => $"방어력이 {threshold} 이상인",
+        TraitConditionType.DefenseBelow => $"방어력이 {threshold} 이하인",
+        TraitConditionType.SpeedAtLeast => $"속도 {threshold} 이상인",
+        TraitConditionType.SpeedBelow => $"속도 {threshold} 이하인",
         _ => ""
     };
 
