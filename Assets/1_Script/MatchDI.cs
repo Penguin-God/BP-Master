@@ -5,6 +5,7 @@ using UnityEngine;
 public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionManagerMono champManager;
+    ChampionCatalog championCatalog;
     [SerializeField] ChampionSelectUI_Controller BanPickUI;
     [SerializeField] TraitUseView traitUseView;
     [SerializeField] BanPickView banPickView;
@@ -18,8 +19,8 @@ public class MatchDI : MonoBehaviour
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
     {
-        storage = new GameBanPickStorage(champManager.AllId);
-        
+        championCatalog = new ChampionCatalog(Resources.LoadAll<ChampionSO>("SO/Champions").Select(x => x.CreateChampion()));
+        storage = new GameBanPickStorage(championCatalog.AllId);
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
@@ -49,8 +50,8 @@ public class MatchDI : MonoBehaviour
         gamerMap.Add(Team.Blue, blueGamers.Select(x => x.CreateGamer()).ToList());
         gamerMap.Add(Team.Red, redGamers.Select(x => x.CreateGamer()).ToList());
 
-        // 그냥 밴픽 끝나면 알아서 넣어주면 안되냐
-        pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => champManager.GetChampion(x)).ToList());
+        // 그냥 밴픽 끝나면 알아서 넣어주면 안되나
+        pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => championCatalog.GetChampion(x)).ToList());
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
 

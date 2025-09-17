@@ -40,4 +40,13 @@ public class ChampionManagementTests
 
         Assert.That(champion.Name, Is.EqualTo("암살자"));
     }
+
+    [Test]
+    public void 조회한_데이터는_깊은_복사()
+    {
+        var champion = manager.GetChampion(3);
+        champion.ChangeStat(new ChampionStatData(10, 10, 10));
+
+        Assert.AreEqual(0, manager.GetChampion(3).StatData.Attack);
+    }
 }
