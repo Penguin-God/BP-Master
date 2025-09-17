@@ -54,7 +54,7 @@ public class TraitUseView : MonoBehaviour
 
     void OnButtonClicked(Team buttonTeam, int index)
     {
-        var clickSlot = new ChampionSlot(buttonTeam, index);
+        var clickSlot = new SlotData(buttonTeam, index);
         var result = presenter.ClickChampion(clickSlot);
         switch (result)
         {

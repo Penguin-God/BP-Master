@@ -56,5 +56,5 @@ public class TraitUsePresenterTests
         CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
 
-    ChampionSlot CreateSlot(Team team, int index) => new ChampionSlot(team, index);
+    SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
 }

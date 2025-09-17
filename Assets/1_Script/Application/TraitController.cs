@@ -23,7 +23,7 @@ public class TraitController
         traitUseFlags = traitsByTeam.ToDictionary(x => x.Key, x => new bool[x.Value.Count]);
     }
 
-    public bool UseTrait(ChampionSlot traitSlot, ChampionSlot targetSlot)
+    public bool UseTrait(SlotData traitSlot, SlotData targetSlot)
     {
         if (traitUseFlags[traitSlot.Team][traitSlot.Index] == true) return false;
 
@@ -34,7 +34,7 @@ public class TraitController
         return true;
     }
 
-    public bool IsTraitUsed(ChampionSlot slot) => traitUseFlags[slot.Team][slot.Index];
+    public bool IsTraitUsed(SlotData slot) => traitUseFlags[slot.Team][slot.Index];
 
     void ExecuteTrait(TraitExecutor executor, IEnumerable<Champion> champions)
     {
