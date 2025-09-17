@@ -23,7 +23,11 @@ public class GameBanPickStorage
     readonly Dictionary<Team, TeamBanPickStorage> storage = new();
     readonly HashSet<int> allSelecteds = new();
     readonly HashSet<int> selectableIds = new();
-    public IReadOnlyDictionary<Team, IReadOnlyList<int>> TeamPicks => storage.ToDictionary(x => x.Key, x => x.Value.GetStorage(SelectType.Pick));
+    public IReadOnlyDictionary<SlotData, int> PickBySlot =>
+    storage
+        .SelectMany(kv => kv.Value.GetStorage(SelectType.Pick)
+                                  .Select((id, index) => new KeyValuePair<SlotData, int>(new SlotData(kv.Key, index), id)))
+        .ToDictionary(p => p.Key, p => p.Value);
 
     public IReadOnlyList<int> SelectableIds => selectableIds.ToList();
 

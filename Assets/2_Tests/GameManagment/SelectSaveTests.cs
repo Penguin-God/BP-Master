@@ -59,8 +59,12 @@ public class SelectSaveTests
         Select(storage, Team.Red, SelectType.Pick, 101);
         Select(storage, Team.Red, SelectType.Pick, 102);
 
-        CollectionAssert.AreEquivalent(new int[] { 11, 22}, storage.TeamPicks[Team.Blue]);
-        CollectionAssert.AreEquivalent(new int[] { 101, 102 }, storage.TeamPicks[Team.Red]);
+        var result = storage.PickBySlot;
+
+        Assert.AreEqual(11, result[TestHelper.CreateBlueSlot(0)]);
+        Assert.AreEqual(22, result[TestHelper.CreateBlueSlot(1)]);
+        Assert.AreEqual(101, result[TestHelper.CreateRedSlot(0)]);
+        Assert.AreEqual(102, result[TestHelper.CreateRedSlot(1)]);
     }
 
     bool Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));

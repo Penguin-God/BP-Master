@@ -16,6 +16,7 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
 
     IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
+    SlotStorage pickSlotStorage;
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
     {
@@ -51,7 +52,8 @@ public class MatchDI : MonoBehaviour
         gamerMap.Add(Team.Red, redGamers.Select(x => x.CreateGamer()).ToList());
 
         // 그냥 밴픽 끝나면 알아서 넣어주면 안되나
-        pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => championCatalog.GetChampion(x)).ToList());
+        pickSlotStorage = new SlotStorage();
+        // pickChampions = storage.PickBySlot.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => championCatalog.GetChampion(x)).ToList());
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
 
@@ -62,6 +64,11 @@ public class MatchDI : MonoBehaviour
         presenter.OnTraitUsed += phaseManager.SubmitAction;
         presenter.OnTraitUsed += _ => banPickView.UpdateAllPick(pickChampions);
         initTrait = true;
+    }
+
+    void SettingSlotStorage()
+    {
+        pickSlotStorage = new SlotStorage();
     }
 
     void ApplyMastery(Team team)
