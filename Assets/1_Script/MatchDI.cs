@@ -52,8 +52,7 @@ public class MatchDI : MonoBehaviour
         gamerMap.Add(Team.Red, redGamers.Select(x => x.CreateGamer()).ToList());
 
         // 그냥 밴픽 끝나면 알아서 넣어주면 안되나
-        pickSlotStorage = new SlotStorage();
-        // pickChampions = storage.PickBySlot.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => championCatalog.GetChampion(x)).ToList());
+        SettingSlotStorage();
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
 
@@ -69,6 +68,8 @@ public class MatchDI : MonoBehaviour
     void SettingSlotStorage()
     {
         pickSlotStorage = new SlotStorage();
+        foreach (var item in storage.PickBySlot)
+            pickSlotStorage.AddSlot(item.Key.Team, championCatalog.GetChampion(item.Value));
     }
 
     void ApplyMastery(Team team)

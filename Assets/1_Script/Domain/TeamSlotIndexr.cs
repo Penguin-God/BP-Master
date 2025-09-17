@@ -5,7 +5,7 @@ public class TeamSlotIndexr
     int blueIndex;
     int redIndex;
 
-    public int GetNextIndex(Team team)
+    public int AllocateIndex(Team team)
     {
         if (team == Team.Blue)
         {

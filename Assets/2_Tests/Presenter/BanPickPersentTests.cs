@@ -7,9 +7,9 @@ public class BanPickPersentTests
     {
         var sut = new TeamSlotIndexr();
 
-        Assert.AreEqual(0, sut.GetNextIndex(Team.Blue));
-        Assert.AreEqual(0, sut.GetNextIndex(Team.Red));
-        Assert.AreEqual(1, sut.GetNextIndex(Team.Red));
-        Assert.AreEqual(1, sut.GetNextIndex(Team.Blue));
+        Assert.AreEqual(0, sut.AllocateIndex(Team.Blue));
+        Assert.AreEqual(0, sut.AllocateIndex(Team.Red));
+        Assert.AreEqual(1, sut.AllocateIndex(Team.Red));
+        Assert.AreEqual(1, sut.AllocateIndex(Team.Blue));
     }
 }
