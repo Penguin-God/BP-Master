@@ -11,7 +11,7 @@ public class ProGamerDel
     {
         Id = playerData.Id;
         PlayerName = playerData.PlayerName;
-        championMasteries = playerData.StartMasteries.ToHashSet();
+        // championMasteries = playerData.StartMasteries.ToHashSet();
     }
 
     public ChampionMasteryData GetMastery(int chamId) => championMasteries.FirstOrDefault(x => x.Champion.Id == chamId);

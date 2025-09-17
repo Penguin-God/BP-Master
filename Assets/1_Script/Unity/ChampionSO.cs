@@ -50,4 +50,5 @@ public class ChampionSO : ScriptableObject
     [SerializeField] TraitData traitData;
     public TraitData TraitData => traitData;
     public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.TraitTargetRule, traitData.TraitExecutor);
+    public ChampionSO GetClone() => Instantiate(this);
 }

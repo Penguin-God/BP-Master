@@ -15,7 +15,7 @@ public class ChampionMasteryData
         this.level = level;
     }
 
-    public ChampionMasteryData GetClone() => new ChampionMasteryData(champion, level);
+    public ChampionMastery GetMastery() => new ChampionMastery(champion.Id, level);
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "BP Master/PlayerSO")]
@@ -28,24 +28,5 @@ public class PlayerSO : ScriptableObject
     public string PlayerName => playerName;
 
     [SerializeField] ChampionMasteryData[] startMasteries;
-    public IReadOnlyList<ChampionMasteryData> StartMasteries => startMasteries.Select(x => x.GetClone()).ToArray();
-
-    public int GetMasteryLevel(int chamId)
-    {
-        if (TryGetMastery(chamId, out var mastery))
-            return mastery.level;
-        else return 0;
-    }
-
-    bool TryGetMastery(int chamId, out ChampionMasteryData mastery)
-    {
-        mastery = null;
-        if (startMasteries.Any(x => x.Champion.Id == chamId))
-        {
-            mastery = startMasteries.First(x => x.Champion.Id == chamId);
-            return true;
-        }
-        else
-            return false;
-    }
+    public ProGamer CreateGamer() => new ProGamer(startMasteries.Select(x => x.GetMastery()));
 }
