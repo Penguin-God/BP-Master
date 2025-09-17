@@ -56,11 +56,13 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
 
+        // 지우고
         var presenter = new  TraitUsePresenter(new TraitController(pickChampions));
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
         presenter.OnTraitUsed += phaseManager.SubmitAction;
+        // 지우기
         presenter.OnTraitUsed += _ => banPickView.UpdateAllPick(pickChampions);
         initTrait = true;
     }
@@ -74,14 +76,14 @@ public class MatchDI : MonoBehaviour
 
     void ApplyMastery(Team team)
     {
-        for (int i = 0; i < pickChampions[team].Count; i++)
+        for (int i = 0; i < pickSlotStorage.GetTeam(team).Count(); i++)
             new MasteryApplier().ApplyMastery(gamerMap[team][i], pickChampions[team][i]);
     }
 
     void OnDone()
     {
-        var blue = pickChampions[Team.Blue];
-        var red = pickChampions[Team.Red];
+        var blue = pickSlotStorage.GetTeam(Team.Blue);
+        var red = pickSlotStorage.GetTeam(Team.Red);
 
         var calculator = new TeamScoreCalculator(bonusDataSO.ChampionBonus, bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
