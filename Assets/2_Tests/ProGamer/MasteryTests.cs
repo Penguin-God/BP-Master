@@ -7,7 +7,7 @@ public class MasteryTests
     {
         ChampionMastery[] data = new ChampionMastery[]{new ChampionMastery(12, 10), new ChampionMastery(11, 20)};
 
-        ProGamer sut = new();
+        ProGamer sut = new(data);
 
         Assert.AreEqual(10, sut.GetMastery(12));
         Assert.AreEqual(20, sut.GetMastery(11));

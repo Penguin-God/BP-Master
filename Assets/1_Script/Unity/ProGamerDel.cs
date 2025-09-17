@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ProGamer
+public class ProGamerDel
 {
     public readonly int Id;
     public readonly string PlayerName;
     HashSet<ChampionMasteryData> championMasteries;
     public IReadOnlyList<ChampionMasteryData> AllMasterys => championMasteries.ToArray();
-    public ProGamer(PlayerSO playerData)
+    public ProGamerDel(PlayerSO playerData)
     {
         Id = playerData.Id;
         PlayerName = playerData.PlayerName;

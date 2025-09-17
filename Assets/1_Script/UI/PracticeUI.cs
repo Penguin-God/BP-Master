@@ -19,7 +19,7 @@ public class PracticeUI : MonoBehaviour
         playerSectionUI.DrawPlayerButton(DrawChampions, playerManager.Players.ToArray());
     }
 
-    void DrawChampions(ProGamer player)
+    void DrawChampions(ProGamerDel player)
     {
         playerSectionUI.gameObject.SetActive(false);
         currentPracticePlayer = player.Id;

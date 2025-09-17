@@ -9,7 +9,7 @@ public class PlayerSectionUI : MonoBehaviour
 {
     [SerializeField] GameObject championBtn;
 
-    public void DrawPlayerButton(UnityAction<ProGamer> onclick, ProGamer[] players)
+    public void DrawPlayerButton(UnityAction<ProGamerDel> onclick, ProGamerDel[] players)
     {
         foreach (Transform child in transform)
             Destroy(child.gameObject);
@@ -22,7 +22,7 @@ public class PlayerSectionUI : MonoBehaviour
         }
     }
 
-    string BuildMasteryText(ProGamer player)
+    string BuildMasteryText(ProGamerDel player)
     {
         var sb = new StringBuilder();
         sb.AppendLine($"Player: {player.PlayerName}");

@@ -6,8 +6,8 @@ public class ProGamerManager : MonoBehaviour
 {
     [SerializeField] PlayerSO[] playerDatas;
     [SerializeField] ChampionManagerMono championManager;
-    HashSet<ProGamer> players;
-    public IReadOnlyList<ProGamer> Players => players.ToArray();
+    HashSet<ProGamerDel> players;
+    public IReadOnlyList<ProGamerDel> Players => players.ToArray();
 
     public void IncreasedMastery(int currentClickPlayer, ChampionSO championSO)
     {
@@ -17,9 +17,9 @@ public class ProGamerManager : MonoBehaviour
     void Awake()
     {
         players = playerDatas
-                    .Select(x => new ProGamer(x))
+                    .Select(x => new ProGamerDel(x))
                     .ToHashSet();
     }
 
-    ProGamer GetPlayer(int id) => players.FirstOrDefault(x => x.Id == id);
+    ProGamerDel GetPlayer(int id) => players.FirstOrDefault(x => x.Id == id);
 }
