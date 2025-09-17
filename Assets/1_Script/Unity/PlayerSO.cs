@@ -3,19 +3,19 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ChampionMastery
+public class ChampionMasteryData
 {
     [SerializeField] ChampionSO champion;
     public ChampionSO Champion => champion;
     public int level;
 
-    public ChampionMastery(ChampionSO champion, int level)
+    public ChampionMasteryData(ChampionSO champion, int level)
     {
         this.champion = champion;
         this.level = level;
     }
 
-    public ChampionMastery GetClone() => new ChampionMastery(champion, level);
+    public ChampionMasteryData GetClone() => new ChampionMasteryData(champion, level);
 }
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "BP Master/PlayerSO")]
@@ -27,8 +27,8 @@ public class PlayerSO : ScriptableObject
     [SerializeField] string playerName;
     public string PlayerName => playerName;
 
-    [SerializeField] ChampionMastery[] startMasteries;
-    public IReadOnlyList<ChampionMastery> StartMasteries => startMasteries.Select(x => x.GetClone()).ToArray();
+    [SerializeField] ChampionMasteryData[] startMasteries;
+    public IReadOnlyList<ChampionMasteryData> StartMasteries => startMasteries.Select(x => x.GetClone()).ToArray();
 
     public int GetMasteryLevel(int chamId)
     {
@@ -37,7 +37,7 @@ public class PlayerSO : ScriptableObject
         else return 0;
     }
 
-    bool TryGetMastery(int chamId, out ChampionMastery mastery)
+    bool TryGetMastery(int chamId, out ChampionMasteryData mastery)
     {
         mastery = null;
         if (startMasteries.Any(x => x.Champion.Id == chamId))

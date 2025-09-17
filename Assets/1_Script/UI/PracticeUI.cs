@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PracticeUI : MonoBehaviour
 {
-    [SerializeField] PlayerManager playerManager;
+    [SerializeField] ProGamerManager playerManager;
     ChampionDrawer championSelectionUI;
     PlayerSectionUI playerSectionUI;
     int currentPracticePlayer = -1;
@@ -19,7 +19,7 @@ public class PracticeUI : MonoBehaviour
         playerSectionUI.DrawPlayerButton(DrawChampions, playerManager.Players.ToArray());
     }
 
-    void DrawChampions(Player player)
+    void DrawChampions(ProGamer player)
     {
         playerSectionUI.gameObject.SetActive(false);
         currentPracticePlayer = player.Id;

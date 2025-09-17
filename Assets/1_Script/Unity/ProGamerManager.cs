@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class ProGamerManager : MonoBehaviour
 {
     [SerializeField] PlayerSO[] playerDatas;
     [SerializeField] ChampionManagerMono championManager;
-    HashSet<Player> players;
-    public IReadOnlyList<Player> Players => players.ToArray();
+    HashSet<ProGamer> players;
+    public IReadOnlyList<ProGamer> Players => players.ToArray();
 
     public void IncreasedMastery(int currentClickPlayer, ChampionSO championSO)
     {
@@ -17,9 +17,9 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         players = playerDatas
-                    .Select(x => new Player(x))
+                    .Select(x => new ProGamer(x))
                     .ToHashSet();
     }
 
-    Player GetPlayer(int id) => players.FirstOrDefault(x => x.Id == id);
+    ProGamer GetPlayer(int id) => players.FirstOrDefault(x => x.Id == id);
 }
