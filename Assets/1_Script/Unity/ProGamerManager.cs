@@ -17,6 +17,7 @@ public class ProGamerManager : MonoBehaviour
     }
 
     public void IncreasedMastery(int gamer, int champId) => proGamerMap[gamer].AddMastery(champId);
+    public int GetMastery(int gamer, int champId) => proGamerMap[gamer].GetMastery(champId);
 
     void Awake()
     {
