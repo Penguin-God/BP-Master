@@ -11,4 +11,10 @@ public class ProGamer
     }
 
     public int GetMastery(int championId) => masteryMap.TryGetValue(championId, out int level) ? level : 0;
+
+    public void AddMastery(int champId)
+    {
+        if (masteryMap.ContainsKey(champId)) masteryMap[champId]++;
+        else masteryMap.Add(champId, 1);
+    }
 }
