@@ -13,7 +13,9 @@ public class MatchDI : MonoBehaviour
     [SerializeField] DraftTurnSO trait;
     GameBanPickStorage storage;
     PhaseManager phaseManager;
+
     IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
+    Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(champManager.AllId);
@@ -38,12 +40,21 @@ public class MatchDI : MonoBehaviour
     }
 
     bool initTrait;
+    [SerializeField] ProGamerSO[] blueGamers;
+    [SerializeField] ProGamerSO[] redGamers;
     void Trait(Team team)
     {
         if (initTrait) return;
+
+        gamerMap.Add(Team.Blue, blueGamers.Select(x => x.CreateGamer()).ToList());
+        gamerMap.Add(Team.Red, redGamers.Select(x => x.CreateGamer()).ToList());
+
         // 그냥 밴픽 끝나면 알아서 넣어주면 안되냐
         pickChampions = storage.TeamPicks.ToDictionary(x => x.Key, x => (IReadOnlyList<Champion>)x.Value.Select(x => champManager.GetChampion(x)).ToList());
-        var presenter = new TraitUsePresenter(new TraitController(pickChampions));
+        ApplyMastery(Team.Blue);
+        ApplyMastery(Team.Red);
+
+        var presenter = new  TraitUsePresenter(new TraitController(pickChampions));
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
@@ -52,16 +63,22 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
     }
 
-    void OnDone() // pickChampions 사용
+    void ApplyMastery(Team team)
     {
-        var blue = champManager.GetStats(storage.GetStorage(Team.Blue, SelectType.Pick));
-        var red = champManager.GetStats(storage.GetStorage(Team.Red, SelectType.Pick));
+        for (int i = 0; i < pickChampions[team].Count; i++)
+            new MasteryApplier().ApplyMastery(gamerMap[team][i], pickChampions[team][i]);
+    }
+
+    void OnDone()
+    {
+        var blue = pickChampions[Team.Blue];
+        var red = pickChampions[Team.Red];
 
         var calculator = new TeamScoreCalculator(bonusDataSO.ChampionBonus, bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue, red);
-        print(result.BlueScore);
-        print(result.RedScore);
-        print(result.Winner);
+        MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
+        print($"Blue : {result.BlueScore}");
+        print($"Red : {result.RedScore}");
+        print($"승자 : {result.Winner}");
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;

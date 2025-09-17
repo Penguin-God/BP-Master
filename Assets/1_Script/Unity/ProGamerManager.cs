@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ProGamerManager : MonoBehaviour
 {
-    [SerializeField] PlayerSO[] playerDatas;
+    [SerializeField] ProGamerSO[] playerDatas;
     [SerializeField] ChampionManagerMono championManager;
 
-    Dictionary<int, ProGamer> proGamerMap;
     HashSet<ProGamerDel> players;
     public IReadOnlyList<ProGamerDel> Players => players.ToArray();
 
@@ -16,13 +15,9 @@ public class ProGamerManager : MonoBehaviour
         GetPlayer(currentClickPlayer).AddMastery(championSO);
     }
 
-    public void IncreasedMastery(int gamer, int champId) => proGamerMap[gamer].AddMastery(champId);
-    public int GetMastery(int gamer, int champId) => proGamerMap[gamer].GetMastery(champId);
 
     void Awake()
     {
-        proGamerMap = playerDatas.ToDictionary(x => x.Id, x => x.CreateGamer());
-
         players = playerDatas
                     .Select(x => new ProGamerDel(x))
                     .ToHashSet();

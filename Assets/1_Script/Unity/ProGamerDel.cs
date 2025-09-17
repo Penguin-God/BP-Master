@@ -7,7 +7,7 @@ public class ProGamerDel
     public readonly string PlayerName;
     HashSet<ChampionMasteryData> championMasteries;
     public IReadOnlyList<ChampionMasteryData> AllMasterys => championMasteries.ToArray();
-    public ProGamerDel(PlayerSO playerData)
+    public ProGamerDel(ProGamerSO playerData)
     {
         Id = playerData.Id;
         PlayerName = playerData.PlayerName;
