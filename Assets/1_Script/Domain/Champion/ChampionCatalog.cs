@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ChampionManager // 얘 어따 쓰지? Storage받고 챔피언으로 바꾸는 작업할까
+public class ChampionCatalog
 {
     readonly IEnumerable<Champion> allChampion;
     public IReadOnlyList<Champion> AllChampion => allChampion.ToArray();
     public IReadOnlyList<int> AllId => allChampion.Select(x => x.Id).ToList();
 
-    public ChampionManager(IEnumerable<Champion> champions) => allChampion = champions;
+    public ChampionCatalog(IEnumerable<Champion> champions) => allChampion = champions;
 
     public Champion GetChampion(int id) => allChampion.First(x => x.Id == id);
 

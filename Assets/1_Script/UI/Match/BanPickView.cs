@@ -5,6 +5,8 @@ using UnityEngine;
 public class BanPickView : MonoBehaviour
 {
     [SerializeField] ChampionManagerMono championManager;
+    //[SerializeField] Transform blueSlotParent;
+    //[SerializeField] Transform redSlotParent;
     [SerializeField] ChampionView[] bluePicks;
     [SerializeField] ChampionView[] redPicks;
     readonly Dictionary<Team, ChampionView[]> pickTextDict = new();
@@ -13,8 +15,6 @@ public class BanPickView : MonoBehaviour
     [SerializeField] TextMeshProUGUI redBan;
     readonly Dictionary<Team, TextMeshProUGUI> banTextDict = new();
 
-
-    
     readonly TeamSlotIndexr pickCursor = new TeamSlotIndexr();
     void Start()
     {

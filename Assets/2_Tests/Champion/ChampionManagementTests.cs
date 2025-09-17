@@ -4,7 +4,7 @@ using UnityEngine.TestTools;
 
 public class ChampionManagementTests
 {
-    ChampionManager manager;
+    ChampionCatalog manager;
     Champion[] testChampions;
 
     Champion CreateChamp(int id, string name) => new Champion(id, name, default, default, null);
@@ -21,7 +21,7 @@ public class ChampionManagementTests
             CreateChamp(5, "서포터")
         };
 
-        manager = new ChampionManager(testChampions);
+        manager = new ChampionCatalog(testChampions);
     }
 
     [Test]
