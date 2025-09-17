@@ -9,6 +9,6 @@ public class SlotManagementTests
 
         sut.AddSlot(TestHelper.CreateBlueSlot(0), TestHelper.CreateStatChamp(10));
 
-        Assert.AreEqual(10, sut.GetSlot(TestHelper.CreateBlueSlot(0)).Attack);
+        Assert.AreEqual(10, sut.GetSlot(TestHelper.CreateBlueSlot(0)).StatData.Attack);
     }
 }

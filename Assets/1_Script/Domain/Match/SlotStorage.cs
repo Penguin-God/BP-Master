@@ -2,15 +2,9 @@ using System.Collections.Generic;
 
 public class SlotStorage
 {
-    private readonly Dictionary<SlotData, ChampionStatData> slots = new();
+    readonly Dictionary<SlotData, Champion> slots = new();
 
-    public void AddSlot(SlotData slot, Champion champion)
-    {
-        slots[slot] = champion.StatData;
-    }
+    public void AddSlot(SlotData slot, Champion champion) => slots[slot] = champion;
 
-    public ChampionStatData GetSlot(SlotData slot)
-    {
-        return slots[slot];
-    }
+    public Champion GetSlot(SlotData slot) => slots[slot];
 }
