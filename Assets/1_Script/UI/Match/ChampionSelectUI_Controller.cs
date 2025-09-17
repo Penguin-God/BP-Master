@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,6 +60,7 @@ public class ChampionSelectUI_Controller : MonoBehaviour
         swapDoneBtn.gameObject.SetActive(true);
         swapDoneBtn.onClick.AddListener(() => SwapDone(team));
         view.HideBan();
+        nailDownBtn.gameObject.SetActive(false);
     }
 
     void SwapDone(Team team)
