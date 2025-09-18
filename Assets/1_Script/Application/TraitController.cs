@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,11 +10,28 @@ public enum TraitType
     SpeedChanger,
 }
 
+public readonly struct TraitFeedback
+{
+    public readonly SlotData Slot;
+    public readonly ChampionStatData Before;
+    public readonly ChampionStatData After;
+
+    public TraitFeedback(SlotData slot, ChampionStatData before, ChampionStatData after)
+    {
+        Slot = slot;
+        Before = before;
+        After = after;
+    }
+}
+
 public class TraitController
 {
     readonly SlotStorage<Champion> champions;
     readonly TraitTargetSelector targetFinder;
     readonly SlotStorage<bool> traitUseFlags;
+
+    // ✔ 컨트롤러가 피드백 이벤트를 직접 보유
+    public event Action<TraitFeedback> OnTraitApplied;
 
     public TraitController(SlotStorage<Champion> picks)
     {
@@ -26,21 +44,27 @@ public class TraitController
     {
         if (IsTraitUsed(traitSlot)) return false;
 
-        Champion champion = champions.GetSlot(traitSlot);
-        var targets = targetFinder.GetTargetSlots(traitSlot.Team, champion.TraitTargetRule, targetSlot);
-        ExecuteTrait(champion.TraitExecutor, targets.Select(x => champions.GetSlot(x)));
+        Champion executor = champions.GetSlot(traitSlot);
+        var targetSlots = targetFinder.GetTargetSlots(traitSlot.Team, executor.TraitTargetRule, targetSlot);
+        ExecuteTrait(executor.TraitExecutor, targetSlots);
         traitUseFlags.ChangeSlot(traitSlot, true);
         return true;
     }
 
     public bool IsTraitUsed(SlotData slot) => traitUseFlags.GetSlot(slot);
 
-    void ExecuteTrait(TraitExecutor executor, IEnumerable<Champion> champions)
+    void ExecuteTrait(TraitExecutor executor, IEnumerable<SlotData> slots)
     {
-        foreach (var champion in champions)
-            executor.ExecteTrait(champion);
+        foreach (var slot in slots)
+        {
+            var target = champions.GetSlot(slot);
+            var before = target.StatData;
+            executor.ExecteTrait(target);
+            OnTraitApplied?.Invoke(new TraitFeedback(slot, before, target.StatData));
+        }
     }
 
     public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
-    public TraitTargetRule GetTargetRule(Team team, int index) => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
+    public TraitTargetRule GetTargetRule(Team team, int index)
+        => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }

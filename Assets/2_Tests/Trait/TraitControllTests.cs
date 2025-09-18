@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TraitControllTests
 {
@@ -77,5 +78,38 @@ public class TraitControllTests
             TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10),
             TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10)
         };
+    }
+
+    [Test]
+    public void 특성_적용시_피드백_여러_타겟()
+    {
+        // Arrange
+        SlotStorage<Champion> storage = new();
+        storage.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
+        storage.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
+
+        storage.AddSlot(Team.Red, TestHelper.CreateStatChamp(0));
+        storage.AddSlot(Team.Red, TestHelper.CreateStatChamp(0));
+        
+        var sut = new TraitController(storage);
+
+        List<TraitFeedback> lastFeedback = new List<TraitFeedback>();
+        sut.OnTraitApplied += fb => lastFeedback.Add(fb);
+
+        // Act
+        sut.UseTrait(TestHelper.CreateBlueSlot(0), TestHelper.CreateRedSlot(0));
+
+        // Assert - 피드백이 2개(두 타겟)에 대해 왔는지
+        Assert.AreEqual(2, lastFeedback.Count);
+
+        // 어떤 슬롯들이 대상이었는지 (순서 무관 검증)
+        var receivedSlots = lastFeedback.Select(f => f.Slot).ToArray();
+        CollectionAssert.AreEquivalent(new[] { TestHelper.CreateRedSlot(0), TestHelper.CreateRedSlot(1) }, receivedSlots);
+
+        Assert.AreEqual(0, lastFeedback[0].Before.Attack);
+        Assert.AreEqual(10, lastFeedback[0].After.Attack);
+
+        Assert.AreEqual(0, lastFeedback[1].Before.Attack);
+        Assert.AreEqual(10, lastFeedback[1].After.Attack);
     }
 }
