@@ -20,6 +20,8 @@ public class TraitTargetSelector
 
     public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side) => Enumerable.Range(0, teamCount).Select(i => new SlotData(BanPickEnumCaster.GetTargetTeam(team, side), i));
 
+
+    public IEnumerable<SlotData> GetTargetSlots(Team team, TraitTargetRule rule, SlotData targetSlot) => GetTargetSlots(team, rule.TargetSide, rule.TargetRange, targetSlot);
     public IEnumerable<SlotData> GetTargetSlots(Team team, Side targetSide, TargetRange targetRange, SlotData targetSlot)
     {
         var targetTeam = BanPickEnumCaster.GetTargetTeam(team, targetSide);

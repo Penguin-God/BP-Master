@@ -30,5 +30,16 @@ public class SlotManagementTests
         SlotStorage<bool> sut = new(3, false);
 
         CollectionAssert.AreEqual(new bool[] { false, false, false }, sut.GetTeam(Team.Blue));
+        CollectionAssert.AreEqual(new bool[] { false, false, false }, sut.GetTeam(Team.Red));
+    }
+
+    [Test]
+    public void 슬롯갑_변경()
+    {
+        SlotStorage<bool> sut = new(3, false);
+
+        sut.ChangeSlot(TestHelper.CreateBlueSlot(1), true);
+
+        CollectionAssert.AreEqual(new bool[] { false, true, false }, sut.GetTeam(Team.Blue));
     }
 }
