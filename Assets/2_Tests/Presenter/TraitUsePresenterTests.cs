@@ -8,15 +8,16 @@ public class TraitUsePresenterTests
     [SetUp]
     public void SetUp()
     {
-        var blueChamp = TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0);
-        var redChamp = TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0);
+        SlotStorage<Champion> picks = new();
+        picks.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
+        picks.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
+        picks.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
 
-        var teams = new Dictionary<Team, IReadOnlyList<Champion>>
-        {
-            { Team.Blue, new List<Champion>{ blueChamp, blueChamp, blueChamp } },
-            { Team.Red, new List<Champion>{ redChamp, redChamp, redChamp } }
-        }; // 만들기 귀찮아서 복붙했는데 이럼 특성이 싹다 적용되긴해
-        presenter = new TraitUsePresenter(new TraitController(teams));
+        picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+        picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+        picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+
+        presenter = new TraitUsePresenter(new TraitController(picks));
     }
 
     [Test]

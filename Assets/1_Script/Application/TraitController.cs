@@ -12,6 +12,7 @@ public enum TraitType
 public class TraitController
 {
     readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> championsByTeam;
+    readonly SlotStorage<Champion> champions;
     readonly TraitTargetSelector targetFinder;
     readonly SlotStorage<bool> traitUseFlags;
 
@@ -22,13 +23,21 @@ public class TraitController
         traitUseFlags = new SlotStorage<bool>(traitsByTeam[Team.Blue].Count, false);
     }
 
+    public TraitController(SlotStorage<Champion> picks)
+    {
+        champions = picks;
+        targetFinder = new TraitTargetSelector(picks.GetTeam(Team.Blue).Count());
+        traitUseFlags = new SlotStorage<bool>(picks.GetTeam(Team.Blue).Count(), false);
+    }
+
     public bool UseTrait(SlotData traitSlot, SlotData targetSlot)
     {
         if (IsTraitUsed(traitSlot)) return false;
 
-        Champion champion = championsByTeam[traitSlot.Team][traitSlot.Index];
+        // Champion champion = championsByTeam[traitSlot.Team][traitSlot.Index];
+        Champion champion = champions.GetSlot(traitSlot);
         var targets = targetFinder.GetTargetSlots(traitSlot.Team, champion.TraitTargetRule, targetSlot);
-        ExecuteTrait(champion.TraitExecutor, targets.Select(x => championsByTeam[x.Team][x.Index]));
+        ExecuteTrait(champion.TraitExecutor, targets.Select(x => champions.GetSlot(x)));
         traitUseFlags.ChangeSlot(traitSlot, true);
         return true;
     }
@@ -41,7 +50,6 @@ public class TraitController
             executor.ExecteTrait(champion);
     }
 
-    public int GetTeamSize(Team team) => championsByTeam[team].Count;
-
-    public TraitTargetRule GetTargetRule(Team team, int index) => championsByTeam[team][index].TraitTargetRule;
+    public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
+    public TraitTargetRule GetTargetRule(Team team, int index) => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }
