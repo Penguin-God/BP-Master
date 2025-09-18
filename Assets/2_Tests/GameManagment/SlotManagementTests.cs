@@ -42,4 +42,14 @@ public class SlotManagementTests
 
         CollectionAssert.AreEqual(new bool[] { false, true, false }, sut.GetTeam(Team.Blue));
     }
+
+    [Test]
+    public void 컬랙션_추가()
+    {
+        SlotStorage<bool> sut = new();
+
+        sut.AddSlots(Team.Blue, new bool[] { true, false, true});
+
+        CollectionAssert.AreEqual(new bool[] { true, false, true }, sut.GetTeam(Team.Blue));
+    }
 }
