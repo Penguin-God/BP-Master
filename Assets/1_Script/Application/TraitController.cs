@@ -11,17 +11,9 @@ public enum TraitType
 
 public class TraitController
 {
-    readonly IReadOnlyDictionary<Team, IReadOnlyList<Champion>> championsByTeam;
     readonly SlotStorage<Champion> champions;
     readonly TraitTargetSelector targetFinder;
     readonly SlotStorage<bool> traitUseFlags;
-
-    public TraitController(IReadOnlyDictionary<Team, IReadOnlyList<Champion>> traitsByTeam)
-    {
-        this.championsByTeam = traitsByTeam;
-        targetFinder = new TraitTargetSelector(traitsByTeam[Team.Blue].Count);
-        traitUseFlags = new SlotStorage<bool>(traitsByTeam[Team.Blue].Count, false);
-    }
 
     public TraitController(SlotStorage<Champion> picks)
     {
@@ -34,7 +26,6 @@ public class TraitController
     {
         if (IsTraitUsed(traitSlot)) return false;
 
-        // Champion champion = championsByTeam[traitSlot.Team][traitSlot.Index];
         Champion champion = champions.GetSlot(traitSlot);
         var targets = targetFinder.GetTargetSlots(traitSlot.Team, champion.TraitTargetRule, targetSlot);
         ExecuteTrait(champion.TraitExecutor, targets.Select(x => champions.GetSlot(x)));

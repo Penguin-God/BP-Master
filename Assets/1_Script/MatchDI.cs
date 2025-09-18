@@ -16,7 +16,7 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
 
     IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
-    SlotStorage pickSlotStorage;
+    SlotStorage<Champion> pickSlotStorage;
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
     {
@@ -57,7 +57,7 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Red);
 
         // 지우고
-        var presenter = new  TraitUsePresenter(new TraitController(pickChampions));
+        var presenter = new  TraitUsePresenter(new TraitController(pickSlotStorage));
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
@@ -69,7 +69,7 @@ public class MatchDI : MonoBehaviour
 
     void SettingSlotStorage()
     {
-        pickSlotStorage = new SlotStorage();
+        pickSlotStorage = new SlotStorage<Champion>();
         foreach (var item in storage.PickBySlot)
             pickSlotStorage.AddSlot(item.Key.Team, championCatalog.GetChampion(item.Value));
     }
@@ -77,7 +77,7 @@ public class MatchDI : MonoBehaviour
     void ApplyMastery(Team team)
     {
         for (int i = 0; i < pickSlotStorage.GetTeam(team).Count(); i++)
-            new MasteryApplier().ApplyMastery(gamerMap[team][i], pickChampions[team][i]);
+            new MasteryApplier().ApplyMastery(gamerMap[team][i], pickSlotStorage.GetSlot(new SlotData(team, i)));
     }
 
     void OnDone()
