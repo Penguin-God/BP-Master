@@ -1,16 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class SlotStorage
+public class SlotStorage<T>
 {
     readonly TeamSlotIndexr indexr = new TeamSlotIndexr();
-    readonly Dictionary<SlotData, Champion> slots = new();
+    readonly Dictionary<SlotData, T> slots = new();
 
-    public void AddSlot(Team team, Champion champion) => slots.Add(new SlotData(team, indexr.AllocateIndex(team)), champion);
+    public SlotStorage() { }
 
-    public Champion GetSlot(SlotData slot) => slots[slot];
+    // 슬롯 수와 기본값으로 초기화 (Blue 팀 기준)
+    public SlotStorage(int slotCount, T value)
+    {
+        Enumerable.Range(0, slotCount)
+            .ToList()
+            .ForEach(_ => AddSlot(Team.Blue, value));
+    }
 
-    public IEnumerable<Champion> GetTeam(Team team) 
+    public void AddSlot(Team team, T champion) => slots.Add(new SlotData(team, indexr.AllocateIndex(team)), champion);
+
+    public T GetSlot(SlotData slot) => slots[slot];
+
+    public IEnumerable<T> GetTeam(Team team) 
         => slots
             .Where(kv => kv.Key.Team == team)
             .OrderBy(kv => kv.Key.Index)
