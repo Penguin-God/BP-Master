@@ -16,7 +16,6 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     TraitController traitController;
 
-    IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
     SlotStorage<Champion> pickSlotStorage;
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
