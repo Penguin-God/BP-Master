@@ -8,10 +8,7 @@ public class BanPickView : MonoBehaviour
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
     SlotStorage<SlotView> slotViews = new();
-
-    [SerializeField] ChampionView[] bluePicks;
-    [SerializeField] ChampionView[] redPicks;
-    readonly Dictionary<Team, ChampionView[]> pickTextDict = new();
+    SlotStorage<ChampionView> pickViews = new();
 
     [SerializeField] TextMeshProUGUI blueBan;
     [SerializeField] TextMeshProUGUI redBan;
@@ -23,8 +20,8 @@ public class BanPickView : MonoBehaviour
         slotViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<SlotView>());
         slotViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<SlotView>());
 
-        pickTextDict.Add(Team.Blue, bluePicks);
-        pickTextDict.Add(Team.Red, redPicks);
+        pickViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<ChampionView>());
+        pickViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<ChampionView>());
 
         banTextDict.Add(Team.Blue, blueBan);
         banTextDict.Add(Team.Red, redBan);
@@ -40,7 +37,7 @@ public class BanPickView : MonoBehaviour
 
     public void UpdateAllPick(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
-    void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.AllocateIndex(team)].UpdateChampion(champion.CreateChampion());
+    void UpdatePickView(Team team, ChampionSO champion) => pickViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(champion.CreateChampion());
 
     void UpdateBanView(Team team, ChampionSO champion)
     {
