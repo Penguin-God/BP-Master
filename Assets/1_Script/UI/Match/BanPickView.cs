@@ -39,7 +39,7 @@ public class BanPickView : MonoBehaviour
         else if(phase == GamePhase.Ban) UpdateBanView(team, champion);
     }
 
-    public void UpdateAllPick(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
+    public void ChangeChampionStat(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
     void UpdatePickView(Team team, Champion champion) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(champion);
 

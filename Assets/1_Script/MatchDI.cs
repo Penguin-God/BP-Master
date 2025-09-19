@@ -56,7 +56,7 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
         traitController = new TraitController(pickSlotStorage);
-        traitController.OnTraitApplied += banPickView.UpdateAllPick;
+        traitController.OnTraitApplied += banPickView.ChangeChampionStat;
 
         var presenter = new  TraitUsePresenter(traitController);
         traitUseView.Init(presenter);
@@ -76,7 +76,13 @@ public class MatchDI : MonoBehaviour
     void ApplyMastery(Team team)
     {
         for (int i = 0; i < pickSlotStorage.GetTeam(team).Count(); i++)
-            new MasteryApplier().ApplyMastery(gamerMap[team][i], pickSlotStorage.GetSlot(new SlotData(team, i)));
+        {
+            var slot = new SlotData(team, i);
+            var beforeStat = pickSlotStorage.GetSlot(slot).StatData;
+            // 숙련도 있으면 UI 피드백
+            if (new MasteryApplier().ApplyMastery(gamerMap[team][i], pickSlotStorage.GetSlot(slot)))
+                banPickView.ChangeChampionStat(new StatChangeData(slot, beforeStat, pickSlotStorage.GetSlot(slot).StatData));
+        }
     }
 
     void OnDone()

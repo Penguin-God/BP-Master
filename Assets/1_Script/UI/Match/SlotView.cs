@@ -17,7 +17,6 @@ public class SlotView : MonoBehaviour
     Champion traickingTarget;
     ChampionView traickingView;
 
-
     StatChangePresenter statChangePresenter = new StatChangePresenter(Color.green, Color.red);
 
     void Start()
@@ -53,7 +52,7 @@ public class SlotView : MonoBehaviour
 
     IEnumerator ApplyStatChangeAfterDelay(ChampionStatData afterStat)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         championView.UpdateStat(afterStat);
         InActiveTexts();
