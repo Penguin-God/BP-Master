@@ -33,4 +33,6 @@ public class SlotStorage<T>
             .Where(kv => kv.Key.Team == team)
             .OrderBy(kv => kv.Key.Index)
             .Select(kv => kv.Value);
+
+    public IEnumerable<T> GetAll() => new[] { Team.Blue, Team.Red }.SelectMany(team => GetTeam(team));
 }
