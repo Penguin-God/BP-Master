@@ -1,4 +1,3 @@
-using System.Data;
 using TMPro;
 using UnityEngine;
 
@@ -15,14 +14,19 @@ public class ChampionView : MonoBehaviour
     ChampionPersenter championPersenter = new ChampionPersenter();
     public void UpdateDisplay(ChampionSO champion)
     {
-        UpdateStat(champion.CreateChampion());
+        UpdateChampion(champion.CreateChampion());
         traitText.text = championPersenter.CreateViewModel(champion.StatData, champion.TraitData.CreateUI_Data()).Trait;
     }
 
-    public void UpdateStat(Champion champion)
+    public void UpdateChampion(Champion champion)
     {
-        var viewModel = championPersenter.CreateViewModel(champion.StatData, default);
         nameText.text = champion.Name;
+        UpdateStat(champion.StatData);
+    }
+
+    public void UpdateStat(ChampionStatData statData)
+    {
+        var viewModel = championPersenter.CreateViewModel(statData, default);
         attackText.text = viewModel.Attack;
         defenseText.text = viewModel.Defense;
         speedText.text = viewModel.Speed;

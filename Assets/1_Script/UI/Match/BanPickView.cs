@@ -5,8 +5,10 @@ using UnityEngine;
 public class BanPickView : MonoBehaviour
 {
     [SerializeField] ChampionManagerMono championManager;
-    //[SerializeField] Transform blueSlotParent;
-    //[SerializeField] Transform redSlotParent;
+    [SerializeField] Transform blueSlotParent;
+    [SerializeField] Transform redSlotParent;
+    SlotStorage<SlotView> slotViews = new();
+
     [SerializeField] ChampionView[] bluePicks;
     [SerializeField] ChampionView[] redPicks;
     readonly Dictionary<Team, ChampionView[]> pickTextDict = new();
@@ -18,6 +20,9 @@ public class BanPickView : MonoBehaviour
     readonly TeamSlotIndexr pickCursor = new TeamSlotIndexr();
     void Start()
     {
+        slotViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<SlotView>());
+        slotViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<SlotView>());
+
         pickTextDict.Add(Team.Blue, bluePicks);
         pickTextDict.Add(Team.Red, redPicks);
 
@@ -33,21 +38,9 @@ public class BanPickView : MonoBehaviour
         else if(phase == GamePhase.Ban) UpdateBanView(team, champion);
     }
 
-    public void UpdateAllPick(IReadOnlyDictionary<Team, IReadOnlyList<Champion>> data)
-    {
-        for (int i = 0; i < data[Team.Blue].Count; i++)
-            pickTextDict[Team.Blue][i].UpdateStat(data[Team.Blue][i]);
+    public void UpdateAllPick(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
-        for (int i = 0; i < data[Team.Red].Count; i++)
-            pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i]);
-    }
-
-    public void UpdateStat(StatChangeData feedback)
-    {
-        
-    }
-
-    void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.AllocateIndex(team)].UpdateStat(champion.CreateChampion());
+    void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.AllocateIndex(team)].UpdateChampion(champion.CreateChampion());
 
     void UpdateBanView(Team team, ChampionSO champion)
     {

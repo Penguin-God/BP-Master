@@ -7972,6 +7972,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championManager: {fileID: 1420292359}
+  blueSlotParent: {fileID: 1998413612}
+  redSlotParent: {fileID: 473974211}
   bluePicks:
   - {fileID: 1595147331}
   - {fileID: 2101394359}

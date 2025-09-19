@@ -11,6 +11,11 @@ public class SlotView : MonoBehaviour
 
     StatChangePresenter statChangePresenter = new StatChangePresenter(Color.green, Color.red);
 
+    void Start()
+    {
+        InActiveTexts();
+    }
+
     public void ChangeStat(StatChangeData changeData)
     {
         var changeViewModel = statChangePresenter.CreateViewModel(changeData);
@@ -24,9 +29,14 @@ public class SlotView : MonoBehaviour
 
     IEnumerator ApplyStatChangeAfterDelay(ChampionStatData afterStat)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         championView.UpdateStat(afterStat);
+        InActiveTexts();
+    }
+
+    void InActiveTexts()
+    {
         attChangeText.gameObject.SetActive(false);
         defChangeText.gameObject.SetActive(false);
         speedChangeText.gameObject.SetActive(false);
