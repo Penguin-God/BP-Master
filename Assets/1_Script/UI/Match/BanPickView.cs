@@ -15,10 +15,14 @@ public class BanPickView : MonoBehaviour
     readonly Dictionary<Team, TextMeshProUGUI> banTextDict = new();
 
     readonly TeamSlotIndexr pickCursor = new TeamSlotIndexr();
+    [SerializeField] ChampionView mainView;
     void Start()
     {
         slotViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<SlotView>());
         slotViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<SlotView>());
+
+        foreach (var item in slotViews.GetAll())
+            item.Init(mainView, championManager);
 
         pickViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<ChampionView>());
         pickViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<ChampionView>());
@@ -31,13 +35,13 @@ public class BanPickView : MonoBehaviour
 
     public void UpdateSelectView(GamePhase phase, Team team, ChampionSO champion)
     {
-        if (phase == GamePhase.Pick) UpdatePickView(team, champion);
+        if (phase == GamePhase.Pick) UpdatePickView(team, champion.CreateChampion());
         else if(phase == GamePhase.Ban) UpdateBanView(team, champion);
     }
 
     public void UpdateAllPick(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
-    void UpdatePickView(Team team, ChampionSO champion) => pickViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(champion.CreateChampion());
+    void UpdatePickView(Team team, Champion champion) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(champion);
 
     void UpdateBanView(Team team, ChampionSO champion)
     {

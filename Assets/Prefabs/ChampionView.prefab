@@ -296,6 +296,7 @@ MonoBehaviour:
   attChangeText: {fileID: 6897212238952395986}
   defChangeText: {fileID: 8572052138301835999}
   speedChangeText: {fileID: 1088094293814703625}
+  slotButton: {fileID: 4782385028736395433}
 --- !u!1 &5099845033087087049
 GameObject:
   m_ObjectHideFlags: 0

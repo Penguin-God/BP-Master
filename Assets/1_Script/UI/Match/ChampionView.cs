@@ -18,6 +18,12 @@ public class ChampionView : MonoBehaviour
         traitText.text = championPersenter.CreateViewModel(champion.StatData, champion.TraitData.CreateUI_Data()).Trait;
     }
 
+    public void UpdateDisplay(Champion champion, TraitUI_Data traitUI_Data)
+    {
+        UpdateChampion(champion);
+        traitText.text = championPersenter.CreateViewModel(champion.StatData, traitUI_Data).Trait;
+    }
+
     public void UpdateChampion(Champion champion)
     {
         nameText.text = champion.Name;

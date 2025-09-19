@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlotView : MonoBehaviour
 {
@@ -8,13 +10,35 @@ public class SlotView : MonoBehaviour
     [SerializeField] TextMeshProUGUI attChangeText;
     [SerializeField] TextMeshProUGUI defChangeText;
     [SerializeField] TextMeshProUGUI speedChangeText;
+    [SerializeField] Button slotButton;
+
+    ChampionManagerMono championManager;
+    // SlotStorage<Champion> pickStorage;
+    Champion traickingTarget;
+    ChampionView traickingView;
+
 
     StatChangePresenter statChangePresenter = new StatChangePresenter(Color.green, Color.red);
 
     void Start()
     {
         InActiveTexts();
+        slotButton.onClick.AddListener(DrawTarget);
     }
+
+    public void Init(ChampionView view, ChampionManagerMono championManager)
+    {
+        traickingView = view;
+        this.championManager = championManager;
+    }
+
+    public void UpdateChampion(Champion target)
+    {
+        traickingTarget = target;
+        championView.UpdateChampion(target);
+    }
+
+    void DrawTarget() => traickingView.UpdateDisplay(traickingTarget, championManager.GetChampionData(traickingTarget.Id).TraitData.CreateUI_Data());
 
     public void ChangeStat(StatChangeData changeData)
     {
