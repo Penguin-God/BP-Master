@@ -93,7 +93,7 @@ public class TraitControllTests
         
         var sut = new TraitController(storage);
 
-        List<TraitFeedback> lastFeedback = new List<TraitFeedback>();
+        List<StatChangeData> lastFeedback = new List<StatChangeData>();
         sut.OnTraitApplied += fb => lastFeedback.Add(fb);
 
         // Act

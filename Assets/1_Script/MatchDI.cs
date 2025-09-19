@@ -14,6 +14,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] DraftTurnSO trait;
     GameBanPickStorage storage;
     PhaseManager phaseManager;
+    TraitController traitController;
 
     IReadOnlyDictionary<Team, IReadOnlyList<Champion>> pickChampions;
     SlotStorage<Champion> pickSlotStorage;
@@ -55,15 +56,14 @@ public class MatchDI : MonoBehaviour
         SettingSlotStorage();
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
+        traitController = new TraitController(pickSlotStorage);
+        var presenter = new  TraitUsePresenter(traitController);
+        presenter.OnTraitUsed += _ => banPickView.UpdateAllPick(pickChampions);
 
-        // 지우고
-        var presenter = new  TraitUsePresenter(new TraitController(pickSlotStorage));
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
         presenter.OnTraitUsed += phaseManager.SubmitAction;
-        // 지우기
-        presenter.OnTraitUsed += _ => banPickView.UpdateAllPick(pickChampions);
         initTrait = true;
     }
 

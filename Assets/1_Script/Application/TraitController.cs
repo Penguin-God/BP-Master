@@ -10,13 +10,13 @@ public enum TraitType
     SpeedChanger,
 }
 
-public readonly struct TraitFeedback
+public readonly struct StatChangeData
 {
     public readonly SlotData Slot;
     public readonly ChampionStatData Before;
     public readonly ChampionStatData After;
 
-    public TraitFeedback(SlotData slot, ChampionStatData before, ChampionStatData after)
+    public StatChangeData(SlotData slot, ChampionStatData before, ChampionStatData after)
     {
         Slot = slot;
         Before = before;
@@ -30,8 +30,7 @@ public class TraitController
     readonly TraitTargetSelector targetFinder;
     readonly SlotStorage<bool> traitUseFlags;
 
-    // ✔ 컨트롤러가 피드백 이벤트를 직접 보유
-    public event Action<TraitFeedback> OnTraitApplied;
+    public event Action<StatChangeData> OnTraitApplied;
 
     public TraitController(SlotStorage<Champion> picks)
     {
@@ -60,7 +59,7 @@ public class TraitController
             var target = champions.GetSlot(slot);
             var before = target.StatData;
             executor.ExecteTrait(target);
-            OnTraitApplied?.Invoke(new TraitFeedback(slot, before, target.StatData));
+            OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
         }
     }
 

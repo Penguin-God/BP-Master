@@ -42,6 +42,11 @@ public class BanPickView : MonoBehaviour
             pickTextDict[Team.Red][i].UpdateStat(data[Team.Red][i]);
     }
 
+    public void UpdateStat(StatChangeData feedback)
+    {
+        
+    }
+
     void UpdatePickView(Team team, ChampionSO champion) => pickTextDict[team][pickCursor.AllocateIndex(team)].UpdateStat(champion.CreateChampion());
 
     void UpdateBanView(Team team, ChampionSO champion)
