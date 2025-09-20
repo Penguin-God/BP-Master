@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class TeamScoreCalculator
+public class DefaultScoreCalculator
 {
-    readonly TeamBonusCalculator teamBonusCalculator;
-    public TeamScoreCalculator(TeamBonusCalculator teamBonusCalculator) => this.teamBonusCalculator = teamBonusCalculator;
-
-    public int GetDefaultScore(IEnumerable<ChampionStatData> team) => CalculateAttackTotal(team) + CalculateDefenseTotal(team);
-    public int CalculateAttackTotal(IEnumerable<ChampionStatData> team) => team.Sum(x => x.Attack);
-    public int CalculateDefenseTotal(IEnumerable<ChampionStatData> team) => team.Sum(x => x.Defense);
-
-    public int CalculateScore(IEnumerable<ChampionStatData> team) => GetDefaultScore(team) + teamBonusCalculator.CalculateTeamBonus(team);
+    public int CalculateDefaultScore(IEnumerable<ChampionStatData> team) => CalculateAttack(team) + CalculateDefense(team);
+    public int CalculateAttack(IEnumerable<ChampionStatData> team) => team.Sum(x => x.Attack);
+    public int CalculateDefense(IEnumerable<ChampionStatData> team) => team.Sum(x => x.Defense);
 }
 
 // ChampionBonus 쓰는 클래스

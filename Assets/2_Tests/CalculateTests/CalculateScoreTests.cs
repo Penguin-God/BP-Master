@@ -3,23 +3,34 @@ using NUnit.Framework;
 
 public class CalculateScoreTests
 {
+    //[Test]
+    //public void 점수는_공방과_보너스의_합()
+    //{
+    //    SortedDictionary<int, int> teamBonusData1 = new SortedDictionary<int, int>();
+    //    teamBonusData1.Add(300, 50);
+
+    //    SortedDictionary<int, int> teamBonusData2 = new SortedDictionary<int, int>();
+    //    teamBonusData2.Add(20, 30);
+
+    //    var teamCal = new TeamBonusCalculator(CreateBonusCalculator(300, 50), CreateBonusCalculator(300, 50), CreateBonusCalculator(20, 30));
+    //    DefaultScoreCalculator sut = new();
+    //    ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(80, 200, 15) };
+
+    //    int result = sut.CalculateScore(team);
+
+    //    // 580 + 80
+    //    Assert.AreEqual(660, result);
+    //}
+
     [Test]
-    public void 점수는_공방과_보너스의_합()
+    public void 기본_점수는_공방의_합()
     {
-        SortedDictionary<int, int> teamBonusData1 = new SortedDictionary<int, int>();
-        teamBonusData1.Add(300, 50);
+        DefaultScoreCalculator sut = new();
+        ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(100, 200, 15) };
 
-        SortedDictionary<int, int> teamBonusData2 = new SortedDictionary<int, int>();
-        teamBonusData2.Add(20, 30);
-
-        var teamCal = new TeamBonusCalculator(CreateBonusCalculator(300, 50), CreateBonusCalculator(300, 50), CreateBonusCalculator(20, 30));
-        TeamScoreCalculator sut = new TeamScoreCalculator(teamCal);
-        ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(80, 200, 15) };
-
-        int result = sut.CalculateScore(team);
-
-        // 580 + 80
-        Assert.AreEqual(660, result);
+        Assert.AreEqual(250, sut.CalculateAttack(team));
+        Assert.AreEqual(350, sut.CalculateDefense(team));
+        Assert.AreEqual(600, sut.CalculateDefaultScore(team));
     }
 
     [Test]
