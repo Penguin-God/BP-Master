@@ -13,5 +13,6 @@ public struct BonusData
 public class BonusDataSO : ScriptableObject
 {
     [SerializeField] BonusData[] bonusDatas;
-    public BonusCalculator Bonus => new BonusCalculator(new SortedDictionary<int, int>(bonusDatas.ToDictionary(x => x.Threshold, x => x.Bonus)));
+    public SortedDictionary<int, int> BonusDatas => new SortedDictionary<int, int>(bonusDatas.ToDictionary(x => x.Threshold, x => x.Bonus));
+    public BonusCalculator Bonus => new BonusCalculator(BonusDatas);
 }
