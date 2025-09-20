@@ -17,6 +17,8 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     TraitController traitController;
 
+    [SerializeField] ScoreView scoreView;
+
     SlotStorage<Champion> pickSlotStorage;
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
@@ -64,6 +66,12 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
         presenter.OnTraitUsed += phaseManager.SubmitAction;
+
+        scoreView.Init(pickSlotStorage);
+        scoreView.UpdateTeamScore(Team.Blue);
+        scoreView.UpdateTeamScore(Team.Red);
+        traitController.OnTraitApplied += (x) => scoreView.UpdateTeamScore(x.Slot.Team);
+
         initTrait = true;
     }
 
