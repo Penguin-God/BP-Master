@@ -2909,7 +2909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &670859826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4337,7 +4337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &882374935
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6763,6 +6763,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71ae33eb705d9ff4f93516c3f9d583a6, type: 2}
   - {fileID: 11400000, guid: 3eb3ee9e161a5a04d900e3727b7050d2, type: 2}
   - {fileID: 11400000, guid: 9b3bc931d21d666419ad4454b4efec43, type: 2}
+  Scores: {fileID: 882374934}
+  textBlue: {fileID: 1908862552}
+  textRed: {fileID: 1173623354}
   bonusDataSO: {fileID: 11400000, guid: 3ed54617ea912194c92454bc2563d3fe, type: 2}
 --- !u!1001 &1425457482
 PrefabInstance:

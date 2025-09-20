@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -85,16 +86,19 @@ public class MatchDI : MonoBehaviour
         }
     }
 
-    void OnDone() // UI에 정보 주기
+    [SerializeField] GameObject Scores;
+    [SerializeField] TextMeshProUGUI textBlue;
+    [SerializeField] TextMeshProUGUI textRed;
+    void OnDone()
     {
         var blue = pickSlotStorage.GetTeam(Team.Blue);
         var red = pickSlotStorage.GetTeam(Team.Red);
 
-        var calculator = new TeamScoreCalculator(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
+        MatchResult result = new MatchResultCalculator(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
 
-        print($"Blue : {result.BlueScore}");
-        print($"Red : {result.RedScore}");
+        Scores.SetActive(true);
+        textBlue.text = new ScorePresenter().BuildText(result.BlueInfo);
+        textRed.text = new ScorePresenter().BuildText(result.RedInfo);
         print($"승자 : {result.Winner}");
     }
 

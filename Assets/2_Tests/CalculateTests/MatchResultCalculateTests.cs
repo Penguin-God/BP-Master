@@ -5,8 +5,7 @@ public class MatchResultCalculateTests
     ChampionStatData CreateStat(int atk = 0, int def = 0, int spd = 0) => new ChampionStatData(atk, def, spd);
 
     BonusCalculator CreateEmptyBonus() => new BonusCalculator(new System.Collections.Generic.SortedDictionary<int, int>());
-    DefaultScoreCalculator CreateScoreCalculator() => new ();
-
+    
     [Test]
     public void 스코어_합_계산()
     {
@@ -30,7 +29,7 @@ public class MatchResultCalculateTests
             CreateStat(10, 6),
             CreateStat(10, 6),
         };
-        var sut = new MatchResultCalculator(CreateScoreCalculator(), new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+        var sut = new MatchResultCalculator(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
 
         MatchResult result = sut.CalculateResult(blue, red);
 
@@ -48,7 +47,7 @@ public class MatchResultCalculateTests
             CreateStat(10, 10, 5),
             CreateStat(8,  12, 6),
         };
-        var sut = new MatchResultCalculator(CreateScoreCalculator(), new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+        var sut = new MatchResultCalculator(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
 
         MatchResult result = sut.CalculateResult(team, team);
 
