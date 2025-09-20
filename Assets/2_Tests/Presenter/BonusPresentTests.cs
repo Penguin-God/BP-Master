@@ -32,7 +32,7 @@ public class BonusThresholdPresenterTests
 
         var attack = CreateThresholds((150, 35), (200, 44), (300, 11));
         var defense = CreateThresholds((150, 35), (200, 44), (300, 11));
-        var speed = CreateThresholds((150, 35), (200, 44), (300, 11));
+        var speed = CreateThresholds((10, 35), (15, 44), (20, 11));
 
         string result = presenter.BuildBonusAllText(attack, defense, speed);
 
@@ -41,7 +41,7 @@ public class BonusThresholdPresenterTests
             "보너스 점수(누적 X)" + nl +
             "공격력 : 150이상 +35, 200이상 +44, 300이상 +11" + nl +
             "방어력 : 150이상 +35, 200이상 +44, 300이상 +11" + nl +
-            "속도 : 150이상 +35, 200이상 +44, 300이상 +11";
+            "속도 : 10이상 +35, 15이상 +44, 20이상 +11";
 
         // OS 줄바꿈 차이 안전하게 비교하려면 Normalize 사용도 가능:
         // Assert.AreEqual(expected.Replace("\r\n","\n"), result.Replace("\r\n","\n"));
