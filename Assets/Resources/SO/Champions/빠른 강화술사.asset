@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uBE60\uB978 \uAC15\uD654\uC220\uC0AC"
   m_EditorClassIdentifier: 
   id: 19
-  championName: "\uAC15\uD654\uC220\uC0AC"
+  championName: "\uBE60\uB978 \uAC15\uD654\uC220\uC0AC"
   attack: 130
   defense: 80
   speed: 6
