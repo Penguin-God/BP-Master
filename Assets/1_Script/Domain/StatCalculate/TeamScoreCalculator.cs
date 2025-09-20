@@ -6,8 +6,11 @@ public class TeamScoreCalculator
     readonly TeamBonusCalculator teamBonusCalculator;
     public TeamScoreCalculator(TeamBonusCalculator teamBonusCalculator) => this.teamBonusCalculator = teamBonusCalculator;
 
-    public int CalculateScore(IEnumerable<ChampionStatData> team)
-        => team.Sum(x => x.Attack + x.Defense) + teamBonusCalculator.CalculateTeamBonus(team);
+    public int GetDefaultScore(IEnumerable<ChampionStatData> team) => CalculateAttackTotal(team) + CalculateDefenseTotal(team);
+    public int CalculateAttackTotal(IEnumerable<ChampionStatData> team) => team.Sum(x => x.Attack);
+    public int CalculateDefenseTotal(IEnumerable<ChampionStatData> team) => team.Sum(x => x.Defense);
+
+    public int CalculateScore(IEnumerable<ChampionStatData> team) => GetDefaultScore(team) + teamBonusCalculator.CalculateTeamBonus(team);
 }
 
 // ChampionBonus 쓰는 클래스

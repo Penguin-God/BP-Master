@@ -14,9 +14,9 @@ public class TeamBonusCalculator
         this.speedBonusCalculator = bonusCalculator3;
     }
 
-    public int CalculateTeamBonus(IEnumerable<ChampionStatData> team)
-    {
-        return attackBonusCalculator.CalculateBonus(team.Sum(x => x.Attack)) + defenseBonusCalculator.CalculateBonus(team.Sum(x => x.Defense)) 
-            + speedBonusCalculator.CalculateBonus(team.Sum(x => x.Speed));
-    }
+    public int GetAttackBonus(IEnumerable<ChampionStatData> team) => attackBonusCalculator.CalculateBonus(team.Sum(x => x.Attack));
+    public int GetDefenseBonus(IEnumerable<ChampionStatData> team) => defenseBonusCalculator.CalculateBonus(team.Sum(x => x.Defense));
+    public int GetSpeedBonus(IEnumerable<ChampionStatData> team) => speedBonusCalculator.CalculateBonus(team.Sum(x => x.Speed));
+
+    public int CalculateTeamBonus(IEnumerable<ChampionStatData> team) => GetAttackBonus(team) + GetDefenseBonus(team) + GetSpeedBonus(team);
 }
