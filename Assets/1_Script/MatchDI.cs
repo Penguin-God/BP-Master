@@ -85,13 +85,14 @@ public class MatchDI : MonoBehaviour
         }
     }
 
-    void OnDone()
+    void OnDone() // UI에 정보 주기
     {
         var blue = pickSlotStorage.GetTeam(Team.Blue);
         var red = pickSlotStorage.GetTeam(Team.Red);
 
-        var calculator = new TeamScoreCalculator(bonusDataSO.ChampionBonus, bonusDataSO.TeamBonus);
+        var calculator = new TeamScoreCalculator(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultCalculator(calculator).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
+
         print($"Blue : {result.BlueScore}");
         print($"Red : {result.RedScore}");
         print($"승자 : {result.Winner}");

@@ -12,15 +12,14 @@ public class CalculateScoreTests
         SortedDictionary<int, int> teamBonusData2 = new SortedDictionary<int, int>();
         teamBonusData2.Add(20, 30);
 
-        var champCal = new ChampionBonusCalculator(CreateBonusCalculator(100, 20), CreateBonusCalculator(100, 20));
         var teamCal = new TeamBonusCalculator(CreateBonusCalculator(300, 50), CreateBonusCalculator(300, 50), CreateBonusCalculator(20, 30));
-        TeamScoreCalculator sut = new TeamScoreCalculator(champCal, teamCal);
+        TeamScoreCalculator sut = new TeamScoreCalculator(teamCal);
         ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(80, 200, 15) };
 
         int result = sut.CalculateScore(team);
 
-        // 580 + 80 + 60
-        Assert.AreEqual(720, result);
+        // 580 + 80
+        Assert.AreEqual(660, result);
     }
 
     [Test]

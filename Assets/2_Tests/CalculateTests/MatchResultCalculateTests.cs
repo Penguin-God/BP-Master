@@ -6,10 +6,7 @@ public class MatchResultCalculateTests
 
     BonusCalculator CreateEmptyBonus() => new BonusCalculator(new System.Collections.Generic.SortedDictionary<int, int>());
     TeamScoreCalculator CreateScoreCalculator()
-    {
-        return new TeamScoreCalculator(new ChampionBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus()),
-            new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
-    }
+        => new TeamScoreCalculator(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
     [Test]
     public void 다수_챔피언_스쿼드_결과()
     {
