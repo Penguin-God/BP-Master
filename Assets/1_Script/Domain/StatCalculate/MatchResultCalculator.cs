@@ -1,38 +1,71 @@
-
 using System.Collections.Generic;
+
+public readonly struct TeamScoreInfo
+{
+    public int AttackTotal { get; }
+    public int DefenseTotal { get; }
+    public int DefaultScore => AttackTotal + DefenseTotal;
+
+    public int AttackBonus { get; }
+    public int DefenseBonus { get; }
+    public int SpeedBonus { get; }
+    public int BonusScore => AttackBonus + DefenseBonus + SpeedBonus;
+
+    public int Total => DefaultScore + BonusScore;
+
+    public TeamScoreInfo(int attackTotal, int defenseTotal, int attackBonus, int defenseBonus, int speedBonus)
+    {
+        AttackTotal = attackTotal;
+        DefenseTotal = defenseTotal;
+        AttackBonus = attackBonus;
+        DefenseBonus = defenseBonus;
+        SpeedBonus = speedBonus;
+    }
+}
 
 public readonly struct MatchResult
 {
-    public readonly int BlueScore;
-    public readonly int RedScore;
+    public readonly TeamScoreInfo BlueInfo;
+    public readonly TeamScoreInfo RedInfo;
     public readonly Team Winner;
 
-    public MatchResult(int blueScore, int redScore, Team winner)
+    public MatchResult(TeamScoreInfo blueInfo, TeamScoreInfo redInfo, Team winner)
     {
-        BlueScore = blueScore;
-        RedScore = redScore;
+        BlueInfo = blueInfo;
+        RedInfo = redInfo;
         Winner = winner;
     }
 }
 
+
 public class MatchResultCalculator
 {
-    readonly TeamScoreCalculator scoreCalculator;
-    public MatchResultCalculator(TeamScoreCalculator teamScoreCalculator) 
+    readonly DefaultScoreCalculator scoreCalculator;
+    readonly TeamBonusCalculator teamBonusCalculator;
+    public MatchResultCalculator(DefaultScoreCalculator teamScoreCalculator, TeamBonusCalculator teamBonusCalculator)
     {
         this.scoreCalculator = teamScoreCalculator;
+        this.teamBonusCalculator = teamBonusCalculator;
     }
 
     public MatchResult CalculateResult(IEnumerable<ChampionStatData> blue, IEnumerable<ChampionStatData> red)
     {
-        int blueScore = scoreCalculator.CalculateScore(blue);
-        int redScore = scoreCalculator.CalculateScore(red);
+        TeamScoreInfo blueInfo = CreateInfo(blue);
+        TeamScoreInfo redInfo = CreateInfo(red);
 
         Team winner;
-        if (blueScore == redScore) winner = Team.All;
-        else if (blueScore > redScore) winner = Team.Blue;
+        if (blueInfo.Total == redInfo.Total) winner = Team.All;
+        else if (blueInfo.Total > redInfo.Total) winner = Team.Blue;
         else winner = Team.Red;
 
-        return new MatchResult(blueScore, redScore, winner);
+        return new MatchResult(blueInfo, redInfo, winner);
     }
+
+    TeamScoreInfo CreateInfo(IEnumerable<ChampionStatData> team) => new TeamScoreInfo(
+        scoreCalculator.CalculateAttack(team),
+        scoreCalculator.CalculateDefense(team),
+        teamBonusCalculator.CalculateAttackBonus(team),
+        teamBonusCalculator.CalculateDefenseBonus(team),
+        teamBonusCalculator.CalculateSpeedBonus(team)
+        );
 }
