@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MatchDI : MonoBehaviour
 {
-    [SerializeField] ChampionManagerMono champManager;
-    ChampionCatalog championCatalog;
+    [SerializeField] ChampionRepository champManager;
+    ChampionCatalog championCatalog => champManager.Catalog;
     [SerializeField] ChampionSelectUI_Controller BanPickUI;
     [SerializeField] TraitUseView traitUseView;
     [SerializeField] BanPickView banPickView;
@@ -23,7 +23,6 @@ public class MatchDI : MonoBehaviour
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     public void GameStart(Team playerTeam)
     {
-        championCatalog = new ChampionCatalog(Resources.LoadAll<ChampionSO>("SO/Champions").Select(x => x.CreateChampion()));
         storage = new GameBanPickStorage(championCatalog.AllId);
         PhaseData[] phase = new PhaseData[]
         {

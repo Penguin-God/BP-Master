@@ -9,9 +9,6 @@ public class ChampionCatalog
     public ChampionCatalog(IEnumerable<Champion> champions) => allChampion = champions;
 
     public Champion GetChampion(int id) => Clone(allChampion.First(x => x.Id == id));
-
-    public IEnumerable<ChampionStatData> GetStats(IEnumerable<int> ids) => ids.Select(x => GetChampion(x).StatData);
-
-    // 현재는 스탯만 바뀌니까 이 정도면 충분
+    // 현재는 스탯만 바뀌니까 이 정도만 클론하면 충분
     Champion Clone(Champion src) => new Champion(src.Id, src.Name, src.StatData, src.TraitTargetRule, src.TraitExecutor);
 }

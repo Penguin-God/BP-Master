@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ChampionDrawer : MonoBehaviour
 {
-    [SerializeField] ChampionManagerMono championManager;
+    [SerializeField] ChampionRepository championManager;
     [SerializeField] GameObject championBtn;
 
     public void DrawChampionButtons(UnityAction<ChampionSO, Button> onclick)

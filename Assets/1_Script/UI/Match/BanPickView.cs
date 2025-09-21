@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BanPickView : MonoBehaviour
 {
-    [SerializeField] ChampionManagerMono championManager;
+    [SerializeField] ChampionRepository championManager;
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
     SlotStorage<SlotView> slotViews = new();

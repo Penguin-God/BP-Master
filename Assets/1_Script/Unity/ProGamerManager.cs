@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProGamerManager : MonoBehaviour
 {
     [SerializeField] ProGamerSO[] playerDatas;
-    [SerializeField] ChampionManagerMono championManager;
+    [SerializeField] ChampionRepository championManager;
 
     HashSet<ProGamerDel> players;
     public IReadOnlyList<ProGamerDel> Players => players.ToArray();

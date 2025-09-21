@@ -40,7 +40,7 @@ public class ChampionSelectUI_Controller : MonoBehaviour
         selectBtn = null;
     }
 
-    [SerializeField] ChampionManagerMono championManager;
+    [SerializeField] ChampionRepository championManager;
     void NailDownChampion() // 챔프 확정
     {
         int selectId = championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);

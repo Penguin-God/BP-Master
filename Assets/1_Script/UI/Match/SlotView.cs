@@ -12,7 +12,7 @@ public class SlotView : MonoBehaviour
     [SerializeField] TextMeshProUGUI speedChangeText;
     [SerializeField] Button slotButton;
 
-    ChampionManagerMono championManager;
+    ChampionRepository championManager;
     // SlotStorage<Champion> pickStorage;
     Champion traickingTarget;
     ChampionView traickingView;
@@ -25,7 +25,7 @@ public class SlotView : MonoBehaviour
         slotButton.onClick.AddListener(DrawTarget);
     }
 
-    public void Init(ChampionView view, ChampionManagerMono championManager)
+    public void Init(ChampionView view, ChampionRepository championManager)
     {
         traickingView = view;
         this.championManager = championManager;
