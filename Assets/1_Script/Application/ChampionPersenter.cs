@@ -36,27 +36,27 @@ public struct TraitUI_Data
     }
 }
 
-public class ChampionPersenter
+public class TraitPersenter
 {
-    public ChampionViewModel CreateViewModel(ChampionStatData stat, TraitUI_Data traitData) => new ChampionViewModel(
-        $"공격력 : {stat.Attack}",
-        $"방어력 : {stat.Defense}",
-        $"속도 : {stat.Speed}",
-        BuildTargetText(traitData)
-    );
-
-    
-    string BuildTargetText(TraitUI_Data traitData)
+    public string BuildTraitText(TraitUI_Data traitData)
     {
         var conditoin = BuildTraitConditionText(traitData.ConditionType, traitData.Threshold);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(traitData.TargetSide, traitData.Range);
-        var action = BuildTraitText(traitData.TraitType, traitData.Amount);
-        
+        var action = BuildActionText(traitData.TraitType, traitData.Amount);
+
         // 조건이 있으면 "조건 + 공백"을 앞에 붙이고, 없으면 그대로
         return $"{conditoin}{space}{target} {action}";
     }
+
+    string BuildActionText(TraitType traitType, int amount) => (traitType) switch
+    {
+        TraitType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        _ => ""
+    };
 
     string BuildTargetRuleText(Side side, TargetRange range) => (side, range) switch
     {
@@ -66,14 +66,6 @@ public class ChampionPersenter
         (Side.Opponent, TargetRange.All) => "적군 전체",
         (Side.All, TargetRange.All) => "양팀 전체",
         _ => "대상 없음"
-    };
-
-    string BuildTraitText(TraitType traitType, int amount) => (traitType) switch
-    {
-        TraitType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        _ => ""
     };
 
 
@@ -90,4 +82,15 @@ public class ChampionPersenter
     };
 
     string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
+}
+
+public class ChampionPersenter : TraitPersenter
+{
+    public ChampionViewModel CreateViewModel(ChampionStatData stat, TraitUI_Data traitData) => 
+        new ChampionViewModel(
+        $"공격력 : {stat.Attack}",
+        $"방어력 : {stat.Defense}",
+        $"속도 : {stat.Speed}",
+        BuildTraitText(traitData)
+    );
 }
