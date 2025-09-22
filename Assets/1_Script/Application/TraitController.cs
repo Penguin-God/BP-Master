@@ -61,3 +61,43 @@ public class TraitController
     public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
     public TraitTargetRule GetTargetRule(Team team, int index) => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }
+
+public readonly struct StatDelta
+{
+    public readonly int Attack;
+    public readonly int Defense;
+    public readonly int Speed;
+
+    public StatDelta(int attack, int defense, int speed)
+    {
+        Attack = attack; 
+        Defense = defense;
+        Speed = speed;
+    }
+}
+
+public class TraitApplier
+{
+    public IEnumerable<StatDelta> UseTrait(TraitExecutor executor, IEnumerable<ChampionStatus> targets)
+    {
+        var result = new List<StatDelta>();
+
+        foreach (var target in targets)
+        {
+            var before = target.StatData;
+            //
+            executor.ExecuteTrait(target);
+
+            var after = target.StatData;
+            var delta = new StatDelta(
+                attack: after.Attack - before.Attack,
+                defense: after.Defense - before.Defense,
+                speed: after.Speed - before.Speed
+            );
+
+            result.Add(delta);
+        }
+
+        return result;
+    }
+}
