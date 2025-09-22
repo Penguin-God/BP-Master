@@ -45,13 +45,14 @@ public class TraitController
 
     public bool IsTraitUsed(SlotData slot) => traitUseFlags.GetSlot(slot);
 
-    void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
+void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
     {
+        var executor = TraitExecutorFactory.CreateExecutor(traitData);
         foreach (var slot in slots)
         {
             var target = champions.GetSlot(slot);
             var before = target.StatData;
-            new TraitExecutor(traitData).ExecuteTrait(target);
+            executor.ExecuteTrait(target, traitData);
             OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
         }
     }

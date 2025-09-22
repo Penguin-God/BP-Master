@@ -22,14 +22,16 @@ public readonly struct TraitTargetRule
 
 public class TraitData
 {
-    public readonly ITraitAction Action;
+    public readonly TraitType TraitType;
+    public readonly int Amount;
 
     public readonly TraitConditionType ConditionType;
     public readonly int Threshold;
 
-    public TraitData(ITraitAction action, TraitConditionType conditionType = TraitConditionType.None, int threshold = 0)
+    public TraitData(TraitType traitType, int amount, TraitConditionType conditionType = TraitConditionType.None, int threshold = 0)
     {
-        Action = action;
+        TraitType = traitType;
+        Amount = amount;
         ConditionType = conditionType;
         Threshold = threshold;
     }
@@ -38,13 +40,13 @@ public class TraitData
 public class TraitExecutor
 {
     readonly TraitConditionChecker conditionChecker = new TraitConditionChecker();
-    readonly TraitData traitData;
-    public TraitExecutor(TraitData traitData) => this.traitData = traitData;
+    readonly ITraitAction action;
+    public TraitExecutor(ITraitAction traitAction) => action = traitAction;
 
-    public void ExecuteTrait(Champion champion)
+    public void ExecuteTrait(Champion champion, TraitData traitData)
     {
         if (CanExecute(champion, traitData))
-            traitData.Action.Do(champion);
+            action.Do(champion);
     }
 
     bool CanExecute(Champion champion, TraitData traitData) =>

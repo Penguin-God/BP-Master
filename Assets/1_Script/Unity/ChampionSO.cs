@@ -17,17 +17,8 @@ public class TraitDataConfig
 
 
     public TraitTargetRule TraitTargetRule => new TraitTargetRule(targetSide, range);
-    public TraitData CreateTraitData() => new TraitData(CreateAction(), conditionType, threshold);
-    ITraitAction CreateAction()
-    {
-        switch (traitType)
-        {
-            case TraitType.AttackChanger: return new AttackChanger(amount);
-            case TraitType.DefenseChanger: return new DefenseChanger(amount);
-            case TraitType.SpeedChanger: return new SpeedChanger(amount);
-            default: return null;
-        }
-    }
+public TraitData CreateTraitData() => new TraitData(traitType, amount, conditionType, threshold);
+
 
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount, conditionType, threshold);
 }
