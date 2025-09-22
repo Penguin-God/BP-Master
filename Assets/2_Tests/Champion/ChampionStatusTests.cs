@@ -1,0 +1,41 @@
+using NUnit.Framework;
+
+[TestFixture]
+public class ChampionStatusTests
+{
+    [Test]
+    public void 생성시_스탯이_정상적으로_저장된다()
+    {
+        var stat = new ChampionStatData(attack: 10, defense: 5, speed: 3);
+
+        var status = new ChampionStatus(stat);
+
+        Assert.AreEqual(10, status.StatData.Attack);
+        Assert.AreEqual(5, status.StatData.Defense);
+        Assert.AreEqual(3, status.StatData.Speed);
+        Assert.IsFalse(status.IsUseTrait);
+    }
+
+    [Test]
+    public void UseTrait_호출시_IsUseTrait이_true가_된다()
+    {
+        var status = new ChampionStatus(new ChampionStatData(1, 1, 1));
+
+        status.UseTrait();
+
+        Assert.IsTrue(status.IsUseTrait);
+    }
+
+    [Test]
+    public void ChangeStat_호출시_스탯이_바뀐다()
+    {
+        var status = new ChampionStatus(new ChampionStatData(1, 1, 1));
+        var newStat = new ChampionStatData(5, 6, 7);
+
+        status.ChangeStat(newStat);
+
+        Assert.AreEqual(5, status.StatData.Attack);
+        Assert.AreEqual(6, status.StatData.Defense);
+        Assert.AreEqual(7, status.StatData.Speed);
+    }
+}

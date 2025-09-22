@@ -6733,7 +6733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2c16e51805ce748bcf405f511d0595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allChampion: []
 --- !u!4 &1420292360
 Transform:
   m_ObjectHideFlags: 0
