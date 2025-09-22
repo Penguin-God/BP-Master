@@ -1,18 +1,16 @@
 using System;
 
-public readonly struct ChampionViewModel
+public readonly struct StatViewModel
 {
     public readonly string Attack;
     public readonly string Defense;
     public readonly string Speed;
-    public readonly string Trait;
-
-    public ChampionViewModel(string attack, string defense, string speed, string trait)
+    
+    public StatViewModel(string attack, string defense, string speed)
     {
         Attack = attack;
         Defense = defense;
         Speed = speed;
-        Trait = trait;
     }
 }
 
@@ -68,7 +66,6 @@ public class TraitPersenter
         _ => "대상 없음"
     };
 
-
     string BuildTraitConditionText(TraitConditionType conditionType, int threshold) => conditionType switch
     {
         TraitConditionType.None => "",
@@ -86,11 +83,10 @@ public class TraitPersenter
 
 public class ChampionPersenter : TraitPersenter
 {
-    public ChampionViewModel CreateViewModel(ChampionStatData stat, TraitUI_Data traitData) => 
-        new ChampionViewModel(
+    public StatViewModel CreateStatViewModel(ChampionStatData stat) => 
+        new StatViewModel(
         $"공격력 : {stat.Attack}",
         $"방어력 : {stat.Defense}",
-        $"속도 : {stat.Speed}",
-        BuildTraitText(traitData)
+        $"속도 : {stat.Speed}"
     );
 }

@@ -12,16 +12,17 @@ public class ChampionView : MonoBehaviour
     void Start() => ClearDisplay();
 
     ChampionPersenter championPersenter = new ChampionPersenter();
+    TraitPersenter traitPersenter = new();
     public void UpdateDisplay(ChampionSO champion)
     {
         UpdateChampion(champion.CreateChampion());
-        traitText.text = championPersenter.CreateViewModel(champion.StatData, champion.TraitData.CreateUI_Data()).Trait;
+        traitText.text = traitPersenter.BuildTraitText(champion.TraitData.CreateUI_Data());
     }
 
     public void UpdateDisplay(Champion champion, TraitUI_Data traitUI_Data)
     {
         UpdateChampion(champion);
-        traitText.text = championPersenter.CreateViewModel(champion.StatData, traitUI_Data).Trait;
+        traitText.text = traitPersenter.BuildTraitText(traitUI_Data);
     }
 
     public void UpdateChampion(Champion champion)
@@ -32,7 +33,7 @@ public class ChampionView : MonoBehaviour
 
     public void UpdateStat(ChampionStatData statData)
     {
-        var viewModel = championPersenter.CreateViewModel(statData, default);
+        StatViewModel viewModel = championPersenter.CreateStatViewModel(statData);
         attackText.text = viewModel.Attack;
         defenseText.text = viewModel.Defense;
         speedText.text = viewModel.Speed;

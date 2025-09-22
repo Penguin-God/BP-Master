@@ -7,7 +7,7 @@ public class ChampionPresentTests
     {
         var sut = new ChampionPersenter();
 
-        ChampionViewModel result = sut.CreateViewModel(new ChampionStatData(10, 12, 6), default);
+        StatViewModel result = sut.CreateStatViewModel(new ChampionStatData(10, 12, 6));
 
         Assert.AreEqual("공격력 : 10", result.Attack);
         Assert.AreEqual("방어력 : 12", result.Defense);
