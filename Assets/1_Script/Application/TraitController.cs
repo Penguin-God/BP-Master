@@ -1,15 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-public enum TraitType
-{
-    None,
-    AttackChanger,
-    DefenseChanger,
-    SpeedChanger,
-}
-
 public readonly struct StatChangeData
 {
     public readonly SlotData Slot;

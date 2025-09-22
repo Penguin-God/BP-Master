@@ -1,3 +1,13 @@
+
+public enum TraitType
+{
+    None,
+    AttackChanger,
+    DefenseChanger,
+    SpeedChanger,
+}
+
+
 public interface ITraitAction
 {
     public void Do(Champion target);
