@@ -65,6 +65,7 @@ public class TraitController
         }
     }
 
+    // 없애고싶다
     public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
     public TraitTargetRule GetTargetRule(Team team, int index) => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }
