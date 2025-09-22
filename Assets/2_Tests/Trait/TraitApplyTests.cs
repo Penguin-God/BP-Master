@@ -6,10 +6,9 @@ public class TraitApplyTests
     public void 조건_만족시_Action_실행됨()
     {
         var champion = TestHelper.CreateStatChamp(10, def: 60, 5);
-        var traitData = new TraitData(TraitType.AttackChanger, 5, TraitConditionType.DefenseAtLeast, 50);
-        var sut = new TraitExecutor(new AttackChanger(5));
+        var sut = new TraitExecutor(new AttackChanger(5), TraitConditionType.DefenseAtLeast, 50);
 
-        sut.ExecuteTrait(champion, traitData);
+        sut.ExecuteTrait(champion);
 
         Assert.AreEqual(15, champion.StatData.Attack);
     }
@@ -18,10 +17,9 @@ public class TraitApplyTests
     public void 조건_불만족시_Action_실행되지않음()
     {
         var champion = TestHelper.CreateStatChamp(10, 40, 5);
-        var traitData = new TraitData(TraitType.AttackChanger, 5, TraitConditionType.DefenseAtLeast, 50);
-        var sut = new TraitExecutor(new AttackChanger(5));
+        var sut = new TraitExecutor(new AttackChanger(5), TraitConditionType.DefenseAtLeast, 50);
 
-        sut.ExecuteTrait(champion, traitData);
+        sut.ExecuteTrait(champion);
 
         Assert.AreEqual(10, champion.StatData.Attack);
     }

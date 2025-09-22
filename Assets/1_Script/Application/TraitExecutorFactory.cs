@@ -5,7 +5,7 @@ public static class TraitExecutorFactory
     public static TraitExecutor CreateExecutor(TraitData traitData)
     {
         ITraitAction action = CreateAction(traitData.TraitType, traitData.Amount);
-        return new TraitExecutor(action);
+        return new TraitExecutor(action, traitData.ConditionType, traitData.Threshold);
     }
 
     public static ITraitAction CreateAction(TraitType actionType, int amount)

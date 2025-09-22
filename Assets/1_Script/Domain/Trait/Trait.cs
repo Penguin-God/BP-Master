@@ -41,14 +41,21 @@ public class TraitExecutor
 {
     readonly TraitConditionChecker conditionChecker = new TraitConditionChecker();
     readonly ITraitAction action;
-    public TraitExecutor(ITraitAction traitAction) => action = traitAction;
+    readonly TraitConditionType ConditionType;
+    readonly int Threshold;
 
-    public void ExecuteTrait(Champion champion, TraitData traitData)
+    public TraitExecutor(ITraitAction traitAction, TraitConditionType conditionType, int threshold)
     {
-        if (CanExecute(champion, traitData))
+        action = traitAction;
+        ConditionType = conditionType;
+        Threshold = threshold;
+    }
+
+    public void ExecuteTrait(Champion champion)
+    {
+        if (CanExecute(champion))
             action.Do(champion);
     }
 
-    bool CanExecute(Champion champion, TraitData traitData) =>
-        conditionChecker.CheckCondition(traitData.ConditionType, champion.StatData, traitData.Threshold);
+    bool CanExecute(Champion champion) => conditionChecker.CheckCondition(ConditionType, champion.StatData, Threshold);
 }

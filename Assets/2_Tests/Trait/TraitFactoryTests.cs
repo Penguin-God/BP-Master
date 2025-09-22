@@ -11,7 +11,7 @@ public class TraitFactoryTests
         var data = new TraitData(TraitType.AttackChanger, 5, TraitConditionType.AttackAtLeast, 10);
         var executor = TraitExecutorFactory.CreateExecutor(data);
 
-        executor.ExecuteTrait(champion, data);
+        executor.ExecuteTrait(champion);
 
         Assert.AreEqual(15, champion.StatData.Attack);
         Assert.AreEqual(5, champion.StatData.Defense);
@@ -27,7 +27,7 @@ public class TraitFactoryTests
         var data = new TraitData(TraitType.DefenseChanger, 10, TraitConditionType.DefenseAtLeast, 10);
         var executor = TraitExecutorFactory.CreateExecutor(data);
 
-        executor.ExecuteTrait(champion, data);
+        executor.ExecuteTrait(champion);
 
         Assert.AreEqual(8, champion.StatData.Attack);
         Assert.AreEqual(4, champion.StatData.Defense); // unchanged

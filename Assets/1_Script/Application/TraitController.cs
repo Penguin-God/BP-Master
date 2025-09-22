@@ -52,7 +52,7 @@ void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
         {
             var target = champions.GetSlot(slot);
             var before = target.StatData;
-            executor.ExecuteTrait(target, traitData);
+            executor.ExecuteTrait(target);
             OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
         }
     }
