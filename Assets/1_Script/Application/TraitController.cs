@@ -43,27 +43,28 @@ public class TraitController
     {
         if (IsTraitUsed(traitSlot)) return false;
 
-        Champion executor = champions.GetSlot(traitSlot);
-        var targetSlots = targetFinder.GetTargetSlots(traitSlot.Team, executor.TraitTargetRule, targetSlot);
-        ExecuteTrait(executor.TraitExecutor, targetSlots);
+        Champion user = champions.GetSlot(traitSlot);
+        var targetSlots = targetFinder.GetTargetSlots(traitSlot.Team, user.TraitTargetRule, targetSlot);
+        
+        ExecuteTrait(user.TraitData, targetSlots);
+        
         traitUseFlags.ChangeSlot(traitSlot, true);
         return true;
     }
 
     public bool IsTraitUsed(SlotData slot) => traitUseFlags.GetSlot(slot);
 
-    void ExecuteTrait(TraitExecutor executor, IEnumerable<SlotData> slots)
+    void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
     {
         foreach (var slot in slots)
         {
             var target = champions.GetSlot(slot);
             var before = target.StatData;
-            executor.ExecteTrait(target);
+            new TraitExecutor().ExecuteTrait(target, traitData);
             OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
         }
     }
 
     public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
-    public TraitTargetRule GetTargetRule(Team team, int index)
-        => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
+    public TraitTargetRule GetTargetRule(Team team, int index) => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }

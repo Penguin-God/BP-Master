@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class TraitData
+public class TraitDataConfig
 {
     [Header("범위")]
     [SerializeField] Side targetSide;
@@ -17,7 +17,7 @@ public class TraitData
 
 
     public TraitTargetRule TraitTargetRule => new TraitTargetRule(targetSide, range);
-    public TraitExecutor TraitExecutor => new TraitExecutor(CreateAction(), conditionType, threshold);
+    public TraitData CreateTraitData() => new TraitData(CreateAction(), conditionType, threshold);
     ITraitAction CreateAction()
     {
         switch (traitType)
@@ -47,8 +47,8 @@ public class ChampionSO : ScriptableObject
     public ChampionStatData StatData => new ChampionStatData(attack, defense, speed);
 
     [Header("특성")]
-    [SerializeField] TraitData traitData;
-    public TraitData TraitData => traitData;
-    public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.TraitTargetRule, traitData.TraitExecutor);
+    [SerializeField] TraitDataConfig traitData;
+    public TraitDataConfig TraitData => traitData;
+    public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.TraitTargetRule, traitData.CreateTraitData());
     public ChampionSO GetClone() => Instantiate(this);
 }

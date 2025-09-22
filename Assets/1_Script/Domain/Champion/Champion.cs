@@ -23,15 +23,15 @@ public class Champion
     readonly public string Name;
     public ChampionStatData StatData { get; private set; }
     readonly public TraitTargetRule TraitTargetRule;
-    readonly public TraitExecutor TraitExecutor;
+    readonly public TraitData TraitData;
 
-    public Champion(int id, string name, ChampionStatData statData, TraitTargetRule traitTargetRule, TraitExecutor traitExecutor)
+    public Champion(int id, string name, ChampionStatData statData, TraitTargetRule traitTargetRule, TraitData traitData)
     {
         Id = id;
         Name = name;
         StatData = statData;
         TraitTargetRule = traitTargetRule;
-        TraitExecutor = traitExecutor;
+        TraitData = traitData;
     }
 
     public void ChangeStat(ChampionStatData newStat) => StatData = newStat;
