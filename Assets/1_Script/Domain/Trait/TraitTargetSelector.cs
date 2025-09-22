@@ -17,24 +17,17 @@ public class TraitTargetSelector
 {
     readonly int teamCount;
     public TraitTargetSelector(int count) => teamCount = count;
-
-    public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side) => Enumerable.Range(0, teamCount).Select(i => new SlotData(BanPickEnumCaster.GetTargetTeam(team, side), i));
-
-
-    public IEnumerable<SlotData> GetTargetSlots(Team team, TraitTargetRule rule, SlotData targetSlot) => GetTargetSlots(team, rule.TargetSide, rule.TargetRange, targetSlot);
-    public IEnumerable<SlotData> GetTargetSlots(Team team, Side targetSide, TargetRange targetRange, SlotData targetSlot)
+    public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
     {
-        var targetTeam = BanPickEnumCaster.GetTargetTeam(team, targetSide);
-        if (targetSlot.Team != targetTeam)
-        {
-            UnityEngine.Debug.Log($"잘못된 팀 {targetTeam}");
-            return null;
-        }
-
+        Team targetTeam = BanPickEnumCaster.GetTargetTeam(team, side);
+        return Enumerable.Range(0, teamCount).Select(i => new SlotData(targetTeam, i));
+    }
+    public IEnumerable<SlotData> GetTargetSlots(TargetRange targetRange, SlotData targetSlot)
+    {
         switch (targetRange)
         {
-            case TargetRange.Single:return new[] { new SlotData(targetTeam, targetSlot.Index) };
-            case TargetRange.All: return Enumerable.Range(0, teamCount).Select(i => new SlotData(targetTeam, i));
+            case TargetRange.Single:return new[] { targetSlot };
+            case TargetRange.All: return Enumerable.Range(0, teamCount).Select(i => new SlotData(targetSlot.Team, i));
             default: return null;
         }
     }

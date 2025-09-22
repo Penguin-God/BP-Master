@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 
 public class TraitTargetFindingTests
 {
@@ -22,18 +20,9 @@ public class TraitTargetFindingTests
     {
         var sut = CreateSut(3);
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetSlots(Team.Blue, Side.Opponent, TargetRange.All, TestHelper.CreateRedSlot(0)));
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(1), sut.GetTargetSlots(Team.Blue, Side.Self, TargetRange.Single, TestHelper.CreateBlueSlot(1)));
+        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, TestHelper.CreateRedSlot(0)));
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(1), sut.GetTargetSlots(TargetRange.Single, TestHelper.CreateBlueSlot(1)));
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetSlots(Team.Red, Side.Opponent, TargetRange.All, TestHelper.CreateBlueSlot(0)));
-    }
-
-    [Test]
-    public void 잘못된_타겟주면_null_반환()
-    {
-        var sut = CreateSut(3);
-
-        Assert.IsNull(sut.GetTargetSlots(Team.Blue, Side.Opponent, TargetRange.All, TestHelper.CreateBlueSlot(0)));
-        Assert.IsNull(sut.GetTargetSlots(Team.Red, Side.Self, TargetRange.Single, TestHelper.CreateBlueSlot(0)));
+        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, TestHelper.CreateBlueSlot(0)));
     }
 }

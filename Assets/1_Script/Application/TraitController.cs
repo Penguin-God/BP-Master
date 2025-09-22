@@ -35,7 +35,7 @@ public class TraitController
         if (IsTraitUsed(traitSlot)) return false;
 
         Champion user = champions.GetSlot(traitSlot);
-        var targetSlots = targetFinder.GetTargetSlots(traitSlot.Team, user.TraitTargetRule, targetSlot);
+        var targetSlots = targetFinder.GetTargetSlots(user.TraitTargetRule.TargetRange, targetSlot);
         
         ExecuteTrait(user.TraitData, targetSlots);
         
@@ -45,7 +45,7 @@ public class TraitController
 
     public bool IsTraitUsed(SlotData slot) => traitUseFlags.GetSlot(slot);
 
-void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
+    void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
     {
         var executor = TraitExecutorFactory.CreateExecutor(traitData);
         foreach (var slot in slots)
