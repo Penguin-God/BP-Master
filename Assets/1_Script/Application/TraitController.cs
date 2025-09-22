@@ -60,7 +60,7 @@ public class TraitController
         {
             var target = champions.GetSlot(slot);
             var before = target.StatData;
-            new TraitExecutor().ExecuteTrait(target, traitData);
+            new TraitExecutor(traitData).ExecuteTrait(target);
             OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
         }
     }
