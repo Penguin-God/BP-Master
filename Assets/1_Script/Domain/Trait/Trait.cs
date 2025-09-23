@@ -51,16 +51,11 @@ public class TraitExecutor
         Threshold = threshold;
     }
 
-    public void ExecuteTrait(Champion champion)
+    public void ExecuteTrait(ChampionStatus target)
     {
-        if (CanExecute(champion))
-            action.Do(champion);
+        if (CanExecute(target))
+            action.Do(target);
     }
 
-    public void ExecuteTrait(ChampionStatus champion)
-    {
-        // action.Do(champion);
-    }
-
-    bool CanExecute(Champion champion) => conditionChecker.CheckCondition(ConditionType, champion.StatData, Threshold);
+    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionType, target.StatData, Threshold);
 }

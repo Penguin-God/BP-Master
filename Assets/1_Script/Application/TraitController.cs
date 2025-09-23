@@ -36,9 +36,9 @@ public class TraitController
 
         Champion user = champions.GetSlot(traitSlot);
         var targetSlots = targetFinder.GetTargetSlots(user.TraitTargetRule.TargetRange, targetSlot);
-        
+
         ExecuteTrait(user.TraitData, targetSlots);
-        
+
         traitUseFlags.ChangeSlot(traitSlot, true);
         return true;
     }
@@ -52,7 +52,7 @@ public class TraitController
         {
             var target = champions.GetSlot(slot);
             var before = target.StatData;
-            executor.ExecuteTrait(target);
+            executor.ExecuteTrait(null);
             OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
         }
     }

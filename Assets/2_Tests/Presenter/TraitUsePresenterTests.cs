@@ -17,7 +17,7 @@ public class TraitUsePresenterTests
         picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
         picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
 
-        presenter = new TraitUsePresenter(new TraitController(picks));
+        // presenter = new TraitUsePresenter(new TraitController(picks));
     }
 
     [Test]

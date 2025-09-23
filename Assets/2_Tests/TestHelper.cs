@@ -21,11 +21,14 @@ public static class TestHelper
 
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(x => CreateBlueSlot(x));
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(x => CreateRedSlot(x));
+
+    public static ChampionStatus CreateStatStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(new ChampionStatData(att, def, speed));
 }
 
 public class TestAttackChangerAction : ITraitAction
 {
     readonly int Amount;
     public TestAttackChangerAction(int amount) => Amount = amount;
-    public void Do(Champion target) => target.ChangeStat(target.StatData.ChangeAttack(target.StatData.Attack + Amount));
+
+    public void Do(ChampionStatus target) => target.ChangeStat(target.StatData.ChangeAttack(target.StatData.Attack + Amount));
 }

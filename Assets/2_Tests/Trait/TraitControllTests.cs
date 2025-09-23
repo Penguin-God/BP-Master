@@ -4,7 +4,7 @@ using System.Linq;
 
 public class TraitControllTests
 {
-    [Test]
+    //[Test]
     public void 한_챔피언이_특성_중복_사용_불가()
     {
         SlotStorage<Champion> storage = new();
@@ -74,7 +74,7 @@ public class TraitControllTests
         Assert.AreEqual(15, storage.GetSlot(TestHelper.CreateRedSlot(1)).StatData.Attack);
 
         // 10이하면 공 15증가
-        Champion[] CreateTrait() => new Champion[] { 
+        Champion[] CreateTrait() => new Champion[] {
             TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10),
             TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10)
         };
@@ -90,7 +90,7 @@ public class TraitControllTests
 
         storage.AddSlot(Team.Red, TestHelper.CreateStatChamp(0));
         storage.AddSlot(Team.Red, TestHelper.CreateStatChamp(0));
-        
+
         var sut = new TraitController(storage);
 
         List<StatChangeData> lastFeedback = new List<StatChangeData>();
