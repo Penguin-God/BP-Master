@@ -7,14 +7,12 @@ public class ChampionSelectPresenter
 
     public void SelectChamp(int id) => selectId = id;
 
-    public int NailDownChampion(GameFlowData flow)
+    public void NailDownChampion(GameFlowData flow)
     {
-        if (storage.SaveSelect(new SelectInfo(flow.Turn, BanPickEnumCaster.PhaseToSelect(flow.Phase), selectId)))
-        {
-            int result = selectId;
-            selectId = -1;
-            return result;
-        }
-        else return -1;
+        if (storage.CanSelected(selectId) == false) throw new System.Exception($"선택 불가 ID : {selectId}");
+
+        if (flow.Phase == GamePhase.Pick) storage.SaveSelect(new SelectInfo(flow.Turn, SelectType.Pick, selectId));
+        else if(flow.Phase == GamePhase.Ban) storage.SaveSelect(new SelectInfo(flow.Turn, SelectType.Ban, selectId));
+        else throw new System.Exception($"선택 불가 ID : {selectId}");
     }
 }

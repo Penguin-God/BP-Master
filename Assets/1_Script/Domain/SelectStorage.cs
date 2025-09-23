@@ -38,9 +38,11 @@ public class GameBanPickStorage
         storage.Add(Team.Blue, new());
     }
 
+    public bool CanSelected(int id) => selectableIds.Contains(id);
+
     public bool SaveSelect(SelectInfo info)
     {
-        if(selectableIds.Contains(info.Id) == false) return false;
+        if(CanSelected(info.Id) == false) return false;
 
         selectableIds.Remove(info.Id);
         allSelecteds.Add(info.Id);

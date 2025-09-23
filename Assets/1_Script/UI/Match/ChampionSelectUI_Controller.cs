@@ -43,10 +43,8 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     [SerializeField] ChampionRepository championManager;
     void NailDownChampion() // 챔프 확정
     {
-        int selectId = championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
-        if (selectId == -1) return;
-
-        view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
+        championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
+        // view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
         championFocusView.ClearDisplay();
         InActiveSelectButton();
