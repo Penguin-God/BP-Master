@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,8 +13,6 @@ public class TraitUsePresenter // 타겟들 다 포함
     readonly TraitController traitController;
     readonly SlotStorage<Champion> championStorage;
     Team currentTeam = Team.All;
-
-    public event Action<Team> OnTraitUsed;
     
     public TraitUsePresenter(TraitController traitController, SlotStorage<Champion> champions)
     {
@@ -47,10 +44,9 @@ public class TraitUsePresenter // 타겟들 다 포함
     TraitClickResult UseTrait(SlotData targetSlot)
     {
         var sel = selected.Value;
-        var champion = championStorage.GetSlot(targetSlot);
+        var champion = championStorage.GetSlot(sel);
         if (traitController.UseTrait(selected.Value, targetSlot, champion.TraitData, champion.TraitTargetRule.TargetRange))
         {
-            OnTraitUsed?.Invoke(currentTeam);
             selected = null;
             return TraitClickResult.Use;
         }
@@ -60,6 +56,7 @@ public class TraitUsePresenter // 타겟들 다 포함
     public IEnumerable<SlotData> GetClickableSlots()
     {
         int size = championStorage.GetTeam(Team.Blue).Count();
+
         // 선택 전: 현재 팀의 미사용 슬롯
         if (IsSelect == false)
         {

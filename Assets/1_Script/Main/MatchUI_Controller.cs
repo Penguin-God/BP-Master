@@ -31,6 +31,11 @@ public class MatchUI_Controller : MonoBehaviour
         traitController.OnTraitApplied += banPickView.ChangeChampionStat;
     }
 
+    public void UpdateMaserty(StatChangeData statChangeData)
+    {
+        banPickView.ChangeChampionStat(statChangeData);
+    }
+
 
     [SerializeField] GameObject scores;
     [SerializeField] TextMeshProUGUI textBlue;

@@ -4,20 +4,21 @@ using static TestHelper;
 public class TraitUsePresenterTests
 {
     TraitUsePresenter presenter;
+    SlotStorage<ChampionStatus> statuses;
 
     [SetUp]
     public void SetUp()
     {
         SlotStorage<Champion> picks = new();
-        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
-        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
-        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
+        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
+        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
+        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
 
-        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 0));
-        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 0));
-        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 10));
+        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 10));
+        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 10));
 
-        SlotStorage<ChampionStatus> statuses= new();
+        statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus());
         statuses.AddSlot(Team.Blue, CreateStatus());
         statuses.AddSlot(Team.Blue, CreateStatus());
@@ -41,28 +42,26 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 특성_사용_후_이벤트_호출()
+    public void 특성_사용_적용()
     {
-        Team result = Team.Red;
-        presenter.OnTraitUsed += _ => result = _;
         presenter.ChangeTeam(Team.Blue);
 
         presenter.ClickChampion(CreateSlot(Team.Blue, 0)); // 선택
         presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용
 
-        Assert.AreEqual(Team.Blue, result);
+        Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).StatData.Attack);
     }
 
     [Test]
     public void 클릭_상태에_따라_선택_가능한_슬롯들_반환()
     {
         presenter.ChangeTeam(Team.Blue);
-
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());
+
         presenter.ClickChampion(CreateSlot(Team.Blue, 1));
         CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), presenter.GetClickableSlots());
-        presenter.ClickChampion(CreateSlot(Team.Red, 0));
 
+        presenter.ClickChampion(CreateSlot(Team.Red, 0));
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
 
