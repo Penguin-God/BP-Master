@@ -62,6 +62,8 @@ public class MatchDI : MonoBehaviour
         matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, selectFacade.Champions);
         initTrait = true;
     }
+
+    // 클래스로 분리 및 테스트
     void ApplyMastery(Team team)
     {
         for (int i = 0; i < selectFacade.Champions.GetTeam(team).Count(); i++)
@@ -74,6 +76,7 @@ public class MatchDI : MonoBehaviour
         }
     }
 
+    // 클래스로 분리 및 테스트
     void OnDone()
     {
         var blue = selectFacade.Champions.GetTeam(Team.Blue);
@@ -82,7 +85,6 @@ public class MatchDI : MonoBehaviour
         MatchResult result = new MatchResultCalculator(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
         matchUI_Controller.ShowResult(result);
     }
-
 
     [SerializeField] BonusDataFactory bonusDataSO;
 }
