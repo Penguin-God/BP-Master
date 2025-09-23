@@ -4,6 +4,10 @@ public class SelectFacade
 {
     readonly ChampionCatalog championCatalog;
     readonly SlotStorage<ChampionStatus> statuses = new();
+    public SlotStorage<ChampionStatus> Statuses => statuses;
+
+    SlotStorage<Champion> champions = new();
+    public SlotStorage<Champion> Champions => champions;
 
     public event Action<int> OnChampionSelected;
 
@@ -11,9 +15,11 @@ public class SelectFacade
 
     public void Pick(Team team, int championId)
     {
-        var status = new ChampionStatus(championCatalog.GetChampion(championId).StatData);
-        statuses.AddSlot(team, status);
+        var champion = championCatalog.GetChampion(championId);
+        champions.AddSlot(team, champion);
+        statuses.AddSlot(team, new ChampionStatus(champion.StatData));
     }
 
     public ChampionStatus GetStatus(SlotData slot) => statuses.GetSlot(slot);
+    public Champion GetChampion(SlotData slot) => champions.GetSlot(slot);
 }

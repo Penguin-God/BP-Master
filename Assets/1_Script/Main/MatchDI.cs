@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -26,6 +27,12 @@ public class MatchDI : MonoBehaviour
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
         selectFacade = new SelectFacade(championCatalog);
+
+        storage.OnPick += selectFacade.Pick;
+
+        storage.OnBan += banPickView.UpdateBanView;
+        storage.OnPick += banPickView.UpdatePickView;
+
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
@@ -60,10 +67,10 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
         // 쳄피언 스트레지 넣어줘
-        // traitController = new TraitController(pickSlotStorage);
+        traitController = new TraitController(selectFacade.Statuses);
         traitController.OnTraitApplied += banPickView.ChangeChampionStat;
 
-        var presenter = new  TraitUsePresenter(traitController);
+        var presenter = new  TraitUsePresenter(traitController, selectFacade.Champions);
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);

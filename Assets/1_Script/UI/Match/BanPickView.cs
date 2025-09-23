@@ -33,19 +33,12 @@ public class BanPickView : MonoBehaviour
         redBan.text = string.Empty;
     }
 
-    public void UpdateSelectView(GamePhase phase, Team team, ChampionSO champion)
-    {
-        if (phase == GamePhase.Pick) UpdatePickView(team, champion.CreateChampion());
-        else if(phase == GamePhase.Ban) UpdateBanView(team, champion);
-    }
-
     public void ChangeChampionStat(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
-    void UpdatePickView(Team team, Champion champion) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(champion);
-
-    void UpdateBanView(Team team, ChampionSO champion)
+    public void UpdatePickView(Team team, int id) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(championManager.GetChampionData(id).CreateChampion());
+    public void UpdateBanView(Team team, int id)
     {
-        banTextDict[team].text += champion.ChampionName;
+        banTextDict[team].text += championManager.GetChampionData(id).ChampionName;
         banTextDict[team].text += ", ";
     }
 

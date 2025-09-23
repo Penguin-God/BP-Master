@@ -16,8 +16,7 @@ public class TraitUsePresenter // 타겟들 다 포함
     Team currentTeam = Team.All;
 
     public event Action<Team> OnTraitUsed;
-    public TraitUsePresenter(TraitController traitController) => this.traitController = traitController;
-
+    
     public TraitUsePresenter(TraitController traitController, SlotStorage<Champion> champions)
     {
         this.traitController = traitController;

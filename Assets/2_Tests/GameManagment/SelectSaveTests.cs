@@ -75,8 +75,8 @@ public class SelectSaveTests
         int ban = 0;
         int pick = 0;
 
-        storage.OnBan += id => ban = id;
-        storage.OnPick += id => pick = id;
+        storage.OnBan += (team, id) => ban = id;
+        storage.OnPick += (team, id) => pick = id;
 
         Select(storage, Team.Blue, SelectType.Ban, 201);
         Select(storage, Team.Blue, SelectType.Pick, 11);
