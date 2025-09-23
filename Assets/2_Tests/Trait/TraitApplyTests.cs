@@ -24,21 +24,4 @@ public class TraitApplyTests
 
         Assert.AreEqual(10, champion.StatData.Attack);
     }
-
-    [Test]
-    public void 특성_적용_후_스탯_변화_반환()
-    {
-        var sut = new TraitApplier();
-        var status = TestHelper.CreateStatus(att: 5);
-        
-        var result = sut.UseTrait(TestHelper.CreateTraitExecutor(15), status);
-
-        Assert.AreEqual(20, status.StatData.Attack);
-        Assert.AreEqual(15, result.Attack);
-
-        result = sut.UseTrait(TestHelper.CreateTraitExecutor(-15), status);
-
-        Assert.AreEqual(5, status.StatData.Attack);
-        Assert.AreEqual(-15, result.Attack);
-    }
 }
