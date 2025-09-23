@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using System.Collections.Generic;
+using static TestHelper;
 
 public class TraitUsePresenterTests
 {
@@ -9,22 +9,22 @@ public class TraitUsePresenterTests
     public void SetUp()
     {
         SlotStorage<Champion> picks = new();
-        picks.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
-        picks.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
-        picks.AddSlot(Team.Blue, TestHelper.CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
+        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
+        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
+        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 0));
 
-        picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
-        picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
-        picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 0));
+        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 0));
 
         SlotStorage<ChampionStatus> statuses= new();
-        statuses.AddSlot(Team.Blue, TestHelper.CreateStatus());
-        statuses.AddSlot(Team.Blue, TestHelper.CreateStatus());
-        statuses.AddSlot(Team.Blue, TestHelper.CreateStatus());
+        statuses.AddSlot(Team.Blue, CreateStatus());
+        statuses.AddSlot(Team.Blue, CreateStatus());
+        statuses.AddSlot(Team.Blue, CreateStatus());
 
-        statuses.AddSlot(Team.Red, TestHelper.CreateStatus());
-        statuses.AddSlot(Team.Red, TestHelper.CreateStatus());
-        statuses.AddSlot(Team.Red, TestHelper.CreateStatus());
+        statuses.AddSlot(Team.Red, CreateStatus());
+        statuses.AddSlot(Team.Red, CreateStatus());
+        statuses.AddSlot(Team.Red, CreateStatus());
 
         presenter = new TraitUsePresenter(new TraitController(statuses), picks);
     }
@@ -58,12 +58,12 @@ public class TraitUsePresenterTests
     {
         presenter.ChangeTeam(Team.Blue);
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());
         presenter.ClickChampion(CreateSlot(Team.Blue, 1));
-        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), presenter.GetClickableSlots());
         presenter.ClickChampion(CreateSlot(Team.Red, 0));
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 2), presenter.GetClickableSlots());
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
 
     SlotData CreateSlot(Team team, int index) => new SlotData(team, index);

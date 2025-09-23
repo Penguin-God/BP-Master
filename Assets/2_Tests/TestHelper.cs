@@ -10,12 +10,7 @@ public static class TestHelper
         => new Champion(0, "", default, 
             new TraitTargetRule(side, range), 
             new TraitData(TraitType.AttackChanger, amount, TraitConditionType.None, 0));
-    
-    public static Champion CreateTraitChamp(Side side, TargetRange range, int amount, TraitConditionType conditionType, int threshold)
-        => new Champion(0, "", default, 
-            new TraitTargetRule(side, range), 
-            new TraitData(TraitType.AttackChanger, amount, conditionType, threshold));
-            
+
     public static Champion CreateChamp(int id, string name) => new Champion(id, name, default, default, null);
     public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", new ChampionStatData(att, def, speed), default, null);
 
@@ -23,8 +18,6 @@ public static class TestHelper
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(x => CreateRedSlot(x));
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(new ChampionStatData(att, def, speed));
-    public static TraitExecutor CreateTraitExecutor(int att) => new TraitExecutor(new TestAttackChangeAction(att), TraitConditionType.None, 0);
-
     public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionType traitConditionType = TraitConditionType.None, int threshold = 0) => new TraitData(traitType, amount, traitConditionType, threshold);
 }
 
