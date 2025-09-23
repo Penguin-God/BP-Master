@@ -57,7 +57,8 @@ public class MatchDI : MonoBehaviour
         SettingSlotStorage();
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
-        // traitController = new TraitController(pickSlotStorage);
+        // 쳄피언 스트레지 넣어줘
+        traitController = new TraitController(pickSlotStorage);
         traitController.OnTraitApplied += banPickView.ChangeChampionStat;
 
         var presenter = new  TraitUsePresenter(traitController);
