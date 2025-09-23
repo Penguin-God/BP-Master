@@ -67,6 +67,24 @@ public class SelectSaveTests
         Assert.AreEqual(102, result[TestHelper.CreateRedSlot(1)]);
     }
 
+    [Test]
+    public void 밴픽에_따른_이벤트()
+    {
+        var storage = CreateStorage(11, 22, 101, 102, 201);
+
+        int ban = 0;
+        int pick = 0;
+
+        storage.OnBan += id => ban = id;
+        storage.OnPick += id => pick = id;
+
+        Select(storage, Team.Blue, SelectType.Ban, 201);
+        Select(storage, Team.Blue, SelectType.Pick, 11);
+
+        Assert.AreEqual(201, ban);
+        Assert.AreEqual(11, pick);
+    }
+
     bool Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
     GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
 }
