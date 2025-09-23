@@ -6714,6 +6714,7 @@ GameObject:
   - component: {fileID: 1420292360}
   - component: {fileID: 1420292359}
   - component: {fileID: 1420292363}
+  - component: {fileID: 1420292364}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6784,6 +6785,25 @@ MonoBehaviour:
   textBlue: {fileID: 1908862552}
   textRed: {fileID: 1173623354}
   bonusDataSO: {fileID: 11400000, guid: 3ed54617ea912194c92454bc2563d3fe, type: 2}
+--- !u!114 &1420292364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420292358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb82cf15f2b8d7458be8eb73b00dc8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  banPickUI: {fileID: 1213870346}
+  traitUseView: {fileID: 2045637438}
+  banPickView: {fileID: 1919757232}
+  scoreView: {fileID: 670859827}
+  scores: {fileID: 882374934}
+  textBlue: {fileID: 1908862552}
+  textRed: {fileID: 1173623354}
 --- !u!1001 &1425457482
 PrefabInstance:
   m_ObjectHideFlags: 0

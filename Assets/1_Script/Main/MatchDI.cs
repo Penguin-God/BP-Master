@@ -16,6 +16,7 @@ public class MatchDI : MonoBehaviour
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     TraitController traitController;
+    SelectFacade selectFacade;
 
     [SerializeField] ScoreView scoreView;
 
@@ -24,6 +25,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
+        selectFacade = new SelectFacade(championCatalog, storage);
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
