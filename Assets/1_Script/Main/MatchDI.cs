@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.Playables;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -20,19 +21,18 @@ public class MatchDI : MonoBehaviour
     SelectFacade selectFacade;
 
     [SerializeField] ScoreView scoreView;
-
+    MatchUI_Controller matchUI_Controller;
     SlotStorage<Champion> pickSlotStorage;
     Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
+    [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
         selectFacade = new SelectFacade(championCatalog);
-
         storage.OnPick += selectFacade.Pick;
 
-        storage.OnBan += banPickView.UpdateBanView;
-        storage.OnPick += banPickView.UpdatePickView;
-
+        matchUI_Controller = GetComponent<MatchUI_Controller>();
+        utilKey.Init(storage);
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
@@ -42,15 +42,13 @@ public class MatchDI : MonoBehaviour
         };
         phaseManager = new(phase);
 
-        phaseManager.OnPhaseSwap += BanPickUI.OnSwap;
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
 
-        BanPickUI.Init(new ChampionSelectPresenter(storage), phaseManager); // start보다 먼저. 
+        matchUI_Controller.Init(storage, phaseManager); // start보다 먼저
         phaseManager.Start();
-
-        traitUseView.gameObject.SetActive(false);
     }
+
 
     bool initTrait;
     [SerializeField] ProGamerSO[] blueGamers;
@@ -68,19 +66,7 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Red);
         // 쳄피언 스트레지 넣어줘
         traitController = new TraitController(selectFacade.Statuses);
-        traitController.OnTraitApplied += banPickView.ChangeChampionStat;
-
-        var presenter = new  TraitUsePresenter(traitController, selectFacade.Champions);
-        traitUseView.Init(presenter);
-        phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
-        traitUseView.UpdateTrait(team);
-        presenter.OnTraitUsed += phaseManager.SubmitAction;
-
-        scoreView.Init(pickSlotStorage);
-        scoreView.UpdateTeamScore(Team.Blue);
-        scoreView.UpdateTeamScore(Team.Red);
-        traitController.OnTraitApplied += (x) => scoreView.UpdateTeamScore(x.Slot.Team);
-
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, selectFacade.Champions);
         initTrait = true;
     }
 
@@ -112,12 +98,9 @@ public class MatchDI : MonoBehaviour
         var red = pickSlotStorage.GetTeam(Team.Red);
 
         MatchResult result = new MatchResultCalculator(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
-
-        Scores.SetActive(true);
-        textBlue.text = new ScorePresenter().BuildText(result.BlueInfo);
-        textRed.text = new ScorePresenter().BuildText(result.RedInfo);
-        print($"승자 : {result.Winner}");
+        matchUI_Controller.ShowResult(result);
     }
+
 
     [SerializeField] BonusDataFactory bonusDataSO;
 }

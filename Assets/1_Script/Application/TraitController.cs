@@ -20,6 +20,8 @@ public class TraitController
 {
     readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitTargetSelector targetFinder;
+
+    public event Action<Team> OnTraitUsed;
     public event Action<StatChangeData> OnTraitApplied;
 
     public TraitController(SlotStorage<ChampionStatus> statuses)
@@ -36,6 +38,7 @@ public class TraitController
 
         statuses.GetSlot(traitSlot).UseTrait();
         ExecuteTrait(traitData, targetFinder.GetTargetSlots(range, targetSlot));
+        OnTraitUsed?.Invoke(traitSlot.Team);
         return true;
     }
 
