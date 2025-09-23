@@ -10,12 +10,12 @@ public class ChampionSelectUI_Controller : MonoBehaviour
 
     ChampionSelectPresenter championSelectPresenter = null;
     PhaseManager phaseManager;
-    public void Init(GameBanPickStorage storage, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
+    public void Init(ChampionSelectPresenter presenter, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
         view = GetComponentInChildren<BanPickView>();
 
-        championSelectPresenter = new ChampionSelectPresenter(storage);
+        championSelectPresenter = presenter;
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);

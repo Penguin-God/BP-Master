@@ -39,7 +39,7 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
 
-        BanPickUI.Init(storage, phaseManager); // start보다 먼저. 
+        BanPickUI.Init(new ChampionSelectPresenter(storage), phaseManager); // start보다 먼저. 
         phaseManager.Start();
 
         traitUseView.gameObject.SetActive(false);

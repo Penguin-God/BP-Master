@@ -17,11 +17,6 @@ public class MatchUI_Controller : MonoBehaviour
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
     }
 
-    public void InitBanPick(GameBanPickStorage storage, PhaseManager phaseManager)
-    {
-        banPickUI.Init(storage, phaseManager);
-    }
-
     public void InitTrait(TraitUsePresenter presenter, Team team)
     {
         traitUseView.Init(presenter);
