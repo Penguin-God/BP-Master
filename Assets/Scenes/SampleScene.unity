@@ -5082,6 +5082,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   championManager: {fileID: 1420292359}
   championBtn: {fileID: 8033382642434502399, guid: a800959c5b01a5b46b9664e609b38648, type: 3}
+--- !u!1 &1049145343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1049145344}
+  - component: {fileID: 1049145345}
+  m_Layer: 0
+  m_Name: Util
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1049145344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049145343}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 608.64124, y: 480.50586, z: -6.7481074}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1049145345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049145343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9449960ced8d5b24d9f98b8f4f188c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ban: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
+  pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
 --- !u!1 &1101418752
 GameObject:
   m_ObjectHideFlags: 0
@@ -6769,6 +6815,7 @@ MonoBehaviour:
   pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
   trait: {fileID: 11400000, guid: d038f885ef77efe498ecb1f882a1b41e, type: 2}
   scoreView: {fileID: 670859827}
+  utilKey: {fileID: 1049145345}
   blueGamers:
   - {fileID: 11400000, guid: 1c3b4fd2eee97a043b94fca3771d4e33, type: 2}
   - {fileID: 11400000, guid: 4da5d29163e9ab243b24f9458abb1ebf, type: 2}
@@ -11208,3 +11255,4 @@ SceneRoots:
   - {fileID: 1213870345}
   - {fileID: 1420292360}
   - {fileID: 1675818846}
+  - {fileID: 1049145344}
