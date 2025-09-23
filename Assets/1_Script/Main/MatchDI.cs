@@ -25,7 +25,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        selectFacade = new SelectFacade(championCatalog, storage);
+        selectFacade = new SelectFacade(championCatalog);
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
