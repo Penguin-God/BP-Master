@@ -12,10 +12,17 @@ public enum TraitClickResult
 public class TraitUsePresenter // 타겟들 다 포함
 {
     readonly TraitController traitController;
+    readonly SlotStorage<Champion> championStorage;
     Team currentTeam = Team.All;
 
     public event Action<Team> OnTraitUsed;
     public TraitUsePresenter(TraitController traitController) => this.traitController = traitController;
+
+    public TraitUsePresenter(TraitController traitController, SlotStorage<Champion> champions)
+    {
+        this.traitController = traitController;
+        championStorage = champions;
+    }
     public void ChangeTeam(Team team) => currentTeam = team;
 
     SlotData? selected; // 선택된 시전자
@@ -41,8 +48,8 @@ public class TraitUsePresenter // 타겟들 다 포함
     TraitClickResult UseTrait(SlotData targetSlot)
     {
         var sel = selected.Value;
-
-        if (traitController.UseTrait(selected.Value, targetSlot))
+        var champion = championStorage.GetSlot(targetSlot);
+        if (traitController.UseTrait(selected.Value, targetSlot, champion.TraitData, champion.TraitTargetRule.TargetRange))
         {
             OnTraitUsed?.Invoke(currentTeam);
             selected = null;

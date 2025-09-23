@@ -47,6 +47,15 @@ public class TraitController
         return true;
     }
 
+    public bool UseTrait(SlotData traitSlot, SlotData targetSlot, TraitData traitData, TargetRange range)
+    {
+        if (IsTraitUsed(traitSlot)) return false;
+
+        statuses.GetSlot(traitSlot).UseTrait();
+        ExecuteTrait(traitData, targetFinder.GetTargetSlots(range, targetSlot));
+        return true;
+    }
+
     public bool IsTraitUsed(SlotData slot) => statuses.GetSlot(slot).IsUseTrait;
 
     void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)

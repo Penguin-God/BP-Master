@@ -24,6 +24,8 @@ public static class TestHelper
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(new ChampionStatData(att, def, speed));
     public static TraitExecutor CreateTraitExecutor(int att) => new TraitExecutor(new TestAttackChangeAction(att), TraitConditionType.None, 0);
+
+    public static TraitData CreateTraitData(TraitType traitType, int amount) => new TraitData(traitType, amount, TraitConditionType.None, 0);
 }
 
 public class TestAttackChangeAction : ITraitAction
