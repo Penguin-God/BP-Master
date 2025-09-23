@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -14,7 +13,7 @@ public class MatchDI : MonoBehaviour
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     TraitController traitController;
-    SelectFacade selectFacade;
+    PickFacade selectFacade;
 
     MatchUI_Controller matchUI_Controller;
 
@@ -23,7 +22,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        selectFacade = new SelectFacade(championCatalog);
+        selectFacade = new PickFacade(championCatalog);
         storage.OnPick += selectFacade.Pick;
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();

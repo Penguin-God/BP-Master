@@ -8,10 +8,9 @@ public class SelectSaveTests
         const int Id = 3;
         GameBanPickStorage storage = CreateStorage(Id);
 
-        Assert.IsTrue(Select(storage, Team.Blue, SelectType.Ban, Id));
-        Assert.IsFalse(Select(storage, Team.Blue, SelectType.Ban, Id));
-        Assert.IsFalse(Select(storage, Team.Red, SelectType.Pick, Id));
-        CollectionAssert.DoesNotContain(storage.SelectableIds, Id);
+        Assert.IsTrue(storage.CanSelected(Id));
+        Select(storage, Team.Blue, SelectType.Ban, Id);
+        Assert.IsFalse(storage.CanSelected(Id));
     }
 
     [Test]
@@ -50,24 +49,6 @@ public class SelectSaveTests
     }
 
     [Test]
-    public void 픽_챔피언_반환()
-    {
-        var storage = CreateStorage(11, 22, 101, 102, 201);
-        Select(storage, Team.Blue, SelectType.Ban, 201);
-        Select(storage, Team.Blue, SelectType.Pick, 11);
-        Select(storage, Team.Blue, SelectType.Pick, 22);
-        Select(storage, Team.Red, SelectType.Pick, 101);
-        Select(storage, Team.Red, SelectType.Pick, 102);
-
-        var result = storage.PickBySlot;
-
-        Assert.AreEqual(11, result[TestHelper.CreateBlueSlot(0)]);
-        Assert.AreEqual(22, result[TestHelper.CreateBlueSlot(1)]);
-        Assert.AreEqual(101, result[TestHelper.CreateRedSlot(0)]);
-        Assert.AreEqual(102, result[TestHelper.CreateRedSlot(1)]);
-    }
-
-    [Test]
     public void 밴픽에_따른_이벤트()
     {
         var storage = CreateStorage(11, 22, 101, 102, 201);
@@ -85,6 +66,6 @@ public class SelectSaveTests
         Assert.AreEqual(11, pick);
     }
 
-    bool Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
+    void Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
     GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
 }

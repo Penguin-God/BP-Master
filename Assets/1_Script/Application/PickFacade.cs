@@ -1,6 +1,6 @@
 using System;
 
-public class SelectFacade
+public class PickFacade
 {
     readonly ChampionCatalog championCatalog;
     readonly SlotStorage<ChampionStatus> statuses = new();
@@ -11,7 +11,7 @@ public class SelectFacade
 
     public event Action<int> OnChampionSelected;
 
-    public SelectFacade(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
+    public PickFacade(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
 
     public void Pick(Team team, int championId)
     {

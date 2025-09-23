@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public readonly struct SelectInfo
 {
@@ -28,13 +27,6 @@ public class GameBanPickStorage
 
     readonly HashSet<int> allSelecteds = new();
     readonly HashSet<int> selectableIds = new();
-    public IReadOnlyDictionary<SlotData, int> PickBySlot =>
-    storage
-        .SelectMany(kv => kv.Value.GetStorage(SelectType.Pick)
-                                  .Select((id, index) => new KeyValuePair<SlotData, int>(new SlotData(kv.Key, index), id)))
-        .ToDictionary(p => p.Key, p => p.Value);
-
-    public IReadOnlyList<int> SelectableIds => selectableIds.ToList();
 
     public GameBanPickStorage(IEnumerable<int> allIds)
     {
@@ -45,16 +37,15 @@ public class GameBanPickStorage
 
     public bool CanSelected(int id) => selectableIds.Contains(id);
 
-    public bool SaveSelect(SelectInfo info)
+    public void SaveSelect(SelectInfo info)
     {
-        if(CanSelected(info.Id) == false) return false;
+        if (CanSelected(info.Id) == false) return;
 
         selectableIds.Remove(info.Id);
         allSelecteds.Add(info.Id);
         storage[info.Team].SaveSelect(info.Select, info.Id);
         if (info.Select == SelectType.Ban) OnBan?.Invoke(info.Team, info.Id);
         else OnPick?.Invoke(info.Team, info.Id);
-        return true;
     }
     public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
 }
