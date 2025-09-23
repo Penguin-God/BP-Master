@@ -15,26 +15,31 @@ public readonly struct StatChangeData
     }
 }
 
+
 public class TraitController
 {
     readonly SlotStorage<Champion> champions;
+    readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitTargetSelector targetFinder;
     readonly SlotStorage<bool> traitUseFlags;
 
     public event Action<StatChangeData> OnTraitApplied;
 
-    public TraitController(SlotStorage<Champion> picks)
+    public TraitController(SlotStorage<Champion> picks, SlotStorage<ChampionStatus> statuses)
     {
-        champions = picks;
-        targetFinder = new TraitTargetSelector(picks.GetTeam(Team.Blue).Count());
-        traitUseFlags = new SlotStorage<bool>(picks.GetTeam(Team.Blue).Count(), false);
+        this.champions = picks;
+        this.statuses = statuses;
+
+        int teamSize = picks.GetTeam(Team.Blue).Count();
+        targetFinder = new TraitTargetSelector(teamSize);
+        traitUseFlags = new SlotStorage<bool>(teamSize, false);
     }
 
     public bool UseTrait(SlotData traitSlot, SlotData targetSlot)
     {
         if (IsTraitUsed(traitSlot)) return false;
 
-        Champion user = champions.GetSlot(traitSlot);
+        Champion user = champions.GetSlot(traitSlot); // 룰/데이터는 Champion에서
         var targetSlots = targetFinder.GetTargetSlots(user.TraitTargetRule.TargetRange, targetSlot);
 
         ExecuteTrait(user.TraitData, targetSlots);
@@ -50,16 +55,19 @@ public class TraitController
         var executor = TraitExecutorFactory.CreateExecutor(traitData);
         foreach (var slot in slots)
         {
-            var target = champions.GetSlot(slot);
-            var before = target.StatData;
-            executor.ExecuteTrait(null);
-            OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
+            var targetStatus = statuses.GetSlot(slot);
+            var before = targetStatus.StatData;
+
+            executor.ExecuteTrait(targetStatus);
+
+            OnTraitApplied?.Invoke(new StatChangeData(slot, before, targetStatus.StatData));
         }
     }
 
-    // 없애고싶다
+    // 조회(그대로 유지, 룰은 Champion에서 읽음)
     public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
-    public TraitTargetRule GetTargetRule(Team team, int index) => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
+    public TraitTargetRule GetTargetRule(Team team, int index)
+        => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }
 
 public readonly struct StatDelta
