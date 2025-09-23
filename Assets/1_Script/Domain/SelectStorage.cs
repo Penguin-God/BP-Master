@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,10 @@ public enum SelectType { Ban, Pick}
 public class GameBanPickStorage
 {
     readonly Dictionary<Team, TeamBanPickStorage> storage = new();
+
+    public event Action<int> OnBan;
+    public event Action<int> OnPick;
+
     readonly HashSet<int> allSelecteds = new();
     readonly HashSet<int> selectableIds = new();
     public IReadOnlyDictionary<SlotData, int> PickBySlot =>
@@ -47,6 +52,8 @@ public class GameBanPickStorage
         selectableIds.Remove(info.Id);
         allSelecteds.Add(info.Id);
         storage[info.Team].SaveSelect(info.Select, info.Id);
+        if (info.Select == SelectType.Ban) OnBan?.Invoke(info.Id);
+        else OnPick?.Invoke(info.Id);
         return true;
     }
     public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
