@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Graphs;
 public readonly struct StatChangeData
 {
     public readonly SlotData Slot;
@@ -21,8 +22,7 @@ public class TraitController
     readonly SlotStorage<Champion> champions;
     readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitTargetSelector targetFinder;
-    readonly SlotStorage<bool> traitUseFlags;
-
+    
     public event Action<StatChangeData> OnTraitApplied;
 
     public TraitController(SlotStorage<Champion> picks, SlotStorage<ChampionStatus> statuses)
@@ -32,7 +32,6 @@ public class TraitController
 
         int teamSize = picks.GetTeam(Team.Blue).Count();
         targetFinder = new TraitTargetSelector(teamSize);
-        traitUseFlags = new SlotStorage<bool>(teamSize, false);
     }
 
     public bool UseTrait(SlotData traitSlot, SlotData targetSlot)
@@ -44,11 +43,11 @@ public class TraitController
 
         ExecuteTrait(user.TraitData, targetSlots);
 
-        traitUseFlags.ChangeSlot(traitSlot, true);
+        statuses.GetSlot(traitSlot).UseTrait();
         return true;
     }
 
-    public bool IsTraitUsed(SlotData slot) => traitUseFlags.GetSlot(slot);
+    public bool IsTraitUsed(SlotData slot) => statuses.GetSlot(slot).IsUseTrait;
 
     void ExecuteTrait(TraitData traitData, IEnumerable<SlotData> slots)
     {
