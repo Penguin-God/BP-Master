@@ -16,5 +16,4 @@ public class SelectFacade
     }
 
     public ChampionStatus GetStatus(SlotData slot) => statuses.GetSlot(slot);
-    public Champion GetChampion(int id) => championCatalog.GetChampion(id);
 }
