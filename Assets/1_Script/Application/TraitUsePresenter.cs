@@ -60,7 +60,7 @@ public class TraitUsePresenter // 타겟들 다 포함
 
     public IEnumerable<SlotData> GetClickableSlots()
     {
-        int size = traitController.GetTeamSize(currentTeam);
+        int size = championStorage.GetTeam(Team.Blue).Count();
         // 선택 전: 현재 팀의 미사용 슬롯
         if (IsSelect == false)
         {
@@ -71,7 +71,7 @@ public class TraitUsePresenter // 타겟들 다 포함
 
         // 선택 후: 시전자의 TraitSide에 따라 타겟 후보 생성
         var sel = selected.Value;
-        var targetSide = traitController.GetTargetRule(currentTeam, sel.Index).TargetSide;
+        var targetSide = championStorage.GetSlot(sel).TraitTargetRule.TargetSide;
         return new TraitTargetSelector(size).GetTargetableSlot(currentTeam, targetSide);
     }
 }

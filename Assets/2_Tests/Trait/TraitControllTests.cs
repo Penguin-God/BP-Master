@@ -8,17 +8,11 @@ public class TraitControllTests
     [Test]
     public void 한_챔피언이_특성_중복_사용_불가()
     {
-        // 룰/데이터: Champion
-        SlotStorage<Champion> champions = new();
-        champions.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.Single, 10));
-        champions.AddSlot(Team.Red, CreateTraitChamp(Side.Opponent, TargetRange.Single, 10));
-
-        // 상태: ChampionStatus
         SlotStorage<ChampionStatus> statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        var sut = new TraitController(champions, statuses);
+        var sut = new TraitController(statuses);
 
         Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.Single));
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).StatData.Attack);
@@ -30,17 +24,13 @@ public class TraitControllTests
     [Test]
     public void 특성_시전_후_사용_플래그_true()
     {
-        SlotStorage<Champion> champions = new();
-        champions.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.Single, 10));
-        champions.AddSlot(Team.Red, CreateTraitChamp(Side.Opponent, TargetRange.Single, 10));
-
         SlotStorage<ChampionStatus> statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus());
         statuses.AddSlot(Team.Red, CreateStatus());
 
-        var sut = new TraitController(champions, statuses);
+        var sut = new TraitController(statuses);
 
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0)));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.Single));
 
         // 시전자 슬롯만 true
         Assert.IsTrue(sut.IsTraitUsed(CreateBlueSlot(0)));
@@ -50,19 +40,14 @@ public class TraitControllTests
     [Test]
     public void 시전자와_타겟_인덱스_달라질_때()
     {
-        SlotStorage<Champion> champions = new();
-        champions.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.Single, 5));
-        champions.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.Single, 11));
-        champions.AddSlot(Team.Red, CreateTraitChamp(Side.Opponent, TargetRange.Single, 999));
-
         SlotStorage<ChampionStatus> statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus());
         statuses.AddSlot(Team.Blue, CreateStatus());
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        var sut = new TraitController(champions, statuses);
+        var sut = new TraitController(statuses);
 
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0)));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 11), TargetRange.Single));
 
         // ✅ 기대: Red[0] 공격력은 11이어야 함 (시전자 Blue[1]의 효과)
         Assert.AreEqual(11, statuses.GetSlot(CreateRedSlot(0)).StatData.Attack);
@@ -75,10 +60,6 @@ public class TraitControllTests
     [Test]
     public void 조건은_실시간_반영()
     {
-        SlotStorage<Champion> champions = new();
-        champions.AddSlots(Team.Blue, CreateTrait());
-        champions.AddSlots(Team.Red, CreateTrait());
-
         SlotStorage<ChampionStatus> statuses = new();
         // Blue 2, Red 2 상태 초기화 (공격력 0)
         statuses.AddSlot(Team.Blue, CreateStatus(0));
@@ -86,48 +67,34 @@ public class TraitControllTests
         statuses.AddSlot(Team.Red, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        TraitController sut = new TraitController(champions, statuses);
+        TraitController sut = new TraitController(statuses);
 
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0)));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 15, TraitConditionType.AttackBelow, 10), TargetRange.All));
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).StatData.Attack);
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(1)).StatData.Attack);
 
         // 사용은 되지만 조건이 안되서 적용 안됨
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0)));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 15, TraitConditionType.AttackBelow, 10), TargetRange.All));
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).StatData.Attack);
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(1)).StatData.Attack);
-
-        // 10이하면 공 15증가
-        Champion[] CreateTrait() => new Champion[] {
-            CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10),
-            CreateTraitChamp(Side.Opponent, TargetRange.All, 15, TraitConditionType.AttackBelow, 10)
-        };
     }
 
     [Test]
     public void 특성_적용시_피드백_여러_타겟()
     {
-        // Arrange
-        SlotStorage<Champion> champions = new();
-        champions.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
-        champions.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
-
-        champions.AddSlot(Team.Red, CreateStatChamp(0));
-        champions.AddSlot(Team.Red, CreateStatChamp(0));
-
         SlotStorage<ChampionStatus> statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        var sut = new TraitController(champions, statuses);
+        var sut = new TraitController(statuses);
 
         List<StatChangeData> lastFeedback = new List<StatChangeData>();
         sut.OnTraitApplied += fb => lastFeedback.Add(fb);
 
         // Act
-        sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0));
+        sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.All);
 
         // Assert - 피드백이 2개(두 타겟)에 대해 왔는지
         Assert.AreEqual(2, lastFeedback.Count);
