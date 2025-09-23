@@ -78,26 +78,16 @@ public readonly struct StatDelta
 
 public class TraitApplier
 {
-    public IEnumerable<StatDelta> UseTrait(TraitExecutor executor, IEnumerable<ChampionStatus> targets)
+    public StatDelta UseTrait(TraitExecutor executor, ChampionStatus target)
     {
-        var result = new List<StatDelta>();
+        var before = target.StatData;
+        executor.ExecuteTrait(target);
 
-        foreach (var target in targets)
-        {
-            var before = target.StatData;
-            //
-            executor.ExecuteTrait(target);
-
-            var after = target.StatData;
-            var delta = new StatDelta(
-                attack: after.Attack - before.Attack,
-                defense: after.Defense - before.Defense,
-                speed: after.Speed - before.Speed
-            );
-
-            result.Add(delta);
-        }
-
-        return result;
+        var after = target.StatData;
+        return new StatDelta(
+            attack: after.Attack - before.Attack,
+            defense: after.Defense - before.Defense,
+            speed: after.Speed - before.Speed
+        );
     }
 }
