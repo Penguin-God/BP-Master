@@ -4,7 +4,7 @@ using System.Linq;
 
 public class TraitControllTests
 {
-    //[Test]
+    [Test]
     public void 한_챔피언이_특성_중복_사용_불가()
     {
         // 룰/데이터: Champion

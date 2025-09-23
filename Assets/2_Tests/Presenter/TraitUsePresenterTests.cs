@@ -17,7 +17,16 @@ public class TraitUsePresenterTests
         picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
         picks.AddSlot(Team.Red, TestHelper.CreateTraitChamp(Side.Self, TargetRange.Single, 0));
 
-        // presenter = new TraitUsePresenter(new TraitController(picks));
+        SlotStorage<ChampionStatus> statuses= new();
+        statuses.AddSlot(Team.Blue, TestHelper.CreateStatus());
+        statuses.AddSlot(Team.Blue, TestHelper.CreateStatus());
+        statuses.AddSlot(Team.Blue, TestHelper.CreateStatus());
+
+        statuses.AddSlot(Team.Red, TestHelper.CreateStatus());
+        statuses.AddSlot(Team.Red, TestHelper.CreateStatus());
+        statuses.AddSlot(Team.Red, TestHelper.CreateStatus());
+
+        presenter = new TraitUsePresenter(new TraitController(picks, statuses));
     }
 
     [Test]
