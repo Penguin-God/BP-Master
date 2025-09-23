@@ -19,32 +19,16 @@ public readonly struct StatChangeData
 
 public class TraitController
 {
-    readonly SlotStorage<Champion> champions;
     readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitTargetSelector targetFinder;
-    
-    public event Action<StatChangeData> OnTraitApplied;
+    public event Action<SlotData, StatDelta> OnTraitApplied;
 
-    public TraitController(SlotStorage<Champion> picks, SlotStorage<ChampionStatus> statuses)
+    public TraitController(SlotStorage<ChampionStatus> statuses)
     {
-        this.champions = picks;
         this.statuses = statuses;
 
-        int teamSize = picks.GetTeam(Team.Blue).Count();
+        int teamSize = statuses.GetTeam(Team.Blue).Count();
         targetFinder = new TraitTargetSelector(teamSize);
-    }
-
-    public bool UseTrait(SlotData traitSlot, SlotData targetSlot)
-    {
-        if (IsTraitUsed(traitSlot)) return false;
-
-        Champion user = champions.GetSlot(traitSlot); // 룰/데이터는 Champion에서
-        var targetSlots = targetFinder.GetTargetSlots(user.TraitTargetRule.TargetRange, targetSlot);
-
-        ExecuteTrait(user.TraitData, targetSlots);
-
-        statuses.GetSlot(traitSlot).UseTrait();
-        return true;
     }
 
     public bool UseTrait(SlotData traitSlot, SlotData targetSlot, TraitData traitData, TargetRange range)
@@ -63,19 +47,10 @@ public class TraitController
         var executor = TraitExecutorFactory.CreateExecutor(traitData);
         foreach (var slot in slots)
         {
-            var targetStatus = statuses.GetSlot(slot);
-            var before = targetStatus.StatData;
-
-            executor.ExecuteTrait(targetStatus);
-
-            OnTraitApplied?.Invoke(new StatChangeData(slot, before, targetStatus.StatData));
+            var delta = new TraitApplier().UseTrait(executor, statuses.GetSlot(slot));
+            OnTraitApplied?.Invoke(slot, delta);
         }
     }
-
-    // 조회(그대로 유지, 룰은 Champion에서 읽음)
-    public int GetTeamSize(Team team) => champions.GetTeam(team).Count();
-    public TraitTargetRule GetTargetRule(Team team, int index)
-        => champions.GetSlot(new SlotData(team, index)).TraitTargetRule;
 }
 
 public readonly struct StatDelta
