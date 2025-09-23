@@ -48,7 +48,6 @@ public class TraitUseView : MonoBehaviour
     void ActiveButtons()
     {
         InActiveAllBtns();
-        print(presenter.GetClickableSlots());
         foreach (var slot in presenter.GetClickableSlots())
             ActiveButton(buttons[slot.Team][slot.Index]);
     }

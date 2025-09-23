@@ -44,7 +44,6 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     void NailDownChampion() // 챔프 확정
     {
         championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
-        // view.UpdateSelectView(phaseManager.CurrentFlow.Phase, phaseManager.CurrentTurn, championManager.GetChampionData(selectId));
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
         championFocusView.ClearDisplay();
         InActiveSelectButton();

@@ -60,9 +60,6 @@ public class TraitUsePresenter // 타겟들 다 포함
     public IEnumerable<SlotData> GetClickableSlots()
     {
         int size = championStorage.GetTeam(Team.Blue).Count();
-        UnityEngine.Debug.Log(size);
-        UnityEngine.Debug.Log(currentTeam);
-        UnityEngine.Debug.Log(IsSelect);
         // 선택 전: 현재 팀의 미사용 슬롯
         if (IsSelect == false)
         {
