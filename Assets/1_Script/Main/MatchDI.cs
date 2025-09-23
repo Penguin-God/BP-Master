@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.Playables;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -32,7 +30,6 @@ public class MatchDI : MonoBehaviour
         storage.OnPick += selectFacade.Pick;
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
-        utilKey.Init(storage);
         PhaseData[] phase = new PhaseData[]
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
@@ -41,6 +38,7 @@ public class MatchDI : MonoBehaviour
             new PhaseData(GamePhase.Trait, new Phase(trait.Turns)),
         };
         phaseManager = new(phase);
+        utilKey.Init(storage, phaseManager);
 
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
@@ -66,6 +64,8 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Red);
         // 쳄피언 스트레지 넣어줘
         traitController = new TraitController(selectFacade.Statuses);
+        traitController.OnTraitUsed += phaseManager.SubmitAction;
+
         matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, selectFacade.Champions);
         initTrait = true;
     }
