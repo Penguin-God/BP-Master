@@ -1,14 +1,6 @@
 
-public class MasteryApplier
-{
-    public void ApplyMastery(ChampionStatus status, int level)
-    {
-        var newStat = new MasteryCalculator().ApplyMastery(status.Stat, level);
-        status.ChangeStat(newStat);
-    }
-}
 
-public class MasteryCalculator
+public class MasteryApplier
 {
     public ChampionStatData ApplyMastery(ChampionStatData stat, int level)
     {

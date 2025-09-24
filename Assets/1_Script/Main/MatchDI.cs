@@ -74,7 +74,7 @@ public class MatchDI : MonoBehaviour
             int level = gamers.GetSlot(slot).GetMastery(id);
             var status = pickRegistry.Statuses.GetSlot(slot);
 
-            var newStat = new MasteryCalculator().ApplyMastery(status.Stat, level);
+            var newStat = new MasteryApplier().ApplyMastery(status.Stat, level);
             pickStatusChanger.ChangeStat(slot, newStat);
         }
     }
