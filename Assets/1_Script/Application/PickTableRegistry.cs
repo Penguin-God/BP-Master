@@ -11,7 +11,6 @@ public class PickTableRegistry
 
     public event Action<int> OnChampionSelected;
 
-
     public PickTableRegistry(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
 
     public void Pick(Team team, int championId)
