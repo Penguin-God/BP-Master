@@ -13,7 +13,7 @@ public class MatchDI : MonoBehaviour
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     TraitController traitController;
-    PickFacade pickFacade;
+    PickTableRegistry pickFacade;
 
     MatchUI_Controller matchUI_Controller;
 
@@ -22,7 +22,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        pickFacade = new PickFacade(championCatalog);
+        pickFacade = new PickTableRegistry(championCatalog);
         new MatchBinder().BindStorageEvents(storage, pickFacade);
         
         matchUI_Controller = GetComponent<MatchUI_Controller>();

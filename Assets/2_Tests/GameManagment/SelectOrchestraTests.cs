@@ -2,14 +2,14 @@ using NUnit.Framework;
 
 public class SelectOrchestraTests
 {
-    PickFacade sut;
+    PickTableRegistry sut;
 
     [SetUp]
     public void SetUp()
     {
         var champ = new Champion(3, "삼", new ChampionStatData(10, 20, 30), default, null);
         ChampionCatalog championCatalog = new ChampionCatalog(new Champion[] { champ });
-        sut = new PickFacade(championCatalog);
+        sut = new PickTableRegistry(championCatalog);
     }
 
     [Test]

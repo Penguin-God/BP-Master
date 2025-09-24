@@ -1,7 +1,7 @@
 
 public class MatchBinder
 {
-    public void BindStorageEvents(GameBanPickStorage storage, PickFacade pickFacade)
+    public void BindStorageEvents(GameBanPickStorage storage, PickTableRegistry pickFacade)
     {
         storage.OnPick += pickFacade.Pick;
     }

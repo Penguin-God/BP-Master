@@ -17,7 +17,7 @@ public class MatchUI_Controller : MonoBehaviour
         traitUseView.gameObject.SetActive(false);
     }
 
-    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, PickFacade pickFacade)
+    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, PickTableRegistry pickFacade)
     {
         var presenter = new TraitUsePresenter(traitController, pickFacade.Champions);
         traitUseView.Init(presenter);

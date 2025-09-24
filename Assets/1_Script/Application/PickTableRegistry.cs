@@ -1,6 +1,6 @@
 using System;
 
-public class PickFacade
+public class PickTableRegistry
 {
     readonly ChampionCatalog championCatalog;
     readonly SlotStorage<ChampionStatus> statuses = new();
@@ -11,7 +11,8 @@ public class PickFacade
 
     public event Action<int> OnChampionSelected;
 
-    public PickFacade(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
+
+    public PickTableRegistry(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
 
     public void Pick(Team team, int championId)
     {
