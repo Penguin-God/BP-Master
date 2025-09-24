@@ -5,7 +5,7 @@ public class SlotStorage<T>
 {
     readonly TeamSlotIndexr indexr = new TeamSlotIndexr();
     readonly Dictionary<SlotData, T> slots = new();
-
+    
     public void AddSlot(Team team, T value) => slots.Add(new SlotData(team, indexr.AllocateIndex(team)), value);
     public void AddSlots(Team team, IEnumerable<T> items)
     {

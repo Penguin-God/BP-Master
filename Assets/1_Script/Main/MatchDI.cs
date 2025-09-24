@@ -17,15 +17,14 @@ public class MatchDI : MonoBehaviour
 
     MatchUI_Controller matchUI_Controller;
 
-    SlotStorage<ProGamer> gamers;
+    SlotStorage<ProGamer> gamers = new();
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
         pickFacade = new PickFacade(championCatalog);
         new MatchBinder().BindStorageEvents(storage, pickFacade);
-        storage.OnPick += pickFacade.Pick;
-
+        
         matchUI_Controller = GetComponent<MatchUI_Controller>();
         PhaseData[] phase = new PhaseData[]
         {
@@ -67,27 +66,28 @@ public class MatchDI : MonoBehaviour
     // 클래스로 분리 및 테스트
     void ApplyMastery(Team team)
     {
-        for (int i = 0; i < pickFacade.Champions.GetTeam(team).Count(); i++)
+        for (int i = 0; i < pickFacade.Statuses.GetTeam(team).Count(); i++)
         {
             var slot = new SlotData(team, i);
-            var beforeStat = pickFacade.Champions.GetSlot(slot).StatData;
+            var status = pickFacade.Statuses.GetSlot(slot);
+            var beforeStat = status.StatData;
+            int id = pickFacade.Champions.GetSlot(slot).Id;
+            print(slot.Team);
+            print(slot.Index);
+            int level = gamers.GetSlot(slot).GetMastery(id);
 
-            new MasteryApplier().ApplyMastery(pickFacade.Statuses.GetSlot(slot), gamers.GetSlot(slot).GetMastery(pickFacade.Champions.GetSlot(slot).Id));
-            matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, pickFacade.Champions.GetSlot(slot).StatData));
-
-            // gamers.GetLevel(slot)
+            new MasteryApplier().ApplyMastery(status, level);
+            matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, status.StatData));
         }
     }
 
     // 클래스로 분리 및 테스트
-    void OnDone() => matchUI_Controller.ShowResult(new MatchResultConverter(new MatchResultBuilder(bonusDataSO.TeamBonus)).ToResult(pickFacade.Statuses));
-    //{
-    //    var blue = pickFacade.Statuses.GetTeam(Team.Blue);
-    //    var red = pickFacade.Statuses.GetTeam(Team.Red);
-
-    //    MatchResult result = new MatchResultBuilder(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
-    //    matchUI_Controller.ShowResult(result);
-    //}
+    void OnDone()
+    {
+        var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
+        MatchResult result = new MatchResultConverter(builder).ToResult(pickFacade.Statuses);
+        matchUI_Controller.ShowResult(result);
+    }
 
     [SerializeField] BonusDataFactory bonusDataSO;
 }
