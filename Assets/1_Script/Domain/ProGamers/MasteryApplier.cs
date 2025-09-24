@@ -2,16 +2,14 @@
 
 public class MasteryApplier
 {
-    public bool ApplyMastery(ProGamer gamer, Champion champion)
+    public void ApplyMastery(ChampionStatus champion, int level)
     {
-        int level = gamer.GetMastery(champion.Id);
-        if (level == 0) return false;
+        if (level <= 0) return;
 
         var newStat = champion.StatData
             .ChangeAttack(champion.StatData.Attack + level)
             .ChangeDefense(champion.StatData.Defense + level);
 
         champion.ChangeStat(newStat);
-        return true;
     }
 }
