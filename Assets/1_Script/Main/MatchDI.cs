@@ -13,7 +13,7 @@ public class MatchDI : MonoBehaviour
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     TraitController traitController;
-    PickFacade selectFacade;
+    PickFacade pickFacade;
 
     MatchUI_Controller matchUI_Controller;
 
@@ -22,8 +22,9 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        selectFacade = new PickFacade(championCatalog);
-        storage.OnPick += selectFacade.Pick;
+        pickFacade = new PickFacade(championCatalog);
+        new MatchBinder().BindStorageEvents(storage, pickFacade);
+        storage.OnPick += pickFacade.Pick;
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
         PhaseData[] phase = new PhaseData[]
@@ -56,31 +57,31 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
 
-        traitController = new TraitController(selectFacade.Statuses);
+        traitController = new TraitController(pickFacade.Statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, selectFacade.Champions);
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickFacade.Champions);
         initTrait = true;
     }
 
     // 클래스로 분리 및 테스트
     void ApplyMastery(Team team)
     {
-        for (int i = 0; i < selectFacade.Champions.GetTeam(team).Count(); i++)
+        for (int i = 0; i < pickFacade.Champions.GetTeam(team).Count(); i++)
         {
             var slot = new SlotData(team, i);
-            var beforeStat = selectFacade.Champions.GetSlot(slot).StatData;
+            var beforeStat = pickFacade.Champions.GetSlot(slot).StatData;
 
-            if (new MasteryApplier().ApplyMastery(gamerMap[team][i], selectFacade.Champions.GetSlot(slot)))
-                matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, selectFacade.Champions.GetSlot(slot).StatData));
+            if (new MasteryApplier().ApplyMastery(gamerMap[team][i], pickFacade.Champions.GetSlot(slot)))
+                matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, pickFacade.Champions.GetSlot(slot).StatData));
         }
     }
 
     // 클래스로 분리 및 테스트
     void OnDone()
     {
-        var blue = selectFacade.Champions.GetTeam(Team.Blue);
-        var red = selectFacade.Champions.GetTeam(Team.Red);
+        var blue = pickFacade.Champions.GetTeam(Team.Blue);
+        var red = pickFacade.Champions.GetTeam(Team.Red);
 
         MatchResult result = new MatchResultCalculator(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
         matchUI_Controller.ShowResult(result);
