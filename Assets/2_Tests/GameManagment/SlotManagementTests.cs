@@ -25,22 +25,15 @@ public class SlotManagementTests
     }
 
     [Test]
-    public void 생성자에_슬롯_수_넣으면_인자값으로_초기화()
-    {
-        SlotStorage<bool> sut = new(3, false);
-
-        CollectionAssert.AreEqual(new bool[] { false, false, false }, sut.GetTeam(Team.Blue));
-        CollectionAssert.AreEqual(new bool[] { false, false, false }, sut.GetTeam(Team.Red));
-    }
-
-    [Test]
     public void 슬롯갑_변경()
     {
-        SlotStorage<bool> sut = new(3, false);
+        SlotStorage<bool> sut = new();
+        sut.AddSlot(Team.Blue, false);
+        sut.AddSlot(Team.Blue, false);
 
-        sut.ChangeSlot(TestHelper.CreateBlueSlot(1), true);
+        sut.ChangeSlot(TestHelper.CreateBlueSlot(0), true);
 
-        CollectionAssert.AreEqual(new bool[] { false, true, false }, sut.GetTeam(Team.Blue));
+        Assert.AreEqual(true, sut.GetSlot(TestHelper.CreateBlueSlot(0)));
     }
 
     [Test]
