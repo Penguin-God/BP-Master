@@ -17,7 +17,6 @@ public class MatchDI : MonoBehaviour
 
     MatchUI_Controller matchUI_Controller;
 
-    // Dictionary<Team, IReadOnlyList<ProGamer>> gamerMap = new();
     SlotStorage<ProGamer> gamers;
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
@@ -73,8 +72,10 @@ public class MatchDI : MonoBehaviour
             var slot = new SlotData(team, i);
             var beforeStat = pickFacade.Champions.GetSlot(slot).StatData;
 
-            //if (new MasteryApplier().ApplyMastery(gamers.GetSlot(slot), pickFacade.Champions.GetSlot(slot)))
-            //    matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, pickFacade.Champions.GetSlot(slot).StatData));
+            new MasteryApplier().ApplyMastery(pickFacade.Statuses.GetSlot(slot), gamers.GetSlot(slot).GetMastery(pickFacade.Champions.GetSlot(slot).Id));
+            matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, pickFacade.Champions.GetSlot(slot).StatData));
+
+            // gamers.GetLevel(slot)
         }
     }
 
