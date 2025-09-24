@@ -38,11 +38,11 @@ public readonly struct MatchResult
 }
 
 
-public class MatchResultCalculator
+public class MatchResultBuilder
 {
     readonly DefaultScoreCalculator scoreCalculator = new DefaultScoreCalculator();
     readonly TeamBonusCalculator teamBonusCalculator;
-    public MatchResultCalculator(TeamBonusCalculator teamBonusCalculator)
+    public MatchResultBuilder(TeamBonusCalculator teamBonusCalculator)
     {
         this.teamBonusCalculator = teamBonusCalculator;
     }

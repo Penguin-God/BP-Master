@@ -80,14 +80,14 @@ public class MatchDI : MonoBehaviour
     }
 
     // 클래스로 분리 및 테스트
-    void OnDone()
-    {
-        var blue = pickFacade.Statuses.GetTeam(Team.Blue);
-        var red = pickFacade.Statuses.GetTeam(Team.Red);
+    void OnDone() => matchUI_Controller.ShowResult(new MatchResultConverter(new MatchResultBuilder(bonusDataSO.TeamBonus)).ToResult(pickFacade.Statuses));
+    //{
+    //    var blue = pickFacade.Statuses.GetTeam(Team.Blue);
+    //    var red = pickFacade.Statuses.GetTeam(Team.Red);
 
-        MatchResult result = new MatchResultCalculator(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
-        matchUI_Controller.ShowResult(result);
-    }
+    //    MatchResult result = new MatchResultBuilder(bonusDataSO.TeamBonus).CalculateResult(blue.Select(x => x.StatData), red.Select(x => x.StatData));
+    //    matchUI_Controller.ShowResult(result);
+    //}
 
     [SerializeField] BonusDataFactory bonusDataSO;
 }

@@ -29,7 +29,7 @@ public class MatchResultCalculateTests
             CreateStat(10, 6),
             CreateStat(10, 6),
         };
-        var sut = new MatchResultCalculator(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+        var sut = new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
 
         MatchResult result = sut.CalculateResult(blue, red);
 
@@ -47,10 +47,29 @@ public class MatchResultCalculateTests
             CreateStat(10, 10, 5),
             CreateStat(8,  12, 6),
         };
-        var sut = new MatchResultCalculator(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+        var sut = new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
 
         MatchResult result = sut.CalculateResult(team, team);
 
         Assert.AreEqual(Team.All, result.Winner);
+    }
+
+    [Test]
+    public void 챔피언_상태_슬롯을_결과로_변환()
+    {
+        SlotStorage<ChampionStatus> data = new SlotStorage<ChampionStatus>();
+        data.AddSlot(Team.Blue, TestHelper.CreateStatus(12, 4));
+        data.AddSlot(Team.Blue, TestHelper.CreateStatus(7, 8));
+
+        data.AddSlot(Team.Red, TestHelper.CreateStatus(10, 6));
+        data.AddSlot(Team.Red, TestHelper.CreateStatus(10, 6));
+
+        var sut = new MatchResultConverter(new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus())));
+
+        MatchResult result = sut.ToResult(data);
+
+        Assert.AreEqual(31, result.BlueInfo.Total);
+        Assert.AreEqual(32, result.RedInfo.Total);
+        Assert.AreEqual(Team.Red, result.Winner);
     }
 }
