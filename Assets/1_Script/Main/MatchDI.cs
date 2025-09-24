@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,18 +12,20 @@ public class MatchDI : MonoBehaviour
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     TraitController traitController;
-    PickTableRegistry pickFacade;
+    PickTableRegistry pickRegistry;
 
     MatchUI_Controller matchUI_Controller;
+    PickStatusChanger pickStatusChanger;
 
     SlotStorage<ProGamer> gamers = new();
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        pickFacade = new PickTableRegistry(championCatalog);
-        new MatchBinder().BindStorageEvents(storage, pickFacade);
-        
+        pickRegistry = new PickTableRegistry(championCatalog);
+        new MatchBinder().BindStorageEvents(storage, pickRegistry);
+        pickStatusChanger = new PickStatusChanger(pickRegistry.Statuses);
+
         matchUI_Controller = GetComponent<MatchUI_Controller>();
         PhaseData[] phase = new PhaseData[]
         {
@@ -39,7 +40,7 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
 
-        matchUI_Controller.Init(storage, phaseManager); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager, pickStatusChanger); // start보다 먼저
         phaseManager.Start();
     }
 
@@ -56,38 +57,34 @@ public class MatchDI : MonoBehaviour
         ApplyMastery(Team.Blue);
         ApplyMastery(Team.Red);
 
-        traitController = new TraitController(pickFacade.Statuses);
+        traitController = new TraitController(pickRegistry.Statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickFacade);
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickRegistry);
         initTrait = true;
     }
 
     // 클래스로 분리 및 테스트
     void ApplyMastery(Team team)
     {
-        for (int i = 0; i < pickFacade.Statuses.GetTeam(team).Count(); i++)
+        for (int i = 0; i < pickRegistry.Statuses.GetTeam(team).Count(); i++)
         {
             var slot = new SlotData(team, i);
-            var status = pickFacade.Statuses.GetSlot(slot);
-            var beforeStat = status.StatData;
-            int id = pickFacade.Champions.GetSlot(slot).Id;
-            print(slot.Team);
-            print(slot.Index);
+            int id = pickRegistry.Champions.GetSlot(slot).Id;
             int level = gamers.GetSlot(slot).GetMastery(id);
+            var status = pickRegistry.Statuses.GetSlot(slot);
 
-            new MasteryApplier().ApplyMastery(status, level);
-            matchUI_Controller.UpdateMaserty(new StatChangeData(slot, beforeStat, status.StatData));
+            var newStat = new MasteryCalculator().ApplyMastery(status.Stat, level);
+            pickStatusChanger.ChangeStat(slot, newStat);
         }
     }
 
-    // 클래스로 분리 및 테스트
+
+    [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultConverter(builder).ToResult(pickFacade.Statuses);
+        MatchResult result = new MatchResultConverter(builder).ToResult(pickRegistry.Statuses);
         matchUI_Controller.ShowResult(result);
     }
-
-    [SerializeField] BonusDataFactory bonusDataSO;
 }
