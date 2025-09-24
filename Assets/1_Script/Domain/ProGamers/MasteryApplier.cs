@@ -1,15 +1,19 @@
 
-
 public class MasteryApplier
 {
-    public void ApplyMastery(ChampionStatus championStatus, int level)
+    public void ApplyMastery(ChampionStatus status, int level)
     {
-        if (level <= 0) return;
+        var newStat = new MasteryCalculator().ApplyMastery(status.StatData, level);
+        status.ChangeStat(newStat);
+    }
+}
 
-        var newStat = championStatus.StatData
-            .ChangeAttack(championStatus.StatData.Attack + level)
-            .ChangeDefense(championStatus.StatData.Defense + level);
+public class MasteryCalculator
+{
+    public ChampionStatData ApplyMastery(ChampionStatData stat, int level)
+    {
+        if (level <= 0) return stat;
 
-        championStatus.ChangeStat(newStat);
+        return new ChampionStatData(stat.Attack + level, stat.Defense + level, stat.Speed);
     }
 }
