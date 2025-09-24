@@ -2,13 +2,13 @@
 
 public class ChampionStatus
 {
-    public ChampionStatData StatData;
+    public ChampionStatData Stat;
     public bool IsUseTrait = false;
     public ChampionStatus(ChampionStatData statData)
     {
-        StatData = statData;
+        Stat = statData;
     }
 
     public void UseTrait() => IsUseTrait = true;
-    public void ChangeStat(ChampionStatData newStat) => StatData = newStat;
+    public void ChangeStat(ChampionStatData newStat) => Stat = newStat;
 }

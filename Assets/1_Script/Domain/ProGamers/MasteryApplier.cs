@@ -3,7 +3,7 @@ public class MasteryApplier
 {
     public void ApplyMastery(ChampionStatus status, int level)
     {
-        var newStat = new MasteryCalculator().ApplyMastery(status.StatData, level);
+        var newStat = new MasteryCalculator().ApplyMastery(status.Stat, level);
         status.ChangeStat(newStat);
     }
 }

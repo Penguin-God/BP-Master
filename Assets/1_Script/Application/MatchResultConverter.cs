@@ -7,8 +7,8 @@ public class MatchResultConverter
 
     public MatchResult ToResult(SlotStorage<ChampionStatus> statuses)
     {
-        var blueStats = statuses.GetTeam(Team.Blue).Select(x => x.StatData);
-        var redStats = statuses.GetTeam(Team.Red).Select(x => x.StatData);
+        var blueStats = statuses.GetTeam(Team.Blue).Select(x => x.Stat);
+        var redStats = statuses.GetTeam(Team.Red).Select(x => x.Stat);
         return matchResultBuilder.CalculateResult(blueStats, redStats);
     }
 }

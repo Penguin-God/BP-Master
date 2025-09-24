@@ -11,7 +11,7 @@ public class TraitApplyTests
 
         sut.ExecuteTrait(champion);
 
-        Assert.AreEqual(15, champion.StatData.Attack);
+        Assert.AreEqual(15, champion.Stat.Attack);
     }
 
     [Test]
@@ -22,6 +22,6 @@ public class TraitApplyTests
 
         sut.ExecuteTrait(champion);
 
-        Assert.AreEqual(10, champion.StatData.Attack);
+        Assert.AreEqual(10, champion.Stat.Attack);
     }
 }

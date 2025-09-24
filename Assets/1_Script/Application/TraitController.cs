@@ -50,9 +50,9 @@ public class TraitController
         foreach (var slot in slots)
         {
             var target = statuses.GetSlot(slot);
-            var before = target.StatData;
+            var before = target.Stat;
             executor.ExecuteTrait(target);
-            OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.StatData));
+            OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.Stat));
         }
     }
 }

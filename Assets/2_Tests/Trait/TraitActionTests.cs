@@ -12,7 +12,7 @@ public class TraitActionTests
 
         sut.Do(target);
 
-        Assert.AreEqual(expected, target.StatData.Attack);
+        Assert.AreEqual(expected, target.Stat.Attack);
     }
 
     [Test]
@@ -25,7 +25,7 @@ public class TraitActionTests
 
         sut.Do(target);
 
-        Assert.AreEqual(expected, target.StatData.Defense);
+        Assert.AreEqual(expected, target.Stat.Defense);
     }
 
     [Test]
@@ -38,6 +38,6 @@ public class TraitActionTests
 
         sut.Do(target);
 
-        Assert.AreEqual(expected, target.StatData.Speed);
+        Assert.AreEqual(expected, target.Stat.Speed);
     }
 }

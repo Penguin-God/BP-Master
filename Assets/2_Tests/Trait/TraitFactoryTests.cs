@@ -13,9 +13,9 @@ public class TraitFactoryTests
 
         executor.ExecuteTrait(champion);
 
-        Assert.AreEqual(15, champion.StatData.Attack);
-        Assert.AreEqual(5, champion.StatData.Defense);
-        Assert.AreEqual(3, champion.StatData.Speed);
+        Assert.AreEqual(15, champion.Stat.Attack);
+        Assert.AreEqual(5, champion.Stat.Defense);
+        Assert.AreEqual(3, champion.Stat.Speed);
     }
 
     [Test]
@@ -29,8 +29,8 @@ public class TraitFactoryTests
 
         executor.ExecuteTrait(champion);
 
-        Assert.AreEqual(8, champion.StatData.Attack);
-        Assert.AreEqual(4, champion.StatData.Defense); // unchanged
-        Assert.AreEqual(2, champion.StatData.Speed);
+        Assert.AreEqual(8, champion.Stat.Attack);
+        Assert.AreEqual(4, champion.Stat.Defense); // unchanged
+        Assert.AreEqual(2, champion.Stat.Speed);
     }
 }

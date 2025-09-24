@@ -57,5 +57,5 @@ public class TraitExecutor
             action.Do(target);
     }
 
-    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionType, target.StatData, Threshold);
+    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionType, target.Stat, Threshold);
 }

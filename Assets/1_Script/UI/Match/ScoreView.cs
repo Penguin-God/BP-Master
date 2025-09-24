@@ -19,9 +19,9 @@ public class ScoreView : MonoBehaviour
     DefaultScoreCalculator scoreCalculator = new DefaultScoreCalculator();
     public void UpdateTeamScore(Team team)
     {
-        int att = scoreCalculator.CalculateAttack(picks.GetTeam(team).Select(x => x.StatData));
-        int def = scoreCalculator.CalculateDefense(picks.GetTeam(team).Select(x => x.StatData));
-        int speed = picks.GetTeam(team).Sum(x => x.StatData.Speed);
+        int att = scoreCalculator.CalculateAttack(picks.GetTeam(team).Select(x => x.Stat));
+        int def = scoreCalculator.CalculateDefense(picks.GetTeam(team).Select(x => x.Stat));
+        int speed = picks.GetTeam(team).Sum(x => x.Stat.Speed);
 
         if(team == Team.Blue) blueScoreView.UpdateStat(new ChampionStatData(att, def, speed));
         else redScoreView.UpdateStat(new ChampionStatData(att, def, speed));

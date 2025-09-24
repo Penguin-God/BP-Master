@@ -17,7 +17,7 @@ public class SelectOrchestraTests
     {
         sut.Pick(Team.Blue, 3);
 
-        Assert.AreEqual(new ChampionStatData(10, 20, 30), sut.GetStatus(TestHelper.CreateBlueSlot(0)).StatData);
+        Assert.AreEqual(new ChampionStatData(10, 20, 30), sut.GetStatus(TestHelper.CreateBlueSlot(0)).Stat);
         Assert.AreEqual("삼", sut.GetChampion(TestHelper.CreateBlueSlot(0)).Name);
     }
 }

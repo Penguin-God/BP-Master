@@ -10,7 +10,7 @@ public class PickStatusChanger
     public void ChangeStat(SlotData slot, ChampionStatData newStat)
     {
         var status = statusTable.GetSlot(slot);
-        var beforeStat = status.StatData;
+        var beforeStat = status.Stat;
 
         if (beforeStat.Equals(newStat)) return;
 

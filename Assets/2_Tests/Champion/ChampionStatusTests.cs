@@ -10,9 +10,9 @@ public class ChampionStatusTests
 
         var status = new ChampionStatus(stat);
 
-        Assert.AreEqual(10, status.StatData.Attack);
-        Assert.AreEqual(5, status.StatData.Defense);
-        Assert.AreEqual(3, status.StatData.Speed);
+        Assert.AreEqual(10, status.Stat.Attack);
+        Assert.AreEqual(5, status.Stat.Defense);
+        Assert.AreEqual(3, status.Stat.Speed);
         Assert.IsFalse(status.IsUseTrait);
     }
 
@@ -34,8 +34,8 @@ public class ChampionStatusTests
 
         status.ChangeStat(newStat);
 
-        Assert.AreEqual(5, status.StatData.Attack);
-        Assert.AreEqual(6, status.StatData.Defense);
-        Assert.AreEqual(7, status.StatData.Speed);
+        Assert.AreEqual(5, status.Stat.Attack);
+        Assert.AreEqual(6, status.Stat.Defense);
+        Assert.AreEqual(7, status.Stat.Speed);
     }
 }

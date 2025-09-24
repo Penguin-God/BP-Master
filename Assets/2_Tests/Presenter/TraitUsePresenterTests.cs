@@ -49,7 +49,7 @@ public class TraitUsePresenterTests
         presenter.ClickChampion(CreateSlot(Team.Blue, 0)); // 선택
         presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용
 
-        Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).StatData.Attack);
+        Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
     }
 
     [Test]

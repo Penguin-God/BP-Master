@@ -9,26 +9,26 @@ public enum TraitType
 
 public interface ITraitAction
 {
-    void Do(ChampionStatus target); // Champion → ChampionStatus
+    void Do(ChampionStatus target);
 }
 
 public class AttackChanger : ITraitAction
 {
     readonly int Amount;
     public AttackChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.StatData.ChangeAttack(target.StatData.Attack + Amount));
+    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
 }
 
 public class DefenseChanger : ITraitAction
 {
     readonly int Amount;
     public DefenseChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.StatData.ChangeDefense(target.StatData.Defense + Amount));
+    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
 }
 
 public class SpeedChanger : ITraitAction
 {
     readonly int Amount;
     public SpeedChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.StatData.ChangeSpeed(target.StatData.Speed + Amount));
+    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeSpeed(target.Stat.Speed + Amount));
 }

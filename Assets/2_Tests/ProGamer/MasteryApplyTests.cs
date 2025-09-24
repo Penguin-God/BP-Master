@@ -11,14 +11,14 @@ public class MasteryApplyTests
 
         // 숙련도 적용
         sut.ApplyMastery(champ1, 10);
-        Assert.AreEqual(20, champ1.StatData.Attack);
-        Assert.AreEqual(15, champ1.StatData.Defense);
+        Assert.AreEqual(20, champ1.Stat.Attack);
+        Assert.AreEqual(15, champ1.Stat.Defense);
 
         // 숙련도 없어서 스탯 그대로
         sut.ApplyMastery(champ2, 0);
         sut.ApplyMastery(champ2, -33);
-        Assert.AreEqual(10, champ2.StatData.Attack);
-        Assert.AreEqual(5, champ2.StatData.Defense);
+        Assert.AreEqual(10, champ2.Stat.Attack);
+        Assert.AreEqual(5, champ2.Stat.Defense);
     }
 
     [Test]

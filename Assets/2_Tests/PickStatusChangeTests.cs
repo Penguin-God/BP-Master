@@ -26,7 +26,7 @@ public class PickStatusChangeTests
         sut.ChangeStat(slot, newStat);
 
         // 저장소 실제 값 갱신 검증
-        Assert.AreEqual(newStat, statusTable.GetSlot(slot).StatData);
+        Assert.AreEqual(newStat, statusTable.GetSlot(slot).Stat);
 
         // 이벤트 페이로드 검증
         Assert.AreEqual(slot, received.Slot);
@@ -43,7 +43,7 @@ public class PickStatusChangeTests
         sut.OnStatChanged += _ => anyEvent = true;
 
         var slot = new SlotData(Team.Red, 0);
-        var same = statusTable.GetSlot(slot).StatData;
+        var same = statusTable.GetSlot(slot).Stat;
 
         sut.ChangeStat(slot, same);
 
