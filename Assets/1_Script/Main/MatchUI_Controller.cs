@@ -17,14 +17,14 @@ public class MatchUI_Controller : MonoBehaviour
         traitUseView.gameObject.SetActive(false);
     }
 
-    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, SlotStorage<Champion> champions)
+    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, PickFacade pickFacade)
     {
-        var presenter = new TraitUsePresenter(traitController, champions);
+        var presenter = new TraitUsePresenter(traitController, pickFacade.Champions);
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(Team.Blue);
 
-        scoreView.Init(champions);
+        scoreView.Init(pickFacade.Statuses);
         scoreView.UpdateTeamScore(Team.Blue);
         scoreView.UpdateTeamScore(Team.Red);
         traitController.OnTraitApplied += (x) => scoreView.UpdateTeamScore(x.Slot.Team);

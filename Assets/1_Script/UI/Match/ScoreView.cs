@@ -8,13 +8,13 @@ public class ScoreView : MonoBehaviour
     [SerializeField] TextMeshProUGUI bonusInfo;
     [SerializeField] ChampionView blueScoreView;
     [SerializeField] ChampionView redScoreView;
-    SlotStorage<Champion> picks;
+    SlotStorage<ChampionStatus> picks;
     void Start()
     {
         bonusInfo.text = new BonusPresenter().BuildBonusAllText(bonusData.AttackBonus.BonusDatas, bonusData.DefenseBonus.BonusDatas, bonusData.SpeedBonus.BonusDatas);
     }
 
-    public void Init(SlotStorage<Champion> picks) => this.picks = picks;
+    public void Init(SlotStorage<ChampionStatus> picks) => this.picks = picks;
 
     DefaultScoreCalculator scoreCalculator = new DefaultScoreCalculator();
     public void UpdateTeamScore(Team team)
