@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class SlotManagementTests
+public class SlotStorageTests
 {
     [Test]
     public void 슬롯에_추가한_순서로_저장_및_조회()

@@ -1,18 +1,15 @@
 using NUnit.Framework;
-using System.Collections;
-using UnityEngine.TestTools;
 
-public class ChampionManagementTests
+public class ChampionFindingTests
 {
     ChampionCatalog manager;
-    Champion[] testChampions;
-
+    
     Champion CreateChamp(int id, string name) => new Champion(id, name, default, default, null);
 
     [SetUp]
     public void SetUp()
     {
-        testChampions = new[]
+        var testChampions = new[]
         {
             CreateChamp(1, "전사"),
             CreateChamp(2, "마법사"),
