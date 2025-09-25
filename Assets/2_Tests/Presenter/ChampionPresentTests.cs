@@ -5,7 +5,7 @@ public class ChampionPresentTests
     [Test]
     public void 챔피언_스탯정보가_텍스트로_생성()
     {
-        var sut = new ChampionPersenter();
+        var sut = new StatPersenter();
 
         StatViewModel result = sut.CreateStatViewModel(new ChampionStatData(10, 12, 6));
 

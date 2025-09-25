@@ -11,7 +11,7 @@ public class ChampionView : MonoBehaviour
 
     void Start() => ClearDisplay();
 
-    ChampionPersenter championPersenter = new ChampionPersenter();
+    StatPersenter championPersenter = new StatPersenter();
     TraitPersenter traitPersenter = new();
     public void UpdateDisplay(ChampionSO champion)
     {

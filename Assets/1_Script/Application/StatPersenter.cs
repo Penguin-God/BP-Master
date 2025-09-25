@@ -81,7 +81,7 @@ public class TraitPersenter
     string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
 }
 
-public class ChampionPersenter : TraitPersenter
+public class StatPersenter : TraitPersenter
 {
     public StatViewModel CreateStatViewModel(ChampionStatData stat) => 
         new StatViewModel(
