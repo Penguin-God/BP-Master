@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ProGamerManager : MonoBehaviour
+public class ProGamerLoder : MonoBehaviour
 {
     [SerializeField] ProGamerSO[] playerDatas;
     [SerializeField] ChampionRepository championManager;

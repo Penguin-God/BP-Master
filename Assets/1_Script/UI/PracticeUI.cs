@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PracticeUI : MonoBehaviour
 {
-    [SerializeField] ProGamerManager playerManager;
+    [SerializeField] ProGamerLoder playerManager;
     ChampionDrawer championSelectionUI;
     PlayerSectionUI playerSectionUI;
     int currentPracticePlayer = -1;

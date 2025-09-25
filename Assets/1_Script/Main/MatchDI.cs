@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -25,9 +24,8 @@ public class MatchDI : MonoBehaviour
         pickRegistry = new PickTableRegistry(championCatalog);
         new MatchBinder().BindStorageEvents(storage, pickRegistry);
 
-        gamers.AddSlots(Team.Blue, blueGamers.Select(x => x.CreateGamer()));
-        gamers.AddSlots(Team.Red, redGamers.Select(x => x.CreateGamer()));
-        pickSlotRegistry = new PickSlotRegistry(gamers);
+
+        pickSlotRegistry = new PickSlotRegistry(GetComponent<PlayerRoster>().Rosters);
         storage.OnPick += pickSlotRegistry.Pick;
 
         pickStatusChanger = new SlotStatusChanger(pickRegistry.Statuses);
@@ -51,9 +49,6 @@ public class MatchDI : MonoBehaviour
     }
 
     bool initTrait;
-    [SerializeField] ProGamerSO[] blueGamers;
-    [SerializeField] ProGamerSO[] redGamers;
-    SlotStorage<ProGamer> gamers = new();
     void Trait(Team team)
     {
         if (initTrait) return;
@@ -67,10 +62,7 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
     }
 
-    void ApplyMastery()
-    {
-        new TeamMasteryApplier(pickStatusChanger).Apply(pickSlotRegistry.PickSlotDatas);
-    }
+    void ApplyMastery() => new TeamMasteryApplier(pickStatusChanger).Apply(pickSlotRegistry.PickSlotDatas);
 
 
     [SerializeField] BonusDataFactory bonusDataSO;
