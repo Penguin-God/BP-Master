@@ -4,13 +4,11 @@ public class MatchDI : MonoBehaviour
 {
     [SerializeField] ChampionRepository champManager;
     ChampionCatalog championCatalog => champManager.Catalog;
-
     GameBanPickStorage storage;
-    PhaseManager phaseManager;
-    TraitController traitController;
     PickTableRegistry pickRegistry;
     PickSlotRegistry pickSlotRegistry;
 
+    PhaseManager phaseManager;
     MatchUI_Controller matchUI_Controller;
     SlotStatusChanger pickStatusChanger;
 
@@ -19,11 +17,9 @@ public class MatchDI : MonoBehaviour
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
         pickRegistry = new PickTableRegistry(championCatalog);
-        new MatchBinder().BindStorageEvents(storage, pickRegistry);
-
         pickSlotRegistry = new PickSlotRegistry(GetComponent<PlayerRoster>().Rosters);
+        storage.OnPick += pickRegistry.Pick;
         storage.OnPick += pickSlotRegistry.Pick;
-
         pickStatusChanger = new SlotStatusChanger(pickRegistry.Statuses);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -44,7 +40,7 @@ public class MatchDI : MonoBehaviour
 
         ApplyMastery();
 
-        traitController = new TraitController(pickRegistry.Statuses);
+        var traitController = new TraitController(pickRegistry.Statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
         matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickRegistry);

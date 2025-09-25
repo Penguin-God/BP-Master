@@ -26,7 +26,7 @@ public class MatchUI_Controller : MonoBehaviour
         var presenter = new TraitUsePresenter(traitController, pickFacade.Champions);
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
-        traitUseView.UpdateTrait(Team.Blue);
+        traitUseView.UpdateTrait(team);
 
         traitController.OnTraitApplied += (x) => scoreView.UpdateTeamScore(x.Slot.Team);
         traitController.OnTraitApplied += banPickView.ChangeChampionStat;
