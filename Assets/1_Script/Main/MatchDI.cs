@@ -40,7 +40,7 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
 
-        matchUI_Controller.Init(storage, phaseManager, pickStatusChanger); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager, pickStatusChanger, pickRegistry); // start보다 먼저
         phaseManager.Start();
     }
 

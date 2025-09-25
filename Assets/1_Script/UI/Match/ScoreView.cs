@@ -24,6 +24,6 @@ public class ScoreView : MonoBehaviour
         int speed = picks.GetTeam(team).Sum(x => x.Stat.Speed);
 
         if(team == Team.Blue) blueScoreView.UpdateStat(new ChampionStatData(att, def, speed));
-        else redScoreView.UpdateStat(new ChampionStatData(att, def, speed));
+        else if(team == Team.Red) redScoreView.UpdateStat(new ChampionStatData(att, def, speed));
     }
 }
