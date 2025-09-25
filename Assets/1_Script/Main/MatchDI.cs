@@ -5,9 +5,6 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
     ChampionCatalog championCatalog => champManager.Catalog;
 
-    [SerializeField] DraftTurnSO ban;
-    [SerializeField] DraftTurnSO pick;
-    [SerializeField] DraftTurnSO trait;
     GameBanPickStorage storage;
     PhaseManager phaseManager;
     TraitController traitController;
@@ -24,21 +21,13 @@ public class MatchDI : MonoBehaviour
         pickRegistry = new PickTableRegistry(championCatalog);
         new MatchBinder().BindStorageEvents(storage, pickRegistry);
 
-
         pickSlotRegistry = new PickSlotRegistry(GetComponent<PlayerRoster>().Rosters);
         storage.OnPick += pickSlotRegistry.Pick;
 
         pickStatusChanger = new SlotStatusChanger(pickRegistry.Statuses);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
-        PhaseData[] phase = new PhaseData[]
-        {
-            new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
-            new PhaseData(GamePhase.Pick, new Phase(pick.Turns)),
-            new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
-            new PhaseData(GamePhase.Trait, new Phase(trait.Turns)),
-        };
-        phaseManager = new(phase);
+        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase());
         utilKey.Init(storage, phaseManager);
 
         phaseManager.OnPhaseTrait += Trait;
