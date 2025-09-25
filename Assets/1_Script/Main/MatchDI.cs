@@ -70,8 +70,7 @@ public class MatchDI : MonoBehaviour
         for (int i = 0; i < pickRegistry.Statuses.GetTeam(team).Count(); i++)
         {
             var slot = new SlotData(team, i);
-            int id = pickRegistry.Champions.GetSlot(slot).Id;
-            int level = gamers.GetSlot(slot).GetMastery(id);
+            int level = new ActiveMasteryFinder(gamers, pickRegistry.Ids).GetActiveLevel(slot);
             var status = pickRegistry.Statuses.GetSlot(slot);
 
             var newStat = new MasteryApplier().ApplyMastery(status.Stat, level);
