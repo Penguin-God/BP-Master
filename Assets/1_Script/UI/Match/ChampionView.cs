@@ -13,11 +13,7 @@ public class ChampionView : MonoBehaviour
 
     StatPersenter championPersenter = new StatPersenter();
     TraitPersenter traitPersenter = new();
-    public void UpdateDisplay(ChampionSO champion)
-    {
-        UpdateChampion(champion.CreateChampion());
-        traitText.text = traitPersenter.BuildTraitText(champion.TraitData.CreateUI_Data());
-    }
+    public void UpdateDisplay(ChampionSO champion) => UpdateDisplay(champion.CreateChampion(), champion.TraitData.CreateUI_Data());
 
     public void UpdateDisplay(Champion champion, TraitUI_Data traitUI_Data)
     {

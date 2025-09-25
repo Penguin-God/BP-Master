@@ -13,7 +13,6 @@ public class SlotView : MonoBehaviour
     [SerializeField] Button slotButton;
 
     ChampionRepository championManager;
-    // SlotStorage<Champion> pickStorage;
     Champion traickingTarget;
     ChampionView traickingView;
 
