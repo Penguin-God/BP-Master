@@ -69,7 +69,7 @@ public class MatchDI : MonoBehaviour
 
     void ApplyMastery()
     {
-        new TeamMasteryApplier2(pickStatusChanger).Apply(pickSlotRegistry.PickSlotDatas);
+        new TeamMasteryApplier(pickStatusChanger).Apply(pickSlotRegistry.PickSlotDatas);
     }
 
 
