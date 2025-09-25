@@ -15,16 +15,15 @@ public class MatchDI : MonoBehaviour
     PickTableRegistry pickRegistry;
 
     MatchUI_Controller matchUI_Controller;
-    PickStatusChanger pickStatusChanger;
+    SlotStatusChanger pickStatusChanger;
 
-    SlotStorage<ProGamer> gamers = new();
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
         pickRegistry = new PickTableRegistry(championCatalog);
         new MatchBinder().BindStorageEvents(storage, pickRegistry);
-        pickStatusChanger = new PickStatusChanger(pickRegistry.Statuses);
+        pickStatusChanger = new SlotStatusChanger(pickRegistry.Statuses);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
         PhaseData[] phase = new PhaseData[]
@@ -47,6 +46,7 @@ public class MatchDI : MonoBehaviour
     bool initTrait;
     [SerializeField] ProGamerSO[] blueGamers;
     [SerializeField] ProGamerSO[] redGamers;
+    SlotStorage<ProGamer> gamers = new();
     void Trait(Team team)
     {
         if (initTrait) return;
@@ -67,14 +67,11 @@ public class MatchDI : MonoBehaviour
     // 클래스로 분리 및 테스트
     void ApplyMastery(Team team)
     {
-        for (int i = 0; i < pickRegistry.Statuses.GetTeam(team).Count(); i++)
+        for (int i = 0; i < gamers.GetTeam(team).Count(); i++)
         {
             var slot = new SlotData(team, i);
             int level = new ActiveMasteryFinder(gamers, pickRegistry.Ids).GetActiveLevel(slot);
-            var status = pickRegistry.Statuses.GetSlot(slot);
-
-            var newStat = new MasteryApplier().ApplyMastery(status.Stat, level);
-            pickStatusChanger.ChangeStat(slot, newStat);
+            pickStatusChanger.ChangeStat(slot, (stat) => new MasteryApplier().ApplyMastery(stat, level));
         }
     }
 

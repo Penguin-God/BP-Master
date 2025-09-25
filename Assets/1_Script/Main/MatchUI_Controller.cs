@@ -8,7 +8,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] BanPickView banPickView;
     [SerializeField] ScoreView scoreView;
 
-    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PickStatusChanger pickStatusChanger, PickTableRegistry pickTableRegistry)
+    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, SlotStatusChanger pickStatusChanger, PickTableRegistry pickTableRegistry)
     {
         banPickUI.Init(new ChampionSelectPresenter(storage), phaseManager);
         pickStatusChanger.OnStatChanged += banPickView.ChangeChampionStat;
