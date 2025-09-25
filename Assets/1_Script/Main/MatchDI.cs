@@ -67,12 +67,7 @@ public class MatchDI : MonoBehaviour
     // 클래스로 분리 및 테스트
     void ApplyMastery(Team team)
     {
-        for (int i = 0; i < gamers.GetTeam(team).Count(); i++)
-        {
-            var slot = new SlotData(team, i);
-            int level = new ActiveMasteryFinder(gamers, pickRegistry.Ids).GetActiveLevel(slot);
-            pickStatusChanger.ChangeStat(slot, (stat) => new MasteryApplier().ApplyMastery(stat, level));
-        }
+        new TeamMasteryApplier(gamers, pickRegistry.Ids, pickStatusChanger).Apply(team);
     }
 
 
