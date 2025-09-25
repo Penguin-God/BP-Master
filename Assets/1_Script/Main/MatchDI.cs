@@ -13,6 +13,7 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     TraitController traitController;
     PickTableRegistry pickRegistry;
+    PickSlotRegistry pickSlotRegistry;
 
     MatchUI_Controller matchUI_Controller;
     SlotStatusChanger pickStatusChanger;
@@ -23,6 +24,12 @@ public class MatchDI : MonoBehaviour
         storage = new GameBanPickStorage(championCatalog.AllId);
         pickRegistry = new PickTableRegistry(championCatalog);
         new MatchBinder().BindStorageEvents(storage, pickRegistry);
+
+        gamers.AddSlots(Team.Blue, blueGamers.Select(x => x.CreateGamer()));
+        gamers.AddSlots(Team.Red, redGamers.Select(x => x.CreateGamer()));
+        pickSlotRegistry = new PickSlotRegistry(gamers);
+        storage.OnPick += pickSlotRegistry.Pick;
+
         pickStatusChanger = new SlotStatusChanger(pickRegistry.Statuses);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -51,11 +58,7 @@ public class MatchDI : MonoBehaviour
     {
         if (initTrait) return;
 
-        gamers.AddSlots(Team.Blue, blueGamers.Select(x => x.CreateGamer()));
-        gamers.AddSlots(Team.Red, redGamers.Select(x => x.CreateGamer()));
-
-        ApplyMastery(Team.Blue);
-        ApplyMastery(Team.Red);
+        ApplyMastery();
 
         traitController = new TraitController(pickRegistry.Statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
@@ -64,10 +67,9 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
     }
 
-    // 클래스로 분리 및 테스트
-    void ApplyMastery(Team team)
+    void ApplyMastery()
     {
-        new TeamMasteryApplier(gamers, pickRegistry.Ids, pickStatusChanger).Apply(team);
+        new TeamMasteryApplier2(pickStatusChanger).Apply(pickSlotRegistry.PickSlotDatas);
     }
 
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 public class TeamMasteryApplier
@@ -26,5 +27,24 @@ public class TeamMasteryApplier
                   int level = finder.GetActiveLevel(slot);
                   statusChanger.ChangeStat(slot, stat => new MasteryApplier().ApplyMastery(stat, level));
               });
+    }
+}
+
+public class TeamMasteryApplier2
+{
+    readonly SlotStatusChanger statusChanger;
+
+    public TeamMasteryApplier2(SlotStatusChanger statusChanger)
+    {
+        this.statusChanger = statusChanger;
+    }
+
+    public void Apply(IEnumerable<PickSlotData> datas)
+    {
+        foreach (var data in datas)
+        {
+            int level = data.GetActiveMastery();
+            statusChanger.ChangeStat(data.Slot, stat => new MasteryApplier().ApplyMastery(stat, level));
+        }
     }
 }
