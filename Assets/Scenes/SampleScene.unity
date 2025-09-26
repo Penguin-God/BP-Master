@@ -9115,6 +9115,7 @@ MonoBehaviour:
   redSlotParent: {fileID: 473974211}
   blueBan: {fileID: 1901795667}
   redBan: {fileID: 1458519955}
+  playerRoster: {fileID: 1420292365}
   mainView: {fileID: 1640189473}
 --- !u!1001 &1930165194
 PrefabInstance:

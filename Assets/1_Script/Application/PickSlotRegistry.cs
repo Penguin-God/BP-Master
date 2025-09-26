@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class PickSlotData
@@ -21,6 +22,7 @@ public class PickSlotRegistry
 {
     List<PickSlotData> pickSlotDatas = new();
     public IEnumerable<PickSlotData> PickSlotDatas => pickSlotDatas;
+    public event Action<PickSlotData> OnSlotPick;
 
     readonly SlotStorage<ProGamer> gamers;
     public PickSlotRegistry(SlotStorage<ProGamer> gamers) => this.gamers = gamers;
@@ -33,5 +35,6 @@ public class PickSlotRegistry
         var data = new PickSlotData(slot, gamers.GetSlot(slot));
         data.Pick(id);
         pickSlotDatas.Add(data);
+        OnSlotPick?.Invoke(data);
     }
 }
