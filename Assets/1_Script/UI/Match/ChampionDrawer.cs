@@ -8,7 +8,7 @@ public class ChampionDrawer : MonoBehaviour
 {
     [SerializeField] ChampionRepository championManager;
     [SerializeField] GameObject championBtn;
-    [SerializeField] GameObject contentParent;
+    [SerializeField] Transform content;
 
     public void DrawChampionButtons(UnityAction<ChampionSO, Button> onclick)
     {
@@ -17,13 +17,13 @@ public class ChampionDrawer : MonoBehaviour
 
         foreach (var data in championManager.AllChampion)
         {
-            var btn = Instantiate(championBtn, transform).GetComponent<Button>();
+            var btn = Instantiate(championBtn, content).GetComponent<Button>();
             btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
             btn.onClick.AddListener(() => onclick(data, btn));
         }
     }
 
-    public void HideView() => contentParent.gameObject.SetActive(false);
+    public void HideView() => gameObject.SetActive(false);
 
     // 혹시 다시 마우스 올리는 기능을 쓰지 않을까하는 기대감에 남겨둠
     //public void DrawChampionButtons(UnityAction<ChampionSO> onclick, UnityAction<ChampionSO> pointerEnter, UnityAction<ChampionSO> pinterExit)

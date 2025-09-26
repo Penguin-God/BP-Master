@@ -4,10 +4,8 @@ using UnityEngine.UI;
 public class ChampionSelector_UI : MonoBehaviour
 {
     [SerializeField] Button nailDownBtn;
-    [SerializeField] ChampionDrawer buttonDrawer;
     [SerializeField] ChampionView championFocusView;
-    [SerializeField] GameObject pickParent;
-
+    
     ChampionSelectPresenter championSelectPresenter = null;
     PhaseManager phaseManager;
     public void Init(ChampionSelectPresenter presenter, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
@@ -18,11 +16,10 @@ public class ChampionSelector_UI : MonoBehaviour
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
-        buttonDrawer.DrawChampionButtons(SelectChampion);
     }
 
     Button selectBtn;
-    void SelectChampion(ChampionSO champion, Button button)
+    public void SelectChampion(ChampionSO champion, Button button)
     {
         championSelectPresenter.SelectChamp(champion.Id);
         championFocusView.UpdateDisplay(champion);
@@ -38,7 +35,6 @@ public class ChampionSelector_UI : MonoBehaviour
         selectBtn = null;
     }
 
-    [SerializeField] ChampionRepository championManager;
     void NailDownChampion()
     {
         championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
