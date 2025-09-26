@@ -25,7 +25,6 @@ public class GameBanPickStorage
     public event Action<Team, int> OnBan;
     public event Action<Team, int> OnPick;
 
-    readonly HashSet<int> allSelecteds = new();
     readonly HashSet<int> selectableIds = new();
 
     public GameBanPickStorage(IEnumerable<int> allIds)
@@ -42,7 +41,6 @@ public class GameBanPickStorage
         if (CanSelected(info.Id) == false) return;
 
         selectableIds.Remove(info.Id);
-        allSelecteds.Add(info.Id);
         storage[info.Team].SaveSelect(info.Select, info.Id);
         if (info.Select == SelectType.Ban) OnBan?.Invoke(info.Team, info.Id);
         else OnPick?.Invoke(info.Team, info.Id);
