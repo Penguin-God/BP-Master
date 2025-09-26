@@ -9,7 +9,6 @@ public class SlotView : MonoBehaviour
     [SerializeField] TextMeshProUGUI masteryText;
 
     ChampionRepository championManager;
-    ProGamer gamer;
     Champion traickingTarget;
     ChampionView championFocusView;
 
@@ -22,10 +21,10 @@ public class SlotView : MonoBehaviour
     {
         this.championFocusView = championFocusView;
         this.championManager = championManager;
-        this.gamer = gamer;
-
-        masteryText.text = new MasteryPersenter(championManager.Catalog).BuildMasteriesText(gamer.AllMasteries);
+        UpdateMasteryText(gamer);
     }
+
+    void UpdateMasteryText(ProGamer gamer) => masteryText.text = new MasteryPersenter(championManager.Catalog).BuildMasteriesText(gamer.AllMasteries);
 
     public void UpdateChampion(Champion target)
     {
