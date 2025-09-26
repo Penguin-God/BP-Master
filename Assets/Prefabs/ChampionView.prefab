@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 7864687693813878468}
   - component: {fileID: 8207948908854153789}
   - component: {fileID: 4782385028736395433}
-  - component: {fileID: 3054840229153094225}
+  - component: {fileID: 5423206513687981259}
   m_Layer: 0
   m_Name: ChampionView
   m_TagString: Untagged
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3054840229153094225
+--- !u!114 &5423206513687981259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,14 +289,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1294972648436410094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9fbe9939760a9547bf369ccbdbfbdd4, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f3d70287caa2445b86f58a3eaa8009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   championView: {fileID: 7864687693813878468}
   attChangeText: {fileID: 6897212238952395986}
   defChangeText: {fileID: 8572052138301835999}
   speedChangeText: {fileID: 1088094293814703625}
-  slotButton: {fileID: 4782385028736395433}
 --- !u!1 &5099845033087087049
 GameObject:
   m_ObjectHideFlags: 0

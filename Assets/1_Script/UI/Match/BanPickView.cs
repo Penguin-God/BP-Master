@@ -8,7 +8,7 @@ public class BanPickView : MonoBehaviour
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
     SlotStorage<SlotView> slotViews = new();
-    SlotStorage<ChampionView> pickViews = new();
+    SlotStorage<StatChangeView> statChangeViews = new();
 
     [SerializeField] TextMeshProUGUI blueBan;
     [SerializeField] TextMeshProUGUI redBan;
@@ -24,8 +24,8 @@ public class BanPickView : MonoBehaviour
         foreach (var item in slotViews.GetAll())
             item.Init(mainView, championManager);
 
-        pickViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<ChampionView>());
-        pickViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<ChampionView>());
+        statChangeViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<StatChangeView>());
+        statChangeViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<StatChangeView>());
 
         banTextDict.Add(Team.Blue, blueBan);
         banTextDict.Add(Team.Red, redBan);
@@ -33,7 +33,7 @@ public class BanPickView : MonoBehaviour
         redBan.text = string.Empty;
     }
 
-    public void ChangeChampionStat(StatChangeData statChangeData) => slotViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
+    public void ChangeChampionStat(StatChangeData statChangeData) => statChangeViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
     public void UpdatePickView(Team team, int id) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(championManager.GetChampionData(id).CreateChampion());
     public void UpdateBanView(Team team, int id)
