@@ -25,4 +25,17 @@ public class SwapTests
         Assert.AreEqual(expect1, result[index2]);  // ← 스왑 후 index2 위치에는 원래 index1 값
         Assert.AreEqual(expect2, result[index1]);  // ← 스왑 후 index1 위치에는 원래 index2 값
     }
+
+    [Test]
+    public void 저장소_스왑_검증()
+    {
+        var storage = new GameBanPickStorage(new int[] { 11, 22 });
+
+        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, 11));
+        storage.SaveSelect(new SelectInfo(Team.Blue, SelectType.Pick, 22));
+
+        storage.Swap(Team.Blue, 0, 1);
+        Assert.AreEqual(22, storage.GetStorage(Team.Blue, SelectType.Pick)[0]);
+        Assert.AreEqual(11, storage.GetStorage(Team.Blue, SelectType.Pick)[1]);
+    }
 }

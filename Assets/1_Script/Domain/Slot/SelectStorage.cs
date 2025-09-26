@@ -48,6 +48,7 @@ public class GameBanPickStorage
         else OnPick?.Invoke(info.Team, info.Id);
     }
     public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
+    public void Swap(Team team, int index1, int index2) => storage[team].Swap(index1, index2);
 }
 
 public class TeamBanPickStorage

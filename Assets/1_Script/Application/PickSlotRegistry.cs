@@ -17,7 +17,6 @@ public class PickSlotData
     public int GetActiveMastery() => gamer.GetMastery(ChampId);
 }
 
-
 public class PickSlotRegistry
 {
     List<PickSlotData> pickSlotDatas = new();
