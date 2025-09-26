@@ -7,7 +7,7 @@ public class SwapController : MonoBehaviour
     PhaseManager phaseManager;
     public void Init(Team team)
     {
-        swapDoneBtn.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         swapDoneBtn.onClick.AddListener(() => SwapDone(team));
     }
 
@@ -21,7 +21,7 @@ public class SwapController : MonoBehaviour
         if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
         {
             phaseManager.SubmitAction(team);
-            swapDoneBtn.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
