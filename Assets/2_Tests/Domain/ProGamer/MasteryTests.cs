@@ -12,6 +12,7 @@ public class MasteryTests
         Assert.AreEqual(10, sut.GetMastery(12));
         Assert.AreEqual(20, sut.GetMastery(11));
         Assert.AreEqual(0, sut.GetMastery(44));
+        CollectionAssert.AreEquivalent(data, sut.AllMasteries);
     }
 
     [Test]

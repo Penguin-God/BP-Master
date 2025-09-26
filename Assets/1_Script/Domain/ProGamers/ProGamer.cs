@@ -4,6 +4,7 @@ using System.Linq;
 public class ProGamer
 {
     readonly Dictionary<int, int> masteryMap;
+    public IEnumerable<ChampionMastery> AllMasteries => masteryMap.Select(x => new ChampionMastery(x.Key, x.Value));
 
     public ProGamer(IEnumerable<ChampionMastery> masteries)
     {
