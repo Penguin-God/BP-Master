@@ -7,6 +7,7 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
     [SerializeField] ChampionView championFocusView;
+    [SerializeField] GameObject pickParent;
 
     ChampionSelectPresenter championSelectPresenter = null;
     PhaseManager phaseManager;
@@ -53,7 +54,7 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     [SerializeField] Button swapDoneBtn;
     public void OnSwap(Team team)
     {
-        buttonDrawer.gameObject.SetActive(false);
+        pickParent.gameObject.SetActive(false);
         swapDoneBtn.gameObject.SetActive(true);
         swapDoneBtn.onClick.AddListener(() => SwapDone(team));
         view.HideBan();
