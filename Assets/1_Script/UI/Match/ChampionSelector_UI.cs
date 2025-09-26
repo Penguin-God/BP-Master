@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChampionSelectUI_Controller : MonoBehaviour
+public class ChampionSelector_UI : MonoBehaviour
 {
-    BanPickView view;
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionDrawer buttonDrawer;
     [SerializeField] ChampionView championFocusView;
@@ -14,14 +13,12 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     public void Init(ChampionSelectPresenter presenter, PhaseManager pm) // 팀을 아직 안받는 이유는 얘가 팀을 2개를 담당할 때가 있어서
     {
         gameObject.SetActive(true);
-        view = GetComponentInChildren<BanPickView>();
 
         championSelectPresenter = presenter;
         phaseManager = pm;
 
         nailDownBtn.onClick.AddListener(NailDownChampion);
         buttonDrawer.DrawChampionButtons(SelectChampion);
-        swapDoneBtn.gameObject.SetActive(false);
     }
 
     Button selectBtn;
@@ -42,31 +39,11 @@ public class ChampionSelectUI_Controller : MonoBehaviour
     }
 
     [SerializeField] ChampionRepository championManager;
-    void NailDownChampion() // 챔프 확정
+    void NailDownChampion()
     {
         championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
         championFocusView.ClearDisplay();
         InActiveSelectButton();
-    }
-
-    // 나중에 따로 빠짐
-    [SerializeField] Button swapDoneBtn;
-    public void OnSwap(Team team)
-    {
-        pickParent.gameObject.SetActive(false);
-        swapDoneBtn.gameObject.SetActive(true);
-        swapDoneBtn.onClick.AddListener(() => SwapDone(team));
-        view.HideBan();
-        nailDownBtn.gameObject.SetActive(false);
-    }
-
-    void SwapDone(Team team)
-    {
-        if (phaseManager.CurrentFlow.Phase == GamePhase.Swap)
-        {
-            phaseManager.SubmitAction(team);
-            swapDoneBtn.gameObject.SetActive(false);
-        }
     }
 }

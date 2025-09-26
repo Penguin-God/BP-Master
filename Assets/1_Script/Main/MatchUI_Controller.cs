@@ -3,18 +3,24 @@ using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
 {
-    [SerializeField] ChampionSelectUI_Controller banPickUI;
+    [SerializeField] ChampionSelector_UI banPickUI;
     [SerializeField] TraitUseView traitUseView;
     [SerializeField] BanPickView banPickView;
     [SerializeField] ScoreView scoreView;
+    [SerializeField] SwapController swapController;
 
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, SlotStatusChanger pickStatusChanger, PickTableRegistry pickTableRegistry)
     {
+        swapController.Init(phaseManager);
         banPickUI.Init(new ChampionSelectPresenter(storage), phaseManager);
         pickStatusChanger.OnStatChanged += banPickView.ChangeChampionStat;
         storage.OnBan += banPickView.UpdateBanView;
         storage.OnPick += banPickView.UpdatePickView;
-        phaseManager.OnPhaseSwap += banPickUI.OnSwap;
+
+        phaseManager.OnPhaseSwap += swapController.OnSwap;
+        phaseManager.OnPhaseSwap += _ => banPickView.HideBan();
+
+
         traitUseView.gameObject.SetActive(false);
 
         scoreView.Init(pickTableRegistry.Statuses);

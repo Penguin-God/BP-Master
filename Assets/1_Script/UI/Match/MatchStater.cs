@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MatchStater : MonoBehaviour
 {
-    [SerializeField] ChampionSelectUI_Controller banPickUI;
+    [SerializeField] ChampionSelector_UI banPickUI;
     [SerializeField] MatchDI match;
     [SerializeField] Button blueButton;
     [SerializeField] Button redButton;
