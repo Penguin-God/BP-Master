@@ -12,7 +12,7 @@ public class MatchUI_Controller : MonoBehaviour
 
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, SlotStatusChanger pickStatusChanger, PickTableRegistry pickTableRegistry)
     {
-        swapController.Inject(phaseManager);
+        swapController.Inject(phaseManager, storage);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
         championDrawer.DrawChampionButtons(championSelector.SelectChampion);
 

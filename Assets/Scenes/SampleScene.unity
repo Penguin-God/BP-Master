@@ -1452,7 +1452,7 @@ GameObject:
   - component: {fileID: 242015269}
   - component: {fileID: 242015268}
   m_Layer: 5
-  m_Name: TraitSelectButton (2)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2206,6 +2206,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapDoneBtn: {fileID: 683827530}
+  blueSlotButtons:
+  - {fileID: 688748760}
+  - {fileID: 1975936155}
+  - {fileID: 242015268}
+  - {fileID: 714776077}
+  - {fileID: 1882732165}
+  redSlotButtons:
+  - {fileID: 7064207949215706147}
+  - {fileID: 1268789502084704174}
+  - {fileID: 4126595663778918369}
+  - {fileID: 5652639841578457393}
+  - {fileID: 5189610027798419887}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3160,7 +3172,7 @@ GameObject:
   - component: {fileID: 688748761}
   - component: {fileID: 688748760}
   m_Layer: 5
-  m_Name: TraitSelectButton
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3281,7 +3293,7 @@ GameObject:
   - component: {fileID: 714776078}
   - component: {fileID: 714776077}
   m_Layer: 5
-  m_Name: TraitSelectButton (3)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8260,7 +8272,7 @@ GameObject:
   - component: {fileID: 1882732166}
   - component: {fileID: 1882732165}
   m_Layer: 5
-  m_Name: TraitSelectButton (4)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8714,7 +8726,7 @@ GameObject:
   - component: {fileID: 1975936156}
   - component: {fileID: 1975936155}
   m_Layer: 5
-  m_Name: TraitSelectButton (1)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9280,7 +9292,7 @@ GameObject:
   - component: {fileID: 793008091653874288}
   - component: {fileID: 5189610027798419887}
   m_Layer: 5
-  m_Name: TraitSelectButton (4)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9299,7 +9311,7 @@ GameObject:
   - component: {fileID: 970054612691313390}
   - component: {fileID: 5652639841578457393}
   m_Layer: 5
-  m_Name: TraitSelectButton (3)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10092,7 +10104,7 @@ GameObject:
   - component: {fileID: 2381698079298344956}
   - component: {fileID: 7064207949215706147}
   m_Layer: 5
-  m_Name: TraitSelectButton
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11122,7 +11134,7 @@ GameObject:
   - component: {fileID: 5953691839510879345}
   - component: {fileID: 1268789502084704174}
   m_Layer: 5
-  m_Name: TraitSelectButton (1)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11615,7 +11627,7 @@ GameObject:
   - component: {fileID: 8809316432170275902}
   - component: {fileID: 4126595663778918369}
   m_Layer: 5
-  m_Name: TraitSelectButton (2)
+  m_Name: SwapSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
