@@ -22,4 +22,6 @@ public class SlotStorage<T>
             .Select(kv => kv.Value);
 
     public IEnumerable<T> GetAll() => new[] { Team.Blue, Team.Red }.SelectMany(team => GetTeam(team));
+
+    public IEnumerable<SlotData> GetAllSlotDatas() => slots.Keys;
 }

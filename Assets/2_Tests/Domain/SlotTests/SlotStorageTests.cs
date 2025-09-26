@@ -56,4 +56,15 @@ public class SlotStorageTests
 
         CollectionAssert.AreEqual(new bool[] { true, false, false, true }, sut.GetAll());
     }
+
+    [Test]
+    public void 슬롯_데이터_가져오기()
+    {
+        SlotStorage<bool> sut = new();
+
+        sut.AddSlots(Team.Blue, new bool[] { true, false });
+        sut.AddSlots(Team.Red, new bool[] { false, true });
+
+        CollectionAssert.AreEqual(new SlotData[] { TestHelper.CreateBlueSlot(0), TestHelper.CreateBlueSlot(1), TestHelper.CreateRedSlot(0), TestHelper.CreateRedSlot(1), }, sut.GetAllSlotDatas());
+    }
 }
