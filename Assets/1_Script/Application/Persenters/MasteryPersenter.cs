@@ -7,7 +7,7 @@ public class MasteryPersenter
     private readonly ChampionCatalog catalog;
     public MasteryPersenter(ChampionCatalog catalog) => this.catalog = catalog;
 
-    public string Present(Dictionary<int, int> mastery)
-        => string.Join(Environment.NewLine, mastery.Select(pair =>$"{catalog.GetChampion(pair.Key).Name} : {pair.Value}"));
+    public string BuildMasteriesText(IEnumerable<ChampionMastery> masteries)
+        => string.Join(Environment.NewLine, masteries.Select(x =>$"{catalog.GetChampion(x.ChampionId).Name} : {x.Level}"));
     
 }
