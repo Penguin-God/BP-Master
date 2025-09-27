@@ -5,7 +5,6 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
     ChampionCatalog championCatalog => champManager.Catalog;
     GameBanPickStorage storage;
-    PickSlotRegistry pickSlotRegistry;
 
     PhaseManager phaseManager;
     MatchUI_Controller matchUI_Controller;
@@ -15,8 +14,6 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        pickSlotRegistry = new PickSlotRegistry(GetComponent<PlayerRoster>().Rosters);
-        storage.OnPick += pickSlotRegistry.Pick;
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase());
