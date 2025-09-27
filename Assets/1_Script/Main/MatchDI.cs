@@ -9,6 +9,7 @@ public class MatchDI : MonoBehaviour
 
     PhaseManager phaseManager;
     MatchUI_Controller matchUI_Controller;
+    ChampionStorageFactory storageFactory;
 
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
@@ -23,8 +24,9 @@ public class MatchDI : MonoBehaviour
 
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
+        storageFactory = new ChampionStorageFactory(championCatalog);
 
-        matchUI_Controller.Init(storage, phaseManager); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager, storageFactory); // start보다 먼저
         phaseManager.Start();
     }
 
@@ -36,14 +38,13 @@ public class MatchDI : MonoBehaviour
     {
         if (initTrait) return;
 
-        ChampionStorageFactory storageFactory = new ChampionStorageFactory(championCatalog);
         statuses = storageFactory.CreateStatusStorage(storage.PickIds);
 
         var traitController = new TraitController(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
         pickStatusChanger = new SlotStatusChanger(statuses);
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), pickStatusChanger);
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), pickStatusChanger, statuses);
 
         ApplyMastery(); // 마지막에
         initTrait = true;

@@ -8,22 +8,17 @@ public class ScoreView : MonoBehaviour
     [SerializeField] TextMeshProUGUI bonusInfo;
     [SerializeField] ChampionView blueScoreView;
     [SerializeField] ChampionView redScoreView;
-    SlotStorage<ChampionStatus> picks;
+
     void Start()
     {
         bonusInfo.text = new BonusPresenter().BuildBonusAllText(bonusData.AttackBonus.BonusDatas, bonusData.DefenseBonus.BonusDatas, bonusData.SpeedBonus.BonusDatas);
     }
 
-    public void Init(SlotStorage<ChampionStatus> picks) => this.picks = picks;
-
-    DefaultScoreCalculator scoreCalculator = new DefaultScoreCalculator();
-    public void UpdateTeamScore(Team team)
+    public void UpdateTeamScore(SlotStorage<ChampionStatus> statuses, Team team)
     {
-        int att = scoreCalculator.CalculateAttack(picks.GetTeam(team).Select(x => x.Stat));
-        int def = scoreCalculator.CalculateDefense(picks.GetTeam(team).Select(x => x.Stat));
-        int speed = picks.GetTeam(team).Sum(x => x.Stat.Speed);
+        var stat = new StatAggregator().AggregateStat(statuses.GetTeam(team).Select(x => x.Stat));
 
-        if(team == Team.Blue) blueScoreView.UpdateStat(new ChampionStatData(att, def, speed));
-        else if(team == Team.Red) redScoreView.UpdateStat(new ChampionStatData(att, def, speed));
+        if (team == Team.Blue) blueScoreView.UpdateStat(stat);
+        else if (team == Team.Red) redScoreView.UpdateStat(stat);
     }
 }
