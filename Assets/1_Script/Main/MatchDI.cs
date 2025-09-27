@@ -5,7 +5,6 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
     ChampionCatalog championCatalog => champManager.Catalog;
     GameBanPickStorage storage;
-    PickTableRegistry pickRegistry;
     PickSlotRegistry pickSlotRegistry;
 
     PhaseManager phaseManager;
@@ -15,9 +14,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         storage = new GameBanPickStorage(championCatalog.AllId);
-        pickRegistry = new PickTableRegistry(championCatalog);
         pickSlotRegistry = new PickSlotRegistry(GetComponent<PlayerRoster>().Rosters);
-        storage.OnPick += pickRegistry.Pick;
         storage.OnPick += pickSlotRegistry.Pick;
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -27,25 +24,26 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
 
-        matchUI_Controller.Init(storage, phaseManager, pickRegistry); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager); // start보다 먼저
         phaseManager.Start();
     }
 
 
     SlotStatusChanger pickStatusChanger;
     bool initTrait;
+    SlotStorage<ChampionStatus> statuses = new();
     void Trait(Team team)
     {
         if (initTrait) return;
 
         ChampionStorageFactory storageFactory = new ChampionStorageFactory(championCatalog);
-        var statuses = storageFactory.CreateStatusStorage(storage.PickIds);
+        statuses = storageFactory.CreateStatusStorage(storage.PickIds);
 
         var traitController = new TraitController(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
         pickStatusChanger = new SlotStatusChanger(statuses);
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickRegistry, pickStatusChanger);
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), pickStatusChanger);
 
         ApplyMastery(); // 마지막에
         initTrait = true;
@@ -58,7 +56,7 @@ public class MatchDI : MonoBehaviour
     void OnDone()
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultConverter(builder).ToResult(pickRegistry.Statuses);
+        MatchResult result = new MatchResultConverter(builder).ToResult(statuses);
         matchUI_Controller.ShowResult(result);
     }
 }

@@ -10,7 +10,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ScoreView scoreView;
     [SerializeField] SwapController swapController;
 
-    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PickTableRegistry pickTableRegistry)
+    public void Init(GameBanPickStorage storage, PhaseManager phaseManager)
     {
         swapController.Inject(phaseManager, storage);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
@@ -25,14 +25,14 @@ public class MatchUI_Controller : MonoBehaviour
 
         traitUseView.gameObject.SetActive(false);
 
-        scoreView.Init(pickTableRegistry.Statuses);
+        // scoreView.Init(statuses); // 잠시대기
         storage.OnPick += (team, id) => scoreView.UpdateTeamScore(team);
     }
 
-    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, PickTableRegistry pickFacade, SlotStatusChanger statusChanger)
+    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, SlotStorage<Champion> champions, SlotStatusChanger statusChanger)
     {
         statusChanger.OnStatChanged += banPickView.ChangeChampionStat;
-        var presenter = new TraitUsePresenter(traitController, pickFacade.Champions);
+        var presenter = new TraitUsePresenter(traitController, champions);
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
