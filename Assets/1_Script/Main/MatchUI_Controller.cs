@@ -28,7 +28,7 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnPick += (team, id) => scoreView.UpdateTeamScore(factory.CreateStatusStorage(storage.PickIds), team);
     }
 
-    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, SlotStorage<Champion> champions, SlotStatusChanger statusChanger, SlotStorage<ChampionStatus> status)
+    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, SlotStorage<Champion> champions, SlotStorage<ChampionStatus> status)
     {
         banPickView.BindStatChangeEvent(status);
         var presenter = new TraitUsePresenter(traitController, champions);

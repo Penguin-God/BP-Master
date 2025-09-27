@@ -27,8 +27,6 @@ public class MatchDI : MonoBehaviour
         phaseManager.Start();
     }
 
-
-    SlotStatusChanger pickStatusChanger;
     bool initTrait;
     SlotStorage<ChampionStatus> statuses = new();
     void Trait(Team team)
@@ -40,14 +38,13 @@ public class MatchDI : MonoBehaviour
         var traitController = new TraitController(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
-        pickStatusChanger = new SlotStatusChanger(statuses);
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), pickStatusChanger, statuses);
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), statuses);
 
         ApplyMastery(); // 마지막에
         initTrait = true;
     }
 
-    void ApplyMastery() => new TeamMasteryApplier(pickStatusChanger).Apply(GetComponent<PlayerRoster>().Rosters, storage.PickIds);
+    void ApplyMastery() => new TeamMasteryApplier().Apply(GetComponent<PlayerRoster>().Rosters, storage.PickIds, statuses);
 
 
     [SerializeField] BonusDataFactory bonusDataSO;

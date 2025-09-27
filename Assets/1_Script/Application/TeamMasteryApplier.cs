@@ -1,15 +1,13 @@
 
 public class TeamMasteryApplier
 {
-    readonly SlotStatusChanger statusChanger;
-    public TeamMasteryApplier(SlotStatusChanger statusChanger) => this.statusChanger = statusChanger;
-
-    public void Apply(SlotStorage<ProGamer> gamers, SlotStorage<int> ids)
+    public void Apply(SlotStorage<ProGamer> gamers, SlotStorage<int> ids, SlotStorage<ChampionStatus> statuses)
     {
         foreach (var slot in gamers.GetAllSlotDatas())
         {
             int level = gamers.GetSlot(slot).GetMastery(ids.GetSlot(slot));
-            statusChanger.ChangeStat(slot, stat => new MasteryApplier().ApplyMastery(stat, level));
+            var status = statuses.GetSlot(slot);
+            status.ChangeStat(new MasteryApplier().ApplyMastery(status.Stat, level));
         }
     }
 }

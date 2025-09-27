@@ -34,8 +34,6 @@ public class BanPickView : MonoBehaviour
         redBan.text = string.Empty;
     }
 
-    public void ChangeChampionStat(StatChangeData statChangeData) => statChangeViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
-
     public void BindStatChangeEvent(SlotStorage<ChampionStatus> statuses)
     {
         foreach (var slot in statuses.GetAllSlotDatas())
@@ -43,7 +41,7 @@ public class BanPickView : MonoBehaviour
     }
 
     public void UpdatePickView(Team team, int id) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(championManager.GetChampionData(id).CreateChampion());
-    // public void UpdatePickView(PickSlotData data) => slotViews.GetSlot(data.Slot).UpdateChampion(data.ChampId);
+
     public void UpdateBanView(Team team, int id)
     {
         banTextDict[team].text += championManager.GetChampionData(id).ChampionName;
