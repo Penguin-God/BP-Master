@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using static PlasticGui.WorkspaceWindow.Merge.MergeInProgress;
 
 public readonly struct SelectInfo
 {
@@ -21,6 +23,7 @@ public enum SelectType { Ban, Pick}
 public class GameBanPickStorage
 {
     readonly Dictionary<Team, TeamBanPickStorage> storage = new();
+    public SlotStorage<int> PickIds { get; set; } = new();
 
     public event Action<Team, int> OnBan;
     public event Action<Team, int> OnPick;
@@ -41,14 +44,47 @@ public class GameBanPickStorage
     public void SaveSelect(SelectInfo info)
     {
         if (CanSelected(info.Id) == false) return;
-
         selectableIds.Remove(info.Id);
-        storage[info.Team].SaveSelect(info.Select, info.Id);
-        if (info.Select == SelectType.Ban) OnBan?.Invoke(info.Team, info.Id);
-        else OnPick?.Invoke(info.Team, info.Id);
+
+        //storage[info.Team].SaveSelect(info.Select, info.Id);
+        //if (info.Select == SelectType.Ban) OnBan?.Invoke(info.Team, info.Id);
+        //else OnPick?.Invoke(info.Team, info.Id);
+
+        if (info.Select == SelectType.Ban)
+        {
+            storage[info.Team].SaveSelect(info.Select, info.Id);
+            OnBan?.Invoke(info.Team, info.Id);
+        }
+        else
+        {
+            PickIds.AddSlot(info.Team, info.Id);
+            OnPick?.Invoke(info.Team, info.Id);
+        }
     }
-    public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
-    public void Swap(Team team, int index1, int index2) => storage[team].Swap(index1, index2);
+    // public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
+    public IReadOnlyList<int> GetStorage(Team team, SelectType select)
+    {
+        if (select == SelectType.Ban)
+        {
+            return storage[team].GetStorage(select);
+        }
+        else
+        {
+            return PickIds.GetTeam(team).ToList();
+        }
+    }
+    public void Swap(Team team, int index1, int index2)
+    {
+        var slot1 = new SlotData(team, index1);
+        var slot2 = new SlotData(team, index2);
+
+        int id1 = PickIds.GetSlot(slot1);
+        int id2 = PickIds.GetSlot(slot2);
+
+        PickIds.ChangeSlot(slot1, id2);
+        PickIds.ChangeSlot(slot2, id1);
+        // storage[team].Swap(index1, index2);
+    }
 }
 
 public class TeamBanPickStorage
