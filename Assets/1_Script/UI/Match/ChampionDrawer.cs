@@ -12,7 +12,7 @@ public class ChampionDrawer : MonoBehaviour
 
     public void DrawChampionButtons(UnityAction<ChampionSO, Button> onclick)
     {
-        foreach (Transform child in transform)
+        foreach (Transform child in content)
             Destroy(child.gameObject);
 
         foreach (var data in championManager.AllChampion)

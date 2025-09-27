@@ -27,6 +27,8 @@ public class GameBanPickStorage
 
     readonly HashSet<int> selectableIds = new();
 
+    public event Action<int> OnSwap;
+
     public GameBanPickStorage(IEnumerable<int> allIds)
     {
         selectableIds = new HashSet<int>(allIds);

@@ -7,6 +7,7 @@ public class SwapController : MonoBehaviour
     [SerializeField] Button swapDoneBtn;
     [SerializeField] Button[] blueSlotButtons;
     [SerializeField] Button[] redSlotButtons;
+    [SerializeField] BanPickView banPickView;
 
     PhaseManager phaseManager;
     GameBanPickStorage banPickStorage;
@@ -31,7 +32,7 @@ public class SwapController : MonoBehaviour
         foreach (var item in buttons)
         {
             int newIndex = index;
-            item.onClick.AddListener(() => OnSlotClicked(Team.Blue, newIndex));
+            item.onClick.AddListener(() => OnSlotClicked(team, newIndex));
             index++;
         }
     }
@@ -56,8 +57,9 @@ public class SwapController : MonoBehaviour
         if (bag.Count == 2)
         {
             banPickStorage.Swap(team, bag[0], bag[1]);
+            banPickView.slotViews.GetSlot(new SlotData(team, bag[0])).UpdateChampion(banPickStorage.GetStorage(team, SelectType.Pick)[bag[0]]);
+            banPickView.slotViews.GetSlot(new SlotData(team, bag[1])).UpdateChampion(banPickStorage.GetStorage(team, SelectType.Pick)[bag[1]]);
             bag.Clear();
-            print("AA");
         }
     }
 

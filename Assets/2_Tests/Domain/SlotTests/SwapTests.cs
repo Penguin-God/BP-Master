@@ -27,7 +27,7 @@ public class SwapTests
     }
 
     [Test]
-    public void 저장소_스왑_검증()
+    public void 저장소_스왑()
     {
         var storage = new GameBanPickStorage(new int[] { 11, 22 });
 

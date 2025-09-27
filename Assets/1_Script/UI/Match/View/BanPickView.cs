@@ -7,7 +7,7 @@ public class BanPickView : MonoBehaviour
     [SerializeField] ChampionRepository championManager;
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
-    SlotStorage<SlotView> slotViews = new();
+    public SlotStorage<SlotView> slotViews = new();
     SlotStorage<StatChangeView> statChangeViews = new();
 
     [SerializeField] TextMeshProUGUI blueBan;
