@@ -1,4 +1,3 @@
-using System.Linq;
 
 public class ChampionStorageFactory
 {
@@ -13,14 +12,10 @@ public class ChampionStorageFactory
     {
         var result = new SlotStorage<ChampionStatus>();
 
-        // 팀별 순서 보존하여 채우기
-        foreach (var team in new[] { Team.Blue, Team.Red })
+        foreach (var slot in idStorage.GetAllSlotDatas())
         {
-            var statuses = idStorage
-                .GetTeam(team)
-                .Select(id => new ChampionStatus(championCatalog.GetChampion(id).StatData));
-
-            result.AddSlots(team, statuses);
+            var status = new ChampionStatus(championCatalog.GetChampion(idStorage.GetSlot(slot)).StatData);
+            result.AddSlot(slot.Team, status);
         }
 
         return result;
@@ -30,13 +25,10 @@ public class ChampionStorageFactory
     {
         var result = new SlotStorage<Champion>();
 
-        foreach (var team in new[] { Team.Blue, Team.Red })
+        foreach (var slot in idStorage.GetAllSlotDatas())
         {
-            var champions = idStorage
-                .GetTeam(team)
-                .Select(id => championCatalog.GetChampion(id));
-
-            result.AddSlots(team, champions);
+            var champ = championCatalog.GetChampion(idStorage.GetSlot(slot));
+            result.AddSlot(slot.Team, champ);
         }
 
         return result;
