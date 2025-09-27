@@ -30,14 +30,13 @@ public class MatchUI_Controller : MonoBehaviour
 
     public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitController traitController, SlotStorage<Champion> champions, SlotStatusChanger statusChanger, SlotStorage<ChampionStatus> status)
     {
-        statusChanger.OnStatChanged += banPickView.ChangeChampionStat;
+        banPickView.BindStatChangeEvent(status);
         var presenter = new TraitUsePresenter(traitController, champions);
         traitUseView.Init(presenter);
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
 
         traitController.OnTraitApplied += (x) => scoreView.UpdateTeamScore(status, x.Slot.Team);
-        traitController.OnTraitApplied += banPickView.ChangeChampionStat;
     }
 
     [SerializeField] GameObject scores;

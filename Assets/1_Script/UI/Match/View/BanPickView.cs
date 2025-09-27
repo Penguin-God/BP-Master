@@ -36,6 +36,12 @@ public class BanPickView : MonoBehaviour
 
     public void ChangeChampionStat(StatChangeData statChangeData) => statChangeViews.GetSlot(statChangeData.Slot).ChangeStat(statChangeData);
 
+    public void BindStatChangeEvent(SlotStorage<ChampionStatus> statuses)
+    {
+        foreach (var slot in statuses.GetAllSlotDatas())
+            statuses.GetSlot(slot).OnStatChanged += (be, af) => statChangeViews.GetSlot(slot).ChangeStat(new StatChangeData(slot, be, af));
+    }
+
     public void UpdatePickView(Team team, int id) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(championManager.GetChampionData(id).CreateChampion());
     // public void UpdatePickView(PickSlotData data) => slotViews.GetSlot(data.Slot).UpdateChampion(data.ChampId);
     public void UpdateBanView(Team team, int id)
