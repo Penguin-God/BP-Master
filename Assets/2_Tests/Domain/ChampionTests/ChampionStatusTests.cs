@@ -27,15 +27,18 @@ public class ChampionStatusTests
     }
 
     [Test]
-    public void ChangeStat_호출시_스탯이_바뀐다()
+    public void ChangeStat_호출시_스탯이_변경_후_이벤트()
     {
         var status = new ChampionStatus(new ChampionStatData(1, 1, 1));
+        ChampionStatData before = default;
+        ChampionStatData after = default;
+        status.OnStatChanged += (be, af) => (before, after) = (be, af);
         var newStat = new ChampionStatData(5, 6, 7);
 
         status.ChangeStat(newStat);
 
-        Assert.AreEqual(5, status.Stat.Attack);
-        Assert.AreEqual(6, status.Stat.Defense);
-        Assert.AreEqual(7, status.Stat.Speed);
+        Assert.AreEqual(newStat, status.Stat);
+        Assert.AreEqual(new ChampionStatData(1, 1, 1), before);
+        Assert.AreEqual(newStat, after);
     }
 }

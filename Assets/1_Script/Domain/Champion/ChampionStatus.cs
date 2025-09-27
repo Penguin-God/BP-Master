@@ -1,8 +1,9 @@
-
+using System;
 
 public class ChampionStatus
 {
     public ChampionStatData Stat;
+    public event Action<ChampionStatData, ChampionStatData> OnStatChanged;
     public bool IsUseTrait = false;
     public ChampionStatus(ChampionStatData statData)
     {
@@ -10,5 +11,10 @@ public class ChampionStatus
     }
 
     public void UseTrait() => IsUseTrait = true;
-    public void ChangeStat(ChampionStatData newStat) => Stat = newStat;
+    public void ChangeStat(ChampionStatData newStat)
+    {
+        if(newStat.Equals(Stat)) return;
+        OnStatChanged?.Invoke(Stat, newStat);
+        Stat = newStat;
+    }
 }
