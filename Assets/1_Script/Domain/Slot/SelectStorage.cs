@@ -22,7 +22,7 @@ public enum SelectType { Ban, Pick}
 
 public class GameBanPickStorage
 {
-    readonly Dictionary<Team, TeamBanPickStorage> storage = new();
+    readonly Dictionary<Team, BanStorage> storage = new();
     public SlotStorage<int> PickIds { get; set; } = new();
 
     public event Action<Team, int> OnBan;
@@ -46,13 +46,9 @@ public class GameBanPickStorage
         if (CanSelected(info.Id) == false) return;
         selectableIds.Remove(info.Id);
 
-        //storage[info.Team].SaveSelect(info.Select, info.Id);
-        //if (info.Select == SelectType.Ban) OnBan?.Invoke(info.Team, info.Id);
-        //else OnPick?.Invoke(info.Team, info.Id);
-
         if (info.Select == SelectType.Ban)
         {
-            storage[info.Team].SaveSelect(info.Select, info.Id);
+            storage[info.Team].SaveBan(info.Id);
             OnBan?.Invoke(info.Team, info.Id);
         }
         else
@@ -61,12 +57,12 @@ public class GameBanPickStorage
             OnPick?.Invoke(info.Team, info.Id);
         }
     }
-    // public IReadOnlyList<int> GetStorage(Team team, SelectType select) => storage[team].GetStorage(select);
+
     public IReadOnlyList<int> GetStorage(Team team, SelectType select)
     {
         if (select == SelectType.Ban)
         {
-            return storage[team].GetStorage(select);
+            return storage[team].Bans;
         }
         else
         {
@@ -83,31 +79,13 @@ public class GameBanPickStorage
 
         PickIds.ChangeSlot(slot1, id2);
         PickIds.ChangeSlot(slot2, id1);
-        // storage[team].Swap(index1, index2);
     }
 }
 
-public class TeamBanPickStorage
+public class BanStorage
 {
-    readonly Dictionary<SelectType, List<int>> storage;
+    List<int> bans = new List<int>();
+    public IReadOnlyList<int> Bans => bans;
 
-    public TeamBanPickStorage()
-    {
-        storage = new Dictionary<SelectType, List<int>>() 
-        {
-            { SelectType.Ban, new List<int>()},
-            { SelectType.Pick, new List<int>()}
-        };
-    }
-
-    public void SaveSelect(SelectType select, int id) => storage[select].Add(id);
-    public IReadOnlyList<int> GetStorage(SelectType select) => storage[select];
-
-    public void Swap(int index1, int index2)
-    {
-        if (index1 == index2) return;
-
-        var list = storage[SelectType.Pick];
-        (list[index1], list[index2]) = (list[index2], list[index1]);
-    }
+    public void SaveBan(int id) => bans.Add(id);
 }
