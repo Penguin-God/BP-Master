@@ -13,4 +13,13 @@ public class TeamMasteryApplier
             statusChanger.ChangeStat(data.Slot, stat => new MasteryApplier().ApplyMastery(stat, level));
         }
     }
+
+    public void Apply(SlotStorage<ProGamer> gamers, SlotStorage<int> ids)
+    {
+        foreach (var slot in gamers.GetAllSlotDatas())
+        {
+            int level = gamers.GetSlot(slot).GetMastery(ids.GetSlot(slot));
+            statusChanger.ChangeStat(slot, stat => new MasteryApplier().ApplyMastery(stat, level));
+        }
+    }
 }

@@ -10,7 +10,6 @@ public class MatchDI : MonoBehaviour
 
     PhaseManager phaseManager;
     MatchUI_Controller matchUI_Controller;
-    SlotStatusChanger pickStatusChanger;
 
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
@@ -20,7 +19,6 @@ public class MatchDI : MonoBehaviour
         pickSlotRegistry = new PickSlotRegistry(GetComponent<PlayerRoster>().Rosters);
         storage.OnPick += pickRegistry.Pick;
         storage.OnPick += pickSlotRegistry.Pick;
-        pickStatusChanger = new SlotStatusChanger(pickRegistry.Statuses);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase());
@@ -29,25 +27,31 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnPhaseTrait += Trait;
         phaseManager.OnPhaseDone += OnDone;
 
-        matchUI_Controller.Init(storage, phaseManager, pickStatusChanger, pickRegistry); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager, pickRegistry); // start보다 먼저
         phaseManager.Start();
     }
 
+
+    SlotStatusChanger pickStatusChanger;
     bool initTrait;
     void Trait(Team team)
     {
         if (initTrait) return;
 
-        ApplyMastery();
+        ChampionStorageFactory storageFactory = new ChampionStorageFactory(championCatalog);
+        var statuses = storageFactory.CreateStatusStorage(storage.PickIds);
 
-        var traitController = new TraitController(pickRegistry.Statuses);
+        var traitController = new TraitController(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickRegistry);
+        pickStatusChanger = new SlotStatusChanger(statuses);
+        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, pickRegistry, pickStatusChanger);
+
+        ApplyMastery(); // 마지막에
         initTrait = true;
     }
 
-    void ApplyMastery() => new TeamMasteryApplier(pickStatusChanger).Apply(pickSlotRegistry.PickSlotDatas);
+    void ApplyMastery() => new TeamMasteryApplier(pickStatusChanger).Apply(GetComponent<PlayerRoster>().Rosters, storage.PickIds);
 
 
     [SerializeField] BonusDataFactory bonusDataSO;
