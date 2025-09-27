@@ -4,6 +4,19 @@ using NUnit.Framework;
 public class CalculateScoreTests
 {
     [Test]
+    public void 모든_스탯_합치기()
+    {
+        StatAggregator sut = new();
+        ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(100, 200, 15) };
+
+        ChampionStatData result = sut.AggregateStat(team);
+
+        Assert.AreEqual(250, result.Attack);
+        Assert.AreEqual(350, result.Defense);
+        Assert.AreEqual(25, result.Speed);
+    }
+
+    [Test]
     public void 기본_점수는_공방의_합()
     {
         DefaultScoreCalculator sut = new();
