@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 27
   championName: "\uC218\uD638\uC790"
-  attack: 70
-  defense: 140
+  attack: 30
+  defense: 120
   speed: 4
   traitData:
     targetSide: 0
     range: 2
     traitType: 2
-    amount: 20
+    amount: 30
     conditionType: 0
     threshold: 0
