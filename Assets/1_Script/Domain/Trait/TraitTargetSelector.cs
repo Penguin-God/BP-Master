@@ -22,16 +22,9 @@ public class TraitTargetSelector
     public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
     {
         Team targetTeam = BanPickEnumCaster.GetTargetTeam(team, side);
-        return Enumerable.Range(0, teamCount).Select(i => new SlotData(targetTeam, i));
-    }
-    public IEnumerable<SlotData> GetTargetSlots(TargetRange targetRange, SlotData targetSlot)
-    {
-        switch (targetRange)
-        {
-            case TargetRange.Single:return new[] { targetSlot };
-            case TargetRange.All: return GetTeamSlots(targetSlot.Team);
-            default: return null;
-        }
+
+        if (targetTeam == Team.All) return GetAllSlots();
+        else return GetTeamSlots(targetTeam);
     }
 
     public IEnumerable<SlotData> GetTargetSlots(TraitTargetRule rule, SlotData targetSlot)

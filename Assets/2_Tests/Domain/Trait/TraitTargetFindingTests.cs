@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using static TestHelper;
 
 public class TraitTargetFindingTests
@@ -8,12 +9,15 @@ public class TraitTargetFindingTests
     [Test]
     public void 타겟_팀전체_슬롯_반환()
     {
-        var sut = CreateSut(3);
+        var sut = CreateSut(2);
 
-        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Opponent));
-        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
-        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
-        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Red, Side.Opponent));
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1), GetSlots(Team.Blue, Side.Opponent));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1), GetSlots(Team.Blue, Side.Self));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1), GetSlots(Team.Blue, Side.Self));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1), GetSlots(Team.Red, Side.Opponent));
+        CollectionAssert.AreEquivalent(new SlotData[] { CreateBlueSlot(0), CreateBlueSlot(1), CreateRedSlot(0), CreateRedSlot(1) }, GetSlots(Team.Red, Side.All));
+
+        IEnumerable<SlotData> GetSlots(Team team, Side side) => sut.GetTargetableSlot(team, side);
     }
 
     [Test]
@@ -21,10 +25,11 @@ public class TraitTargetFindingTests
     {
         var sut = CreateSut(3);
 
-        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, CreateRedSlot(0)));
-        CollectionAssert.AreEquivalent(CreateBlueSlots(1), sut.GetTargetSlots(TargetRange.Single, CreateBlueSlot(1)));
+        var result = sut.GetTargetSlots(new TraitTargetRule(Side.Opponent, TargetRange.All), CreateRedSlot(0));
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), result);
 
-        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, CreateBlueSlot(0)));
+        result = sut.GetTargetSlots(new TraitTargetRule(Side.Opponent, TargetRange.Single), CreateRedSlot(1));
+        CollectionAssert.AreEquivalent(CreateRedSlots(1), result);
     }
 
     [Test]
