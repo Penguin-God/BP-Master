@@ -22,7 +22,7 @@ public class Champion
     readonly public int Id;
     readonly public string Name;
     public ChampionStatData StatData { get; private set; }
-    readonly public TraitTargetRule TraitTargetRule;
+    // readonly public TraitTargetRule TraitTargetRule;
     readonly public TraitData TraitData;
 
     public Champion(int id, string name, ChampionStatData statData, TraitTargetRule traitTargetRule, TraitData traitData)
@@ -30,7 +30,7 @@ public class Champion
         Id = id;
         Name = name;
         StatData = statData;
-        TraitTargetRule = traitTargetRule;
+        // TraitTargetRule = traitTargetRule;
         TraitData = traitData;
     }
 
