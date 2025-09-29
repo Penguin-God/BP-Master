@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class TraitControllTests
+public class TraitFacadeTests
 {
     [Test]
     public void 특성_사용_후_플래그는_참이되고_중복_사용_불가()
@@ -10,7 +10,7 @@ public class TraitControllTests
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        var sut = new TraitController(statuses);
+        var sut = new TraitUseFacade(statuses);
 
         Assert.IsFalse(sut.IsTraitUsed(CreateBlueSlot(0))); // 사용 전에는 false
         Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.Single));
@@ -31,7 +31,7 @@ public class TraitControllTests
         statuses.AddSlot(Team.Red, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        TraitController sut = new TraitController(statuses);
+        TraitUseFacade sut = new TraitUseFacade(statuses);
 
         Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 15, TraitConditionType.AttackBelow, 10), TargetRange.All));
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);

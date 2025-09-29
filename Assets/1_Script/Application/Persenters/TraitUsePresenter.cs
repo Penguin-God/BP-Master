@@ -10,11 +10,11 @@ public enum TraitClickResult
 
 public class TraitUsePresenter // 타겟들 다 포함
 {
-    readonly TraitController traitController;
+    readonly TraitUseFacade traitController;
     readonly SlotStorage<Champion> championStorage;
     Team currentTeam = Team.All;
     
-    public TraitUsePresenter(TraitController traitController, SlotStorage<Champion> champions)
+    public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<Champion> champions)
     {
         this.traitController = traitController;
         championStorage = champions;

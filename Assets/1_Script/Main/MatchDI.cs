@@ -35,7 +35,7 @@ public class MatchDI : MonoBehaviour
 
         statuses = storageFactory.CreateStatusStorage(storage.PickIds);
 
-        var traitController = new TraitController(statuses);
+        var traitController = new TraitUseFacade(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
         matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), statuses);

@@ -27,7 +27,7 @@ public class TraitUsePresenterTests
         statuses.AddSlot(Team.Red, CreateStatus());
         statuses.AddSlot(Team.Red, CreateStatus());
 
-        presenter = new TraitUsePresenter(new TraitController(statuses), picks);
+        presenter = new TraitUsePresenter(new TraitUseFacade(statuses), picks);
     }
 
     [Test]
