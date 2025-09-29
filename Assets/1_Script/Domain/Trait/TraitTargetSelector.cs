@@ -11,6 +11,8 @@ public struct SlotData
         Team = team;
         Index = index;
     }
+
+    public override string ToString() => $"SlotData => Team :{Team}, index : {Index}";
 }
 
 public class TraitTargetSelector
