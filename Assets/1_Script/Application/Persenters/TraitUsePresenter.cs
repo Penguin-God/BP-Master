@@ -45,7 +45,7 @@ public class TraitUsePresenter // 타겟들 다 포함
     {
         var sel = selected.Value;
         var traitData = championStorage.GetSlot(sel).TraitData;
-        if (traitController.UseTrait(selected.Value, targetSlot, traitData, traitData.TargetRule.TargetRange))
+        if (traitController.UseTrait(selected.Value, targetSlot, traitData))
         {
             selected = null;
             return TraitClickResult.Use;

@@ -14,10 +14,10 @@ public class TraitApplier
         targetSelector = new TraitTargetSelector(teamSize);
     }
 
-    public void Execute(TraitData traitData, SlotData targetSlot, TargetRange range)
+    public void Execute(TraitData traitData, SlotData targetSlot)
     {
         var executor = TraitExecutorFactory.CreateExecutor(traitData);
-        IEnumerable<SlotData> targetSlots = targetSelector.GetTargetSlots(range, targetSlot);
+        IEnumerable<SlotData> targetSlots = targetSelector.GetTargetSlots(traitData.TargetRule.TargetRange, targetSlot);
 
         foreach (var slot in targetSlots)
         {

@@ -13,11 +13,11 @@ public class TraitFacadeTests
         var sut = new TraitUseFacade(statuses);
 
         Assert.IsFalse(sut.IsTraitUsed(CreateBlueSlot(0))); // 사용 전에는 false
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.Single));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateAttTraitData(10, range: TargetRange.Single)));
         Assert.IsTrue(sut.IsTraitUsed(CreateBlueSlot(0)));
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
 
-        Assert.IsFalse(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), null, TargetRange.All));
+        Assert.IsFalse(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), null));
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
     }
 
@@ -33,12 +33,12 @@ public class TraitFacadeTests
 
         TraitUseFacade sut = new TraitUseFacade(statuses);
 
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 15, TraitConditionType.AttackBelow, 10), TargetRange.All));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateAttTraitData(15, TraitConditionType.AttackBelow, 10, range: TargetRange.All)));
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(1)).Stat.Attack);
 
         // 사용은 되지만 조건이 안되서 적용 안됨
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 15, TraitConditionType.AttackBelow, 10), TargetRange.All));
+        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0), CreateAttTraitData(15, TraitConditionType.AttackBelow, 10, range: TargetRange.All)));
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(1)).Stat.Attack);
     }

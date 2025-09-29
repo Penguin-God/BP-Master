@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class TraitApplyTests
+public class TraitExecuteTests
 {
     [Test]
     public void 조건_만족시_Action_실행됨()

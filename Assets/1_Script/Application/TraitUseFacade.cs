@@ -13,12 +13,12 @@ public class TraitUseFacade
         applier = new TraitApplier(statuses);
     }
 
-    public bool UseTrait(SlotData traitSlot, SlotData targetSlot, TraitData traitData, TargetRange range)
+    public bool UseTrait(SlotData traitSlot, SlotData targetSlot, TraitData traitData)
     {
         if (IsTraitUsed(traitSlot)) return false;
 
-        statuses.GetSlot(traitSlot).UseTrait();
-        applier.Execute(traitData, targetSlot, range);
+        statuses.GetSlot(traitSlot).UseTrait(); 
+        applier.Execute(traitData, targetSlot);
         OnTraitUsed?.Invoke(traitSlot.Team);
         return true;
     }

@@ -18,6 +18,9 @@ public static class TestHelper
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(new ChampionStatData(att, def, speed));
     public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionType traitConditionType = TraitConditionType.None, int threshold = 0) => new TraitData(traitType, amount, traitConditionType, threshold, default);
+
+    public static TraitData CreateAttTraitData(int amount, TraitConditionType traitConditionType = 0, int threshold = 0, Side side = 0, TargetRange range = 0)
+        => new TraitData(TraitType.AttackChanger, amount, traitConditionType, threshold, new TraitTargetRule(side, range));
 }
 
 public class TestAttackChangeAction : ITraitAction
