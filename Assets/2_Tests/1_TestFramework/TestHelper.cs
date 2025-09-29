@@ -20,11 +20,10 @@ public static class TestHelper
     public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionType traitConditionType = TraitConditionType.None, int threshold = 0) => new TraitData(traitType, amount, traitConditionType, threshold, default);
 }
 
-// 다시 쓰는 날이 오지 않을까?
-//public class TestAttackChangeAction : ITraitAction
-//{
-//    readonly int Amount;
-//    public TestAttackChangeAction(int amount) => Amount = amount;
+public class TestAttackChangeAction : ITraitAction
+{
+    readonly int Amount;
+    public TestAttackChangeAction(int amount) => Amount = amount;
 
-//    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
-//}
+    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
+}
