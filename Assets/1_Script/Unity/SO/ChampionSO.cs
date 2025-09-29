@@ -15,10 +15,7 @@ public class TraitDataConfig
     [SerializeField] TraitConditionType conditionType;
     [SerializeField] int threshold;
 
-
-    public TraitTargetRule TraitTargetRule => new TraitTargetRule(targetSide, range);
-    public TraitData CreateTraitData() => new TraitData(traitType, amount, conditionType, threshold);
-
+    public TraitData CreateTraitData() => new TraitData(traitType, amount, conditionType, threshold, new TraitTargetRule(targetSide, range));
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount, conditionType, threshold);
 }
 
@@ -39,5 +36,5 @@ public class ChampionSO : ScriptableObject
     [Header("특성")]
     [SerializeField] TraitDataConfig traitData;
     public TraitDataConfig TraitData => traitData;
-    public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.TraitTargetRule, traitData.CreateTraitData());
+    public Champion CreateChampion() => new Champion(id, championName, StatData, traitData.CreateTraitData());
 }

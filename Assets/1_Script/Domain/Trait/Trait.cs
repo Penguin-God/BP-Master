@@ -37,14 +37,6 @@ public class TraitData
 
     public TraitTargetRule TargetRule;
 
-    public TraitData(TraitType traitType, int amount, TraitConditionType conditionType = TraitConditionType.None, int threshold = 0)
-    {
-        TraitType = traitType;
-        Amount = amount;
-        ConditionType = conditionType;
-        Threshold = threshold;
-    }
-
     public TraitData(TraitType traitType, int amount, TraitConditionType conditionType, int threshold, TraitTargetRule traitTargetRule)
     {
         TraitType = traitType;
