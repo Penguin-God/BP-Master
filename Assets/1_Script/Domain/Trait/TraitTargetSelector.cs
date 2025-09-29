@@ -1,20 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public struct SlotData
-{
-    public readonly Team Team;
-    public readonly int Index;
-
-    public SlotData(Team team, int index)
-    {
-        Team = team;
-        Index = index;
-    }
-
-    public override string ToString() => $"SlotData => Team :{Team}, index : {Index}";
-}
-
 public class TraitTargetSelector
 {
     readonly int teamCount;

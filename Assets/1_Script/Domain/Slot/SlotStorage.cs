@@ -1,6 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public readonly struct SlotData
+{
+    public readonly Team Team;
+    public readonly int Index;
+
+    public SlotData(Team team, int index)
+    {
+        Team = team;
+        Index = index;
+    }
+
+    public override string ToString() => $"SlotData => Team :{Team}, index : {Index}";
+}
+
 public class SlotStorage<T>
 {
     readonly TeamSlotIndexr indexr = new TeamSlotIndexr();
