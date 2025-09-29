@@ -1,4 +1,11 @@
 
+public enum TraitType
+{
+    None,
+    AttackChanger,
+    DefenseChanger,
+    SpeedChanger,
+}
 
 public enum Side { Self, Opponent, All }
 public enum TargetRange
@@ -28,12 +35,23 @@ public class TraitData
     public readonly TraitConditionType ConditionType;
     public readonly int Threshold;
 
+    public TraitTargetRule TargetRule;
+
     public TraitData(TraitType traitType, int amount, TraitConditionType conditionType = TraitConditionType.None, int threshold = 0)
     {
         TraitType = traitType;
         Amount = amount;
         ConditionType = conditionType;
         Threshold = threshold;
+    }
+
+    public TraitData(TraitType traitType, int amount, TraitConditionType conditionType, int threshold, TraitTargetRule traitTargetRule)
+    {
+        TraitType = traitType;
+        Amount = amount;
+        ConditionType = conditionType;
+        Threshold = threshold;
+        TargetRule = traitTargetRule;
     }
 }
 

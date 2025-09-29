@@ -3,8 +3,8 @@ using NUnit.Framework;
 public class ChampionFindingTests
 {
     ChampionCatalog manager;
-    
-    Champion CreateChamp(int id, string name) => new Champion(id, name, default, default, null);
+
+    Champion CreateChamp(int id, string name) => TestHelper.CreateChamp(id, name);
 
     [SetUp]
     public void SetUp()

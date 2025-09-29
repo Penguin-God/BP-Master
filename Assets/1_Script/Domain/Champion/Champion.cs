@@ -34,5 +34,13 @@ public class Champion
         TraitData = traitData;
     }
 
+    public Champion(int id, string name, ChampionStatData statData, TraitData traitData)
+    {
+        Id = id;
+        Name = name;
+        StatData = statData;
+        TraitData = traitData;
+    }
+
     public void ChangeStat(ChampionStatData newStat) => StatData = newStat;
 }

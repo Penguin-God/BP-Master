@@ -11,8 +11,8 @@ public static class TestHelper
             new TraitTargetRule(side, range), 
             new TraitData(TraitType.AttackChanger, amount, TraitConditionType.None, 0));
 
-    public static Champion CreateChamp(int id, string name) => new Champion(id, name, default, default, null);
-    public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", new ChampionStatData(att, def, speed), default, null);
+    public static Champion CreateChamp(int id, string name) => new Champion(id, name, default, null);
+    public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", new ChampionStatData(att, def, speed), null);
 
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(x => CreateBlueSlot(x));
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(x => CreateRedSlot(x));
