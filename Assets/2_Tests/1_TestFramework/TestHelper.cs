@@ -7,11 +7,10 @@ public static class TestHelper
     public static SlotData CreateRedSlot(int index) => new SlotData(Team.Red, index);
 
     public static Champion CreateTraitChamp(Side side, TargetRange range, int amount) 
-        => new Champion(0, "", default, 
-            new TraitTargetRule(side, range), 
-            new TraitData(TraitType.AttackChanger, amount, TraitConditionType.None, 0));
+        => new Champion(0, "", default,  
+            new TraitData(TraitType.AttackChanger, amount, TraitConditionType.None, 0, new TraitTargetRule(side, range)));
 
-    public static Champion CreateChamp(int id, string name) => new Champion(id, name, default, null);
+    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, TraitData trait = null) => new Champion(id, name, stat, trait);
     public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", new ChampionStatData(att, def, speed), null);
 
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(x => CreateBlueSlot(x));
@@ -21,10 +20,11 @@ public static class TestHelper
     public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionType traitConditionType = TraitConditionType.None, int threshold = 0) => new TraitData(traitType, amount, traitConditionType, threshold);
 }
 
-public class TestAttackChangeAction : ITraitAction
-{
-    readonly int Amount;
-    public TestAttackChangeAction(int amount) => Amount = amount;
+// 다시 쓰는 날이 오지 않을까?
+//public class TestAttackChangeAction : ITraitAction
+//{
+//    readonly int Amount;
+//    public TestAttackChangeAction(int amount) => Amount = amount;
 
-    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
-}
+//    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
+//}

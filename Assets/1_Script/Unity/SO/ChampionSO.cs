@@ -19,7 +19,6 @@ public class TraitDataConfig
     public TraitTargetRule TraitTargetRule => new TraitTargetRule(targetSide, range);
     public TraitData CreateTraitData() => new TraitData(traitType, amount, conditionType, threshold);
 
-
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount, conditionType, threshold);
 }
 

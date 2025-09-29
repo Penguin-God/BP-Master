@@ -11,7 +11,7 @@ public class StorageFactoryTests
         data = new SlotStorage<int>();
         data.AddSlot(Team.Blue, 1);
         data.AddSlot(Team.Red, 2);
-        ChampionCatalog championCatalog = new ChampionCatalog(new Champion[] { new Champion(1, "일", new ChampionStatData(10, 10, 10), default, null), new Champion(2, "이", new ChampionStatData(20, 20, 20), default, null) });
+        ChampionCatalog championCatalog = new ChampionCatalog(new Champion[] { TestHelper.CreateChamp(1, "일", new ChampionStatData(10, 10, 10)), TestHelper.CreateChamp(2, "이", new ChampionStatData(20, 20, 20)) });
         sut = new(championCatalog);
     }
 
