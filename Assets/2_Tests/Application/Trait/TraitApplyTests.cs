@@ -21,4 +21,21 @@ public class TraitApplyTests
         sut.Execute(traitData, CreateRedSlot(0));
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
     }
+
+    [Test]
+    public void 특성_전원_적용()
+    {
+        SlotStorage<ChampionStatus> statuses = new();
+        // Blue 1, Red 1 상태 초기화 (공격력 0)
+        statuses.AddSlot(Team.Blue, CreateStatus(0));
+        statuses.AddSlot(Team.Red, CreateStatus(0));
+
+        var traitData = CreateAttTraitData(15, side: Side.All, range: TargetRange.All);
+        TraitApplier sut = new TraitApplier(statuses);
+
+        sut.Execute(traitData, CreateRedSlot(0));
+
+        Assert.AreEqual(15, statuses.GetSlot(CreateBlueSlot(0)).Stat.Attack);
+        Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
+    }
 }

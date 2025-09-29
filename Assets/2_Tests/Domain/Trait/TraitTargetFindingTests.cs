@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static TestHelper;
 
 public class TraitTargetFindingTests
 {
@@ -9,10 +10,10 @@ public class TraitTargetFindingTests
     {
         var sut = CreateSut(3);
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Opponent));
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Red, Side.Opponent));
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Opponent));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Blue, Side.Self));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetableSlot(Team.Red, Side.Opponent));
     }
 
     [Test]
@@ -20,9 +21,19 @@ public class TraitTargetFindingTests
     {
         var sut = CreateSut(3);
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateRedSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, TestHelper.CreateRedSlot(0)));
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(1), sut.GetTargetSlots(TargetRange.Single, TestHelper.CreateBlueSlot(1)));
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, CreateRedSlot(0)));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(1), sut.GetTargetSlots(TargetRange.Single, CreateBlueSlot(1)));
 
-        CollectionAssert.AreEquivalent(TestHelper.CreateBlueSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, TestHelper.CreateBlueSlot(0)));
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), sut.GetTargetSlots(TargetRange.All, CreateBlueSlot(0)));
+    }
+
+    [Test]
+    public void 사이드와_범위가_All이면_모든_타겟_반환()
+    {
+        var sut = CreateSut(2);
+
+        var result = sut.GetTargetSlots(new TraitTargetRule(Side.All, TargetRange.All), CreateRedSlot(0));
+
+        CollectionAssert.AreEquivalent(new SlotData[] { CreateBlueSlot(0), CreateBlueSlot(1), CreateRedSlot(0), CreateRedSlot(1) }, result);
     }
 }
