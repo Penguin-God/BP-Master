@@ -41,6 +41,4 @@ public class Champion
         StatData = statData;
         TraitData = traitData;
     }
-
-    public void ChangeStat(ChampionStatData newStat) => StatData = newStat;
 }
