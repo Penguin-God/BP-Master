@@ -78,35 +78,4 @@ public class TraitControllTests
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(1)).Stat.Attack);
     }
-
-    [Test]
-    public void 특성_적용시_피드백_여러_타겟()
-    {
-        SlotStorage<ChampionStatus> statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus(0));
-        statuses.AddSlot(Team.Blue, CreateStatus(0));
-        statuses.AddSlot(Team.Red, CreateStatus(0));
-        statuses.AddSlot(Team.Red, CreateStatus(0));
-
-        var sut = new TraitController(statuses);
-
-        List<StatChangeData> lastFeedback = new List<StatChangeData>();
-        sut.OnTraitApplied += fb => lastFeedback.Add(fb);
-
-        // Act
-        sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.All);
-
-        // Assert - 피드백이 2개(두 타겟)에 대해 왔는지
-        Assert.AreEqual(2, lastFeedback.Count);
-
-        // 어떤 슬롯들이 대상이었는지 (순서 무관 검증)
-        var receivedSlots = lastFeedback.Select(f => f.Slot).ToArray();
-        CollectionAssert.AreEquivalent(new[] { CreateRedSlot(0), CreateRedSlot(1) }, receivedSlots);
-
-        Assert.AreEqual(0, lastFeedback[0].Before.Attack);
-        Assert.AreEqual(10, lastFeedback[0].After.Attack);
-
-        Assert.AreEqual(0, lastFeedback[1].Before.Attack);
-        Assert.AreEqual(10, lastFeedback[1].After.Attack);
-    }
 }

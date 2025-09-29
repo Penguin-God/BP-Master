@@ -22,7 +22,6 @@ public class TraitController
     readonly TraitTargetSelector targetFinder;
 
     public event Action<Team> OnTraitUsed;
-    public event Action<StatChangeData> OnTraitApplied;
 
     public TraitController(SlotStorage<ChampionStatus> statuses)
     {
@@ -50,9 +49,7 @@ public class TraitController
         foreach (var slot in slots)
         {
             var target = statuses.GetSlot(slot);
-            var before = target.Stat;
             executor.ExecuteTrait(target);
-            OnTraitApplied?.Invoke(new StatChangeData(slot, before, target.Stat));
         }
     }
 }

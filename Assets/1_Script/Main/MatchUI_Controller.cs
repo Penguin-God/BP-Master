@@ -36,7 +36,7 @@ public class MatchUI_Controller : MonoBehaviour
         phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
 
-        traitController.OnTraitApplied += (x) => scoreView.UpdateTeamScore(status, x.Slot.Team);
+        phaseManager.OnPhaseTrait += (team) => scoreView.UpdateTeamScore(status, team);
     }
 
     [SerializeField] GameObject scores;
