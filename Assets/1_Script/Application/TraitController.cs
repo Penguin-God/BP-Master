@@ -1,20 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-public readonly struct StatChangeData
-{
-    public readonly SlotData Slot;
-    public readonly ChampionStatData Before;
-    public readonly ChampionStatData After;
-
-    public StatChangeData(SlotData slot, ChampionStatData before, ChampionStatData after)
-    {
-        Slot = slot;
-        Before = before;
-        After = after;
-    }
-}
-
 
 public class TraitController
 {

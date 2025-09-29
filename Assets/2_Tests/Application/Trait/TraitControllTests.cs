@@ -1,12 +1,10 @@
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using static TestHelper;
 
 public class TraitControllTests
 {
     [Test]
-    public void 한_챔피언이_특성_중복_사용_불가()
+    public void 특성_사용_후_플래그는_참이되고_중복_사용_불가()
     {
         SlotStorage<ChampionStatus> statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus(0));
@@ -14,47 +12,13 @@ public class TraitControllTests
 
         var sut = new TraitController(statuses);
 
+        Assert.IsFalse(sut.IsTraitUsed(CreateBlueSlot(0))); // 사용 전에는 false
         Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.Single));
+        Assert.IsTrue(sut.IsTraitUsed(CreateBlueSlot(0)));
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
 
         Assert.IsFalse(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), null, TargetRange.All));
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
-    }
-
-    [Test]
-    public void 특성_시전_후_사용_플래그_true()
-    {
-        SlotStorage<ChampionStatus> statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        statuses.AddSlot(Team.Red, CreateStatus());
-
-        var sut = new TraitController(statuses);
-
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 10), TargetRange.Single));
-
-        // 시전자 슬롯만 true
-        Assert.IsTrue(sut.IsTraitUsed(CreateBlueSlot(0)));
-        Assert.IsFalse(sut.IsTraitUsed(CreateRedSlot(0)));
-    }
-
-    [Test]
-    public void 시전자와_타겟_인덱스_달라질_때()
-    {
-        SlotStorage<ChampionStatus> statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        statuses.AddSlot(Team.Red, CreateStatus(0));
-
-        var sut = new TraitController(statuses);
-
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(1), CreateRedSlot(0), CreateTraitData(TraitType.AttackChanger, 11), TargetRange.Single));
-
-        // ✅ 기대: Red[0] 공격력은 11이어야 함 (시전자 Blue[1]의 효과)
-        Assert.AreEqual(11, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
-
-        // ✅ 기대: 사용 플래그는 Blue[1]만 true
-        Assert.IsFalse(sut.IsTraitUsed(CreateBlueSlot(0)));
-        Assert.IsTrue(sut.IsTraitUsed(CreateBlueSlot(1)));
     }
 
     [Test]

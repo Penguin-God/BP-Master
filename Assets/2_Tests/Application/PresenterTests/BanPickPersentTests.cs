@@ -18,7 +18,7 @@ public class BanPickPersentTests
     public void 스탯_변경_데이터_뷰모델로_변환()
     {
         StatChangePresenter sut = new(Color.green, Color.red);
-        StatChangeData data = new StatChangeData(TestHelper.CreateBlueSlot(1), new ChampionStatData(20, 20, 0), new ChampionStatData(25, 15, 0));
+        StatChangeData data = new StatChangeData(new ChampionStatData(20, 20, 0), new ChampionStatData(25, 15, 0));
 
         var result = sut.CreateViewModel(data);
 

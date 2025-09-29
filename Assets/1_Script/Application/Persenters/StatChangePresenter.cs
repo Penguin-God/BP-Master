@@ -2,6 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public readonly struct StatChangeData
+{
+    public readonly ChampionStatData Before;
+    public readonly ChampionStatData After;
+
+    public StatChangeData(ChampionStatData before, ChampionStatData after)
+    {
+        Before = before;
+        After = after;
+    }
+}
+
+
 public class StatDeltaViewModel
 {
     public bool IsChange { get; }
