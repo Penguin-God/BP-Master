@@ -12,12 +12,14 @@ public class TraitUsePresenter // 타겟들 다 포함
 {
     readonly TraitUseFacade traitController;
     readonly SlotStorage<Champion> championStorage;
+    readonly TraitSlotFilter slotFilter;
     Team currentTeam = Team.All;
     
     public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<Champion> champions)
     {
         this.traitController = traitController;
         championStorage = champions;
+        slotFilter = new TraitSlotFilter(championStorage.GetTeam(Team.Blue).Count(), traitController);
     }
     public void ChangeTeam(Team team) => currentTeam = team;
 
@@ -26,7 +28,7 @@ public class TraitUsePresenter // 타겟들 다 포함
 
     public TraitClickResult ClickChampion(SlotData slot)
     {
-        if (IsValidTarget(slot.Team) == false) return TraitClickResult.Faild;
+        if (IsClickable(slot.Team) == false) return TraitClickResult.Faild;
 
         if (IsSelect) return UseTrait(slot);
         else
@@ -36,7 +38,7 @@ public class TraitUsePresenter // 타겟들 다 포함
         }
     }
 
-    bool IsValidTarget(Team buttonTeam) // 나중에는 타겟 범위까지 판단해야 됨
+    bool IsClickable(Team buttonTeam) // 나중에는 타겟 범위까지 판단해야 됨
     {
         return (IsSelect == false && currentTeam == buttonTeam) || IsSelect;
     }
@@ -55,18 +57,11 @@ public class TraitUsePresenter // 타겟들 다 포함
 
     public IEnumerable<SlotData> GetClickableSlots()
     {
-        int size = championStorage.GetTeam(Team.Blue).Count();
-        // 선택 전: 현재 팀의 미사용 슬롯
-        if (IsSelect == false)
+        if (IsSelect == false) return slotFilter.FilteringUseableSlots(currentTeam);
+        else
         {
-            return Enumerable.Range(0, size)
-                             .Select(i => new SlotData(currentTeam, i))
-                             .Where(slot => traitController.IsTraitUsed(slot) == false);
+            var targetSide = championStorage.GetSlot(selected.Value).TraitData.TargetRule.TargetSide;
+            return slotFilter.FilteringTargetSlots(currentTeam, targetSide);
         }
-
-        // 선택 후: 시전자의 TraitSide에 따라 타겟 후보 생성
-        var sel = selected.Value;
-        var targetSide = championStorage.GetSlot(sel).TraitData.TargetRule.TargetSide;
-        return new TraitTargetSelector(size).GetTargetableSlot(currentTeam, targetSide);
     }
 }

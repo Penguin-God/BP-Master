@@ -65,5 +65,26 @@ public class TraitUsePresenterTests
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
 
+    [Test]
+    public void 특성_사용_가능한_슬롯들_필터링()
+    {
+        TraitSlotFilter sut = new (3, new TraitUseFacade(statuses));
+        statuses.GetSlot(CreateBlueSlot(1)).UseTrait();
+
+        var result = sut.FilteringUseableSlots(Team.Blue);
+
+        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 2), result);
+    }
+
+    [Test]
+    public void 특성_타겟_슬롯들_필터링()
+    {
+        TraitSlotFilter sut = new(3, new TraitUseFacade(statuses));
+
+        var result = sut.FilteringTargetSlots(Team.Blue, Side.Opponent);
+
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), result);
+    }
+
     SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
 }
