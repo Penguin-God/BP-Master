@@ -13,11 +13,12 @@ public class TraitFacadeTests
         var sut = new TraitUseFacade(statuses);
 
         Assert.IsFalse(sut.IsTraitUsed(CreateBlueSlot(0))); // 사용 전에는 false
-        Assert.IsTrue(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateAttTraitData(10, range: TargetRange.Single)));
+        sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), CreateAttTraitData(10, range: TargetRange.Single));
         Assert.IsTrue(sut.IsTraitUsed(CreateBlueSlot(0)));
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
 
-        Assert.IsFalse(sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), null));
+        // 사용 후 실행 X
+        sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), null);
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
     }
 }

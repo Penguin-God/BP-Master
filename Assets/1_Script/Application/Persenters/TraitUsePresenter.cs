@@ -24,18 +24,14 @@ public class TraitUsePresenter // 타겟들 다 포함
     public void ChangeTeam(Team team) => currentTeam = team;
 
     SlotData? selected; // 선택된 시전자
-    bool IsSelect => selected.HasValue;
+    public bool IsSelect => selected.HasValue;
 
-    public TraitClickResult ClickChampion(SlotData slot)
+    public void ClickChampion(SlotData slot)
     {
-        if (IsClickable(slot.Team) == false) return TraitClickResult.Faild;
+        if (IsClickable(slot.Team) == false) return;
 
-        if (IsSelect) return UseTrait(slot);
-        else
-        {
-            selected = slot;
-            return TraitClickResult.Select;
-        }
+        if (IsSelect) UseTrait(slot);
+        else selected = slot;
     }
 
     bool IsClickable(Team buttonTeam) // 나중에는 타겟 범위까지 판단해야 됨
@@ -43,16 +39,13 @@ public class TraitUsePresenter // 타겟들 다 포함
         return (IsSelect == false && currentTeam == buttonTeam) || IsSelect;
     }
 
-    TraitClickResult UseTrait(SlotData targetSlot)
+    void UseTrait(SlotData targetSlot)
     {
-        var sel = selected.Value;
-        var traitData = championStorage.GetSlot(sel).TraitData;
-        if (traitController.UseTrait(selected.Value, targetSlot, traitData))
-        {
-            selected = null;
-            return TraitClickResult.Use;
-        }
-        else return TraitClickResult.Faild;
+        if (traitController.IsTraitUsed(selected.Value)) return;
+
+        var traitData = championStorage.GetSlot(selected.Value).TraitData;
+        traitController.UseTrait(selected.Value, targetSlot, traitData);
+        selected = null;
     }
 
     public IEnumerable<SlotData> GetClickableSlots()
