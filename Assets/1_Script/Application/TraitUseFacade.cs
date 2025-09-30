@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class TraitUseFacade
 {
@@ -19,6 +20,15 @@ public class TraitUseFacade
 
         statuses.GetSlot(traitSlot).UseTrait(); 
         applier.Execute(traitData, targetSlot);
+        OnTraitUsed?.Invoke(traitSlot.Team);
+    }
+
+    public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitData)
+    {
+        if (IsTraitUsed(traitSlot)) return;
+
+        statuses.GetSlot(traitSlot).UseTrait();
+        // applier.Execute(traitData, targetSlot);
         OnTraitUsed?.Invoke(traitSlot.Team);
     }
 
