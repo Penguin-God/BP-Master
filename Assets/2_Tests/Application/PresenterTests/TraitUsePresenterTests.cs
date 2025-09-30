@@ -31,17 +31,6 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 클릭_결과에_따라_enum반환()
-    {
-        presenter.ChangeTeam(Team.Blue);
-        Assert.AreEqual(TraitClickResult.Faild, presenter.ClickChampion(CreateSlot(Team.Red, 0)));
-
-        Assert.AreEqual(TraitClickResult.Select, presenter.ClickChampion(CreateSlot(Team.Blue, 0)));
-
-        Assert.AreEqual(TraitClickResult.Use, presenter.ClickChampion(CreateSlot(Team.Red, 0)));
-    }
-
-    [Test]
     public void 특성_사용_적용()
     {
         presenter.ChangeTeam(Team.Blue);
@@ -84,6 +73,21 @@ public class TraitUsePresenterTests
         var result = sut.FilteringTargetSlots(Team.Blue, Side.Opponent);
 
         CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), result);
+    }
+
+    [Test]
+    public void 클릭_결과에_따라_select상태_변화2()
+    {
+        TraitSelectionState sut = new(Team.Blue);
+
+        TraitSelectResult result = sut.SelectTraitSlot(CreateSlot(Team.Red, 0));
+        Assert.AreEqual(TraitSelectResult.Faild, result);
+
+        result = sut.SelectTraitSlot(CreateSlot(Team.Blue, 0));
+        Assert.AreEqual(TraitSelectResult.Select, result);
+
+        result = sut.SelectTraitSlot(CreateSlot(Team.Red, 0));
+        Assert.AreEqual(TraitSelectResult.Use, result);
     }
 
     SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
