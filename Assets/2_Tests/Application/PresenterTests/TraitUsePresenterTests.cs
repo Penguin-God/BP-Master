@@ -50,6 +50,7 @@ public class TraitUsePresenterTests
         presenter.ClickChampion(CreateSlot(Team.Blue, 1));
         CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), presenter.GetClickableSlots());
 
+        // blue 1번째 사용했으니 그건 제외
         presenter.ClickChampion(CreateSlot(Team.Red, 0));
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
@@ -76,7 +77,7 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 클릭_결과에_따라_select상태_변화2()
+    public void 선택에_따라_결과_반환()
     {
         TraitSelectionState sut = new(Team.Blue);
 
