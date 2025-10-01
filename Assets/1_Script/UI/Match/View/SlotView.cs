@@ -33,5 +33,5 @@ public class SlotView : MonoBehaviour
         championView.UpdateChampion(target);
     }
 
-    void DrawTarget() => championFocusView.UpdateDisplay(traickingTarget, championManager.GetChampionData(traickingTarget.Id).TraitData.CreateUI_Data());
+    void DrawTarget() => championFocusView.UpdateDisplay(traickingTarget, championManager.GetChampionData(traickingTarget.Id).CreateTrait_UI_Datas());
 }

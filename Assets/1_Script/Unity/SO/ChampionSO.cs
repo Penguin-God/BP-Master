@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -36,6 +37,6 @@ public class ChampionSO : ScriptableObject
 
     [Header("특성")]
     [SerializeField] TraitDataConfig[] traitDatas;
-    public TraitDataConfig TraitData => traitDatas[0]; // 이건 임시 제발 나중에 바꿔줘
     public Champion CreateChampion() => new Champion(id, championName, StatData, traitDatas.Select(x => x.CreateTraitData()));
+    public IEnumerable<TraitUI_Data> CreateTrait_UI_Datas() => traitDatas.Select(x => x.CreateUI_Data());
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,9 +14,9 @@ public class ChampionView : MonoBehaviour
 
     StatPersenter championPersenter = new StatPersenter();
     TraitPersenter traitPersenter = new();
-    public void UpdateDisplay(ChampionSO champion) => UpdateDisplay(champion.CreateChampion(), champion.TraitData.CreateUI_Data());
+    public void UpdateDisplay(ChampionSO champion) => UpdateDisplay(champion.CreateChampion(), champion.CreateTrait_UI_Datas());
 
-    public void UpdateDisplay(Champion champion, TraitUI_Data traitUI_Data)
+    public void UpdateDisplay(Champion champion, IEnumerable<TraitUI_Data> traitUI_Data)
     {
         UpdateChampion(champion);
         traitText.text = traitPersenter.BuildTraitText(traitUI_Data);
