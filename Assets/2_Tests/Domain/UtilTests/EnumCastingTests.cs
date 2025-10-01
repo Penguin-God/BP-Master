@@ -21,4 +21,13 @@ public class EnumCastingTests
     {
         Assert.Throws<System.Exception>(() => BanPickEnumCaster.PhaseToSelect(GamePhase.Swap));
     }
+
+    [Test]
+    public void Side_컬렉션_합치기()
+    {
+        Assert.AreEqual(Side.Self, BanPickEnumCaster.MergeSide(new Side[] { Side.Self, Side.Self }));
+        Assert.AreEqual(Side.Opponent, BanPickEnumCaster.MergeSide(new Side[] { Side.Opponent, Side.Opponent }));
+        Assert.AreEqual(Side.All, BanPickEnumCaster.MergeSide(new Side[] { Side.Self, Side.All }));
+        Assert.AreEqual(Side.All, BanPickEnumCaster.MergeSide(new Side[] { Side.Self, Side.Opponent }));
+    }
 }

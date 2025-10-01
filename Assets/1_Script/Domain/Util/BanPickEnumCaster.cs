@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 public static class BanPickEnumCaster
 {
@@ -18,5 +20,12 @@ public static class BanPickEnumCaster
         if (phase == GamePhase.Pick) return SelectType.Pick;
         else if (phase == GamePhase.Ban) return SelectType.Ban;
         else throw new Exception($"밴과 픽 중 하나여야 함 : {phase}");
+    }
+
+    public static Side MergeSide(IEnumerable<Side> sides)
+    {
+        if (sides.All(s => s == Side.Self)) return Side.Self;
+        else if(sides.All(s => s == Side.Opponent)) return Side.Opponent;
+        else return Side.All;
     }
 }
