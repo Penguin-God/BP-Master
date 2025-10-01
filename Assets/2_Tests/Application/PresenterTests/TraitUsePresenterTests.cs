@@ -69,11 +69,13 @@ public class TraitUsePresenterTests
     [Test]
     public void 특성_타겟_슬롯들_필터링()
     {
-        TraitSlotFilter sut = new(3, new TraitUseFacade(statuses));
+        TraitSlotFilter sut = new(2, new TraitUseFacade(statuses));
 
-        var result = sut.FilteringTargetSlots(Team.Blue, Side.Opponent);
+        var result = sut.FilteringTargetSlots(Team.Blue, new Side[] { Side.Opponent });
+        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1), result);
 
-        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), result);
+        result = sut.FilteringTargetSlots(Team.Blue, new Side[] { Side.Opponent, Side.Self });
+        CollectionAssert.AreEquivalent(new SlotData[] { CreateBlueSlot(0), CreateBlueSlot(1), CreateRedSlot(0), CreateRedSlot(1) }, result);
     }
 
     [Test]
