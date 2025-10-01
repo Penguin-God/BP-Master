@@ -23,12 +23,13 @@ public class TraitUseFacade
         OnTraitUsed?.Invoke(traitSlot.Team);
     }
 
-    public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitData)
+    public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitDatas)
     {
         if (IsTraitUsed(traitSlot)) return;
 
         statuses.GetSlot(traitSlot).UseTrait();
-        // applier.Execute(traitData, targetSlot);
+        foreach (var data in traitDatas)
+            applier.Execute(data, targetSlot);
         OnTraitUsed?.Invoke(traitSlot.Team);
     }
 
