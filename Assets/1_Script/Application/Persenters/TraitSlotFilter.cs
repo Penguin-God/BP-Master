@@ -18,8 +18,6 @@ public class TraitSlotFilter
                  .Where(slot => traitUseFacade.IsTraitUsed(slot) == false);
     }
 
-    public IEnumerable<SlotData> FilteringTargetSlots(Team team, Side side) => new TraitTargetSelector(TeamSize).GetTargetableSlot(team, side);
-
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {
         var side = BanPickEnumCaster.MergeSide(sides);

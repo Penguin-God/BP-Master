@@ -10,7 +10,7 @@ public class TraitUsePresenterTests
     public void SetUp()
     {
         SlotStorage<Champion> picks = new();
-        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
+        picks.AddSlot(Team.Blue, CreateChamps(traits: new TraitData[] { CreateTraitData(type: TraitType.AttackChanger, amount: 10), CreateTraitData(type: TraitType.DefenseChanger, amount: 10) }));
         picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
         picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
 
@@ -39,6 +39,7 @@ public class TraitUsePresenterTests
         presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용
 
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
+        Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Defense);
     }
 
     [Test]

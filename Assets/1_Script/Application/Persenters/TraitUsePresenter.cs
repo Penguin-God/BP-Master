@@ -33,7 +33,7 @@ public class TraitUsePresenter
     {
         if (traitController.IsTraitUsed(selectSlot)) return;
 
-        var traitData = championStorage.GetSlot(selectSlot).TraitData;
+        var traitData = championStorage.GetSlot(selectSlot).TraitDatas;
         traitController.UseTrait(selectSlot, targetSlot, traitData);
         selectSlot = default;
     }
@@ -43,8 +43,8 @@ public class TraitUsePresenter
         if (selectionState.IsSelect == false) return slotFilter.FilteringUseableSlots(currentTeam);
         else
         {
-            var targetSide = championStorage.GetSlot(selectSlot).TraitData.TargetRule.TargetSide;
-            return slotFilter.FilteringTargetSlots(currentTeam, targetSide);
+            var targetSides = championStorage.GetSlot(selectSlot).TraitDatas.Select(x => x.TargetRule.TargetSide);
+            return slotFilter.FilteringTargetSlots(currentTeam, targetSides);
         }
     }
 }
