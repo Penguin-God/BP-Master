@@ -17,9 +17,9 @@ MonoBehaviour:
   attack: 110
   defense: 60
   speed: 2
-  traitData:
-    targetSide: 0
-    range: 2
+  traitDatas:
+  - targetSide: 0
+    range: 1
     traitType: 1
     amount: 30
     conditionType: 0
