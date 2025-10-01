@@ -43,4 +43,19 @@ public class ChampionPresentTests
         Assert.AreEqual("속도 5 이상인 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.SpeedAtLeast, 5));
         Assert.AreEqual("속도 3 이하인 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.SpeedBelow, 3));
     }
+
+    [Test]
+    public void 특성_컬랙션은_텍스트_합쳐서_반환()
+    {
+        var sut = new TraitPersenter();
+        var datas = new TraitUI_Data[]
+        {
+            new TraitUI_Data(TraitType.AttackChanger, Side.Opponent, TargetRange.All, -10, 0, 0),
+            new TraitUI_Data(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10, 0, 0),
+        };
+
+        string result = sut.BuildTraitText(datas);
+
+        Assert.AreEqual("적군 전체 공격력 10 감소, 적군 전체 방어력 10 감소", result);
+    }
 }

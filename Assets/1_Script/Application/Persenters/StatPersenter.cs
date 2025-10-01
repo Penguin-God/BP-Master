@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public readonly struct StatViewModel
 {
@@ -36,6 +38,8 @@ public struct TraitUI_Data
 
 public class TraitPersenter
 {
+    public string BuildTraitText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildTraitText(x)));
+
     public string BuildTraitText(TraitUI_Data traitData)
     {
         var conditoin = BuildTraitConditionText(traitData.ConditionType, traitData.Threshold);
