@@ -10,8 +10,7 @@ public static class TestHelper
         => new Champion(0, "", default,
             CreateTraitDatas(type: TraitType.AttackChanger, amount: amount, side: side, range: range));
 
-    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, TraitData trait = null) => new Champion(id, name, stat, trait);
-    public static Champion CreateChamps(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<TraitData> traits = null) => new Champion(id, name, stat, traits);
+    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<TraitData> traits = null) => new Champion(id, name, stat, traits);
     public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", new ChampionStatData(att, def, speed), new TraitData[0]);
 
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(x => CreateBlueSlot(x));

@@ -35,7 +35,7 @@ public class TraitData
     public readonly TraitConditionType ConditionType;
     public readonly int Threshold;
 
-    public TraitTargetRule TargetRule;
+    public readonly TraitTargetRule TargetRule;
 
     public TraitData(TraitType traitType, int amount, TraitConditionType conditionType, int threshold, TraitTargetRule traitTargetRule)
     {

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public readonly struct ChampionStatData
 {
     public readonly int Attack;
@@ -22,14 +24,13 @@ public class Champion
     readonly public int Id;
     readonly public string Name;
     public ChampionStatData StatData { get; private set; }
-    readonly public TraitData TraitData;
+    readonly public IEnumerable<TraitData> TraitDatas;
 
-
-    public Champion(int id, string name, ChampionStatData statData, TraitData traitData)
+    public Champion(int id, string name, ChampionStatData statData, IEnumerable<TraitData> traitDatas)
     {
         Id = id;
         Name = name;
         StatData = statData;
-        TraitData = traitData;
+        TraitDatas = traitDatas;
     }
 }
