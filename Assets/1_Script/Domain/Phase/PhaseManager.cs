@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 public enum GamePhase { Ban, Pick, Swap, Trait, Done }
@@ -33,7 +32,7 @@ public class PhaseManager
     PhaseData _current;
     public Team CurrentTurn => CurrentFlow.Turn;
     public GameFlowData CurrentFlow { get; private set; }
-    readonly HashSet<Team> _submittedInAll = new();
+    readonly HashSet<Team> _submittedTeams = new();
     private readonly PhaseEventDispatcher _dispatcher;
 
     public PhaseManager(PhaseData[] phaseDatas, PhaseEventDispatcher dispatcher)
@@ -62,15 +61,17 @@ public class PhaseManager
 
         if (CurrentTurn == Team.All)
         {
-            _submittedInAll.Add(actingTeam);
-            if (_submittedInAll.Contains(Team.Blue) && _submittedInAll.Contains(Team.Red))
+            _submittedTeams.Add(actingTeam);
+            if (AllTeamsSubmitted())
             {
                 Advance();
-                _submittedInAll.Clear();
+                _submittedTeams.Clear();
             }
         }
         else if (actingTeam == CurrentTurn) Advance();
     }
+    bool AllTeamsSubmitted() => _submittedTeams.Contains(Team.Blue) && _submittedTeams.Contains(Team.Red);
+
 
     void Advance()
     {

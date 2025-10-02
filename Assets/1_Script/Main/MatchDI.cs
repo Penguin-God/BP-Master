@@ -7,6 +7,7 @@ public class MatchDI : MonoBehaviour
     GameBanPickStorage storage;
 
     PhaseManager phaseManager;
+    PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
     ChampionStorageFactory storageFactory;
 
@@ -16,14 +17,15 @@ public class MatchDI : MonoBehaviour
         storage = new GameBanPickStorage(championCatalog.AllId);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
-        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase());
+
+        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
         utilKey.Init(storage, phaseManager);
 
-        phaseManager.OnPhaseTrait += Trait;
-        phaseManager.OnPhaseDone += OnDone;
+        phaseEventDispatcher.OnPhaseTrait += Trait;
+        phaseEventDispatcher.OnPhaseDone += OnDone;
         storageFactory = new ChampionStorageFactory(championCatalog);
 
-        matchUI_Controller.Init(storage, phaseManager, storageFactory); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
         phaseManager.Start();
     }
 
@@ -38,7 +40,7 @@ public class MatchDI : MonoBehaviour
         var traitController = new TraitUseFacade(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
-        matchUI_Controller.TraitUI_Init(team, phaseManager, traitController, storageFactory.CreateChampionStorage(storage.PickIds), statuses);
+        matchUI_Controller.TraitUI_Init(team, phaseEventDispatcher, traitController, storageFactory.CreateChampionStorage(storage.PickIds), statuses);
 
         ApplyMastery(); // 마지막에
         initTrait = true;

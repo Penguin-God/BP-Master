@@ -10,7 +10,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ScoreView scoreView;
     [SerializeField] SwapController swapController;
 
-    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, ChampionStorageFactory factory)
+    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, ChampionStorageFactory factory, PhaseEventDispatcher eventDispatcher)
     {
         swapController.Inject(phaseManager, storage);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
@@ -19,24 +19,24 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnBan += banPickView.UpdateBanView;
         storage.OnPick += banPickView.UpdatePickView;
 
-        phaseManager.OnPhaseSwap += swapController.Init;
-        phaseManager.OnPhaseSwap += _ => banPickView.HideBan();
-        phaseManager.OnPhaseSwap += _ => championDrawer.HideView();
+        eventDispatcher.OnPhaseSwap += swapController.Init;
+        eventDispatcher.OnPhaseSwap += _ => banPickView.HideBan();
+        eventDispatcher.OnPhaseSwap += _ => championDrawer.HideView();
 
         traitUseView.gameObject.SetActive(false);
 
         storage.OnPick += (team, id) => scoreView.UpdateTeamScore(factory.CreateStatusStorage(storage.PickIds), team);
     }
 
-    public void TraitUI_Init(Team team, PhaseManager phaseManager, TraitUseFacade traitController, SlotStorage<Champion> champions, SlotStorage<ChampionStatus> status)
+    public void TraitUI_Init(Team team, PhaseEventDispatcher eventDispatcher, TraitUseFacade traitController, SlotStorage<Champion> champions, SlotStorage<ChampionStatus> status)
     {
         banPickView.BindStatChangeEvent(status);
         var presenter = new TraitUsePresenter(traitController, champions);
         traitUseView.Init(presenter);
-        phaseManager.OnPhaseTrait += traitUseView.UpdateTrait;
+        eventDispatcher.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);
 
-        phaseManager.OnPhaseTrait += (team) => scoreView.UpdateTeamScore(status, team);
+        eventDispatcher.OnPhaseTrait += (team) => scoreView.UpdateTeamScore(status, team);
     }
 
     [SerializeField] GameObject scores;
