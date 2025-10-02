@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   playerName: q
-  startMasteries: []
+  startMasteries:
+  - champion: {fileID: 11400000, guid: 8710fb3935eb85045ab9b7b056eaf0b5, type: 2}
+    level: 10
+  - champion: {fileID: 11400000, guid: 76d0219708f6e06448baa851953f4372, type: 2}
+    level: 15
+  - champion: {fileID: 11400000, guid: 5d38329471112af438d2c472494c7427, type: 2}
+    level: 20
