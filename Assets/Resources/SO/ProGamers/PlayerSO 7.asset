@@ -19,5 +19,5 @@ MonoBehaviour:
     level: 10
   - champion: {fileID: 11400000, guid: 76d0219708f6e06448baa851953f4372, type: 2}
     level: 15
-  - champion: {fileID: 11400000, guid: 5d38329471112af438d2c472494c7427, type: 2}
+  - champion: {fileID: 11400000, guid: ed9a45c3fd24c304eb2e9afeea1fb3b7, type: 2}
     level: 20

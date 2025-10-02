@@ -22,5 +22,5 @@ MonoBehaviour:
     range: 2
     traitType: 1
     amount: -40
-    conditionType: 2
-    threshold: 120
+    conditionType: 1
+    threshold: 110
