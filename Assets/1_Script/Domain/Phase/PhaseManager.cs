@@ -29,20 +29,11 @@ public readonly struct GameFlowData
 
 public class PhaseManager
 {
-    public event Action<Team> OnPhaseBan;
-    public event Action<Team> OnPhasePick;
-    public event Action<Team> OnPhaseSwap;
-    public event Action<Team> OnPhaseTrait;
-    public event Action OnPhaseDone;
-
     readonly Queue<PhaseData> _phases;
     PhaseData _current;
     public Team CurrentTurn => CurrentFlow.Turn;
     public GameFlowData CurrentFlow { get; private set; }
     readonly HashSet<Team> _submittedInAll = new();
-
-    public event Action<GameFlowData> OnFlowChanged;
-
     private readonly PhaseEventDispatcher _dispatcher;
 
     public PhaseManager(PhaseData[] phaseDatas, PhaseEventDispatcher dispatcher)
@@ -84,10 +75,9 @@ public class PhaseManager
     void Advance()
     {
         if (_current.Phase.IsDone) _current = _phases.Dequeue();
-
-        CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());
-
-        OnFlowChanged?.Invoke(CurrentFlow);
+        ProgressFlow();
         _dispatcher.Dispatch(CurrentFlow.Phase, CurrentFlow.Turn);
     }
+
+    void ProgressFlow() => CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());
 }
