@@ -29,6 +29,12 @@ public readonly struct GameFlowData
 
 public class PhaseManager
 {
+    public event Action<Team> OnPhaseBan;
+    public event Action<Team> OnPhasePick;
+    public event Action<Team> OnPhaseSwap;
+    public event Action<Team> OnPhaseTrait;
+    public event Action OnPhaseDone;
+
     readonly Queue<PhaseData> _phases;
     PhaseData _current;
     public Team CurrentTurn => CurrentFlow.Turn;
@@ -36,16 +42,20 @@ public class PhaseManager
     readonly HashSet<Team> _submittedInAll = new();
 
     public event Action<GameFlowData> OnFlowChanged;
-    public event Action<Team> OnPhaseBan;
-    public event Action<Team> OnPhasePick;
-    public event Action<Team> OnPhaseSwap;
-    public event Action<Team> OnPhaseTrait;
-    public event Action OnPhaseDone;
+
+    private readonly PhaseEventDispatcher _dispatcher;
+
+    public PhaseManager(PhaseData[] phaseDatas, PhaseEventDispatcher dispatcher)
+    {
+        _phases = new Queue<PhaseData>(phaseDatas);
+        // Done은 마지막 고정
+        _phases.Enqueue(new PhaseData(GamePhase.Done, new Phase(new[] { Team.All })));
+        _dispatcher = dispatcher;
+    }
 
     public PhaseManager(PhaseData[] phaseDatas)
     {
         _phases = new Queue<PhaseData>(phaseDatas);
-        // 항상 종료 페이즈를 꼬리로 추가
         _phases.Enqueue(new PhaseData(GamePhase.Done, new Phase(new[] { Team.All })));
     }
 
@@ -59,7 +69,7 @@ public class PhaseManager
     {
         if (_current.GamePhase == GamePhase.Done) return;
 
-        if (CurrentTurn == Team.All) // Team.All: 양 팀 모두 접수되어야 진행
+        if (CurrentTurn == Team.All)
         {
             _submittedInAll.Add(actingTeam);
             if (_submittedInAll.Contains(Team.Blue) && _submittedInAll.Contains(Team.Red))
@@ -73,34 +83,11 @@ public class PhaseManager
 
     void Advance()
     {
-        // 현재 페이즈의 큐가 비었으면 다음 페이즈로 이동
         if (_current.Phase.IsDone) _current = _phases.Dequeue();
 
         CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());
-        
-        OnFlowChanged?.Invoke(CurrentFlow);
-        InvokePhaseEvent(CurrentFlow.Phase, CurrentFlow.Turn);
-    }
-    
-    void InvokePhaseEvent(GamePhase phase, Team turn)
-    {
-        if (turn == Team.All)
-        {
-            Raise(phase, Team.Blue);
-            Raise(phase, Team.Red);
-        }
-        else Raise(phase, turn);
-    }
 
-    void Raise(GamePhase phase, Team turn)
-    {
-        switch (phase)
-        {
-            case GamePhase.Ban: OnPhaseBan?.Invoke(turn); break;
-            case GamePhase.Pick: OnPhasePick?.Invoke(turn); break;
-            case GamePhase.Swap: OnPhaseSwap?.Invoke(turn); break;
-            case GamePhase.Trait: OnPhaseTrait?.Invoke(turn); break;
-            case GamePhase.Done: OnPhaseDone?.Invoke(); break;
-        }
+        OnFlowChanged?.Invoke(CurrentFlow);
+        _dispatcher.Dispatch(CurrentFlow.Phase, CurrentFlow.Turn);
     }
 }
