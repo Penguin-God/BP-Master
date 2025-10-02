@@ -16,12 +16,12 @@ MonoBehaviour:
   championName: "\uAD11\uC804\uC0AC"
   attack: 180
   defense: 80
-  speed: 2
+  speed: 5
   traitDatas:
   - targetSide: 0
     range: 2
     traitType: 2
-    amount: -25
+    amount: -30
     conditionType: 0
     threshold: 0
   - targetSide: 0

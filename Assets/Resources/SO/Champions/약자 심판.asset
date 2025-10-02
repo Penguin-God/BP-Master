@@ -16,7 +16,7 @@ MonoBehaviour:
   championName: "\uC57D\uC790 \uC2EC\uD310"
   attack: 100
   defense: 100
-  speed: 2
+  speed: 5
   traitDatas:
   - targetSide: 2
     range: 2

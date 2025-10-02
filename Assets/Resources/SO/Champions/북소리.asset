@@ -16,10 +16,10 @@ MonoBehaviour:
   championName: "\uBD81\uC18C\uB9AC"
   attack: 110
   defense: 60
-  speed: 2
+  speed: 5
   traitDatas:
   - targetSide: 0
-    range: 1
+    range: 2
     traitType: 1
     amount: 30
     conditionType: 0
