@@ -89,8 +89,8 @@ public class StatPersenter : TraitPersenter
 {
     public StatViewModel CreateStatViewModel(ChampionStatData stat) => 
         new StatViewModel(
-        $"공격력 : {stat.Attack}",
-        $"방어력 : {stat.Defense}",
-        $"속도 : {stat.Speed}"
+        $"공 {stat.Attack}",
+        $"방 {stat.Defense}",
+        $"속도 {stat.Speed}"
     );
 }

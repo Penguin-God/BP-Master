@@ -39,7 +39,7 @@ public class ChampionView : MonoBehaviour
     public void ClearDisplay()
     {
         if (nameText != null)
-            nameText.text = "챔피언 없음";
+            nameText.text = "-";
         attackText.text = "공격 : -";
         defenseText.text = "방어 : -";
         speedText.text = "속도 : -";
