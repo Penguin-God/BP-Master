@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uB9CC\uB2A5\uC220\uC0AC"
   m_EditorClassIdentifier: 
   id: 7
-  championName: "\uB300\uC7A5\uC7A5\uC774"
+  championName: "\uB9CC\uB2A5\uC220\uC0AC"
   attack: 100
   defense: 100
   speed: 5

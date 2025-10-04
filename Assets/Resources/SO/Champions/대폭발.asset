@@ -21,6 +21,6 @@ MonoBehaviour:
   - targetSide: 2
     range: 2
     traitType: 1
-    amount: -100
+    amount: -50
     conditionType: 1
-    threshold: 120
+    threshold: 80
