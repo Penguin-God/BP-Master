@@ -10,7 +10,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ScoreView scoreView;
     [SerializeField] SwapController swapController;
 
-    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, ChampionStorageFactory factory, PhaseEventDispatcher eventDispatcher)
+    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, StorageConverter factory, PhaseEventDispatcher eventDispatcher)
     {
         swapController.Inject(phaseManager, storage);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);

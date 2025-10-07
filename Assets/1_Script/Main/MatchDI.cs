@@ -9,7 +9,7 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
-    ChampionStorageFactory storageFactory;
+    StorageConverter storageFactory;
 
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
@@ -23,7 +23,7 @@ public class MatchDI : MonoBehaviour
 
         phaseEventDispatcher.OnPhaseTrait += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
-        storageFactory = new ChampionStorageFactory(championCatalog);
+        storageFactory = new StorageConverter(championCatalog);
 
         matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
         phaseManager.Start();

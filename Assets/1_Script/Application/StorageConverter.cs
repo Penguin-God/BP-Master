@@ -1,9 +1,9 @@
 
-public class ChampionStorageFactory
+public class StorageConverter
 {
     readonly ChampionCatalog championCatalog;
 
-    public ChampionStorageFactory(ChampionCatalog championCatalog)
+    public StorageConverter(ChampionCatalog championCatalog)
     {
         this.championCatalog = championCatalog;
     }

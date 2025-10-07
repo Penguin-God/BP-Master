@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 public class StorageFactoryTests
 {
-    ChampionStorageFactory sut;
+    StorageConverter sut;
     SlotStorage<int> data;
 
     [SetUp]
