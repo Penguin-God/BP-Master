@@ -6,7 +6,7 @@ public class PlayerRoster : MonoBehaviour
     [SerializeField] ProGamerSO[] blueGamers;
     [SerializeField] ProGamerSO[] redGamers;
     public SlotStorage<ProGamer> Rosters = new();
-
+    
     void Start()
     {
         Rosters.AddSlots(Team.Blue, blueGamers.Select(x => x.CreateGamer()));

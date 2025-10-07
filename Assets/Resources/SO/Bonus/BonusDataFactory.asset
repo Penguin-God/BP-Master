@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: BonusDataFactorySO
+  m_Name: BonusDataFactory
   m_EditorClassIdentifier: App::BonusDataFactory
   champAttackBonus: {fileID: 11400000, guid: e1585175cc37f6047b66c70fdb6fe478, type: 2}
   champDefenseBonus: {fileID: 11400000, guid: cc5893c222164c24b95ab22ca8556540, type: 2}
