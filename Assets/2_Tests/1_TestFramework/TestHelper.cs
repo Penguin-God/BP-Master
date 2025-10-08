@@ -25,6 +25,15 @@ public static class TestHelper
             )
         );
 
+    public static IEnumerable<Champion> CreateFiveChamps() => new Champion[]
+    {
+        CreateChamp(1, "일"),
+        CreateChamp(2, "이"),
+        CreateChamp(3, "삼"),
+        CreateChamp(4, "사"),
+        CreateChamp(5, "오"),
+    };
+
     public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<TraitData> traits = null)
         => new Champion(id, name, stat, traits);
 
