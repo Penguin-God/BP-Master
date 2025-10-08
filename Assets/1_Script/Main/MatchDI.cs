@@ -10,6 +10,7 @@ public class MatchDI : MonoBehaviour
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
     StorageConverter storageFactory;
+    GamerRoster gamerRoster;
 
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
@@ -24,6 +25,9 @@ public class MatchDI : MonoBehaviour
         phaseEventDispatcher.OnPhaseTrait += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storageFactory = new StorageConverter(championCatalog);
+
+        gamerRoster  = GetComponent<GamerRoster>();
+        gamerRoster.SetRandomRoster(championCatalog);
 
         matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
         phaseManager.Start();
@@ -46,7 +50,7 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
     }
 
-    void ApplyMastery() => new TeamMasteryApplier().Apply(GetComponent<PlayerRoster>().Rosters, storage.PickIds, statuses);
+    void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, statuses);
 
 
     [SerializeField] BonusDataFactory bonusDataSO;

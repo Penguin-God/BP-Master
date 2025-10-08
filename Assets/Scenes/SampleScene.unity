@@ -6157,6 +6157,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71ae33eb705d9ff4f93516c3f9d583a6, type: 2}
   - {fileID: 11400000, guid: 3eb3ee9e161a5a04d900e3727b7050d2, type: 2}
   - {fileID: 11400000, guid: 9b3bc931d21d666419ad4454b4efec43, type: 2}
+  teamCount: 5
+  masteryLevels: 0a0000000f00000014000000
 --- !u!114 &1420292366
 MonoBehaviour:
   m_ObjectHideFlags: 0
