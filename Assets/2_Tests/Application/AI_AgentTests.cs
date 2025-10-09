@@ -32,7 +32,7 @@ public class AI_AgentTests
         var sut = new AI_SelectAgent(Team.Blue, phaseManager, storage, new MinSelector());
 
         // Act
-        sut.Select(Team.Blue);
+        sut.Ban(Team.Blue);
 
         // Assert
         // MinSelector이므로 3이 밴됨
@@ -49,7 +49,7 @@ public class AI_AgentTests
         var sut = new AI_SelectAgent(Team.Red, phaseManager, storage, new MinSelector());
 
         // Act
-        sut.Select(Team.Red);
+        sut.Pick(Team.Red);
 
         // Assert
         // MinSelector이므로 2가 픽됨
@@ -67,7 +67,7 @@ public class AI_AgentTests
         var sut = new AI_SelectAgent(Team.Red, phaseManager, storage, new MinSelector());
 
         // Act
-        sut.Select(Team.Red);
+        sut.Pick(Team.Red);
 
         // Assert
         Assert.AreEqual(Team.Blue, phaseManager.CurrentTurn);
@@ -82,7 +82,7 @@ public class AI_AgentTests
         var sut = new AI_SelectAgent(Team.Blue, phaseManager, storage, new MinSelector());
 
         // Act
-        sut.Select(Team.Red); // 팀 불일치 → 조기 반환
+        sut.Ban(Team.Red); // 팀 불일치
 
         // Assert
         CollectionAssert.IsEmpty(storage.GetStorage(Team.Blue, SelectType.Ban));

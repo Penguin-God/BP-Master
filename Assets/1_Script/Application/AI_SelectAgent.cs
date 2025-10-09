@@ -14,14 +14,13 @@ public class AI_SelectAgent
         this.selector = selector;
     }
 
-    public void Select(Team team)
+    void Select(Team team, SelectType selectType)
     {
         if (team != Team) return;
-
-        if (phaseManager.CurrentFlow.Phase == GamePhase.Ban)
-            storage.SaveSelect(new SelectInfo(Team, SelectType.Ban, selector.Ban(storage.SelectableIds)));
-        else if(phaseManager.CurrentFlow.Phase == GamePhase.Pick)
-            storage.SaveSelect(new SelectInfo(Team, SelectType.Pick, selector.Pick(storage.SelectableIds)));
+        storage.SaveSelect(new SelectInfo(Team, selectType, selector.Ban(storage.SelectableIds)));
         phaseManager.SubmitAction(Team);
     }
+
+    public void Ban(Team team) => Select(team, SelectType.Ban);
+    public void Pick(Team team) => Select(team, SelectType.Pick);
 }

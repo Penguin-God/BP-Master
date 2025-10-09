@@ -32,8 +32,8 @@ public class MatchDI : MonoBehaviour
         matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
 
         var ai = new AI_SelectAgent(Team.Red, phaseManager, storage, new RandomSelector());
-        phaseEventDispatcher.OnPhasePick += ai.Select;
-        phaseEventDispatcher.OnPhaseBan += ai.Select;
+        phaseEventDispatcher.OnPhaseBan += ai.Ban;
+        phaseEventDispatcher.OnPhasePick += ai.Pick;
         phaseManager.Start();
     }
 
