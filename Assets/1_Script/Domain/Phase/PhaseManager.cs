@@ -43,12 +43,6 @@ public class PhaseManager
         _dispatcher = dispatcher;
     }
 
-    public PhaseManager(PhaseData[] phaseDatas)
-    {
-        _phases = new Queue<PhaseData>(phaseDatas);
-        _phases.Enqueue(new PhaseData(GamePhase.Done, new Phase(new[] { Team.All })));
-    }
-
     public void Start()
     {
         _current = _phases.Dequeue();

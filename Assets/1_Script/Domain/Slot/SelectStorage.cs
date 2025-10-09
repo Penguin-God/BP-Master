@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static PlasticGui.WorkspaceWindow.Merge.MergeInProgress;
 
 public readonly struct SelectInfo
 {
@@ -28,23 +27,23 @@ public class GameBanPickStorage
     public event Action<Team, int> OnBan;
     public event Action<Team, int> OnPick;
 
-    readonly HashSet<int> selectableIds = new();
+    public readonly HashSet<int> SelectableIds = new();
 
     public event Action<int> OnSwap;
 
     public GameBanPickStorage(IEnumerable<int> allIds)
     {
-        selectableIds = new HashSet<int>(allIds);
+        SelectableIds = new HashSet<int>(allIds);
         storage.Add(Team.Red, new());
         storage.Add(Team.Blue, new());
     }
 
-    public bool CanSelected(int id) => selectableIds.Contains(id);
+    public bool CanSelected(int id) => SelectableIds.Contains(id);
 
     public void SaveSelect(SelectInfo info)
     {
         if (CanSelected(info.Id) == false) return;
-        selectableIds.Remove(info.Id);
+        SelectableIds.Remove(info.Id);
 
         if (info.Select == SelectType.Ban)
         {
