@@ -30,5 +30,6 @@ public class MasteryDrawer
         return results.ToArray();
     }
 
-    int GetRandomIndex(int listCount) => new Random().Next(listCount);
+    readonly Random random = new Random();
+    int GetRandomIndex(int listCount) => random.Next(listCount);
 }
