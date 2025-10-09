@@ -16,7 +16,7 @@ public class AI_SelectAgent
 
     public void Select(Team team)
     {
-        if (team == Team) return;
+        if (team != Team) return;
 
         if (phaseManager.CurrentFlow.Phase == GamePhase.Ban)
             storage.SaveSelect(new SelectInfo(Team, SelectType.Ban, selector.Ban(storage.SelectableIds)));
