@@ -12,11 +12,9 @@ public class TraitSlotFilter
     }
 
     public IEnumerable<SlotData> FilteringUseableSlots(Team team)
-    {
-        return Enumerable.Range(0, TeamSize)
+        => Enumerable.Range(0, TeamSize)
                  .Select(i => new SlotData(team, i))
                  .Where(slot => traitUseFacade.IsTraitUsed(slot) == false);
-    }
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {

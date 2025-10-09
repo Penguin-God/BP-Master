@@ -56,21 +56,6 @@ public class TraitUseView : MonoBehaviour
     {
         presenter.ClickChampion(new SlotData(buttonTeam, index));
         ActiveButtons();
-        //var result = presenter.ClickChampion(clickSlot);
-        //switch (result)
-        //{
-        //    case TraitClickResult.Faild:
-        //        print("선택실패");
-        //        break;
-        //    case TraitClickResult.Select:
-        //        print(buttonTeam + " select");
-        //        ActiveButtons();
-        //        break;
-        //    case TraitClickResult.Use:
-        //        print(buttonTeam + " use");
-        //        ActiveButtons();
-        //        break;
-        //}
     }
 
     void ActiveButton(Button btn)
