@@ -32,7 +32,7 @@ public class MatchUI_Controller : MonoBehaviour
     public void TraitUI_Init(Team team, PhaseEventDispatcher eventDispatcher, TraitUseFacade traitController, SlotStorage<Champion> champions, SlotStorage<ChampionStatus> status)
     {
         banPickView.BindStatChangeEvent(status);
-        var presenter = new TraitUsePresenter(traitController, champions, team);
+        var presenter = new TraitUsePresenter(traitController, new ChampionStorageConverter().ChamptionToTrait(champions), team);
         traitUseView.Init(presenter);
         eventDispatcher.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.UpdateTrait(team);

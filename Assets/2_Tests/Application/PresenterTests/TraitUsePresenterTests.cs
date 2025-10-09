@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using static TestHelper;
 
 public class TraitUsePresenterTests
@@ -9,14 +10,14 @@ public class TraitUsePresenterTests
     [SetUp]
     public void SetUp()
     {
-        SlotStorage<Champion> picks = new();
-        picks.AddSlot(Team.Blue, CreateChamp(traits: new TraitData[] { CreateTraitData(type: TraitType.AttackChanger, amount: 10), CreateTraitData(type: TraitType.DefenseChanger, amount: 10) }));
-        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
-        picks.AddSlot(Team.Blue, CreateTraitChamp(Side.Opponent, TargetRange.All, 10));
+        SlotStorage<IEnumerable<TraitData>> picks = new();
+        picks.AddSlot(Team.Blue, new TraitData[] { CreateTraitData(type: TraitType.AttackChanger, amount: 10), CreateTraitData(type: TraitType.DefenseChanger, amount: 10) });
+        picks.AddSlot(Team.Blue, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Opponent, range: TargetRange.All, amount: 10));
+        picks.AddSlot(Team.Blue, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Opponent, range: TargetRange.All, amount: 10));
 
-        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 10));
-        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 10));
-        picks.AddSlot(Team.Red, CreateTraitChamp(Side.Self, TargetRange.Single, 10));
+        picks.AddSlot(Team.Red, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Self, range: TargetRange.Single, amount: 10));
+        picks.AddSlot(Team.Red, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Self, range: TargetRange.Single, amount: 10));
+        picks.AddSlot(Team.Red, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Self, range: TargetRange.Single, amount: 10));
 
         statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus());

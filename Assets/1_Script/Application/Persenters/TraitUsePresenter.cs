@@ -4,15 +4,15 @@ using System.Linq;
 public class TraitUsePresenter
 {
     readonly TraitUseFacade traitController;
-    readonly SlotStorage<Champion> championStorage;
+    readonly SlotStorage<IEnumerable<TraitData>> traitDatas;
     TraitSlotFilter slotFilter;
     TraitSelectionState selectionState;
     
-    public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<Champion> champions, Team team)
+    public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<IEnumerable<TraitData>> traits, Team team)
     {
         this.traitController = traitController;
-        championStorage = champions;
-        slotFilter = new TraitSlotFilter(championStorage.GetTeam(Team.Blue).Count(), traitController);
+        traitDatas = traits;
+        slotFilter = new TraitSlotFilter(traitDatas.GetTeam(Team.Blue).Count(), traitController);
         selectionState = new TraitSelectionState(team);
     }
     public void ChangeTeam(Team team) => selectionState = new TraitSelectionState(team);
@@ -29,7 +29,7 @@ public class TraitUsePresenter
     {
         if (traitController.IsTraitUsed(selectSlot)) return;
 
-        var traitData = championStorage.GetSlot(selectSlot).TraitDatas;
+        var traitData = traitDatas.GetSlot(selectSlot);
         traitController.UseTrait(selectSlot, targetSlot, traitData);
         selectSlot = default;
     }
@@ -39,7 +39,7 @@ public class TraitUsePresenter
         if (selectionState.IsSelect == false) return slotFilter.FilteringUseableSlots(selectionState.Team);
         else
         {
-            var targetSides = championStorage.GetSlot(selectSlot).TraitDatas.Select(x => x.TargetRule.TargetSide);
+            var targetSides = traitDatas.GetSlot(selectSlot).Select(x => x.TargetRule.TargetSide);
             return slotFilter.FilteringTargetSlots(selectionState.Team, targetSides);
         }
     }
