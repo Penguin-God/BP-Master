@@ -7,19 +7,15 @@ public class TraitUsePresenter
     readonly SlotStorage<Champion> championStorage;
     TraitSlotFilter slotFilter;
     TraitSelectionState selectionState;
-    Team currentTeam = Team.All;
     
-    public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<Champion> champions)
+    public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<Champion> champions, Team team)
     {
         this.traitController = traitController;
         championStorage = champions;
         slotFilter = new TraitSlotFilter(championStorage.GetTeam(Team.Blue).Count(), traitController);
-    }
-    public void ChangeTeam(Team team)
-    {
-        currentTeam = team;
         selectionState = new TraitSelectionState(team);
     }
+    public void ChangeTeam(Team team) => selectionState = new TraitSelectionState(team);
 
     SlotData selectSlot;
     public void ClickChampion(SlotData slot)
@@ -40,11 +36,11 @@ public class TraitUsePresenter
 
     public IEnumerable<SlotData> GetClickableSlots()
     {
-        if (selectionState.IsSelect == false) return slotFilter.FilteringUseableSlots(currentTeam);
+        if (selectionState.IsSelect == false) return slotFilter.FilteringUseableSlots(selectionState.Team);
         else
         {
             var targetSides = championStorage.GetSlot(selectSlot).TraitDatas.Select(x => x.TargetRule.TargetSide);
-            return slotFilter.FilteringTargetSlots(currentTeam, targetSides);
+            return slotFilter.FilteringTargetSlots(selectionState.Team, targetSides);
         }
     }
 }

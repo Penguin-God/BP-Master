@@ -27,14 +27,12 @@ public class TraitUsePresenterTests
         statuses.AddSlot(Team.Red, CreateStatus());
         statuses.AddSlot(Team.Red, CreateStatus());
 
-        presenter = new TraitUsePresenter(new TraitUseFacade(statuses), picks);
+        presenter = new TraitUsePresenter(new TraitUseFacade(statuses), picks, Team.Blue);
     }
 
     [Test]
     public void 특성_사용_적용()
     {
-        presenter.ChangeTeam(Team.Blue);
-
         presenter.ClickChampion(CreateSlot(Team.Blue, 0)); // 선택
         presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용
 
@@ -45,7 +43,6 @@ public class TraitUsePresenterTests
     [Test]
     public void 클릭_상태에_따라_선택_가능한_슬롯들_반환()
     {
-        presenter.ChangeTeam(Team.Blue);
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());
 
         presenter.ClickChampion(CreateSlot(Team.Blue, 1));

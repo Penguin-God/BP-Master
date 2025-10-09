@@ -1,8 +1,9 @@
 using NUnit.Framework;
+using System.Linq;
 
 public class StorageFactoryTests
 {
-    StorageConverter sut;
+    IdStorageConverter sut;
     SlotStorage<int> data;
 
     [SetUp]
@@ -18,7 +19,7 @@ public class StorageFactoryTests
     [Test]
     public void ID를_챔피언_상태로_변환()
     {
-        SlotStorage<ChampionStatus> result = sut.CreateStatusStorage(data);
+        SlotStorage<ChampionStatus> result = sut.IdToStatus(data);
 
         Assert.AreEqual(new ChampionStatData(10, 10, 10), result.GetSlot(TestHelper.CreateBlueSlot(0)).Stat);
         Assert.AreEqual(new ChampionStatData(20, 20, 20), result.GetSlot(TestHelper.CreateRedSlot(0)).Stat);
@@ -27,9 +28,35 @@ public class StorageFactoryTests
     [Test]
     public void ID를_챔피언으로_변환()
     {
-        SlotStorage<Champion> result = sut.CreateChampionStorage(data);
+        SlotStorage<Champion> result = sut.IdToChampion(data);
 
         Assert.AreEqual("일", result.GetSlot(TestHelper.CreateBlueSlot(0)).Name);
         Assert.AreEqual("이", result.GetSlot(TestHelper.CreateRedSlot(0)).Name);
+    }
+
+    [Test]
+    public void 챔피언을_특성_데이터로_반환()
+    {
+        // Arrange
+        var championStorage = new SlotStorage<Champion>();
+        var converter = new ChampionStorageConverter();
+
+        championStorage.AddSlots(Team.Blue, new[]
+        {
+            TestHelper.CreateTraitChamp(Side.All, TargetRange.All, 10),
+        });
+
+        championStorage.AddSlots(Team.Red, new[]
+        {
+            TestHelper.CreateTraitChamp(Side.All, TargetRange.All, 50),
+        });
+
+        // Act
+        var result = converter.ChamptionToTrait(championStorage);
+
+        // Assert
+        Assert.AreEqual(1, result.GetTeam(Team.Blue).Count());
+        Assert.AreEqual(1, result.GetTeam(Team.Red).Count());
+        Assert.AreEqual(10, result.GetSlot(TestHelper.CreateBlueSlot(0)).ToArray()[0].Amount);
     }
 }

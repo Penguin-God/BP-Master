@@ -1,14 +1,15 @@
+using System.Collections.Generic;
 
-public class StorageConverter
+public class IdStorageConverter
 {
     readonly ChampionCatalog championCatalog;
 
-    public StorageConverter(ChampionCatalog championCatalog)
+    public IdStorageConverter(ChampionCatalog championCatalog)
     {
         this.championCatalog = championCatalog;
     }
 
-    public SlotStorage<ChampionStatus> CreateStatusStorage(SlotStorage<int> idStorage)
+    public SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage)
     {
         var result = new SlotStorage<ChampionStatus>();
 
@@ -21,7 +22,7 @@ public class StorageConverter
         return result;
     }
 
-    public SlotStorage<Champion> CreateChampionStorage(SlotStorage<int> idStorage)
+    public SlotStorage<Champion> IdToChampion(SlotStorage<int> idStorage)
     {
         var result = new SlotStorage<Champion>();
 
@@ -29,6 +30,22 @@ public class StorageConverter
         {
             var champ = championCatalog.GetChampion(idStorage.GetSlot(slot));
             result.AddSlot(slot.Team, champ);
+        }
+
+        return result;
+    }
+}
+
+public class ChampionStorageConverter
+{
+    public SlotStorage<IEnumerable<TraitData>> ChamptionToTrait(SlotStorage<Champion> champions)
+    {
+        var result = new SlotStorage<IEnumerable<TraitData>>();
+
+        foreach (var slot in champions.GetAllSlotDatas())
+        {
+            var trait = champions.GetSlot(slot).TraitDatas;
+            result.AddSlot(slot.Team, trait);
         }
 
         return result;

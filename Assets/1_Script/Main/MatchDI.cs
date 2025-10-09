@@ -9,7 +9,7 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
-    StorageConverter storageFactory;
+    IdStorageConverter storageFactory;
     GamerRoster gamerRoster;
 
     [SerializeField] UtilKey utilKey;
@@ -24,7 +24,7 @@ public class MatchDI : MonoBehaviour
 
         phaseEventDispatcher.OnPhaseTrait += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
-        storageFactory = new StorageConverter(championCatalog);
+        storageFactory = new IdStorageConverter(championCatalog);
 
         gamerRoster  = GetComponent<GamerRoster>();
         gamerRoster.SetRandomRoster(championCatalog);
@@ -43,12 +43,12 @@ public class MatchDI : MonoBehaviour
     {
         if (initTrait) return;
 
-        statuses = storageFactory.CreateStatusStorage(storage.PickIds);
+        statuses = storageFactory.IdToStatus(storage.PickIds);
 
         var traitController = new TraitUseFacade(statuses);
         traitController.OnTraitUsed += phaseManager.SubmitAction;
 
-        matchUI_Controller.TraitUI_Init(team, phaseEventDispatcher, traitController, storageFactory.CreateChampionStorage(storage.PickIds), statuses);
+        matchUI_Controller.TraitUI_Init(team, phaseEventDispatcher, traitController, storageFactory.IdToChampion(storage.PickIds), statuses);
 
         ApplyMastery(); // 마지막에
         initTrait = true;
