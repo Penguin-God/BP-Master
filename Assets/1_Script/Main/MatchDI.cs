@@ -34,6 +34,7 @@ public class MatchDI : MonoBehaviour
         var ai = new AI_SelectAgent(Team.Red, phaseManager, storage, new RandomSelector());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
+
         phaseManager.Start();
     }
 
@@ -45,10 +46,13 @@ public class MatchDI : MonoBehaviour
 
         statuses = storageFactory.IdToStatus(storage.PickIds);
 
-        var traitController = new TraitUseFacade(statuses);
-        traitController.OnTraitUsed += phaseManager.SubmitAction;
+        var traitFacade = new TraitUseFacade(statuses);
+        traitFacade.OnTraitUsed += phaseManager.SubmitAction;
 
-        matchUI_Controller.TraitUI_Init(team, phaseEventDispatcher, traitController, storageFactory.IdToChampion(storage.PickIds), statuses);
+        var trait_ai = new AI_TraitAgent(Team.Red, new TraitSlotFilter(5, traitFacade), new ChampionStorageConverter().ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
+        phaseEventDispatcher.OnPhaseTrait += trait_ai.UseTrait;
+
+        matchUI_Controller.TraitUI_Init(team, phaseEventDispatcher, traitFacade, storageFactory.IdToChampion(storage.PickIds), statuses);
 
         ApplyMastery(); // 마지막에
         initTrait = true;

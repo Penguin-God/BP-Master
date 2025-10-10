@@ -35,7 +35,7 @@ public class MatchUI_Controller : MonoBehaviour
         var presenter = new TraitUsePresenter(traitController, new ChampionStorageConverter().ChamptionToTrait(champions), team);
         traitUseView.Init(presenter);
         eventDispatcher.OnPhaseTrait += traitUseView.UpdateTrait;
-        traitUseView.UpdateTrait(team);
+        traitUseView.Set(team);
 
         eventDispatcher.OnPhaseTrait += (team) => scoreView.UpdateTeamScore(status, team);
     }

@@ -39,9 +39,14 @@ public class TraitUseView : MonoBehaviour
             InActiveButton(btn);
     }
 
-    public void UpdateTrait(Team team) // ActiveButtons 발동 순간이 애매함
+    public void Set(Team team)
     {
         presenter.ChangeTeam(team);
+        ActiveButtons();
+    }
+
+    public void UpdateTrait(Team team) // ActiveButtons 발동 순간이 애매함
+    {
         ActiveButtons();
     }
 
