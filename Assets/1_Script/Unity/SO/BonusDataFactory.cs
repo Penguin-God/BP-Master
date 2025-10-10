@@ -1,12 +1,8 @@
 using UnityEngine;
 
-
 [CreateAssetMenu(fileName = "BonusDataFactorySO", menuName = "BP Master/BonusFactorySO")]
 public class BonusDataFactory : ScriptableObject
 {
-    [SerializeField] BonusDataSO champAttackBonus;
-    [SerializeField] BonusDataSO champDefenseBonus;
-
     [SerializeField] BonusDataSO attackBonus;
     public BonusDataSO AttackBonus => attackBonus;
 
