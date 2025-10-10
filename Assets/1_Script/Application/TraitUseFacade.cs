@@ -14,15 +14,6 @@ public class TraitUseFacade
         applier = new TraitApplier(statuses);
     }
 
-    public void UseTrait(SlotData traitSlot, SlotData targetSlot, TraitData traitData)
-    {
-        if (IsTraitUsed(traitSlot)) return;
-
-        statuses.GetSlot(traitSlot).UseTrait(); 
-        applier.Execute(traitData, targetSlot);
-        OnTraitUsed?.Invoke(traitSlot.Team);
-    }
-
     public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitDatas)
     {
         if (IsTraitUsed(traitSlot)) return;

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 public class AI_TraitUseTests
@@ -8,11 +7,11 @@ public class AI_TraitUseTests
     public void AI_특성_사용()
     {
         var statuses = new SlotStorage<ChampionStatus>();
-        statuses.AddSlot(Team.Blue, new ChampionStatus(new ChampionStatData(0, 0, 0)));
-        statuses.AddSlot(Team.Red, new ChampionStatus(new ChampionStatData(0, 0, 0)));
+        statuses.AddSlot(Team.Blue, new ChampionStatus(default));
+        statuses.AddSlot(Team.Red, new ChampionStatus(default));
 
         var traitStorage = new SlotStorage<IEnumerable<TraitData>>();
-        var rule = new TraitTargetRule(Side.Self, TargetRange.Single);
+        var rule = new TraitTargetRule(Side.Opponent, TargetRange.Single);
         var traits = new TraitData[] { new TraitData(TraitType.AttackChanger, 10, TraitConditionType.None, 0, rule) };
 
         traitStorage.AddSlot(Team.Blue, traits);
