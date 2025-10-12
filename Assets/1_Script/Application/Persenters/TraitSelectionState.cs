@@ -4,7 +4,7 @@ public class TraitSelectionState
     public readonly Team Team;
     SlotData? useSlot;
     public SlotData UseSlot => useSlot.Value;
-    public bool IsSelect => useSlot.HasValue;
+    public bool UseTurn => useSlot.HasValue;
 
     public TraitSelectionState(Team team) => Team = team;
 
@@ -12,7 +12,7 @@ public class TraitSelectionState
     {
         if (IsSelectable(slot.Team) == false) return null;
 
-        if (IsSelect)
+        if (UseTurn)
         {
             var result = UseSlot;
             useSlot = null;
@@ -25,5 +25,5 @@ public class TraitSelectionState
         }
     }
 
-    bool IsSelectable(Team selectTeam) => (IsSelect == false && Team == selectTeam) || IsSelect;
+    bool IsSelectable(Team selectTeam) => (UseTurn == false && Team == selectTeam) || UseTurn;
 }

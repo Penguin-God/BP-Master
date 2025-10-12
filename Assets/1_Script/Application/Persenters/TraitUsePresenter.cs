@@ -36,7 +36,7 @@ public class TraitUsePresenter
 
     IEnumerable<SlotData> GetSlots()
     {
-        if (selectionState.IsSelect == false) return slotFilter.FilteringUseableSlots(selectionState.Team);
+        if (selectionState.UseTurn == false) return slotFilter.FilteringUseableSlots(selectionState.Team);
         else
         {
             var targetSides = traitDatas.GetSlot(selectionState.UseSlot).Select(x => x.TargetRule.TargetSide);
