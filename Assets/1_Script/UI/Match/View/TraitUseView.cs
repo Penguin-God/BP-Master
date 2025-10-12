@@ -45,9 +45,10 @@ public class TraitUseView : MonoBehaviour
         ActiveButtons();
     }
 
-    public void UpdateTrait(Team team) // ActiveButtons 발동 순간이 애매함
+    public void UpdateTrait(Team team)
     {
-        ActiveButtons();
+        if (team == presenter.Team) ActiveButtons();
+        else InActiveAllBtns();
     }
 
     void ActiveButtons()
@@ -60,6 +61,7 @@ public class TraitUseView : MonoBehaviour
     void OnButtonClicked(Team buttonTeam, int index)
     {
         presenter.ClickChampion(new SlotData(buttonTeam, index));
-        ActiveButtons();
+        if(presenter.selectionState.UseTurn)
+            ActiveButtons();
     }
 }

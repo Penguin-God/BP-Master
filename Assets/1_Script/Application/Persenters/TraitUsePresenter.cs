@@ -6,8 +6,9 @@ public class TraitUsePresenter
     readonly TraitUseFacade traitController;
     readonly SlotStorage<IEnumerable<TraitData>> traitDatas;
     TraitSlotFilter slotFilter;
-    TraitSelectionState selectionState;
-    
+    public TraitSelectionState selectionState;
+    public Team Team => selectionState.Team;
+
     public TraitUsePresenter(TraitUseFacade traitController, SlotStorage<IEnumerable<TraitData>> traits, Team team)
     {
         this.traitController = traitController;
