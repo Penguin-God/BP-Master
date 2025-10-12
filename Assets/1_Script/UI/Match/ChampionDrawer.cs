@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -21,6 +23,23 @@ public class ChampionDrawer : MonoBehaviour
             btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
             btn.onClick.AddListener(() => onclick(data, btn));
         }
+    }
+
+    public IEnumerable<Button> CreateChampionButtons(UnityAction<ChampionSO, Button> onclick)
+    {
+        foreach (Transform child in content)
+            Destroy(child.gameObject);
+
+        var result = new List<Button>();
+        foreach (var data in championManager.AllChampion)
+        {
+            var btn = Instantiate(championBtn, content).GetComponent<Button>();
+            btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
+            btn.onClick.AddListener(() => onclick(data, btn));
+            btn.GetOrAddComponent<ChampionIdentify>().Id = data.Id;
+            result.Add(btn);
+        }
+        return result;
     }
 
     public void HideView() => gameObject.SetActive(false);

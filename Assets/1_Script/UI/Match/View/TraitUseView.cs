@@ -36,7 +36,7 @@ public class TraitUseView : MonoBehaviour
     void InActiveAllBtns()
     {
         foreach (Button btn in buttons.Values.SelectMany(x => x))
-            InActiveButton(btn);
+            ButtonUtil.InActiveButton(btn);
     }
 
     public void Set(Team team)
@@ -54,28 +54,12 @@ public class TraitUseView : MonoBehaviour
     {
         InActiveAllBtns();
         foreach (var slot in presenter.GetClickableSlots())
-            ActiveButton(buttons[slot.Team][slot.Index]);
+            ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
     }
 
     void OnButtonClicked(Team buttonTeam, int index)
     {
         presenter.ClickChampion(new SlotData(buttonTeam, index));
         ActiveButtons();
-    }
-
-    void ActiveButton(Button btn)
-    {
-        btn.enabled = true;
-        var colors = btn.colors;
-        colors.normalColor = new Color(1f, 1f, 1f);
-        btn.colors = colors;
-    }
-
-    void InActiveButton(Button btn)
-    {
-        btn.enabled = false;
-        var colors = btn.colors;
-        colors.normalColor = new Color(0.5f, 0.5f, 0.5f);
-        btn.colors = colors;
     }
 }

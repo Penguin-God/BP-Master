@@ -26,20 +26,13 @@ public class ChampionSelector_UI : MonoBehaviour
         selectBtn = button;
     }
 
-    void InActiveSelectButton()
-    {
-        selectBtn.enabled = false;
-        var colors = selectBtn.colors;
-        colors.normalColor = new Color(0.5f, 0.5f, 0.5f); // 회색 톤
-        selectBtn.colors = colors;
-        selectBtn = null;
-    }
-
     void NailDownChampion()
     {
         championSelectPresenter.NailDownChampion(phaseManager.CurrentFlow);
         phaseManager.SubmitAction(phaseManager.CurrentTurn);
         championFocusView.ClearDisplay();
-        InActiveSelectButton();
+
+        ButtonUtil.InActiveButton(selectBtn);
+        selectBtn = null;
     }
 }
