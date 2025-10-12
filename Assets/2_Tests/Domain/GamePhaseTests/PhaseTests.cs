@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 
 public class PhaseTests
 {
@@ -57,13 +58,12 @@ public class PhaseTests
     }
 
     [Test]
-    public void 잘못된_팀_제출시_플로우_진행_안함()
+    public void 잘못된_팀_제출시_에러()
     {
         var sut = CreateSut(new[] { CreateData(GamePhase.Ban, Team.Blue) });
         sut.Start();
 
-        sut.SubmitAction(Team.Red);
-        Assert.AreEqual(CreateFlow(GamePhase.Ban, Team.Blue), sut.CurrentFlow);
+        Assert.Throws<Exception>(() => sut.SubmitAction(Team.Red));
     }
 
     [Test]

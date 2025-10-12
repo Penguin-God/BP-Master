@@ -63,6 +63,7 @@ public class PhaseManager
             }
         }
         else if (actingTeam == CurrentTurn) Advance();
+        else throw new System.Exception($"현재 턴 {CurrentTurn}, 행동 팀 {actingTeam}");
     }
     bool AllTeamsSubmitted() => _submittedTeams.Contains(Team.Blue) && _submittedTeams.Contains(Team.Red);
 
