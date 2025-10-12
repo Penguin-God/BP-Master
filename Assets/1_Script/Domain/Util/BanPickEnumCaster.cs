@@ -25,7 +25,14 @@ public static class BanPickEnumCaster
     public static Side MergeSide(IEnumerable<Side> sides)
     {
         if (sides.All(s => s == Side.Self)) return Side.Self;
-        else if(sides.All(s => s == Side.Opponent)) return Side.Opponent;
+        else if (sides.All(s => s == Side.Opponent)) return Side.Opponent;
         else return Side.All;
+    }
+
+    public static Team GetOppoentTeam(Team team)
+    {
+        if (team == Team.Blue) return Team.Red;
+        else if (team == Team.Red) return Team.Blue;
+        else throw new Exception("All은 안됨");
     }
 }
