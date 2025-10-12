@@ -29,13 +29,13 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnPick += (team, id) => scoreView.UpdateTeamScore(factory.IdToStatus(storage.PickIds), team);
     }
 
-    public void TraitUI_Init(Team team, PhaseEventDispatcher eventDispatcher, TraitUseFacade traitController, SlotStorage<Champion> champions, SlotStorage<ChampionStatus> status)
+    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, TraitUseFacade traitController, SlotStorage<Champion> champions, SlotStorage<ChampionStatus> status)
     {
         banPickView.BindStatChangeEvent(status);
-        var presenter = new TraitUsePresenter(traitController, new ChampionStorageConverter().ChamptionToTrait(champions), team);
+        var presenter = new TraitUsePresenter(traitController, new ChampionStorageConverter().ChamptionToTrait(champions), playerTeam);
         traitUseView.Init(presenter);
         eventDispatcher.OnPhaseTrait += traitUseView.UpdateTrait;
-        traitUseView.Set(team);
+        traitUseView.Set(playerTeam);
 
         eventDispatcher.OnPhaseTrait += (team) => scoreView.UpdateTeamScore(status, team);
     }

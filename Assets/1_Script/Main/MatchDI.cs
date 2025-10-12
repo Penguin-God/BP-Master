@@ -12,9 +12,14 @@ public class MatchDI : MonoBehaviour
     IdStorageConverter storageFactory;
     GamerRoster gamerRoster;
 
+    Team playerTeam;
+    Team aiTeam;
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
+        this.playerTeam = playerTeam;
+        aiTeam = BanPickEnumCaster.GetOppoentTeam(playerTeam);
+
         storage = new GameBanPickStorage(championCatalog.AllId);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -31,7 +36,7 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
 
-        var ai = new AI_SelectAgent(Team.Red, phaseManager, storage, new RandomSelector());
+        var ai = new AI_SelectAgent(aiTeam, phaseManager, storage, new RandomSelector());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
 
@@ -43,19 +48,20 @@ public class MatchDI : MonoBehaviour
     void Trait(Team team)
     {
         if (initTrait) return;
+        initTrait = true;
 
         statuses = storageFactory.IdToStatus(storage.PickIds);
 
         var traitFacade = new TraitUseFacade(statuses);
         traitFacade.OnTraitUsed += phaseManager.SubmitAction;
 
-        var trait_ai = new AI_TraitAgent(Team.Red, new TraitSlotFilter(5, traitFacade), new ChampionStorageConverter().ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
+        var trait_ai = new AI_TraitAgent(aiTeam, new TraitSlotFilter(5, traitFacade), new ChampionStorageConverter().ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
         phaseEventDispatcher.OnPhaseTrait += trait_ai.UseTrait;
 
-        matchUI_Controller.TraitUI_Init(team, phaseEventDispatcher, traitFacade, storageFactory.IdToChampion(storage.PickIds), statuses);
+        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, storageFactory.IdToChampion(storage.PickIds), statuses);
 
         ApplyMastery(); // 마지막에
-        initTrait = true;
+        if(aiTeam == Team.Blue) trait_ai.UseTrait(Team.Blue);
     }
 
     void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, statuses);
