@@ -4,7 +4,7 @@ using UnityEngine;
 public class MatchUI_Controller : MonoBehaviour
 {
     [SerializeField] ChampionSelector_UI championSelector;
-    [SerializeField] ChampionDrawer championDrawer;
+    [SerializeField] ChampionButtonView championDrawer;
     [SerializeField] TraitUseView traitUseView;
     [SerializeField] BanPickView banPickView;
     [SerializeField] ScoreView scoreView;
@@ -15,10 +15,12 @@ public class MatchUI_Controller : MonoBehaviour
         banPickView.ViewMastery();
         swapController.Inject(phaseManager, storage);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
-        championDrawer.DrawChampionButtons(championSelector.SelectChampion);
 
         storage.OnBan += banPickView.UpdateBanView;
         storage.OnPick += banPickView.UpdatePickView;
+
+        storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
+        storage.OnPick += (team, id) => championDrawer.InActiveButton(id);
 
         eventDispatcher.OnPhaseSwap += swapController.Init;
         eventDispatcher.OnPhaseSwap += _ => banPickView.HideBan();

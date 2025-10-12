@@ -4566,6 +4566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nailDownBtn: {fileID: 919244431}
   championFocusView: {fileID: 1640189473}
+  championManager: {fileID: 1420292359}
+  champBtnView: {fileID: 1027524856}
 --- !u!114 &1027524856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4575,7 +4577,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027524850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ae2f2ebbccf3e4eaa7f4f0f7624fa8, type: 3}
+  m_Script: {fileID: 11500000, guid: c9a27498091c0b84c905b0e577b75df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   championManager: {fileID: 1420292359}

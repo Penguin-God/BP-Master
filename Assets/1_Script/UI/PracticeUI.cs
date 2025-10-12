@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class PracticeUI : MonoBehaviour
 {
     [SerializeField] ProGamerLoder playerManager;
-    ChampionDrawer championSelectionUI;
+    ChampionButtonView championSelectionUI;
     PlayerSectionUI playerSectionUI;
     int currentPracticePlayer = -1;
 
     void Start()
     {
-        championSelectionUI = GetComponentInChildren<ChampionDrawer>(true);
+        championSelectionUI = GetComponentInChildren<ChampionButtonView>(true);
         playerSectionUI = GetComponentInChildren<PlayerSectionUI>(true);
         championSelectionUI.gameObject.SetActive(false);
         playerSectionUI.gameObject.SetActive(true);
@@ -25,7 +25,7 @@ public class PracticeUI : MonoBehaviour
         currentPracticePlayer = player.Id;
 
         championSelectionUI.gameObject.SetActive(true);
-        championSelectionUI.DrawChampionButtons(IncreasedMastery);
+        championSelectionUI.CreateButtons();
     }
 
 
