@@ -6,7 +6,7 @@ public class TraitUseFacade
     readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitApplier applier;
 
-    public event Action<Team> OnTraitUsed;
+    public event Action<SlotData> OnTraitUsed;
 
     public TraitUseFacade(SlotStorage<ChampionStatus> statuses)
     {
@@ -21,7 +21,7 @@ public class TraitUseFacade
         statuses.GetSlot(traitSlot).UseTrait();
         foreach (var data in traitDatas)
             applier.Execute(data, targetSlot);
-        OnTraitUsed?.Invoke(traitSlot.Team);
+        OnTraitUsed?.Invoke(traitSlot);
     }
 
     public bool IsTraitUsed(SlotData slot) => statuses.GetSlot(slot).IsUseTrait;
