@@ -1,9 +1,3 @@
-public enum TraitSelectResult
-{
-    Faild,
-    Select,
-    Use
-}
 
 public class TraitSelectionState
 {
@@ -11,21 +5,23 @@ public class TraitSelectionState
     SlotData? useSlot;
     public SlotData UseSlot => useSlot.Value;
     public bool IsSelect => useSlot.HasValue;
+
     public TraitSelectionState(Team team) => Team = team;
 
-    public TraitSelectResult SelectTraitSlot(SlotData slot)
+    public SlotData? ClickTraitSlot(SlotData slot)
     {
-        if (IsSelectable(slot.Team) == false) return TraitSelectResult.Faild;
+        if (IsSelectable(slot.Team) == false) return null;
 
         if (IsSelect)
         {
+            var result = UseSlot;
             useSlot = null;
-            return TraitSelectResult.Use;
+            return result;
         }
         else
         {
             useSlot = slot;
-            return TraitSelectResult.Select;
+            return null;
         }
     }
 

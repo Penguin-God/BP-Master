@@ -17,29 +17,29 @@ public class TraitUsePresenter
     }
     public void ChangeTeam(Team team) => selectionState = new TraitSelectionState(team);
 
-    SlotData selectSlot;
     public void ClickChampion(SlotData slot)
     {
-        var result = selectionState.SelectTraitSlot(slot);
-        if (result == TraitSelectResult.Use) UseTrait(slot);
-        else if (result == TraitSelectResult.Select) selectSlot = slot;
+        SlotData? result = selectionState.ClickTraitSlot(slot);
+        if (result.HasValue) UseTrait(result.Value, slot);
     }
 
-    void UseTrait(SlotData targetSlot)
+    void UseTrait(SlotData useSlot, SlotData targetSlot)
     {
-        if (traitController.IsTraitUsed(selectSlot)) return;
-
-        var traitData = traitDatas.GetSlot(selectSlot);
-        traitController.UseTrait(selectSlot, targetSlot, traitData);
-        selectSlot = default;
+        var traitData = traitDatas.GetSlot(useSlot);
+        traitController.UseTrait(useSlot, targetSlot, traitData);
     }
 
     public IEnumerable<SlotData> GetClickableSlots()
     {
+        return GetSlots();
+    }
+
+    IEnumerable<SlotData> GetSlots()
+    {
         if (selectionState.IsSelect == false) return slotFilter.FilteringUseableSlots(selectionState.Team);
         else
         {
-            var targetSides = traitDatas.GetSlot(selectSlot).Select(x => x.TargetRule.TargetSide);
+            var targetSides = traitDatas.GetSlot(selectionState.UseSlot).Select(x => x.TargetRule.TargetSide);
             return slotFilter.FilteringTargetSlots(selectionState.Team, targetSides);
         }
     }

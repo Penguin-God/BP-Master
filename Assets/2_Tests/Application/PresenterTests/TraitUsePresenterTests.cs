@@ -58,15 +58,16 @@ public class TraitUsePresenterTests
     public void 선택에_따라_결과_반환()
     {
         TraitSelectionState sut = new(Team.Blue);
+        SlotData useSlot = CreateSlot(Team.Blue, 0);
 
-        TraitSelectResult result = sut.SelectTraitSlot(CreateSlot(Team.Red, 0));
-        Assert.AreEqual(TraitSelectResult.Faild, result);
+        SlotData? result = sut.ClickTraitSlot(CreateSlot(Team.Red, 0));
+        Assert.AreEqual(null, result);
 
-        result = sut.SelectTraitSlot(CreateSlot(Team.Blue, 0));
-        Assert.AreEqual(TraitSelectResult.Select, result);
+        result = sut.ClickTraitSlot(useSlot);
+        Assert.AreEqual(null, result);
 
-        result = sut.SelectTraitSlot(CreateSlot(Team.Red, 0));
-        Assert.AreEqual(TraitSelectResult.Use, result);
+        result = sut.ClickTraitSlot(CreateSlot(Team.Red, 0));
+        Assert.AreEqual(useSlot, result.Value);
     }
 
     SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
