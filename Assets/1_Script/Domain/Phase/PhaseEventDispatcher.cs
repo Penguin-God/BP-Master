@@ -2,6 +2,7 @@ using System;
 
 public class PhaseEventDispatcher
 {
+    public event Action<GameFlowData> OnGameProgress;
     public event Action<Team> OnPhaseBan;
     public event Action<Team> OnPhasePick;
     public event Action<Team> OnPhaseSwap;
@@ -21,6 +22,7 @@ public class PhaseEventDispatcher
 
     void Raise(GamePhase phase, Team turn)
     {
+        OnGameProgress?.Invoke(new GameFlowData(phase, turn));
         switch (phase)
         {
             case GamePhase.Ban: OnPhaseBan?.Invoke(turn); break;
