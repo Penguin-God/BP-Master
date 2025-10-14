@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Speed
   m_EditorClassIdentifier: 
   bonusDatas:
-  - Threshold: 20
-    Bonus: 200
   - Threshold: 25
-    Bonus: 350
+    Bonus: 200
   - Threshold: 30
-    Bonus: 500
+    Bonus: 350
+  - Threshold: 35
+    Bonus: 600
