@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
   m_Name: "\uC800\uC8FC\uC758 \uC18C\uB9AC"
   m_EditorClassIdentifier: 
-  id: 20
+  id: 27
   championName: "\uC800\uC8FC\uC758 \uC18C\uB9AC"
   attack: 120
   defense: 110
