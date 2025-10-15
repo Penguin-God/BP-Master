@@ -37,12 +37,6 @@ public class TraitUsePresenter
     }
     public void ChangeTeam(Team team) => selectionState = new TraitSelectionState(team);
 
-    public void ClickChampion(SlotData slot)
-    {
-        SlotData? result = selectionState.ClickTraitSlot(slot);
-        if (result.HasValue) UseTrait(result.Value, slot);
-    }
-
     public bool ClickChampion(SlotData slot, out TraitUseSlotData traitUseSlotData)
     {
         traitUseSlotData = default;
@@ -53,12 +47,6 @@ public class TraitUsePresenter
             return true;
         }
         else return false;
-    }
-
-    void UseTrait(SlotData useSlot, SlotData targetSlot)
-    {
-        var traitData = traitDatas.GetSlot(useSlot);
-        traitController.UseTrait(useSlot, targetSlot, traitData);
     }
 
     public IEnumerable<SlotData> GetClickableSlots()

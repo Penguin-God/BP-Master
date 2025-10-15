@@ -32,16 +32,6 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 특성_사용_적용()
-    {
-        presenter.ClickChampion(CreateSlot(Team.Blue, 0)); // 선택
-        presenter.ClickChampion(CreateSlot(Team.Red, 0));  // 사용
-
-        Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
-        Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Defense);
-    }
-
-    [Test]
     public void 특성_사용_데이터_반환()
     {
         TraitUseSlotData result;
@@ -52,19 +42,6 @@ public class TraitUsePresenterTests
         Assert.IsTrue(useable);
         Assert.AreEqual(CreateSlot(Team.Blue, 0), result.UseSlot);
         Assert.AreEqual(CreateSlot(Team.Red, 0), result.TargetSlot);
-    }
-
-    [Test]
-    public void 클릭_상태에_따라_선택_가능한_슬롯들_반환()
-    {
-        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());
-
-        presenter.ClickChampion(CreateSlot(Team.Blue, 1));
-        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), presenter.GetClickableSlots());
-
-        // blue 1번째 사용했으니 그건 제외
-        presenter.ClickChampion(CreateSlot(Team.Red, 0));
-        CollectionAssert.AreEquivalent(CreateBlueSlots(0, 2), presenter.GetClickableSlots());
     }
 
     [Test]

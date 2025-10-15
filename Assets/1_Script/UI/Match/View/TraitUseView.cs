@@ -10,20 +10,6 @@ public class TraitUseView : MonoBehaviour
     Dictionary<Team, Button[]> buttons = new();
 
     TraitUsePresenter presenter;
-
-    public void Init(TraitUsePresenter presenter)
-    {
-        gameObject.SetActive(true);
-        this.presenter = presenter;
-
-        buttons.Add(Team.Blue, blueChamps);
-        buttons.Add(Team.Red, redChamps);
-
-        SetupChampionButtons(blueChamps, Team.Blue);
-        SetupChampionButtons(redChamps, Team.Red);
-        InActiveAllBtns();
-    }
-
     TraitUseFacade traitUseFacade;
     SlotStorage<IEnumerable<TraitData>> traits;
     public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
@@ -74,13 +60,6 @@ public class TraitUseView : MonoBehaviour
         foreach (var slot in presenter.GetClickableSlots())
             ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
     }
-
-    //void OnButtonClicked(Team buttonTeam, int index)
-    //{
-    //    presenter.ClickChampion(new SlotData(buttonTeam, index));
-    //    if(presenter.selectionState.UseTurn)
-    //        ActiveButtons();
-    //}
 
     void OnButtonClicked(Team buttonTeam, int index)
     {
