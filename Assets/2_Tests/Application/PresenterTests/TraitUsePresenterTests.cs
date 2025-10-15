@@ -50,8 +50,8 @@ public class TraitUsePresenterTests
         useable = presenter.ClickChampion(CreateSlot(Team.Red, 0), out result);
 
         Assert.IsTrue(useable);
-        Assert.AreEqual(CreateSlot(Team.Red, 0), result.UseSlot);
-        Assert.AreEqual(CreateSlot(Team.Blue, 0), result.TargetSlot);
+        Assert.AreEqual(CreateSlot(Team.Blue, 0), result.UseSlot);
+        Assert.AreEqual(CreateSlot(Team.Red, 0), result.TargetSlot);
     }
 
     [Test]

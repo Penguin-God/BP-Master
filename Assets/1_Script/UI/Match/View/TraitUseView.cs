@@ -25,11 +25,13 @@ public class TraitUseView : MonoBehaviour
     }
 
     TraitUseFacade traitUseFacade;
-    public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade)
+    SlotStorage<IEnumerable<TraitData>> traits;
+    public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
     {
         gameObject.SetActive(true);
         this.presenter = presenter;
         this.traitUseFacade = traitUseFacade;
+        this.traits = traits;
 
         buttons.Add(Team.Blue, blueChamps);
         buttons.Add(Team.Red, redChamps);
@@ -73,10 +75,20 @@ public class TraitUseView : MonoBehaviour
             ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
     }
 
+    //void OnButtonClicked(Team buttonTeam, int index)
+    //{
+    //    presenter.ClickChampion(new SlotData(buttonTeam, index));
+    //    if(presenter.selectionState.UseTurn)
+    //        ActiveButtons();
+    //}
+
     void OnButtonClicked(Team buttonTeam, int index)
     {
-        presenter.ClickChampion(new SlotData(buttonTeam, index));
-        if(presenter.selectionState.UseTurn)
+        var result = presenter.ClickChampion(new SlotData(buttonTeam, index), out var useData);
+        if (result)
+        {
+            traitUseFacade.UseTrait(useData.UseSlot, useData.TargetSlot, traits.GetSlot(useData.UseSlot));
             ActiveButtons();
+        }
     }
 }
