@@ -4,7 +4,9 @@ using NUnit.Framework;
 public class TraitTargetFilteringTests
 {
     SlotStorage<ChampionStatus> statuses;
-
+    TraitSlotFilter sut;
+    SlotStorage<TraitApplier> applilers;
+    TraitApplier CreatAppliler() => new TraitApplier(statuses);
     [SetUp]
     public void SetUp()
     {
@@ -14,13 +16,20 @@ public class TraitTargetFilteringTests
         
         statuses.AddSlot(Team.Red, CreateStatus());
         statuses.AddSlot(Team.Red, CreateStatus());
+
+        applilers = new();
+        applilers.AddSlot(Team.Blue, CreatAppliler());
+        applilers.AddSlot(Team.Blue, CreatAppliler());
+        applilers.AddSlot(Team.Red, CreatAppliler());
+        applilers.AddSlot(Team.Red, CreatAppliler());
+
+        sut = new TraitSlotFilter(applilers);
     }
 
     [Test]
     public void 특성_사용_가능한_슬롯들_필터링()
     {
-        TraitSlotFilter sut = new(2, new TraitUseFacade(statuses));
-        statuses.GetSlot(CreateBlueSlot(1)).UseTrait();
+        applilers.GetSlot(CreateBlueSlot(1)).Execute(CreateTraitData(type: TraitType.AttackChanger, side:Side.Opponent), CreateRedSlot(0));
 
         var result = sut.FilteringUseableSlots(Team.Blue);
 
@@ -30,8 +39,6 @@ public class TraitTargetFilteringTests
     [Test]
     public void 특성_타겟_슬롯들_필터링()
     {
-        TraitSlotFilter sut = new(2, new TraitUseFacade(statuses));
-
         var result = sut.FilteringTargetSlots(Team.Blue, new Side[] { Side.Opponent });
         CollectionAssert.AreEquivalent(CreateRedSlots(0, 1), result);
 
@@ -42,8 +49,6 @@ public class TraitTargetFilteringTests
     [Test]
     public void 선택_특성_필터링()
     {
-        TraitSlotFilter sut = new(2, new TraitUseFacade(statuses));
-
         var result = sut.GetSlots(true, Team.Blue, new Side[] { Side.Opponent });
         CollectionAssert.AreEquivalent(CreateRedSlots(0, 1), result);
 

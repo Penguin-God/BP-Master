@@ -38,8 +38,8 @@ public class MatchUI_Controller : MonoBehaviour
     {
         banPickView.BindStatChangeEvent(status);
         var presenter = new TraitUsePresenter(playerTeam);
-        // traitUseView.Init(presenter);
-        traitUseView.Init(presenter, traitUseFacade, new ChampionStorageConverter().ChamptionToTrait(champions));
+        
+        traitUseView.Init(presenter, traitUseFacade, ChampionStorageConverter.ChamptionToTrait(champions));
         eventDispatcher.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.Set(playerTeam);
 

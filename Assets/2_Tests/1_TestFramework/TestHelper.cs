@@ -43,21 +43,6 @@ public static class TestHelper
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0)
         => new ChampionStatus(new ChampionStatData(att, def, speed));
 
-    public static TraitData CreateTraitData(
-        TraitType traitType,
-        int amount,
-        TraitConditionType traitConditionType = TraitConditionType.None,
-        int threshold = 0
-    )
-        => CreateTraitData(
-            type: traitType,
-            amount: amount,
-            conditionType: traitConditionType,
-            threshold: threshold,
-            side: default,
-            range: default
-        );
-
     public static TraitData CreateAttTraitData(
         int amount,
         TraitConditionType traitConditionType = TraitConditionType.None,

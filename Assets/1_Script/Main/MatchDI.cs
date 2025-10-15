@@ -55,7 +55,7 @@ public class MatchDI : MonoBehaviour
         var traitFacade = new TraitUseFacade(statuses);
         traitFacade.OnTraitUsed += slot => phaseManager.SubmitAction(slot.Team);
 
-        var trait_ai = new AI_TraitAgent(aiTeam, new TraitSlotFilter(5, traitFacade), new ChampionStorageConverter().ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
+        var trait_ai = new AI_TraitAgent(aiTeam, new TraitSlotFilter(5, traitFacade), ChampionStorageConverter.ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
         AI_MonoBehaviourAgent aI_Mono = GetComponent<AI_MonoBehaviourAgent>();
         aI_Mono.Init(trait_ai);
         phaseEventDispatcher.OnPhaseTrait += GetComponent<AI_MonoBehaviourAgent>().UseTrait;

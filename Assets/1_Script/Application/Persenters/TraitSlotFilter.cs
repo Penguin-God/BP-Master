@@ -12,10 +12,17 @@ public class TraitSlotFilter
         this.traitUseFacade = traitUseFacade;
     }
 
+    SlotStorage<TraitApplier> appliers;
+    public TraitSlotFilter(SlotStorage<TraitApplier> appliers)
+    {
+        TeamSize = appliers.GetTeam(Team.Blue).Count();
+        this.appliers = appliers;
+    }
+
     public IEnumerable<SlotData> FilteringUseableSlots(Team team)
         => Enumerable.Range(0, TeamSize)
                  .Select(i => new SlotData(team, i))
-                 .Where(slot => traitUseFacade.IsTraitUsed(slot) == false);
+                 .Where(slot => appliers.GetSlot(slot).IsUse == false);
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {

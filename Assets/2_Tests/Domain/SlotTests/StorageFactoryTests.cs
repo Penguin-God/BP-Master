@@ -37,10 +37,8 @@ public class StorageFactoryTests
     [Test]
     public void 챔피언을_특성_데이터로_반환()
     {
-        // Arrange
         var championStorage = new SlotStorage<Champion>();
-        var converter = new ChampionStorageConverter();
-
+        
         championStorage.AddSlots(Team.Blue, new[]
         {
             TestHelper.CreateTraitChamp(Side.All, TargetRange.All, 10),
@@ -52,7 +50,7 @@ public class StorageFactoryTests
         });
 
         // Act
-        var result = converter.ChamptionToTrait(championStorage);
+        var result = ChampionStorageConverter.ChamptionToTrait(championStorage);
 
         // Assert
         Assert.AreEqual(1, result.GetTeam(Team.Blue).Count());

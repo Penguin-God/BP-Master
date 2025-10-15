@@ -22,20 +22,10 @@ public class TraitUseFacade
 
     public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitDatas)
     {
-        if (IsTraitUsed(traitSlot)) return;
-
-        statuses.GetSlot(traitSlot).UseTrait();
-        foreach (var data in traitDatas)
-            applier.Execute(data, targetSlot);
-        OnTraitUsed?.Invoke(traitSlot);
-    }
-
-    public void UseTrait2(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitDatas)
-    {
         foreach (var data in traitDatas)
             appliers.GetSlot(traitSlot).Execute(data, targetSlot);
         OnTraitUsed?.Invoke(traitSlot);
     }
 
-    public bool IsTraitUsed(SlotData slot) => statuses.GetSlot(slot).IsUseTrait;
+    public bool IsTraitUsed(SlotData slot) => appliers.GetSlot(slot).IsUse;
 }
