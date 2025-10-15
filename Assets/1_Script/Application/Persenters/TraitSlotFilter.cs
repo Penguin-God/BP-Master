@@ -1,17 +1,9 @@
-using NUnit.Framework.Internal.Filters;
 using System.Collections.Generic;
 using System.Linq;
 
 public class TraitSlotFilter
 {
     readonly int TeamSize;
-    readonly TraitUseFacade traitUseFacade;
-    public TraitSlotFilter(int teamSize, TraitUseFacade traitUseFacade)
-    {
-        TeamSize = teamSize;
-        this.traitUseFacade = traitUseFacade;
-    }
-
     SlotStorage<TraitApplier> appliers;
     public TraitSlotFilter(SlotStorage<TraitApplier> appliers)
     {

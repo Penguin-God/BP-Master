@@ -50,4 +50,14 @@ public static class ChampionStorageConverter
 
         return result;
     }
+
+    public static SlotStorage<TraitApplier> StatusToTraitAppiler(SlotStorage<ChampionStatus> statuese)
+    {
+        var result = new SlotStorage<TraitApplier>();
+
+        foreach (var slot in statuese.GetAllSlotDatas())
+            result.AddSlot(slot.Team, new TraitApplier(statuese));
+
+        return result;
+    }
 }
