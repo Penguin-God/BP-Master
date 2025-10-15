@@ -9,7 +9,7 @@ public class TraitFacadeTests
         SlotStorage<ChampionStatus> statuses = new();
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
-        TraitData[] datas = new TraitData[] { CreateAttTraitData(10, range: TargetRange.Single), new TraitData(TraitType.DefenseChanger, 10, TraitConditionType.None, 0, new TraitTargetRule(Side.Self, TargetRange.Single)) };
+        TraitData[] datas = new TraitData[] { CreateAttTraitData(10, range: TargetRange.Single), TestHelper.CreateTraitData(TraitType.DefenseChanger, 10, side: Side.Self, range: TargetRange.Single) };
         var sut = new TraitUseFacade(statuses);
 
         sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), datas);

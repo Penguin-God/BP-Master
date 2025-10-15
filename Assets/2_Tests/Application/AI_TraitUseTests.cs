@@ -11,8 +11,7 @@ public class AI_TraitUseTests
         statuses.AddSlot(Team.Red, new ChampionStatus(default));
 
         var traitStorage = new SlotStorage<IEnumerable<TraitData>>();
-        var rule = new TraitTargetRule(Side.Opponent, TargetRange.Single);
-        var traits = new TraitData[] { new TraitData(TraitType.AttackChanger, 10, TraitConditionType.None, 0, rule) };
+        var traits = new TraitData[] { TestHelper.CreateTraitData(TraitType.AttackChanger, 10, side: Side.Opponent, range: TargetRange.Single) };
 
         traitStorage.AddSlot(Team.Blue, traits);
         traitStorage.AddSlot(Team.Red, traits);

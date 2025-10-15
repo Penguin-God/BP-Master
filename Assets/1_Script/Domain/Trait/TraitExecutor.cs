@@ -3,14 +3,11 @@ public class TraitExecutor
 {
     readonly TraitConditionChecker conditionChecker = new TraitConditionChecker();
     readonly ITraitAction action;
-    readonly TraitConditionType ConditionType;
-    readonly int Threshold;
-
+    readonly TraitConditionData ConditionData;
     public TraitExecutor(ITraitAction traitAction, TraitConditionType conditionType, int threshold)
     {
         action = traitAction;
-        ConditionType = conditionType;
-        Threshold = threshold;
+        ConditionData = new TraitConditionData(conditionType, threshold);
     }
 
     public void ExecuteTrait(ChampionStatus target)
@@ -19,5 +16,5 @@ public class TraitExecutor
             action.Do(target);
     }
 
-    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionType, target.Stat, Threshold);
+    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionData, target.Stat);
 }

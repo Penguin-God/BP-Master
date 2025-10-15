@@ -31,11 +31,20 @@ public readonly struct TraitConditionData
 {
     public readonly TraitConditionType ConditionType;
     public readonly int Threshold;
+    public readonly Side Target;
 
     public TraitConditionData(TraitConditionType type, int threshold)
     {
         ConditionType = type;
         Threshold = threshold;
+        Target = Side.All;
+    }
+
+    public TraitConditionData(TraitConditionType type, int threshold, Side side)
+    {
+        ConditionType = type;
+        Threshold = threshold;
+        Target = side;
     }
 }
 
@@ -50,11 +59,11 @@ public class TraitData
 
     public readonly TraitTargetRule TargetRule;
 
-    public TraitData(TraitType traitType, int amount, TraitConditionType conditionType, int threshold, TraitTargetRule traitTargetRule)
+    public TraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
     {
         TraitType = traitType;
         Amount = amount;
         TargetRule = traitTargetRule;
-        ConditionData = new TraitConditionData(conditionType, threshold);
+        ConditionData = conditionData;
     }
 }

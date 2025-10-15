@@ -17,7 +17,7 @@ public class TraitDataConfig
     [SerializeField] TraitConditionType conditionType;
     [SerializeField] int threshold;
 
-    public TraitData CreateTraitData() => new TraitData(traitType, amount, conditionType, threshold, new TraitTargetRule(targetSide, range));
+    public TraitData CreateTraitData() => new TraitData(traitType, amount, new TraitConditionData(conditionType, threshold), new TraitTargetRule(targetSide, range));
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount, conditionType, threshold);
 }
 

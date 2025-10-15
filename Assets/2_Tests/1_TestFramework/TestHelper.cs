@@ -85,7 +85,7 @@ public static class TestHelper
         Side side = Side.Self,
         TargetRange range = TargetRange.All
     )
-        => new TraitData(type, amount, conditionType, threshold, new TraitTargetRule(side, range));
+        => new TraitData(type, amount, new TraitConditionData(conditionType, threshold), new TraitTargetRule(side, range));
 }
 
 public class TestAttackChangeAction : ITraitAction

@@ -16,22 +16,22 @@ public enum TraitConditionType
 
 public class TraitConditionChecker
 {
-    public bool CheckCondition(TraitConditionType type, ChampionStatData data, int threshold)
+    public bool CheckCondition(TraitConditionData conditionData, ChampionStatData stat)
     {
-        return type switch
+        return conditionData.ConditionType switch
         {
             TraitConditionType.None => true,
 
-            TraitConditionType.DefenseBelow => data.Defense <= threshold,
-            TraitConditionType.DefenseAtLeast => data.Defense >= threshold,
+            TraitConditionType.DefenseBelow => stat.Defense <= conditionData.Threshold,
+            TraitConditionType.DefenseAtLeast => stat.Defense >= conditionData.Threshold,
 
-            TraitConditionType.AttackBelow => data.Attack <= threshold,
-            TraitConditionType.AttackAtLeast => data.Attack >= threshold,
+            TraitConditionType.AttackBelow => stat.Attack <= conditionData.Threshold,
+            TraitConditionType.AttackAtLeast => stat.Attack >= conditionData.Threshold,
 
-            TraitConditionType.SpeedBelow => data.Speed <= threshold,
-            TraitConditionType.SpeedAtLeast => data.Speed >= threshold,
+            TraitConditionType.SpeedBelow => stat.Speed <= conditionData.Threshold,
+            TraitConditionType.SpeedAtLeast => stat.Speed >= conditionData.Threshold,
 
-            _ => throw new NotImplementedException($"Condition not implemented: {type}")
+            _ => throw new NotImplementedException($"Condition not implemented: {conditionData.ConditionType}")
         };
     }
 }

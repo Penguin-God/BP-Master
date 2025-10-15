@@ -68,7 +68,7 @@ public class TraitConditionTests
         Assert.IsTrue(Check(TraitConditionType.SpeedAtLeast, Stat(speed: 20), threshold));
     }
 
-    bool Check(TraitConditionType type, ChampionStatData stat, int threshold) => new TraitConditionChecker().CheckCondition(type, stat, threshold);
+    bool Check(TraitConditionType type, ChampionStatData stat, int threshold) => new TraitConditionChecker().CheckCondition(new TraitConditionData(type, threshold), stat);
 
     ChampionStatData Stat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }
