@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal.Filters;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,5 +21,11 @@ public class TraitSlotFilter
     {
         var side = BanPickEnumCaster.MergeSide(sides);
         return new TraitTargetSelector(TeamSize).GetTargetableSlot(team, side);
+    }
+
+    public IEnumerable<SlotData> GetSlots(bool isUse, Team team, IEnumerable<Side> sides)
+    {
+        if (isUse) return FilteringTargetSlots(team, sides);
+        else return FilteringUseableSlots(team);
     }
 }

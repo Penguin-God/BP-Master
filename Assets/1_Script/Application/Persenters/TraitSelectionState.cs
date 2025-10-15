@@ -3,7 +3,7 @@ public class TraitSelectionState
 {
     public readonly Team Team;
     SlotData? useSlot;
-    public SlotData UseSlot => useSlot.Value;
+    public SlotData UseSlot => useSlot.HasValue ? useSlot.Value : default;
     public bool UseTurn => useSlot.HasValue;
 
     public TraitSelectionState(Team team) => Team = team;

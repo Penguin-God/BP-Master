@@ -12,12 +12,14 @@ public class TraitUseView : MonoBehaviour
     TraitUsePresenter presenter;
     TraitUseFacade traitUseFacade;
     SlotStorage<IEnumerable<TraitData>> traits;
+    TraitSlotFilter traitSlotFilter;
     public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
     {
         gameObject.SetActive(true);
         this.presenter = presenter;
         this.traitUseFacade = traitUseFacade;
         this.traits = traits;
+        this.traitSlotFilter = new TraitSlotFilter(traits.GetTeam(Team.Blue).Count(), traitUseFacade);
 
         buttons.Add(Team.Blue, blueChamps);
         buttons.Add(Team.Red, redChamps);
@@ -57,7 +59,10 @@ public class TraitUseView : MonoBehaviour
     void ActiveButtons()
     {
         InActiveAllBtns();
-        foreach (var slot in presenter.GetClickableSlots())
+        //foreach (var slot in presenter.GetClickableSlots())
+        //    ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
+        var targetSides = traits.GetSlot(presenter.selectionState.UseSlot).Select(x => x.TargetRule.TargetSide);
+        foreach (var slot in traitSlotFilter.GetSlots(presenter.selectionState.UseTurn, presenter.selectionState.Team, targetSides))
             ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
     }
 
