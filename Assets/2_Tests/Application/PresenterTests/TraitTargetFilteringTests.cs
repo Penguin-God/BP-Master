@@ -52,7 +52,7 @@ public class TraitTargetFilteringTests
         var result = sut.GetSlots(true, Team.Blue, new Side[] { Side.Opponent });
         CollectionAssert.AreEquivalent(CreateRedSlots(0, 1), result);
 
-        result = sut.GetSlots(false, Team.Blue, new Side[] { Side.Opponent, Side.Self });
+        result = sut.GetSlots(false, Team.Blue, null);
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1), result);
     }
 }

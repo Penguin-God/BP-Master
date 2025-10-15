@@ -47,20 +47,21 @@ public class TraitUseView : MonoBehaviour
     public void Set(Team team)
     {
         presenter.ChangeTeam(team);
-        ActiveButtons();
+        ActiveButtons(false);
     }
 
     public void UpdateTrait(Team team)
     {
-        if (team == presenter.Team) ActiveButtons();
+        print(team); // 딜레이 버그 수정하기
+        if (team == presenter.Team) ActiveButtons(false);
         else InActiveAllBtns();
     }
 
-    void ActiveButtons()
+    void ActiveButtons(bool isUse)
     {
         InActiveAllBtns();
         var targetSides = traits.GetSlot(presenter.selectionState.UseSlot).Select(x => x.TargetRule.TargetSide);
-        foreach (var slot in traitSlotFilter.GetSlots(presenter.selectionState.UseTurn, presenter.selectionState.Team, targetSides))
+        foreach (var slot in traitSlotFilter.GetSlots(presenter.selectionState.UseTurn, presenter.Team, targetSides))
             ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
     }
 
@@ -70,7 +71,7 @@ public class TraitUseView : MonoBehaviour
         if (result)
         {
             traitUseFacade.UseTrait(useData.UseSlot, useData.TargetSlot, traits.GetSlot(useData.UseSlot));
-            ActiveButtons();
         }
+        ActiveButtons(result);
     }
 }
