@@ -13,13 +13,13 @@ public class TraitUseView : MonoBehaviour
     TraitUseFacade traitUseFacade;
     SlotStorage<IEnumerable<TraitData>> traits;
     TraitSlotFilter traitSlotFilter;
-    public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
+    public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits, TraitSlotFilter filter)
     {
         gameObject.SetActive(true);
         this.presenter = presenter;
         this.traitUseFacade = traitUseFacade;
         this.traits = traits;
-        this.traitSlotFilter = new TraitSlotFilter(traits.GetTeam(Team.Blue).Count(), traitUseFacade);
+        this.traitSlotFilter = filter;
 
         buttons.Add(Team.Blue, blueChamps);
         buttons.Add(Team.Red, redChamps);

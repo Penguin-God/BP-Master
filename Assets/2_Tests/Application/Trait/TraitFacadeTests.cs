@@ -23,6 +23,6 @@ public class TraitFacadeTests
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Defense);
         Assert.AreEqual(CreateBlueSlot(0), callSlot);
-        Assert.IsTrue(sut.IsTraitUsed(callSlot));
+        Assert.IsTrue(appliers.GetSlot(callSlot).IsUse);
     }
 }

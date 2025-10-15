@@ -51,16 +51,18 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
 
         statuses = storageFactory.IdToStatus(storage.PickIds);
+        var appilers = ChampionStorageConverter.StatusToTraitAppiler(statuses);
 
-        var traitFacade = new TraitUseFacade(statuses);
+        var traitFacade = new TraitUseFacade(appilers);
+        var filter = new TraitSlotFilter(appilers);
         traitFacade.OnTraitUsed += slot => phaseManager.SubmitAction(slot.Team);
 
-        var trait_ai = new AI_TraitAgent(aiTeam, new TraitSlotFilter(5, traitFacade), ChampionStorageConverter.ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
+        var trait_ai = new AI_TraitAgent(aiTeam, filter, ChampionStorageConverter.ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
         AI_MonoBehaviourAgent aI_Mono = GetComponent<AI_MonoBehaviourAgent>();
         aI_Mono.Init(trait_ai);
         phaseEventDispatcher.OnPhaseTrait += GetComponent<AI_MonoBehaviourAgent>().UseTrait;
 
-        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, storageFactory.IdToChampion(storage.PickIds), statuses);
+        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, storageFactory.IdToChampion(storage.PickIds), statuses, filter);
 
         ApplyMastery(); // 마지막에
         if(aiTeam == Team.Blue) trait_ai.UseTrait(Team.Blue);
