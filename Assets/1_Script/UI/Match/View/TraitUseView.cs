@@ -24,6 +24,21 @@ public class TraitUseView : MonoBehaviour
         InActiveAllBtns();
     }
 
+    TraitUseFacade traitUseFacade;
+    public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade)
+    {
+        gameObject.SetActive(true);
+        this.presenter = presenter;
+        this.traitUseFacade = traitUseFacade;
+
+        buttons.Add(Team.Blue, blueChamps);
+        buttons.Add(Team.Red, redChamps);
+
+        SetupChampionButtons(blueChamps, Team.Blue);
+        SetupChampionButtons(redChamps, Team.Red);
+        InActiveAllBtns();
+    }
+
     void SetupChampionButtons(Button[] btns, Team buttonTeam)
     {
         for (int i = 0; i < btns.Length; i++)

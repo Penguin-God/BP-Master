@@ -42,6 +42,19 @@ public class TraitUsePresenterTests
     }
 
     [Test]
+    public void 특성_사용_데이터_반환()
+    {
+        TraitUseSlotData result;
+        bool useable = presenter.ClickChampion(CreateSlot(Team.Blue, 0), out result);
+        Assert.IsFalse(useable);
+        useable = presenter.ClickChampion(CreateSlot(Team.Red, 0), out result);
+
+        Assert.IsTrue(useable);
+        Assert.AreEqual(CreateSlot(Team.Red, 0), result.UseSlot);
+        Assert.AreEqual(CreateSlot(Team.Blue, 0), result.TargetSlot);
+    }
+
+    [Test]
     public void 클릭_상태에_따라_선택_가능한_슬롯들_반환()
     {
         CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1, 2), presenter.GetClickableSlots());

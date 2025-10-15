@@ -1,6 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public readonly struct TraitUseSlotData
+{
+    public readonly SlotData UseSlot;
+    public readonly SlotData TargetSlot;
+
+    public TraitUseSlotData(SlotData useSlot, SlotData targetSlot)
+    {
+        this.UseSlot = useSlot;
+        this.TargetSlot = targetSlot;
+    }
+}
+
 public class TraitUsePresenter
 {
     readonly TraitUseFacade traitController;
@@ -16,12 +28,31 @@ public class TraitUsePresenter
         slotFilter = new TraitSlotFilter(traitDatas.GetTeam(Team.Blue).Count(), traitController);
         selectionState = new TraitSelectionState(team);
     }
+
+    public TraitUsePresenter(SlotStorage<IEnumerable<TraitData>> traits, Team team)
+    {
+        traitDatas = traits;
+        slotFilter = new TraitSlotFilter(traitDatas.GetTeam(Team.Blue).Count(), traitController);
+        selectionState = new TraitSelectionState(team);
+    }
     public void ChangeTeam(Team team) => selectionState = new TraitSelectionState(team);
 
     public void ClickChampion(SlotData slot)
     {
         SlotData? result = selectionState.ClickTraitSlot(slot);
         if (result.HasValue) UseTrait(result.Value, slot);
+    }
+
+    public bool ClickChampion(SlotData slot, out TraitUseSlotData traitUseSlotData)
+    {
+        traitUseSlotData = default;
+        SlotData? result = selectionState.ClickTraitSlot(slot);
+        if (result.HasValue)
+        {
+            traitUseSlotData = new TraitUseSlotData(result.Value, slot);
+            return true;
+        }
+        else return false;
     }
 
     void UseTrait(SlotData useSlot, SlotData targetSlot)
