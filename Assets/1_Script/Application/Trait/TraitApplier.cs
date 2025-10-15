@@ -5,6 +5,7 @@ public class TraitApplier
 {
     readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitTargetSelector targetSelector;
+    public bool IsUse { get; set; }
 
     public TraitApplier(SlotStorage<ChampionStatus> statuses)
     {
@@ -24,5 +25,6 @@ public class TraitApplier
             var target = statuses.GetSlot(slot);
             executor.ExecuteTrait(target);
         }
+        IsUse = true;
     }
 }
