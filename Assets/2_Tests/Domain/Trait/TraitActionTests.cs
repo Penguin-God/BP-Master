@@ -40,4 +40,15 @@ public class TraitActionTests
 
         Assert.AreEqual(expected, target.Stat.Speed);
     }
+
+    [Test]
+    public void 챔피언_방어만_지정값으로_고정()
+    {
+        var target = TestHelper.CreateStatus(0, 0, 7);
+        var sut = new DefenseFixer(100);
+
+        sut.Do(target);
+
+        Assert.AreEqual(TestHelper.CreateStat(0, 100, 7), target.Stat);
+    }
 }

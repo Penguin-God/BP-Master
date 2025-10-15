@@ -24,3 +24,12 @@ public class SpeedChanger : ITraitAction
     public SpeedChanger(int amount) => Amount = amount;
     public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeSpeed(target.Stat.Speed + Amount));
 }
+
+
+public class DefenseFixer : ITraitAction
+{
+    readonly int Value;
+    public DefenseFixer(int value) => this.Value = value;
+
+    public void Do(ChampionStatus target) => target.ChangeStat(new ChampionStatData(target.Stat.Attack, Value, target.Stat.Speed));
+}
