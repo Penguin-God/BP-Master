@@ -1,43 +1,22 @@
 using NUnit.Framework;
-using System.Collections.Generic;
-using static TestHelper;
 
 public class TraitUsePresenterTests
 {
-    TraitUsePresenter presenter;
-    SlotStorage<ChampionStatus> statuses;
+    TraitUsePresenter sut;
 
     [SetUp]
     public void SetUp()
     {
-        SlotStorage<IEnumerable<TraitData>> picks = new();
-        picks.AddSlot(Team.Blue, new TraitData[] { CreateTraitData(type: TraitType.AttackChanger, amount: 10), CreateTraitData(type: TraitType.DefenseChanger, amount: 10) });
-        picks.AddSlot(Team.Blue, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Opponent, range: TargetRange.All, amount: 10));
-        picks.AddSlot(Team.Blue, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Opponent, range: TargetRange.All, amount: 10));
-
-        picks.AddSlot(Team.Red, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Self, range: TargetRange.Single, amount: 10));
-        picks.AddSlot(Team.Red, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Self, range: TargetRange.Single, amount: 10));
-        picks.AddSlot(Team.Red, CreateTraitDatas(type: TraitType.AttackChanger, side: Side.Self, range: TargetRange.Single, amount: 10));
-
-        statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        statuses.AddSlot(Team.Blue, CreateStatus());
-
-        statuses.AddSlot(Team.Red, CreateStatus());
-        statuses.AddSlot(Team.Red, CreateStatus());
-        statuses.AddSlot(Team.Red, CreateStatus());
-
-        presenter = new TraitUsePresenter(new TraitUseFacade(statuses), picks, Team.Blue);
+        sut = new TraitUsePresenter(Team.Blue);
     }
 
     [Test]
     public void 특성_사용_데이터_반환()
     {
         TraitUseSlotData result;
-        bool useable = presenter.ClickChampion(CreateSlot(Team.Blue, 0), out result);
+        bool useable = sut.ClickChampion(CreateSlot(Team.Blue, 0), out result);
         Assert.IsFalse(useable);
-        useable = presenter.ClickChampion(CreateSlot(Team.Red, 0), out result);
+        useable = sut.ClickChampion(CreateSlot(Team.Red, 0), out result);
 
         Assert.IsTrue(useable);
         Assert.AreEqual(CreateSlot(Team.Blue, 0), result.UseSlot);

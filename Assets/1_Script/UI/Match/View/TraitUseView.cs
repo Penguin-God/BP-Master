@@ -59,8 +59,6 @@ public class TraitUseView : MonoBehaviour
     void ActiveButtons()
     {
         InActiveAllBtns();
-        //foreach (var slot in presenter.GetClickableSlots())
-        //    ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
         var targetSides = traits.GetSlot(presenter.selectionState.UseSlot).Select(x => x.TargetRule.TargetSide);
         foreach (var slot in traitSlotFilter.GetSlots(presenter.selectionState.UseTurn, presenter.selectionState.Team, targetSides))
             ButtonUtil.ActiveButton(buttons[slot.Team][slot.Index]);
