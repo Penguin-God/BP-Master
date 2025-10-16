@@ -52,7 +52,6 @@ public class TraitUseView : MonoBehaviour
 
     public void UpdateTrait(Team team)
     {
-        print(team); // 딜레이 버그 수정하기
         if (team == presenter.Team) ActiveButtons(false);
         else InActiveAllBtns();
     }
@@ -69,9 +68,8 @@ public class TraitUseView : MonoBehaviour
     {
         var result = presenter.ClickChampion(new SlotData(buttonTeam, index), out var useData);
         if (result)
-        {
             traitUseFacade.UseTrait(useData.UseSlot, useData.TargetSlot, traits.GetSlot(useData.UseSlot));
-        }
-        ActiveButtons(result);
+        else
+            ActiveButtons(true);
     }
 }
