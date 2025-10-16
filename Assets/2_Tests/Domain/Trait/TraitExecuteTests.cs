@@ -23,4 +23,16 @@ public class TraitExecuteTests
 
         Assert.AreEqual(10, champion.Stat.Attack);
     }
+
+    [Test]
+    public void 특성_제외된_경우_무시()
+    {
+        var status = TestHelper.CreateStatus(0, 0, 0);
+        status.TraitExcluded();
+        var sut = new TraitExecutor(new TestAttackChangeAction(5), TraitConditionType.None, 0);
+
+        sut.ExecuteTrait(status);
+
+        Assert.AreEqual(0, status.Stat.Attack);
+    }
 }

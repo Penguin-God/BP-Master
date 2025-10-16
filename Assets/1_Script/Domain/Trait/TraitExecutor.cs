@@ -16,5 +16,5 @@ public class TraitExecutor
             action.Do(target);
     }
 
-    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionData, target.Stat);
+    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionData, target.Stat) && target.IsTraitExcluded == false;
 }
