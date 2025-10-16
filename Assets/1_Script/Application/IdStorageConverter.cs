@@ -1,63 +1,37 @@
+using System;
 using System.Collections.Generic;
 
 public class IdStorageConverter
 {
     readonly ChampionCatalog championCatalog;
-
-    public IdStorageConverter(ChampionCatalog championCatalog)
-    {
-        this.championCatalog = championCatalog;
-    }
+    public IdStorageConverter(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
 
     public SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage)
-    {
-        var result = new SlotStorage<ChampionStatus>();
-
-        foreach (var slot in idStorage.GetAllSlotDatas())
-        {
-            var status = new ChampionStatus(championCatalog.GetChampion(idStorage.GetSlot(slot)).StatData);
-            result.AddSlot(slot.Team, status);
-        }
-
-        return result;
-    }
+        => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championCatalog.GetChampion(id).StatData));
 
     public SlotStorage<Champion> IdToChampion(SlotStorage<int> idStorage)
-    {
-        var result = new SlotStorage<Champion>();
-
-        foreach (var slot in idStorage.GetAllSlotDatas())
-        {
-            var champ = championCatalog.GetChampion(idStorage.GetSlot(slot));
-            result.AddSlot(slot.Team, champ);
-        }
-
-        return result;
-    }
+        => StorageConverter.ConvertStorage(idStorage, id => championCatalog.GetChampion(id));
 }
 
 public static class ChampionStorageConverter
 {
     public static SlotStorage<IEnumerable<TraitData>> ChamptionToTrait(SlotStorage<Champion> champions)
-    {
-        var result = new SlotStorage<IEnumerable<TraitData>>();
+        => StorageConverter.ConvertStorage(champions, champ => champ.TraitDatas);
 
-        foreach (var slot in champions.GetAllSlotDatas())
+    public static SlotStorage<TraitApplier> StatusToTraitAppiler(SlotStorage<ChampionStatus> statuses)
+        => StorageConverter.ConvertStorage(statuses, _ => new TraitApplier(statuses));
+}
+
+public static class StorageConverter
+{
+    public static SlotStorage<TOut> ConvertStorage<TIn, TOut>(SlotStorage<TIn> source, Func<TIn, TOut> selector)
+    {
+        var result = new SlotStorage<TOut>();
+        foreach (var slot in source.GetAllSlotDatas())
         {
-            var trait = champions.GetSlot(slot).TraitDatas;
-            result.AddSlot(slot.Team, trait);
+            var converted = selector(source.GetSlot(slot));
+            result.AddSlot(slot.Team, converted);
         }
-
-        return result;
-    }
-
-    public static SlotStorage<TraitApplier> StatusToTraitAppiler(SlotStorage<ChampionStatus> statuese)
-    {
-        var result = new SlotStorage<TraitApplier>();
-
-        foreach (var slot in statuese.GetAllSlotDatas())
-            result.AddSlot(slot.Team, new TraitApplier(statuese));
-
         return result;
     }
 }
