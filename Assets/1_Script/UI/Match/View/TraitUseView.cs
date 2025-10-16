@@ -29,28 +29,16 @@ public class TraitUseView : MonoBehaviour
         for (int i = 0; i < btns.Length; i++)
         {
             int index = i; // 클로저 캡처 방지
-            btns[i].onClick.AddListener(() => OnButtonClicked(buttonTeam, index));
+            btns[i].onClick.AddListener(() => OnButtonClicked(new SlotData(buttonTeam, index)));
         }
     }
 
-    public void Set(Team team)
+    void OnButtonClicked(SlotData clickSlot)
     {
-        presenter.ChangeTeam(team);
-        traitButtonView.ActiveUseableButtons(presenter.Team);
-    }
-
-    public void UpdateTrait(Team team)
-    {
-        if (team == presenter.Team) traitButtonView.ActiveUseableButtons(presenter.Team);
-        else traitButtonView.InActiveAllBtns();
-    }
-
-    void OnButtonClicked(Team buttonTeam, int index)
-    {
-        var result = presenter.ClickChampion(new SlotData(buttonTeam, index), out var useData);
+        var result = presenter.ClickChampion(clickSlot, out var useData);
         if (result)
             traitUseFacade.UseTrait(useData.UseSlot, useData.TargetSlot, traits.GetSlot(useData.UseSlot));
         else
-            traitButtonView.ActiveTargets(presenter.Team, traits.GetSlot(presenter.selectionState.UseSlot));
+            traitButtonView.ActiveTargets(traits.GetSlot(presenter.selectionState.UseSlot));
     }
 }

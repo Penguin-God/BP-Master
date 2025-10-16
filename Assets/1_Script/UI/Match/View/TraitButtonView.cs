@@ -10,15 +10,15 @@ public class TraitButtonView : MonoBehaviour
     SlotStorage<Button> buttonSlots = new();
 
     TraitSlotFilter traitSlotFilter;
-    public void Init(TraitSlotFilter filter)
+    Team team;
+    public void Init(TraitSlotFilter filter, Team team)
     {
         gameObject.SetActive(true);
         this.traitSlotFilter = filter;
+        this.team = team;
 
         buttonSlots.AddSlots(Team.Blue, blueTraits);
         buttonSlots.AddSlots(Team.Red, redTraits);
-
-        InActiveAllBtns();
     }
 
     public void InActiveAllBtns()
@@ -27,7 +27,7 @@ public class TraitButtonView : MonoBehaviour
             ButtonUtil.InActiveButton(btn);
     }
 
-    public void ActiveUseableButtons(Team team)
+    public void ActiveUseableButtons()
     {
         InActiveAllBtns();
         var slots = traitSlotFilter.FilteringUseableSlots(team);
@@ -35,7 +35,13 @@ public class TraitButtonView : MonoBehaviour
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }
 
-    public void ActiveTargets(Team team, IEnumerable<TraitData> traitDatas)
+    public void RefreshButtonsByTurn(Team team)
+    {
+        if (team == this.team) ActiveUseableButtons();
+        else InActiveAllBtns();
+    }
+
+    public void ActiveTargets(IEnumerable<TraitData> traitDatas)
     {
         InActiveAllBtns();
         var slots = traitSlotFilter.FilteringTargetSlots(team, traitDatas.Select(x => x.TargetRule.TargetSide));

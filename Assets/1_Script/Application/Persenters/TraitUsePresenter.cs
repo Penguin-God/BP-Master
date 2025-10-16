@@ -16,12 +16,7 @@ public class TraitUsePresenter
     public TraitSelectionState selectionState;
     public Team Team => selectionState.Team;
 
-    public TraitUsePresenter(Team team)
-    {
-        selectionState = new TraitSelectionState(team);
-    }
-
-    public void ChangeTeam(Team team) => selectionState = new TraitSelectionState(team);
+    public TraitUsePresenter(Team team) => selectionState = new TraitSelectionState(team);
 
     public bool ClickChampion(SlotData slot, out TraitUseSlotData traitUseSlotData)
     {
