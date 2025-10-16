@@ -4,13 +4,8 @@ public class ChampionStatus
 {
     public ChampionStatData Stat;
     public event Action<ChampionStatData, ChampionStatData> OnStatChanged;
-    public bool IsUseTrait = false;
-    public ChampionStatus(ChampionStatData statData)
-    {
-        Stat = statData;
-    }
+    public ChampionStatus(ChampionStatData statData) => Stat = statData;
 
-    public void UseTrait() => IsUseTrait = true;
     public void ChangeStat(ChampionStatData newStat)
     {
         if(newStat.Equals(Stat)) return;

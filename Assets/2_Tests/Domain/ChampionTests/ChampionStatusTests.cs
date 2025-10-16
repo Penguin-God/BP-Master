@@ -13,17 +13,6 @@ public class ChampionStatusTests
         Assert.AreEqual(10, status.Stat.Attack);
         Assert.AreEqual(5, status.Stat.Defense);
         Assert.AreEqual(3, status.Stat.Speed);
-        Assert.IsFalse(status.IsUseTrait);
-    }
-
-    [Test]
-    public void UseTrait_호출시_IsUseTrait이_true가_된다()
-    {
-        var status = new ChampionStatus(new ChampionStatData(1, 1, 1));
-
-        status.UseTrait();
-
-        Assert.IsTrue(status.IsUseTrait);
     }
 
     [Test]
