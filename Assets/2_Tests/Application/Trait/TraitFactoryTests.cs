@@ -33,4 +33,15 @@ public class TraitFactoryTests
         Assert.AreEqual(4, champion.Stat.Defense); // unchanged
         Assert.AreEqual(2, champion.Stat.Speed);
     }
+
+    [TestCase(TraitType.AttackChanger, typeof(AttackChanger))]
+    [TestCase(TraitType.DefenseChanger, typeof(DefenseChanger))]
+    [TestCase(TraitType.SpeedChanger, typeof(SpeedChanger))]
+    [TestCase(TraitType.DefenseFixer, typeof(DefenseFixer))]
+    [TestCase(TraitType.TraitExcluder, typeof(TraitExcluder))]
+    public void 각_TraitType에_맞는_Action_타입을_생성한다(TraitType type, System.Type expectedType)
+    {
+        var result = TraitActionFactory.CreateAction(type, 0);
+        Assert.IsInstanceOf(expectedType, result);
+    }
 }

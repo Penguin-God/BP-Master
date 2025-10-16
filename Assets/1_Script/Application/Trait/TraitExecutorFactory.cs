@@ -4,10 +4,13 @@ public static class TraitExecutorFactory
 {
     public static TraitExecutor CreateExecutor(TraitData traitData)
     {
-        ITraitAction action = CreateAction(traitData.TraitType, traitData.Amount);
+        ITraitAction action = TraitActionFactory.CreateAction(traitData.TraitType, traitData.Amount);
         return new TraitExecutor(action, traitData.ConditionType, traitData.Threshold);
     }
+}
 
+public static class TraitActionFactory
+{
     public static ITraitAction CreateAction(TraitType actionType, int amount)
     {
         return actionType switch
@@ -15,6 +18,8 @@ public static class TraitExecutorFactory
             TraitType.AttackChanger => new AttackChanger(amount),
             TraitType.DefenseChanger => new DefenseChanger(amount),
             TraitType.SpeedChanger => new SpeedChanger(amount),
+            TraitType.DefenseFixer => new DefenseFixer(amount),
+            TraitType.TraitExcluder => new TraitExcluder(),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }

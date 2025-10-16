@@ -5,6 +5,8 @@ public enum TraitType
     AttackChanger,
     DefenseChanger,
     SpeedChanger,
+    DefenseFixer,
+    TraitExcluder,
 }
 
 public enum Side { Self, Opponent, All }
@@ -38,13 +40,6 @@ public readonly struct TraitConditionData
         ConditionType = type;
         Threshold = threshold;
         Target = Side.All;
-    }
-
-    public TraitConditionData(TraitConditionType type, int threshold, Side side)
-    {
-        ConditionType = type;
-        Threshold = threshold;
-        Target = side;
     }
 }
 
