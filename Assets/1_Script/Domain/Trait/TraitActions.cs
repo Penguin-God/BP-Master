@@ -33,3 +33,8 @@ public class DefenseFixer : ITraitAction
 
     public void Do(ChampionStatus target) => target.ChangeStat(new ChampionStatData(target.Stat.Attack, Value, target.Stat.Speed));
 }
+
+public class TraitExcluder : ITraitAction
+{
+    public void Do(ChampionStatus target) => target.TraitExcluded();
+}

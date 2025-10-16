@@ -51,4 +51,15 @@ public class TraitActionTests
 
         Assert.AreEqual(TestHelper.CreateStat(0, 100, 7), target.Stat);
     }
+
+    [Test]
+    public void 특성_제외시키기()
+    {
+        var target = TestHelper.CreateStatus(0, 0, 7);
+        var sut = new TraitExcluder();
+
+        sut.Do(target);
+
+        Assert.IsTrue(target.IsTraitExcluded);
+    }
 }
