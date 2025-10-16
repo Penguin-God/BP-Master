@@ -6323,6 +6323,7 @@ MonoBehaviour:
   scoreView: {fileID: 670859827}
   swapController: {fileID: 502510546}
   gameFlowView: {fileID: 1107171632}
+  traitButtonView: {fileID: 2045637439}
   scores: {fileID: 882374934}
   textBlue: {fileID: 1908862552}
   textRed: {fileID: 1173623354}
@@ -9428,6 +9429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2045637437}
   - component: {fileID: 2045637438}
+  - component: {fileID: 2045637439}
   m_Layer: 5
   m_Name: Trait
   m_TagString: Untagged
@@ -9475,6 +9477,30 @@ MonoBehaviour:
   - {fileID: 1017426912}
   - {fileID: 1425457484}
   redChamps:
+  - {fileID: 69391751}
+  - {fileID: 1303766833}
+  - {fileID: 212632266}
+  - {fileID: 1657165901}
+  - {fileID: 1681239419}
+--- !u!114 &2045637439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045637436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f9dc3bc904ac841bdd1ebc91a6fdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueTraits:
+  - {fileID: 784907036}
+  - {fileID: 1289146205}
+  - {fileID: 1590343676}
+  - {fileID: 1017426912}
+  - {fileID: 1425457484}
+  redTraits:
   - {fileID: 69391751}
   - {fileID: 1303766833}
   - {fileID: 212632266}

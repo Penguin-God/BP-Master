@@ -10,6 +10,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ScoreView scoreView;
     [SerializeField] SwapController swapController;
     [SerializeField] GameFlowView gameFlowView;
+    [SerializeField] TraitButtonView traitButtonView;
 
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, IdStorageConverter factory, PhaseEventDispatcher eventDispatcher)
     {
@@ -38,8 +39,9 @@ public class MatchUI_Controller : MonoBehaviour
     {
         banPickView.BindStatChangeEvent(status);
         var presenter = new TraitUsePresenter(playerTeam);
-        
-        traitUseView.Init(presenter, traitUseFacade, ChampionStorageConverter.ChamptionToTrait(champions), filter);
+
+        traitButtonView.Init(filter);
+        traitUseView.Init(presenter, traitUseFacade, ChampionStorageConverter.ChamptionToTrait(champions));
         eventDispatcher.OnPhaseTrait += traitUseView.UpdateTrait;
         traitUseView.Set(playerTeam);
 
