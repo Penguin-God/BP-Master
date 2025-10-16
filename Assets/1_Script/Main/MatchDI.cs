@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MatchDI : MonoBehaviour
 {
+    SlotStorageManager slotManager;
     [SerializeField] ChampionRepository champManager;
     ChampionCatalog championCatalog => champManager.Catalog;
     GameBanPickStorage storage;
@@ -44,38 +45,34 @@ public class MatchDI : MonoBehaviour
     }
 
     bool initTrait;
-    SlotStorage<ChampionStatus> statuses = new();
     void Trait(Team team)
     {
         if (initTrait) return;
         initTrait = true;
+        slotManager = new SlotStorageManager(storage, storageFactory);
 
-        statuses = storageFactory.IdToStatus(storage.PickIds);
-        var appilers = ChampionStorageConverter.StatusToTraitAppiler(statuses);
-
-        var traitFacade = new TraitUseFacade(appilers);
-        var filter = new TraitSlotFilter(appilers);
+        var traitFacade = new TraitUseFacade(slotManager.TraitApplierSlots);
+        var filter = new TraitSlotFilter(slotManager.TraitApplierSlots);
         traitFacade.OnTraitUsed += slot => phaseManager.SubmitAction(slot.Team);
 
-        var trait_ai = new AI_TraitAgent(aiTeam, filter, ChampionStorageConverter.ChamptionToTrait(storageFactory.IdToChampion(storage.PickIds)), traitFacade);
+        var trait_ai = new AI_TraitAgent(aiTeam, filter, slotManager.TraitSlots, traitFacade);
         AI_MonoBehaviourAgent aI_Mono = GetComponent<AI_MonoBehaviourAgent>();
         aI_Mono.Init(trait_ai);
         phaseEventDispatcher.OnPhaseTrait += GetComponent<AI_MonoBehaviourAgent>().UseTrait;
 
-        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, storageFactory.IdToChampion(storage.PickIds), statuses, filter);
+        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, slotManager.ChampionSlots, slotManager.StatusSlots, filter);
 
         ApplyMastery(); // 마지막에
         if(aiTeam == Team.Blue) trait_ai.UseTrait(Team.Blue);
     }
 
-    void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, statuses);
-
+    void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, slotManager.StatusSlots);
 
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultConverter(builder).ToResult(statuses);
+        MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
         matchUI_Controller.ShowResult(result);
     }
 }
