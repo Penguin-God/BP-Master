@@ -6,7 +6,6 @@ public class TraitUseView : MonoBehaviour
 {
     [SerializeField] Button[] blueChamps;
     [SerializeField] Button[] redChamps;
-    Dictionary<Team, Button[]> buttons = new();
 
     TraitButtonView traitButtonView;
 
@@ -19,9 +18,6 @@ public class TraitUseView : MonoBehaviour
         this.presenter = presenter;
         this.traitUseFacade = traitUseFacade;
         this.traits = traits;
-
-        buttons.Add(Team.Blue, blueChamps);
-        buttons.Add(Team.Red, redChamps);
 
         SetupChampionButtons(blueChamps, Team.Blue);
         SetupChampionButtons(redChamps, Team.Red);
