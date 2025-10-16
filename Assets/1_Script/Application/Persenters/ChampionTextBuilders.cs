@@ -36,7 +36,7 @@ public struct TraitUI_Data
     }
 }
 
-public class TraitPersenter
+public class TraitTextBuilder
 {
     public string BuildTraitText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildTraitText(x)));
 
@@ -85,7 +85,7 @@ public class TraitPersenter
     string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
 }
 
-public class StatPersenter : TraitPersenter
+public class StatTextBuilder
 {
     public StatViewModel CreateStatViewModel(ChampionStatData stat) => 
         new StatViewModel(

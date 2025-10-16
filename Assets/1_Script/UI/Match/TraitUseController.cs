@@ -32,6 +32,7 @@ public class TraitUseController : MonoBehaviour
         }
     }
 
+    // 첫 번째 클릭은 특성 선택. 다음 선택은 타겟
     void OnClickTraitSlot(SlotData clickSlot)
     {
         if (selectState.IsSelect)

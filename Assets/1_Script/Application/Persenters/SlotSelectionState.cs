@@ -1,3 +1,5 @@
+
+
 public class SlotSelectionState
 {
     public SlotSelectionState() { }

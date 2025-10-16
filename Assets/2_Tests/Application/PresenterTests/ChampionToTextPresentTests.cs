@@ -5,7 +5,7 @@ public class ChampionToTextPresentTests
     [Test]
     public void 챔피언_스탯정보가_텍스트로_생성()
     {
-        var sut = new StatPersenter();
+        var sut = new StatTextBuilder();
 
         StatViewModel result = sut.CreateStatViewModel(new ChampionStatData(10, 12, 6));
 
@@ -17,7 +17,7 @@ public class ChampionToTextPresentTests
     [Test]
     public void 특성_타입에_맞는_텍스트_생성()
     {
-        var sut = new TraitPersenter();
+        var sut = new TraitTextBuilder();
         
         // 편의 함수
         string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.BuildTraitText(new TraitUI_Data(traitType, side, range, amount, TraitConditionType.None, 0));
@@ -31,7 +31,7 @@ public class ChampionToTextPresentTests
     [Test]
     public void 조건과_액션에_맞는_특성_텍스트_생성()
     {
-        var sut = new TraitPersenter();
+        var sut = new TraitTextBuilder();
 
         // 편의 함수
         string GetTraitText(TraitConditionType conditionType, int thershold) => sut.BuildTraitText(new TraitUI_Data(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10, conditionType, thershold));
@@ -47,7 +47,7 @@ public class ChampionToTextPresentTests
     [Test]
     public void 특성_컬랙션은_텍스트_합쳐서_반환()
     {
-        var sut = new TraitPersenter();
+        var sut = new TraitTextBuilder();
         var datas = new TraitUI_Data[]
         {
             new TraitUI_Data(TraitType.AttackChanger, Side.Opponent, TargetRange.All, -10, 0, 0),
