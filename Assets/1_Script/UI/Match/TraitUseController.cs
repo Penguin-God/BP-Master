@@ -9,13 +9,12 @@ public class TraitUseController : MonoBehaviour
 
     TraitButtonView traitButtonView;
 
-    TraitUsePresenter presenter;
+    SlotSelectionState selectState = new SlotSelectionState();
     TraitUseFacade traitUseFacade;
     SlotStorage<IEnumerable<TraitData>> traits;
-    public void Init(TraitUsePresenter presenter, TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
+    public void Init(TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
     {
         gameObject.SetActive(true);
-        this.presenter = presenter;
         this.traitUseFacade = traitUseFacade;
         this.traits = traits;
 
@@ -29,16 +28,21 @@ public class TraitUseController : MonoBehaviour
         for (int i = 0; i < btns.Length; i++)
         {
             int index = i; // 클로저 캡처 방지
-            btns[i].onClick.AddListener(() => OnButtonClicked(new SlotData(buttonTeam, index)));
+            btns[i].onClick.AddListener(() => OnClickTraitSlot(new SlotData(buttonTeam, index)));
         }
     }
 
-    void OnButtonClicked(SlotData clickSlot)
+    void OnClickTraitSlot(SlotData clickSlot)
     {
-        var result = presenter.ClickChampion(clickSlot, out var useData);
-        if (result)
-            traitUseFacade.UseTrait(useData.UseSlot, useData.TargetSlot, traits.GetSlot(useData.UseSlot));
+        if (selectState.IsSelect)
+        {
+            traitUseFacade.UseTrait(selectState.SelectedSlot, clickSlot, traits.GetSlot(selectState.SelectedSlot));
+            selectState.Use();
+        }
         else
-            traitButtonView.ActiveTargets(traits.GetSlot(presenter.selectionState.UseSlot));
+        {
+            selectState.SelectSlot(clickSlot);
+            traitButtonView.ActiveTargets(traits.GetSlot(clickSlot));
+        }
     }
 }
