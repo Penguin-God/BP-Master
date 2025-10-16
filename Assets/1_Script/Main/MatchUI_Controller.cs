@@ -5,7 +5,7 @@ public class MatchUI_Controller : MonoBehaviour
 {
     [SerializeField] ChampionSelector_UI championSelector;
     [SerializeField] ChampionButtonView championDrawer;
-    [SerializeField] TraitUseView traitUseView;
+    [SerializeField] TraitUseController traitUseView;
     [SerializeField] BanPickView banPickView;
     [SerializeField] ScoreView scoreView;
     [SerializeField] SwapController swapController;

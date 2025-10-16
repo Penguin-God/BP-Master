@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TraitUseView : MonoBehaviour
+public class TraitUseController : MonoBehaviour
 {
     [SerializeField] Button[] blueChamps;
     [SerializeField] Button[] redChamps;
