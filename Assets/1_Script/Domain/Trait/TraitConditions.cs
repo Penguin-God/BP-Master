@@ -49,6 +49,36 @@ public class StatThresholdChecker : ITraitConditionChecker
     }
 }
 
+public class StatComparisonChecker : ITraitConditionChecker
+{
+    readonly TraitConditionType Type;
+    readonly ChampionStatData UseChamp;
+    public StatComparisonChecker(TraitConditionType type, ChampionStatData useChamp)
+    {
+        Type = type;
+        UseChamp = useChamp;
+    }
+
+    public bool Check(ChampionStatData target)
+    {
+        return Type switch
+        {
+            TraitConditionType.None => true,
+
+            TraitConditionType.DefenseBelow => UseChamp.Defense <= target.Defense,
+            TraitConditionType.DefenseAtLeast => UseChamp.Defense >= target.Defense,
+
+            TraitConditionType.AttackBelow => UseChamp.Attack <= target.Attack,
+            TraitConditionType.AttackAtLeast => UseChamp.Attack >= target.Attack,
+
+            TraitConditionType.SpeedBelow => UseChamp.Speed <= target.Speed,
+            TraitConditionType.SpeedAtLeast => UseChamp.Speed >= target.Speed,
+
+            _ => throw new NotImplementedException($"Condition not implemented: {Type}")
+        };
+    }
+}
+
 public class TraitConditionChecker
 {
     public bool CheckCondition(TraitConditionData conditionData, ChampionStatData useChampStat, ChampionStatData targetStat)
