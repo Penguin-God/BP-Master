@@ -6,10 +6,13 @@ public class TraitConditionTests
     public void None은_무조건_참() => Assert.IsTrue(Check(TraitConditionType.None, 0, default));
 
     [Test]
+    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(default));
+
+    [Test]
     [TestCase(TraitConditionType.AttackBelow)]
     [TestCase(TraitConditionType.DefenseBelow)]
     [TestCase(TraitConditionType.SpeedBelow)]
-    public void 스탯이_기준_이하면_참2(TraitConditionType type)
+    public void 스탯이_기준_이하면_참(TraitConditionType type)
     {
         int threshold = 100;
 
@@ -22,7 +25,7 @@ public class TraitConditionTests
     [TestCase(TraitConditionType.AttackAtLeast)]
     [TestCase(TraitConditionType.DefenseAtLeast)]
     [TestCase(TraitConditionType.SpeedAtLeast)]
-    public void 스탯이_기준_이상이면_참2(TraitConditionType type)
+    public void 스탯이_기준_이상이면_참(TraitConditionType type)
     {
         int threshold = 100;
 
