@@ -42,13 +42,6 @@ public readonly struct TraitConditionData
     public readonly int Threshold;
     public readonly ConditionCheckerType CheckerType;
 
-    public TraitConditionData(TraitConditionType type, int threshold)
-    {
-        ConditionType = type;
-        Threshold = threshold;
-        CheckerType = ConditionCheckerType.None;
-    }
-
     public TraitConditionData(TraitConditionType type, int threshold, ConditionCheckerType checkerType)
     {
         ConditionType = type;
@@ -61,11 +54,7 @@ public class TraitData
 {
     public readonly TraitType TraitType;
     public readonly int Amount;
-
-    public TraitConditionType ConditionType => ConditionData.ConditionType;
-    public int Threshold => ConditionData.Threshold;
     public readonly TraitConditionData ConditionData;
-
     public readonly TraitTargetRule TargetRule;
 
     public TraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
