@@ -39,9 +39,19 @@ public class TraitFactoryTests
     [TestCase(TraitType.SpeedChanger, typeof(SpeedChanger))]
     [TestCase(TraitType.DefenseFixer, typeof(DefenseFixer))]
     [TestCase(TraitType.TraitExcluder, typeof(TraitExcluder))]
-    public void 각_TraitType에_맞는_Action_타입을_생성한다(TraitType type, System.Type expectedType)
+    public void Type에_맞는_Action_객체_생성(TraitType type, System.Type expectedType)
     {
         var result = TraitActionFactory.CreateAction(type, 0);
+        Assert.IsInstanceOf(expectedType, result);
+    }
+
+    [TestCase(ConditionCheckerType.None, typeof(NullChecker))]
+    [TestCase(ConditionCheckerType.Threshold, typeof(StatThresholdChecker))]
+    [TestCase(ConditionCheckerType.Compare, typeof(StatComparisonChecker))]
+    public void Data에_따른_조건_검사_객체_생성(ConditionCheckerType checkerType, System.Type expectedType)
+    {
+        TraitConditionData data = new TraitConditionData(TraitConditionType.None, 0, checkerType);
+        var result = TraitCondtionCheckerFactory.CreateChecker(data, default);
         Assert.IsInstanceOf(expectedType, result);
     }
 }

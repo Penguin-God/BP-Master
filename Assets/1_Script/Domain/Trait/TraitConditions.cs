@@ -19,6 +19,11 @@ public interface ITraitConditionChecker
     public bool Check(ChampionStatData stat);
 }
 
+public class NullChecker : ITraitConditionChecker
+{
+    public bool Check(ChampionStatData stat) => true;
+}
+
 public class StatThresholdChecker : ITraitConditionChecker
 {
     readonly TraitConditionType Type;

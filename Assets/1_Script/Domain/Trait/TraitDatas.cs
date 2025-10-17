@@ -29,24 +29,31 @@ public readonly struct TraitTargetRule
     }
 }
 
+public enum ConditionCheckerType
+{
+    None,
+    Threshold,
+    Compare,
+}
+
 public readonly struct TraitConditionData
 {
     public readonly TraitConditionType ConditionType;
     public readonly int Threshold;
-    public readonly bool IsCompareOppnent;
+    public readonly ConditionCheckerType CheckerType;
 
     public TraitConditionData(TraitConditionType type, int threshold)
     {
         ConditionType = type;
         Threshold = threshold;
-        IsCompareOppnent = false;
+        CheckerType = ConditionCheckerType.None;
     }
 
-    public TraitConditionData(TraitConditionType type, int threshold,  bool isCompareOppnent)
+    public TraitConditionData(TraitConditionType type, int threshold, ConditionCheckerType checkerType)
     {
         ConditionType = type;
         Threshold = threshold;
-        IsCompareOppnent = isCompareOppnent;
+        CheckerType = checkerType;
     }
 }
 

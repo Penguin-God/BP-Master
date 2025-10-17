@@ -24,3 +24,17 @@ public static class TraitActionFactory
         };
     }
 }
+
+public static class TraitCondtionCheckerFactory
+{
+    public static ITraitConditionChecker CreateChecker(TraitConditionData data, ChampionStatData useChamp)
+    {
+        return data.CheckerType switch
+        {
+            ConditionCheckerType.None => new NullChecker(),
+            ConditionCheckerType.Threshold => new StatThresholdChecker(data.ConditionType, data.Threshold),
+            ConditionCheckerType.Compare => new StatComparisonChecker(data.ConditionType, useChamp),
+            _ => throw new NotImplementedException($"Action not implemented: {data.CheckerType}")
+        };
+    }
+}
