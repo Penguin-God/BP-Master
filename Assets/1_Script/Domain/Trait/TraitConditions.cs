@@ -78,31 +78,3 @@ public class StatComparisonChecker : ITraitConditionChecker
         };
     }
 }
-
-public class TraitConditionChecker
-{
-    public bool CheckCondition(TraitConditionData conditionData, ChampionStatData useChampStat, ChampionStatData targetStat)
-    {
-        if (conditionData.IsCompareOppnent) return CompareTarget(conditionData.ConditionType, useChampStat, targetStat);
-        else return new StatThresholdChecker(conditionData.ConditionType, conditionData.Threshold).Check(targetStat);
-    }
-
-    bool CompareTarget(TraitConditionType type, ChampionStatData useChampStat, ChampionStatData targetStat)
-    {
-        return type switch
-        {
-            TraitConditionType.None => true,
-
-            TraitConditionType.DefenseBelow => useChampStat.Defense <= targetStat.Defense,
-            TraitConditionType.DefenseAtLeast => useChampStat.Defense >= targetStat.Defense,
-
-            TraitConditionType.AttackBelow => useChampStat.Attack <= targetStat.Attack,
-            TraitConditionType.AttackAtLeast => useChampStat.Attack >= targetStat.Attack,
-
-            TraitConditionType.SpeedBelow => useChampStat.Speed <= targetStat.Speed,
-            TraitConditionType.SpeedAtLeast => useChampStat.Speed >= targetStat.Speed,
-
-            _ => throw new NotImplementedException($"Condition not implemented: {type}")
-        };
-    }
-}
