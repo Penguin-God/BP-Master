@@ -4,15 +4,15 @@ using static TestHelper;
 public class TraitFactoryTests
 {
     [Test]
-    [TestCase(100, 15)]
+    [TestCase(100, 0)]
     [TestCase(0, 10)]
     public void 팩토리로_넘긴_값이_조건과_액션에_적용되야_함(int attThreshold, int expected)
     {
-        var champion = CreateStatus(10);
+        var champion = CreateStatus(0);
 
-        // att가 기준값 이상일 때 Attack +5
+        // att가 기준값 이상일 때 Attack +10
         TraitConditionData condition = CreateThresholdCondition(TraitConditionType.AttackAtLeast, attThreshold);
-        var data = CreateTraitData(TraitType.AttackChanger, 5, condition, SelfAllRule);
+        var data = CreateTraitData(TraitType.AttackChanger, 10, condition, SelfAllRule);
         var result = TraitExecutorFactory.CreateExecutor(data, default);
 
         result.ExecuteTrait(champion);

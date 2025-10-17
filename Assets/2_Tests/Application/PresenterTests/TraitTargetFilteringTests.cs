@@ -29,7 +29,7 @@ public class TraitTargetFilteringTests
     [Test]
     public void 특성_사용_가능한_슬롯들_필터링()
     {
-        applilers.GetSlot(CreateBlueSlot(1)).Execute(CreateTraitData(type: TraitType.AttackChanger, side:Side.Opponent), CreateRedSlot(0));
+        applilers.GetSlot(CreateBlueSlot(1)).Execute(CreateTraitData(type: TraitType.AttackChanger, side:Side.Opponent), CreateRedSlot(0), CreateBlueSlot(0));
 
         var result = sut.FilteringUseableSlots(Team.Blue);
 

@@ -31,18 +31,7 @@ public static class TestHelper
     public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", CreateStat(att, def, speed), null);
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
-    public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0)
-        => new ChampionStatus(new ChampionStatData(att, def, speed));
-
-    public static TraitData CreateAttTraitData(
-        int amount,
-        TraitConditionType traitConditionType = TraitConditionType.None,
-        int threshold = 0,
-        Side side = default,
-        TargetRange range = default,
-        ConditionCheckerType checkerType = ConditionCheckerType.None
-    )
-        => CreateTraitData(type: TraitType.AttackChanger, amount, traitConditionType, threshold, side, range, checkerType);
+    public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
 
     public static TraitData[] CreateTraitDatas(
         TraitType type = default,
@@ -65,14 +54,16 @@ public static class TestHelper
     )
         => new TraitData(type, amount, new TraitConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
 
-    public static TraitData CreateConditionFreeTrait(TraitType type, int amount, Side side, TargetRange range)
-        => new TraitData(type, amount, default, new TraitTargetRule(side, range));
+    public static TraitData CreateConditionFreeTrait(TraitType type, int amount, TraitTargetRule rule) => new TraitData(type, amount, default, rule);
 
     public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
         => new TraitData(traitType, amount, conditionData, traitTargetRule);
+
     public static TraitConditionData CreateThresholdCondition(TraitConditionType type, int threshold) => new TraitConditionData(type, threshold, ConditionCheckerType.Threshold);
+    public static TraitConditionData CreateCompareCondition(TraitConditionType type) => new TraitConditionData(type, 0, ConditionCheckerType.Compare);
     public static TraitTargetRule SelfAllRule => new TraitTargetRule(Side.Self, TargetRange.All);
     public static TraitTargetRule OpponentAllRule => new TraitTargetRule(Side.Opponent, TargetRange.All);
+    public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
 }
 
 public class TestAttackChangeAction : ITraitAction
