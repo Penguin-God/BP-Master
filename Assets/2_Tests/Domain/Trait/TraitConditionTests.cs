@@ -68,7 +68,19 @@ public class TraitConditionTests
         Assert.IsTrue(Check(TraitConditionType.SpeedAtLeast, Stat(speed: 20), threshold));
     }
 
+    [Test]
+    public void 상대방과_비교()
+    {
+        var statData = Stat(10);
+        var data = CreateCondition(TraitConditionType.AttackAtLeast, 0, true);
+
+        Assert.IsTrue(Check(data, statData, Stat(6)));
+        Assert.IsFalse(Check(data, statData, Stat(12)));
+    }
+
     bool Check(TraitConditionType type, ChampionStatData stat, int threshold) => new TraitConditionChecker().CheckCondition(new TraitConditionData(type, threshold), stat);
+    bool Check(TraitConditionData data, ChampionStatData user, ChampionStatData target) => new TraitConditionChecker().CheckCondition(data, user, target);
+    TraitConditionData CreateCondition(TraitConditionType type, int threshold, bool isCompare) => new TraitConditionData(type, threshold, isCompare);
 
     ChampionStatData Stat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }
