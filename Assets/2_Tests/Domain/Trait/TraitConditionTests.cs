@@ -43,7 +43,7 @@ public class TraitConditionTests
         Assert.IsFalse(Check(data, statData, Stat(12, 12, 12)));
     }
 
-    bool Check(TraitConditionType type, ChampionStatData stat, int threshold) => new TraitConditionChecker().CheckCondition(new TraitConditionData(type, threshold), stat);
+    bool Check(TraitConditionType type, ChampionStatData stat, int threshold) => new TraitConditionChecker().CheckCondition(new TraitConditionData(type, threshold, false), default, targetStat: stat);
     bool Check(TraitConditionData data, ChampionStatData user, ChampionStatData target) => new TraitConditionChecker().CheckCondition(data, user, target);
     TraitConditionData CreateCondition(TraitConditionType type, int threshold, bool isCompare) => new TraitConditionData(type, threshold, isCompare);
 

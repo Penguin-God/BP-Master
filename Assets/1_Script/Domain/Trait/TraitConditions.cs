@@ -37,7 +37,13 @@ public class TraitConditionChecker
 
     public bool CheckCondition(TraitConditionData conditionData, ChampionStatData useChampStat, ChampionStatData targetStat)
     {
-        return conditionData.ConditionType switch
+        if (conditionData.IsCompareOppnent) return CompareTarget(conditionData.ConditionType, useChampStat, targetStat);
+        else return CheckCondition(conditionData, targetStat);
+    }
+
+    bool CompareTarget(TraitConditionType type, ChampionStatData useChampStat, ChampionStatData targetStat)
+    {
+        return type switch
         {
             TraitConditionType.None => true,
 
@@ -50,7 +56,7 @@ public class TraitConditionChecker
             TraitConditionType.SpeedBelow => useChampStat.Speed <= targetStat.Speed,
             TraitConditionType.SpeedAtLeast => useChampStat.Speed >= targetStat.Speed,
 
-            _ => throw new NotImplementedException($"Condition not implemented: {conditionData.ConditionType}")
+            _ => throw new NotImplementedException($"Condition not implemented: {type}")
         };
     }
 }
