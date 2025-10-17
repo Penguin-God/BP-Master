@@ -33,13 +33,20 @@ public readonly struct TraitConditionData
 {
     public readonly TraitConditionType ConditionType;
     public readonly int Threshold;
-    public readonly Side Target;
+    public readonly bool IsCompareOppnent;
 
     public TraitConditionData(TraitConditionType type, int threshold)
     {
         ConditionType = type;
         Threshold = threshold;
-        Target = Side.All;
+        IsCompareOppnent = false;
+    }
+
+    public TraitConditionData(TraitConditionType type, int threshold,  bool isCompareOppnent)
+    {
+        ConditionType = type;
+        Threshold = threshold;
+        IsCompareOppnent = isCompareOppnent;
     }
 }
 

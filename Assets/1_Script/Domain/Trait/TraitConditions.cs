@@ -11,7 +11,7 @@ public enum TraitConditionType
     AttackAtLeast,
 
     SpeedBelow,
-    SpeedAtLeast
+    SpeedAtLeast,
 }
 
 public class TraitConditionChecker
@@ -30,6 +30,25 @@ public class TraitConditionChecker
 
             TraitConditionType.SpeedBelow => stat.Speed <= conditionData.Threshold,
             TraitConditionType.SpeedAtLeast => stat.Speed >= conditionData.Threshold,
+
+            _ => throw new NotImplementedException($"Condition not implemented: {conditionData.ConditionType}")
+        };
+    }
+
+    public bool CheckCondition(TraitConditionData conditionData, ChampionStatData useChampStat, ChampionStatData targetStat)
+    {
+        return conditionData.ConditionType switch
+        {
+            TraitConditionType.None => true,
+
+            TraitConditionType.DefenseBelow => useChampStat.Defense <= targetStat.Defense,
+            TraitConditionType.DefenseAtLeast => useChampStat.Defense >= targetStat.Defense,
+
+            TraitConditionType.AttackBelow => useChampStat.Attack <= targetStat.Attack,
+            TraitConditionType.AttackAtLeast => useChampStat.Attack >= targetStat.Attack,
+
+            TraitConditionType.SpeedBelow => useChampStat.Speed <= targetStat.Speed,
+            TraitConditionType.SpeedAtLeast => useChampStat.Speed >= targetStat.Speed,
 
             _ => throw new NotImplementedException($"Condition not implemented: {conditionData.ConditionType}")
         };
