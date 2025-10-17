@@ -48,9 +48,10 @@ public static class TestHelper
         TraitConditionType traitConditionType = TraitConditionType.None,
         int threshold = 0,
         Side side = default,
-        TargetRange range = default
+        TargetRange range = default,
+        ConditionCheckerType checkerType = ConditionCheckerType.None
     )
-        => CreateTraitData(type: TraitType.AttackChanger, amount, traitConditionType, threshold, side, range);
+        => CreateTraitData(type: TraitType.AttackChanger, amount, traitConditionType, threshold, side, range, checkerType);
 
     public static TraitData[] CreateTraitDatas(
         TraitType type = default,
@@ -68,9 +69,10 @@ public static class TestHelper
         TraitConditionType conditionType = default,
         int threshold = 0,
         Side side = Side.Self,
-        TargetRange range = TargetRange.All
+        TargetRange range = TargetRange.All,
+        ConditionCheckerType checkerType = ConditionCheckerType.None
     )
-        => new TraitData(type, amount, new TraitConditionData(conditionType, threshold), new TraitTargetRule(side, range));
+        => new TraitData(type, amount, new TraitConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
 }
 
 public class TestAttackChangeAction : ITraitAction

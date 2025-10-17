@@ -8,8 +8,8 @@ public class TraitFactoryTests
         var champion = TestHelper.CreateStatus(10, 5, 3);
 
         // 조건: AttackAtLeast 10 이상일 때만 동작, 액션: Attack +5
-        var data = TestHelper.CreateTraitData(TraitType.AttackChanger, 5, TraitConditionType.AttackAtLeast, 10);
-        var executor = TraitExecutorFactory.CreateExecutor(data);
+        var data = TestHelper.CreateTraitData(TraitType.AttackChanger, 5, TraitConditionType.AttackAtLeast, 10, checkerType: ConditionCheckerType.Threshold);
+        var executor = TraitExecutorFactory.CreateExecutor(data, default);
 
         executor.ExecuteTrait(champion);
 
@@ -24,8 +24,8 @@ public class TraitFactoryTests
         var champion = TestHelper.CreateStatus(8, 4, 2);
 
         // 조건: DefenseAtLeast 10 이상이어야 하지만 현재 4 → 실행되지 않아야 함
-        var data = TestHelper.CreateTraitData(TraitType.DefenseChanger, 10, TraitConditionType.DefenseAtLeast, 10);
-        var executor = TraitExecutorFactory.CreateExecutor(data);
+        var data = TestHelper.CreateTraitData(TraitType.DefenseChanger, 10, TraitConditionType.DefenseAtLeast, 10, checkerType: ConditionCheckerType.Threshold);
+        var executor = TraitExecutorFactory.CreateExecutor(data, default);
 
         executor.ExecuteTrait(champion);
 

@@ -2,10 +2,11 @@ using System;
 
 public static class TraitExecutorFactory
 {
-    public static TraitExecutor CreateExecutor(TraitData traitData)
+    public static TraitExecutor CreateExecutor(TraitData traitData, ChampionStatData useChamp)
     {
         ITraitAction action = TraitActionFactory.CreateAction(traitData.TraitType, traitData.Amount);
-        return new TraitExecutor(action, traitData.ConditionType, traitData.Threshold);
+        ITraitConditionChecker checker = TraitCondtionCheckerFactory.CreateChecker(traitData.ConditionData, useChamp);
+        return new TraitExecutor(action, checker);
     }
 }
 

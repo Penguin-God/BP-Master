@@ -11,7 +11,7 @@ public class TraitApplyTests
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        var traitData = CreateAttTraitData(15, TraitConditionType.AttackBelow, 10, range: TargetRange.All);
+        var traitData = CreateAttTraitData(15, TraitConditionType.AttackBelow, 10, range: TargetRange.All, checkerType:ConditionCheckerType.Threshold);
         TraitApplier sut = new TraitApplier(statuses);
 
         sut.Execute(traitData, CreateRedSlot(0));
