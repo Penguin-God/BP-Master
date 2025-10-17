@@ -25,14 +25,14 @@ public class TraitExecuteTests
     }
 
     [Test]
-    public void 특성_제외된_경우_무시()
+    public void 특성_적용_제외된_경우_무시()
     {
-        var status = TestHelper.CreateStatus(0, 0, 0);
-        status.TraitExcluded();
+        var target = TestHelper.CreateStatus(0, 0, 0);
+        target.TraitExcluded();
         var sut = new TraitExecutor(new TestAttackChangeAction(5), TraitConditionType.None, 0);
 
-        sut.ExecuteTrait(status);
+        sut.ExecuteTrait(target);
 
-        Assert.AreEqual(0, status.Stat.Attack);
+        Assert.AreEqual(0, target.Stat.Attack);
     }
 }

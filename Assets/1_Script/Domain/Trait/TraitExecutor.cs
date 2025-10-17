@@ -1,7 +1,6 @@
 
 public class TraitExecutor
 {
-    readonly TraitConditionChecker conditionChecker = new TraitConditionChecker();
     readonly ITraitAction action;
     readonly TraitConditionData ConditionData;
     public TraitExecutor(ITraitAction traitAction, TraitConditionType conditionType, int threshold)
@@ -16,5 +15,5 @@ public class TraitExecutor
             action.Do(target);
     }
 
-    bool CanExecute(ChampionStatus target) => conditionChecker.CheckCondition(ConditionData, target.Stat) && target.IsTraitExcluded == false;
+    bool CanExecute(ChampionStatus target) => new StatThresholdChecker(ConditionData.ConditionType, ConditionData.Threshold).Check(target.Stat) && target.IsTraitExcluded == false;
 }

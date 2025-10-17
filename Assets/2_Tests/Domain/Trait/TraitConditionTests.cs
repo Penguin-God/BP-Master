@@ -9,6 +9,33 @@ public class TraitConditionTests
     [TestCase(TraitConditionType.AttackBelow)]
     [TestCase(TraitConditionType.DefenseBelow)]
     [TestCase(TraitConditionType.SpeedBelow)]
+    public void 스탯이_기준_이하면_참2(TraitConditionType type)
+    {
+        int threshold = 100;
+
+        Assert.IsTrue(Check(type, threshold, default));
+        Assert.IsTrue(Check(type, threshold, Stat(100, 100, 100)));
+        Assert.IsFalse(Check(type, threshold, Stat(120, 120, 120)));
+    }
+
+    [Test]
+    [TestCase(TraitConditionType.AttackAtLeast)]
+    [TestCase(TraitConditionType.DefenseAtLeast)]
+    [TestCase(TraitConditionType.SpeedAtLeast)]
+    public void 스탯이_기준_이상이면_참2(TraitConditionType type)
+    {
+        int threshold = 100;
+
+        Assert.IsTrue(Check(type, threshold, Stat(110, 120, 100)));
+        Assert.IsFalse(Check(type, threshold, Stat(80, 80, 80)));
+    }
+
+    bool Check(TraitConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(target);
+
+    [Test]
+    [TestCase(TraitConditionType.AttackBelow)]
+    [TestCase(TraitConditionType.DefenseBelow)]
+    [TestCase(TraitConditionType.SpeedBelow)]
     public void 스탯이_기준_이하면_참(TraitConditionType type)
     {
         int threshold = 100;
