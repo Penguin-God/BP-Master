@@ -30,13 +30,29 @@ public class TraitApplyTests
         statuses.AddSlot(Team.Blue, CreateStatus(0));
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
-        var traitData = CreateAttTraitData(15, side: Side.All, range: TargetRange.All);
+        var traitData = CreateAttTraitData(15, TraitConditionType.AttackAtLeast, side: Side.All, range: TargetRange.All, checkerType: ConditionCheckerType.None);
         TraitApplier sut = new TraitApplier(statuses);
 
-        sut.Execute(traitData, CreateRedSlot(0));
+        sut.Execute(traitData, CreateRedSlot(0), CreateBlueSlot(0));
 
         Assert.AreEqual(15, statuses.GetSlot(CreateBlueSlot(0)).Stat.Attack);
         Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
+    }
+
+    [Test]
+    public void 조건_검사_비교()
+    {
+        SlotStorage<ChampionStatus> statuses = new();
+        // Blue 1, Red 1 상태 초기화 (공격력 0)
+        statuses.AddSlot(Team.Blue, CreateStatus(15));
+        statuses.AddSlot(Team.Red, CreateStatus(10));
+
+        var traitData = CreateAttTraitData(-10, TraitConditionType.AttackAtLeast, side:Side.Opponent, range: TargetRange.All, checkerType: ConditionCheckerType.Compare);
+        TraitApplier sut = new TraitApplier(statuses);
+
+        sut.Execute(traitData, CreateRedSlot(0), CreateBlueSlot(0));
+
+        Assert.AreEqual(0, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
     }
 
     [Test]

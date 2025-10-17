@@ -27,4 +27,17 @@ public class TraitApplier
         }
         IsUse = true;
     }
+
+    public void Execute(TraitData traitData, SlotData targetSlot, SlotData useSlot)
+    {
+        var executor = TraitExecutorFactory.CreateExecutor(traitData, statuses.GetSlot(useSlot).Stat);
+        IEnumerable<SlotData> targetSlots = targetSelector.GetTargetSlots(traitData.TargetRule, targetSlot);
+
+        foreach (var slot in targetSlots)
+        {
+            var target = statuses.GetSlot(slot);
+            executor.ExecuteTrait(target);
+        }
+        IsUse = true;
+    }
 }
