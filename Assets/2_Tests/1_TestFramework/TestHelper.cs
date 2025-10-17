@@ -25,15 +25,6 @@ public static class TestHelper
             )
         );
 
-    public static IEnumerable<Champion> CreateFiveChamps() => new Champion[]
-    {
-        CreateChamp(1, "일"),
-        CreateChamp(2, "이"),
-        CreateChamp(3, "삼"),
-        CreateChamp(4, "사"),
-        CreateChamp(5, "오"),
-    };
-
     public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<TraitData> traits = null)
         => new Champion(id, name, stat, traits);
 
@@ -73,6 +64,15 @@ public static class TestHelper
         ConditionCheckerType checkerType = ConditionCheckerType.None
     )
         => new TraitData(type, amount, new TraitConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
+
+    public static TraitData CreateConditionFreeTrait(TraitType type, int amount, Side side, TargetRange range)
+        => new TraitData(type, amount, default, new TraitTargetRule(side, range));
+
+    public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
+        => new TraitData(traitType, amount, conditionData, traitTargetRule);
+    public static TraitConditionData CreateThresholdCondition(TraitConditionType type, int threshold) => new TraitConditionData(type, threshold, ConditionCheckerType.Threshold);
+    public static TraitTargetRule SelfAllRule => new TraitTargetRule(Side.Self, TargetRange.All);
+    public static TraitTargetRule OpponentAllRule => new TraitTargetRule(Side.Opponent, TargetRange.All);
 }
 
 public class TestAttackChangeAction : ITraitAction
