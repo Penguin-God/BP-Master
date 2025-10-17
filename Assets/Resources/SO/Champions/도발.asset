@@ -24,9 +24,11 @@ MonoBehaviour:
     amount: -50
     conditionType: 0
     threshold: 0
+    conditionCheckerType: 0
   - targetSide: 1
     range: 2
     traitType: 1
     amount: 40
     conditionType: 0
     threshold: 0
+    conditionCheckerType: 0

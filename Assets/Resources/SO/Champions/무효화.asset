@@ -24,3 +24,4 @@ MonoBehaviour:
     amount: 0
     conditionType: 0
     threshold: 0
+    conditionCheckerType: 0

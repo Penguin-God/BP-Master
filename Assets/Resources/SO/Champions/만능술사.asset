@@ -24,15 +24,18 @@ MonoBehaviour:
     amount: 15
     conditionType: 0
     threshold: 0
+    conditionCheckerType: 0
   - targetSide: 0
     range: 2
     traitType: 2
     amount: 15
     conditionType: 0
     threshold: 0
+    conditionCheckerType: 0
   - targetSide: 0
     range: 2
     traitType: 3
     amount: 1
     conditionType: 0
     threshold: 0
+    conditionCheckerType: 0
