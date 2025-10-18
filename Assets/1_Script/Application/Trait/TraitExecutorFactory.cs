@@ -1,8 +1,8 @@
 using System;
 
-public static class TraitExecutorFactory
+public class TraitExecutorFactory
 {
-    public static TraitExecutor CreateExecutor(TraitData traitData, ChampionStatData useChamp)
+    public TraitExecutor CreateExecutor(TraitData traitData, ChampionStatData useChamp)
     {
         ITraitAction action = TraitActionFactory.CreateAction(traitData.TraitType, traitData.Amount);
         ITraitConditionChecker checker = TraitCondtionCheckerFactory.CreateChecker(traitData.ConditionData, useChamp);

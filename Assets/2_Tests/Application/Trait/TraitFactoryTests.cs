@@ -13,7 +13,7 @@ public class TraitFactoryTests
         // att가 기준값 이상일 때 Attack +10
         TraitConditionData condition = CreateThresholdCondition(TraitConditionType.AttackAtLeast, attThreshold);
         var data = CreateTraitData(TraitType.AttackChanger, 10, condition, SelfAllRule);
-        var result = TraitExecutorFactory.CreateExecutor(data, default);
+        var result = new TraitExecutorFactory().CreateExecutor(data, default);
 
         result.ExecuteTrait(champion);
 

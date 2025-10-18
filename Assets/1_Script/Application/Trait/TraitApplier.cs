@@ -17,7 +17,7 @@ public class TraitApplier
 
     public void Execute(TraitData traitData, SlotData targetSlot, SlotData useSlot)
     {
-        var executor = TraitExecutorFactory.CreateExecutor(traitData, statuses.GetSlot(useSlot).Stat);
+        var executor = new TraitExecutorFactory().CreateExecutor(traitData, statuses.GetSlot(useSlot).Stat);
         IEnumerable<SlotData> targetSlots = targetSelector.GetTargetSlots(traitData.TargetRule, targetSlot);
 
         foreach (var slot in targetSlots)
