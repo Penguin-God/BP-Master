@@ -49,10 +49,10 @@ public class TraitApplyTests
     public void 서로_비교하는_조건에_따른_실행(int att, int expected)
     {
         SlotStorage<ChampionStatus> statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus(att)); // 레드 이상의 값이여야 실행됨
+        statuses.AddSlot(Team.Blue, CreateStatus(att)); // 레드 초과의 값이여야 실행됨
         statuses.AddSlot(Team.Red, CreateStatus(10));
 
-        var condition = CreateCompareCondition(TraitConditionType.AttackAtLeast);
+        var condition = CreateCompareCondition(TraitConditionType.AttackBelow);
         var traitData = CreateTraitData(TraitType.AttackChanger, -10, condition, OpponentAllRule);
         TraitApplier sut = new TraitApplier(statuses);
 

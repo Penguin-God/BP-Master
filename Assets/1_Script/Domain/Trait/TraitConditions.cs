@@ -70,15 +70,15 @@ public class StatComparisonChecker : ITraitConditionChecker // 초과, 미만
         {
             TraitConditionType.None => true,
 
-            TraitConditionType.DefenseBelow => UseChamp.Defense < target.Defense,
-            TraitConditionType.DefenseAtLeast => UseChamp.Defense > target.Defense,
+            TraitConditionType.DefenseAtLeast => UseChamp.Defense < target.Defense,
+            TraitConditionType.DefenseBelow => UseChamp.Defense > target.Defense,
 
-            TraitConditionType.AttackBelow => UseChamp.Attack < target.Attack,
-            TraitConditionType.AttackAtLeast => UseChamp.Attack > target.Attack,
+            TraitConditionType.AttackAtLeast => UseChamp.Attack < target.Attack,
+            TraitConditionType.AttackBelow => UseChamp.Attack > target.Attack,
 
-            TraitConditionType.SpeedBelow => UseChamp.Speed < target.Speed,
-            TraitConditionType.SpeedAtLeast => UseChamp.Speed > target.Speed,
-
+            TraitConditionType.SpeedAtLeast => UseChamp.Speed < target.Speed,
+            TraitConditionType.SpeedBelow => UseChamp.Speed > target.Speed,
+            
             _ => throw new NotImplementedException($"Condition not implemented: {Type}")
         };
     }

@@ -39,24 +39,24 @@ public class TraitConditionTests // StatThresholdChecker는 이상, 이하. Stat
     [TestCase(TraitConditionType.AttackAtLeast)]
     [TestCase(TraitConditionType.DefenseAtLeast)]
     [TestCase(TraitConditionType.SpeedAtLeast)]
-    public void 타겟과_비교_후_초과면_참(TraitConditionType type)
+    public void 타겟이_더_크면_참(TraitConditionType type)
     {
         var targetStat = Stat(10, 10, 10);
 
-        Assert.IsTrue(Check(type, Stat(12, 15, 11), targetStat));
-        Assert.IsFalse(Check(type, Stat(8, 10, 2), targetStat));
+        Assert.IsTrue(Check(type, Stat(3, 8, 0), targetStat));
+        Assert.IsFalse(Check(type, Stat(12, 10, 22), targetStat));
     }
 
     [Test]
     [TestCase(TraitConditionType.AttackBelow)]
     [TestCase(TraitConditionType.DefenseBelow)]
     [TestCase(TraitConditionType.SpeedBelow)]
-    public void 타겟과_비교_후_미만이면_참(TraitConditionType type)
+    public void 타겟이_더_작으면_참(TraitConditionType type)
     {
         var targetStat = Stat(10, 10, 10);
 
-        Assert.IsTrue(Check(type, Stat(6, 8, 9), targetStat));
-        Assert.IsFalse(Check(type, Stat(12, 10, 12), targetStat));
+        Assert.IsTrue(Check(type, Stat(12, 11, 19), targetStat));
+        Assert.IsFalse(Check(type, Stat(0, 4, 10), targetStat));
     }
     bool Check(TraitConditionType type, ChampionStatData user, ChampionStatData target) => new StatComparisonChecker(type, user).Check(target);
 
