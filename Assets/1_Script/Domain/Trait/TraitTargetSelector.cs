@@ -3,15 +3,16 @@ using System.Linq;
 
 public class TraitTargetSelector
 {
-    readonly int TeamSize;
-    readonly TraitTargetRule Rule;
-
     readonly HashSet<SlotData> selected = new HashSet<SlotData>();
     public IEnumerable<SlotData> Targets => selected;
 
+    readonly int TeamSize;
+    readonly TraitTargetRule Rule;
+    readonly TargetCounter targetCounter;
     public TraitTargetSelector(int teamSize, TraitTargetRule rule)
     {
         TeamSize = teamSize;
+        targetCounter = new TargetCounter(teamSize);
         Rule = rule;
     }
 
@@ -20,21 +21,14 @@ public class TraitTargetSelector
         get
         {
             if (Rule.TargetRange == TargetRange.All) return selected.Count > 0;
-            else return selected.Count >= CapacityFor(Rule.TargetRange);
+            else return selected.Count >= targetCounter.CalculateTargetCount(Rule);
         }
     }
 
-    int CapacityFor(TargetRange range) => range switch
-    {
-        TargetRange.Single => 1,
-        TargetRange.Double => 2,
-        TargetRange.Triple => 3,
-        _ => 0
-    };
-
-    public bool CanSelected(SlotData clicked) => selected.Contains(clicked) == false && IsFull == false;
+    public bool CanSelected(SlotData target) => selected.Contains(target) == false && IsFull == false;
     public void Select(SlotData target)
     {
+        
         if(CanSelected(target) == false) return;
 
         if (Rule.TargetRange == TargetRange.All) SelectAll(target);
@@ -54,8 +48,6 @@ public class TraitTargetSelector
         foreach (var s in slots)
             selected.Add(s);
     }
-
-
 
     IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, TeamSize).Select(i => new SlotData(team, i));
     IEnumerable<SlotData> AllTeamSlots => TeamSlots(Team.Blue).Concat(TeamSlots(Team.Red));
