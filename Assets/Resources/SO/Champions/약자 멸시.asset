@@ -22,13 +22,13 @@ MonoBehaviour:
     range: 2
     traitType: 2
     amount: -30
-    conditionType: 4
+    conditionType: 3
     threshold: 0
     conditionCheckerType: 2
   - targetSide: 1
     range: 2
     traitType: 1
     amount: -30
-    conditionType: 4
+    conditionType: 3
     threshold: 0
     conditionCheckerType: 2
