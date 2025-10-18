@@ -41,6 +41,18 @@ public class TraitTargetSelectTests
     }
 
     [Test]
+    public void 타겟_수_초과되면_무시()
+    {
+        TraitTargetSelector sut = new TraitTargetSelector(5, OpponentSingleRule);
+
+        sut.Select(BlueZeroSlot);
+        Assert.AreEqual(1, sut.Targets.Count());
+
+        sut.Select(BlueZeroSlot);
+        Assert.AreEqual(1, sut.Targets.Count());
+    }
+
+    [Test]
     public void Type에_따른_개수_저장()
     {
         TraitTargetSelector sut = new TraitTargetSelector(5, CreateDoubleRule(Side.All));
