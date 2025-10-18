@@ -6,13 +6,8 @@ public class TraitFacadeTests
     [Test]
     public void 특성_컬랙션_적용()
     {
-        SlotStorage<ChampionStatus> statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus(0));
-        statuses.AddSlot(Team.Red, CreateStatus(0));
-
-        SlotStorage<TraitApplier> appliers = new();
-        appliers.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
-        appliers.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
+        SlotStorage<ChampionStatus> statuses = CreateOneSlotStatus();
+        SlotStorage<TraitApplier> appliers = CreateOneSlotApplier(statuses);
         TraitData[] datas = new TraitData[] { CreateTraitData(TraitType.AttackChanger, 10, range: TargetRange.Single), CreateTraitData(TraitType.DefenseChanger, 10, side: Side.Self, range: TargetRange.Single) };
         var sut = new TraitUseFacade(appliers);
 

@@ -14,6 +14,14 @@ public static class TestHelper
         return result;
     }
 
+    public static SlotStorage<TraitApplier> CreateOneSlotApplier(SlotStorage<ChampionStatus> statuses)
+    {
+        SlotStorage<TraitApplier> result = new();
+        result.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
+        result.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
+        return result;
+    }
+
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
 
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));

@@ -7,22 +7,16 @@ public class AI_TraitUseTests
     [Test]
     public void AI_특성_사용()
     {
-        var statuses = new SlotStorage<ChampionStatus>();
-        statuses.AddSlot(Team.Blue, new ChampionStatus(default));
-        statuses.AddSlot(Team.Red, new ChampionStatus(default));
+        var statuses = CreateOneSlotStatus();
+        SlotStorage<TraitApplier> applilers = CreateOneSlotApplier(statuses);
+        var facade = new TraitUseFacade(applilers);
 
         var traitStorage = new SlotStorage<IEnumerable<TraitData>>();
         var traits = new TraitData[] { TestHelper.CreateTraitData(TraitType.AttackChanger, 10, side: Side.Opponent, range: TargetRange.Single) };
-
         traitStorage.AddSlot(Team.Blue, traits);
         traitStorage.AddSlot(Team.Red, traits);
 
-        
-        SlotStorage<TraitApplier> applilers = new();
-        applilers.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
-        applilers.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
 
-        var facade = new TraitUseFacade(applilers);
         var filter = new TraitSlotFilter(applilers);
         var sut = new AI_TraitAgent(Team.Blue, filter, traitStorage, facade);
 
