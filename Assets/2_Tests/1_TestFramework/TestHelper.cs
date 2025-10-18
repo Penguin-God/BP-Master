@@ -14,6 +14,14 @@ public static class TestHelper
         return result;
     }
 
+    public static SlotStorage<ChampionStatus> CreateTwoSlotStatus(int att = 0, int def = 0, int speed = 0)
+    {
+        SlotStorage<ChampionStatus> result = CreateOneSlotStatus(att, def, speed);
+        result.AddSlot(Team.Blue, CreateStatus(att, def, speed));
+        result.AddSlot(Team.Red, CreateStatus(att, def, speed));
+        return result;
+    }
+
     public static SlotStorage<TraitApplier> CreateOneSlotApplier(SlotStorage<ChampionStatus> statuses)
     {
         SlotStorage<TraitApplier> result = new();
