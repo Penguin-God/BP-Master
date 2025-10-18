@@ -50,4 +50,10 @@ public class TraitUsePresenterTests
         // Assert
         Assert.AreEqual(second, sut.SelectedSlot);
     }
+
+    [Test]
+    public void 사용_확인()
+    {
+        var sut = new TraitUsePersenter();
+    }
 }
