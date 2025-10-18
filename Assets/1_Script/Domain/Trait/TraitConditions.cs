@@ -4,8 +4,8 @@ public enum TraitConditionType
 {
     None,
 
-    DefenseBelow, // 이상
-    DefenseAtLeast, // 이하
+    DefenseBelow,
+    DefenseAtLeast,
 
     AttackBelow,
     AttackAtLeast,
@@ -24,7 +24,7 @@ public class NullChecker : ITraitConditionChecker
     public bool Check(ChampionStatData stat) => true;
 }
 
-public class StatThresholdChecker : ITraitConditionChecker
+public class StatThresholdChecker : ITraitConditionChecker // 이상, 이하
 {
     readonly TraitConditionType Type;
     readonly int Threshold;
@@ -54,7 +54,7 @@ public class StatThresholdChecker : ITraitConditionChecker
     }
 }
 
-public class StatComparisonChecker : ITraitConditionChecker
+public class StatComparisonChecker : ITraitConditionChecker // 초과, 미만
 {
     readonly TraitConditionType Type;
     readonly ChampionStatData UseChamp;
@@ -70,14 +70,14 @@ public class StatComparisonChecker : ITraitConditionChecker
         {
             TraitConditionType.None => true,
 
-            TraitConditionType.DefenseBelow => UseChamp.Defense <= target.Defense,
-            TraitConditionType.DefenseAtLeast => UseChamp.Defense >= target.Defense,
+            TraitConditionType.DefenseBelow => UseChamp.Defense < target.Defense,
+            TraitConditionType.DefenseAtLeast => UseChamp.Defense > target.Defense,
 
-            TraitConditionType.AttackBelow => UseChamp.Attack <= target.Attack,
-            TraitConditionType.AttackAtLeast => UseChamp.Attack >= target.Attack,
+            TraitConditionType.AttackBelow => UseChamp.Attack < target.Attack,
+            TraitConditionType.AttackAtLeast => UseChamp.Attack > target.Attack,
 
-            TraitConditionType.SpeedBelow => UseChamp.Speed <= target.Speed,
-            TraitConditionType.SpeedAtLeast => UseChamp.Speed >= target.Speed,
+            TraitConditionType.SpeedBelow => UseChamp.Speed < target.Speed,
+            TraitConditionType.SpeedAtLeast => UseChamp.Speed > target.Speed,
 
             _ => throw new NotImplementedException($"Condition not implemented: {Type}")
         };
