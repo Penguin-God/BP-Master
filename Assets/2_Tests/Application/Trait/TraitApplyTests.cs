@@ -70,4 +70,16 @@ public class TraitApplyTests
 
         Assert.AreEqual(expected, statuses.GetSlot(RedZeroSlot).Stat.Attack);
     }
+
+    [Test]
+    public void 타겟들을_받아서_실행()
+    {
+        var statuses = CreateOneSlotStatus();
+        var traitData = CreateConditionFreeTrait(TraitType.AttackChanger, 15, OpponentAllRule);
+        var sut = CreateSut(statuses, BlueZeroSlot);
+
+        sut.Execute(traitData, RedZeroSlot);
+
+        Assert.AreEqual(15, statuses.GetSlot(RedZeroSlot).Stat.Attack);
+    }
 }

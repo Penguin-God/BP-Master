@@ -32,4 +32,16 @@ public class TraitApplier
         IsUse = true;
         OnUseTrait?.Invoke(Slot);
     }
+
+    public void Execute(TraitData traitData, IEnumerable<SlotData> targetSlots)
+    {
+        var executor = new TraitExecutorFactory().CreateExecutor(traitData, statuses.GetSlot(Slot).Stat);
+        foreach (var slot in targetSlots)
+        {
+            var target = statuses.GetSlot(slot);
+            executor.ExecuteTrait(target);
+        }
+        IsUse = true;
+        OnUseTrait?.Invoke(Slot);
+    }
 }
