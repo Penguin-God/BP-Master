@@ -34,12 +34,13 @@ public class ChampionTextBuilderTests
     }
 
     [Test]
-    public void 조건과_액션에_맞는_특성_텍스트_생성()
+    public void 기준점_조건_텍스트_생성()
     {
         var sut = new TraitTextBuilder();
 
         // 편의 함수
-        string GetTraitText(TraitConditionType conditionType, int thershold) => sut.BuildTraitText(new TraitUI_Data(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10, conditionType, thershold));
+        string GetTraitText(TraitConditionType conditionType, int thershold) 
+            => sut.BuildTraitText(CreateData(TraitType.DefenseChanger, -10, CreateThresholdCondition(conditionType, thershold), OpponentAllRule));
 
         Assert.AreEqual("방어력이 100 이상인 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.DefenseAtLeast, 100));
         Assert.AreEqual("방어력이 10 이하인 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.DefenseBelow, 10));
@@ -50,7 +51,23 @@ public class ChampionTextBuilderTests
     }
 
     [Test]
-    public void 특성_컬랙션은_텍스트_합쳐서_반환()
+    public void 비교_조건_텍스트_생성()
+    {
+        var sut = new TraitTextBuilder();
+
+        // 편의 함수
+        string GetTraitText(TraitConditionType conditionType) => sut.BuildTraitText(CreateData(TraitType.DefenseChanger, -10, CreateCompareCondition(conditionType), OpponentAllRule));
+
+        Assert.AreEqual("방어력이 자신보다 높은 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.DefenseAtLeast));
+        Assert.AreEqual("방어력이 자신보다 낮은 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.DefenseBelow));
+        Assert.AreEqual("공격력이 자신보다 높은 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.AttackAtLeast));
+        Assert.AreEqual("공격력이 자신보다 낮은 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.AttackBelow));
+        Assert.AreEqual("속도가 자신보다 높은 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.SpeedAtLeast));
+        Assert.AreEqual("속도가 자신보다 낮은 적군 전체 방어력 10 감소", GetTraitText(TraitConditionType.SpeedBelow));
+    }
+
+    [Test]
+    public void 특성_컬랙션은_텍스트_합쳐서_반환() // 케이스 추가?
     {
         var sut = new TraitTextBuilder();
         var datas = new TraitUI_Data[]

@@ -21,21 +21,11 @@ public readonly struct TraitUI_Data
     public readonly TraitType TraitType;
     public readonly int Amount;
 
-    public readonly TraitConditionType ConditionType => Condition.ConditionType;
-    public readonly int Threshold => Condition.Threshold;
     public readonly TraitConditionData Condition;
     public readonly TraitTargetRule Rule;
 
     public readonly Side TargetSide => Rule.TargetSide;
     public readonly TargetRange Range => Rule.TargetRange;
-
-    public TraitUI_Data(TraitType traitType, Side targetSide, TargetRange range, int amount, TraitConditionType conditionType, int threshold)
-    {
-        TraitType = traitType;
-        Amount = amount;
-        Condition = new TraitConditionData(conditionType, threshold, 0);
-        Rule = new TraitTargetRule(targetSide, range);
-    }
 
     public TraitUI_Data(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
     {
@@ -52,7 +42,7 @@ public class TraitTextBuilder
 
     public string BuildTraitText(TraitUI_Data traitData)
     {
-        var conditoin = BuildTraitConditionText(traitData.ConditionType, traitData.Threshold);
+        var conditoin = BuildConditionText(traitData.Condition);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(traitData.TargetSide, traitData.Range);
@@ -82,7 +72,13 @@ public class TraitTextBuilder
         _ => "대상 없음"
     };
 
-    string BuildTraitConditionText(TraitConditionType conditionType, int threshold) => conditionType switch
+    string BuildConditionText(TraitConditionData conditionData)
+    {
+        if (conditionData.CheckerType == ConditionCheckerType.Threshold) return BuildThresholdText(conditionData.ConditionType, conditionData.Threshold);
+        else return BuildCompareText(conditionData.ConditionType);
+    }
+
+    string BuildThresholdText(TraitConditionType conditionType, int threshold) => conditionType switch
     {
         TraitConditionType.None => "",
         TraitConditionType.AttackAtLeast => $"공격력이 {threshold} 이상인",
@@ -91,6 +87,18 @@ public class TraitTextBuilder
         TraitConditionType.DefenseBelow => $"방어력이 {threshold} 이하인",
         TraitConditionType.SpeedAtLeast => $"속도 {threshold} 이상인",
         TraitConditionType.SpeedBelow => $"속도 {threshold} 이하인",
+        _ => ""
+    };
+
+    string BuildCompareText(TraitConditionType conditionType) => conditionType switch
+    {
+        TraitConditionType.None => "",
+        TraitConditionType.AttackAtLeast => $"공격력이 자신보다 높은",
+        TraitConditionType.AttackBelow => $"공격력이 자신보다 낮은",
+        TraitConditionType.DefenseAtLeast => $"방어력이 자신보다 높은",
+        TraitConditionType.DefenseBelow => $"방어력이 자신보다 낮은",
+        TraitConditionType.SpeedAtLeast => $"속도가 자신보다 높은",
+        TraitConditionType.SpeedBelow => $"속도가 자신보다 낮은",
         _ => ""
     };
 
