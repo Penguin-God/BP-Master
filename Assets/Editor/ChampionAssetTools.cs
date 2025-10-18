@@ -4,6 +4,7 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 
 public static class ChampionAssetTools
 {
@@ -82,9 +83,7 @@ public static class ChampionAssetTools
             Undo.RecordObject(champion, "Re-index ChampionSO");
 
             // id 필드는 private 이므로 reflection 사용
-            typeof(ChampionSO)
-                .GetField("id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.SetValue(champion, nextId);
+            typeof(ChampionSO).GetField("id", BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(champion, nextId);
 
             EditorUtility.SetDirty(champion);
             nextId++;

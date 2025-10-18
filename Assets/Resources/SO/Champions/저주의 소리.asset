@@ -19,7 +19,7 @@ MonoBehaviour:
   speed: 5
   traitDatas:
   - targetSide: 1
-    range: 2
+    range: 4
     traitType: 1
     amount: -20
     conditionType: 0
