@@ -16,23 +16,33 @@ public readonly struct StatViewModel
     }
 }
 
-public struct TraitUI_Data
+public readonly struct TraitUI_Data
 {
     public readonly TraitType TraitType;
-    public readonly Side TargetSide;
-    public readonly TargetRange Range;
     public readonly int Amount;
-    public readonly TraitConditionType ConditionType;
-    public readonly int Threshold;
+
+    public readonly TraitConditionType ConditionType => Condition.ConditionType;
+    public readonly int Threshold => Condition.Threshold;
+    public readonly TraitConditionData Condition;
+    public readonly TraitTargetRule Rule;
+
+    public readonly Side TargetSide => Rule.TargetSide;
+    public readonly TargetRange Range => Rule.TargetRange;
 
     public TraitUI_Data(TraitType traitType, Side targetSide, TargetRange range, int amount, TraitConditionType conditionType, int threshold)
     {
         TraitType = traitType;
-        TargetSide = targetSide;
-        Range = range;
         Amount = amount;
-        ConditionType = conditionType;
-        Threshold = threshold;
+        Condition = new TraitConditionData(conditionType, threshold, 0);
+        Rule = new TraitTargetRule(targetSide, range);
+    }
+
+    public TraitUI_Data(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
+    {
+        TraitType = traitType;
+        Amount = amount;
+        Condition = conditionData;
+        Rule = traitTargetRule;
     }
 }
 

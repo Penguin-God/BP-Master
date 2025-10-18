@@ -8,6 +8,7 @@ public class TraitDataConfig
     [Header("범위")]
     [SerializeField] Side targetSide;
     [SerializeField] TargetRange range;
+    TraitTargetRule Rule => new TraitTargetRule(targetSide, range);
 
     [Header("액션")]
     [SerializeField] TraitType traitType;
@@ -17,9 +18,10 @@ public class TraitDataConfig
     [SerializeField] TraitConditionType conditionType;
     [SerializeField] int threshold;
     [SerializeField] ConditionCheckerType conditionCheckerType;
+    TraitConditionData Condition => new TraitConditionData(conditionType, threshold, conditionCheckerType);
 
-    public TraitData CreateTraitData() => new TraitData(traitType, amount, new TraitConditionData(conditionType, threshold, conditionCheckerType), new TraitTargetRule(targetSide, range));
-    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, targetSide, range, amount, conditionType, threshold);
+    public TraitData CreateTraitData() => new TraitData(traitType, amount, Condition, Rule);
+    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, amount, Condition, Rule);
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]
