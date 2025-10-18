@@ -78,9 +78,9 @@ public static class TestHelper
     )
         => new TraitData(type, amount, new TraitConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
 
-    public static TraitData CreateConditionFreeTrait(TraitType type, int amount, TraitTargetRule rule) => new TraitData(type, amount, default, rule);
+    public static TraitData CreateConditionFreeTrait(TraitType type, int amount, TraitTargetRule rule = default) => new TraitData(type, amount, default, rule);
 
-    public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
+    public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule = default)
         => new TraitData(traitType, amount, conditionData, traitTargetRule);
 
     public static TraitConditionData CreateThresholdCondition(TraitConditionType type, int threshold) => new TraitConditionData(type, threshold, ConditionCheckerType.Threshold);
