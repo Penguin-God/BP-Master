@@ -57,6 +57,8 @@ public class TraitTextBuilder
         TraitType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        TraitType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
+        TraitType.TraitExcluder => $"특성 제외",
         _ => ""
     };
 

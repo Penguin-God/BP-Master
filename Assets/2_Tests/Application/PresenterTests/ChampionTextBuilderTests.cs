@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class ChampionToTextPresentTests
+public class ChampionTextBuilderTests
 {
     [Test]
     public void 챔피언_스탯정보가_텍스트로_생성()
@@ -26,6 +26,8 @@ public class ChampionToTextPresentTests
         Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10));
         Assert.AreEqual("아군 단일 대상 속도 2 증가", GetTraitText(TraitType.SpeedChanger, Side.Self, TargetRange.Single, 2));
         Assert.AreEqual("양팀 전체 공격력 50 증가", GetTraitText(TraitType.AttackChanger, Side.All, TargetRange.All, 50));
+        Assert.AreEqual("아군 전체 방어력 100으로 고정", GetTraitText(TraitType.DefenseFixer, Side.Self, TargetRange.All, 100));
+        Assert.AreEqual("적군 단일 대상 특성 제외", GetTraitText(TraitType.TraitExcluder, Side.Opponent, TargetRange.Single, 50));
     }
 
     [Test]
