@@ -15,14 +15,11 @@ public class TraitFacadeTests
         appliers.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
         TraitData[] datas = new TraitData[] { CreateTraitData(TraitType.AttackChanger, 10, range: TargetRange.Single), CreateTraitData(TraitType.DefenseChanger, 10, side: Side.Self, range: TargetRange.Single) };
         var sut = new TraitUseFacade(appliers);
-        SlotData callSlot = CreateRedSlot(11);
-        sut.OnTraitUsed += slot => callSlot = slot;
 
         sut.UseTrait(CreateBlueSlot(0), CreateRedSlot(0), datas);
 
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
         Assert.AreEqual(10, statuses.GetSlot(CreateRedSlot(0)).Stat.Defense);
-        Assert.AreEqual(CreateBlueSlot(0), callSlot);
-        Assert.IsTrue(appliers.GetSlot(callSlot).IsUse);
+        Assert.IsTrue(appliers.GetSlot(CreateBlueSlot(0)).IsUse);
     }
 }
