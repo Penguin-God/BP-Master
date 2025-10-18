@@ -12,7 +12,7 @@ public class TraitUseFacade
     public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitDatas)
     {
         foreach (var data in traitDatas)
-            appliers.GetSlot(traitSlot).Execute(data, targetSlot, traitSlot);
+            appliers.GetSlot(traitSlot).Execute(data, targetSlot);
         OnTraitUsed?.Invoke(traitSlot);
     }
 }

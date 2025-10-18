@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using static TestHelper;
 
 public class AI_TraitUseTests
 {
@@ -18,8 +19,8 @@ public class AI_TraitUseTests
 
         
         SlotStorage<TraitApplier> applilers = new();
-        applilers.AddSlot(Team.Blue, new TraitApplier(statuses));
-        applilers.AddSlot(Team.Red, new TraitApplier(statuses));
+        applilers.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
+        applilers.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
 
         var facade = new TraitUseFacade(applilers);
         var filter = new TraitSlotFilter(applilers);
@@ -27,7 +28,7 @@ public class AI_TraitUseTests
 
         sut.UseTrait(Team.Blue);
 
-        Assert.IsTrue(applilers.GetSlot(TestHelper.CreateBlueSlot(0)).IsUse);
-        Assert.AreEqual(10, statuses.GetSlot(TestHelper.CreateRedSlot(0)).Stat.Attack);
+        Assert.IsTrue(applilers.GetSlot(BlueZeroSlot).IsUse);
+        Assert.AreEqual(10, statuses.GetSlot(RedZeroSlot).Stat.Attack);
     }
 }

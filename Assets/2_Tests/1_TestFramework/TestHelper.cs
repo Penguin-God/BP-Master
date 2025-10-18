@@ -6,6 +6,14 @@ public static class TestHelper
     public static SlotData CreateBlueSlot(int index) => new SlotData(Team.Blue, index);
     public static SlotData CreateRedSlot(int index) => new SlotData(Team.Red, index);
 
+    public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0, int speed = 0)
+    {
+        SlotStorage<ChampionStatus> result = new();
+        result.AddSlot(Team.Blue, CreateStatus(att, def, speed));
+        result.AddSlot(Team.Red, CreateStatus(att, def, speed));
+        return result;
+    }
+
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
 
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
@@ -71,6 +79,7 @@ public static class TestHelper
     public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
 
     public static SlotData RedZeroSlot => CreateRedSlot(0);
+    public static SlotData RedOneSlot => CreateRedSlot(1);
     public static SlotData BlueZeroSlot => CreateBlueSlot(0);
     public static SlotData BlueOneSlot => CreateBlueSlot(1);
 }

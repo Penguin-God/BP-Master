@@ -11,8 +11,8 @@ public class TraitFacadeTests
         statuses.AddSlot(Team.Red, CreateStatus(0));
 
         SlotStorage<TraitApplier> appliers = new();
-        appliers.AddSlot(Team.Blue, new TraitApplier(statuses));
-        appliers.AddSlot(Team.Red, new TraitApplier(statuses));
+        appliers.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
+        appliers.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
         TraitData[] datas = new TraitData[] { CreateTraitData(TraitType.AttackChanger, 10, range: TargetRange.Single), CreateTraitData(TraitType.DefenseChanger, 10, side: Side.Self, range: TargetRange.Single) };
         var sut = new TraitUseFacade(appliers);
         SlotData callSlot = CreateRedSlot(11);

@@ -6,7 +6,7 @@ public class TraitTargetFilteringTests
     SlotStorage<ChampionStatus> statuses;
     TraitSlotFilter sut;
     SlotStorage<TraitApplier> applilers;
-    TraitApplier CreatAppliler() => new TraitApplier(statuses);
+    TraitApplier CreatAppliler(SlotData slot) => new TraitApplier(statuses, slot);
     [SetUp]
     public void SetUp()
     {
@@ -18,10 +18,11 @@ public class TraitTargetFilteringTests
         statuses.AddSlot(Team.Red, CreateStatus());
 
         applilers = new();
-        applilers.AddSlot(Team.Blue, CreatAppliler());
-        applilers.AddSlot(Team.Blue, CreatAppliler());
-        applilers.AddSlot(Team.Red, CreatAppliler());
-        applilers.AddSlot(Team.Red, CreatAppliler());
+        applilers.AddSlot(Team.Blue, CreatAppliler(BlueZeroSlot));
+        applilers.AddSlot(Team.Blue, CreatAppliler(BlueOneSlot));
+
+        applilers.AddSlot(Team.Red, CreatAppliler(RedZeroSlot));
+        applilers.AddSlot(Team.Red, CreatAppliler(RedOneSlot));
 
         sut = new TraitSlotFilter(applilers);
     }
@@ -29,7 +30,7 @@ public class TraitTargetFilteringTests
     [Test]
     public void 특성_사용_가능한_슬롯들_필터링()
     {
-        applilers.GetSlot(CreateBlueSlot(1)).Execute(CreateTraitData(type: TraitType.AttackChanger, side:Side.Opponent), CreateRedSlot(0), CreateBlueSlot(0));
+        applilers.GetSlot(BlueOneSlot).Execute(CreateTraitData(type: TraitType.AttackChanger, side:Side.Opponent), CreateRedSlot(0));
 
         var result = sut.FilteringUseableSlots(Team.Blue);
 
