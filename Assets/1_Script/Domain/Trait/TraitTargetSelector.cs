@@ -24,6 +24,14 @@ public class TraitTargetSelector
         }
     }
 
+    int CapacityFor(TargetRange range) => range switch
+    {
+        TargetRange.Single => 1,
+        TargetRange.Double => 2,
+        TargetRange.Triple => 3,
+        _ => 0
+    };
+
     public bool CanSelected(SlotData clicked) => selected.Contains(clicked) == false && IsFull == false;
     public void Select(SlotData target)
     {
@@ -47,13 +55,7 @@ public class TraitTargetSelector
             selected.Add(s);
     }
 
-    int CapacityFor(TargetRange range) => range switch
-    {
-        TargetRange.Single => 1,
-        TargetRange.Double => 2,
-        TargetRange.Triple => 3,
-        _ => 0
-    };
+
 
     IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, TeamSize).Select(i => new SlotData(team, i));
     IEnumerable<SlotData> AllTeamSlots => TeamSlots(Team.Blue).Concat(TeamSlots(Team.Red));
