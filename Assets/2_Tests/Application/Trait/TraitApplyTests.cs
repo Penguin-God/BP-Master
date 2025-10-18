@@ -6,7 +6,7 @@ public class TraitApplyTests
     TraitApplier CreateSut(SlotStorage<ChampionStatus> statuses, SlotData slot) => new TraitApplier(statuses, slot);
 
     [Test]
-    public void 특성_사용후_플래그가_바뀌며_다음_실행_조건은_바뀐_값을_반영함()
+    public void 특성_사용후_다음_실행은_바뀐_값을_반영해_조건_검사()
     {
         var statuses = CreateOneSlotStatus();
 
@@ -14,13 +14,29 @@ public class TraitApplyTests
         var traitData = CreateTraitData(TraitType.AttackChanger, 15, condition, OpponentAllRule);
         var sut = CreateSut(statuses, BlueZeroSlot);
 
-        sut.Execute(traitData, CreateRedSlot(0));
-        Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
-        Assert.IsTrue(sut.IsUse);
-
+        sut.Execute(traitData, RedZeroSlot);
+        Assert.AreEqual(15, statuses.GetSlot(RedZeroSlot).Stat.Attack);
+        
         // 아까 실행으로 조건이 거짓이 되었으므로 아무일도 안생김
-        sut.Execute(traitData, CreateRedSlot(0));
-        Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
+        sut.Execute(traitData, RedZeroSlot);
+        Assert.AreEqual(15, statuses.GetSlot(RedZeroSlot).Stat.Attack);
+    }
+
+    [Test]
+    public void 특성_사용후_플래그_바뀌고_이벤트_알림()
+    {
+        var statuses = CreateOneSlotStatus();
+        var traitData = CreateConditionFreeTrait(TraitType.AttackChanger, 15, OpponentAllRule);
+        var callSlot = RedZeroSlot;
+
+        var sut = CreateSut(statuses, BlueZeroSlot);
+        sut.OnUseTrait += slot => callSlot = slot;
+
+        sut.Execute(traitData, RedZeroSlot);
+
+
+        Assert.IsTrue(sut.IsUse);
+        Assert.AreEqual(BlueZeroSlot, callSlot);
     }
 
     [Test]
@@ -31,10 +47,10 @@ public class TraitApplyTests
         var traitData = CreateConditionFreeTrait(TraitType.AttackChanger, 15, AllRule);
         var sut = CreateSut(statuses, BlueZeroSlot);
 
-        sut.Execute(traitData, CreateRedSlot(0));
+        sut.Execute(traitData, RedZeroSlot);
 
         Assert.AreEqual(15, statuses.GetSlot(CreateBlueSlot(0)).Stat.Attack);
-        Assert.AreEqual(15, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
+        Assert.AreEqual(15, statuses.GetSlot(RedZeroSlot).Stat.Attack);
     }
 
     [Test]
@@ -50,8 +66,8 @@ public class TraitApplyTests
         var traitData = CreateTraitData(TraitType.AttackChanger, -10, condition, OpponentAllRule);
         var sut = CreateSut(statuses, BlueZeroSlot);
 
-        sut.Execute(traitData, CreateRedSlot(0));
+        sut.Execute(traitData, RedZeroSlot);
 
-        Assert.AreEqual(expected, statuses.GetSlot(CreateRedSlot(0)).Stat.Attack);
+        Assert.AreEqual(expected, statuses.GetSlot(RedZeroSlot).Stat.Attack);
     }
 }

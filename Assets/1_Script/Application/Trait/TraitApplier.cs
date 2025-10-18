@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class TraitApplier
 {
     readonly SlotStorage<ChampionStatus> statuses;
     readonly TraitTargetFinder targetSelector;
     public bool IsUse { get; set; }
+    public event Action<SlotData> OnUseTrait;
 
     readonly SlotData Slot;
     public TraitApplier(SlotStorage<ChampionStatus> statuses, SlotData slotData)
@@ -28,5 +30,6 @@ public class TraitApplier
             executor.ExecuteTrait(target);
         }
         IsUse = true;
+        OnUseTrait?.Invoke(Slot);
     }
 }
