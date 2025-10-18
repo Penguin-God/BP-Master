@@ -63,7 +63,12 @@ public static class TestHelper
     public static TraitConditionData CreateCompareCondition(TraitConditionType type) => new TraitConditionData(type, 0, ConditionCheckerType.Compare);
     public static TraitTargetRule SelfAllRule => new TraitTargetRule(Side.Self, TargetRange.All);
     public static TraitTargetRule OpponentAllRule => new TraitTargetRule(Side.Opponent, TargetRange.All);
+    
+    public static TraitTargetRule SelfSingleRule => new TraitTargetRule(Side.Self, TargetRange.Single);
+    public static TraitTargetRule OpponentSingleRule => new TraitTargetRule(Side.Opponent, TargetRange.Single);
+
     public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
+
 }
 
 public class TestAttackChangeAction : ITraitAction

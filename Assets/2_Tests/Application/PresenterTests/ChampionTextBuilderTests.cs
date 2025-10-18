@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static TestHelper;
 
 public class ChampionTextBuilderTests
 {
@@ -14,20 +15,22 @@ public class ChampionTextBuilderTests
         Assert.AreEqual("속도 6", result.Speed);
     }
 
+    TraitUI_Data CreateData(TraitType traitType, int amount, TraitConditionData condition, TraitTargetRule rule) => new TraitUI_Data(traitType, amount, condition, rule);
+
     [Test]
     public void 특성_타입에_맞는_텍스트_생성()
     {
         var sut = new TraitTextBuilder();
         
         // 편의 함수
-        string GetTraitText(TraitType traitType, Side side, TargetRange range, int amount) => sut.BuildTraitText(new TraitUI_Data(traitType, side, range, amount, TraitConditionType.None, 0));
+        string GetTraitText(TraitType traitType, int amount, TraitTargetRule rule) => sut.BuildTraitText(CreateData(traitType, amount, default, rule));
 
-        Assert.AreEqual("아군 전체 공격력 10 증가", GetTraitText(TraitType.AttackChanger, Side.Self, TargetRange.All, 10));
-        Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10));
-        Assert.AreEqual("아군 단일 대상 속도 2 증가", GetTraitText(TraitType.SpeedChanger, Side.Self, TargetRange.Single, 2));
-        Assert.AreEqual("양팀 전체 공격력 50 증가", GetTraitText(TraitType.AttackChanger, Side.All, TargetRange.All, 50));
-        Assert.AreEqual("아군 전체 방어력 100으로 고정", GetTraitText(TraitType.DefenseFixer, Side.Self, TargetRange.All, 100));
-        Assert.AreEqual("적군 단일 대상 특성 제외", GetTraitText(TraitType.TraitExcluder, Side.Opponent, TargetRange.Single, 50));
+        Assert.AreEqual("아군 전체 공격력 10 증가", GetTraitText(TraitType.AttackChanger, 10, SelfAllRule));
+        Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, -10, OpponentAllRule));
+        Assert.AreEqual("아군 단일 대상 속도 2 증가", GetTraitText(TraitType.SpeedChanger, 2, SelfSingleRule));
+        Assert.AreEqual("양팀 전체 공격력 50 증가", GetTraitText(TraitType.AttackChanger, 50, AllRule));
+        Assert.AreEqual("아군 전체 방어력 100으로 고정", GetTraitText(TraitType.DefenseFixer, 100, SelfAllRule));
+        Assert.AreEqual("적군 단일 대상 특성 제외", GetTraitText(TraitType.TraitExcluder, 50, OpponentSingleRule));
     }
 
     [Test]
@@ -52,8 +55,8 @@ public class ChampionTextBuilderTests
         var sut = new TraitTextBuilder();
         var datas = new TraitUI_Data[]
         {
-            new TraitUI_Data(TraitType.AttackChanger, Side.Opponent, TargetRange.All, -10, 0, 0),
-            new TraitUI_Data(TraitType.DefenseChanger, Side.Opponent, TargetRange.All, -10, 0, 0),
+            CreateData(TraitType.AttackChanger, -10, default, OpponentAllRule),
+            CreateData(TraitType.DefenseChanger, -10, default, OpponentAllRule),
         };
 
         string result = sut.BuildTraitText(datas);
