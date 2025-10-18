@@ -30,6 +30,14 @@ public static class TestHelper
         return result;
     }
 
+    public static SlotStorage<IEnumerable<TraitData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
+    {
+        SlotStorage<IEnumerable<TraitData>> result = new();
+        result.AddSlot(Team.Blue, new TraitData[] { CreateConditionFreeTrait(TraitType.AttackChanger, amount, rule) });
+        result.AddSlot(Team.Red, new TraitData[] { CreateConditionFreeTrait(TraitType.AttackChanger, amount, rule) });
+        return result;
+    }
+
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
 
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));

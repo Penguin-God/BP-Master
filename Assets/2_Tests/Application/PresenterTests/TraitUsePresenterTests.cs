@@ -57,15 +57,14 @@ public class TraitUsePresenterTests
     {
         var statuses = CreateTwoSlotStatus();
         var appliler = CreateOneSlotApplier(statuses);
-        var sut = new TraitUsePersenter(appliler, 2);
         var rule = new TraitTargetRule(Side.Opponent, TargetRange.Double);
-        var traits = new TraitData[] { CreateConditionFreeTrait(TraitType.AttackChanger, 100, rule) };
+        var sut = new TraitUsePersenter(appliler, 2, CreateAttTraitSlots(100, rule));
 
         sut.SelectUseTrait(BlueZeroSlot, rule);
         Assert.IsTrue(sut.IsUseable);
 
-        Assert.IsFalse(sut.UseTrait(RedZeroSlot, traits));
-        Assert.IsTrue(sut.UseTrait(RedOneSlot, traits));
+        Assert.IsFalse(sut.SelectTarget(RedZeroSlot));
+        Assert.IsTrue(sut.SelectTarget(RedOneSlot));
 
         Assert.AreEqual(100, statuses.GetSlot(RedZeroSlot).Stat.Attack);
         Assert.AreEqual(100, statuses.GetSlot(RedOneSlot).Stat.Attack);
