@@ -14,6 +14,8 @@ public enum TargetRange
 {
     None,
     Single,
+    Double,
+    Triple,
     All,
 }
 

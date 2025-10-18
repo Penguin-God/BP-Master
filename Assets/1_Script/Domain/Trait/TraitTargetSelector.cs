@@ -3,28 +3,58 @@ using System.Linq;
 
 public class TraitTargetSelector
 {
-    readonly int teamCount;
-    public TraitTargetSelector(int count) => teamCount = count;
-    public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
-    {
-        Team targetTeam = BanPickEnumCaster.GetTargetTeam(team, side);
+    readonly int TeamSize;
+    readonly TraitTargetRule Rule;
 
-        if (targetTeam == Team.All) return GetAllSlots();
-        else return GetTeamSlots(targetTeam);
+    readonly HashSet<SlotData> selected = new HashSet<SlotData>();
+    public IEnumerable<SlotData> Targets => selected;
+
+    public TraitTargetSelector(int teamSize, TraitTargetRule rule)
+    {
+        TeamSize = teamSize;
+        Rule = rule;
     }
 
-    public IEnumerable<SlotData> GetTargetSlots(TraitTargetRule rule, SlotData targetSlot)
+    public bool IsFull
     {
-        if (rule.TargetSide == Side.All) return GetAllSlots();
-
-        switch (rule.TargetRange)
+        get
         {
-            case TargetRange.Single: return new[] { targetSlot };
-            case TargetRange.All: return GetTeamSlots(targetSlot.Team);
-            default: throw new System.Exception($"정의 되지 않은 규칙 조합 {rule.TargetSide} : {rule.TargetRange}");
+            if (Rule.TargetRange == TargetRange.All) return selected.Count > 0;
+            else return selected.Count >= CapacityFor(Rule.TargetRange);
         }
     }
 
-    IEnumerable<SlotData> GetTeamSlots(Team team) => Enumerable.Range(0, teamCount).Select(i => new SlotData(team, i));
-    IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(x => GetTeamSlots(x));
+    public bool CanSelected(SlotData clicked) => selected.Contains(clicked) == false && IsFull == false;
+    public void Select(SlotData target)
+    {
+        if(CanSelected(target) == false) return;
+
+        if (Rule.TargetRange == TargetRange.All) SelectAll(target);
+        else selected.Add(target);
+    }
+
+    void SelectAll(SlotData target)
+    {
+        selected.Clear();
+
+        if (Rule.TargetSide == Side.All) SelectAdds(AllTeamSlots);
+        else SelectAdds(TeamSlots(target.Team));
+    }
+
+    void SelectAdds(IEnumerable<SlotData> slots)
+    {
+        foreach (var s in slots)
+            selected.Add(s);
+    }
+
+    int CapacityFor(TargetRange range) => range switch
+    {
+        TargetRange.Single => 1,
+        TargetRange.Double => 2,
+        TargetRange.Triple => 3,
+        _ => 0
+    };
+
+    IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, TeamSize).Select(i => new SlotData(team, i));
+    IEnumerable<SlotData> AllTeamSlots => TeamSlots(Team.Blue).Concat(TeamSlots(Team.Red));
 }

@@ -70,6 +70,9 @@ public static class TestHelper
 
     public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
 
+    public static SlotData RedZeroSlot => CreateRedSlot(0);
+    public static SlotData BlueZeroSlot => CreateBlueSlot(0);
+    public static SlotData BlueOneSlot => CreateBlueSlot(1);
 }
 
 public class TestAttackChangeAction : ITraitAction

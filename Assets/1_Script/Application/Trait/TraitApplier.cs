@@ -4,7 +4,7 @@ using System.Linq;
 public class TraitApplier
 {
     readonly SlotStorage<ChampionStatus> statuses;
-    readonly TraitTargetSelector targetSelector;
+    readonly TraitTargetFinder targetSelector;
     public bool IsUse { get; set; }
 
     public TraitApplier(SlotStorage<ChampionStatus> statuses)
@@ -12,7 +12,7 @@ public class TraitApplier
         this.statuses = statuses;
 
         int teamSize = statuses.GetTeam(Team.Blue).Count();
-        targetSelector = new TraitTargetSelector(teamSize);
+        targetSelector = new TraitTargetFinder(teamSize);
     }
 
     public void Execute(TraitData traitData, SlotData targetSlot, SlotData useSlot)
