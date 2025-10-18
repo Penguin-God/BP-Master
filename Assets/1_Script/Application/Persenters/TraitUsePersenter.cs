@@ -3,22 +3,24 @@ using System.Collections.Generic;
 public class TraitUsePersenter
 {
     readonly SlotStorage<TraitApplier> appliers;
+    readonly SlotStorage<IEnumerable<TraitData>> traitSlots;
     TraitTargetSelector traitTargetSelector;
     int TeamSize;
-    public TraitUsePersenter(SlotStorage<TraitApplier> appliers, int teamSize)
+    public TraitUsePersenter(SlotStorage<TraitApplier> appliers, int teamSize, SlotStorage<IEnumerable<TraitData>> traitDatas)
     {
         this.appliers = appliers;
         TeamSize = teamSize;
+        traitSlots = traitDatas;
     }
 
-    public bool UseTrait(SlotData targetSlot, IEnumerable<TraitData> traitDatas)
+    public bool SelectTarget(SlotData targetSlot)
     {
         if (IsUseable == false) return false;
 
         traitTargetSelector.Select(targetSlot);
         if (traitTargetSelector.IsFull)
         {
-            foreach (var data in traitDatas)
+            foreach (var data in traitSlots.GetSlot(useSlot.Value))
                 appliers.GetSlot(useSlot.Value).Execute(data, traitTargetSelector.Targets);
             return true;
         }

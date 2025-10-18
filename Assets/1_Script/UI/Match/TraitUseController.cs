@@ -23,6 +23,18 @@ public class TraitUseController : MonoBehaviour
         traitButtonView = GetComponent<TraitButtonView>();
     }
 
+    TraitUsePersenter traitUsePresenter;
+    public void Init(TraitUsePersenter traitUsePresenter, SlotStorage<IEnumerable<TraitData>> traits)
+    {
+        gameObject.SetActive(true);
+        this.traitUsePresenter = traitUsePresenter;
+        this.traits = traits;
+
+        SetupChampionButtons(blueChamps, Team.Blue);
+        SetupChampionButtons(redChamps, Team.Red);
+        traitButtonView = GetComponent<TraitButtonView>();
+    }
+
     void SetupChampionButtons(Button[] btns, Team buttonTeam)
     {
         for (int i = 0; i < btns.Length; i++)
@@ -32,7 +44,13 @@ public class TraitUseController : MonoBehaviour
         }
     }
 
-    // 첫 번째 클릭은 특성 선택. 다음 선택은 타겟
+    //void OnClickTraitSlot(SlotData clickSlot)
+    //{
+    //    if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
+    //    else traitUsePresenter.SelectUseTrait(clickSlot);
+    //}
+
+    // 특성 선택 후 타게팅
     void OnClickTraitSlot(SlotData clickSlot)
     {
         if (selectState.IsSelect)
