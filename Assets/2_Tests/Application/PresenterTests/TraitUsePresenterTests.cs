@@ -65,6 +65,7 @@ public class TraitUsePresenterTests
 
         Assert.IsFalse(sut.SelectTarget(RedZeroSlot));
         Assert.IsTrue(sut.SelectTarget(RedOneSlot));
+        Assert.IsFalse(sut.IsUseable);
 
         Assert.AreEqual(100, statuses.GetSlot(RedZeroSlot).Stat.Attack);
         Assert.AreEqual(100, statuses.GetSlot(RedOneSlot).Stat.Attack);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,9 +47,17 @@ public class TraitUseController : MonoBehaviour
 
     void OnClickTraitSlot(SlotData clickSlot)
     {
-        if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
-        else traitUsePresenter.SelectUseTrait(clickSlot);
-        
+        if (traitUsePresenter.IsUseable)
+        {
+            traitUsePresenter.SelectTarget(clickSlot);
+            if(traitUsePresenter.IsUseable) traitButtonView.ActiveTargets(traits.GetSlot(clickSlot));
+        }
+        else
+        {
+            var rules = traits.GetSlot(clickSlot).Select(x => x.TargetRule);
+            traitUsePresenter.SelectUseTrait(clickSlot, EnumCaster.MergeRule(rules));
+            traitButtonView.ActiveTargets(traits.GetSlot(clickSlot));
+        }
     }
 
     // 특성 선택 후 타게팅

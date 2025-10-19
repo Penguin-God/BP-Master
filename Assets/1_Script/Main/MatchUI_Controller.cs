@@ -40,7 +40,8 @@ public class MatchUI_Controller : MonoBehaviour
         banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
         
         traitButtonView.Init(filter, playerTeam);
-        traitUseView.Init(traitUseFacade, ChampionStorageConverter.ChamptionToTrait(slotStorageManager.ChampionSlots));
+        // traitUseView.Init(traitUseFacade, ChampionStorageConverter.ChamptionToTrait(slotStorageManager.ChampionSlots));
+        traitUseView.Init(new TraitUsePersenter(slotStorageManager.TraitApplierSlots, 5, slotStorageManager.TraitSlots), slotStorageManager.TraitSlots);
         eventDispatcher.OnPhaseTrait += traitButtonView.RefreshButtonsByTurn;
         traitButtonView.RefreshButtonsByTurn(Team.Blue);
 
