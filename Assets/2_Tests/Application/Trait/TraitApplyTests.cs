@@ -23,19 +23,15 @@ public class TraitApplyTests
     }
 
     [Test]
-    public void 특성_사용후_플래그_바뀌고_이벤트_알림()
+    public void 특성_사용후_플래그_바뀜()
     {
         var statuses = CreateOneSlotStatus();
         var traitData = CreateConditionFreeTrait(TraitType.AttackChanger, 15);
-        var callSlot = RedZeroSlot;
-
         var sut = CreateSut(statuses, BlueZeroSlot);
-        sut.OnUseTrait += slot => callSlot = slot;
 
         ExecuteSut(sut, traitData, RedZeroSlot);
 
         Assert.IsTrue(sut.IsUse);
-        Assert.AreEqual(BlueZeroSlot, callSlot);
     }
 
     [Test]

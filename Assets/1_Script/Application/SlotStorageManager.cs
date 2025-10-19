@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 public class SlotStorageManager
@@ -16,11 +15,5 @@ public class SlotStorageManager
         StatusSlots = idStorageConverter.IdToStatus(IdSlots);
         TraitApplierSlots = ChampionStorageConverter.StatusToTraitAppiler(StatusSlots);
         TraitSlots = ChampionStorageConverter.ChamptionToTrait(ChampionSlots);
-    }
-
-    public void AddTraitUseEvent(Action<SlotData> action)
-    {
-        foreach (var item in TraitApplierSlots.GetAll())
-            item.OnUseTrait += action;
     }
 }
