@@ -29,6 +29,13 @@ public static class EnumCaster
         else return Side.All;
     }
 
+    public static TraitTargetRule MergeRule(IEnumerable<TraitTargetRule> rules)
+    {
+        if(rules.Select(x => x.TargetRange).Distinct().Count() > 1) throw new Exception($"range가 통일되지 않음 : {string.Join(", ", rules.Select(x => x.TargetRange))}");
+
+        return new TraitTargetRule(MergeSide(rules.Select(x => x.TargetSide)), rules.First().TargetRange);
+    }
+
     public static Team GetOppoentTeam(Team team)
     {
         if (team == Team.Blue) return Team.Red;

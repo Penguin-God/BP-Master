@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 public class EnumCastingTests
 {
@@ -29,5 +31,33 @@ public class EnumCastingTests
         Assert.AreEqual(Side.Opponent, EnumCaster.MergeSide(new Side[] { Side.Opponent, Side.Opponent }));
         Assert.AreEqual(Side.All, EnumCaster.MergeSide(new Side[] { Side.Self, Side.All }));
         Assert.AreEqual(Side.All, EnumCaster.MergeSide(new Side[] { Side.Self, Side.Opponent }));
+    }
+
+    [Test]
+    public void 동일한_Range면_정상적으로_병합()
+    {
+        var rules = new[]
+        {
+            new TraitTargetRule(Side.Self, TargetRange.All),
+            new TraitTargetRule(Side.Opponent, TargetRange.All)
+        };
+
+        var result = EnumCaster.MergeRule(rules);
+
+        Assert.AreEqual(TargetRange.All, result.TargetRange);
+    }
+
+    [Test]
+    public void Range가_다르면_예외_발생()
+    {
+        var rules = new[]
+        {
+            new TraitTargetRule(Side.Self, TargetRange.Single),
+            new TraitTargetRule(Side.Opponent, TargetRange.All)
+        };
+
+        var ex = Assert.Throws<Exception>(() => EnumCaster.MergeRule(rules));
+
+        Assert.AreEqual("range가 통일되지 않음 : Single, All", ex.Message);
     }
 }
