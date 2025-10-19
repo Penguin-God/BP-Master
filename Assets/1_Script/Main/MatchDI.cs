@@ -19,7 +19,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
-        aiTeam = BanPickEnumCaster.GetOppoentTeam(playerTeam);
+        aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
         storage = new GameBanPickStorage(championCatalog.AllId);
 

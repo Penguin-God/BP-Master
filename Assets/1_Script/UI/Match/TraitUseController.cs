@@ -44,24 +44,25 @@ public class TraitUseController : MonoBehaviour
         }
     }
 
-    //void OnClickTraitSlot(SlotData clickSlot)
-    //{
-    //    if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
-    //    else traitUsePresenter.SelectUseTrait(clickSlot);
-    //}
-
-    // 특성 선택 후 타게팅
     void OnClickTraitSlot(SlotData clickSlot)
     {
-        if (selectState.IsSelect)
-        {
-            traitUseFacade.UseTrait(selectState.SelectedSlot, clickSlot, traits.GetSlot(selectState.SelectedSlot));
-            selectState.Use();
-        }
-        else
-        {
-            selectState.SelectSlot(clickSlot);
-            traitButtonView.ActiveTargets(traits.GetSlot(clickSlot));
-        }
+        if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
+        else traitUsePresenter.SelectUseTrait(clickSlot);
+        
     }
+
+    // 특성 선택 후 타게팅
+    //void OnClickTraitSlot(SlotData clickSlot)
+    //{
+    //    if (selectState.IsSelect)
+    //    {
+    //        traitUseFacade.UseTrait(selectState.SelectedSlot, clickSlot, traits.GetSlot(selectState.SelectedSlot));
+    //        selectState.Use();
+    //    }
+    //    else
+    //    {
+    //        selectState.SelectSlot(clickSlot);
+    //        traitButtonView.ActiveTargets(traits.GetSlot(clickSlot));
+    //    }
+    //}
 }

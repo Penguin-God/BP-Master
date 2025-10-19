@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public static class BanPickEnumCaster
+public static class EnumCaster
 {
     public static Team GetTargetTeam(Team selfTeam, Side side) => (selfTeam, side) switch
     {

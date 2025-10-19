@@ -18,7 +18,7 @@ public class TraitSlotFilter
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {
-        var side = BanPickEnumCaster.MergeSide(sides);
+        var side = EnumCaster.MergeSide(sides);
         return new TraitTargetFinder(TeamSize).GetTargetableSlot(team, side);
     }
 

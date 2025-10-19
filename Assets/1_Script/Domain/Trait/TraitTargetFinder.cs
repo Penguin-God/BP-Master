@@ -7,7 +7,7 @@ public class TraitTargetFinder
     public TraitTargetFinder(int count) => teamCount = count;
     public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
     {
-        Team targetTeam = BanPickEnumCaster.GetTargetTeam(team, side);
+        Team targetTeam = EnumCaster.GetTargetTeam(team, side);
 
         if (targetTeam == Team.All) return GetAllSlots();
         else return GetTeamSlots(targetTeam);
