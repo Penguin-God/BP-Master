@@ -21,13 +21,13 @@ public class TraitButtonView : MonoBehaviour
         buttonSlots.AddSlots(Team.Red, redTraits);
     }
 
-    public void InActiveAllBtns()
+    void InActiveAllBtns()
     {
         foreach (Button btn in buttonSlots.GetAll())
             ButtonUtil.InActiveButton(btn);
     }
 
-    public void ActiveUseableButtons()
+    void ActiveUseableButtons()
     {
         InActiveAllBtns();
         var slots = traitSlotFilter.FilteringUseableSlots(team);
@@ -45,6 +45,7 @@ public class TraitButtonView : MonoBehaviour
     {
         InActiveAllBtns();
         var slots = traitSlotFilter.FilteringTargetSlots(team, traitDatas.Select(x => x.TargetRule.TargetSide));
+        print(slots);
         foreach (var slot in slots)
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }

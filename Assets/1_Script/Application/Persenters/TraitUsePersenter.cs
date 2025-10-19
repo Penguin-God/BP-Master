@@ -28,6 +28,7 @@ public class TraitUsePersenter
     }
 
     public bool IsUseable => useSlot.HasValue;
+    public SlotData UseSlot => useSlot.Value;
     SlotData? useSlot;
     public void SelectUseTrait(SlotData useSlot, TraitTargetRule rule)
     {
