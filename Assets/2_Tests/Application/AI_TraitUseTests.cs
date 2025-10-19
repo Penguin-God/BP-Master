@@ -9,7 +9,7 @@ public class AI_TraitUseTests
     {
         var statuses = CreateOneSlotStatus();
         SlotStorage<TraitApplier> applilers = CreateOneSlotApplier(statuses);
-        var facade = new TraitUseFacade(applilers);
+        var facade = new TraitUseFacade(applilers, statuses);
 
         var traitStorage = new SlotStorage<IEnumerable<TraitData>>();
         var traits = new TraitData[] { TestHelper.CreateTraitData(TraitType.AttackChanger, 10, side: Side.Opponent, range: TargetRange.Single) };

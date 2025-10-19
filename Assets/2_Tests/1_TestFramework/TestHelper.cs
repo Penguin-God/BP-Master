@@ -64,6 +64,7 @@ public static class TestHelper
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
+    public static TraitData[] CreateTraits(params TraitData[] traits) => traits;
 
     public static TraitData[] CreateTraitDatas(
         TraitType type = default,

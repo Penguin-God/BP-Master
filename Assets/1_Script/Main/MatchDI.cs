@@ -51,7 +51,7 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
         slotManager = new SlotStorageManager(storage, storageFactory);
 
-        var traitFacade = new TraitUseFacade(slotManager.TraitApplierSlots);
+        var traitFacade = new TraitUseFacade(slotManager.TraitApplierSlots, slotManager.StatusSlots);
         var filter = new TraitSlotFilter(slotManager.TraitApplierSlots);
         // traitFacade.OnTraitUsed += slot => phaseManager.SubmitAction(slot.Team);
         slotManager.AddTraitUseEvent(slot => phaseManager.SubmitAction(slot.Team));
