@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 public class TraitUsePersenter
 {
-    readonly SlotStorage<TraitApplier> appliers;
     readonly SlotStorage<IEnumerable<TraitData>> traitSlots;
     TraitTargetSelector traitTargetSelector;
+    TraitUseFacade facade;
     int TeamSize;
-    public TraitUsePersenter(SlotStorage<TraitApplier> appliers, int teamSize, SlotStorage<IEnumerable<TraitData>> traitDatas)
+    public TraitUsePersenter(TraitUseFacade facade, int teamSize, SlotStorage<IEnumerable<TraitData>> traitDatas)
     {
-        this.appliers = appliers;
+        this.facade = facade;
         TeamSize = teamSize;
         traitSlots = traitDatas;
     }
@@ -20,8 +20,8 @@ public class TraitUsePersenter
         traitTargetSelector.Select(targetSlot);
         if (traitTargetSelector.IsFull)
         {
-            foreach (var data in traitSlots.GetSlot(useSlot.Value))
-                appliers.GetSlot(useSlot.Value).Execute(data, traitTargetSelector.Targets);
+            facade.UseTrait(useSlot.Value, traitTargetSelector.Targets, traitSlots.GetSlot(useSlot.Value));
+            useSlot = null;
             return true;
         }
         else return false;
