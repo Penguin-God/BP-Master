@@ -27,10 +27,12 @@ public class EnumCastingTests
     [Test]
     public void Side_컬렉션_합치기()
     {
-        Assert.AreEqual(Side.Self, EnumCaster.MergeSide(new Side[] { Side.Self, Side.Self }));
-        Assert.AreEqual(Side.Opponent, EnumCaster.MergeSide(new Side[] { Side.Opponent, Side.Opponent }));
-        Assert.AreEqual(Side.All, EnumCaster.MergeSide(new Side[] { Side.Self, Side.All }));
-        Assert.AreEqual(Side.All, EnumCaster.MergeSide(new Side[] { Side.Self, Side.Opponent }));
+        Assert.AreEqual(Side.Self, MergeSide(Side.Self, Side.Self));
+        Assert.AreEqual(Side.Opponent, MergeSide(Side.Opponent, Side.Opponent));
+        Assert.AreEqual(Side.All, MergeSide(Side.Self, Side.All));
+        Assert.AreEqual(Side.All, MergeSide(Side.Self, Side.Opponent));
+
+        Side MergeSide(params Side[] sides) => EnumCaster.MergeSide(sides);
     }
 
     [Test]
