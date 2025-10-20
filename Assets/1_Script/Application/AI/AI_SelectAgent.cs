@@ -17,7 +17,13 @@ public class AI_SelectAgent
     void Select(Team team, SelectType selectType)
     {
         if (team != Team) return;
-        storage.SaveSelect(new SelectInfo(Team, selectType, selector.Ban(storage.SelectableIds)));
+        if(selectType == SelectType.Ban)
+            storage.SaveSelect(new SelectInfo(Team, selectType, selector.Ban(storage.SelectableIds)));
+        else
+        {
+            if(storage.SelectableIds.Contains(43)) storage.SaveSelect(new SelectInfo(Team, selectType, 43));
+            else storage.SaveSelect(new SelectInfo(Team, selectType, selector.Pick(storage.SelectableIds)));
+        }
         phaseManager.SubmitAction(Team);
     }
 

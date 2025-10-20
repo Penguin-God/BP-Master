@@ -30,6 +30,14 @@ public static class TestHelper
         return result;
     }
 
+    public static SlotStorage<TraitApplier> CreateTwoSlotApplier(SlotStorage<ChampionStatus> statuses)
+    {
+        SlotStorage<TraitApplier> result = CreateOneSlotApplier(statuses);
+        result.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
+        result.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
+        return result;
+    }
+
     public static SlotStorage<IEnumerable<TraitData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
     {
         SlotStorage<IEnumerable<TraitData>> result = new();
@@ -100,7 +108,6 @@ public static class TestHelper
     
     public static TraitTargetRule SelfSingleRule => new TraitTargetRule(Side.Self, TargetRange.Single);
     public static TraitTargetRule OpponentSingleRule => new TraitTargetRule(Side.Opponent, TargetRange.Single);
-
     public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
 
     public static SlotData RedZeroSlot => CreateRedSlot(0);
