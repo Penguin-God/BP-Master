@@ -27,10 +27,10 @@ public class ChampionTextBuilderTests
 
         Assert.AreEqual("아군 전체 공격력 10 증가", GetTraitText(TraitType.AttackChanger, 10, SelfAllRule));
         Assert.AreEqual("적군 전체 방어력 10 감소", GetTraitText(TraitType.DefenseChanger, -10, OpponentAllRule));
-        Assert.AreEqual("아군 단일 대상 속도 2 증가", GetTraitText(TraitType.SpeedChanger, 2, SelfSingleRule));
+        Assert.AreEqual("아군 둘의 속도 2 증가", GetTraitText(TraitType.SpeedChanger, 2, SelfDouble));
         Assert.AreEqual("양팀 전체 공격력 50 증가", GetTraitText(TraitType.AttackChanger, 50, AllRule));
-        Assert.AreEqual("아군 전체 방어력 100으로 고정", GetTraitText(TraitType.DefenseFixer, 100, SelfAllRule));
-        Assert.AreEqual("적군 단일 대상 특성 제외", GetTraitText(TraitType.TraitExcluder, 50, OpponentSingleRule));
+        Assert.AreEqual("아군 셋의 방어력 100으로 고정", GetTraitText(TraitType.DefenseFixer, 100, SelfTriple));
+        Assert.AreEqual("적군 하나의 상태는 특성의 영향을 받지 않는다", GetTraitText(TraitType.TraitExcluder, 50, OpponentSingleRule));
     }
 
     [Test]

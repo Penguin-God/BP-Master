@@ -103,11 +103,16 @@ public static class TestHelper
     public static TraitConditionData CreateThresholdCondition(TraitConditionType type, int threshold) => new TraitConditionData(type, threshold, ConditionCheckerType.Threshold);
     public static TraitConditionData CreateCompareCondition(TraitConditionType type) => new TraitConditionData(type, 0, ConditionCheckerType.Compare);
 
-    public static TraitTargetRule SelfAllRule => new TraitTargetRule(Side.Self, TargetRange.All);
-    public static TraitTargetRule OpponentAllRule => new TraitTargetRule(Side.Opponent, TargetRange.All);
     
     public static TraitTargetRule SelfSingleRule => new TraitTargetRule(Side.Self, TargetRange.Single);
+    public static TraitTargetRule SelfDouble => new TraitTargetRule(Side.Self, TargetRange.Double);
+    public static TraitTargetRule SelfTriple => new TraitTargetRule(Side.Self, TargetRange.Triple);
+    public static TraitTargetRule SelfAllRule => new TraitTargetRule(Side.Self, TargetRange.All);
+
     public static TraitTargetRule OpponentSingleRule => new TraitTargetRule(Side.Opponent, TargetRange.Single);
+    public static TraitTargetRule OpponentDoubleRule => new TraitTargetRule(Side.Opponent, TargetRange.Double);
+    public static TraitTargetRule OpponentAllRule => new TraitTargetRule(Side.Opponent, TargetRange.All);
+
     public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
 
     public static SlotData RedZeroSlot => CreateRedSlot(0);

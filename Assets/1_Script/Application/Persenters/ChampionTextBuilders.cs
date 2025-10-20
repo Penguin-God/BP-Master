@@ -58,15 +58,19 @@ public class TraitTextBuilder
         TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
-        TraitType.TraitExcluder => $"특성 제외",
+        TraitType.TraitExcluder => $"상태는 특성의 영향을 받지 않는다",
         _ => ""
     };
 
     string BuildTargetRuleText(Side side, TargetRange range) => (side, range) switch
     {
-        (Side.Self, TargetRange.Single) => "아군 단일 대상",
+        (Side.Self, TargetRange.Single) => "아군 하나의",
+        (Side.Self, TargetRange.Double) => "아군 둘의",
+        (Side.Self, TargetRange.Triple) => "아군 셋의",
         (Side.Self, TargetRange.All) => "아군 전체",
-        (Side.Opponent, TargetRange.Single) => "적군 단일 대상",
+        (Side.Opponent, TargetRange.Single) => "적군 하나의",
+        (Side.Opponent, TargetRange.Double) => "적군 둘의",
+        (Side.Opponent, TargetRange.Triple) => "적군 셋의",
         (Side.Opponent, TargetRange.All) => "적군 전체",
         (Side.All, TargetRange.All) => "양팀 전체",
         _ => "대상 없음"
