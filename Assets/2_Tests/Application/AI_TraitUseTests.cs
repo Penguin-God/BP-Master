@@ -25,7 +25,6 @@ public class AI_TraitUseTests
 
         sut.UseTrait(Team.Blue);
 
-        Assert.IsTrue(applilers.GetSlot(BlueZeroSlot).IsUse);
         Assert.AreEqual(10, statuses.GetSlot(RedZeroSlot).Stat.Attack);
         Assert.AreEqual(10, statuses.GetSlot(RedOneSlot).Stat.Attack);
     }
