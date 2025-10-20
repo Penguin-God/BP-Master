@@ -30,19 +30,16 @@ public class TraitUseController : MonoBehaviour
             btns[i].onClick.AddListener(() => OnClickTraitSlot(new SlotData(buttonTeam, index)));
         }
     }
-    // 더블 시 이미 선택한거 제외
+
     void OnClickTraitSlot(SlotData clickSlot)
     {
-        if (traitUsePresenter.IsUseable)
-        {
-            traitUsePresenter.SelectTarget(clickSlot);
-            if(traitUsePresenter.IsUseable) traitButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
-        }
+        if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
         else
         {
             var rules = traits.GetSlot(clickSlot).Select(x => x.TargetRule);
             traitUsePresenter.SelectUseTrait(clickSlot, EnumCaster.MergeRule(rules));
-            traitButtonView.ActiveTargets(traits.GetSlot(clickSlot), traitUsePresenter.CurrentTargets);
         }
+
+        if (traitUsePresenter.IsUseable) traitButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
     }
 }
