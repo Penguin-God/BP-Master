@@ -19,9 +19,9 @@ MonoBehaviour:
   speed: 3
   traitDatas:
   - targetSide: 1
-    range: 1
+    range: 3
     traitType: 1
-    amount: -120
+    amount: -40
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
