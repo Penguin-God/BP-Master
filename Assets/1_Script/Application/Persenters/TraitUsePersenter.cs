@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 
 public class TraitUsePersenter
 {
     readonly SlotStorage<IEnumerable<TraitData>> traitSlots;
     TraitTargetSelector traitTargetSelector;
+    public IEnumerable<SlotData> CurrentTargets => traitTargetSelector?.Targets;
     TraitUseFacade facade;
     int TeamSize;
     public TraitUsePersenter(TraitUseFacade facade, int teamSize, SlotStorage<IEnumerable<TraitData>> traitDatas)

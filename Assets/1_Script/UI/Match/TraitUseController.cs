@@ -36,13 +36,13 @@ public class TraitUseController : MonoBehaviour
         if (traitUsePresenter.IsUseable)
         {
             traitUsePresenter.SelectTarget(clickSlot);
-            if(traitUsePresenter.IsUseable) traitButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot));
+            if(traitUsePresenter.IsUseable) traitButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
         }
         else
         {
             var rules = traits.GetSlot(clickSlot).Select(x => x.TargetRule);
             traitUsePresenter.SelectUseTrait(clickSlot, EnumCaster.MergeRule(rules));
-            traitButtonView.ActiveTargets(traits.GetSlot(clickSlot));
+            traitButtonView.ActiveTargets(traits.GetSlot(clickSlot), traitUsePresenter.CurrentTargets);
         }
     }
 }

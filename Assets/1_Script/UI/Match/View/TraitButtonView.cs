@@ -41,11 +41,10 @@ public class TraitButtonView : MonoBehaviour
         else InActiveAllBtns();
     }
 
-    public void ActiveTargets(IEnumerable<TraitData> traitDatas)
+    public void ActiveTargets(IEnumerable<TraitData> traitDatas, IEnumerable<SlotData> currentTargets)
     {
         InActiveAllBtns();
-        var slots = traitSlotFilter.FilteringTargetSlots(team, traitDatas.Select(x => x.TargetRule.TargetSide));
-        print(slots);
+        var slots = traitSlotFilter.FilteringTargetSlots(team, traitDatas.Select(x => x.TargetRule.TargetSide)).Except(currentTargets);
         foreach (var slot in slots)
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }
