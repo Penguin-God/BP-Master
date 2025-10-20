@@ -21,7 +21,7 @@ MonoBehaviour:
   - targetSide: 0
     range: 4
     traitType: 1
-    amount: 30
+    amount: 25
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
