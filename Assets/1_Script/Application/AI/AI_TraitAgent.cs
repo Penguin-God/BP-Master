@@ -9,14 +9,6 @@ public class AI_TraitAgent
     readonly SlotStorage<IEnumerable<TraitData>> traits;
     readonly Team Team;
 
-    public AI_TraitAgent(Team team, TraitSlotFilter traitSlotFilter, SlotStorage<IEnumerable<TraitData>> traits, TraitUseFacade traitUseFacade)
-    {
-        Team = team;
-        this.traitSlotFilter = traitSlotFilter;
-        this.traits = traits;
-        this.traitUseFacade = traitUseFacade;
-    }
-
     readonly TargetCounter targetCounter;
     public AI_TraitAgent(Team team, TraitSlotFilter traitSlotFilter, SlotStorage<IEnumerable<TraitData>> traits, TraitUseFacade traitUseFacade, TargetCounter targetCounter)
     {

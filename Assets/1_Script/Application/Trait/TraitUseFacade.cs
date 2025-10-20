@@ -13,13 +13,6 @@ public class TraitUseFacade
         this.statusSlots = statusSlots;
     }
 
-    public void UseTrait(SlotData traitSlot, SlotData targetSlot, IEnumerable<TraitData> traitDatas)
-    {
-        foreach (var data in traitDatas)
-            appliers.GetSlot(traitSlot).Execute(data, targetSlot);
-        OnUseTrait?.Invoke(traitSlot);
-    }
-
     public void UseTrait(SlotData traitSlot, IEnumerable<SlotData> targetSlots, IEnumerable<TraitData> traitDatas)
     {
         foreach (var data in traitDatas)

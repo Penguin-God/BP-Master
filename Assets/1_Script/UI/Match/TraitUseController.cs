@@ -9,21 +9,7 @@ public class TraitUseController : MonoBehaviour
     [SerializeField] Button[] redChamps;
 
     TraitButtonView traitButtonView;
-
-    SlotSelectionState selectState = new SlotSelectionState();
-    TraitUseFacade traitUseFacade;
     SlotStorage<IEnumerable<TraitData>> traits;
-    public void Init(TraitUseFacade traitUseFacade, SlotStorage<IEnumerable<TraitData>> traits)
-    {
-        gameObject.SetActive(true);
-        this.traitUseFacade = traitUseFacade;
-        this.traits = traits;
-
-        SetupChampionButtons(blueChamps, Team.Blue);
-        SetupChampionButtons(redChamps, Team.Red);
-        traitButtonView = GetComponent<TraitButtonView>();
-    }
-
     TraitUsePersenter traitUsePresenter;
     public void Init(TraitUsePersenter traitUsePresenter, SlotStorage<IEnumerable<TraitData>> traits)
     {
@@ -44,7 +30,7 @@ public class TraitUseController : MonoBehaviour
             btns[i].onClick.AddListener(() => OnClickTraitSlot(new SlotData(buttonTeam, index)));
         }
     }
-
+    // 더블 시 이미 선택한거 제외
     void OnClickTraitSlot(SlotData clickSlot)
     {
         if (traitUsePresenter.IsUseable)
