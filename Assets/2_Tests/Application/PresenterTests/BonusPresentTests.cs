@@ -43,8 +43,6 @@ public class BonusThresholdPresenterTests
             "방어력 : 150이상 +35, 200이상 +44, 300이상 +11" + nl +
             "속도 : 10이상 +35, 15이상 +44, 20이상 +11";
 
-        // OS 줄바꿈 차이 안전하게 비교하려면 Normalize 사용도 가능:
-        // Assert.AreEqual(expected.Replace("\r\n","\n"), result.Replace("\r\n","\n"));
         Assert.AreEqual(expected, result);
     }
 }

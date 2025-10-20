@@ -13,7 +13,7 @@ public class StorageFactoryTests
         data = new SlotStorage<int>();
         data.AddSlot(Team.Blue, 1);
         data.AddSlot(Team.Red, 2);
-        ChampionCatalog championCatalog = new ChampionCatalog(new Champion[] { TestHelper.CreateChamp(1, "일", new ChampionStatData(10, 10, 10)), TestHelper.CreateChamp(2, "이", new ChampionStatData(20, 20, 20)) });
+        ChampionCatalog championCatalog = new ChampionCatalog(new Champion[] { CreateChamp(1, "일", new ChampionStatData(10, 10, 10)), CreateChamp(2, "이", new ChampionStatData(20, 20, 20)) });
         sut = new(championCatalog);
     }
 
@@ -22,8 +22,8 @@ public class StorageFactoryTests
     {
         SlotStorage<ChampionStatus> result = sut.IdToStatus(data);
 
-        Assert.AreEqual(new ChampionStatData(10, 10, 10), result.GetSlot(TestHelper.CreateBlueSlot(0)).Stat);
-        Assert.AreEqual(new ChampionStatData(20, 20, 20), result.GetSlot(TestHelper.CreateRedSlot(0)).Stat);
+        Assert.AreEqual(new ChampionStatData(10, 10, 10), result.GetSlot(CreateBlueSlot(0)).Stat);
+        Assert.AreEqual(new ChampionStatData(20, 20, 20), result.GetSlot(CreateRedSlot(0)).Stat);
     }
 
     [Test]
@@ -31,24 +31,16 @@ public class StorageFactoryTests
     {
         SlotStorage<Champion> result = sut.IdToChampion(data);
 
-        Assert.AreEqual("일", result.GetSlot(TestHelper.CreateBlueSlot(0)).Name);
-        Assert.AreEqual("이", result.GetSlot(TestHelper.CreateRedSlot(0)).Name);
+        Assert.AreEqual("일", result.GetSlot(CreateBlueSlot(0)).Name);
+        Assert.AreEqual("이", result.GetSlot(CreateRedSlot(0)).Name);
     }
 
     [Test]
     public void 챔피언을_특성_데이터로_반환()
     {
         var championStorage = new SlotStorage<Champion>();
-        
-        championStorage.AddSlots(Team.Blue, new[]
-        {
-            TestHelper.CreateTraitChamp(Side.All, TargetRange.All, 10),
-        });
-
-        championStorage.AddSlots(Team.Red, new[]
-        {
-            TestHelper.CreateTraitChamp(Side.All, TargetRange.All, 50),
-        });
+        championStorage.AddSlots(Team.Blue, new[] { CreateTraitChamp(Side.All, TargetRange.All, 10), });
+        championStorage.AddSlots(Team.Red, new[] { CreateTraitChamp(Side.All, TargetRange.All, 50), });
 
         // Act
         var result = ChampionStorageConverter.ChamptionToTrait(championStorage);
@@ -56,7 +48,7 @@ public class StorageFactoryTests
         // Assert
         Assert.AreEqual(1, result.GetTeam(Team.Blue).Count());
         Assert.AreEqual(1, result.GetTeam(Team.Red).Count());
-        Assert.AreEqual(10, result.GetSlot(TestHelper.CreateBlueSlot(0)).ToArray()[0].Amount);
+        Assert.AreEqual(10, result.GetSlot(CreateBlueSlot(0)).ToArray()[0].Amount);
     }
 
     [Test]

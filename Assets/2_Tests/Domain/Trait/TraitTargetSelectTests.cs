@@ -6,13 +6,14 @@ public class TraitTargetSelectTests
 {
     int[] AllIndexs = new int[] { 0, 1, 2, 3, 4 };
     TraitTargetRule CreateDoubleRule(Side side) => new TraitTargetRule(side, TargetRange.Double);
+    void Select(TraitTargetSelector sut, SlotData slot) => sut.Select(slot);
 
     [Test]
     public void All은_선택_시_전체_세팅()
     {
         TraitTargetSelector sut = new TraitTargetSelector(5, AllRule);
 
-        sut.Select(BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
 
         Assert.IsTrue(sut.IsFull);
         CollectionAssert.AreEquivalent(CreateBlueSlots(AllIndexs).Concat(CreateRedSlots(AllIndexs)), sut.Targets);
@@ -23,7 +24,7 @@ public class TraitTargetSelectTests
     {
         TraitTargetSelector sut = new TraitTargetSelector(5, new TraitTargetRule(Side.Opponent, TargetRange.All));
 
-        sut.Select(BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
 
         Assert.IsTrue(sut.IsFull);
         CollectionAssert.AreEquivalent(CreateBlueSlots(AllIndexs), sut.Targets);
@@ -34,8 +35,8 @@ public class TraitTargetSelectTests
     {
         TraitTargetSelector sut = new TraitTargetSelector(5, CreateDoubleRule(Side.All));
 
-        sut.Select(BlueZeroSlot);
-        sut.Select(BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
 
         Assert.AreEqual(1, sut.Targets.Count());
     }
@@ -45,10 +46,10 @@ public class TraitTargetSelectTests
     {
         TraitTargetSelector sut = new TraitTargetSelector(5, OpponentSingleRule);
 
-        sut.Select(BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
         Assert.AreEqual(1, sut.Targets.Count());
 
-        sut.Select(BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
         Assert.AreEqual(1, sut.Targets.Count());
     }
 
@@ -57,9 +58,9 @@ public class TraitTargetSelectTests
     {
         TraitTargetSelector sut = new TraitTargetSelector(5, CreateDoubleRule(Side.All));
 
-        sut.Select(BlueZeroSlot);
+        Select(sut, BlueZeroSlot);
         Assert.IsFalse(sut.IsFull);
-        sut.Select(BlueOneSlot);
+        Select(sut, BlueOneSlot);
 
         Assert.IsTrue(sut.IsFull);
         Assert.AreEqual(2, sut.Targets.Count());

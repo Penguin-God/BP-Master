@@ -33,7 +33,6 @@ public class MatchResultCalculateTests
 
         MatchResult result = sut.CalculateResult(blue, red);
 
-        // 변경 포인트: BlueScore/RedScore → BlueInfo.Total / RedInfo.Total
         Assert.AreEqual(31, result.BlueInfo.Total);
         Assert.AreEqual(32, result.RedInfo.Total);
         Assert.AreEqual(Team.Red, result.Winner);

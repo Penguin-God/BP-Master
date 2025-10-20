@@ -29,7 +29,7 @@ public class RosterCreateTests
         Assert.AreEqual(5, result.GetTeam(Team.Red).Count());
 
         // 레벨 검증
-        Assert.AreEqual(5, result.GetSlot(TestHelper.CreateRedSlot(0)).AllMasteries.ToArray()[0].Level);
-        Assert.AreEqual(10, result.GetSlot(TestHelper.CreateRedSlot(0)).AllMasteries.ToArray()[1].Level);
+        Assert.AreEqual(5, result.GetSlot(RedZeroSlot).AllMasteries.ToArray()[0].Level);
+        Assert.AreEqual(10, result.GetSlot(RedZeroSlot).AllMasteries.ToArray()[1].Level);
     }
 }
