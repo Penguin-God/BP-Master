@@ -24,4 +24,4 @@ MonoBehaviour:
     amount: 65
     conditionType: 2
     threshold: 160
-    conditionCheckerType: 0
+    conditionCheckerType: 1

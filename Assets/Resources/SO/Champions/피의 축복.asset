@@ -24,18 +24,18 @@ MonoBehaviour:
     amount: 30
     conditionType: 4
     threshold: 150
-    conditionCheckerType: 0
+    conditionCheckerType: 1
   - targetSide: 2
     range: 4
     traitType: 2
     amount: 30
     conditionType: 4
     threshold: 150
-    conditionCheckerType: 0
+    conditionCheckerType: 1
   - targetSide: 2
     range: 2
     traitType: 3
     amount: 1
     conditionType: 4
     threshold: 150
-    conditionCheckerType: 0
+    conditionCheckerType: 1
