@@ -58,21 +58,24 @@ public class TraitTextBuilder
         TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         TraitType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
-        TraitType.TraitExcluder => $"상태는 특성의 영향을 받지 않는다",
+        TraitType.TraitExcluder => $"스탯은 특성으로 인한 변화를 무시",
         _ => ""
     };
 
     string BuildTargetRuleText(Side side, TargetRange range) => (side, range) switch
     {
-        (Side.Self, TargetRange.Single) => "아군 하나의",
-        (Side.Self, TargetRange.Double) => "아군 둘의",
-        (Side.Self, TargetRange.Triple) => "아군 셋의",
+        (Side.Self, TargetRange.Single) => "선택한 아군 하나의",
+        (Side.Self, TargetRange.Double) => "선택한 아군 둘의",
+        (Side.Self, TargetRange.Triple) => "선택한 아군 셋의",
         (Side.Self, TargetRange.All) => "아군 전체",
-        (Side.Opponent, TargetRange.Single) => "적군 하나의",
-        (Side.Opponent, TargetRange.Double) => "적군 둘의",
-        (Side.Opponent, TargetRange.Triple) => "적군 셋의",
+        (Side.Opponent, TargetRange.Single) => "선택한 적군 하나의",
+        (Side.Opponent, TargetRange.Double) => "선택한 적군 둘의",
+        (Side.Opponent, TargetRange.Triple) => "선택한 적군 셋의",
         (Side.Opponent, TargetRange.All) => "적군 전체",
         (Side.All, TargetRange.All) => "양팀 전체",
+        (Side.All, TargetRange.Single) => "선택한 하나의",
+        (Side.All, TargetRange.Double) => "선택한 둘의",
+        (Side.All, TargetRange.Triple) => "선택한 셋의",
         _ => "대상 없음"
     };
 
@@ -85,10 +88,10 @@ public class TraitTextBuilder
     string BuildThresholdText(TraitConditionType conditionType, int threshold) => conditionType switch
     {
         TraitConditionType.None => "",
-        TraitConditionType.AttackAtLeast => $"공격력이 {threshold} 이상인",
-        TraitConditionType.AttackBelow => $"공격력이 {threshold} 이하인",
-        TraitConditionType.DefenseAtLeast => $"방어력이 {threshold} 이상인",
-        TraitConditionType.DefenseBelow => $"방어력이 {threshold} 이하인",
+        TraitConditionType.AttackAtLeast => $"공격력 {threshold} 이상인",
+        TraitConditionType.AttackBelow => $"공격력 {threshold} 이하인",
+        TraitConditionType.DefenseAtLeast => $"방어력 {threshold} 이상인",
+        TraitConditionType.DefenseBelow => $"방어력 {threshold} 이하인",
         TraitConditionType.SpeedAtLeast => $"속도 {threshold} 이상인",
         TraitConditionType.SpeedBelow => $"속도 {threshold} 이하인",
         _ => ""
