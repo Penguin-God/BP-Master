@@ -20,4 +20,12 @@ public class TraitUseFacade
 
         OnUseTrait?.Invoke(traitSlot);
     }
+
+    public void UseTrait2(SlotData traitSlot, IEnumerable<SlotData> targetSlots, IEnumerable<TraitData> traitDatas)
+    {
+        foreach (var data in traitDatas)
+            appliers.GetSlot(traitSlot).Execute(data, targetSlots);
+
+        OnUseTrait?.Invoke(traitSlot);
+    }
 }

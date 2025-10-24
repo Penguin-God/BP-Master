@@ -26,4 +26,16 @@ public class TraitExecuteTests
 
         Assert.AreEqual(0, target.Stat.Attack);
     }
+
+    [Test]
+    public void 조건_만족한_챔프만_실행()
+    {
+        var champions = new ChampionStatus[] { TestHelper.CreateStatus(att:100), TestHelper.CreateStatus(0) };
+        var sut = new TraitExecutor(new TestAttackChangeAction(100), new StatThresholdChecker(TraitConditionType.AttackAtLeast, 50));
+
+        sut.ExecuteTrait(champions);
+
+        Assert.AreEqual(200, champions[0].Stat.Attack);
+        Assert.AreEqual(0, champions[1].Stat.Attack);
+    }
 }

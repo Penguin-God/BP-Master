@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using System.Linq;
+
 public class TraitExecutor
 {
     readonly ITraitAction action;
@@ -12,6 +15,12 @@ public class TraitExecutor
     public void ExecuteTrait(ChampionStatus target)
     {
         if (CanExecute(target))
+            action.Do(target);
+    }
+
+    public void ExecuteTrait(IEnumerable<ChampionStatus> targets)
+    {
+        foreach (ChampionStatus target in targets.Where(x => CanExecute(x)))
             action.Do(target);
     }
 
