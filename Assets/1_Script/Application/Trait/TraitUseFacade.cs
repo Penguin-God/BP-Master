@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TraitUseFacade
 {
@@ -15,17 +16,14 @@ public class TraitUseFacade
 
     public void UseTrait(SlotData traitSlot, IEnumerable<SlotData> targetSlots, IEnumerable<TraitData> traitDatas)
     {
-        foreach (var data in traitDatas)
-            appliers.GetSlot(traitSlot).Execute(data, targetSlots);
+        var targets = targetSlots.Select(x => statusSlots.GetSlot(x));
+        foreach (var trait in traitDatas)
+        {
+            var executor = new TraitExecutorFactory().CreateExecutor(trait, statusSlots.GetSlot(traitSlot).Stat);
+            executor.ExecuteTrait(targets);
+        }
 
-        OnUseTrait?.Invoke(traitSlot);
-    }
-
-    public void UseTrait2(SlotData traitSlot, IEnumerable<SlotData> targetSlots, IEnumerable<TraitData> traitDatas)
-    {
-        foreach (var data in traitDatas)
-            appliers.GetSlot(traitSlot).Execute(data, targetSlots);
-
+        appliers.GetSlot(traitSlot).Use();
         OnUseTrait?.Invoke(traitSlot);
     }
 }
