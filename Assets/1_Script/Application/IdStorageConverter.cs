@@ -15,7 +15,7 @@ public class IdStorageConverter
 
 public static class ChampionStorageConverter
 {
-    public static SlotStorage<IEnumerable<TraitData>> ChamptionToTrait(SlotStorage<Champion> champions)
+    public static SlotStorage<IEnumerable<SkillData>> ChamptionToSkill(SlotStorage<Champion> champions)
         => StorageConverter.ConvertStorage(champions, champ => champ.TraitDatas);
 }
 

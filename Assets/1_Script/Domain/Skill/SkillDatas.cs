@@ -1,5 +1,5 @@
 
-public enum TraitType
+public enum SkillType
 {
     None,
     AttackChanger,
@@ -31,35 +31,35 @@ public readonly struct TraitTargetRule
     }
 }
 
-public enum ConditionCheckerType
+public enum ConditionType
 {
     None,
     Threshold,
     Compare,
 }
 
-public readonly struct TraitConditionData
+public readonly struct SkillConditionData
 {
-    public readonly TraitConditionType ConditionType;
+    public readonly StatConditionType StatType;
     public readonly int Threshold;
-    public readonly ConditionCheckerType CheckerType;
+    public readonly ConditionType ConditionType;
 
-    public TraitConditionData(TraitConditionType type, int threshold, ConditionCheckerType checkerType)
+    public SkillConditionData(StatConditionType statType, int threshold, ConditionType checkerType)
     {
-        ConditionType = type;
+        StatType = statType;
         Threshold = threshold;
-        CheckerType = checkerType;
+        ConditionType = checkerType;
     }
 }
 
-public class TraitData
+public class SkillData
 {
-    public readonly TraitType TraitType;
+    public readonly SkillType TraitType;
     public readonly int Amount;
-    public readonly TraitConditionData ConditionData;
+    public readonly SkillConditionData ConditionData;
     public readonly TraitTargetRule TargetRule;
 
-    public TraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
+    public SkillData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule)
     {
         TraitType = traitType;
         Amount = amount;

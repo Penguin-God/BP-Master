@@ -13,10 +13,10 @@ public class AI_TraitUseTests
         SlotStorage<bool> flags = new SlotStorage<bool>();
         flags.AddSlots(Team.Red, new bool[] { false, false });
         flags.AddSlots(Team.Blue, new bool[] { false, false });
-        var facade = new TraitUseFacade(statuses);
+        var facade = new SkillUseOrchestrator(statuses);
 
-        var traits = CreateTraits ( CreateConditionFreeTrait(TraitType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
-        var traitStorage = new SlotStorage<IEnumerable<TraitData>>();
+        var traits = CreateTraits ( CreateConditionFreeTrait(SkillType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
+        var traitStorage = new SlotStorage<IEnumerable<SkillData>>();
         traitStorage.AddSlot(Team.Blue, traits);
         traitStorage.AddSlot(Team.Blue, traits);
         traitStorage.AddSlot(Team.Red, traits);

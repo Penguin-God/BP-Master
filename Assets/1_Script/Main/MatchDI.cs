@@ -28,7 +28,7 @@ public class MatchDI : MonoBehaviour
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
         utilKey.Init(storage, phaseManager);
 
-        phaseEventDispatcher.OnPhaseTrait += Trait;
+        phaseEventDispatcher.OnPhaseSkill += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storageFactory = new IdStorageConverter(championCatalog);
 
@@ -51,15 +51,15 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
         slotManager = new SlotStorageManager(storage, storageFactory);
 
-        var traitFacade = new TraitUseFacade(slotManager.StatusSlots);
-        traitFacade.OnUseTrait += slot => slotManager.TraitUseFlagSlot.ChangeSlot(slot, true); // 슬롯 사용으로 변경
-        traitFacade.OnUseTrait += slot => phaseManager.SubmitAction(slot.Team);
-        var filter = new TraitSlotFilter(slotManager.TraitUseFlagSlot);
+        var traitFacade = new SkillUseOrchestrator(slotManager.StatusSlots);
+        traitFacade.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
+        traitFacade.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
+        var filter = new TraitSlotFilter(slotManager.SkillUseFlagSlot);
 
-        var trait_ai = new AI_TraitAgent(aiTeam, filter, slotManager.TraitSlots, traitFacade, new TargetCounter(5));
+        var trait_ai = new AI_TraitAgent(aiTeam, filter, slotManager.SkillSlots, traitFacade, new TargetCounter(5));
         AI_MonoBehaviourAgent aI_Mono = GetComponent<AI_MonoBehaviourAgent>();
         aI_Mono.Init(trait_ai);
-        phaseEventDispatcher.OnPhaseTrait += GetComponent<AI_MonoBehaviourAgent>().UseTrait;
+        phaseEventDispatcher.OnPhaseSkill += GetComponent<AI_MonoBehaviourAgent>().UseTrait;
 
         matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, slotManager, filter);
 

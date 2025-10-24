@@ -18,16 +18,16 @@ public readonly struct StatViewModel
 
 public readonly struct TraitUI_Data
 {
-    public readonly TraitType TraitType;
+    public readonly SkillType TraitType;
     public readonly int Amount;
 
-    public readonly TraitConditionData Condition;
+    public readonly SkillConditionData Condition;
     public readonly TraitTargetRule Rule;
 
     public readonly Side TargetSide => Rule.TargetSide;
     public readonly TargetRange Range => Rule.TargetRange;
 
-    public TraitUI_Data(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule)
+    public TraitUI_Data(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule)
     {
         TraitType = traitType;
         Amount = amount;
@@ -52,13 +52,13 @@ public class TraitTextBuilder
         return $"{conditoin}{space}{target} {action}";
     }
 
-    string BuildActionText(TraitType traitType, int amount) => (traitType) switch
+    string BuildActionText(SkillType traitType, int amount) => (traitType) switch
     {
-        TraitType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        TraitType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        TraitType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        TraitType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
-        TraitType.TraitExcluder => $"스탯은 특성으로 인한 변화를 무시",
+        SkillType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        SkillType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        SkillType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
+        SkillType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
+        SkillType.TraitExcluder => $"스탯은 특성으로 인한 변화를 무시",
         _ => ""
     };
 
@@ -79,33 +79,33 @@ public class TraitTextBuilder
         _ => "대상 없음"
     };
 
-    string BuildConditionText(TraitConditionData conditionData)
+    string BuildConditionText(SkillConditionData conditionData)
     {
-        if (conditionData.CheckerType == ConditionCheckerType.Threshold) return BuildThresholdText(conditionData.ConditionType, conditionData.Threshold);
-        else return BuildCompareText(conditionData.ConditionType);
+        if (conditionData.ConditionType == ConditionType.Threshold) return BuildThresholdText(conditionData.StatType, conditionData.Threshold);
+        else return BuildCompareText(conditionData.StatType);
     }
 
-    string BuildThresholdText(TraitConditionType conditionType, int threshold) => conditionType switch
+    string BuildThresholdText(StatConditionType conditionType, int threshold) => conditionType switch
     {
-        TraitConditionType.None => "",
-        TraitConditionType.AttackAtLeast => $"공격력 {threshold} 이상인",
-        TraitConditionType.AttackBelow => $"공격력 {threshold} 이하인",
-        TraitConditionType.DefenseAtLeast => $"방어력 {threshold} 이상인",
-        TraitConditionType.DefenseBelow => $"방어력 {threshold} 이하인",
-        TraitConditionType.SpeedAtLeast => $"속도 {threshold} 이상인",
-        TraitConditionType.SpeedBelow => $"속도 {threshold} 이하인",
+        StatConditionType.None => "",
+        StatConditionType.AttackAtLeast => $"공격력 {threshold} 이상인",
+        StatConditionType.AttackBelow => $"공격력 {threshold} 이하인",
+        StatConditionType.DefenseAtLeast => $"방어력 {threshold} 이상인",
+        StatConditionType.DefenseBelow => $"방어력 {threshold} 이하인",
+        StatConditionType.SpeedAtLeast => $"속도 {threshold} 이상인",
+        StatConditionType.SpeedBelow => $"속도 {threshold} 이하인",
         _ => ""
     };
 
-    string BuildCompareText(TraitConditionType conditionType) => conditionType switch
+    string BuildCompareText(StatConditionType conditionType) => conditionType switch
     {
-        TraitConditionType.None => "",
-        TraitConditionType.AttackAtLeast => $"공격력이 자신보다 높은",
-        TraitConditionType.AttackBelow => $"공격력이 자신보다 낮은",
-        TraitConditionType.DefenseAtLeast => $"방어력이 자신보다 높은",
-        TraitConditionType.DefenseBelow => $"방어력이 자신보다 낮은",
-        TraitConditionType.SpeedAtLeast => $"속도가 자신보다 높은",
-        TraitConditionType.SpeedBelow => $"속도가 자신보다 낮은",
+        StatConditionType.None => "",
+        StatConditionType.AttackAtLeast => $"공격력이 자신보다 높은",
+        StatConditionType.AttackBelow => $"공격력이 자신보다 낮은",
+        StatConditionType.DefenseAtLeast => $"방어력이 자신보다 높은",
+        StatConditionType.DefenseBelow => $"방어력이 자신보다 낮은",
+        StatConditionType.SpeedAtLeast => $"속도가 자신보다 높은",
+        StatConditionType.SpeedBelow => $"속도가 자신보다 낮은",
         _ => ""
     };
 

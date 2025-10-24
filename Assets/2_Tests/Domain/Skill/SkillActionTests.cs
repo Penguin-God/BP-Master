@@ -56,7 +56,7 @@ public class TraitActionTests
     public void 특성_제외시키기()
     {
         var target = TestHelper.CreateStatus(0, 0, 7);
-        var sut = new TraitExcluder();
+        var sut = new SkillExcluder();
 
         sut.Do(target);
 

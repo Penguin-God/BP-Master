@@ -22,11 +22,11 @@ public static class TestHelper
         return result;
     }
 
-    public static SlotStorage<IEnumerable<TraitData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
+    public static SlotStorage<IEnumerable<SkillData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
     {
-        SlotStorage<IEnumerable<TraitData>> result = new();
-        result.AddSlot(Team.Blue, new TraitData[] { CreateConditionFreeTrait(TraitType.AttackChanger, amount, rule) });
-        result.AddSlot(Team.Red, new TraitData[] { CreateConditionFreeTrait(TraitType.AttackChanger, amount, rule) });
+        SlotStorage<IEnumerable<SkillData>> result = new();
+        result.AddSlot(Team.Blue, new SkillData[] { CreateConditionFreeTrait(SkillType.AttackChanger, amount, rule) });
+        result.AddSlot(Team.Red, new SkillData[] { CreateConditionFreeTrait(SkillType.AttackChanger, amount, rule) });
         return result;
     }
 
@@ -40,52 +40,52 @@ public static class TestHelper
             name: "",
             statData: default,
             traitDatas: CreateTraitDatas(
-                type: TraitType.AttackChanger,
+                type: SkillType.AttackChanger,
                 amount: amount,
-                conditionType: TraitConditionType.None,
+                conditionType: StatConditionType.None,
                 threshold: 0,
                 side: side,
                 range: range
             )
         );
 
-    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<TraitData> traits = null)
+    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<SkillData> traits = null)
         => new Champion(id, name, stat, traits);
 
     public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", CreateStat(att, def, speed), null);
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
-    public static TraitData[] CreateTraits(params TraitData[] traits) => traits;
+    public static SkillData[] CreateTraits(params SkillData[] traits) => traits;
 
-    public static TraitData[] CreateTraitDatas(
-        TraitType type = default,
+    public static SkillData[] CreateTraitDatas(
+        SkillType type = default,
         int amount = 0,
-        TraitConditionType conditionType = default,
+        StatConditionType conditionType = default,
         int threshold = 0,
         Side side = Side.Self,
         TargetRange range = TargetRange.All
     )
         => new[] { CreateTraitData(type, amount, conditionType, threshold, side, range) };
 
-    public static TraitData CreateTraitData(
-        TraitType type = default,
+    public static SkillData CreateTraitData(
+        SkillType type = default,
         int amount = 0,
-        TraitConditionType conditionType = default,
+        StatConditionType conditionType = default,
         int threshold = 0,
         Side side = Side.Self,
         TargetRange range = TargetRange.All,
-        ConditionCheckerType checkerType = ConditionCheckerType.None
+        ConditionType checkerType = ConditionType.None
     )
-        => new TraitData(type, amount, new TraitConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
+        => new SkillData(type, amount, new SkillConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
 
-    public static TraitData CreateConditionFreeTrait(TraitType type, int amount, TraitTargetRule rule = default) => new TraitData(type, amount, default, rule);
+    public static SkillData CreateConditionFreeTrait(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
 
-    public static TraitData CreateTraitData(TraitType traitType, int amount, TraitConditionData conditionData, TraitTargetRule traitTargetRule = default)
-        => new TraitData(traitType, amount, conditionData, traitTargetRule);
+    public static SkillData CreateTraitData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
+        => new SkillData(traitType, amount, conditionData, traitTargetRule);
 
-    public static TraitConditionData CreateThresholdCondition(TraitConditionType type, int threshold) => new TraitConditionData(type, threshold, ConditionCheckerType.Threshold);
-    public static TraitConditionData CreateCompareCondition(TraitConditionType type) => new TraitConditionData(type, 0, ConditionCheckerType.Compare);
+    public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => new SkillConditionData(type, threshold, ConditionType.Threshold);
+    public static SkillConditionData CreateCompareCondition(StatConditionType type) => new SkillConditionData(type, 0, ConditionType.Compare);
 
     
     public static TraitTargetRule SelfSingleRule => new TraitTargetRule(Side.Self, TargetRange.Single);
@@ -105,7 +105,7 @@ public static class TestHelper
     public static SlotData BlueOneSlot => CreateBlueSlot(1);
 }
 
-public class TestAttackChangeAction : ITraitAction
+public class TestAttackChangeAction : ISkillAction
 {
     readonly int Amount;
     public TestAttackChangeAction(int amount) => Amount = amount;

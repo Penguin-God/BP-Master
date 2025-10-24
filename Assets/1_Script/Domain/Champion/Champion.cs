@@ -24,9 +24,9 @@ public class Champion
     readonly public int Id;
     readonly public string Name;
     public ChampionStatData StatData { get; private set; }
-    readonly public IEnumerable<TraitData> TraitDatas;
+    readonly public IEnumerable<SkillData> TraitDatas;
 
-    public Champion(int id, string name, ChampionStatData statData, IEnumerable<TraitData> traitDatas)
+    public Champion(int id, string name, ChampionStatData statData, IEnumerable<SkillData> traitDatas)
     {
         Id = id;
         Name = name;

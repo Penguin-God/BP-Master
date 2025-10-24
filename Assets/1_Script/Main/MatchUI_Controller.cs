@@ -35,19 +35,19 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
     }
 
-    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, TraitUseFacade traitUseFacade, SlotStorageManager slotStorageManager, TraitSlotFilter filter)
+    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseOrchestrator traitUseFacade, SlotStorageManager slotStorageManager, TraitSlotFilter filter)
     {
         banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
         
         traitButtonView.Init(filter, playerTeam);
-        traitUseView.Init(new TraitUsePersenter(traitUseFacade, 5, slotStorageManager.TraitSlots), slotStorageManager.TraitSlots);
-        eventDispatcher.OnPhaseTrait += traitButtonView.RefreshButtonsByTurn;
+        traitUseView.Init(new TraitUsePersenter(traitUseFacade, 5, slotStorageManager.SkillSlots), slotStorageManager.SkillSlots);
+        eventDispatcher.OnPhaseSkill += traitButtonView.RefreshButtonsByTurn;
         traitButtonView.RefreshButtonsByTurn(Team.Blue);
 
         gameFlowView.Init(slotStorageManager.ChampionSlots);
-        traitUseFacade.OnUseTrait += gameFlowView.ViewTraitUseLog;
+        traitUseFacade.OnUseSkill += gameFlowView.ViewTraitUseLog;
 
-        eventDispatcher.OnPhaseTrait += (team) => scoreView.UpdateTeamScore(slotStorageManager.StatusSlots, team);
+        eventDispatcher.OnPhaseSkill += (team) => scoreView.UpdateTeamScore(slotStorageManager.StatusSlots, team);
     }
 
     [SerializeField] GameObject scores;

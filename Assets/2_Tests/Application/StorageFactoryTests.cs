@@ -43,7 +43,7 @@ public class StorageFactoryTests
         championStorage.AddSlots(Team.Red, new[] { CreateTraitChamp(Side.All, TargetRange.All, 50), });
 
         // Act
-        var result = ChampionStorageConverter.ChamptionToTrait(championStorage);
+        var result = ChampionStorageConverter.ChamptionToSkill(championStorage);
 
         // Assert
         Assert.AreEqual(1, result.GetTeam(Team.Blue).Count());

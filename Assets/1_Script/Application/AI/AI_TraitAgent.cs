@@ -4,13 +4,13 @@ using System.Linq;
 
 public class AI_TraitAgent
 {
-    readonly TraitUseFacade traitUseFacade;
+    readonly SkillUseOrchestrator traitUseFacade;
     readonly TraitSlotFilter traitSlotFilter;
-    readonly SlotStorage<IEnumerable<TraitData>> traits;
+    readonly SlotStorage<IEnumerable<SkillData>> traits;
     readonly Team Team;
 
     readonly TargetCounter targetCounter;
-    public AI_TraitAgent(Team team, TraitSlotFilter traitSlotFilter, SlotStorage<IEnumerable<TraitData>> traits, TraitUseFacade traitUseFacade, TargetCounter targetCounter)
+    public AI_TraitAgent(Team team, TraitSlotFilter traitSlotFilter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseOrchestrator traitUseFacade, TargetCounter targetCounter)
     {
         Team = team;
         this.traitSlotFilter = traitSlotFilter;
@@ -27,13 +27,13 @@ public class AI_TraitAgent
 
         
         SlotData useSlot = usableSlots[random.Next(usableSlots.Count)];
-        IEnumerable<TraitData> useDatas = traits.GetSlot(useSlot);
+        IEnumerable<SkillData> useDatas = traits.GetSlot(useSlot);
 
         var targetSides = useDatas.Select(x => x.TargetRule.TargetSide);
         var targetSlots = traitSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
 
         int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useDatas.Select(x => x.TargetRule)));
-        traitUseFacade.UseTrait(useSlot, SelectSlots(targetSlots, targetCount), useDatas);
+        traitUseFacade.UseSkill(useSlot, SelectSlots(targetSlots, targetCount), useDatas);
     }
 
     IEnumerable<SlotData> SelectSlots(List<SlotData> targetSlots, int targetCount)

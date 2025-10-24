@@ -9,9 +9,9 @@ public class TraitUseController : MonoBehaviour
     [SerializeField] Button[] redChamps;
 
     TraitButtonView traitButtonView;
-    SlotStorage<IEnumerable<TraitData>> traits;
+    SlotStorage<IEnumerable<SkillData>> traits;
     TraitUsePersenter traitUsePresenter;
-    public void Init(TraitUsePersenter traitUsePresenter, SlotStorage<IEnumerable<TraitData>> traits)
+    public void Init(TraitUsePersenter traitUsePresenter, SlotStorage<IEnumerable<SkillData>> traits)
     {
         gameObject.SetActive(true);
         this.traitUsePresenter = traitUsePresenter;

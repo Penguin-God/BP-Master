@@ -21,13 +21,13 @@ public class PhaseEventRaiseTests
         sut.OnPhaseBan += (team) => banEvents.Add(team);
         sut.OnPhasePick += (team) => pickEvents.Add(team);
         sut.OnPhaseSwap += (team) => swapEvents.Add(team);
-        sut.OnPhaseTrait += (team) => traitEvents.Add(team);
+        sut.OnPhaseSkill += (team) => traitEvents.Add(team);
         sut.OnPhaseDone += () => doneEvents.Add(Team.All);
 
         Dispatch(GamePhase.Ban, Team.Blue);
         Dispatch(GamePhase.Pick,Team.Red);
         Dispatch(GamePhase.Swap, Team.Blue);
-        Dispatch(GamePhase.Trait, Team.Red);
+        Dispatch(GamePhase.Skill, Team.Red);
         Dispatch(GamePhase.Done, Team.Blue);
 
 
@@ -48,7 +48,7 @@ public class PhaseEventRaiseTests
             CreateFlow(GamePhase.Ban, Team.Blue),
             CreateFlow(GamePhase.Pick, Team.Red),
             CreateFlow(GamePhase.Swap, Team.Blue),
-            CreateFlow(GamePhase.Trait, Team.Red),
+            CreateFlow(GamePhase.Skill, Team.Red),
             CreateFlow(GamePhase.Done, Team.Blue),
         }, 
         flowEvents);
