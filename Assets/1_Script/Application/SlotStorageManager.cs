@@ -7,6 +7,7 @@ public class SlotStorageManager
     public SlotStorage<ChampionStatus> StatusSlots { get; private set; }
     public SlotStorage<TraitApplier> TraitApplierSlots{ get; private set; }
     public SlotStorage<IEnumerable<TraitData>> TraitSlots { get; private set; }
+    public SlotStorage<bool> TraitUseFlagSlot { get; private set; }
 
     public SlotStorageManager(GameBanPickStorage storage, IdStorageConverter idStorageConverter)
     {
@@ -15,5 +16,6 @@ public class SlotStorageManager
         StatusSlots = idStorageConverter.IdToStatus(IdSlots);
         TraitApplierSlots = ChampionStorageConverter.StatusToTraitAppiler(StatusSlots);
         TraitSlots = ChampionStorageConverter.ChamptionToTrait(ChampionSlots);
+        TraitUseFlagSlot = StorageConverter.ConvertStorage(IdSlots, _ => false);
     }
 }
