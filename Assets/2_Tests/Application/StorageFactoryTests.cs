@@ -50,15 +50,4 @@ public class StorageFactoryTests
         Assert.AreEqual(1, result.GetTeam(Team.Red).Count());
         Assert.AreEqual(10, result.GetSlot(CreateBlueSlot(0)).ToArray()[0].Amount);
     }
-
-    [Test]
-    public void 상태를_특성_슬롯으로_변경()
-    {
-        var statuses = CreateOneSlotStatus();
-
-        var result = ChampionStorageConverter.StatusToTraitAppiler(statuses);
-
-        Assert.IsFalse(result.GetSlot(BlueZeroSlot).IsUse);
-        Assert.IsFalse(result.GetSlot(RedZeroSlot).IsUse);
-    }
 }

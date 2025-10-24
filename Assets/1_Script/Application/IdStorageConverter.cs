@@ -17,26 +17,21 @@ public static class ChampionStorageConverter
 {
     public static SlotStorage<IEnumerable<TraitData>> ChamptionToTrait(SlotStorage<Champion> champions)
         => StorageConverter.ConvertStorage(champions, champ => champ.TraitDatas);
-
-    public static SlotStorage<TraitApplier> StatusToTraitAppiler(SlotStorage<ChampionStatus> statuses)
-        => StorageConverter.ConvertStorage(statuses, (status, slot) => new TraitApplier(statuses, slot));
 }
 
 public static class StorageConverter
 {
-    public static SlotStorage<TOut> ConvertStorage<TIn, TOut>(SlotStorage<TIn> source, Func<TIn, SlotData, TOut> selector)
+    // TIn을 TOut으로 변환하는 Func를 받아 모든 Slot에 적용 후 리턴
+    public static SlotStorage<TOut> ConvertStorage<TIn, TOut>(SlotStorage<TIn> source, Func<TIn, TOut> selector)
     {
         var result = new SlotStorage<TOut>();
 
         foreach (var slot in source.GetAllSlotDatas())
         {
-            var converted = selector(source.GetSlot(slot), slot);
+            var converted = selector(source.GetSlot(slot));
             result.AddSlot(slot.Team, converted);
         }
 
         return result;
     }
-
-    public static SlotStorage<TOut> ConvertStorage<TIn, TOut>(SlotStorage<TIn> source, Func<TIn, TOut> selector)
-        => ConvertStorage(source, (tin, _) => selector(tin));
 }

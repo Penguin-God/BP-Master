@@ -56,9 +56,8 @@ public class TraitUsePresenterTests
     public void 특성_선택_후_타겟_가득_차면_자동_적용()
     {
         var statuses = CreateTwoSlotStatus();
-        var appliler = CreateOneSlotApplier(statuses);
         var rule = new TraitTargetRule(Side.Opponent, TargetRange.Double);
-        var sut = new TraitUsePersenter(new TraitUseFacade(appliler, statuses), 2, CreateAttTraitSlots(100, rule));
+        var sut = new TraitUsePersenter(new TraitUseFacade(statuses), 2, CreateAttTraitSlots(100, rule));
 
         sut.SelectUseTrait(BlueZeroSlot, rule);
         Assert.IsTrue(sut.IsUseable);

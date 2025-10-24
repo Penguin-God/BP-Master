@@ -22,22 +22,6 @@ public static class TestHelper
         return result;
     }
 
-    public static SlotStorage<TraitApplier> CreateOneSlotApplier(SlotStorage<ChampionStatus> statuses)
-    {
-        SlotStorage<TraitApplier> result = new();
-        result.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
-        result.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
-        return result;
-    }
-
-    public static SlotStorage<TraitApplier> CreateTwoSlotApplier(SlotStorage<ChampionStatus> statuses)
-    {
-        SlotStorage<TraitApplier> result = CreateOneSlotApplier(statuses);
-        result.AddSlot(Team.Blue, new TraitApplier(statuses, BlueZeroSlot));
-        result.AddSlot(Team.Red, new TraitApplier(statuses, RedZeroSlot));
-        return result;
-    }
-
     public static SlotStorage<IEnumerable<TraitData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
     {
         SlotStorage<IEnumerable<TraitData>> result = new();

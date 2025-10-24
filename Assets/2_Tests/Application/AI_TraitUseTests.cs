@@ -10,11 +10,10 @@ public class AI_TraitUseTests
     public void AI_특성_사용(TargetRange targetRange)
     {
         var statuses = CreateTwoSlotStatus();
-        SlotStorage<TraitApplier> applilers = CreateTwoSlotApplier(statuses);
         SlotStorage<bool> flags = new SlotStorage<bool>();
         flags.AddSlots(Team.Red, new bool[] { false, false });
         flags.AddSlots(Team.Blue, new bool[] { false, false });
-        var facade = new TraitUseFacade(applilers, statuses);
+        var facade = new TraitUseFacade(statuses);
 
         var traits = CreateTraits ( CreateConditionFreeTrait(TraitType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
         var traitStorage = new SlotStorage<IEnumerable<TraitData>>();

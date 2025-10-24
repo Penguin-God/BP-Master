@@ -1,24 +1,13 @@
 using NUnit.Framework;
 using static TestHelper;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class TraitTargetFilteringTests
 {
-    SlotStorage<ChampionStatus> statuses;
     TraitSlotFilter sut;
-    SlotStorage<TraitApplier> applilers;
     SlotStorage<bool> flags;
-    TraitApplier CreatAppliler(SlotData slot) => new TraitApplier(statuses, slot);
     [SetUp]
     public void SetUp()
     {
-        statuses = new();
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        statuses.AddSlot(Team.Blue, CreateStatus());
-        
-        statuses.AddSlot(Team.Red, CreateStatus());
-        statuses.AddSlot(Team.Red, CreateStatus());
-
         flags = new SlotStorage<bool>();
         flags.AddSlots(Team.Red, new bool[] { false, false });
         flags.AddSlots(Team.Blue, new bool[] { false, false });

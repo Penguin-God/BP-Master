@@ -5,10 +5,10 @@ public class TraitSlotFilter
 {
     readonly int TeamSize;
     SlotStorage<bool> triatUseFlagSlots;
-    public TraitSlotFilter(SlotStorage<bool> appliers)
+    public TraitSlotFilter(SlotStorage<bool> triatUseFlagSlots)
     {
-        TeamSize = appliers.GetTeam(Team.Blue).Count();
-        this.triatUseFlagSlots = appliers;
+        TeamSize = triatUseFlagSlots.GetTeam(Team.Blue).Count();
+        this.triatUseFlagSlots = triatUseFlagSlots;
     }
 
     public IEnumerable<SlotData> FilteringUseableSlots(Team team)
