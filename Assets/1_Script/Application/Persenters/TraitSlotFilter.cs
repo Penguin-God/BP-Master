@@ -4,17 +4,17 @@ using System.Linq;
 public class TraitSlotFilter
 {
     readonly int TeamSize;
-    SlotStorage<TraitApplier> appliers;
-    public TraitSlotFilter(SlotStorage<TraitApplier> appliers)
+    SlotStorage<bool> triatUseFlagSlots;
+    public TraitSlotFilter(SlotStorage<bool> appliers)
     {
         TeamSize = appliers.GetTeam(Team.Blue).Count();
-        this.appliers = appliers;
+        this.triatUseFlagSlots = appliers;
     }
 
     public IEnumerable<SlotData> FilteringUseableSlots(Team team)
         => Enumerable.Range(0, TeamSize)
                  .Select(i => new SlotData(team, i))
-                 .Where(slot => appliers.GetSlot(slot).IsUse == false);
+                 .Where(slot => triatUseFlagSlots.GetSlot(slot) == false);
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {

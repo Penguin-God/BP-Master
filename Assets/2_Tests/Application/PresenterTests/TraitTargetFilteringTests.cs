@@ -1,11 +1,13 @@
-using static TestHelper;
 using NUnit.Framework;
+using static TestHelper;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class TraitTargetFilteringTests
 {
     SlotStorage<ChampionStatus> statuses;
     TraitSlotFilter sut;
     SlotStorage<TraitApplier> applilers;
+    SlotStorage<bool> flags;
     TraitApplier CreatAppliler(SlotData slot) => new TraitApplier(statuses, slot);
     [SetUp]
     public void SetUp()
@@ -17,20 +19,16 @@ public class TraitTargetFilteringTests
         statuses.AddSlot(Team.Red, CreateStatus());
         statuses.AddSlot(Team.Red, CreateStatus());
 
-        applilers = new();
-        applilers.AddSlot(Team.Blue, CreatAppliler(BlueZeroSlot));
-        applilers.AddSlot(Team.Blue, CreatAppliler(BlueOneSlot));
-
-        applilers.AddSlot(Team.Red, CreatAppliler(RedZeroSlot));
-        applilers.AddSlot(Team.Red, CreatAppliler(RedOneSlot));
-
-        sut = new TraitSlotFilter(applilers);
+        flags = new SlotStorage<bool>();
+        flags.AddSlots(Team.Red, new bool[] { false, false });
+        flags.AddSlots(Team.Blue, new bool[] { false, false });
+        sut = new TraitSlotFilter(flags);
     }
 
     [Test]
     public void 특성_사용_가능한_슬롯들_필터링()
     {
-        applilers.GetSlot(BlueOneSlot).Use();
+        flags.ChangeSlot(BlueOneSlot, true);
 
         var result = sut.FilteringUseableSlots(Team.Blue);
 

@@ -54,7 +54,7 @@ public class MatchDI : MonoBehaviour
         var traitFacade = new TraitUseFacade(slotManager.TraitApplierSlots, slotManager.StatusSlots);
         traitFacade.OnUseTrait += slot => slotManager.TraitUseFlagSlot.ChangeSlot(slot, true); // 슬롯 사용으로 변경
         traitFacade.OnUseTrait += slot => phaseManager.SubmitAction(slot.Team);
-        var filter = new TraitSlotFilter(slotManager.TraitApplierSlots);
+        var filter = new TraitSlotFilter(slotManager.TraitUseFlagSlot);
 
         var trait_ai = new AI_TraitAgent(aiTeam, filter, slotManager.TraitSlots, traitFacade, new TargetCounter(5));
         AI_MonoBehaviourAgent aI_Mono = GetComponent<AI_MonoBehaviourAgent>();

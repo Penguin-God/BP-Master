@@ -11,6 +11,9 @@ public class AI_TraitUseTests
     {
         var statuses = CreateTwoSlotStatus();
         SlotStorage<TraitApplier> applilers = CreateTwoSlotApplier(statuses);
+        SlotStorage<bool> flags = new SlotStorage<bool>();
+        flags.AddSlots(Team.Red, new bool[] { false, false });
+        flags.AddSlots(Team.Blue, new bool[] { false, false });
         var facade = new TraitUseFacade(applilers, statuses);
 
         var traits = CreateTraits ( CreateConditionFreeTrait(TraitType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
@@ -20,7 +23,7 @@ public class AI_TraitUseTests
         traitStorage.AddSlot(Team.Red, traits);
         traitStorage.AddSlot(Team.Red, traits);
 
-        var filter = new TraitSlotFilter(applilers);
+        var filter = new TraitSlotFilter(flags);
         var sut = new AI_TraitAgent(Team.Blue, filter, traitStorage, facade, new TargetCounter(2));
 
         sut.UseTrait(Team.Blue);
