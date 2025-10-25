@@ -23,8 +23,6 @@ public class Charge
     public void Do()
     {
         int totalIncrease = GetChargeCount() * AmountPerHolder;
-        UnityEngine.Debug.Log(totalIncrease);
-        UnityEngine.Debug.Log(GetChargeCount());
         foreach (var status in statuses.Where(IsCharge))
         {
             var newStat = status.Stat.ChangeAttack(status.Stat.Attack + totalIncrease);

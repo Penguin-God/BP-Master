@@ -7,7 +7,7 @@ public class IdStorageConverter
     public IdStorageConverter(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
 
     public SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage)
-        => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championCatalog.GetChampion(id).StatData));
+        => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championCatalog.GetChampion(id).StatData, TraitType.Charge));
 
     public SlotStorage<Champion> IdToChampion(SlotStorage<int> idStorage)
         => StorageConverter.ConvertStorage(idStorage, id => championCatalog.GetChampion(id));

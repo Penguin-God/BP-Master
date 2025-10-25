@@ -20,6 +20,7 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
+        ai_main = new AI_Main(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(championCatalog.AllId);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -36,7 +37,6 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
 
-        ai_main = new AI_Main(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         ai_main.InitAI_BanPick(phaseManager, storage);
 
         phaseManager.Start();
@@ -56,9 +56,11 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
 
+        new Charge(5, slotManager.StatusSlots.GetTeam(Team.Blue)).Do();
+        new Charge(5, slotManager.StatusSlots.GetTeam(Team.Red)).Do();
+
         ApplyMastery(); // 마지막에
         ai_main.InitAI_Trait(filter, slotManager, skillController, GetComponent<AI_MonoBehaviourAgent>());
-
     }
 
     void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, slotManager.StatusSlots);
