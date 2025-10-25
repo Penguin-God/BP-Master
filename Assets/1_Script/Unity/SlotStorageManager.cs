@@ -8,11 +8,12 @@ public class SlotStorageManager
     public SlotStorage<IEnumerable<SkillData>> SkillSlots { get; private set; }
     public SlotStorage<bool> SkillUseFlagSlot { get; private set; }
 
-    public SlotStorageManager(GameBanPickStorage storage, IdStorageConverter idStorageConverter)
+    public SlotStorageManager(GameBanPickStorage storage, ChampionRepository champRegistory)
     {
         IdSlots = storage.PickIds;
-        ChampionSlots = idStorageConverter.IdToChampion(IdSlots);
-        StatusSlots = idStorageConverter.IdToStatus(IdSlots);
+        ChampionSlots = StorageConverter.ConvertStorage(IdSlots, id => champRegistory.GetChampionData(id).CreateChampion());
+        StatusSlots = StorageConverter.ConvertStorage(IdSlots, id => champRegistory.GetChampionData(id).CreateStatus());
+
         SkillSlots = ChampionStorageConverter.ChamptionToSkill(ChampionSlots);
         SkillUseFlagSlot = StorageConverter.ConvertStorage(IdSlots, _ => false);
     }

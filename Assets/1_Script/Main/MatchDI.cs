@@ -1,6 +1,4 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class MatchDI : MonoBehaviour
 {
@@ -47,7 +45,7 @@ public class MatchDI : MonoBehaviour
     {
         if (initTrait) return;
         initTrait = true;
-        slotManager = new SlotStorageManager(storage, storageFactory);
+        slotManager = new SlotStorageManager(storage, champManager);
 
         var skillController = new SkillUseController(slotManager.StatusSlots);
         skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);

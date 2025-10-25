@@ -41,6 +41,7 @@ public class ChampionSO : ScriptableObject
     [Header("스킬")]
     [SerializeField] TraitDataConfig[] traitDatas;
     public Champion CreateChampion() => new Champion(id, championName, StatData, traitDatas.Select(x => x.CreateTraitData()));
+    public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
     public IEnumerable<TraitUI_Data> CreateTrait_UI_Datas() => traitDatas.Select(x => x.CreateUI_Data());
 
     [Header("특성")]
