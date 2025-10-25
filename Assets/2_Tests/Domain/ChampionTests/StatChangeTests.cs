@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class ChampionStatChangeTests
+public class StatChangeTests
 {
     [Test]
     public void 생성자에서_음수값은_0으로_보정된다()

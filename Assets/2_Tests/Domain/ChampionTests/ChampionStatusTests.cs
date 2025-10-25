@@ -29,4 +29,40 @@ public class ChampionStatusTests
         Assert.AreEqual(CreateStat(1, 1, 1), before);
         Assert.AreEqual(newStat, after);
     }
+
+    [Test]
+    public void 증가분에는_UpRate를_적용한다()
+    {
+        var status = CreateStatus();
+        status.AddUpRate(0.5f);
+
+        status.ChangeStatWithRate(CreateStat(att: 100));
+
+        Assert.AreEqual(150, status.Stat.Attack);
+    }
+
+    [Test]
+    public void 감소분에는_DownRate를_적용한다()
+    {
+        var status = CreateStatus(def: 100);
+        status.AddDownRate(downRate: -0.5f);
+
+        status.ChangeStatWithRate(CreateStat(def: 50));
+
+        Assert.AreEqual(75, status.Stat.Defense);
+    }
+
+    [Test]
+    public void 일반_변경_함수는_Rate_무시()
+    {
+        var status = CreateStatus(att: 100, def:100);
+        status.AddUpRate(10000f);
+        status.AddDownRate(10000f);
+
+        status.ChangeStat(CreateStat(att: 200, def: 50));
+
+        // attack 증가분, defense 감소분 무시
+        Assert.AreEqual(200, status.Stat.Attack);
+        Assert.AreEqual(50, status.Stat.Defense);
+    }
 }
