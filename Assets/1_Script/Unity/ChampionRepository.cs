@@ -7,7 +7,7 @@ public class ChampionRepository : MonoBehaviour
     ChampionSO[] allChampion;
     public IReadOnlyList<ChampionSO> AllChampion => allChampion;
     public ChampionCatalog Catalog { get; private set; }
-
+    // 이름만 주는 딕셔너리
     void Awake()
     {
         allChampion = LoadAllChampions();
