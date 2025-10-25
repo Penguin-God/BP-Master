@@ -13,6 +13,13 @@ public class ChampionStatus
 
     public ChampionStatus(ChampionStatData statData) => Stat = statData;
 
+    public readonly TraitType TraitType;
+    public ChampionStatus(ChampionStatData statData, TraitType traitType)
+    {
+        Stat = statData;
+        TraitType = traitType;
+    }
+
     public void AddUpRate(float upRate) => UpRate += upRate;
     public void AddDownRate(float downRate) => DownRate += downRate;
 

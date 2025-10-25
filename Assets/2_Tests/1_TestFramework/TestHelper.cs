@@ -52,7 +52,7 @@ public static class TestHelper
     public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<SkillData> traits = null) => new Champion(id, name, stat, traits);
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
-    public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
+    public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
     public static SkillData[] CreateTraits(params SkillData[] traits) => traits;
 
     public static SkillData[] CreateTraitDatas(
