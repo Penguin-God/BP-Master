@@ -9,13 +9,13 @@ public class GameFlowView : MonoBehaviour
 
     public void ViewGameFlow(GameFlowData flow) => gameFlowText.text = new GameFlowTextBuilder().BuildFlowText(flow);
 
-    SlotStorage<Champion> champions;
-    public void Init(SlotStorage<Champion> champions)
+    SlotStorage<ChampionSO> champions;
+    public void Init(SlotStorage<ChampionSO> champions)
     {
         this.champions = champions;
     }
 
-    public void ViewTraitUseLog(SlotData useSlot) => StartCoroutine(Co_ViewTriatUseLog(champions.GetSlot(useSlot).Name));
+    public void ViewTraitUseLog(SlotData useSlot) => StartCoroutine(Co_ViewTriatUseLog(champions.GetSlot(useSlot).ChampionName));
 
     IEnumerator Co_ViewTriatUseLog(string name)
     {

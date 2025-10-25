@@ -44,7 +44,7 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnPhaseSkill += traitButtonView.RefreshButtonsByTurn;
         traitButtonView.RefreshButtonsByTurn(Team.Blue);
 
-        gameFlowView.Init(slotStorageManager.ChampionSlots);
+        gameFlowView.Init(slotStorageManager.ChampionDataSlots);
         traitUseFacade.OnUseSkill += gameFlowView.ViewTraitUseLog;
 
         eventDispatcher.OnPhaseSkill += (team) => scoreView.UpdateTeamScore(slotStorageManager.StatusSlots, team);
