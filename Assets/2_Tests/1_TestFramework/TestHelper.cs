@@ -50,8 +50,6 @@ public static class TestHelper
         );
 
     public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<SkillData> traits = null) => new Champion(id, name, stat, traits);
-
-    public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => CreateChamp(0, "", CreateStat(att, def, speed), null);
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));

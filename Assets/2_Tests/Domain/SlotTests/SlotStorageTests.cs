@@ -5,12 +5,12 @@ public class SlotStorageTests
     [Test]
     public void 슬롯에_추가한_순서로_저장_및_조회()
     {
-        SlotStorage<Champion> sut = new();
+        SlotStorage<int> sut = new();
 
-        sut.AddSlot(Team.Blue, TestHelper.CreateStatChamp(10));
-        sut.AddSlot(Team.Blue, TestHelper.CreateStatChamp(20));
+        sut.AddSlot(Team.Blue, 10);
+        sut.AddSlot(Team.Blue, 20);
 
-        Assert.AreEqual(10, sut.GetSlot(TestHelper.CreateBlueSlot(0)).StatData.Attack);
+        Assert.AreEqual(10, sut.GetSlot(TestHelper.CreateBlueSlot(0)));
     }
 
     [Test]
