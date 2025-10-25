@@ -8,21 +8,21 @@ public class AttackChanger : ISkillAction
 {
     readonly int Amount;
     public AttackChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
+    public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
 }
 
 public class DefenseChanger : ISkillAction
 {
     readonly int Amount;
     public DefenseChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
+    public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
 }
 
 public class SpeedChanger : ISkillAction
 {
     readonly int Amount;
     public SpeedChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeSpeed(target.Stat.Speed + Amount));
+    public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeSpeed(target.Stat.Speed + Amount));
 }
 
 
