@@ -3,7 +3,6 @@ using System.Collections.Generic;
 public class SlotStorageManager
 {
     public SlotStorage<int> IdSlots { get; private set; }
-    public SlotStorage<Champion> ChampionSlots { get; private set; }
     public SlotStorage<ChampionStatus> StatusSlots { get; private set; }
     public SlotStorage<IEnumerable<SkillData>> SkillSlots { get; private set; }
     public SlotStorage<bool> SkillUseFlagSlot { get; private set; }
@@ -13,10 +12,9 @@ public class SlotStorageManager
     {
         IdSlots = storage.PickIds;
         ChampionDataSlots = StorageConverter.ConvertStorage(IdSlots, id => champRegistory.GetChampionData(id));
-        ChampionSlots = StorageConverter.ConvertStorage(ChampionDataSlots, data => data.CreateChampion());
         StatusSlots = StorageConverter.ConvertStorage(ChampionDataSlots, data => data.CreateStatus());
 
-        SkillSlots = ChampionStorageConverter.ChamptionToSkill(ChampionSlots);
+        SkillSlots = StorageConverter.ConvertStorage(ChampionDataSlots, champ => champ.SkillDatas);
         SkillUseFlagSlot = StorageConverter.ConvertStorage(IdSlots, _ => false);
     }
 }

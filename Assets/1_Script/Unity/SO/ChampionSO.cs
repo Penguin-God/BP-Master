@@ -39,10 +39,11 @@ public class ChampionSO : ScriptableObject
     public ChampionStatData StatData => new ChampionStatData(attack, defense, speed);
 
     [Header("스킬")]
-    [SerializeField] TraitDataConfig[] traitDatas;
-    public Champion CreateChampion() => new Champion(id, championName, StatData, traitDatas.Select(x => x.CreateTraitData()));
+    [SerializeField] TraitDataConfig[] skillDatas;
+    public IEnumerable<SkillData> SkillDatas => skillDatas.Select(x => x.CreateTraitData());
+    public Champion CreateChampion() => new Champion(id, championName, StatData, SkillDatas);
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
-    public IEnumerable<TraitUI_Data> CreateTrait_UI_Datas() => traitDatas.Select(x => x.CreateUI_Data());
+    public IEnumerable<TraitUI_Data> CreateTrait_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
 
     [Header("특성")]
     [SerializeField] TraitType traitType;
