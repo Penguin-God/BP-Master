@@ -35,11 +35,11 @@ public static class TestHelper
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
 
     public static Champion CreateTraitChamp(Side side, TargetRange range, int amount)
-        => new Champion(
+        => CreateChamp(
             id: 0,
             name: "",
-            statData: default,
-            traitDatas: CreateTraitDatas(
+            stat: default,
+            traits: CreateTraitDatas(
                 type: SkillType.AttackChanger,
                 amount: amount,
                 conditionType: StatConditionType.None,
@@ -49,10 +49,9 @@ public static class TestHelper
             )
         );
 
-    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<SkillData> traits = null)
-        => new Champion(id, name, stat, traits);
+    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<SkillData> traits = null) => new Champion(id, name, stat, traits);
 
-    public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => new Champion(0, "", CreateStat(att, def, speed), null);
+    public static Champion CreateStatChamp(int att = 0, int def = 0, int speed = 0) => CreateChamp(0, "", CreateStat(att, def, speed), null);
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
