@@ -52,7 +52,7 @@ public readonly struct SkillConditionData
     }
 }
 
-public class SkillData
+public readonly struct SkillData
 {
     public readonly SkillType TraitType;
     public readonly int Amount;

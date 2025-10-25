@@ -19,7 +19,7 @@ public readonly struct ChampionStatData
     public readonly ChampionStatData ChangeSpeed(int speed) => new ChampionStatData(Attack, Defense, speed);
 }
 
-public class Champion
+public struct Champion
 {
     readonly public int Id;
     readonly public string Name;
