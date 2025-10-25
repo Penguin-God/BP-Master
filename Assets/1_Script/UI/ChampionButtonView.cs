@@ -15,7 +15,7 @@ public class ChampionButtonView : MonoBehaviour
 
     IEnumerable<Button> buttons;
 
-    public void CreateButtons() => buttons = new ChampionButtonCreator().DrawChampionButtons(content, championManager.Catalog.AllChampion, championBtn);
+    public void CreateButtons() => buttons = new ChampionButtonCreator().DrawChampionButtons(content, championManager.AllChampion, championBtn);
 
     public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
     public void InActiveButton(int id) => ButtonUtil.InActiveButton(GetButton(id));
@@ -32,7 +32,7 @@ public class ChampionButtonView : MonoBehaviour
 
 public class ChampionButtonCreator
 {
-    public IEnumerable<Button> DrawChampionButtons(Transform parent, IEnumerable<Champion> champions, GameObject btnPrefab)
+    public IEnumerable<Button> DrawChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject btnPrefab)
     {
         foreach (Transform child in parent)
             Object.Destroy(child.gameObject);
@@ -41,7 +41,7 @@ public class ChampionButtonCreator
         foreach (var data in champions)
         {
             var btn = Object.Instantiate(btnPrefab, parent).GetComponent<Button>();
-            btn.GetComponentInChildren<TextMeshProUGUI>().text = data.Name;
+            btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
             btn.GetOrAddComponent<ChampionIdentify>().Id = data.Id;
             result.Add(btn);
         }
