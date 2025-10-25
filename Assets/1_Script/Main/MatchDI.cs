@@ -1,4 +1,6 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class MatchDI : MonoBehaviour
 {
@@ -12,15 +14,12 @@ public class MatchDI : MonoBehaviour
     MatchUI_Controller matchUI_Controller;
     IdStorageConverter storageFactory;
     GamerRoster gamerRoster;
-
+    AI_Main ai_main;
     Team playerTeam;
-    Team aiTeam;
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
-        aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
-
         storage = new GameBanPickStorage(championCatalog.AllId);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -37,9 +36,8 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
 
-        var ai = new AI_SelectAgent(aiTeam, phaseManager, storage, new RandomSelector());
-        phaseEventDispatcher.OnPhaseBan += ai.Ban;
-        phaseEventDispatcher.OnPhasePick += ai.Pick;
+        ai_main = new AI_Main(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
+        ai_main.InitAI_BanPick(phaseManager, storage);
 
         phaseManager.Start();
     }
@@ -51,20 +49,16 @@ public class MatchDI : MonoBehaviour
         initTrait = true;
         slotManager = new SlotStorageManager(storage, storageFactory);
 
-        var traitFacade = new SkillUseOrchestrator(slotManager.StatusSlots);
-        traitFacade.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
-        traitFacade.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
+        var skillController = new SkillUseController(slotManager.StatusSlots);
+        skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
+        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         var filter = new TraitSlotFilter(slotManager.SkillUseFlagSlot);
 
-        var trait_ai = new AI_TraitAgent(aiTeam, filter, slotManager.SkillSlots, traitFacade, new TargetCounter(5));
-        AI_MonoBehaviourAgent aI_Mono = GetComponent<AI_MonoBehaviourAgent>();
-        aI_Mono.Init(trait_ai);
-        phaseEventDispatcher.OnPhaseSkill += GetComponent<AI_MonoBehaviourAgent>().UseTrait;
-
-        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, traitFacade, slotManager, filter);
+        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
 
         ApplyMastery(); // 마지막에
-        if(aiTeam == Team.Blue) trait_ai.UseTrait(Team.Blue);
+        ai_main.InitAI_Trait(filter, slotManager, skillController, GetComponent<AI_MonoBehaviourAgent>());
+
     }
 
     void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, slotManager.StatusSlots);
@@ -75,5 +69,32 @@ public class MatchDI : MonoBehaviour
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
         matchUI_Controller.ShowResult(result);
+    }
+}
+
+
+public class AI_Main
+{
+    public readonly Team Team;
+    readonly PhaseEventDispatcher phaseEventDispatcher;
+    public AI_Main(Team team, PhaseEventDispatcher phaseEventDispatcher)
+    {
+        Team = team;
+        this.phaseEventDispatcher = phaseEventDispatcher;
+    }
+
+    public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
+    {
+        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomSelector());
+        phaseEventDispatcher.OnPhaseBan += ai.Ban;
+        phaseEventDispatcher.OnPhasePick += ai.Pick;
+    }
+
+    public void InitAI_Trait(TraitSlotFilter filter, SlotStorageManager slotManager, SkillUseController skillController, AI_MonoBehaviourAgent ai_agent)
+    {
+        var skill_ai = new AI_TraitAgent(Team, filter, slotManager.SkillSlots, skillController, new TargetCounter(5));
+        ai_agent.Init(skill_ai);
+        phaseEventDispatcher.OnPhaseSkill += ai_agent.UseTrait;
+        if (Team == Team.Blue) skill_ai.UseTrait(Team.Blue);
     }
 }

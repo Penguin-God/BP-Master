@@ -5,9 +5,9 @@ public class TraitUsePersenter
     readonly SlotStorage<IEnumerable<SkillData>> traitSlots;
     TraitTargetSelector traitTargetSelector;
     public IEnumerable<SlotData> CurrentTargets => traitTargetSelector?.Targets;
-    SkillUseOrchestrator facade;
+    SkillUseController facade;
     int TeamSize;
-    public TraitUsePersenter(SkillUseOrchestrator facade, int teamSize, SlotStorage<IEnumerable<SkillData>> traitDatas)
+    public TraitUsePersenter(SkillUseController facade, int teamSize, SlotStorage<IEnumerable<SkillData>> traitDatas)
     {
         this.facade = facade;
         TeamSize = teamSize;

@@ -4,13 +4,13 @@ using System.Linq;
 
 public class AI_TraitAgent
 {
-    readonly SkillUseOrchestrator traitUseFacade;
+    readonly SkillUseController traitUseFacade;
     readonly TraitSlotFilter traitSlotFilter;
     readonly SlotStorage<IEnumerable<SkillData>> traits;
     readonly Team Team;
 
     readonly TargetCounter targetCounter;
-    public AI_TraitAgent(Team team, TraitSlotFilter traitSlotFilter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseOrchestrator traitUseFacade, TargetCounter targetCounter)
+    public AI_TraitAgent(Team team, TraitSlotFilter traitSlotFilter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseController traitUseFacade, TargetCounter targetCounter)
     {
         Team = team;
         this.traitSlotFilter = traitSlotFilter;

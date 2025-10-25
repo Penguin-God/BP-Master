@@ -8,7 +8,7 @@ public class SkillUseTests
     {
         SlotStorage<ChampionStatus> statuses = CreateOneSlotStatus();
         SkillData[] datas = CreateTraits(CreateConditionFreeTrait(SkillType.AttackChanger, 10, SelfAllRule), CreateConditionFreeTrait(SkillType.DefenseChanger, 10, SelfAllRule));
-        var sut = new SkillUseOrchestrator(statuses);
+        var sut = new SkillUseController(statuses);
         SlotData callSlot = RedOneSlot;
         sut.OnUseSkill += slot => callSlot = slot;
 

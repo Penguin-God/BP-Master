@@ -35,7 +35,7 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
     }
 
-    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseOrchestrator traitUseFacade, SlotStorageManager slotStorageManager, TraitSlotFilter filter)
+    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController traitUseFacade, SlotStorageManager slotStorageManager, TraitSlotFilter filter)
     {
         banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
         
