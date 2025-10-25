@@ -35,6 +35,7 @@ public class ChampionStatusTests
     {
         var status = CreateStatus();
         status.AddUpRate(0.5f);
+        status.AddDownRate(10000f); // 무시
 
         status.ChangeStatWithRate(CreateStat(att: 100));
 
@@ -45,6 +46,7 @@ public class ChampionStatusTests
     public void 감소분에는_DownRate를_적용한다()
     {
         var status = CreateStatus(def: 100);
+        status.AddUpRate(100000f); // 무시
         status.AddDownRate(downRate: -0.5f);
 
         status.ChangeStatWithRate(CreateStat(def: 50));
