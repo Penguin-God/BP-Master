@@ -85,6 +85,9 @@ public static class ChampionAssetTools
             // id 필드는 private 이므로 reflection 사용
             typeof(ChampionSO).GetField("id", BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(champion, nextId);
 
+            var traitDatas = typeof(ChampionSO).GetField("traitDatas", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(champion);
+            typeof(ChampionSO).GetField("skillDatas", BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(champion, traitDatas);
+
             EditorUtility.SetDirty(champion);
             nextId++;
         }

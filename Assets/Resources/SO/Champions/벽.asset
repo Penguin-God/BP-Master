@@ -25,3 +25,12 @@ MonoBehaviour:
     conditionType: 6
     threshold: 6
     conditionCheckerType: 1
+  skillDatas:
+  - targetSide: 1
+    range: 4
+    traitType: 1
+    amount: -30
+    conditionType: 6
+    threshold: 6
+    conditionCheckerType: 1
+  traitType: 0

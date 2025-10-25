@@ -25,3 +25,12 @@ MonoBehaviour:
     conditionType: 2
     threshold: 140
     conditionCheckerType: 1
+  skillDatas:
+  - targetSide: 2
+    range: 4
+    traitType: 3
+    amount: 2
+    conditionType: 2
+    threshold: 140
+    conditionCheckerType: 1
+  traitType: 0
