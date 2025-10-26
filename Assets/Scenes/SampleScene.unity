@@ -6301,6 +6301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08c0b08665efa344881d3ec13785c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   champManager: {fileID: 1420292359}
   utilKey: {fileID: 1049145345}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
@@ -6316,6 +6317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb82cf15f2b8d7458be8eb73b00dc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   championSelector: {fileID: 1027524855}
   championDrawer: {fileID: 1027524856}
   traitUseView: {fileID: 2045637438}

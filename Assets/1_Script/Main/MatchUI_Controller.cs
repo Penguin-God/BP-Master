@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
 {
+    [SerializeField] MatchConfigSO matchConfig;
     [SerializeField] ChampionSelector_UI championSelector;
     [SerializeField] ChampionButtonView championDrawer;
     [SerializeField] TraitUseController traitUseView;
@@ -39,17 +40,17 @@ public class MatchUI_Controller : MonoBehaviour
     SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 
         => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championRepository.GetChampionData(id).StatData, TraitType.None));
 
-    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController traitUseFacade, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
+    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
     {
         banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
         
         traitButtonView.Init(filter, playerTeam);
-        traitUseView.Init(new TraitUsePersenter(traitUseFacade, 5, slotStorageManager.SkillSlots), slotStorageManager.SkillSlots);
+        traitUseView.Init(new TraitUsePersenter(skillController, matchConfig.TeamSize, slotStorageManager.SkillSlots), slotStorageManager.SkillSlots);
         eventDispatcher.OnPhaseSkill += traitButtonView.RefreshButtonsByTurn;
         traitButtonView.RefreshButtonsByTurn(Team.Blue);
 
         gameFlowView.Init(slotStorageManager.ChampionDataSlots);
-        traitUseFacade.OnUseSkill += gameFlowView.ViewTraitUseLog;
+        skillController.OnUseSkill += gameFlowView.ViewTraitUseLog;
 
         eventDispatcher.OnPhaseSkill += (team) => scoreView.UpdateTeamScore(slotStorageManager.StatusSlots, team);
     }
