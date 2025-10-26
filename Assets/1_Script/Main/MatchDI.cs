@@ -4,7 +4,6 @@ public class MatchDI : MonoBehaviour
 {
     SlotStorageManager slotManager;
     [SerializeField] ChampionRepository champManager;
-    ChampionCatalog championCatalog => champManager.Catalog;
     GameBanPickStorage storage;
 
     PhaseManager phaseManager;
@@ -18,7 +17,7 @@ public class MatchDI : MonoBehaviour
     {
         this.playerTeam = playerTeam;
         ai_main = new AI_Main(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
-        storage = new GameBanPickStorage(championCatalog.AllId);
+        storage = new GameBanPickStorage(champManager.AllId);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
 
