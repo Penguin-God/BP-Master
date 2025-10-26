@@ -34,47 +34,10 @@ public static class TestHelper
 
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
 
-    public static Champion CreateTraitChamp(Side side, TargetRange range, int amount)
-        => CreateChamp(
-            id: 0,
-            name: "",
-            stat: default,
-            traits: CreateTraitDatas(
-                type: SkillType.AttackChanger,
-                amount: amount,
-                conditionType: StatConditionType.None,
-                threshold: 0,
-                side: side,
-                range: range
-            )
-        );
-
-    public static Champion CreateChamp(int id = 0, string name = "", ChampionStatData stat = default, IEnumerable<SkillData> traits = null) => new Champion(id, name, stat, traits);
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
     public static SkillData[] CreateTraits(params SkillData[] traits) => traits;
-
-    public static SkillData[] CreateTraitDatas(
-        SkillType type = default,
-        int amount = 0,
-        StatConditionType conditionType = default,
-        int threshold = 0,
-        Side side = Side.Self,
-        TargetRange range = TargetRange.All
-    )
-        => new[] { CreateTraitData(type, amount, conditionType, threshold, side, range) };
-
-    public static SkillData CreateTraitData(
-        SkillType type = default,
-        int amount = 0,
-        StatConditionType conditionType = default,
-        int threshold = 0,
-        Side side = Side.Self,
-        TargetRange range = TargetRange.All,
-        ConditionType checkerType = ConditionType.None
-    )
-        => new SkillData(type, amount, new SkillConditionData(conditionType, threshold, checkerType), new TraitTargetRule(side, range));
 
     public static SkillData CreateConditionFreeTrait(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
 
