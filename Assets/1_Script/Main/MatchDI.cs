@@ -52,8 +52,9 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
 
-        new Charge(matchConfig.ChargeAttackBonus, slotManager.StatusSlots.GetTeam(Team.Blue)).Do();
-        new Charge(matchConfig.ChargeAttackBonus, slotManager.StatusSlots.GetTeam(Team.Red)).Do();
+        var traitFactory = new TraitFactory(matchConfig.TraitConfig, slotManager.StatusSlots);
+        var traitExecutor = new TraitExecutor(traitFactory);
+        traitExecutor.ExecuteAllTriat(slotManager.StatusSlots);
 
         ApplyMastery(); // 마지막에
         ai_main.InitAI_Trait(filter, slotManager, skillController, GetComponent<AI_MonoBehaviourAgent>(), matchConfig.TeamSize);

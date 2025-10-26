@@ -17,14 +17,6 @@ MonoBehaviour:
   attack: 60
   defense: 150
   speed: 4
-  traitDatas:
-  - targetSide: 0
-    range: 4
-    traitType: 2
-    amount: 40
-    conditionType: 2
-    threshold: 130
-    conditionCheckerType: 1
   skillDatas:
   - targetSide: 0
     range: 4
@@ -33,4 +25,4 @@ MonoBehaviour:
     conditionType: 2
     threshold: 130
     conditionCheckerType: 1
-  traitType: 0
+  traitType: 2
