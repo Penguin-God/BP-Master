@@ -12,10 +12,10 @@ public readonly struct TraitConfig
     }
 }
 
-public sealed class TraitFactory
+public class TraitFactory
 {
-    private readonly TraitConfig config;
-    private readonly SlotStorage<ChampionStatus> statusSlots;
+    readonly TraitConfig config;
+    readonly SlotStorage<ChampionStatus> statusSlots;
 
     public TraitFactory(TraitConfig config, SlotStorage<ChampionStatus> statusSlots)
     {
