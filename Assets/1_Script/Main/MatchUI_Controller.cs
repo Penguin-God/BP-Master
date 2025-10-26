@@ -56,8 +56,8 @@ public class MatchUI_Controller : MonoBehaviour
     public void ShowResult(MatchResult result)
     {
         scores.SetActive(true);
-        textBlue.text = new ScorePresenter().BuildText(result.BlueInfo);
-        textRed.text = new ScorePresenter().BuildText(result.RedInfo);
+        textBlue.text = new ScoreTextBuilder().BuildText(result.BlueInfo);
+        textRed.text = new ScoreTextBuilder().BuildText(result.RedInfo);
         print($"승자 : {result.Winner}");
     }
 }

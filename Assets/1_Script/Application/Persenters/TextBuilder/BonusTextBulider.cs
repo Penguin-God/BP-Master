@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class BonusPresenter
+public class BonusTextBulider
 {
     public string BuildLineText(SortedDictionary<int, int> thresholdToBonus) => string.Join(", ", thresholdToBonus.Select(pair => $"{pair.Key}이상 +{pair.Value}"));
 

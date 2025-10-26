@@ -24,7 +24,7 @@ public class SlotView : MonoBehaviour
         UpdateMasteryText(gamer);
     }
 
-    void UpdateMasteryText(ProGamer gamer) => masteryText.text = new MasteryPersenter(championManager.Catalog).BuildMasteriesText(gamer.AllMasteries);
+    void UpdateMasteryText(ProGamer gamer) => masteryText.text = new MasteryTextBuilder(championManager.Catalog).BuildMasteriesText(gamer.AllMasteries);
 
     public void UpdateChampion(int id)
     {

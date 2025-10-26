@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-public class ScorePresenter
+public class ScoreTextBuilder
 {
     public string BuildText(TeamScoreInfo info)
     {

@@ -11,7 +11,7 @@ public class ScoreView : MonoBehaviour
 
     void Start()
     {
-        bonusInfo.text = new BonusPresenter().BuildBonusAllText(bonusData.AttackBonus.BonusDatas, bonusData.DefenseBonus.BonusDatas, bonusData.SpeedBonus.BonusDatas);
+        bonusInfo.text = new BonusTextBulider().BuildBonusAllText(bonusData.AttackBonus.BonusDatas, bonusData.DefenseBonus.BonusDatas, bonusData.SpeedBonus.BonusDatas);
     }
 
     public void UpdateTeamScore(SlotStorage<ChampionStatus> statuses, Team team)

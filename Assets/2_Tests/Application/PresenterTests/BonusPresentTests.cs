@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class BonusThresholdPresenterTests
 {
-    BonusPresenter CreatePresenter() => new BonusPresenter();
+    BonusTextBulider CreatePresenter() => new BonusTextBulider();
 
     SortedDictionary<int, int> CreateThresholds(params (int threshold, int bonus)[] items)
     {

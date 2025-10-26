@@ -6,7 +6,7 @@ public class ScorePresentTests
     [Test]
     public void 점수_텍스트_생성()
     {
-        ScorePresenter sut = new();
+        ScoreTextBuilder sut = new();
         TeamScoreInfo info = new(10, 15, 3, 5, 6);
         string result = sut.BuildText(info);
 

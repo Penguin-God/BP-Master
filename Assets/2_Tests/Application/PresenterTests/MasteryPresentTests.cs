@@ -11,7 +11,7 @@ public class MasteryPresentTests
         mastery.Add(new ChampionMastery(1, 2));
         mastery.Add(new ChampionMastery(2, 32));
         ChampionCatalog catalog = new ChampionCatalog(new Champion[] { TestHelper.CreateChamp(1, "닉스"), TestHelper.CreateChamp(2, "아르카나") });
-        MasteryPersenter sut = new(catalog);
+        MasteryTextBuilder sut = new(catalog);
         
         string result = sut.BuildMasteriesText(mastery);
 
