@@ -34,3 +34,21 @@ public class Charge
 
     bool IsCharge(ChampionStatus status) => status.TraitType == TraitType.Charge;
 }
+
+public class Guard
+{
+    readonly float GuardBonusRate;
+    readonly IEnumerable<ChampionStatus> statuses;
+
+    public Guard(float guardBonusRate, IEnumerable<ChampionStatus> statuses)
+    {
+        GuardBonusRate = guardBonusRate;
+        this.statuses = statuses;
+    }
+
+    public void Do()
+    {
+        foreach (var status in statuses) 
+            status.AddDownRate(GuardBonusRate * -1);
+    }
+}

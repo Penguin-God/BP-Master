@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 
 public class TraitTests
 {
@@ -14,6 +15,19 @@ public class TraitTests
         Assert.AreEqual(10, statuses[0].Stat.Attack);
         Assert.AreEqual(0, statuses[1].Stat.Attack);
         Assert.AreEqual(10, statuses[2].Stat.Attack);
+    }
+
+    [Test]
+    public void Guard가_모든_Status에_적용된다()
+    {
+        var statuses = new List<ChampionStatus> { TestHelper.CreateStatus(), TestHelper.CreateStatus() };
+
+        var sut = new Guard(0.2f, statuses);
+
+        sut.Do();
+
+        Assert.AreEqual(0.8f, statuses[0].DownRate);
+        Assert.AreEqual(0.8f, statuses[0].DownRate);
     }
 
     ChampionStatus CreateStatus(TraitType type) => TestHelper.CreateStatus(traitType: type);

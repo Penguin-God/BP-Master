@@ -8,8 +8,8 @@ public class ChampionStatus
     public bool IsTraitExcluded { get; private set; }
     public void TraitExcluded() => IsTraitExcluded = true;
 
-    float UpRate= 1f;
-    float DownRate= 1f;
+    public float UpRate { get; private set; } = 1f;
+    public float DownRate { get; private set; } = 1f;
 
     public ChampionStatus(ChampionStatData statData) => Stat = statData;
 
