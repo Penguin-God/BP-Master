@@ -7,11 +7,12 @@ public class ChampionRepository : MonoBehaviour
     ChampionSO[] allChampion;
     public IReadOnlyList<ChampionSO> AllChampion => allChampion;
     public ChampionCatalog Catalog { get; private set; }
-    // 이름만 주는 딕셔너리
+    public Dictionary<int, string> NameCatalog { get; private set; }
     void Awake()
     {
         allChampion = LoadAllChampions();
         Catalog = new ChampionCatalog(allChampion.Select(x => x.CreateChampion()));
+        NameCatalog = allChampion.ToDictionary(x => x.Id, x => x.ChampionName);
     }
     public ChampionSO GetChampionData(int id) => allChampion.First(x =>  x.Id == id);
     ChampionSO[] LoadAllChampions() => Resources.LoadAll<ChampionSO>("SO/Champions");

@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 public class MasteryTextBuilder
 {
-    private readonly ChampionCatalog catalog;
-    public MasteryTextBuilder(ChampionCatalog catalog) => this.catalog = catalog;
+    readonly Dictionary<int, string> NameCatalog;
+    public MasteryTextBuilder(Dictionary<int, string> nameCatalog) => NameCatalog = nameCatalog;
 
     public string BuildMasteriesText(IEnumerable<ChampionMastery> masteries)
-        => string.Join(Environment.NewLine, masteries.Select(x =>$"{catalog.GetChampion(x.ChampionId).Name} : {x.Level}"));
-    
+        => string.Join(Environment.NewLine, masteries.Select(x =>$"{NameCatalog[x.ChampionId]} : {x.Level}"));
 }
