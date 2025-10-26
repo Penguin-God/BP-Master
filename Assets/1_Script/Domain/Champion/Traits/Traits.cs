@@ -14,6 +14,11 @@ public interface ITrait
     public void Do();
 }
 
+public class NullTrait : ITrait
+{
+    public void Do() { }
+}
+
 public class Charge : ITrait
 {
     readonly int AmountPerHolder;

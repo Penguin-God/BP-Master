@@ -27,9 +27,9 @@ public class TraitFactory
     {
         return traitType switch
         {
+            TraitType.None => new NullTrait(),
             TraitType.Charge => new Charge(config.ChargeAttack, statusSlots.GetTeam(team)), // 우리팀
             TraitType.Guard => new Guard(config.GuardBonusRate, statusSlots.GetTeam(team)), // 우리팀
-            _ => throw new NotSupportedException($"지원하지 않는 TraitType: {traitType}")
         };
     }
 }

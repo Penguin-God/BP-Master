@@ -3,6 +3,7 @@ using static TestHelper;
 
 public class TraitFactoryTests
 {
+    [TestCase(TraitType.None, typeof(NullTrait))]
     [TestCase(TraitType.Charge, typeof(Charge))]
     [TestCase(TraitType.Guard, typeof(Guard))]
     public void Type에_맞는_Action_객체_생성(TraitType type, System.Type expectedType)
