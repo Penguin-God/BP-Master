@@ -10,7 +10,7 @@ public class GamerRoster : MonoBehaviour
     [SerializeField] int teamCount;
     [SerializeField] int[] masteryLevels;
 
-    public void SetRandomRoster()
+    public void CreateRandomRoster()
     {
         RandomRosterFactory factory = new RandomRosterFactory(new MasteryDrawer(championRepository.AllId));
         Rosters = factory.CreateRoster(teamCount, masteryLevels);
