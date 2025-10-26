@@ -6324,6 +6324,7 @@ MonoBehaviour:
   swapController: {fileID: 502510546}
   gameFlowView: {fileID: 1107171632}
   traitButtonView: {fileID: 2045637439}
+  championRepository: {fileID: 1420292359}
   scores: {fileID: 882374934}
   textBlue: {fileID: 1908862552}
   textRed: {fileID: 1173623354}

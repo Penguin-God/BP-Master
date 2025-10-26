@@ -1,13 +1,5 @@
 using System;
 
-public class IdStorageConverter
-{
-    readonly ChampionCatalog championCatalog;
-    public IdStorageConverter(ChampionCatalog championCatalog) => this.championCatalog = championCatalog;
-
-    public SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championCatalog.GetChampion(id).StatData, TraitType.Charge));
-}
-
 public static class StorageConverter
 {
     // TIn을 TOut으로 변환하는 Func를 받아 모든 Slot에 적용 후 리턴

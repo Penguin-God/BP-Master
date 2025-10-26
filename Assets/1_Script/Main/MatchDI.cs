@@ -10,7 +10,6 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
-    IdStorageConverter storageFactory;
     GamerRoster gamerRoster;
     AI_Main ai_main;
     Team playerTeam;
@@ -28,12 +27,11 @@ public class MatchDI : MonoBehaviour
 
         phaseEventDispatcher.OnPhaseSkill += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
-        storageFactory = new IdStorageConverter(championCatalog);
-
+        
         gamerRoster  = GetComponent<GamerRoster>();
         gamerRoster.SetRandomRoster(championCatalog);
 
-        matchUI_Controller.Init(storage, phaseManager, storageFactory, phaseEventDispatcher); // start보다 먼저
+        matchUI_Controller.Init(storage, phaseManager, phaseEventDispatcher); // start보다 먼저
 
         ai_main.InitAI_BanPick(phaseManager, storage);
 
