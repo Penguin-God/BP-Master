@@ -9,7 +9,12 @@ public enum TraitType
     Amplifier,
 }
 
-public class Charge
+public interface ITrait
+{
+    public void Do();
+}
+
+public class Charge : ITrait
 {
     readonly int AmountPerHolder;
     readonly IEnumerable<ChampionStatus> statuses;
@@ -35,7 +40,7 @@ public class Charge
     bool IsCharge(ChampionStatus status) => status.TraitType == TraitType.Charge;
 }
 
-public class Guard
+public class Guard : ITrait
 {
     readonly float GuardBonusRate;
     readonly IEnumerable<ChampionStatus> statuses;

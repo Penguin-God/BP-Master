@@ -6,11 +6,11 @@ public static class TestHelper
     public static SlotData CreateBlueSlot(int index) => new SlotData(Team.Blue, index);
     public static SlotData CreateRedSlot(int index) => new SlotData(Team.Red, index);
 
-    public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0, int speed = 0)
+    public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None)
     {
         SlotStorage<ChampionStatus> result = new();
-        result.AddSlot(Team.Blue, CreateStatus(att, def, speed));
-        result.AddSlot(Team.Red, CreateStatus(att, def, speed));
+        result.AddSlot(Team.Blue, CreateStatus(att, def, speed, traitType));
+        result.AddSlot(Team.Red, CreateStatus(att, def, speed, traitType));
         return result;
     }
 
