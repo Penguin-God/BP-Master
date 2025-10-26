@@ -6,6 +6,7 @@ public class ChampionRepository : MonoBehaviour
 {
     ChampionSO[] allChampion;
     public IReadOnlyList<ChampionSO> AllChampion => allChampion;
+    public IEnumerable<int> AllId => allChampion.Select(x => x.Id);
     public ChampionCatalog Catalog { get; private set; }
     public Dictionary<int, string> NameCatalog { get; private set; }
     void Awake()

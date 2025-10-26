@@ -29,7 +29,7 @@ public class MatchDI : MonoBehaviour
         phaseEventDispatcher.OnPhaseDone += OnDone;
         
         gamerRoster  = GetComponent<GamerRoster>();
-        gamerRoster.SetRandomRoster(championCatalog);
+        gamerRoster.SetRandomRoster();
 
         matchUI_Controller.Init(storage, phaseManager, phaseEventDispatcher); // start보다 먼저
 

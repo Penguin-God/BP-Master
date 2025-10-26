@@ -4,16 +4,12 @@ using System.Linq;
 
 public class MasteryDrawer
 {
-    readonly ChampionCatalog catalog;
-    
-    public MasteryDrawer(ChampionCatalog catalog)
-    {
-        this.catalog = catalog;
-    }
+    readonly IEnumerable<int> ids;
+    public MasteryDrawer(IEnumerable<int> ids) => this.ids = ids;
 
     public ChampionMastery[] DrawRandoms(int[] levels)
     {
-        var allIds = catalog.AllId.ToList();
+        var allIds = ids.ToList();
         var results = new List<ChampionMastery>();
 
         foreach (var level in levels)

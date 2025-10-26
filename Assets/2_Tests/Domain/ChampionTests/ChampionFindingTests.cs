@@ -29,12 +29,4 @@ public class ChampionFindingTests
         Assert.That(allIds.Count, Is.EqualTo(5));
         Assert.That(allIds, Is.EquivalentTo(new[] { 1, 2, 3, 4, 5 }));
     }
-
-    [Test]
-    public void ID로_챔피언_데이터_조회()
-    {
-        var champion = manager.GetChampion(3);
-
-        Assert.That(champion.Name, Is.EqualTo("암살자"));
-    }
 }

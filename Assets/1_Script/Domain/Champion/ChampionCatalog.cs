@@ -7,6 +7,4 @@ public class ChampionCatalog
     public IReadOnlyList<int> AllId => allChampion.Select(x => x.Id).ToList();
 
     public ChampionCatalog(IEnumerable<Champion> champions) => allChampion = champions;
-
-    public Champion GetChampion(int id) => allChampion.First(x => x.Id == id);
 }

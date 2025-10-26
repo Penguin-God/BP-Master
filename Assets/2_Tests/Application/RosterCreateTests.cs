@@ -7,16 +7,8 @@ public class RosterCreateTests
     [Test]
     public void 랜덤으로_숙련도_뽑아서_로스터_생성()
     {
-        ChampionCatalog catalog = new ChampionCatalog(
-        new Champion[]
-        {
-            CreateChamp(1, "일"),
-            CreateChamp(2, "이"),
-            CreateChamp(3, "삼"),
-            CreateChamp(4, "사"),
-            CreateChamp(5, "오"),
-        });
-        MasteryDrawer drawer = new(catalog);
+        var ids = new int[] { 1, 2, 3, 4, 5 };
+        MasteryDrawer drawer = new(ids);
         
 
         RandomRosterFactory sut = new (drawer);
