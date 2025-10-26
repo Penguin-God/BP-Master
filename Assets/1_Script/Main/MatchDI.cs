@@ -47,7 +47,7 @@ public class MatchDI : MonoBehaviour
         var skillController = new SkillUseController(slotManager.StatusSlots);
         skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-        var filter = new TraitSlotFilter(slotManager.SkillUseFlagSlot);
+        var filter = new SkillSlotFilter(slotManager.SkillUseFlagSlot);
 
         matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
 
@@ -87,7 +87,7 @@ public class AI_Main
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }
 
-    public void InitAI_Trait(TraitSlotFilter filter, SlotStorageManager slotManager, SkillUseController skillController, AI_MonoBehaviourAgent ai_agent)
+    public void InitAI_Trait(SkillSlotFilter filter, SlotStorageManager slotManager, SkillUseController skillController, AI_MonoBehaviourAgent ai_agent)
     {
         var skill_ai = new AI_TraitAgent(Team, filter, slotManager.SkillSlots, skillController, new TargetCounter(5));
         ai_agent.Init(skill_ai);

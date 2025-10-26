@@ -39,7 +39,7 @@ public class MatchUI_Controller : MonoBehaviour
     SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 
         => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championRepository.GetChampionData(id).StatData, TraitType.None));
 
-    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController traitUseFacade, SlotStorageManager slotStorageManager, TraitSlotFilter filter)
+    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController traitUseFacade, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
     {
         banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
         

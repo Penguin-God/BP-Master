@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class TraitSlotFilter
+public class SkillSlotFilter
 {
     readonly int TeamSize;
     SlotStorage<bool> triatUseFlagSlots;
-    public TraitSlotFilter(SlotStorage<bool> triatUseFlagSlots)
+    public SkillSlotFilter(SlotStorage<bool> triatUseFlagSlots)
     {
         TeamSize = triatUseFlagSlots.GetTeam(Team.Blue).Count();
         this.triatUseFlagSlots = triatUseFlagSlots;
@@ -20,11 +20,5 @@ public class TraitSlotFilter
     {
         var side = EnumCaster.MergeSide(sides);
         return new TraitTargetFinder(TeamSize).GetTargetableSlot(team, side);
-    }
-
-    public IEnumerable<SlotData> GetSlots(bool isUse, Team team, IEnumerable<Side> sides)
-    {
-        if (isUse) return FilteringTargetSlots(team, sides);
-        else return FilteringUseableSlots(team);
     }
 }

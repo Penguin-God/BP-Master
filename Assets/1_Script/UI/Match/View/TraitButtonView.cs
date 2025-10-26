@@ -9,9 +9,9 @@ public class TraitButtonView : MonoBehaviour
     [SerializeField] Button[] redTraits;
     SlotStorage<Button> buttonSlots = new();
 
-    TraitSlotFilter traitSlotFilter;
+    SkillSlotFilter traitSlotFilter;
     Team team;
-    public void Init(TraitSlotFilter filter, Team team)
+    public void Init(SkillSlotFilter filter, Team team)
     {
         gameObject.SetActive(true);
         this.traitSlotFilter = filter;
