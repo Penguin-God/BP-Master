@@ -7,7 +7,7 @@ public class TraitExecuteTests
     public void 양팀_각각의_특성은_자기_팀에게만_적용된다()
     {
         var slots = CreateOneSlotStatus(traitType: TraitType.Charge);
-        var config = new TraitConfig(5, 0);
+        var config = new TraitConfig(5, 0, 0);
         var factory = new TraitFactory(config, slots);
         var sut = new TraitExecutor(factory);
 

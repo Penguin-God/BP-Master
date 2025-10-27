@@ -6,6 +6,7 @@ public class TraitFactoryTests
     [TestCase(TraitType.None, typeof(NullTrait))]
     [TestCase(TraitType.Charge, typeof(Charge))]
     [TestCase(TraitType.Guard, typeof(Guard))]
+    [TestCase(TraitType.Amplifier, typeof(Amplifier))]
     public void Type에_맞는_Action_객체_생성(TraitType type, System.Type expectedType)
     {
         var sut = new TraitFactory(default, CreateOneSlotStatus());
@@ -16,11 +17,11 @@ public class TraitFactoryTests
     }
 
     [Test]
-    public void Charge는_지정한_팀의_Charge_보유자에게만_같은_팀_보유_수_곱만큼_공격_증가()
+    public void 팩토리에_넘긴_변수에_맞게_특성_적용()
     {
         var slots = CreateOneSlotStatus(traitType:TraitType.Charge);
 
-        var config = new TraitConfig(5, 0f);
+        var config = new TraitConfig(5, 0f, 0f);
         var sut = new TraitFactory(config, slots);
 
         // Blue 팀에만 적용

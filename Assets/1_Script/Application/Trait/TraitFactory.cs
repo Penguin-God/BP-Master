@@ -1,14 +1,14 @@
-using System;
-
 public readonly struct TraitConfig
 {
     public readonly int ChargeAttack;
     public readonly float GuardBonusRate;
+    public readonly float AmpilyRate;
 
-    public TraitConfig(int  chargeAttack, float guardBonusRate)
+    public TraitConfig(int  chargeAttack, float guardBonusRate, float ampliRate)
     {
         this.ChargeAttack = chargeAttack;
         this.GuardBonusRate = guardBonusRate;
+        AmpilyRate = ampliRate;
     }
 }
 
@@ -30,6 +30,7 @@ public class TraitFactory
             TraitType.None => new NullTrait(),
             TraitType.Charge => new Charge(config.ChargeAttack, statusSlots.GetTeam(team)), // 우리팀
             TraitType.Guard => new Guard(config.GuardBonusRate, statusSlots.GetTeam(team)), // 우리팀
+            TraitType.Amplifier => new Amplifier(config.AmpilyRate, statusSlots.GetTeam(team)), // 우리팀
         };
     }
 }

@@ -62,3 +62,21 @@ public class Guard : ITrait
             status.AddDownRate(GuardBonusRate * -1);
     }
 }
+
+public class Amplifier : ITrait
+{
+    readonly float AmpilyRate;
+    readonly IEnumerable<ChampionStatus> statuses;
+
+    public Amplifier(float ampliyRate, IEnumerable<ChampionStatus> statuses)
+    {
+        AmpilyRate = ampliyRate;
+        this.statuses = statuses;
+    }
+
+    public void Do()
+    {
+        foreach (var status in statuses)
+            status.AddUpRate(AmpilyRate);
+    }
+}
