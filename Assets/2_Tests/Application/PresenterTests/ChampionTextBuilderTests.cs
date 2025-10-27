@@ -20,7 +20,7 @@ public class ChampionTextBuilderTests
     [Test]
     public void 특성_타입에_맞는_텍스트_생성()
     {
-        var sut = new TraitTextBuilder();
+        var sut = new SkillTextBuilder();
         
         // 편의 함수
         string GetTraitText(SkillType traitType, int amount, TraitTargetRule rule) => sut.BuildTraitText(CreateData(traitType, amount, default, rule));
@@ -36,7 +36,7 @@ public class ChampionTextBuilderTests
     [Test]
     public void 기준점_조건_텍스트_생성()
     {
-        var sut = new TraitTextBuilder();
+        var sut = new SkillTextBuilder();
 
         // 편의 함수
         string GetTraitText(StatConditionType conditionType, int thershold) 
@@ -53,7 +53,7 @@ public class ChampionTextBuilderTests
     [Test]
     public void 비교_조건_텍스트_생성()
     {
-        var sut = new TraitTextBuilder();
+        var sut = new SkillTextBuilder();
 
         // 편의 함수
         string GetTraitText(StatConditionType conditionType) => sut.BuildTraitText(CreateData(SkillType.DefenseChanger, -10, CreateCompareCondition(conditionType), SelfAllRule));
@@ -69,14 +69,14 @@ public class ChampionTextBuilderTests
     [Test]
     public void 특성_컬랙션은_텍스트_합쳐서_반환() // 케이스 추가?
     {
-        var sut = new TraitTextBuilder();
+        var sut = new SkillTextBuilder();
         var datas = new TraitUI_Data[]
         {
             CreateData(SkillType.AttackChanger, -10, default, OpponentAllRule),
             CreateData(SkillType.DefenseChanger, -10, default, OpponentAllRule),
         };
 
-        string result = sut.BuildTraitText(datas);
+        string result = sut.BuildSkillText(datas);
 
         Assert.AreEqual("적군 전체 공격력 10 감소, 적군 전체 방어력 10 감소", result);
     }

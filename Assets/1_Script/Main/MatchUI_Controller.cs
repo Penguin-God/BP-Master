@@ -6,12 +6,12 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] MatchConfigSO matchConfig;
     [SerializeField] ChampionSelector_UI championSelector;
     [SerializeField] ChampionButtonView championDrawer;
-    [SerializeField] TraitUseController traitUseView;
+    [SerializeField] SkillUseController_UI traitUseView;
     [SerializeField] BanPickView banPickView;
     [SerializeField] ScoreView scoreView;
     [SerializeField] SwapController swapController;
     [SerializeField] GameFlowView gameFlowView;
-    [SerializeField] TraitButtonView traitButtonView;
+    [SerializeField] SkillButtonView skillButtonView;
     [SerializeField] ChampionRepository championRepository;
 
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
@@ -44,10 +44,10 @@ public class MatchUI_Controller : MonoBehaviour
     {
         banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
         
-        traitButtonView.Init(filter, playerTeam);
-        traitUseView.Init(new TraitUsePersenter(skillController, matchConfig.TeamSize, slotStorageManager.SkillSlots), slotStorageManager.SkillSlots);
-        eventDispatcher.OnPhaseSkill += traitButtonView.RefreshButtonsByTurn;
-        traitButtonView.RefreshButtonsByTurn(Team.Blue);
+        skillButtonView.Init(filter, playerTeam);
+        traitUseView.Init(new SkillUsePersenter(skillController, matchConfig.TeamSize, slotStorageManager.SkillSlots), slotStorageManager.SkillSlots);
+        eventDispatcher.OnPhaseSkill += skillButtonView.RefreshButtonsByTurn;
+        skillButtonView.RefreshButtonsByTurn(Team.Blue);
 
         gameFlowView.Init(slotStorageManager.ChampionDataSlots);
         skillController.OnUseSkill += gameFlowView.ViewTraitUseLog;

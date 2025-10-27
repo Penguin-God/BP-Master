@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 799522245077108719}
   - component: {fileID: 5196062453932817456}
   m_Layer: 5
-  m_Name: TraitSelectButton
+  m_Name: SkillSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

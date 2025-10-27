@@ -42,7 +42,7 @@ public class ChampionSO : ScriptableObject
     [SerializeField] TraitDataConfig[] skillDatas;
     public IEnumerable<SkillData> SkillDatas => skillDatas.Select(x => x.CreateTraitData());
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
-    public IEnumerable<TraitUI_Data> CreateTrait_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
+    public IEnumerable<TraitUI_Data> CreateSkill_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
 
     [Header("특성")]
     [SerializeField] TraitType traitType;

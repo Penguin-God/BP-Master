@@ -1264,7 +1264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279119296}
   m_Layer: 5
-  m_Name: RedTraitBtns
+  m_Name: RedSkillBtns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6325,7 +6325,7 @@ MonoBehaviour:
   scoreView: {fileID: 670859827}
   swapController: {fileID: 502510546}
   gameFlowView: {fileID: 1107171632}
-  traitButtonView: {fileID: 2045637439}
+  skillButtonView: {fileID: 2045637439}
   championRepository: {fileID: 1420292359}
   scores: {fileID: 882374934}
   textBlue: {fileID: 1908862552}
@@ -7254,7 +7254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 741026030}
   statView: {fileID: 1640189474}
-  traitText: {fileID: 1194289692}
+  skillText: {fileID: 1194289692}
 --- !u!114 &1640189474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9268,7 +9268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1999851441}
   m_Layer: 5
-  m_Name: BlueTraitBtns
+  m_Name: BlueSkillBtns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9448,7 +9448,7 @@ GameObject:
   - component: {fileID: 2045637438}
   - component: {fileID: 2045637439}
   m_Layer: 5
-  m_Name: Trait
+  m_Name: Skills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9508,16 +9508,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2045637436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f9dc3bc904ac841bdd1ebc91a6fdbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 289c4eb22be70e948b138c6cf5f6fe6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueTraits:
+  blueSkills:
   - {fileID: 784907036}
   - {fileID: 1289146205}
   - {fileID: 1590343676}
   - {fileID: 1017426912}
   - {fileID: 1425457484}
-  redTraits:
+  redSkills:
   - {fileID: 69391751}
   - {fileID: 1303766833}
   - {fileID: 212632266}

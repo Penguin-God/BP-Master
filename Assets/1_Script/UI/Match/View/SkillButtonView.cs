@@ -3,10 +3,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TraitButtonView : MonoBehaviour
+public class SkillButtonView : MonoBehaviour
 {
-    [SerializeField] Button[] blueTraits;
-    [SerializeField] Button[] redTraits;
+    [SerializeField] Button[] blueSkills;
+    [SerializeField] Button[] redSkills;
     SlotStorage<Button> buttonSlots = new();
 
     SkillSlotFilter traitSlotFilter;
@@ -17,8 +17,8 @@ public class TraitButtonView : MonoBehaviour
         this.traitSlotFilter = filter;
         this.team = team;
 
-        buttonSlots.AddSlots(Team.Blue, blueTraits);
-        buttonSlots.AddSlots(Team.Red, redTraits);
+        buttonSlots.AddSlots(Team.Blue, blueSkills);
+        buttonSlots.AddSlots(Team.Red, redSkills);
     }
 
     void InActiveAllBtns()

@@ -36,9 +36,9 @@ public readonly struct TraitUI_Data
     }
 }
 
-public class TraitTextBuilder
+public class SkillTextBuilder
 {
-    public string BuildTraitText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildTraitText(x)));
+    public string BuildSkillText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildTraitText(x)));
 
     public string BuildTraitText(TraitUI_Data traitData)
     {

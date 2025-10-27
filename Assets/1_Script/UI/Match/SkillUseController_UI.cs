@@ -3,15 +3,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TraitUseController : MonoBehaviour
+public class SkillUseController_UI : MonoBehaviour
 {
     [SerializeField] Button[] blueChamps;
     [SerializeField] Button[] redChamps;
 
-    TraitButtonView traitButtonView;
+    SkillButtonView skillButtonView;
     SlotStorage<IEnumerable<SkillData>> traits;
-    TraitUsePersenter traitUsePresenter;
-    public void Init(TraitUsePersenter traitUsePresenter, SlotStorage<IEnumerable<SkillData>> traits)
+    SkillUsePersenter traitUsePresenter;
+    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<IEnumerable<SkillData>> traits)
     {
         gameObject.SetActive(true);
         this.traitUsePresenter = traitUsePresenter;
@@ -19,7 +19,7 @@ public class TraitUseController : MonoBehaviour
 
         SetupChampionButtons(blueChamps, Team.Blue);
         SetupChampionButtons(redChamps, Team.Red);
-        traitButtonView = GetComponent<TraitButtonView>();
+        skillButtonView = GetComponent<SkillButtonView>();
     }
 
     void SetupChampionButtons(Button[] btns, Team buttonTeam)
@@ -27,19 +27,19 @@ public class TraitUseController : MonoBehaviour
         for (int i = 0; i < btns.Length; i++)
         {
             int index = i; // 클로저 캡처 방지
-            btns[i].onClick.AddListener(() => OnClickTraitSlot(new SlotData(buttonTeam, index)));
+            btns[i].onClick.AddListener(() => OnClickSkillSlot(new SlotData(buttonTeam, index)));
         }
     }
 
-    void OnClickTraitSlot(SlotData clickSlot)
+    void OnClickSkillSlot(SlotData clickSlot)
     {
         if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
         else
         {
             var rules = traits.GetSlot(clickSlot).Select(x => x.TargetRule);
-            traitUsePresenter.SelectUseTrait(clickSlot, EnumCaster.MergeRule(rules));
+            traitUsePresenter.SelectUseSkill(clickSlot, EnumCaster.MergeRule(rules));
         }
 
-        if (traitUsePresenter.IsUseable) traitButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
+        if (traitUsePresenter.IsUseable) skillButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
     }
 }

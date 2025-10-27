@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class TraitUsePresenterTests
+public class SkillUsePresenterTests
 {
     SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
 
@@ -53,13 +53,13 @@ public class TraitUsePresenterTests
     }
 
     [Test]
-    public void 특성_선택_후_타겟_가득_차면_자동_적용()
+    public void 스킬_선택_후_타겟_가득_차면_자동_적용()
     {
         var statuses = CreateTwoSlotStatus();
         var rule = new TraitTargetRule(Side.Opponent, TargetRange.Double);
-        var sut = new TraitUsePersenter(new SkillUseController(statuses), 2, CreateAttTraitSlots(100, rule));
+        var sut = new SkillUsePersenter(new SkillUseController(statuses), 2, CreateAttTraitSlots(100, rule));
 
-        sut.SelectUseTrait(BlueZeroSlot, rule);
+        sut.SelectUseSkill(BlueZeroSlot, rule);
         Assert.IsTrue(sut.IsUseable);
 
         Assert.IsFalse(sut.SelectTarget(RedZeroSlot));

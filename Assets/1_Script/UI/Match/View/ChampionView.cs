@@ -5,15 +5,15 @@ public class ChampionView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] StatView statView;
-    [SerializeField] TextMeshProUGUI traitText;
+    [SerializeField] TextMeshProUGUI skillText;
 
     void Start() => ClearDisplay();
 
-    TraitTextBuilder traitPersenter = new();
+    readonly SkillTextBuilder skillTextBuilder = new();
     public void UpdateDisplay(ChampionSO champion)
     {
         UpdateChampion(champion);
-        traitText.text = traitPersenter.BuildTraitText(champion.CreateTrait_UI_Datas());
+        skillText.text = skillTextBuilder.BuildSkillText(champion.CreateSkill_UI_Datas());
     }
     public void UpdateChampion(ChampionSO champion)
     {
@@ -25,7 +25,7 @@ public class ChampionView : MonoBehaviour
     {
         nameText.text = "-";
         statView.ClearDisplay();
-        if(traitText != null)
-            traitText.text = "";
+        if(skillText != null)
+            skillText.text = "";
     }
 }
