@@ -24,6 +24,20 @@ public class TraitDataConfig
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, amount, Condition, Rule);
 }
 
+public readonly struct ChampionModel
+{
+    public readonly string Name;
+    public readonly ChampionStatData Stat;
+    public readonly TraitType TraitType;
+
+    public ChampionModel(string name, ChampionStatData stat, TraitType traitType)
+    {
+        Name = name;
+        Stat = stat;
+        TraitType = traitType;
+    }
+}
+
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]
 public class ChampionSO : ScriptableObject
 {
@@ -42,6 +56,7 @@ public class ChampionSO : ScriptableObject
     [SerializeField] TraitDataConfig[] skillDatas;
     public IEnumerable<SkillData> SkillDatas => skillDatas.Select(x => x.CreateTraitData());
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
+    public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData, traitType);
     public IEnumerable<TraitUI_Data> CreateSkill_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
 
     [Header("특성")]

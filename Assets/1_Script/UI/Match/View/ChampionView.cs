@@ -10,15 +10,17 @@ public class ChampionView : MonoBehaviour
     void Start() => ClearDisplay();
 
     readonly SkillTextBuilder skillTextBuilder = new();
+    readonly ChampionStatusTextBuilder statusTextBuilder = new();
     public void UpdateDisplay(ChampionSO champion)
     {
-        UpdateChampion(champion);
+        UpdateChampion(champion.CreateChampionModel());
         skillText.text = skillTextBuilder.BuildSkillText(champion.CreateSkill_UI_Datas());
     }
-    public void UpdateChampion(ChampionSO champion)
+
+    public void UpdateChampion(ChampionModel model)
     {
-        nameText.text = champion.ChampionName;
-        statView.UpdateStat(champion.StatData);
+        nameText.text = $"{model.Name}({statusTextBuilder.BuildTraitText(model.TraitType)})";
+        statView.UpdateStat(model.Stat);
     }
 
     public void ClearDisplay()
