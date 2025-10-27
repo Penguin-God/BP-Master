@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatChangeView : MonoBehaviour
 {
-    [SerializeField] ChampionView championView;
+    [SerializeField] StatView statView;
     [SerializeField] TextMeshProUGUI attChangeText;
     [SerializeField] TextMeshProUGUI defChangeText;
     [SerializeField] TextMeshProUGUI speedChangeText;
@@ -28,7 +28,7 @@ public class StatChangeView : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        championView.UpdateStat(afterStat);
+        statView.UpdateStat(afterStat);
         InActiveTexts();
     }
 

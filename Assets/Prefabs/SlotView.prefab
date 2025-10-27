@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 738874658271576691}
   - component: {fileID: 2609140280346123950}
   - component: {fileID: 922761530011916858}
+  - component: {fileID: 2865069792005043793}
   - component: {fileID: 6107222167726110637}
   - component: {fileID: 50506760632782602}
   - component: {fileID: 1343732211533317347}
@@ -766,10 +767,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 3313022715216232836}
+  statView: {fileID: 2865069792005043793}
+  traitText: {fileID: 0}
+--- !u!114 &2865069792005043793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6429098621507359674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13101a852206980439635a11a74f03a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   attackText: {fileID: 85331542728356027}
   defenseText: {fileID: 1350437804625176739}
   speedText: {fileID: 3648330087568490659}
-  traitText: {fileID: 0}
 --- !u!114 &6107222167726110637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f3d70287caa2445b86f58a3eaa8009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championView: {fileID: 922761530011916858}
+  statView: {fileID: 2865069792005043793}
   attChangeText: {fileID: 1866832807054344300}
   defChangeText: {fileID: 5271481687963963807}
   speedChangeText: {fileID: 679104290105764945}

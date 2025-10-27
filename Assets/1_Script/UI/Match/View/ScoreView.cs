@@ -6,8 +6,8 @@ public class ScoreView : MonoBehaviour
 {
     [SerializeField] BonusDataFactory bonusData;
     [SerializeField] TextMeshProUGUI bonusInfo;
-    [SerializeField] ChampionView blueScoreView;
-    [SerializeField] ChampionView redScoreView;
+    [SerializeField] StatView blueScoreView;
+    [SerializeField] StatView redScoreView;
 
     void Start()
     {

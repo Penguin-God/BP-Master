@@ -4,14 +4,11 @@ using UnityEngine;
 public class ChampionView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] TextMeshProUGUI attackText;
-    [SerializeField] TextMeshProUGUI defenseText;
-    [SerializeField] TextMeshProUGUI speedText;
+    [SerializeField] StatView statView;
     [SerializeField] TextMeshProUGUI traitText;
 
     void Start() => ClearDisplay();
 
-    StatTextBuilder championPersenter = new StatTextBuilder();
     TraitTextBuilder traitPersenter = new();
     public void UpdateDisplay(ChampionSO champion)
     {
@@ -21,24 +18,13 @@ public class ChampionView : MonoBehaviour
     public void UpdateChampion(ChampionSO champion)
     {
         nameText.text = champion.ChampionName;
-        UpdateStat(champion.StatData);
-    }
-
-    public void UpdateStat(ChampionStatData statData)
-    {
-        StatViewModel viewModel = championPersenter.CreateStatViewModel(statData);
-        attackText.text = viewModel.Attack;
-        defenseText.text = viewModel.Defense;
-        speedText.text = viewModel.Speed;
+        statView.UpdateStat(champion.StatData);
     }
 
     public void ClearDisplay()
     {
-        if (nameText != null)
-            nameText.text = "-";
-        attackText.text = "공격 : -";
-        defenseText.text = "방어 : -";
-        speedText.text = "속도 : -";
+        nameText.text = "-";
+        statView.ClearDisplay();
         if(traitText != null)
             traitText.text = "";
     }

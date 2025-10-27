@@ -2425,8 +2425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusData: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
   bonusInfo: {fileID: 1693385179}
-  blueScoreView: {fileID: 7864687692419654291}
-  redScoreView: {fileID: 7864687692616837993}
+  blueScoreView: {fileID: 8207948910718123627}
+  redScoreView: {fileID: 8207948910857500561}
 --- !u!1 &683827528
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,7 +6355,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3eb3ee9e161a5a04d900e3727b7050d2, type: 2}
   - {fileID: 11400000, guid: 9b3bc931d21d666419ad4454b4efec43, type: 2}
   championRepository: {fileID: 1420292359}
-  teamCount: 5
   masteryLevels: 0a0000000f00000014000000
 --- !u!114 &1420292366
 MonoBehaviour:
@@ -7173,6 +7172,7 @@ GameObject:
   - component: {fileID: 1640189472}
   - component: {fileID: 1640189471}
   - component: {fileID: 1640189473}
+  - component: {fileID: 1640189474}
   m_Layer: 5
   m_Name: ChampionFocusView
   m_TagString: Untagged
@@ -7253,10 +7253,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 741026030}
+  statView: {fileID: 1640189474}
+  traitText: {fileID: 1194289692}
+--- !u!114 &1640189474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640189469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13101a852206980439635a11a74f03a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   attackText: {fileID: 864049216}
   defenseText: {fileID: 73557872}
   speedText: {fileID: 1614600243}
-  traitText: {fileID: 1194289692}
 --- !u!1001 &1642387525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10167,9 +10180,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3193008338365636207}
   - component: {fileID: 3577963704458764073}
-  - component: {fileID: 7864687692616837993}
   - component: {fileID: 8207948910857500560}
   - component: {fileID: 4782385026975337732}
+  - component: {fileID: 8207948910857500561}
   m_Layer: 0
   m_Name: RedScore
   m_TagString: Untagged
@@ -10187,9 +10200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3193008338262267797}
   - component: {fileID: 3577963704540337875}
-  - component: {fileID: 7864687692419654291}
   - component: {fileID: 8207948910718123626}
   - component: {fileID: 4782385026905687294}
+  - component: {fileID: 8207948910718123627}
   m_Layer: 0
   m_Name: BlueScore
   m_TagString: Untagged
@@ -11676,40 +11689,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7864687692419654291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294972648652065465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4f14d80adc8644ba980210fad17046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 0}
-  attackText: {fileID: 8338956856838379574}
-  defenseText: {fileID: 8182956778805697826}
-  speedText: {fileID: 3938318211044108050}
-  traitText: {fileID: 0}
---- !u!114 &7864687692616837993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294972648557609795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4f14d80adc8644ba980210fad17046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 0}
-  attackText: {fileID: 8338956857002922444}
-  defenseText: {fileID: 8182956778700002520}
-  speedText: {fileID: 3938318210920820456}
-  traitText: {fileID: 0}
 --- !u!1 &8000710035306601449
 GameObject:
   m_ObjectHideFlags: 0
@@ -11958,6 +11937,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8207948910718123627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294972648652065465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13101a852206980439635a11a74f03a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackText: {fileID: 8338956856838379574}
+  defenseText: {fileID: 8182956778805697826}
+  speedText: {fileID: 3938318211044108050}
 --- !u!114 &8207948910857500560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11988,6 +11982,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8207948910857500561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294972648557609795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13101a852206980439635a11a74f03a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackText: {fileID: 8338956857002922444}
+  defenseText: {fileID: 8182956778700002520}
+  speedText: {fileID: 3938318210920820456}
 --- !u!1 &8271235677229966233
 GameObject:
   m_ObjectHideFlags: 0
