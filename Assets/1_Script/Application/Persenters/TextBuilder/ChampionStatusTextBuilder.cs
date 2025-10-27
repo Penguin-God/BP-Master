@@ -46,6 +46,9 @@ public class ChampionStatusTextBuilder
 
     public CombatModifierTextModel BuildCombatModel(float increaseRate, float decreaseRate)
     {
-        return new CombatModifierTextModel(increaseRate.ToString(), decreaseRate.ToString());
+        return new CombatModifierTextModel(
+            $"증가율 : {increaseRate.ToString("0.##")}",
+            $"감소율 : {decreaseRate.ToString("0.##")}"
+            );
     }
 }
