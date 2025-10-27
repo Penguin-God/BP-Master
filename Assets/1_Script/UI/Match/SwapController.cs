@@ -7,7 +7,7 @@ public class SwapController : MonoBehaviour
     [SerializeField] Button swapDoneBtn;
     [SerializeField] Button[] blueSlotButtons;
     [SerializeField] Button[] redSlotButtons;
-    [SerializeField] PickView banPickView;
+    [SerializeField] SlotViewOrchestrator banPickView;
 
     PhaseManager phaseManager;
     GameBanPickStorage banPickStorage;

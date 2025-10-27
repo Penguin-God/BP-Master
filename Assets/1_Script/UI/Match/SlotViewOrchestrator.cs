@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PickView : MonoBehaviour
+public class SlotViewOrchestrator : MonoBehaviour
 {
     [SerializeField] ChampionRepository championManager;
     [SerializeField] Transform blueSlotParent;
