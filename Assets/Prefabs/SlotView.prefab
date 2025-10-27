@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 1782121792991305482}
   - component: {fileID: 3092011554610127437}
   m_Layer: 0
-  m_Name: DecresdRate
+  m_Name: DecresdRateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,6 +834,7 @@ GameObject:
   - component: {fileID: 922761530011916858}
   - component: {fileID: 2865069792005043793}
   - component: {fileID: 6107222167726110637}
+  - component: {fileID: 4965324326915006801}
   - component: {fileID: 50506760632782602}
   - component: {fileID: 1343732211533317347}
   m_Layer: 0
@@ -906,7 +907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 3313022715216232836}
   statView: {fileID: 2865069792005043793}
-  traitText: {fileID: 0}
+  skillText: {fileID: 0}
 --- !u!114 &2865069792005043793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,6 +939,21 @@ MonoBehaviour:
   attChangeText: {fileID: 1866832807054344300}
   defChangeText: {fileID: 5271481687963963807}
   speedChangeText: {fileID: 679104290105764945}
+--- !u!114 &4965324326915006801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6429098621507359674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2a331fe4568b64c8812c85d4e275d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statChangeView: {fileID: 6107222167726110637}
+  increaseRateText: {fileID: 990331422460021734}
+  decreaseRateText: {fileID: 3092011554610127437}
 --- !u!114 &50506760632782602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,7 +1312,7 @@ GameObject:
   - component: {fileID: 6476221490334821168}
   - component: {fileID: 990331422460021734}
   m_Layer: 0
-  m_Name: IncresdRate
+  m_Name: IncresdRateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,6 +17,7 @@ public class ChampionStatusTrackerView : MonoBehaviour
 
     void Update()
     {
+        if (target == null) return;
         var combatModifierTextModel = StatusTextBuilder.BuildCombatModel(target.UpRate, target.DownRate);
         increaseRateText.text = combatModifierTextModel.IncreaseRateText;
         decreaseRateText.text = combatModifierTextModel.DecreaseRateText;

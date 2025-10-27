@@ -25,7 +25,7 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnPick += banPickView.PickChampion;
 
         storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
-        storage.OnPick += (team, id) => championDrawer.InActiveButton(id);
+        storage.OnPick += (slot, id) => championDrawer.InActiveButton(id);
 
         eventDispatcher.OnPhaseSwap += swapController.Init;
         eventDispatcher.OnPhaseSwap += _ => banView.HideBan();
@@ -43,7 +43,7 @@ public class MatchUI_Controller : MonoBehaviour
 
     public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
     {
-        banPickView.BindStatChangeEvent(slotStorageManager.StatusSlots);
+        banPickView.InitTrackerViewSlots(slotStorageManager.StatusSlots);
         
         skillButtonView.Init(filter, playerTeam);
         traitUseView.Init(new SkillUsePersenter(skillController, matchConfig.TeamSize, slotStorageManager.SkillSlots), slotStorageManager.SkillSlots);
