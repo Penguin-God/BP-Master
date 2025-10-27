@@ -14,6 +14,18 @@ public readonly struct StatViewModel
     }
 }
 
+public readonly struct CombatModifierTextModel
+{
+    public readonly string IncreaseRateText;
+    public readonly string DecreaseRateText;
+
+    public CombatModifierTextModel(string increaseRateText, string decreaseRateText)
+    {
+        IncreaseRateText = increaseRateText;
+        DecreaseRateText = decreaseRateText;
+    }
+}
+
 public class ChampionStatusTextBuilder
 {
     public StatViewModel CreateStatViewModel(ChampionStatData stat) =>
@@ -31,4 +43,9 @@ public class ChampionStatusTextBuilder
         TraitType.Amplifier => "증폭",
         _ => throw new NotImplementedException(),
     };
+
+    public CombatModifierTextModel BuildCombatModel(float increaseRate, float decreaseRate)
+    {
+        return new CombatModifierTextModel(increaseRate.ToString(), decreaseRate.ToString());
+    }
 }

@@ -26,4 +26,12 @@ public class ChampionStatusTextBuildTests
 
         Assert.AreEqual(expected, result);
     }
+
+    public void 전투_보정치_텍스트_빌드()
+    {
+        CombatModifierTextModel result = sut.BuildCombatModel(1.24f, 1.3f);
+
+        Assert.AreEqual(result.IncreaseRateText, "1.24");
+        Assert.AreEqual(result.DecreaseRateText, "1.3");
+    }
 }
