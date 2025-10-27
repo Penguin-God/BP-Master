@@ -7,6 +7,7 @@ public enum TraitType
     Charge,
     Guard,
     Amplifier,
+    Break,
 }
 
 public interface ITrait
@@ -78,5 +79,24 @@ public class Amplifier : ITrait
     {
         foreach (var status in statuses)
             status.AddUpRate(AmpilyRate);
+    }
+}
+
+
+public class Break : ITrait
+{
+    readonly float BreakRate;
+    readonly IEnumerable<ChampionStatus> statuses;
+
+    public Break(float breakRate, IEnumerable<ChampionStatus> statuses)
+    {
+        BreakRate = breakRate;
+        this.statuses = statuses;
+    }
+
+    public void Do()
+    {
+        foreach (var status in statuses)
+            status.AddDownRate(BreakRate);
     }
 }

@@ -63,6 +63,9 @@ public static class TestHelper
     public static SlotData RedOneSlot => CreateRedSlot(1);
     public static SlotData BlueZeroSlot => CreateBlueSlot(0);
     public static SlotData BlueOneSlot => CreateBlueSlot(1);
+
+    public static TraitConfig CreateTraitConfig(int chargeAttack = 0, float guardBonusRate = 0, float ampliyRate = 0, float breakRate = 0) 
+        => new TraitConfig(chargeAttack, guardBonusRate, ampliyRate, breakRate);
 }
 
 public class TestAttackChangeAction : ISkillAction

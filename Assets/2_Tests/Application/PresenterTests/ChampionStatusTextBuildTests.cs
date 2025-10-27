@@ -20,6 +20,7 @@ public class ChampionStatusTextBuildTests
     [TestCase(TraitType.Charge, "돌격")]
     [TestCase(TraitType.Guard, "가드")]
     [TestCase(TraitType.Amplifier, "증폭")]
+    [TestCase(TraitType.Break, "파괴")]
     public void 특성_텍스트_빌드(TraitType traitType, string expected)
     {
         string result = sut.BuildTraitText(traitType);

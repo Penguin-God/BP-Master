@@ -41,6 +41,7 @@ public class ChampionStatusTextBuilder
         TraitType.Charge => "돌격",
         TraitType.Guard => "가드",
         TraitType.Amplifier => "증폭",
+        TraitType.Break => "파괴",
         _ => throw new NotImplementedException(),
     };
 

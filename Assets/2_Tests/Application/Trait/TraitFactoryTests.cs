@@ -7,6 +7,7 @@ public class TraitFactoryTests
     [TestCase(TraitType.Charge, typeof(Charge))]
     [TestCase(TraitType.Guard, typeof(Guard))]
     [TestCase(TraitType.Amplifier, typeof(Amplifier))]
+    [TestCase(TraitType.Break, typeof(Break))]
     public void Type에_맞는_Action_객체_생성(TraitType type, System.Type expectedType)
     {
         var sut = new TraitFactory(default, CreateOneSlotStatus());
@@ -21,7 +22,7 @@ public class TraitFactoryTests
     {
         var slots = CreateOneSlotStatus(traitType:TraitType.Charge);
 
-        var config = new TraitConfig(5, 0f, 0f);
+        var config = CreateTraitConfig(chargeAttack: 5);
         var sut = new TraitFactory(config, slots);
 
         // Blue 팀에만 적용
@@ -30,5 +31,21 @@ public class TraitFactoryTests
 
         Assert.AreEqual(5, slots.GetSlot(BlueZeroSlot).Stat.Attack);
         Assert.AreEqual(0, slots.GetSlot(RedZeroSlot).Stat.Attack);
+    }
+
+    [Test]
+    public void 타겟이_상대팀이면_그에맞게_적용()
+    {
+        var slots = CreateOneSlotStatus();
+
+        var config = CreateTraitConfig(breakRate: 0.2f);
+        var sut = new TraitFactory(config, slots);
+
+        var trait = sut.Create(Team.Blue, TraitType.Break);
+        trait.Do();
+
+        // Red 팀에만 적용
+        Assert.AreEqual(1, slots.GetSlot(BlueZeroSlot).DownRate);
+        Assert.AreEqual(1.2f, slots.GetSlot(RedZeroSlot).DownRate);
     }
 }
