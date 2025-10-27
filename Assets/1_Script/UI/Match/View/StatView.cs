@@ -9,7 +9,7 @@ public class StatView : MonoBehaviour
 
     void Start() => ClearDisplay();
 
-    readonly StatTextBuilder StatTextBuilder = new StatTextBuilder();
+    readonly ChampionStatusTextBuilder StatTextBuilder = new ChampionStatusTextBuilder();
     
     public void UpdateStat(ChampionStatData statData)
     {

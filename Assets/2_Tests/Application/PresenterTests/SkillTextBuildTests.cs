@@ -1,20 +1,8 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class ChampionTextBuilderTests
+public class SkillTextBuildTests
 {
-    [Test]
-    public void 챔피언_스탯정보가_텍스트로_생성()
-    {
-        var sut = new StatTextBuilder();
-
-        StatViewModel result = sut.CreateStatViewModel(new ChampionStatData(10, 12, 6));
-
-        Assert.AreEqual("공 10", result.Attack);
-        Assert.AreEqual("방 12", result.Defense);
-        Assert.AreEqual("속도 6", result.Speed);
-    }
-
     TraitUI_Data CreateData(SkillType traitType, int amount, SkillConditionData condition, TraitTargetRule rule) => new TraitUI_Data(traitType, amount, condition, rule);
 
     [Test]

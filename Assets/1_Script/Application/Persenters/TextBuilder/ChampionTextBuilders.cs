@@ -112,7 +112,7 @@ public class SkillTextBuilder
     string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
 }
 
-public class StatTextBuilder
+public class ChampionStatusTextBuilder
 {
     public StatViewModel CreateStatViewModel(ChampionStatData stat) => 
         new StatViewModel(
@@ -120,4 +120,13 @@ public class StatTextBuilder
         $"방 {stat.Defense}",
         $"속도 {stat.Speed}"
     );
+
+    public string BuildTraitText(TraitType traitType) => traitType switch
+    {
+        TraitType.None => "없음",
+        TraitType.Charge => "돌격",
+        TraitType.Guard => "가드",
+        TraitType.Amplifier => "증폭",
+        _ => throw new NotImplementedException(),
+    };
 }
