@@ -29,6 +29,7 @@ public class SlotStorage<T>
     public void ChangeSlot(SlotData slot, T value) => slots[slot] = value;
     public T GetSlot(SlotData slot) => slots[slot];
 
+    public int Count(Team team) => GetTeam(team).Count();
     public IEnumerable<T> GetTeam(Team team) 
         => slots
             .Where(kv => kv.Key.Team == team)
@@ -36,6 +37,5 @@ public class SlotStorage<T>
             .Select(kv => kv.Value);
 
     public IEnumerable<T> GetAll() => new[] { Team.Blue, Team.Red }.SelectMany(team => GetTeam(team));
-
     public IEnumerable<SlotData> GetAllSlotDatas() => slots.Keys;
 }
