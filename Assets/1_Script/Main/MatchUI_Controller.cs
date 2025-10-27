@@ -22,7 +22,7 @@ public class MatchUI_Controller : MonoBehaviour
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
         storage.OnBan += banView.UpdateBanList;
-        storage.OnPick += banPickView.UpdatePickView;
+        storage.OnPick += banPickView.PickChampion;
 
         storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
         storage.OnPick += (team, id) => championDrawer.InActiveButton(id);
@@ -33,7 +33,7 @@ public class MatchUI_Controller : MonoBehaviour
 
         traitUseView.gameObject.SetActive(false);
 
-        storage.OnPick += (team, id) => scoreView.UpdateTeamScore(IdToStatus(storage.PickIds), team);
+        storage.OnPick += (slot, id) => scoreView.UpdateTeamScore(IdToStatus(storage.PickIds), slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
     }

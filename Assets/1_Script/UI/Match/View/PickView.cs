@@ -9,8 +9,6 @@ public class PickView : MonoBehaviour
     SlotStorage<StatChangeView> statChangeViews = new();
 
     [SerializeField] GamerRoster playerRoster;
-
-    readonly TeamSlotIndexr pickCursor = new TeamSlotIndexr();
     [SerializeField] ChampionView mainView;
     void Start()
     {
@@ -33,5 +31,5 @@ public class PickView : MonoBehaviour
             slotViews.GetSlot(slot).Init(mainView, championManager, playerRoster.Rosters.GetSlot(slot));
     }
 
-    public void UpdatePickView(Team team, int id) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(id);
+    public void PickChampion(SlotData pickSlot, int id) => slotViews.GetSlot(pickSlot).UpdateChampion(id);
 }
