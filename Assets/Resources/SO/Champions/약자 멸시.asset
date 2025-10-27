@@ -32,4 +32,4 @@ MonoBehaviour:
     conditionType: 3
     threshold: 0
     conditionCheckerType: 2
-  traitType: 3
+  traitType: 4

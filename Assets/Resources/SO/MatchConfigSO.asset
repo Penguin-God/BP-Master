@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MatchConfigSO
   m_EditorClassIdentifier: 
   teamSize: 5
-  chargeAttackBonus: 5
+  chargeAttackBonus: 10
   guardBonusRate: 0.1
   amplifyBonusRate: 0.1
+  breakRate: 0.1

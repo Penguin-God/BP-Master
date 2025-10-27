@@ -25,4 +25,4 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-  traitType: 1
+  traitType: 4
