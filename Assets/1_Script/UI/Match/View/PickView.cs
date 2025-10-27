@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class BanPickView : MonoBehaviour
+public class PickView : MonoBehaviour
 {
     [SerializeField] ChampionRepository championManager;
     [SerializeField] Transform blueSlotParent;
@@ -10,9 +8,6 @@ public class BanPickView : MonoBehaviour
     public SlotStorage<SlotView> slotViews = new();
     SlotStorage<StatChangeView> statChangeViews = new();
 
-    [SerializeField] TextMeshProUGUI blueBan;
-    [SerializeField] TextMeshProUGUI redBan;
-    readonly Dictionary<Team, TextMeshProUGUI> banTextDict = new();
     [SerializeField] GamerRoster playerRoster;
 
     readonly TeamSlotIndexr pickCursor = new TeamSlotIndexr();
@@ -24,11 +19,6 @@ public class BanPickView : MonoBehaviour
 
         statChangeViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<StatChangeView>());
         statChangeViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<StatChangeView>());
-
-        banTextDict.Add(Team.Blue, blueBan);
-        banTextDict.Add(Team.Red, redBan);
-        blueBan.text = string.Empty;
-        redBan.text = string.Empty;
     }
 
     public void BindStatChangeEvent(SlotStorage<ChampionStatus> statuses)
@@ -44,16 +34,4 @@ public class BanPickView : MonoBehaviour
     }
 
     public void UpdatePickView(Team team, int id) => slotViews.GetSlot(new SlotData(team, pickCursor.AllocateIndex(team))).UpdateChampion(id);
-
-    public void UpdateBanView(Team team, int id)
-    {
-        banTextDict[team].text += championManager.GetChampionData(id).ChampionName;
-        banTextDict[team].text += ", ";
-    }
-
-    public void HideBan()
-    {
-        blueBan.gameObject.SetActive(false);
-        redBan.gameObject.SetActive(false);
-    }
 }
