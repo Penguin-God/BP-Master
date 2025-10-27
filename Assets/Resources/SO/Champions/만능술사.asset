@@ -17,28 +17,6 @@ MonoBehaviour:
   attack: 100
   defense: 100
   speed: 5
-  traitDatas:
-  - targetSide: 0
-    range: 4
-    traitType: 1
-    amount: 15
-    conditionType: 0
-    threshold: 0
-    conditionCheckerType: 0
-  - targetSide: 0
-    range: 4
-    traitType: 2
-    amount: 15
-    conditionType: 0
-    threshold: 0
-    conditionCheckerType: 0
-  - targetSide: 0
-    range: 4
-    traitType: 3
-    amount: 1
-    conditionType: 0
-    threshold: 0
-    conditionCheckerType: 0
   skillDatas:
   - targetSide: 0
     range: 4
@@ -61,4 +39,4 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-  traitType: 0
+  traitType: 3
