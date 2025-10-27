@@ -5,7 +5,7 @@ public class SlotViewOrchestrator : MonoBehaviour
     [SerializeField] ChampionRepository championManager;
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
-    public SlotStorage<SlotView> slotViews = new();
+    SlotStorage<SlotView> slotViews = new();
     SlotStorage<ChampionStatusTrackerView> trackerViewSlots = new();
 
     [SerializeField] GamerRoster playerRoster;

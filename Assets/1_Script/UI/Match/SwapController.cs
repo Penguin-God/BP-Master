@@ -57,8 +57,8 @@ public class SwapController : MonoBehaviour
         if (bag.Count == 2)
         {
             banPickStorage.Swap(team, bag[0], bag[1]);
-            banPickView.slotViews.GetSlot(new SlotData(team, bag[0])).UpdateChampion(banPickStorage.GetStorage(team, SelectType.Pick)[bag[0]]);
-            banPickView.slotViews.GetSlot(new SlotData(team, bag[1])).UpdateChampion(banPickStorage.GetStorage(team, SelectType.Pick)[bag[1]]);
+            banPickView.PickChampion(new SlotData(team, bag[0]), banPickStorage.GetStorage(team, SelectType.Pick)[bag[0]]);
+            banPickView.PickChampion(new SlotData(team, bag[1]), banPickStorage.GetStorage(team, SelectType.Pick)[bag[1]]);
             bag.Clear();
         }
     }
