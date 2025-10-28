@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,5 +17,5 @@ public class SkillExecutor
             action.Do(target);
     }
 
-    bool CanExecute(ChampionStatus target) => condition.Check(target.Stat) && target.IsTraitExcluded == false;
+bool CanExecute(ChampionStatus target) => condition.Check(target) && target.IsTraitExcluded == false;
 }

@@ -32,17 +32,6 @@ public class SkillFactoryTests
         Assert.IsInstanceOf(expectedType, result);
     }
 
-
-    [TestCase(ConditionType.None, typeof(NullChecker))]
-    [TestCase(ConditionType.Threshold, typeof(StatThresholdChecker))]
-    [TestCase(ConditionType.Compare, typeof(StatComparisonChecker))]
-    public void Data에_따른_조건_검사_객체_생성(ConditionType checkerType, System.Type expectedType)
-    {
-        SkillConditionData data = new SkillConditionData(StatConditionType.None, 0, checkerType);
-        var result = ChampionCondtionFactory.CreateChecker(data, CreateStat());
-        Assert.IsInstanceOf(expectedType, result);
-    }
-
     [TestCase(ConditionType.None, typeof(NullChecker))]
     [TestCase(ConditionType.Threshold, typeof(StatThresholdChecker))]
     [TestCase(ConditionType.Compare, typeof(StatComparisonChecker))]
@@ -50,8 +39,8 @@ public class SkillFactoryTests
     public void 타입에_맞는_조건_객체_생성(ConditionType checkerType, System.Type expectedType)
     {
         SkillConditionData data = new SkillConditionData(StatConditionType.None, 0, checkerType);
-        var result = ChampionCondtionFactory.CreateCondition(data, CreateStatus());
-        result.Check(CreateStat()); // 에러만 체크
+        var result = ChampionCondtionFactory.CreateCondition(data, CreateStat());
+        result.Check(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }
 }

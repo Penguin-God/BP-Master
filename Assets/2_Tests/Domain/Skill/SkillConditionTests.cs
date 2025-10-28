@@ -6,7 +6,7 @@ public class TraitConditionTests // StatThresholdChecker는 이상, 이하. Stat
     public void None은_무조건_참() => Assert.IsTrue(Check(StatConditionType.None, 0, default));
 
     [Test]
-    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(default));
+    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(new ChampionStatus(default)));
 
     [Test]
     [TestCase(StatConditionType.AttackBelow)]
@@ -33,7 +33,7 @@ public class TraitConditionTests // StatThresholdChecker는 이상, 이하. Stat
         Assert.IsFalse(Check(type, threshold, Stat(80, 80, 80)));
     }
 
-    bool Check(StatConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(target);
+    bool Check(StatConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(new ChampionStatus(target));
 
     [Test]
     [TestCase(StatConditionType.AttackAtLeast)]
@@ -58,7 +58,8 @@ public class TraitConditionTests // StatThresholdChecker는 이상, 이하. Stat
         Assert.IsTrue(Check(type, Stat(12, 11, 19), targetStat));
         Assert.IsFalse(Check(type, Stat(0, 4, 10), targetStat));
     }
-    bool Check(StatConditionType type, ChampionStatData user, ChampionStatData target) => new StatComparisonChecker(type, user).Check(target);
+
+    bool Check(StatConditionType type, ChampionStatData user, ChampionStatData target) => new StatComparisonChecker(type, user).Check(TestHelper.CreateStatus(target.Attack, target.Defense, target.Speed));
 
     ChampionStatData Stat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }

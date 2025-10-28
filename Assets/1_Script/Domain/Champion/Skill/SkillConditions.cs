@@ -16,12 +16,12 @@ public enum StatConditionType
 
 public interface IChampionCondition
 {
-    public bool Check(ChampionStatData stat);
+    public bool Check(ChampionStatus target);
 }
 
 public class NullChecker : IChampionCondition
 {
-    public bool Check(ChampionStatData stat) => true;
+    public bool Check(ChampionStatus status) => true;
 }
 
 public class StatThresholdChecker : IChampionCondition // 이상, 이하
@@ -34,8 +34,9 @@ public class StatThresholdChecker : IChampionCondition // 이상, 이하
         Threshold = threshold;
     }
 
-    public bool Check(ChampionStatData stat)
+    public bool Check(ChampionStatus target)
     {
+        var stat = target.Stat;
         return Type switch
         {
             StatConditionType.None => true,
@@ -64,20 +65,21 @@ public class StatComparisonChecker : IChampionCondition // 초과, 미만
         UseChamp = useChamp;
     }
 
-    public bool Check(ChampionStatData target)
+    public bool Check(ChampionStatus target)
     {
+        var targetStat = target.Stat;
         return Type switch
         {
             StatConditionType.None => true,
 
-            StatConditionType.DefenseAtLeast => UseChamp.Defense < target.Defense,
-            StatConditionType.DefenseBelow => UseChamp.Defense > target.Defense,
+            StatConditionType.DefenseAtLeast => UseChamp.Defense < targetStat.Defense,
+            StatConditionType.DefenseBelow => UseChamp.Defense > targetStat.Defense,
 
-            StatConditionType.AttackAtLeast => UseChamp.Attack < target.Attack,
-            StatConditionType.AttackBelow => UseChamp.Attack > target.Attack,
+            StatConditionType.AttackAtLeast => UseChamp.Attack < targetStat.Attack,
+            StatConditionType.AttackBelow => UseChamp.Attack > targetStat.Attack,
 
-            StatConditionType.SpeedAtLeast => UseChamp.Speed < target.Speed,
-            StatConditionType.SpeedBelow => UseChamp.Speed > target.Speed,
+            StatConditionType.SpeedAtLeast => UseChamp.Speed < targetStat.Speed,
+            StatConditionType.SpeedBelow => UseChamp.Speed > targetStat.Speed,
             
             _ => throw new NotImplementedException($"Condition not implemented: {Type}")
         };
@@ -86,13 +88,8 @@ public class StatComparisonChecker : IChampionCondition // 초과, 미만
 
 public class TraitCondition : IChampionCondition
 {
-    readonly ChampionStatus Status;
     readonly TraitType TargetType;
-    public TraitCondition(ChampionStatus status, TraitType targetType)
-    {
-        Status = status;
-        TargetType = targetType;
-    }
+    public TraitCondition(TraitType targetType) => TargetType = targetType;
 
-    public bool Check(ChampionStatData target) => Status.TraitType == TargetType;
+    public bool Check(ChampionStatus target) => target.TraitType == TargetType;
 }
