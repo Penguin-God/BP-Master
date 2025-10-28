@@ -16,7 +16,7 @@ public class ChampionStatusTextBuildTests
 
 
     [Test]
-    [TestCase(TraitType.None, "없음")]
+    [TestCase(TraitType.None, "무개성")]
     [TestCase(TraitType.Charge, "돌격")]
     [TestCase(TraitType.Guard, "가드")]
     [TestCase(TraitType.Amplifier, "증폭")]
