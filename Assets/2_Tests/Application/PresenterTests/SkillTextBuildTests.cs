@@ -22,7 +22,7 @@ public class SkillTextBuildTests
     }
 
     [Test]
-    public void 기준점_조건_텍스트_생성()
+    public void 스킬_텍스트는_조건_타겟_액션의_조합()
     {
         var sut = new SkillTextBuilder();
 
@@ -34,25 +34,25 @@ public class SkillTextBuildTests
         Assert.AreEqual("방어력 10 이하인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.DefenseBelow, 10));
         Assert.AreEqual("공격력 100 이상인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.AttackAtLeast, 100));
         Assert.AreEqual("공격력 120 이하인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.AttackBelow, 120));
-        Assert.AreEqual("속도 5 이상인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.SpeedAtLeast, 5));
-        Assert.AreEqual("속도 3 이하인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.SpeedBelow, 3));
     }
 
     [Test]
-    public void 비교_조건_텍스트_생성()
+    public void 조건_타입과_인자값에_맞는_텍스트_생성()
     {
-        var sut = new SkillTextBuilder();
+        var sut = new SkillConditionTextBuilder();
 
         // 편의 함수
-        string GetTraitText(StatConditionType conditionType) => sut.BuildTraitText(CreateData(SkillType.DefenseChanger, -10, CreateCompareCondition(conditionType), SelfAllRule));
+        string GetText(SkillConditionData conditionData) => sut.BuildConditionText(conditionData);
 
-        Assert.AreEqual("방어력이 자신보다 높은 아군 전체 방어력 10 감소", GetTraitText(StatConditionType.DefenseAtLeast));
-        Assert.AreEqual("방어력이 자신보다 낮은 아군 전체 방어력 10 감소", GetTraitText(StatConditionType.DefenseBelow));
-        Assert.AreEqual("공격력이 자신보다 높은 아군 전체 방어력 10 감소", GetTraitText(StatConditionType.AttackAtLeast));
-        Assert.AreEqual("공격력이 자신보다 낮은 아군 전체 방어력 10 감소", GetTraitText(StatConditionType.AttackBelow));
-        Assert.AreEqual("속도가 자신보다 높은 아군 전체 방어력 10 감소", GetTraitText(StatConditionType.SpeedAtLeast));
-        Assert.AreEqual("속도가 자신보다 낮은 아군 전체 방어력 10 감소", GetTraitText(StatConditionType.SpeedBelow));
+        Assert.AreEqual("특성이 가드인", GetText(CreateConditionData(ConditionType.Trait, traitType:TraitType.Guard)));
+        Assert.AreEqual("방어력이 자신보다 높은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.DefenseAtLeast)));
+        Assert.AreEqual("방어력이 자신보다 낮은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.DefenseBelow)));
+        Assert.AreEqual("공격력이 자신보다 낮은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.AttackBelow)));
+        Assert.AreEqual("공격력 120 이하인", GetText(CreateConditionData(ConditionType.Threshold, statType: StatConditionType.AttackBelow, 120)));
+        Assert.AreEqual("공격력 120 이상인", GetText(CreateConditionData(ConditionType.Threshold, statType: StatConditionType.AttackAtLeast, 120)));
+        Assert.AreEqual("방어력 120 이상인", GetText(CreateConditionData(ConditionType.Threshold, statType: StatConditionType.DefenseAtLeast, 120)));
     }
+
 
     [Test]
     public void 특성_컬랙션은_텍스트_합쳐서_반환() // 케이스 추가?

@@ -104,5 +104,5 @@ public class SkillConditionTextBuilder
         _ => ""
     };
 
-    string BuildTriatText(TraitType traitType) => $"특성이{new ChampionStatusTextBuilder().BuildTraitText(traitType)}인";
+    string BuildTriatText(TraitType traitType) => $"특성이 {new ChampionStatusTextBuilder().BuildTraitText(traitType)}인";
 }
