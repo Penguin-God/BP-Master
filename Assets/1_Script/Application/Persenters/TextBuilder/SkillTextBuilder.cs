@@ -24,11 +24,12 @@ public readonly struct TraitUI_Data
 
 public class SkillTextBuilder
 {
+    readonly SkillConditionTextBuilder ConditionTextBuilder = new SkillConditionTextBuilder();
     public string BuildSkillText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildTraitText(x)));
 
     public string BuildTraitText(TraitUI_Data traitData)
     {
-        var conditoin = BuildConditionText(traitData.Condition);
+        var conditoin = ConditionTextBuilder.BuildConditionText(traitData.Condition);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(traitData.TargetSide, traitData.Range);
@@ -65,11 +66,19 @@ public class SkillTextBuilder
         _ => "대상 없음"
     };
 
-    string BuildConditionText(SkillConditionData conditionData)
+    string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
+}
+
+
+public class SkillConditionTextBuilder
+{
+    public string BuildConditionText(SkillConditionData conditionData) => conditionData.ConditionType switch
     {
-        if (conditionData.ConditionType == ConditionType.Threshold) return BuildThresholdText(conditionData.StatType, conditionData.Threshold);
-        else return BuildCompareText(conditionData.StatType);
-    }
+        ConditionType.None => "",
+        ConditionType.Threshold => BuildThresholdText(conditionData.StatType, conditionData.Threshold),
+        ConditionType.Compare => BuildCompareText(conditionData.StatType),
+        ConditionType.Trait => BuildTriatText(conditionData.TraitType),
+    };
 
     string BuildThresholdText(StatConditionType conditionType, int threshold) => conditionType switch
     {
@@ -95,5 +104,5 @@ public class SkillTextBuilder
         _ => ""
     };
 
-    string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
+    string BuildTriatText(TraitType traitType) => $"특성이{new ChampionStatusTextBuilder().BuildTraitText(traitType)}인";
 }
