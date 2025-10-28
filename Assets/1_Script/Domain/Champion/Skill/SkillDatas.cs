@@ -36,6 +36,7 @@ public enum ConditionType
     None,
     Threshold,
     Compare,
+    Trait,
 }
 
 public readonly struct SkillConditionData

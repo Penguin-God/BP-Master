@@ -38,4 +38,16 @@ public static class ChampionCondtionFactory
             _ => throw new NotImplementedException($"Action not implemented: {data.ConditionType}")
         };
     }
+
+    public static IChampionCondition CreateCondition(SkillConditionData data, ChampionStatus status)
+    {
+        return data.ConditionType switch
+        {
+            ConditionType.None => new NullChecker(),
+            ConditionType.Threshold => new StatThresholdChecker(data.StatType, data.Threshold),
+            ConditionType.Compare => new StatComparisonChecker(data.StatType, status.Stat),
+            ConditionType.Trait => new TraitCondition(null, TraitType.None),
+            _ => throw new NotImplementedException($"Action not implemented: {data.ConditionType}")
+        };
+    }
 }
