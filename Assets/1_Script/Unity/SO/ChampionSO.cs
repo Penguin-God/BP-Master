@@ -18,7 +18,8 @@ public class TraitDataConfig
     [SerializeField] StatConditionType conditionType;
     [SerializeField] int threshold;
     [SerializeField] ConditionType conditionCheckerType;
-    SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
+    [SerializeField] TraitType targetTrait;
+    SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
 
     public SkillData CreateTraitData() => new SkillData(traitType, amount, Condition, Rule);
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, amount, Condition, Rule);

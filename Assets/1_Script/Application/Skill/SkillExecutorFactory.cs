@@ -35,7 +35,7 @@ public static class ChampionCondtionFactory
             ConditionType.None => new NullChecker(),
             ConditionType.Threshold => new StatThresholdChecker(data.StatType, data.Threshold),
             ConditionType.Compare => new StatComparisonChecker(data.StatType, useChamp),
-            ConditionType.Trait => new TraitCondition(TraitType.None),
+            ConditionType.Trait => new TraitCondition(data.TraitType),
             _ => throw new NotImplementedException($"Action not implemented: {data.ConditionType}")
         };
     }
