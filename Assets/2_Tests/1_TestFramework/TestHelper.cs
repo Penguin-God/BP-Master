@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Graphs;
 
 public static class TestHelper
 {
@@ -44,10 +45,12 @@ public static class TestHelper
     public static SkillData CreateTraitData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, conditionData, traitTargetRule);
 
-    public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => new SkillConditionData(type, threshold, ConditionType.Threshold);
-    public static SkillConditionData CreateCompareCondition(StatConditionType type) => new SkillConditionData(type, 0, ConditionType.Compare);
+    public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
+    public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);
+    public static SkillConditionData CreateConditionData(ConditionType conditionType, StatConditionType statType = StatConditionType.None, int threshold = 0, TraitType traitType = TraitType.None)
+        => new SkillConditionData(statType, threshold, traitType, conditionType);
 
-    
+
     public static TraitTargetRule SelfSingleRule => new TraitTargetRule(Side.Self, TargetRange.Single);
     public static TraitTargetRule SelfDouble => new TraitTargetRule(Side.Self, TargetRange.Double);
     public static TraitTargetRule SelfTriple => new TraitTargetRule(Side.Self, TargetRange.Triple);

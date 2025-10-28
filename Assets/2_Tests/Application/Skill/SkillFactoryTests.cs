@@ -38,7 +38,7 @@ public class SkillFactoryTests
     [TestCase(ConditionType.Trait, typeof(TraitCondition))]
     public void 타입에_맞는_조건_객체_생성(ConditionType checkerType, System.Type expectedType)
     {
-        SkillConditionData data = new SkillConditionData(StatConditionType.None, 0, checkerType);
+        SkillConditionData data = CreateConditionData(checkerType);
         var result = ChampionCondtionFactory.CreateCondition(data, CreateStat());
         result.Check(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);

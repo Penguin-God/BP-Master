@@ -44,12 +44,21 @@ public readonly struct SkillConditionData
     public readonly StatConditionType StatType;
     public readonly int Threshold;
     public readonly ConditionType ConditionType;
-
+    public readonly TraitType TraitType;
     public SkillConditionData(StatConditionType statType, int threshold, ConditionType checkerType)
     {
         StatType = statType;
         Threshold = threshold;
         ConditionType = checkerType;
+        TraitType = TraitType.None;
+    }
+
+    public SkillConditionData(StatConditionType statType, int threshold, TraitType traitType, ConditionType checkerType)
+    {
+        StatType = statType;
+        Threshold = threshold;
+        ConditionType = checkerType;
+        TraitType = traitType;
     }
 }
 
