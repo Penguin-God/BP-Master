@@ -14,41 +14,6 @@ public class SelectSaveTests
     }
 
     [Test]
-    public void 교차_선택_시_팀별_저장_보장()
-    {
-        var storage = CreateStorage(101, 102, 201, 202);
-
-        Select(storage, Team.Red, SelectType.Pick, 101);
-        Select(storage, Team.Red, SelectType.Pick, 102);
-        Select(storage, Team.Blue, SelectType.Pick, 201);
-        Select(storage, Team.Blue, SelectType.Pick, 202);
-
-        var redList = storage.GetStorage(Team.Red, SelectType.Pick);
-        var blueList = storage.GetStorage(Team.Blue, SelectType.Pick);
-
-        CollectionAssert.AreEqual(new[] { 101, 102 }, redList);
-        CollectionAssert.AreEqual(new[] { 201, 202 }, blueList);
-    }
-
-
-    [Test]
-    public void 밴픽_순서_섞여도_간섭없음()
-    {
-        var storage = CreateStorage(11, 22, 101, 102, 201);
-
-        Select(storage, Team.Red, SelectType.Ban, 11);
-        Select(storage, Team.Red, SelectType.Pick, 101);
-        Select(storage, Team.Red, SelectType.Pick, 102);
-        Select(storage, Team.Blue, SelectType.Ban, 22);
-        Select(storage, Team.Blue, SelectType.Pick, 201);
-
-        CollectionAssert.AreEqual(new[] { 11 }, storage.GetStorage(Team.Red, SelectType.Ban));
-        CollectionAssert.AreEqual(new[] { 22 }, storage.GetStorage(Team.Blue, SelectType.Ban));
-        CollectionAssert.AreEqual(new[] { 101, 102 }, storage.GetStorage(Team.Red, SelectType.Pick));
-        CollectionAssert.AreEqual(new[] { 201 }, storage.GetStorage(Team.Blue, SelectType.Pick));
-    }
-
-    [Test]
     public void 밴픽에_따른_이벤트()
     {
         var storage = CreateStorage(11, 22, 101, 102, 201);

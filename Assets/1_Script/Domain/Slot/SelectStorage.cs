@@ -54,25 +54,10 @@ public class GameBanPickStorage
             OnPick?.Invoke(new SlotData(info.Team, PickIds.Count(info.Team) - 1), info.Id);
         }
     }
-
-    public IReadOnlyList<int> GetStorage(Team team, SelectType select)
-    {
-        if (select == SelectType.Ban)
-        {
-            return storage[team].Bans;
-        }
-        else
-        {
-            return PickIds.GetTeam(team).ToList();
-        }
-    }
-
 }
 
 public class BanStorage
 {
     List<int> bans = new List<int>();
-    public IReadOnlyList<int> Bans => bans;
-
     public void SaveBan(int id) => bans.Add(id);
 }
