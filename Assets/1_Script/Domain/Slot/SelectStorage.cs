@@ -29,8 +29,6 @@ public class GameBanPickStorage
 
     public readonly HashSet<int> SelectableIds = new();
 
-    public event Action<int> OnSwap;
-
     public GameBanPickStorage(IEnumerable<int> allIds)
     {
         SelectableIds = new HashSet<int>(allIds);
@@ -68,17 +66,7 @@ public class GameBanPickStorage
             return PickIds.GetTeam(team).ToList();
         }
     }
-    public void Swap(Team team, int index1, int index2)
-    {
-        var slot1 = new SlotData(team, index1);
-        var slot2 = new SlotData(team, index2);
 
-        int id1 = PickIds.GetSlot(slot1);
-        int id2 = PickIds.GetSlot(slot2);
-
-        PickIds.ChangeSlot(slot1, id2);
-        PickIds.ChangeSlot(slot2, id1);
-    }
 }
 
 public class BanStorage

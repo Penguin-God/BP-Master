@@ -9,7 +9,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] SkillUseController_UI traitUseView;
     [SerializeField] SlotViewOrchestrator banPickView;
     [SerializeField] ScoreView scoreView;
-    [SerializeField] SwapController swapController;
+    
     [SerializeField] GameFlowView gameFlowView;
     [SerializeField] SkillButtonView skillButtonView;
     [SerializeField] ChampionRepository championRepository;
@@ -18,7 +18,7 @@ public class MatchUI_Controller : MonoBehaviour
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
     {
         banPickView.ViewMastery();
-        swapController.Inject(phaseManager, storage);
+        
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
         storage.OnBan += banView.UpdateBanList;
@@ -27,9 +27,9 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
         storage.OnPick += (slot, id) => championDrawer.InActiveButton(id);
 
-        eventDispatcher.OnPhaseSwap += swapController.Init;
-        eventDispatcher.OnPhaseSwap += _ => banView.HideBan();
-        eventDispatcher.OnPhaseSwap += _ => championDrawer.HideView();
+        
+        
+        
 
         traitUseView.gameObject.SetActive(false);
 

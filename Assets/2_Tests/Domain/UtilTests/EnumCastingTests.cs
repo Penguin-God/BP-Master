@@ -19,12 +19,6 @@ public class EnumCastingTests
     }
 
     [Test]
-    public void PhaseToSelect_Swap_예외()
-    {
-        Assert.Throws<System.Exception>(() => EnumCaster.PhaseToSelect(GamePhase.Swap));
-    }
-
-    [Test]
     public void Side_컬렉션_합치기()
     {
         Assert.AreEqual(Side.Self, MergeSide(Side.Self, Side.Self));

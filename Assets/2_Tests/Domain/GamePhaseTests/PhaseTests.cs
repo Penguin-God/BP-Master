@@ -69,11 +69,11 @@ public class PhaseTests
     [Test]
     public void TeamAll_은_양팀_모두_제출해야_진행한다()
     {
-        var sut = CreateSut(new[] { CreateData(GamePhase.Swap, Team.All) });
+        var sut = CreateSut(new[] { CreateData(GamePhase.Skill, Team.All) });
         sut.Start();
 
         sut.SubmitAction(Team.Blue);
-        Assert.AreEqual(GamePhase.Swap, sut.CurrentFlow.Phase);  // 아직 Swap
+        Assert.AreEqual(GamePhase.Skill, sut.CurrentFlow.Phase);  // 아직 Skill
 
         sut.SubmitAction(Team.Red);
         Assert.AreEqual(GamePhase.Done, sut.CurrentFlow.Phase);  // Done으로 진행됨

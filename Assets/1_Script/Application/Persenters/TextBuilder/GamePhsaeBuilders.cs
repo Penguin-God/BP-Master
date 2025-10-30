@@ -10,7 +10,6 @@ public class GameFlowTextBuilder
         {
             case GamePhase.Ban: return "밴";
             case GamePhase.Pick: return "픽";
-            case GamePhase.Swap: return "스왑";
             case GamePhase.Skill: return "특성";
             case GamePhase.Done: return "끝";
             default: return "";
