@@ -5,13 +5,22 @@ using System.Linq;
 public class AI_AgentTests
 {
     // Fake
+    class FirstBan : IBanSelector
+    {
+        public int Ban(HashSet<int> ids) => ids.First();
+    }
+    class FirstPick : IPickSelector
+    {
+        public int Pick(HashSet<int> ids) => ids.First();
+    }
+
     class MinSelector : IAI_Selector
     {
         public int Ban(HashSet<int> ids) => ids.Min();
         public int Pick(HashSet<int> ids) => ids.Min();
     }
 
-    private static PhaseManager CreatePhaseManager(GamePhase phase, params Team[] turns)
+    PhaseManager CreatePhaseManager(GamePhase phase, params Team[] turns)
     {
         var dispatcher = new PhaseEventDispatcher();
         var phases = new[]
@@ -23,68 +32,50 @@ public class AI_AgentTests
         return pm;
     }
 
-    [Test]
-    public void 밴을_적절한_저장소에_저장()
-    {
-        // Arrange
-        var storage = new GameBanPickStorage(new[] { 3, 7, 9 });
-        var phaseManager = CreatePhaseManager(GamePhase.Ban, Team.Blue);
-        var sut = new AI_SelectAgent(Team.Blue, phaseManager, storage, new MinSelector());
+    AI_SelectAgent CreateFirstSelectSut(Team team, PhaseManager pm, GameBanPickStorage storage) => new AI_SelectAgent(team, pm, storage, new FirstBan(), new FirstPick());
 
-        // Act
+    [Test]
+    public void 규칙에_맞게_밴_선택_후_저장_및_턴_진행()
+    {
+        var storage = new GameBanPickStorage(new[] { 3, 7, 9 });
+        var phaseManager = CreatePhaseManager(GamePhase.Ban, Team.Blue, Team.Blue, Team.Red);
+        var sut = CreateFirstSelectSut(Team.Blue, phaseManager, storage);
+
+        sut.Ban(Team.Blue);
         sut.Ban(Team.Blue);
 
-        // Assert
-        // MinSelector이므로 3이 밴됨
-        CollectionAssert.AreEqual(new[] { 3 }, storage.GetStorage(Team.Blue, SelectType.Ban));
+        CollectionAssert.AreEqual(new[] { 3, 7 }, storage.GetStorage(Team.Blue, SelectType.Ban));
         Assert.IsFalse(storage.SelectableIds.Contains(3));
+        Assert.IsFalse(storage.SelectableIds.Contains(7));
+        Assert.AreEqual(Team.Red, phaseManager.CurrentTurn);
     }
 
     [Test]
-    public void 픽을_적절한_저장소에_저장()
+    public void 규칙에_맞게_픽_선택_후_저장_및_턴_진행()
     {
-        // Arrange
         var storage = new GameBanPickStorage(new[] { 2, 5, 8 });
-        var phaseManager = CreatePhaseManager(GamePhase.Pick, Team.Red);
-        var sut = new AI_SelectAgent(Team.Red, phaseManager, storage, new MinSelector());
+        var phaseManager = CreatePhaseManager(GamePhase.Pick, Team.Red, Team.Blue);
+        var sut = CreateFirstSelectSut(Team.Red, phaseManager, storage);
 
-        // Act
         sut.Pick(Team.Red);
 
-        // Assert
-        // MinSelector이므로 2가 픽됨
         var picked = storage.GetStorage(Team.Red, SelectType.Pick);
         CollectionAssert.AreEqual(new[] { 2 }, picked);
         Assert.IsFalse(storage.SelectableIds.Contains(2));
-    }
-
-    [Test]
-    public void 선택시_턴_진행()
-    {
-        // Arrange
-        var storage = new GameBanPickStorage(new int[] { 3 });
-        var phaseManager = CreatePhaseManager(GamePhase.Pick, Team.Red, Team.Blue);
-        var sut = new AI_SelectAgent(Team.Red, phaseManager, storage, new MinSelector());
-
-        // Act
-        sut.Pick(Team.Red);
-
-        // Assert
         Assert.AreEqual(Team.Blue, phaseManager.CurrentTurn);
     }
 
     [Test]
     public void 자기_팀_차례가_아니면_아무_일도_일어나지_않음()
     {
-        // Arrange
         var storage = new GameBanPickStorage(new[] { 1, 4, 6 });
         var phaseManager = CreatePhaseManager(GamePhase.Ban, Team.Blue);
-        var sut = new AI_SelectAgent(Team.Blue, phaseManager, storage, new MinSelector());
+        var sut = CreateFirstSelectSut(Team.Blue, phaseManager, storage);
 
-        // Act
-        sut.Ban(Team.Red); // 팀 불일치
+        // 팀 불일치
+        sut.Ban(Team.Red);
+        sut.Pick(Team.Red);
 
-        // Assert
         CollectionAssert.IsEmpty(storage.GetStorage(Team.Blue, SelectType.Ban));
         CollectionAssert.IsEmpty(storage.GetStorage(Team.Blue, SelectType.Pick));
     }

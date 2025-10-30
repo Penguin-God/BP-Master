@@ -2,6 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+public interface IBanSelector
+{
+    public int Ban(HashSet<int> ids);
+}
+
+public interface IPickSelector
+{
+    public int Pick(HashSet<int> ids);
+}
+
 public interface IAI_Selector
 {
     public int Ban(HashSet<int> ids);
