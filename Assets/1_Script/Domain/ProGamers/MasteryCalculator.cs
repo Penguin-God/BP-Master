@@ -1,6 +1,4 @@
-
-
-public class MasteryApplier
+public class MasteryCalculator
 {
     public ChampionStatData ApplyMastery(ChampionStatData stat, int level)
     {

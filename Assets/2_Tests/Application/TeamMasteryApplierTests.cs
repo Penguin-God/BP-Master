@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using static TestHelper;
 
 public class TeamMasteryApplier_GamersIds_Tests
@@ -29,5 +30,22 @@ public class TeamMasteryApplier_GamersIds_Tests
 
         var result = statusTable.GetSlot(new SlotData(Team.Blue, 0)).Stat;
         Assert.AreEqual(new ChampionStatData(13, 23, 30), result);
+    }
+
+    [Test]
+    public void 숙련도_보유한_챔은_스탯_증가()
+    {
+        var masteries = new[] { new ChampionMastery(1, 10) };
+        Dictionary<int, ChampionStatus> statuses = new Dictionary<int, ChampionStatus>()
+        {
+            {1, CreateStatus() },
+            {2, CreateStatus() }
+        };
+        var sut = new TeamMasteryApplier();
+
+        sut.ApplyMastery(statuses, masteries);
+
+        Assert.AreEqual(CreateStat(10, 10), statuses[1].Stat);
+        Assert.AreEqual(CreateStat(0, 0), statuses[2].Stat);
     }
 }
