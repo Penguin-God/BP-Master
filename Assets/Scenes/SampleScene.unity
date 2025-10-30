@@ -3208,6 +3208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dbeee157e288a4b96aee9297d8ddd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championRepository: {fileID: 1420292359}
+  gamerRoster: {fileID: 1420292365}
 --- !u!1001 &782294407
 PrefabInstance:
   m_ObjectHideFlags: 0

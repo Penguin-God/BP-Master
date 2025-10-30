@@ -1,18 +1,30 @@
+using System.Linq;
 using UnityEngine;
 
 public class AI_Main : MonoBehaviour
 {
     Team Team;
     PhaseEventDispatcher phaseEventDispatcher;
+
+    [SerializeField] ChampionRepository championRepository;
+    [SerializeField] GamerRoster gamerRoster;
+    ChampionCatalog catalog;
+    StaticValueEvaluator evaluator;
+    void Start()
+    {
+        catalog = new ChampionCatalog(championRepository.AllChampion.ToDictionary(x => x.Id, x => x.CreateData()));    
+    }
+
     public void Init(Team team, PhaseEventDispatcher phaseEventDispatcher)
     {
         Team = team;
         this.phaseEventDispatcher = phaseEventDispatcher;
+        evaluator = new StaticValueEvaluator(gamerRoster.Rosters.GetTeam(Team).SelectMany(x => x.AllMasteries));
     }
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new RandomPick());
+        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new StaticValuePick(catalog, evaluator));
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }
