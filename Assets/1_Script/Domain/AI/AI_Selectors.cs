@@ -32,21 +32,10 @@ public class StaticValuePick : IPickSelector
         Evaluator = valueEvaluator;
     }
 
-    public int Pick(HashSet<int> ids)
-    {
-        // 각 챔피언 ID에 대해 평가 점수 계산
-        var scored = ids
-            .Select(id =>
-            {
-                var champ = Catalog.GetChampionData(id);
-                int value = Evaluator.Evaluate(id, champ.Stat);
-                return new { Id = id, Value = value };
-            });
+    public int Pick(HashSet<int> ids) 
+        => ids
+            .OrderByDescending(x => GetValue(x))
+            .First();
 
-        // 가장 높은 점수의 챔피언 선택
-        return scored
-            .OrderByDescending(x => x.Value)
-            .First()
-            .Id;
-    }
+    int GetValue(int id) => Evaluator.Evaluate(id, Catalog.GetChampionData(id).Stat);
 }
