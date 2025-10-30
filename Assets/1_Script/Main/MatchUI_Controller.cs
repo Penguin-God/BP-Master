@@ -14,11 +14,13 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] SkillButtonView skillButtonView;
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] BanView banView;
+    [SerializeField] MasteryView masteryView;
 
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
     {
-        banPickView.ViewMastery();
-        
+        banPickView.InitSlotView();
+        masteryView.ViewMastery(championRepository);
+
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
         storage.OnBan += banView.UpdateBanList;

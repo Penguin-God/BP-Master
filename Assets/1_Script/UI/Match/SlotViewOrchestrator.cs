@@ -25,7 +25,7 @@ public class SlotViewOrchestrator : MonoBehaviour
             trackerViewSlots.GetSlot(slot).Init(statuses.GetSlot(slot));
     }
 
-    public void ViewMastery()
+    public void InitSlotView()
     {
         foreach (var slot in slotViews.GetAllSlotDatas())
             slotViews.GetSlot(slot).Init(mainView, championManager, playerRoster.Rosters.GetSlot(slot));

@@ -21,7 +21,7 @@ public class SlotView : MonoBehaviour
     {
         this.championFocusView = championFocusView;
         this.championManager = championManager;
-        UpdateMasteryText(gamer);
+        // UpdateMasteryText(gamer);
     }
 
     void UpdateMasteryText(ProGamer gamer) => masteryText.text = new MasteryTextBuilder(championManager.NameCatalog).BuildMasteriesText(gamer.AllMasteries);
