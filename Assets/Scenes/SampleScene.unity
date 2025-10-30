@@ -5180,6 +5180,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394800987}
   m_CullTransparentMesh: 1
+--- !u!1 &1410148728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1410148729}
+  - component: {fileID: 1410148730}
+  m_Layer: 0
+  m_Name: Mastery
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1410148729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410148728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420292360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1410148730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410148728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e831dcc1b6b144f82f86e7f275e0e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueGamers:
+  - {fileID: 11400000, guid: 1c3b4fd2eee97a043b94fca3771d4e33, type: 2}
+  - {fileID: 11400000, guid: 4da5d29163e9ab243b24f9458abb1ebf, type: 2}
+  - {fileID: 11400000, guid: ed3ea3df832d29242a9074b81ccf5da6, type: 2}
+  - {fileID: 11400000, guid: ca3f846d38f9c874e81e0e04f5d37a7d, type: 2}
+  - {fileID: 11400000, guid: bf3d2a1ee8a1797418e1a540909e0973, type: 2}
+  redGamers:
+  - {fileID: 11400000, guid: 4089edc298244d2409f4802108fb90fb, type: 2}
+  - {fileID: 11400000, guid: 3ba60324b55e6dc4082b9f3cb4ef8622, type: 2}
+  - {fileID: 11400000, guid: 71ae33eb705d9ff4f93516c3f9d583a6, type: 2}
+  - {fileID: 11400000, guid: 3eb3ee9e161a5a04d900e3727b7050d2, type: 2}
+  - {fileID: 11400000, guid: 9b3bc931d21d666419ad4454b4efec43, type: 2}
+  championRepository: {fileID: 1420292359}
+  masteryLevels: 0a0000000f00000014000000
 --- !u!1 &1420292358
 GameObject:
   m_ObjectHideFlags: 0
@@ -5228,6 +5286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 758303700}
+  - {fileID: 1410148729}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1420292363
