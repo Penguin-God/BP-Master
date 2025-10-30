@@ -57,7 +57,7 @@ public class MatchDI : MonoBehaviour
         traitExecutor.ExecuteAllTriat(slotManager.StatusSlots);
 
         ApplyMastery(); // 마지막에
-        ai_main.InitAI_Trait(filter, slotManager, skillController, GetComponent<AI_MonoBehaviourAgent>(), matchConfig.TeamSize);
+        ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
     }
 
     void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, slotManager.StatusSlots);
