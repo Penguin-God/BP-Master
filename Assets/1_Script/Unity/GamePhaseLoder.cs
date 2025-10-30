@@ -12,7 +12,7 @@ public class GamePhaseLoder : MonoBehaviour
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
             new PhaseData(GamePhase.Pick, new Phase(pick.Turns)),
-            new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
+            // new PhaseData(GamePhase.Swap, new Phase(new Team[] { Team.All })),
             new PhaseData(GamePhase.Skill, new Phase(trait.Turns)),
         };
         return phase;
