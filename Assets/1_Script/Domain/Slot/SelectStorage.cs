@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public readonly struct SelectInfo
 {
@@ -21,7 +20,7 @@ public enum SelectType { Ban, Pick}
 
 public class GameBanPickStorage
 {
-    readonly Dictionary<Team, BanStorage> storage = new();
+    readonly Dictionary<Team, HashSet<int>> banStorage = new();
     public SlotStorage<int> PickIds { get; set; } = new();
 
     public event Action<Team, int> OnBan;
@@ -32,8 +31,8 @@ public class GameBanPickStorage
     public GameBanPickStorage(IEnumerable<int> allIds)
     {
         SelectableIds = new HashSet<int>(allIds);
-        storage.Add(Team.Red, new());
-        storage.Add(Team.Blue, new());
+        banStorage.Add(Team.Red, new());
+        banStorage.Add(Team.Blue, new());
     }
 
     public bool CanSelected(int id) => SelectableIds.Contains(id);
@@ -43,21 +42,19 @@ public class GameBanPickStorage
         if (CanSelected(info.Id) == false) return;
         SelectableIds.Remove(info.Id);
 
-        if (info.Select == SelectType.Ban)
-        {
-            storage[info.Team].SaveBan(info.Id);
-            OnBan?.Invoke(info.Team, info.Id);
-        }
-        else
-        {
-            PickIds.AddSlot(info.Team, info.Id);
-            OnPick?.Invoke(new SlotData(info.Team, PickIds.Count(info.Team) - 1), info.Id);
-        }
+        if (info.Select == SelectType.Ban) Ban(info);
+        else Pick(info);
     }
-}
 
-public class BanStorage
-{
-    List<int> bans = new List<int>();
-    public void SaveBan(int id) => bans.Add(id);
+    void Ban(SelectInfo info)
+    {
+        banStorage[info.Team].Add(info.Id);
+        OnBan?.Invoke(info.Team, info.Id);
+    }
+
+    void Pick(SelectInfo info)
+    {
+        PickIds.AddSlot(info.Team, info.Id);
+        OnPick?.Invoke(new SlotData(info.Team, PickIds.Count(info.Team) - 1), info.Id);
+    }
 }
