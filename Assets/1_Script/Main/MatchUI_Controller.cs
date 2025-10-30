@@ -27,9 +27,8 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
         storage.OnPick += (slot, id) => championDrawer.InActiveButton(id);
 
-        
-        
-        
+        eventDispatcher.OnPhaseSkill += _ => banView.HideBan();
+        eventDispatcher.OnPhaseSkill += _ => championDrawer.HideView();
 
         traitUseView.gameObject.SetActive(false);
 
