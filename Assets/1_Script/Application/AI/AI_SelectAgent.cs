@@ -6,12 +6,6 @@ public class AI_SelectAgent
     readonly GameBanPickStorage storage;
     readonly IBanSelector banSelector;
     readonly IPickSelector pickSelector;
-    public AI_SelectAgent(Team team, PhaseManager phaseManager, GameBanPickStorage storage, IAI_Selector selector)
-    {
-        Team = team;
-        this.phaseManager = phaseManager;
-        this.storage = storage;
-    }
 
     public AI_SelectAgent(Team team, PhaseManager phaseManager, GameBanPickStorage storage, IBanSelector banSelector, IPickSelector pickSelector)
     {

@@ -12,7 +12,7 @@ public class RandomTests
         HashSet<int> draws = new();
         for (int i = 0; i < 1000; i++)
         {
-            int result = RandomUtil.PickRandom(numbers);
+            int result = RandomUtil.DrawRandom(numbers);
             draws.Add(result);
             Assert.IsTrue(numbers.Contains(result));
         }

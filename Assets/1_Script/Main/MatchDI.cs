@@ -84,7 +84,7 @@ public class AI_Main
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomSelector());
+        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new RandomPick());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }

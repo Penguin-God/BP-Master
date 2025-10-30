@@ -26,3 +26,13 @@ public class RandomSelector : IAI_Selector
     public int Pick(HashSet<int> ids) => RandomSelect(ids);
     int RandomSelect(HashSet<int> ids) => ids.ToArray()[random.Next(ids.Count)];
 }
+
+public class RandomBan : IBanSelector
+{
+    public int Ban(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
+}
+
+public class RandomPick : IPickSelector
+{
+    public int Pick(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
+}

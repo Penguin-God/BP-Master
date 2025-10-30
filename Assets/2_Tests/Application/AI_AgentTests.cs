@@ -14,12 +14,6 @@ public class AI_AgentTests
         public int Pick(HashSet<int> ids) => ids.First();
     }
 
-    class MinSelector : IAI_Selector
-    {
-        public int Ban(HashSet<int> ids) => ids.Min();
-        public int Pick(HashSet<int> ids) => ids.Min();
-    }
-
     PhaseManager CreatePhaseManager(GamePhase phase, params Team[] turns)
     {
         var dispatcher = new PhaseEventDispatcher();
