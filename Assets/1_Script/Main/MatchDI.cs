@@ -11,13 +11,13 @@ public class MatchDI : MonoBehaviour
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
     GamerRoster gamerRoster;
-    AI_Main ai_main;
+    [SerializeField] AI_Main ai_main;
     Team playerTeam;
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
-        ai_main = new AI_Main(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
 
         matchUI_Controller = GetComponent<MatchUI_Controller>();
@@ -68,32 +68,5 @@ public class MatchDI : MonoBehaviour
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
         matchUI_Controller.ShowResult(result);
-    }
-}
-
-
-public class AI_Main
-{
-    public readonly Team Team;
-    readonly PhaseEventDispatcher phaseEventDispatcher;
-    public AI_Main(Team team, PhaseEventDispatcher phaseEventDispatcher)
-    {
-        Team = team;
-        this.phaseEventDispatcher = phaseEventDispatcher;
-    }
-
-    public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
-    {
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new RandomPick());
-        phaseEventDispatcher.OnPhaseBan += ai.Ban;
-        phaseEventDispatcher.OnPhasePick += ai.Pick;
-    }
-
-    public void InitAI_Trait(SkillSlotFilter filter, SlotStorageManager slotManager, SkillUseController skillController, AI_MonoBehaviourAgent ai_agent, int teamSize)
-    {
-        var skill_ai = new AI_TraitAgent(Team, filter, slotManager.SkillSlots, skillController, new TargetCounter(teamSize));
-        ai_agent.Init(skill_ai);
-        phaseEventDispatcher.OnPhaseSkill += ai_agent.UseTrait;
-        if (Team == Team.Blue) skill_ai.UseTrait(Team.Blue);
     }
 }
