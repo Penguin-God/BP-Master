@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ProGamer
+public class MasteryManager
 {
     readonly Dictionary<int, int> masteryMap;
     public IEnumerable<ChampionMastery> AllMasteries => masteryMap.Select(x => new ChampionMastery(x.Key, x.Value));
 
-    public ProGamer(IEnumerable<ChampionMastery> masteries)
+    public MasteryManager(IEnumerable<ChampionMastery> masteries)
     {
         masteryMap = masteries.ToDictionary(m => m.ChampionId, m => m.Level);
     }

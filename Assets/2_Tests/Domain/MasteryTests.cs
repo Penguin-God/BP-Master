@@ -7,7 +7,7 @@ public class MasteryTests
     {
         ChampionMastery[] data = new ChampionMastery[]{new ChampionMastery(12, 10), new ChampionMastery(11, 20)};
 
-        ProGamer sut = new(data);
+        MasteryManager sut = new(data);
 
         Assert.AreEqual(10, sut.GetMastery(12));
         Assert.AreEqual(20, sut.GetMastery(11));
@@ -18,7 +18,7 @@ public class MasteryTests
     [Test]
     public void 기존_챔피언은_숙련도_1_증가()
     {
-        var sut = new ProGamer(new[] { new ChampionMastery(10, 5) });
+        var sut = new MasteryManager(new[] { new ChampionMastery(10, 5) });
 
         sut.AddMastery(10);
 
@@ -28,7 +28,7 @@ public class MasteryTests
     [Test]
     public void 없는_챔피언은_숙련도_1로_추가()
     {
-        var sut = new ProGamer(new[] { new ChampionMastery(10, 5) });
+        var sut = new MasteryManager(new[] { new ChampionMastery(10, 5) });
 
         sut.AddMastery(44);
 
