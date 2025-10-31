@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class TeamMasteryApplier
 {
@@ -18,6 +19,25 @@ public class TeamMasteryApplier
         {
             if (statuses.TryGetValue(mastery.ChampionId, out var status))
             {
+                var oldStat = status.Stat;
+                var newStat = new ChampionStatData(
+                    oldStat.Attack + mastery.Level,
+                    oldStat.Defense + mastery.Level,
+                    oldStat.Speed
+                );
+                status.ChangeStat(newStat);
+            }
+        }
+    }
+
+    public void ApplyMastery(int[] ids, ChampionStatus[] statuses, IEnumerable<ChampionMastery> masteries)
+    {
+        for (int i = 0; i < ids.Length; i++)
+        {
+            if (masteries.Any(x => x.ChampionId == ids[i]))
+            {
+                var mastery = masteries.First(x => x.ChampionId == ids[i]);
+                var status = statuses[i];
                 var oldStat = status.Stat;
                 var newStat = new ChampionStatData(
                     oldStat.Attack + mastery.Level,
