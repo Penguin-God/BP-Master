@@ -38,7 +38,7 @@ public class ChampionStatusTextBuilder
     public string BuildTraitText(TraitType traitType) => traitType switch
     {
         TraitType.None => "무개성",
-        TraitType.Charge => "돌격",
+        TraitType.Charge => "돌진",
         TraitType.Guard => "가드",
         TraitType.Amplifier => "증폭",
         TraitType.Break => "파괴",
