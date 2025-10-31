@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
@@ -60,7 +61,13 @@ public class MatchDI : MonoBehaviour
         ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
     }
 
-    void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, slotManager.StatusSlots);
+    // void ApplyMastery() => new TeamMasteryApplier().Apply(gamerRoster.Rosters, storage.PickIds, slotManager.StatusSlots);
+
+    void ApplyMastery()
+    {
+        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), gamerRoster.blues);
+        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), gamerRoster.reds);
+    }
 
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
