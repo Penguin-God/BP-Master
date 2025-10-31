@@ -4,7 +4,6 @@ using UnityEngine;
 public class GamerRoster : MonoBehaviour
 {
     [SerializeField] ChampionRepository championRepository;
-    
     [SerializeField] int[] masteryLevels;
 
     public IEnumerable<ChampionMastery> Blues { get; private set; }
