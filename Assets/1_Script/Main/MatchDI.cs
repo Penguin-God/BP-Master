@@ -11,15 +11,14 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
-    [SerializeField] MasteryGenerator gamerRoster;
+    [SerializeField] MasteryGenerator masteryGenerator;
     [SerializeField] AI_Main ai_main;
     Team playerTeam;
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
-        gamerRoster = GetComponent<MasteryGenerator>();
-        gamerRoster.CreateRandomRoster(matchConfig.TeamSize);
+        masteryGenerator.CreateRandomRoster(matchConfig.TeamSize);
 
         ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
@@ -63,8 +62,8 @@ public class MatchDI : MonoBehaviour
 
     void ApplyMastery()
     {
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), gamerRoster.GetTeamMasteries(Team.Blue));
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), gamerRoster.GetTeamMasteries(Team.Red));
+        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), masteryGenerator.GetTeamMasteries(Team.Blue));
+        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), masteryGenerator.GetTeamMasteries(Team.Red));
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;

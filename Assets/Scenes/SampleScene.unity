@@ -809,8 +809,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1534,8 +1534,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5289,7 +5289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   champManager: {fileID: 1420292359}
-  gamerRoster: {fileID: 1410148730}
+  masteryGenerator: {fileID: 1410148730}
   ai_main: {fileID: 758303701}
   utilKey: {fileID: 1049145345}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
@@ -7812,7 +7812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blue: {fileID: 293025776}
   red: {fileID: 590473561}
-  masteryData: {fileID: 0}
+  masteryData: {fileID: 1410148730}
 --- !u!1 &1992837127
 GameObject:
   m_ObjectHideFlags: 0
