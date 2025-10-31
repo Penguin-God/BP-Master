@@ -19,7 +19,7 @@ public class AI_Main : MonoBehaviour
     {
         Team = team;
         this.phaseEventDispatcher = phaseEventDispatcher;
-        evaluator = new StaticValueEvaluator(gamerRoster.Rosters.GetTeam(Team).SelectMany(x => x.AllMasteries));
+        evaluator = new StaticValueEvaluator(gamerRoster.GetTeamMasteries(team));
     }
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)

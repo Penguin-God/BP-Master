@@ -18,6 +18,10 @@ public class MatchDI : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
+        gamerRoster = GetComponent<GamerRoster>();
+        gamerRoster.CreateRandomRoster(matchConfig.TeamSize);
+
+
         ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
 
@@ -28,9 +32,6 @@ public class MatchDI : MonoBehaviour
 
         phaseEventDispatcher.OnPhaseSkill += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
-        
-        gamerRoster  = GetComponent<GamerRoster>();
-        gamerRoster.CreateRandomRoster(matchConfig.TeamSize);
 
         matchUI_Controller.Init(storage, phaseManager, phaseEventDispatcher); // start보다 먼저
 
@@ -63,8 +64,8 @@ public class MatchDI : MonoBehaviour
 
     void ApplyMastery()
     {
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), gamerRoster.blues);
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), gamerRoster.reds);
+        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), gamerRoster.GetTeamMasteries(Team.Blue));
+        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), gamerRoster.GetTeamMasteries(Team.Red));
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;

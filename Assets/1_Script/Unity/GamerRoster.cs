@@ -3,24 +3,19 @@ using UnityEngine;
 
 public class GamerRoster : MonoBehaviour
 {
-    [SerializeField] ProGamerSO[] blueGamers;
-    [SerializeField] ProGamerSO[] redGamers;
     [SerializeField] ChampionRepository championRepository;
-    public SlotStorage<ProGamer> Rosters = new();
-
+    
     [SerializeField] int[] masteryLevels;
 
-    public IEnumerable<ChampionMastery> blues;
-    public IEnumerable<ChampionMastery> reds;
+    public IEnumerable<ChampionMastery> Blues { get; private set; }
+    public IEnumerable<ChampionMastery> Reds { get; private set; }
+
+    public IEnumerable<ChampionMastery> GetTeamMasteries(Team team) => team == Team.Blue ? Blues : Reds;
 
     public void CreateRandomRoster(int teamSize)
     {
         var drawer = new MasteryDrawer(championRepository.AllId);
-
-        RandomRosterFactory factory = new RandomRosterFactory(new MasteryDrawer(championRepository.AllId));
-        Rosters = factory.CreateRoster(teamSize, masteryLevels);
-
-        blues = drawer.DrawRandoms(masteryLevels);
-        reds = drawer.DrawRandoms(masteryLevels);
+        Blues = drawer.DrawRandoms(masteryLevels);
+        Reds = drawer.DrawRandoms(masteryLevels);
     }
 }

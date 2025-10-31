@@ -28,7 +28,7 @@ public class SlotViewOrchestrator : MonoBehaviour
     public void InitSlotView()
     {
         foreach (var slot in slotViews.GetAllSlotDatas())
-            slotViews.GetSlot(slot).Init(mainView, championManager, playerRoster.Rosters.GetSlot(slot));
+            slotViews.GetSlot(slot).Init(mainView, championManager);
     }
 
     public void PickChampion(SlotData pickSlot, int id) => slotViews.GetSlot(pickSlot).UpdateChampion(id);

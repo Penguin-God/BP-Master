@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +5,6 @@ public class SlotView : MonoBehaviour
 {
     [SerializeField] ChampionView championView;
     [SerializeField] Button slotButton;
-    [SerializeField] TextMeshProUGUI masteryText;
 
     ChampionRepository championManager;
     int id;
@@ -17,14 +15,11 @@ public class SlotView : MonoBehaviour
         slotButton.onClick.AddListener(DrawTarget);
     }
 
-    public void Init(ChampionView championFocusView, ChampionRepository championManager, ProGamer gamer)
+    public void Init(ChampionView championFocusView, ChampionRepository championManager)
     {
         this.championFocusView = championFocusView;
         this.championManager = championManager;
-        // UpdateMasteryText(gamer);
     }
-
-    void UpdateMasteryText(ProGamer gamer) => masteryText.text = new MasteryTextBuilder(championManager.NameCatalog).BuildMasteriesText(gamer.AllMasteries);
 
     public void UpdateChampion(int id)
     {

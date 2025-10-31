@@ -10,7 +10,7 @@ public class MasteryView : MonoBehaviour
     public void ViewMastery(ChampionRepository championRepository)
     {
         MasteryTextBuilder textBuilder = new MasteryTextBuilder(championRepository.NameCatalog);
-        blue.text = textBuilder.BuildMasteriesText(masteryData.blues);
-        red.text = textBuilder.BuildMasteriesText(masteryData.reds);
+        blue.text = textBuilder.BuildMasteriesText(masteryData.Blues);
+        red.text = textBuilder.BuildMasteriesText(masteryData.Reds);
     }
 }
