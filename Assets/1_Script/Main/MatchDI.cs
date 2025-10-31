@@ -11,16 +11,15 @@ public class MatchDI : MonoBehaviour
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     MatchUI_Controller matchUI_Controller;
-    GamerRoster gamerRoster;
+    [SerializeField] MasteryGenerator gamerRoster;
     [SerializeField] AI_Main ai_main;
     Team playerTeam;
     [SerializeField] UtilKey utilKey;
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
-        gamerRoster = GetComponent<GamerRoster>();
+        gamerRoster = GetComponent<MasteryGenerator>();
         gamerRoster.CreateRandomRoster(matchConfig.TeamSize);
-
 
         ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);

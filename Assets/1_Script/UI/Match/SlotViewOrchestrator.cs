@@ -8,7 +8,7 @@ public class SlotViewOrchestrator : MonoBehaviour
     SlotStorage<SlotView> slotViews = new();
     SlotStorage<ChampionStatusTrackerView> trackerViewSlots = new();
 
-    [SerializeField] GamerRoster playerRoster;
+    [SerializeField] MasteryGenerator playerRoster;
     [SerializeField] ChampionView mainView;
     void Start()
     {

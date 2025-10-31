@@ -5,7 +5,7 @@ public class MasteryView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI blue;
     [SerializeField] TextMeshProUGUI red;
-    [SerializeField] GamerRoster masteryData;
+    [SerializeField] MasteryGenerator masteryData;
 
     public void ViewMastery(ChampionRepository championRepository)
     {

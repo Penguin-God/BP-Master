@@ -7,7 +7,7 @@ public class AI_Main : MonoBehaviour
     PhaseEventDispatcher phaseEventDispatcher;
 
     [SerializeField] ChampionRepository championRepository;
-    [SerializeField] GamerRoster gamerRoster;
+    [SerializeField] MasteryGenerator gamerRoster;
     ChampionCatalog catalog;
     StaticValueEvaluator evaluator;
     void Start()
