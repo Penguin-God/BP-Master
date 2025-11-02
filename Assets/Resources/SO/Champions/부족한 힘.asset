@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
   m_Name: "\uBD80\uC871\uD55C \uD798"
   m_EditorClassIdentifier: 
-  id: 20
+  id: 17
   championName: "\uBD80\uC871\uD55C \uD798"
   attack: 150
   defense: 60
@@ -25,4 +25,5 @@ MonoBehaviour:
     conditionType: 3
     threshold: 100
     conditionCheckerType: 1
+    targetTrait: 0
   traitType: 4

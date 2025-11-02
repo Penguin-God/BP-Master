@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackBonus: {fileID: 11400000, guid: fdc80c94301d82c48b6505e72c11fcd9, type: 2}
   defenseBonus: {fileID: 11400000, guid: c6eb4d757c873dc42902c0a5b97f0b88, type: 2}
-  speedBonus: {fileID: 11400000, guid: 9f98033fb210bab409286547274e06c6, type: 2}
+  speedBonus: {fileID: 11400000, guid: 88620214a523ed447bc4c2dc9ddb490a, type: 2}

@@ -25,4 +25,5 @@ MonoBehaviour:
     conditionType: 1
     threshold: 80
     conditionCheckerType: 1
+    targetTrait: 0
   traitType: 0
