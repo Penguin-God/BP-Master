@@ -3,7 +3,9 @@ public enum SkillType
 {
     None,
     AttackChanger,
+    PercentAttackChanger,
     DefenseChanger,
+    PercentDefenseChanger,
     SpeedChanger,
     DefenseFixer,
     TraitExcluder,

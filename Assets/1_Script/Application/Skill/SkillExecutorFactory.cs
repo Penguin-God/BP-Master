@@ -18,6 +18,8 @@ public static class SkillActionFactory
         {
             SkillType.AttackChanger => new AttackChanger(amount),
             SkillType.DefenseChanger => new DefenseChanger(amount),
+            SkillType.PercentAttackChanger => new AttackPercentChanger(amount / 100),
+            SkillType.PercentDefenseChanger => new DefensePercentChanger(amount / 100),
             SkillType.SpeedChanger => new SpeedChanger(amount),
             SkillType.DefenseFixer => new DefenseFixer(amount),
             SkillType.TraitExcluder => new SkillExcluder(),
