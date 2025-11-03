@@ -62,4 +62,26 @@ public class TraitActionTests
 
         Assert.IsTrue(target.IsTraitExcluded);
     }
+
+    [Test]
+    public void 퍼센트로_공격값_바꾸기()
+    {
+        var target = TestHelper.CreateStatus(100, 0);
+        var sut = new AttackPercentChanger(0.5f);
+
+        sut.Do(target);
+
+        Assert.AreEqual(150, target.Stat.Attack);
+    }
+
+    [Test]
+    public void 퍼센트로_방어값_바꾸기()
+    {
+        var target = TestHelper.CreateStatus(0, def: 100);
+        var sut = new DefensePercentChanger(-0.3f);
+
+        sut.Do(target);
+
+        Assert.AreEqual(70, target.Stat.Defense);
+    }
 }

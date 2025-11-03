@@ -1,3 +1,4 @@
+using System;
 
 public interface ISkillAction
 {
@@ -37,4 +38,28 @@ public class DefenseFixer : ISkillAction
 public class SkillExcluder : ISkillAction
 {
     public void Do(ChampionStatus target) => target.TraitExcluded();
+}
+
+public class AttackPercentChanger : ISkillAction
+{
+    readonly float Percent;
+    public AttackPercentChanger(float percent) => Percent = percent;
+
+    public void Do(ChampionStatus target)
+    {
+        int amount = (int)Math.Round(target.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
+        new AttackChanger(amount).Do(target);
+    }
+}
+
+public class DefensePercentChanger : ISkillAction
+{
+    readonly float Percent;
+    public DefensePercentChanger(float percent) => Percent = percent;
+
+    public void Do(ChampionStatus target)
+    {
+        int amount = (int)Math.Round(target.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
+        new DefenseChanger(amount).Do(target);
+    }
 }
