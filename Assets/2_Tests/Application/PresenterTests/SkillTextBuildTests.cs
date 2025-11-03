@@ -19,6 +19,8 @@ public class SkillTextBuildTests
         Assert.AreEqual("양팀 전체 공격력 50 증가", GetTraitText(SkillType.AttackChanger, 50, AllRule));
         Assert.AreEqual("선택한 아군 셋의 방어력 100으로 고정", GetTraitText(SkillType.DefenseFixer, 100, SelfTriple));
         Assert.AreEqual("선택한 적군 하나의 스탯은 특성으로 인한 변화를 무시", GetTraitText(SkillType.TraitExcluder, 50, OpponentSingleRule));
+        Assert.AreEqual("적군 전체 공격력 50% 증가", GetTraitText(SkillType.PercentAttackChanger, 50, OpponentAllRule));
+        Assert.AreEqual("적군 전체 방어력 50% 감소", GetTraitText(SkillType.PercentDefenseChanger, -50, OpponentAllRule));
     }
 
     [Test]

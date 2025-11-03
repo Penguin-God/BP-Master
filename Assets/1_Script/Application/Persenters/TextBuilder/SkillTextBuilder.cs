@@ -46,6 +46,8 @@ public class SkillTextBuilder
         SkillType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
         SkillType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
         SkillType.TraitExcluder => $"스탯은 특성으로 인한 변화를 무시",
+        SkillType.PercentAttackChanger => $"공격력 {Math.Abs(amount)}% {GetChangeLabel(amount)}",
+        SkillType.PercentDefenseChanger => $"방어력 {Math.Abs(amount)}% {GetChangeLabel(amount)}",
         _ => ""
     };
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class SelectChampsTests
 {
     [Test]
-    public void 가장_가치가_높은_챔피언_픽()
+    public void 가장_정적_가치가_높은_챔피언_픽()
     {
         ChampionCatalog catalog = new ChampionCatalog(new Dictionary<int, ChampionData>()
         {
