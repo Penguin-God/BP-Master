@@ -29,7 +29,7 @@ public class SlotStorage<T>
     public void ChangeSlot(SlotData slot, T value) => slots[slot] = value;
     public T GetSlot(SlotData slot) => slots[slot];
 
-    public int Count(Team team) => GetTeam(team).Count();
+    public int GetTeamCount(Team team) => GetTeam(team).Count();
     public IEnumerable<T> GetTeam(Team team) 
         => slots
             .Where(kv => kv.Key.Team == team)

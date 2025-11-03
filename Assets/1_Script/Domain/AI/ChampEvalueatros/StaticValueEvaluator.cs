@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,5 +15,16 @@ public class StaticValueEvaluator
     {
         masteryLevels.TryGetValue(championId, out int level);
         return stat.Attack + stat.Defense + level;
+    }
+}
+
+public class SkillEvaluator
+{
+    SlotStorage<ChampionStatus> statuses;
+    public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
+
+    public int Evaluate(SkillData skill)
+    {
+        return statuses.GetTeamCount(Team.Blue) * skill.Amount;
     }
 }

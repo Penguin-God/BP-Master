@@ -55,6 +55,6 @@ public class GameBanPickStorage
     void Pick(SelectInfo info)
     {
         PickIds.AddSlot(info.Team, info.Id);
-        OnPick?.Invoke(new SlotData(info.Team, PickIds.Count(info.Team) - 1), info.Id);
+        OnPick?.Invoke(new SlotData(info.Team, PickIds.GetTeamCount(info.Team) - 1), info.Id);
     }
 }
