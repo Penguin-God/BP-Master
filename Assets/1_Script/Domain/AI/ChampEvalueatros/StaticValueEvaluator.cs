@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,6 +24,8 @@ public class SkillEvaluator
 
     public int Evaluate(SkillData skill)
     {
-        return statuses.GetTeamCount(Team.Blue) * skill.Amount;
+        int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
+        if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
+        return result;
     }
 }

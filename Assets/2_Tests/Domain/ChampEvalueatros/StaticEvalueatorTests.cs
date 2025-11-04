@@ -11,7 +11,7 @@ public class StaticEvalueatorTests
     {
         IEnumerable<ChampionMastery> masteries = new ChampionMastery[] { new ChampionMastery(1, 15) };
         var sut = new StaticValueEvaluator(masteries);
-        ChampionStatData stat = TestHelper.CreateStat(att: 20, def: 40);
+        ChampionStatData stat = CreateStat(att: 20, def: 40);
 
         int result = sut.Evaluate(champId, stat);
 
@@ -19,9 +19,9 @@ public class StaticEvalueatorTests
     }
 
     [Test]
-    public void 조건_없는_스킬_가치는_값과_팀_수의_곱()
+    public void 조건_없는_스킬_가치는_값과_타겟_수의_곱()
     {
-        SkillData skill = new SkillData(SkillType.AttackChanger, 50, default, OpponentAllRule);
+        var skill = CreateNullCkeckSkill(SkillType.AttackChanger, 50, SelfAllRule);
         SlotStorage<ChampionStatus> statuses = CreateTwoSlotStatus();
         var sut = new SkillEvaluator(statuses);
 
@@ -29,4 +29,18 @@ public class StaticEvalueatorTests
 
         Assert.AreEqual(100, result);
     }
+
+    [Test]
+    public void 상대방의_스탯변화_평가는_부호_반대로()
+    {
+        var skill = CreateNullCkeckSkill(SkillType.AttackChanger, 50, OpponentAllRule);
+        SlotStorage<ChampionStatus> statuses = CreateTwoSlotStatus();
+        var sut = new SkillEvaluator(statuses);
+
+        int result = sut.Evaluate(skill);
+
+        Assert.AreEqual(-100, result);
+    }
+
+    SkillData CreateNullCkeckSkill(SkillType type, int amount, TraitTargetRule rule) => new SkillData(type, amount, default, rule);
 }
