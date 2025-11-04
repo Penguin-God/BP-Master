@@ -14,15 +14,21 @@ public class ChampionStatus
     public ChampionStatus(ChampionStatData statData) => Stat = statData;
 
     public readonly TraitType TraitType;
-    public ChampionStatus(ChampionStatData statData, TraitType traitType)
+    public ChampionStatus(ChampionStatData statData, TraitType traitType) : this(statData, traitType, false, 1f, 1f) { }
+
+    ChampionStatus(ChampionStatData statData, TraitType traitType, bool traitExcluded, float upRate, float downRate)
     {
         Stat = statData;
         TraitType = traitType;
+        IsTraitExcluded = traitExcluded;
+        UpRate = upRate;
+        DownRate = downRate;
     }
 
     public void AddUpRate(float upRate) => UpRate += upRate;
     public void AddDownRate(float downRate) => DownRate += downRate;
 
+    public ChampionStatus DeepCopy() => new ChampionStatus(Stat, TraitType, IsTraitExcluded, UpRate, DownRate);
 
     public void ChangeStatWithRate(ChampionStatData desiredStat)
     {
