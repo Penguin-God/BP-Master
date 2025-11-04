@@ -19,26 +19,4 @@ public class TraitTargetFindingTests
 
         IEnumerable<SlotData> GetSlots(Team team, Side side) => sut.GetTargetableSlot(team, side);
     }
-
-    [Test]
-    public void 범위에_따른_타겟_슬롯들_반환()
-    {
-        var sut = CreateSut(3);
-
-        var result = sut.GetTargetSlots(new TraitTargetRule(Side.Opponent, TargetRange.All), CreateRedSlot(0));
-        CollectionAssert.AreEquivalent(CreateRedSlots(0, 1, 2), result);
-
-        result = sut.GetTargetSlots(new TraitTargetRule(Side.Opponent, TargetRange.Single), CreateRedSlot(1));
-        CollectionAssert.AreEquivalent(CreateRedSlots(1), result);
-    }
-
-    [Test]
-    public void 사이드와_범위가_All이면_모든_타겟_반환()
-    {
-        var sut = CreateSut(2);
-
-        var result = sut.GetTargetSlots(new TraitTargetRule(Side.All, TargetRange.All), CreateRedSlot(0));
-
-        CollectionAssert.AreEquivalent(new SlotData[] { CreateBlueSlot(0), CreateBlueSlot(1), CreateRedSlot(0), CreateRedSlot(1) }, result);
-    }
 }

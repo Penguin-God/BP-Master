@@ -34,7 +34,7 @@ public class SkillEvaluator
 
     public int Evaluate(SkillExecutor executor, Team team)
     {
-        TraitTargetFinder
+        // var targets = new SkillTargetFinder(statuses.GetTeamCount(team)).GetTargetSlots();
         if (skill.TargetRule.TargetSide == Side.All) return 0;
 
         int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
