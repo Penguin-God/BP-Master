@@ -4,7 +4,7 @@ using static TestHelper;
 
 public class TraitTargetFindingTests
 {
-    TraitTargetFinder CreateSut(int count) => new TraitTargetFinder(count);
+    SkillTargetFinder CreateSut(int count) => new SkillTargetFinder(count);
 
     [Test]
     public void 타겟_팀전체_슬롯_반환()

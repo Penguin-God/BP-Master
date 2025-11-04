@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class TraitTargetFinder
+public class SkillTargetFinder
 {
     readonly int teamCount;
-    public TraitTargetFinder(int count) => teamCount = count;
+    public SkillTargetFinder(int count) => teamCount = count;
     public IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
     {
         Team targetTeam = EnumCaster.GetTargetTeam(team, side);

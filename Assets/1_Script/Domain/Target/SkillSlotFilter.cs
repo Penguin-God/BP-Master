@@ -19,6 +19,6 @@ public class SkillSlotFilter
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {
         var side = EnumCaster.MergeSide(sides);
-        return new TraitTargetFinder(TeamSize).GetTargetableSlot(team, side);
+        return new SkillTargetFinder(TeamSize).GetTargetableSlot(team, side);
     }
 }

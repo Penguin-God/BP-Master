@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,8 +23,18 @@ public class SkillEvaluator
     SlotStorage<ChampionStatus> statuses;
     public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
 
-    public int Evaluate(SkillData skill)
+    public int Evaluate(SkillData skill, Team team)
     {
+        if (skill.TargetRule.TargetSide == Side.All) return 0;
+
+        int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
+        if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
+        return result;
+    }
+
+    public int Evaluate(SkillExecutor executor, Team team)
+    {
+        TraitTargetFinder
         if (skill.TargetRule.TargetSide == Side.All) return 0;
 
         int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
