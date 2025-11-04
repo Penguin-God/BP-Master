@@ -19,28 +19,18 @@ public class StaticEvalueatorTests
     }
 
     [Test]
-    public void 조건_없는_스킬_가치는_값과_타겟_수의_곱()
+    [TestCase(Side.Self, 100)]
+    [TestCase(Side.Opponent, -100)]
+    [TestCase(Side.All, 0)]
+    public void 조건_없는_스킬_가치는_값과_타겟_범위에_따라_평가(Side side, int expected)
     {
-        var skill = CreateNullCkeckSkill(SkillType.AttackChanger, 50, SelfAllRule);
+        var skill = CreateNullCkeckSkill(SkillType.AttackChanger, 50, new TraitTargetRule(side, TargetRange.All));
         SlotStorage<ChampionStatus> statuses = CreateTwoSlotStatus();
         var sut = new SkillEvaluator(statuses);
 
         int result = sut.Evaluate(skill);
 
-        Assert.AreEqual(100, result);
+        Assert.AreEqual(expected, result);
     }
-
-    [Test]
-    public void 상대방의_스탯변화_평가는_부호_반대로()
-    {
-        var skill = CreateNullCkeckSkill(SkillType.AttackChanger, 50, OpponentAllRule);
-        SlotStorage<ChampionStatus> statuses = CreateTwoSlotStatus();
-        var sut = new SkillEvaluator(statuses);
-
-        int result = sut.Evaluate(skill);
-
-        Assert.AreEqual(-100, result);
-    }
-
     SkillData CreateNullCkeckSkill(SkillType type, int amount, TraitTargetRule rule) => new SkillData(type, amount, default, rule);
 }

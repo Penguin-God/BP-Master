@@ -24,6 +24,8 @@ public class SkillEvaluator
 
     public int Evaluate(SkillData skill)
     {
+        if (skill.TargetRule.TargetSide == Side.All) return 0;
+
         int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
         if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
         return result;
