@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class StaticValueEvaluator
 {
@@ -22,17 +20,8 @@ public class StaticValueEvaluator
 public class SkillEvaluator
 {
     SlotStorage<ChampionStatus> statuses;
-    readonly TargetCounter Counter;
-    readonly ChampionStatAverager StatAverager;
-
+    
     public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
-
-    public SkillEvaluator(SlotStorage<ChampionStatus> statuses, TargetCounter counter, ChampionStatAverager statAverager)
-    {
-        this.statuses = statuses;
-        Counter = counter;
-        StatAverager = statAverager;
-    }
 
     public int Evaluate(SkillData skill, Team team)
     {
@@ -42,22 +31,9 @@ public class SkillEvaluator
         if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
         return result;
     }
-}
 
-public class ChampionStatAverager
-{
-    readonly IEnumerable<ChampionStatData> stats;
-
-    public ChampionStatAverager(ChampionStatData[] stats) => this.stats = stats;
-
-    public ChampionStatData GetStatAverage()
+    public int Evaluate(SkillExecutor executor, Team team)
     {
-        int totalAttack = stats.Sum(s => s.Attack);
-        int totalDefense = stats.Sum(s => s.Defense);
-
-        int attack = Mathf.RoundToInt(totalAttack / stats.Count());
-        int defense = Mathf.RoundToInt(totalDefense / stats.Count());
-
-        return new ChampionStatData(attack, defense, 0);
+        return 0;
     }
 }

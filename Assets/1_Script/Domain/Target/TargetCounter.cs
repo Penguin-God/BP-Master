@@ -1,8 +1,7 @@
 
 public class TargetCounter
 {
-    readonly int TeamSize;
-
+    public readonly int TeamSize;
     public TargetCounter(int teamSize) => TeamSize = teamSize;
 
     public int CalculateTargetCount(TraitTargetRule rule)

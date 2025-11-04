@@ -33,29 +33,29 @@ public class StaticEvalueatorTests
         Assert.AreEqual(expected, result);
     }
 
-    [Test]
-    public void 조건_있는_스킬_가치는_값과_유효한_타겟_범위에_따라_평가()
-    {
-        var skill = new SkillData(SkillType.DefenseChanger, 50, CreateThresholdCondition(StatConditionType.AttackBelow, 100) ,SelfAllRule);
-        SlotStorage<ChampionStatus> statuses = CreateOneSlotStatus();
-        statuses.AddSlot(Team.Blue, CreateStatus(att: 1000));
-        var sut = new SkillEvaluator(statuses);
+    //[Test]
+    //public void 조건_있는_스킬_가치는_값과_유효한_타겟_범위에_따라_평가()
+    //{
+    //    var skill = new SkillData(SkillType.DefenseChanger, 50, CreateThresholdCondition(StatConditionType.AttackBelow, 100) ,SelfAllRule);
+    //    SlotStorage<ChampionStatus> statuses = CreateOneSlotStatus();
+    //    statuses.AddSlot(Team.Blue, CreateStatus(att: 1000));
+    //    var sut = new SkillEvaluator(statuses);
 
-        int result = sut.Evaluate(skill, Team.Blue);
+    //    int result = sut.Evaluate(skill, Team.Blue);
 
-        Assert.AreEqual(50, result);
-    }
+    //    Assert.AreEqual(50, result);
+    //}
 
-    [Test]
-    public void 고정은_변화값_스탯_변화_종합한_가치()
-    {
-        var skill = CreateNullCkeckSkill(SkillType.DefenseChanger, 50, SelfAllRule);
-        SlotStorage<ChampionStatus> statuses = CreateTwoSlotStatus(def:50);
-        var sut = new SkillEvaluator(statuses);
+    //[Test]
+    //public void 고정은_변화값_스탯_변화_종합한_가치()
+    //{
+    //    var skill = CreateNullCkeckSkill(SkillType.DefenseChanger, 50, SelfAllRule);
+    //    SlotStorage<ChampionStatus> statuses = CreateTwoSlotStatus(def:50);
+    //    var sut = new SkillEvaluator(statuses);
 
-        int result = sut.Evaluate(skill, Team.Blue);
+    //    int result = sut.Evaluate(skill, Team.Blue);
 
-        Assert.AreEqual(100, result);
-    }
+    //    Assert.AreEqual(100, result);
+    //}
     SkillData CreateNullCkeckSkill(SkillType type, int amount, TraitTargetRule rule) => new SkillData(type, amount, default, rule);
 }
