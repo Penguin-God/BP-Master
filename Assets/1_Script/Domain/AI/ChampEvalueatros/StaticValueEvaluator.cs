@@ -22,8 +22,17 @@ public class StaticValueEvaluator
 public class SkillEvaluator
 {
     SlotStorage<ChampionStatus> statuses;
-    readonly int TeamSize;
+    readonly TargetCounter Counter;
+    readonly ChampionStatAverager StatAverager;
+
     public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
+
+    public SkillEvaluator(SlotStorage<ChampionStatus> statuses, TargetCounter counter, ChampionStatAverager statAverager)
+    {
+        this.statuses = statuses;
+        Counter = counter;
+        StatAverager = statAverager;
+    }
 
     public int Evaluate(SkillData skill, Team team)
     {
@@ -37,13 +46,17 @@ public class SkillEvaluator
 
 public class ChampionStatAverager
 {
-    public ChampionStatData GetStatAverage(ChampionStatData[] stats)
+    readonly IEnumerable<ChampionStatData> stats;
+
+    public ChampionStatAverager(ChampionStatData[] stats) => this.stats = stats;
+
+    public ChampionStatData GetStatAverage()
     {
         int totalAttack = stats.Sum(s => s.Attack);
         int totalDefense = stats.Sum(s => s.Defense);
 
-        int attack = Mathf.RoundToInt(totalAttack / stats.Length);
-        int defense = Mathf.RoundToInt(totalDefense / stats.Length);
+        int attack = Mathf.RoundToInt(totalAttack / stats.Count());
+        int defense = Mathf.RoundToInt(totalDefense / stats.Count());
 
         return new ChampionStatData(attack, defense, 0);
     }
