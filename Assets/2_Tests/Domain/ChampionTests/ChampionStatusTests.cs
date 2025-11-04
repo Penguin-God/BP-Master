@@ -82,7 +82,7 @@ public class ChampionStatusTests
 
         Assert.AreEqual(original.Stat, copy.Stat);
         Assert.AreEqual(original.TraitType, copy.TraitType);
-        Assert.AreEqual(original.IsTraitExcluded, copy.IsTraitExcluded);
+        Assert.AreEqual(original.IsSkillExcluded, copy.IsSkillExcluded);
         Assert.AreEqual(original.UpRate, copy.UpRate, delta: 1e-6f);
         Assert.AreEqual(original.DownRate, copy.DownRate, delta: 1e-6f);
 

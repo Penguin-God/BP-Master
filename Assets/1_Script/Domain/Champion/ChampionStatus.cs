@@ -5,8 +5,8 @@ public class ChampionStatus
     public ChampionStatData Stat;
     public event Action<ChampionStatData, ChampionStatData> OnStatChanged;
 
-    public bool IsTraitExcluded { get; private set; }
-    public void TraitExcluded() => IsTraitExcluded = true;
+    public bool IsSkillExcluded { get; private set; }
+    public void TraitExcluded() => IsSkillExcluded = true;
 
     public float UpRate { get; private set; } = 1f;
     public float DownRate { get; private set; } = 1f;
@@ -20,7 +20,7 @@ public class ChampionStatus
     {
         Stat = statData;
         TraitType = traitType;
-        IsTraitExcluded = traitExcluded;
+        IsSkillExcluded = traitExcluded;
         UpRate = upRate;
         DownRate = downRate;
     }
@@ -28,7 +28,7 @@ public class ChampionStatus
     public void AddUpRate(float upRate) => UpRate += upRate;
     public void AddDownRate(float downRate) => DownRate += downRate;
 
-    public ChampionStatus DeepCopy() => new ChampionStatus(Stat, TraitType, IsTraitExcluded, UpRate, DownRate);
+    public ChampionStatus DeepCopy() => new ChampionStatus(Stat, TraitType, IsSkillExcluded, UpRate, DownRate);
 
     public void ChangeStatWithRate(ChampionStatData desiredStat)
     {

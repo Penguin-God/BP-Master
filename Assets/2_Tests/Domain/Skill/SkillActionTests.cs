@@ -60,7 +60,7 @@ public class TraitActionTests
 
         sut.Do(target);
 
-        Assert.IsTrue(target.IsTraitExcluded);
+        Assert.IsTrue(target.IsSkillExcluded);
     }
 
     [Test]
