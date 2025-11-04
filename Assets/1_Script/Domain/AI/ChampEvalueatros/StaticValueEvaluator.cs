@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class StaticValueEvaluator
 {
@@ -31,5 +32,19 @@ public class SkillEvaluator
         int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
         if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
         return result;
+    }
+}
+
+public class ChampionStatAverager
+{
+    public ChampionStatData GetStatAverage(ChampionStatData[] stats)
+    {
+        int totalAttack = stats.Sum(s => s.Attack);
+        int totalDefense = stats.Sum(s => s.Defense);
+
+        int attack = Mathf.RoundToInt(totalAttack / stats.Length);
+        int defense = Mathf.RoundToInt(totalDefense / stats.Length);
+
+        return new ChampionStatData(attack, defense, 0);
     }
 }
