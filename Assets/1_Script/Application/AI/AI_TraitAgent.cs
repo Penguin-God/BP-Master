@@ -4,18 +4,18 @@ using System.Linq;
 
 public class AI_TraitAgent
 {
-    readonly SkillUseController traitUseFacade;
-    readonly SkillSlotFilter traitSlotFilter;
-    readonly SlotStorage<IEnumerable<SkillData>> traits;
     readonly Team Team;
-
+    readonly SkillUseController skillController;
+    readonly SkillSlotFilter skillSlotFilter;
+    readonly SlotStorage<IEnumerable<SkillData>> traits;
     readonly TargetCounter targetCounter;
-    public AI_TraitAgent(Team team, SkillSlotFilter traitSlotFilter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseController traitUseFacade, TargetCounter targetCounter)
+
+    public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseController skillController, TargetCounter targetCounter)
     {
         Team = team;
-        this.traitSlotFilter = traitSlotFilter;
+        this.skillSlotFilter = skillSlotFilter;
         this.traits = traits;
-        this.traitUseFacade = traitUseFacade;
+        this.skillController = skillController;
         this.targetCounter = targetCounter;
     }
 
@@ -23,17 +23,17 @@ public class AI_TraitAgent
     public void UseTrait(Team team)
     {
         if (Team != team) return;
-        var usableSlots = traitSlotFilter.FilteringUseableSlots(Team).ToList();
+        var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();
 
         
         SlotData useSlot = usableSlots[random.Next(usableSlots.Count)];
         IEnumerable<SkillData> useDatas = traits.GetSlot(useSlot);
 
         var targetSides = useDatas.Select(x => x.TargetRule.TargetSide);
-        var targetSlots = traitSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
+        var targetSlots = skillSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
 
         int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useDatas.Select(x => x.TargetRule)));
-        traitUseFacade.UseSkill(useSlot, SelectSlots(targetSlots, targetCount), useDatas);
+        skillController.UseSkill(useSlot, SelectSlots(targetSlots, targetCount), useDatas);
     }
 
     IEnumerable<SlotData> SelectSlots(List<SlotData> targetSlots, int targetCount)
