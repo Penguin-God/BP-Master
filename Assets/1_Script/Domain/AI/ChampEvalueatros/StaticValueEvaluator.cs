@@ -21,20 +21,11 @@ public class StaticValueEvaluator
 public class SkillEvaluator
 {
     SlotStorage<ChampionStatus> statuses;
+    readonly int TeamSize;
     public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
 
     public int Evaluate(SkillData skill, Team team)
     {
-        if (skill.TargetRule.TargetSide == Side.All) return 0;
-
-        int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
-        if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
-        return result;
-    }
-
-    public int Evaluate(SkillExecutor executor, Team team)
-    {
-        // var targets = new SkillTargetFinder(statuses.GetTeamCount(team)).GetTargetSlots();
         if (skill.TargetRule.TargetSide == Side.All) return 0;
 
         int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
