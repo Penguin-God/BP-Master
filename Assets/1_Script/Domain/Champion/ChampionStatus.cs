@@ -11,8 +11,6 @@ public class ChampionStatus
     public float UpRate { get; private set; } = 1f;
     public float DownRate { get; private set; } = 1f;
 
-    public ChampionStatus(ChampionStatData statData) => Stat = statData;
-
     public readonly TraitType TraitType;
     public ChampionStatus(ChampionStatData statData, TraitType traitType) : this(statData, traitType, false, 1f, 1f) { }
 

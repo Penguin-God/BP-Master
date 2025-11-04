@@ -6,7 +6,7 @@ public class TraitConditionTests // StatThresholdChecker는 이상, 이하. Stat
     public void None은_무조건_참() => Assert.IsTrue(Check(StatConditionType.None, 0, default));
 
     [Test]
-    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(new ChampionStatus(default)));
+    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(TestHelper.CreateStatus()));
 
     [Test]
     [TestCase(StatConditionType.AttackBelow)]
@@ -33,7 +33,7 @@ public class TraitConditionTests // StatThresholdChecker는 이상, 이하. Stat
         Assert.IsFalse(Check(type, threshold, Stat(80, 80, 80)));
     }
 
-    bool Check(StatConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(new ChampionStatus(target));
+    bool Check(StatConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(TestHelper.CreateStatus(target.Attack, target.Defense, target.Speed));
 
     [Test]
     [TestCase(StatConditionType.AttackAtLeast)]
