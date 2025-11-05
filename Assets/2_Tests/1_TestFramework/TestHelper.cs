@@ -69,6 +69,9 @@ public static class TestHelper
 
     public static TraitConfig CreateTraitConfig(int chargeAttack = 0, float guardBonusRate = 0, float ampliyRate = 0, float breakRate = 0) 
         => new TraitConfig(chargeAttack, guardBonusRate, ampliyRate, breakRate);
+
+    public static SkillExecutor CreateConditionFreeExecutor(ISkillAction skill) => CreateSkillExecutor(skill, new NullChecker());
+    public static SkillExecutor CreateSkillExecutor(ISkillAction skill, IChampionCondition condition) => new SkillExecutor(skill, condition);
 }
 
 public class TestAttackChangeAction : ISkillAction

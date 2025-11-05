@@ -20,20 +20,18 @@ public class StaticValueEvaluator
 public class SkillEvaluator
 {
     SlotStorage<ChampionStatus> statuses;
-    
+    readonly StatTeamPredictor statTeamPredictor;
     public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
 
-    public int Evaluate(SkillData skill, Team team)
+    public SkillEvaluator(SlotStorage<ChampionStatus> statuses, StatTeamPredictor statTeamPredictor)
     {
-        if (skill.TargetRule.TargetSide == Side.All) return 0;
-
-        int result = statuses.GetTeamCount(Team.Blue) * skill.Amount;
-        if (skill.TargetRule.TargetSide == Side.Opponent) result *= -1;
-        return result;
+        this.statuses = statuses;
+        this.statTeamPredictor = statTeamPredictor;
     }
 
-    public int Evaluate(SkillExecutor executor, Team team)
+    public int Evaluate(SkillExecutor executor, Team team, TraitTargetRule rule)
     {
+        
         return 0;
     }
 }

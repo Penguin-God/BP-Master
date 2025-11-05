@@ -39,7 +39,6 @@ public class StatTeamPredictor
 public class ChampionStatAverager
 {
     readonly IEnumerable<ChampionStatData> stats;
-
     public ChampionStatAverager(IEnumerable<ChampionStatData> stats) => this.stats = stats;
 
     public ChampionStatData GetStatAverage()
