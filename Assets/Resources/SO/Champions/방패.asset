@@ -19,7 +19,7 @@ MonoBehaviour:
   speed: 3
   skillDatas:
   - targetSide: 0
-    range: 3
+    range: 2
     traitType: 4
     amount: 30
     conditionType: 0

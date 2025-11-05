@@ -20,8 +20,8 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 1
     range: 3
-    traitType: 3
-    amount: -30
+    traitType: 4
+    amount: -25
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
