@@ -5,7 +5,7 @@ public class SkillExecutorFactory
     public SkillExecutor CreateExecutor(SkillData traitData, ChampionStatData useChamp)
     {
         ISkillAction action = SkillActionFactory.CreateAction(traitData.TraitType, traitData.Amount);
-        IChampionCondition condition = ChampionCondtionFactory.CreateCondition(traitData.ConditionData, useChamp);
+        IChampionCondition condition = SkillCondtionFactory.CreateCondition(traitData.ConditionData, useChamp);
         return new SkillExecutor(action, condition);
     }
 }
@@ -28,7 +28,7 @@ public static class SkillActionFactory
     }
 }
 
-public static class ChampionCondtionFactory
+public static class SkillCondtionFactory
 {
     public static IChampionCondition CreateCondition(SkillConditionData data, ChampionStatData useChamp)
     {

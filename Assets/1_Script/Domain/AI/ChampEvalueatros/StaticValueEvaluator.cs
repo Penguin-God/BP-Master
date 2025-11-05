@@ -16,22 +16,3 @@ public class StaticValueEvaluator
         return stat.Attack + stat.Defense + level;
     }
 }
-
-public class SkillEvaluator
-{
-    SlotStorage<ChampionStatus> statuses;
-    readonly StatTeamPredictor statTeamPredictor;
-    public SkillEvaluator(SlotStorage<ChampionStatus> statuses) => this.statuses = statuses;
-
-    public SkillEvaluator(SlotStorage<ChampionStatus> statuses, StatTeamPredictor statTeamPredictor)
-    {
-        this.statuses = statuses;
-        this.statTeamPredictor = statTeamPredictor;
-    }
-
-    public int Evaluate(SkillExecutor executor, Team team, TraitTargetRule rule)
-    {
-        
-        return 0;
-    }
-}

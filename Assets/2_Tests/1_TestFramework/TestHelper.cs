@@ -42,7 +42,7 @@ public static class TestHelper
 
     public static SkillData CreateConditionFreeTrait(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
 
-    public static SkillData CreateTraitData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
+    public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, conditionData, traitTargetRule);
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
@@ -69,9 +69,6 @@ public static class TestHelper
 
     public static TraitConfig CreateTraitConfig(int chargeAttack = 0, float guardBonusRate = 0, float ampliyRate = 0, float breakRate = 0) 
         => new TraitConfig(chargeAttack, guardBonusRate, ampliyRate, breakRate);
-
-    public static SkillExecutor CreateConditionFreeExecutor(ISkillAction skill) => CreateSkillExecutor(skill, new NullChecker());
-    public static SkillExecutor CreateSkillExecutor(ISkillAction skill, IChampionCondition condition) => new SkillExecutor(skill, condition);
 }
 
 public class TestAttackChangeAction : ISkillAction
