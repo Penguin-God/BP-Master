@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusDatas:
   - Threshold: 500
-    Bonus: 100
-  - Threshold: 600
-    Bonus: 175
-  - Threshold: 700
+    Bonus: 150
+  - Threshold: 750
     Bonus: 250
+  - Threshold: 1000
+    Bonus: 500

@@ -20,7 +20,7 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 2
     range: 4
-    traitType: 1
+    traitType: 3
     amount: 30
     conditionType: 4
     threshold: 150
@@ -28,7 +28,7 @@ MonoBehaviour:
     targetTrait: 0
   - targetSide: 2
     range: 4
-    traitType: 3
+    traitType: 1
     amount: 30
     conditionType: 4
     threshold: 150
