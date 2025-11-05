@@ -28,7 +28,7 @@ MonoBehaviour:
     targetTrait: 0
   - targetSide: 2
     range: 4
-    traitType: 2
+    traitType: 3
     amount: 30
     conditionType: 4
     threshold: 150

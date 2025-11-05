@@ -20,7 +20,7 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 0
     range: 4
-    traitType: 2
+    traitType: 3
     amount: 30
     conditionType: 0
     threshold: 0
