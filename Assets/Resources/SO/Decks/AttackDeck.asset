@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0656e101a5f827e4b9a91ce33f2577b5, type: 3}
+  m_Name: AttackDeck
+  m_EditorClassIdentifier: 
+  bans:
+  - {fileID: 11400000, guid: a07707239a73cdb4aab80b49ce72e982, type: 2}
+  - {fileID: 11400000, guid: bf1e46797b2102f4995e5dbc047357ab, type: 2}
+  - {fileID: 11400000, guid: 253f2ff2f15b66048afe9ccad9db78aa, type: 2}
+  - {fileID: 11400000, guid: 512104aaadb965640950d26d5e496bf8, type: 2}
+  - {fileID: 11400000, guid: 5153718c29d3dba4ea538c4952b5949e, type: 2}
+  - {fileID: 11400000, guid: 10bb0fefc46cd3f428e3bdac9b2bf7ab, type: 2}
+  picks:
+  - {fileID: 11400000, guid: 96e5b2be14ec2e44fb3a39b5e7d7f8b5, type: 2}
+  - {fileID: 11400000, guid: 5d38329471112af438d2c472494c7427, type: 2}
+  - {fileID: 11400000, guid: fce1ffe1b7061b8408ae3702d3a5bc3c, type: 2}
+  - {fileID: 11400000, guid: 76d0219708f6e06448baa851953f4372, type: 2}
+  - {fileID: 11400000, guid: 6bfc90ab66bb4ba45b706202167930bd, type: 2}
+  - {fileID: 11400000, guid: ed9a45c3fd24c304eb2e9afeea1fb3b7, type: 2}
+  - {fileID: 11400000, guid: 8784443d42fd77440b0c4cc92e203e8f, type: 2}

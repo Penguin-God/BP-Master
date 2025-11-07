@@ -8,6 +8,7 @@ public class AI_Main : MonoBehaviour
 
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] MasteryGenerator gamerRoster;
+    [SerializeField] DeckPrioritySO deckData;
     ChampionCatalog catalog;
     StaticValueEvaluator evaluator;
     void Start()
@@ -24,7 +25,9 @@ public class AI_Main : MonoBehaviour
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new StaticValuePick(catalog, evaluator));
+        PrioritySelector prioritySelector = new PrioritySelector(deckData.Bans, deckData.Picks);
+        // var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new StaticValuePick(catalog, evaluator));
+        var ai = new AI_SelectAgent(Team, phaseManager, storage, prioritySelector, prioritySelector);
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }

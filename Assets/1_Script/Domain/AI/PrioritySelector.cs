@@ -4,10 +4,10 @@ using System.Linq;
 
 public class PrioritySelector : IBanSelector, IPickSelector
 {
-    private readonly int[] banPlan;
-    private readonly int[] pickPlan;
+    private readonly IEnumerable<int> banPlan;
+    private readonly IEnumerable<int> pickPlan;
 
-    public PrioritySelector(int[] banPlan, int[] pickPlan)
+    public PrioritySelector(IEnumerable<int> banPlan, IEnumerable<int> pickPlan)
     {
         this.banPlan = banPlan;
         this.pickPlan = pickPlan;

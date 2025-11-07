@@ -2486,6 +2486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   championRepository: {fileID: 1420292359}
   gamerRoster: {fileID: 1410148730}
+  deckData: {fileID: 11400000, guid: 7b7bf1b37ab430f47982c751134a5a94, type: 2}
 --- !u!114 &758303702
 MonoBehaviour:
   m_ObjectHideFlags: 0
