@@ -3,6 +3,17 @@ using NUnit.Framework;
 public class SlotStorageTests
 {
     [Test]
+    public void 현재_순서에_맞는_슬롯_반환()
+    {
+        var sut = new TeamSlotIndexr();
+
+        Assert.AreEqual(0, sut.AllocateIndex(Team.Blue));
+        Assert.AreEqual(0, sut.AllocateIndex(Team.Red));
+        Assert.AreEqual(1, sut.AllocateIndex(Team.Red));
+        Assert.AreEqual(1, sut.AllocateIndex(Team.Blue));
+    }
+
+    [Test]
     public void 슬롯에_추가한_순서로_저장_및_조회()
     {
         SlotStorage<int> sut = new();

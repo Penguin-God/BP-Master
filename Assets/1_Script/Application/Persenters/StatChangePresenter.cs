@@ -63,6 +63,8 @@ public class StatChangePresenter
 
     StatDeltaViewModel BuildDeltaView(int before, int after)
     {
+        UnityEngine.Debug.Log(before);
+        UnityEngine.Debug.Log(after);
         int delta = after - before;
         if (delta > 0) return new StatDeltaViewModel(isChange: true, positiveColor, $"+{delta}");
         else if (delta < 0) return new StatDeltaViewModel(isChange: true, negativeColor, $"-{Mathf.Abs(delta)}");
