@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public readonly struct StatChangeData
@@ -20,14 +18,12 @@ public class StatDeltaViewModel
     public bool IsChange { get; }
     public Color DeltaTextColor { get; }
     public string DeltaText { get; }
-    public IEnumerable<int> DeltaValues { get; }
-
-    public StatDeltaViewModel(bool isChange, Color deltaTextColor, string deltaText, IEnumerable<int> deltaValues)
+    
+    public StatDeltaViewModel(bool isChange, Color deltaTextColor, string deltaText)
     {
         IsChange = isChange;
         DeltaTextColor = deltaTextColor;
         DeltaText = deltaText;
-        DeltaValues = deltaValues;
     }
 }
 
@@ -68,17 +64,8 @@ public class StatChangePresenter
     StatDeltaViewModel BuildDeltaView(int before, int after)
     {
         int delta = after - before;
-        if (delta > 0)
-        {
-            var deltaValues = Enumerable.Range(before + 1, delta);
-            return new StatDeltaViewModel(true, positiveColor, $"+{delta}", deltaValues);
-        }
-        else if (delta < 0)
-        {
-            int count = Mathf.Abs(delta);
-            var deltaValues = Enumerable.Range(after, count).Reverse(); // 내림차순
-            return new StatDeltaViewModel(true, negativeColor, $"-{count}", deltaValues);
-        }
-        else return new StatDeltaViewModel(false, Color.white, string.Empty, null);
+        if (delta > 0) return new StatDeltaViewModel(isChange: true, positiveColor, $"+{delta}");
+        else if (delta < 0) return new StatDeltaViewModel(isChange: true, negativeColor, $"-{Mathf.Abs(delta)}");
+        else return new StatDeltaViewModel(isChange: false, Color.white, string.Empty);
     }
 }
