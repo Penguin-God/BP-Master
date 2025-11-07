@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,33 +9,23 @@ public class PrioritySelector : IBanSelector, IPickSelector
 
     public PrioritySelector(int[] banPlan, int[] pickPlan)
     {
-        this.banPlan = banPlan ?? new int[0];
-        this.pickPlan = pickPlan ?? new int[0];
+        this.banPlan = banPlan;
+        this.pickPlan = pickPlan;
     }
 
-    public int Pick(HashSet<int> selectableIds)
+    public int Pick(HashSet<int> selectableIds) => ChooseByPlanOrRandom(selectableIds, pickPlan, _ => true); 
+    public int Ban(HashSet<int> selectableIds) => ChooseByPlanOrRandom(selectableIds, banPlan, id => pickPlan.Contains(id) == false);
+
+    int ChooseByPlanOrRandom(HashSet<int> selectableIds, IEnumerable<int> plan, Func<int, bool> exclude)
     {
-        // 1) 우선순위 순서대로 가능한 후보 탐색
-        foreach (int id in pickPlan)
+        foreach (int id in plan)
         {
             if (selectableIds.Contains(id))
                 return id;
         }
 
-        // 2) 모든 후보가 불가능하면 랜덤
-        return RandomUtil.DrawRandom(selectableIds);
-    }
-
-    public int Ban(HashSet<int> selectableIds)
-    {
-        // 1) 우선순위 순서대로 가능한 후보 탐색
-        foreach (int id in banPlan)
-        {
-            if (selectableIds.Contains(id))
-                return id;
-        }
-
-        selectableIds = selectableIds.Except(pickPlan).ToHashSet();
-        return RandomUtil.DrawRandom(selectableIds);
+        var pool = selectableIds.Where(id => exclude(id)).ToList();
+        if (pool.Count == 0) pool = selectableIds.ToList(); 
+        return RandomUtil.DrawRandom(pool);
     }
 }
