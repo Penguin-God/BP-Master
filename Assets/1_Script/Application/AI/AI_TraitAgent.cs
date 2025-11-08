@@ -19,14 +19,12 @@ public class AI_TraitAgent
         this.targetCounter = targetCounter;
     }
 
-    Random random = new Random();
     public void UseTrait(Team team)
     {
         if (Team != team) return;
         var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();
 
-        
-        SlotData useSlot = usableSlots[random.Next(usableSlots.Count)];
+        SlotData useSlot = RandomUtil.DrawRandom(usableSlots);
         IEnumerable<SkillData> useDatas = traits.GetSlot(useSlot);
 
         var targetSides = useDatas.Select(x => x.TargetRule.TargetSide);
@@ -41,7 +39,7 @@ public class AI_TraitAgent
         List<SlotData> result = new();
         for (int i = 0; i < targetCount; i++)
         {
-            var target = targetSlots[random.Next(targetSlots.Count)];
+            var target = RandomUtil.DrawRandom(targetSlots);
             result.Add(target);
             targetSlots.Remove(target);
         }
