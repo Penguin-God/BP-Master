@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Graphs;
 
 public static class TestHelper
 {
@@ -26,8 +25,8 @@ public static class TestHelper
     public static SlotStorage<IEnumerable<SkillData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
     {
         SlotStorage<IEnumerable<SkillData>> result = new();
-        result.AddSlot(Team.Blue, new SkillData[] { CreateConditionFreeTrait(SkillType.AttackChanger, amount, rule) });
-        result.AddSlot(Team.Red, new SkillData[] { CreateConditionFreeTrait(SkillType.AttackChanger, amount, rule) });
+        result.AddSlot(Team.Blue, CreateSkills(CreateConditionFreeSkill(SkillType.AttackChanger, amount, rule) ));
+        result.AddSlot(Team.Red, CreateSkills(CreateConditionFreeSkill(SkillType.AttackChanger, amount, rule) ));
         return result;
     }
 
@@ -38,9 +37,9 @@ public static class TestHelper
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
-    public static SkillData[] CreateTraits(params SkillData[] traits) => traits;
+    public static SkillData[] CreateSkills(params SkillData[] traits) => traits;
 
-    public static SkillData CreateConditionFreeTrait(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
+    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
 
     public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, conditionData, traitTargetRule);

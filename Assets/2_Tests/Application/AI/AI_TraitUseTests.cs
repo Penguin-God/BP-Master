@@ -15,7 +15,7 @@ public class AI_TraitUseTests
         flags.AddSlots(Team.Blue, new bool[] { false, false });
         var facade = new SkillUseController(statuses);
 
-        var traits = CreateTraits ( CreateConditionFreeTrait(SkillType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
+        var traits = CreateSkills ( CreateConditionFreeSkill(SkillType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
         var traitStorage = new SlotStorage<IEnumerable<SkillData>>();
         traitStorage.AddSlot(Team.Blue, traits);
         traitStorage.AddSlot(Team.Blue, traits);
