@@ -44,6 +44,9 @@ public static class TestHelper
     public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, conditionData, traitTargetRule);
 
+    public static Skill CreateSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, TraitTargetRule traitTargetRule = default)
+        => new Skill(CreateSkills(CreateSkillData(skillType, amount, conditionData, traitTargetRule)));
+
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
     public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);
     public static SkillConditionData CreateConditionData(ConditionType conditionType, StatConditionType statType = StatConditionType.None, int threshold = 0, TraitType traitType = TraitType.None)
