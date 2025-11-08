@@ -10,7 +10,7 @@ public static class ChampionAssetTools
 {
     private const int START_ID = 1;   // ID 시작값(필요하면 변경)
 
-    [MenuItem("BP Master/Tools/Rename & Re-index ChampionSO Assets")]
+    [MenuItem("Custom Tools/Re-index ChampionSO Assets")]
     private static void RenameAndReindexChampionAssets()
     {
         // ──────────────────────────────────────
