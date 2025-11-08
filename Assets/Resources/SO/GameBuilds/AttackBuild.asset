@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0656e101a5f827e4b9a91ce33f2577b5, type: 3}
-  m_Name: AttackDeck
+  m_Name: AttackBuild
   m_EditorClassIdentifier: 
   bans:
   - {fileID: 11400000, guid: a07707239a73cdb4aab80b49ce72e982, type: 2}

@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DeckPrioritySO", menuName = "BP Master/DeckPrioritySO")]
-public class DeckPrioritySO : ScriptableObject
+[CreateAssetMenu(fileName = "BuildPrioritySO", menuName = "BP Master/BuildPrioritySO")]
+public class BuildPrioritySO : ScriptableObject
 {
     [SerializeField] ChampionSO[] bans;
     [SerializeField] ChampionSO[] picks;

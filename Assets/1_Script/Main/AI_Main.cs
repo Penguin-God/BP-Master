@@ -8,7 +8,7 @@ public class AI_Main : MonoBehaviour
 
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] MasteryGenerator gamerRoster;
-    [SerializeField] DeckPrioritySO deckData;
+    [SerializeField] BuildPrioritySO deckData;
     ChampionCatalog catalog;
     StaticValueEvaluator evaluator;
     void Start()
