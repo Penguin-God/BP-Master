@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,14 +6,14 @@ public class AI_TraitAgent
     readonly Team Team;
     readonly SkillUseController skillController;
     readonly SkillSlotFilter skillSlotFilter;
-    readonly SlotStorage<IEnumerable<SkillData>> traits;
+    readonly SlotStorage<IEnumerable<SkillData>> skills;
     readonly TargetCounter targetCounter;
 
-    public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseController skillController, TargetCounter targetCounter)
+    public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<IEnumerable<SkillData>> skills, SkillUseController skillController, TargetCounter targetCounter)
     {
         Team = team;
         this.skillSlotFilter = skillSlotFilter;
-        this.traits = traits;
+        this.skills = skills;
         this.skillController = skillController;
         this.targetCounter = targetCounter;
     }
@@ -25,16 +24,16 @@ public class AI_TraitAgent
         var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();
 
         SlotData useSlot = RandomUtil.DrawRandom(usableSlots);
-        IEnumerable<SkillData> useDatas = traits.GetSlot(useSlot);
+        IEnumerable<SkillData> useDatas = skills.GetSlot(useSlot);
 
         var targetSides = useDatas.Select(x => x.TargetRule.TargetSide);
         var targetSlots = skillSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
 
         int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useDatas.Select(x => x.TargetRule)));
-        skillController.UseSkill(useSlot, SelectSlots(targetSlots, targetCount), useDatas);
+        skillController.UseSkill(useSlot, SelectSkillTarget(targetSlots, targetCount), useDatas);
     }
 
-    IEnumerable<SlotData> SelectSlots(List<SlotData> targetSlots, int targetCount)
+    IEnumerable<SlotData> SelectSkillTarget(List<SlotData> targetSlots, int targetCount)
     {
         List<SlotData> result = new();
         for (int i = 0; i < targetCount; i++)
