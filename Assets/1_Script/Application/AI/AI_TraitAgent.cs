@@ -22,7 +22,8 @@ public class AI_TraitAgent
     public void UseTrait(Team team)
     {
         if (Team != team) return;
-        Skill useSkill = sKillDicision.SelectSkill(skillSlots.GetTeam(Team));
+        var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();
+        Skill useSkill = sKillDicision.SelectSkill(usableSlots.Select(x => skillSlots.GetSlot(x)));
 
         var targetSides = useSkill.Sides;
         var targetSlots = skillSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();

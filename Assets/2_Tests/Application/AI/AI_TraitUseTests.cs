@@ -18,8 +18,8 @@ public class AI_TraitUseTests
         var skillStorage = new SlotStorage<Skill>();
         skillStorage.AddSlot(Team.Blue, skill);
         skillStorage.AddSlot(Team.Blue, skill);
-        skillStorage.AddSlot(Team.Red, skill);
-        skillStorage.AddSlot(Team.Red, skill);
+        skillStorage.AddSlot(Team.Red, null);
+        skillStorage.AddSlot(Team.Red, null);
 
         var filter = new SkillSlotFilter(flags);
         var sut = new AI_TraitAgent(Team.Blue, filter, skillStorage, facade, new TargetCounter(2));
