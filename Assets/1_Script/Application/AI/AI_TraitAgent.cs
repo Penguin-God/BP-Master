@@ -22,17 +22,16 @@ public class AI_TraitAgent
     public void UseTrait(Team team)
     {
         if (Team != team) return;
-        var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();
-
-        SlotData useSlot = RandomUtil.DrawRandom(usableSlots);
-        Skill useSkill = skillSlots.GetSlot(useSlot);
+        Skill useSkill = sKillDicision.SelectSkill(skillSlots.GetTeam(Team));
 
         var targetSides = useSkill.Sides;
         var targetSlots = skillSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
 
         int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useSkill.Rules));
-        skillController.UseSkill(useSlot, SelectSkillTarget(targetSlots, targetCount), useSkill.SkillDatas);
+        skillController.UseSkill(SkillToSlot(useSkill), SelectSkillTarget(targetSlots, targetCount), useSkill.SkillDatas);
     }
+
+    SlotData SkillToSlot(Skill skill) => skillSlots.GetAllSlotDatas().First(x => skillSlots.GetSlot(x) == skill);
 
     IEnumerable<SlotData> SelectSkillTarget(List<SlotData> targetSlots, int targetCount)
     {
