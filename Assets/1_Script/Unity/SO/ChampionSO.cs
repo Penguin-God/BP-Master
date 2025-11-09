@@ -55,7 +55,6 @@ public class ChampionSO : ScriptableObject
 
     [Header("스킬")]
     [SerializeField] TraitDataConfig[] skillDatas;
-    public IEnumerable<SkillData> SkillDatas => skillDatas.Select(x => x.CreateTraitData());
     public Skill Skill => new Skill(skillDatas.Select(x => x.CreateTraitData()));
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
     public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData, traitType);
