@@ -14,18 +14,16 @@ public class SkillUsePersenter
         traitSlots = traitDatas;
     }
 
-    public bool SelectTarget(SlotData targetSlot)
+    public void SelectTarget(SlotData targetSlot)
     {
-        if (IsUseable == false) return false;
+        if (IsUseable == false) return;
 
         traitTargetSelector.Select(targetSlot);
         if (traitTargetSelector.IsFull)
         {
             useController.UseSkill(useSlot.Value, traitTargetSelector.Targets, traitSlots.GetSlot(useSlot.Value));
             useSlot = null;
-            return true;
         }
-        else return false;
     }
 
     public bool IsUseable => useSlot.HasValue;

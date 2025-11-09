@@ -62,8 +62,8 @@ public class SkillUsePresenterTests
         sut.SelectUseSkill(BlueZeroSlot, rule);
         Assert.IsTrue(sut.IsUseable);
 
-        Assert.IsFalse(sut.SelectTarget(RedZeroSlot));
-        Assert.IsTrue(sut.SelectTarget(RedOneSlot));
+        sut.SelectTarget(RedZeroSlot);
+        sut.SelectTarget(RedOneSlot);
         Assert.IsFalse(sut.IsUseable);
 
         Assert.AreEqual(100, statuses.GetSlot(RedZeroSlot).Stat.Attack);
