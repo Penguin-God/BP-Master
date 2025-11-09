@@ -2,28 +2,27 @@ using System.Collections.Generic;
 
 public class SkillUsePersenter
 {
-    readonly SlotStorage<Skill> skillSlots;
     TraitTargetSelector traitTargetSelector;
     public IEnumerable<SlotData> CurrentTargets => traitTargetSelector?.Targets;
-    SkillUseController useController;
     int TeamSize;
-    public SkillUsePersenter(SkillUseController facade, int teamSize, SlotStorage<Skill> skillSlots)
+    public SkillUsePersenter(int teamSize)
     {
-        this.useController = facade;
         TeamSize = teamSize;
-        this.skillSlots = skillSlots;
     }
 
-    public void SelectTarget(SlotData targetSlot)
+    public bool SelectTarget(SlotData targetSlot, out SlotData slotData)
     {
-        if (IsUseable == false) return;
+        slotData = default;
+        if (IsUseable == false) return false;
 
         traitTargetSelector.Select(targetSlot);
         if (traitTargetSelector.IsFull)
         {
-            useController.UseSkill(useSlot.Value, traitTargetSelector.Targets, skillSlots.GetSlot(useSlot.Value).SkillDatas);
+            slotData = UseSlot;
             useSlot = null;
+            return true;
         }
+        else return false;
     }
 
     public bool IsUseable => useSlot.HasValue;

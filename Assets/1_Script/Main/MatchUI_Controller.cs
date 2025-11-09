@@ -47,7 +47,7 @@ public class MatchUI_Controller : MonoBehaviour
         banPickView.InitTrackerViewSlots(slotStorageManager.StatusSlots);
         
         skillButtonView.Init(filter, playerTeam);
-        traitUseView.Init(new SkillUsePersenter(skillController, matchConfig.TeamSize, slotStorageManager.SkillSlots), slotStorageManager.SkillDataSlots);
+        traitUseView.Init(new SkillUsePersenter(matchConfig.TeamSize), slotStorageManager.SkillDataSlots, skillController);
         eventDispatcher.OnPhaseSkill += skillButtonView.RefreshButtonsByTurn;
         skillButtonView.RefreshButtonsByTurn(Team.Blue);
 

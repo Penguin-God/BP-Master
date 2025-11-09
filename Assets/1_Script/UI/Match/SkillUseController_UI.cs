@@ -11,11 +11,13 @@ public class SkillUseController_UI : MonoBehaviour
     SkillButtonView skillButtonView;
     SlotStorage<IEnumerable<SkillData>> traits;
     SkillUsePersenter traitUsePresenter;
-    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<IEnumerable<SkillData>> traits)
+    SkillUseController skillUseController;
+    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseController skillUseController)
     {
         gameObject.SetActive(true);
         this.traitUsePresenter = traitUsePresenter;
         this.traits = traits;
+        this.skillUseController = skillUseController;
 
         SetupChampionButtons(blueChamps, Team.Blue);
         SetupChampionButtons(redChamps, Team.Red);
@@ -33,7 +35,11 @@ public class SkillUseController_UI : MonoBehaviour
 
     void OnClickSkillSlot(SlotData clickSlot)
     {
-        if (traitUsePresenter.IsUseable) traitUsePresenter.SelectTarget(clickSlot);
+        if (traitUsePresenter.IsUseable)
+        {
+            if(traitUsePresenter.SelectTarget(clickSlot, out var useSlot))
+                skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, traits.GetSlot(useSlot));
+        }
         else
         {
             var rules = traits.GetSlot(clickSlot).Select(x => x.TargetRule);
