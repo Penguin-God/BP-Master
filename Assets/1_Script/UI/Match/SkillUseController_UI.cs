@@ -7,16 +7,17 @@ public class SkillUseController_UI : MonoBehaviour
 {
     [SerializeField] Button[] blueChamps;
     [SerializeField] Button[] redChamps;
-
     SkillButtonView skillButtonView;
-    SlotStorage<IEnumerable<SkillData>> traits;
+
+    SlotStorage<Skill> skillSlots;
     SkillUsePersenter traitUsePresenter;
     SkillUseController skillUseController;
-    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<IEnumerable<SkillData>> traits, SkillUseController skillUseController)
+
+    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
     {
         gameObject.SetActive(true);
         this.traitUsePresenter = traitUsePresenter;
-        this.traits = traits;
+        this.skillSlots = skillSlots;
         this.skillUseController = skillUseController;
 
         SetupChampionButtons(blueChamps, Team.Blue);
@@ -37,15 +38,15 @@ public class SkillUseController_UI : MonoBehaviour
     {
         if (traitUsePresenter.IsUseable)
         {
-            if(traitUsePresenter.SelectTarget(clickSlot, out var useSlot))
-                skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, traits.GetSlot(useSlot));
+            if (traitUsePresenter.SelectTarget(clickSlot, out var useSlot))
+                skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, skillSlots.GetSlot(useSlot).SkillDatas);
         }
         else
         {
-            var rules = traits.GetSlot(clickSlot).Select(x => x.TargetRule);
+            var rules = skillSlots.GetSlot(clickSlot).Rules;
             traitUsePresenter.SelectUseSkill(clickSlot, EnumCaster.MergeRule(rules));
         }
 
-        if (traitUsePresenter.IsUseable) skillButtonView.ActiveTargets(traits.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
+        if (traitUsePresenter.IsUseable) skillButtonView.ActiveTargets(skillSlots.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
     }
 }
