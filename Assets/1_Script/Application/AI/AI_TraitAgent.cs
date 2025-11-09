@@ -6,15 +6,15 @@ public class AI_TraitAgent
     readonly Team Team;
     readonly SkillUseController skillController;
     readonly SkillSlotFilter skillSlotFilter;
-    readonly SlotStorage<IEnumerable<SkillData>> skills;
+    readonly SlotStorage<Skill> skillSlots;
     readonly TargetCounter targetCounter;
     readonly AI_SKillDicision sKillDicision = new AI_SKillDicision();
 
-    public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<IEnumerable<SkillData>> skills, SkillUseController skillController, TargetCounter targetCounter)
+    public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<Skill> skills, SkillUseController skillController, TargetCounter targetCounter)
     {
         Team = team;
         this.skillSlotFilter = skillSlotFilter;
-        this.skills = skills;
+        this.skillSlots = skills;
         this.skillController = skillController;
         this.targetCounter = targetCounter;
     }
@@ -25,13 +25,13 @@ public class AI_TraitAgent
         var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();
 
         SlotData useSlot = RandomUtil.DrawRandom(usableSlots);
-        IEnumerable<SkillData> useDatas = skills.GetSlot(useSlot);
+        Skill useSkill = skillSlots.GetSlot(useSlot);
 
-        var targetSides = useDatas.Select(x => x.TargetRule.TargetSide);
+        var targetSides = useSkill.Sides;
         var targetSlots = skillSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
 
-        int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useDatas.Select(x => x.TargetRule)));
-        skillController.UseSkill(useSlot, SelectSkillTarget(targetSlots, targetCount), useDatas);
+        int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useSkill.Rules));
+        skillController.UseSkill(useSlot, SelectSkillTarget(targetSlots, targetCount), useSkill.SkillDatas);
     }
 
     IEnumerable<SlotData> SelectSkillTarget(List<SlotData> targetSlots, int targetCount)

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using static TestHelper;
 
 public class AI_TraitUseTests
@@ -15,15 +14,15 @@ public class AI_TraitUseTests
         flags.AddSlots(Team.Blue, new bool[] { false, false });
         var facade = new SkillUseController(statuses);
 
-        var traits = CreateSkills ( CreateConditionFreeSkill(SkillType.AttackChanger, 10, new TraitTargetRule(Side.Opponent, targetRange)) );
-        var traitStorage = new SlotStorage<IEnumerable<SkillData>>();
-        traitStorage.AddSlot(Team.Blue, traits);
-        traitStorage.AddSlot(Team.Blue, traits);
-        traitStorage.AddSlot(Team.Red, traits);
-        traitStorage.AddSlot(Team.Red, traits);
+        var skill = CreateSkill(SkillType.AttackChanger, 10, traitTargetRule: new TraitTargetRule(Side.Opponent, targetRange));
+        var skillStorage = new SlotStorage<Skill>();
+        skillStorage.AddSlot(Team.Blue, skill);
+        skillStorage.AddSlot(Team.Blue, skill);
+        skillStorage.AddSlot(Team.Red, skill);
+        skillStorage.AddSlot(Team.Red, skill);
 
         var filter = new SkillSlotFilter(flags);
-        var sut = new AI_TraitAgent(Team.Blue, filter, traitStorage, facade, new TargetCounter(2));
+        var sut = new AI_TraitAgent(Team.Blue, filter, skillStorage, facade, new TargetCounter(2));
 
         sut.UseTrait(Team.Blue);
 

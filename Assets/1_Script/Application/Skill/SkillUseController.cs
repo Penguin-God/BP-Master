@@ -9,14 +9,14 @@ public class SkillUseController
 
     public SkillUseController(SlotStorage<ChampionStatus> statusSlots) => this.statusSlots = statusSlots;
 
-    public void UseSkill(SlotData traitSlot, IEnumerable<SlotData> targetSlots, IEnumerable<SkillData> traitDatas)
+    public void UseSkill(SlotData skillSlot, IEnumerable<SlotData> targetSlots, IEnumerable<SkillData> skillDatas)
     {
         var targets = targetSlots.Select(x => statusSlots.GetSlot(x));
-        foreach (var trait in traitDatas)
+        foreach (var skillData in skillDatas)
         {
-            var executor = new SkillExecutorFactory().CreateExecutor(trait, statusSlots.GetSlot(traitSlot).Stat);
+            var executor = new SkillExecutorFactory().CreateExecutor(skillData, statusSlots.GetSlot(skillSlot).Stat);
             executor.ExecuteSkill(targets);
         }
-        OnUseSkill?.Invoke(traitSlot);
+        OnUseSkill?.Invoke(skillSlot);
     }
 }

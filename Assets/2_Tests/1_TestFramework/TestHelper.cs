@@ -22,14 +22,6 @@ public static class TestHelper
         return result;
     }
 
-    public static SlotStorage<IEnumerable<SkillData>> CreateAttTraitSlots(int amount, TraitTargetRule rule)
-    {
-        SlotStorage<IEnumerable<SkillData>> result = new();
-        result.AddSlot(Team.Blue, CreateSkills(CreateConditionFreeSkill(SkillType.AttackChanger, amount, rule) ));
-        result.AddSlot(Team.Red, CreateSkills(CreateConditionFreeSkill(SkillType.AttackChanger, amount, rule) ));
-        return result;
-    }
-
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
 
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
@@ -41,7 +33,7 @@ public static class TestHelper
 
     public static SkillData CreateConditionFreeSkill(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
 
-    public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule = default)
+    public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, TraitTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, conditionData, traitTargetRule);
 
     public static Skill CreateSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, TraitTargetRule traitTargetRule = default)
