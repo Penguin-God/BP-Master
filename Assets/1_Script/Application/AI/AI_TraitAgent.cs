@@ -8,6 +8,7 @@ public class AI_TraitAgent
     readonly SkillSlotFilter skillSlotFilter;
     readonly SlotStorage<IEnumerable<SkillData>> skills;
     readonly TargetCounter targetCounter;
+    readonly AI_SKillDicision sKillDicision = new AI_SKillDicision();
 
     public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<IEnumerable<SkillData>> skills, SkillUseController skillController, TargetCounter targetCounter)
     {
