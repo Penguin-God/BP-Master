@@ -6,28 +6,20 @@ public class AI_Main : MonoBehaviour
     Team Team;
     PhaseEventDispatcher phaseEventDispatcher;
 
-    [SerializeField] ChampionRepository championRepository;
-    [SerializeField] MasteryGenerator gamerRoster;
-    [SerializeField] BuildPrioritySO deckData;
-    ChampionCatalog catalog;
-    StaticValueEvaluator evaluator;
-    void Start()
-    {
-        catalog = new ChampionCatalog(championRepository.AllChampion.ToDictionary(x => x.Id, x => x.CreateData()));    
-    }
+    [SerializeField] MasteryGenerator masterGenerator;
+    [SerializeField] BuildPrioritySO[] buildDatas;
 
     public void Init(Team team, PhaseEventDispatcher phaseEventDispatcher)
     {
         Team = team;
         this.phaseEventDispatcher = phaseEventDispatcher;
-        evaluator = new StaticValueEvaluator(gamerRoster.GetTeamMasteries(team));
     }
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
-        PrioritySelector prioritySelector = new PrioritySelector(deckData.Bans, deckData.Picks);
+        MultiPrioritySelector selector = new MultiPrioritySelector(new MasteryManager(masterGenerator.GetTeamMasteries(Team)), buildDatas.Select(x => new PrioritySelector(x.Bans, x.Picks)));
         // var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new StaticValuePick(catalog, evaluator));
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, prioritySelector, prioritySelector);
+        var ai = new AI_SelectAgent(Team, phaseManager, storage, selector, selector);
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }
