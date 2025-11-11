@@ -3,7 +3,7 @@ using System.Linq;
 
 public sealed class MultiPrioritySelector : IBanSelector, IPickSelector
 {
-    readonly PrioritySelector[] selectors;
+    readonly IEnumerable<PrioritySelector> selectors;
     readonly MasteryManager mastery;
 
     public MultiPrioritySelector(MasteryManager mastery, IEnumerable<PrioritySelector> selectors)
@@ -12,37 +12,13 @@ public sealed class MultiPrioritySelector : IBanSelector, IPickSelector
         this.selectors = selectors.ToArray();
     }
 
-    PrioritySelector ChooseByMasterySum(HashSet<int> selectableIds)
-    {
-        PrioritySelector best = selectors[0];
-        int bestSum = SumSelectableMastery(best, selectableIds);
+    PrioritySelector SelectBuild()
+        => selectors
+            .OrderByDescending(x => SumPickMastery(x))
+            .FirstOrDefault();
 
-        for (int i = 1; i < selectors.Length; i++)
-        {
-            var s = selectors[i];
-            int sum = SumSelectableMastery(s, selectableIds);
-            if (sum > bestSum)
-            {
-                best = s;
-                bestSum = sum;
-            }
-        }
+    int SumPickMastery(PrioritySelector selector) => selector.PickPlan.Sum(id => mastery.GetMastery(id));
 
-        return best; // 동률이면 앞선 셀렉터 유지
-    }
-
-    int SumSelectableMastery(PrioritySelector selector, HashSet<int> selectableIds)
-    {
-        int total = 0;
-        foreach (var id in selector.PickPlan)
-            if (selectableIds.Contains(id))
-                total += mastery.GetMastery(id);
-        return total;
-    }
-
-    public int Pick(HashSet<int> selectableIds)
-        => ChooseByMasterySum(selectableIds).Pick(selectableIds);
-
-    public int Ban(HashSet<int> selectableIds)
-        => ChooseByMasterySum(selectableIds).Ban(selectableIds);
+    public int Pick(HashSet<int> selectableIds) => SelectBuild().Pick(selectableIds);
+    public int Ban(HashSet<int> selectableIds) => SelectBuild().Ban(selectableIds);
 }
