@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0656e101a5f827e4b9a91ce33f2577b5, type: 3}
+  m_Name: ValueBuild
+  m_EditorClassIdentifier: 
+  bans:
+  - {fileID: 11400000, guid: 5845e19649f08d247b70aac6efe18d8f, type: 2}
+  - {fileID: 11400000, guid: 253f2ff2f15b66048afe9ccad9db78aa, type: 2}
+  - {fileID: 11400000, guid: 603c87e43456fd44286208c78097ee82, type: 2}
+  picks:
+  - {fileID: 11400000, guid: efc97c7ed14228b44b5409f4547a3892, type: 2}
+  - {fileID: 11400000, guid: 96e5b2be14ec2e44fb3a39b5e7d7f8b5, type: 2}
+  - {fileID: 11400000, guid: e1a3b2221509f4f41a0ba6f414d92291, type: 2}
+  - {fileID: 11400000, guid: a7f0e72230ce72a45be4b0a9a420d812, type: 2}
+  - {fileID: 11400000, guid: 48f3b9de02336554d9a03a30d49140fb, type: 2}
+  - {fileID: 11400000, guid: 05764b6ed32fca74d93311ab047dd117, type: 2}
+  - {fileID: 11400000, guid: 5d38329471112af438d2c472494c7427, type: 2}
