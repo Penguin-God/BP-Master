@@ -4,8 +4,9 @@ using System.Linq;
 
 public class PrioritySelector : IBanSelector, IPickSelector
 {
-    private readonly IEnumerable<int> banPlan;
-    private readonly IEnumerable<int> pickPlan;
+    readonly IEnumerable<int> banPlan;
+    readonly IEnumerable<int> pickPlan;
+    public IEnumerable<int> PickPlan => pickPlan;
 
     public PrioritySelector(IEnumerable<int> banPlan, IEnumerable<int> pickPlan)
     {
