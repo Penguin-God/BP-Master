@@ -18,13 +18,5 @@ public class AI_SKillDicision
         return RandomUtil.DrawRandom(list);
     }
 
-    bool HasType(Skill skill, params SkillType[] types)
-    {
-        foreach (var data in skill.SkillDatas)
-        {
-            if (types.Contains(data.TraitType))
-                return true;
-        }
-        return false;
-    }
+    bool HasType(Skill skill, params SkillType[] types) => skill.SkillDatas.Any(x => types.Contains(x.TraitType));
 }
