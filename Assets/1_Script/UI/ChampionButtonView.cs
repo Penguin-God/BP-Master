@@ -14,6 +14,7 @@ public class ChampionButtonView : MonoBehaviour
     [SerializeField] Transform content;
 
     IEnumerable<Button> buttons;
+    public IEnumerable<Button> Buttons => buttons;
 
     public void CreateButtons() => buttons = new ChampionButtonCreator().DrawChampionButtons(content, championManager.AllChampion, championBtn);
 

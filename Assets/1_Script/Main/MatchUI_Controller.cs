@@ -17,12 +17,19 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] MasteryView masteryView;
     [SerializeField] GameObject skillUseLog;
 
-    public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
+    MasteryButtonHighlighter masteryHighlighter;
+    public void Awake()
+    {
+        masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(true);
+    }
+
+    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
     {
         banPickView.InitSlotView();
         masteryView.ViewMastery(championRepository);
-
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
+
+        masteryHighlighter.Highlight(playerTeam); // championSelector 뒤에
 
         storage.OnBan += banView.UpdateBanList;
         storage.OnPick += banPickView.PickChampion;

@@ -29,7 +29,7 @@ public class MatchDI : MonoBehaviour
         phaseEventDispatcher.OnPhaseSkill += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
 
-        matchUI_Controller.Init(storage, phaseManager, phaseEventDispatcher); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher); // start보다 먼저
 
         ai_main.InitAI_BanPick(phaseManager, storage);
 

@@ -3848,6 +3848,7 @@ GameObject:
   - component: {fileID: 1027524852}
   - component: {fileID: 1027524855}
   - component: {fileID: 1027524856}
+  - component: {fileID: 1027524857}
   m_Layer: 5
   m_Name: Champions
   m_TagString: Untagged
@@ -3946,6 +3947,20 @@ MonoBehaviour:
   championManager: {fileID: 1420292359}
   championBtn: {fileID: 8033382642434502399, guid: a800959c5b01a5b46b9664e609b38648, type: 3}
   content: {fileID: 1725860555}
+--- !u!114 &1027524857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027524850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362420e07c8344b43aa956d700eafbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masteryGenerator: {fileID: 1410148730}
+  championButtonView: {fileID: 1027524856}
 --- !u!1 &1049145343
 GameObject:
   m_ObjectHideFlags: 0

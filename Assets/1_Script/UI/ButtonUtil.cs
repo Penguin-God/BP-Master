@@ -18,4 +18,13 @@ public static class ButtonUtil
         colors.normalColor = new Color(1f, 1f, 1f);
         btn.colors = colors;
     }
+
+    public static void ChangeButtonColor(Button btn, Color color)
+    {
+        var colors = btn.colors;
+        colors.normalColor = color;
+        colors.highlightedColor = color;
+        colors.selectedColor = color;
+        btn.colors = colors;
+    }
 }
