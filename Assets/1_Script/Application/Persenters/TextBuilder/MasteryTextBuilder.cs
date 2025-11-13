@@ -7,5 +7,5 @@ public class MasteryTextBuilder
     public MasteryTextBuilder(Dictionary<int, string> nameCatalog) => NameCatalog = nameCatalog;
 
     public string BuildMasteriesText(IEnumerable<ChampionMastery> masteries)
-        => string.Join(", ", masteries.Select(x =>$"{NameCatalog[x.ChampionId]} : {x.Level}"));
+        => string.Join("\n", masteries.Select(x =>$"{NameCatalog[x.ChampionId]} : {x.Level}"));
 }

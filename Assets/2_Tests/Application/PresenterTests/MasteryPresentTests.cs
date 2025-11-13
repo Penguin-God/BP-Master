@@ -25,7 +25,7 @@ public class MasteryPresentTests
 
         string expected =
             "닉스 : 2" +
-            ", " +
+            "\n" +
             "아르카나 : 32";
 
         Assert.AreEqual(expected, result);
