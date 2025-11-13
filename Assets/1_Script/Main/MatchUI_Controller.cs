@@ -15,6 +15,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] BanView banView;
     [SerializeField] MasteryView masteryView;
+    [SerializeField] GameObject skillUseLog;
 
     public void Init(GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
     {
@@ -42,8 +43,11 @@ public class MatchUI_Controller : MonoBehaviour
     SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 
         => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championRepository.GetChampionData(id).StatData, TraitType.None));
 
-    public void TraitUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
+    public void SkillUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
     {
+        skillUseLog.SetActive(true);
+        masteryView.gameObject.SetActive(false);
+
         banPickView.InitTrackerViewSlots(slotStorageManager.StatusSlots);
         
         skillButtonView.Init(filter, playerTeam);
@@ -52,7 +56,7 @@ public class MatchUI_Controller : MonoBehaviour
         skillButtonView.RefreshButtonsByTurn(Team.Blue);
 
         gameFlowView.Init(slotStorageManager.ChampionDataSlots);
-        skillController.OnUseSkill += gameFlowView.ViewTraitUseLog;
+        skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
 
         eventDispatcher.OnPhaseSkill += (team) => scoreView.UpdateTeamScore(slotStorageManager.StatusSlots, team);
     }
@@ -60,8 +64,9 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] GameObject scores;
     [SerializeField] TextMeshProUGUI textBlue;
     [SerializeField] TextMeshProUGUI textRed;
-    public void ShowResult(MatchResult result)
+    public void Done(MatchResult result)
     {
+        skillButtonView.gameObject.SetActive(false);
         scores.SetActive(true);
         textBlue.text = new ScoreTextBuilder().BuildText(result.BlueInfo);
         textRed.text = new ScoreTextBuilder().BuildText(result.RedInfo);

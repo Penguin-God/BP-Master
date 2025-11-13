@@ -10,7 +10,7 @@ public class MatchDI : MonoBehaviour
 
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
-    MatchUI_Controller matchUI_Controller;
+    [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] MasteryGenerator masteryGenerator;
     [SerializeField] AI_Main ai_main;
     Team playerTeam;
@@ -22,8 +22,6 @@ public class MatchDI : MonoBehaviour
 
         ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
-
-        matchUI_Controller = GetComponent<MatchUI_Controller>();
 
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
         utilKey.Init(storage, phaseManager);
@@ -50,7 +48,7 @@ public class MatchDI : MonoBehaviour
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         var filter = new SkillSlotFilter(slotManager.SkillUseFlagSlot);
 
-        matchUI_Controller.TraitUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
+        matchUI_Controller.SkillUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
 
         var traitFactory = new TraitFactory(matchConfig.TraitConfig, slotManager.StatusSlots);
         var traitExecutor = new TraitExecutor(traitFactory);
@@ -71,6 +69,6 @@ public class MatchDI : MonoBehaviour
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
-        matchUI_Controller.ShowResult(result);
+        matchUI_Controller.Done(result);
     }
 }
