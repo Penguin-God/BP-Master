@@ -76,6 +76,8 @@ public class DefenseAbsorber : ISkillAction
 
     public void Do(ChampionStatus target)
     {
-
+        int amount = (int)Math.Round(target.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
+        new DefenseChanger(amount).Do(User);
+        new DefenseChanger(amount * -1).Do(target);
     }
 }
