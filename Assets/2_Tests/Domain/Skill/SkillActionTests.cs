@@ -84,4 +84,17 @@ public class TraitActionTests
 
         Assert.AreEqual(70, target.Stat.Defense);
     }
+
+    [Test]
+    public void 퍼센트_방어_흡수()
+    {
+        var user = TestHelper.CreateStatus(0, def: 100);
+        var target = TestHelper.CreateStatus(0, def: 100);
+        var sut = new DefenseAbsorber(user, 0.5f);
+
+        sut.Do(target);
+
+        Assert.AreEqual(50, target.Stat.Defense);
+        Assert.AreEqual(150, user.Stat.Defense);
+    }
 }

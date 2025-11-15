@@ -63,3 +63,19 @@ public class DefensePercentChanger : ISkillAction
         new DefenseChanger(amount).Do(target);
     }
 }
+
+public class DefenseAbsorber : ISkillAction
+{
+    readonly ChampionStatus User;
+    readonly float Percent;
+    public DefenseAbsorber(ChampionStatus user, float percent)
+    {
+        User = user;
+        Percent = percent;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+
+    }
+}
