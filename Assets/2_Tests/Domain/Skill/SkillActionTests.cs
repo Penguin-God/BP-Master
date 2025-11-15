@@ -110,4 +110,15 @@ public class TraitActionTests
         Assert.AreEqual(50, target.Stat.Attack);
         Assert.AreEqual(50, target.Stat.Defense);
     }
+
+    [Test]
+    public void 증폭율_변경()
+    {
+        var target = TestHelper.CreateStatus();
+        var sut = new AmplifyChanger(0.5f);
+
+        sut.Do(target);
+
+        Assert.AreEqual(1.5f, target.UpRate);
+    }
 }

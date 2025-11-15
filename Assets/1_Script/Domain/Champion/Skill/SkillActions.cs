@@ -102,3 +102,19 @@ public class Resonance : ISkillAction
         new DefenseChanger(attAmount).Do(target);
     }
 }
+
+
+public class AmplifyChanger : ISkillAction
+{
+    private float amount;
+
+    public AmplifyChanger(float amount)
+    {
+        this.amount = amount;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+        target.AddUpRate(amount);
+    }
+}
