@@ -9,6 +9,8 @@ public enum SkillType
     SpeedChanger,
     DefenseFixer,
     TraitExcluder,
+    DefenseAbsorber,
+    Resonance,
 }
 
 public enum Side { Self, Opponent, All }

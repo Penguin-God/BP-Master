@@ -8,12 +8,12 @@ public class SkillFactoryTests
     [TestCase(0, 10)]
     public void 팩토리로_넘긴_값이_조건과_액션에_적용되야_함(int attThreshold, int expected)
     {
-        var champion = CreateStatus(0);
+        var champion = CreateStatus();
 
         // att가 기준값 이상일 때 Attack +10
         SkillConditionData condition = CreateThresholdCondition(StatConditionType.AttackAtLeast, attThreshold);
         var data = CreateSkillData(SkillType.AttackChanger, 10, condition, SelfAllRule);
-        var result = new SkillExecutorFactory().CreateExecutor(data, CreateStat());
+        var result = new SkillExecutorFactory().CreateExecutor(data, champion);
 
         result.ExecuteSkill(new ChampionStatus[] { champion });
 
@@ -27,9 +27,11 @@ public class SkillFactoryTests
     [TestCase(SkillType.SpeedChanger, typeof(SpeedChanger))]
     [TestCase(SkillType.DefenseFixer, typeof(DefenseFixer))]
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
+    [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]
+    [TestCase(SkillType.Resonance, typeof(Resonance))]
     public void Type에_맞는_Action_객체_생성(SkillType type, System.Type expectedType)
     {
-        var result = SkillActionFactory.CreateAction(type, 0);
+        var result = SkillActionFactory.CreateAction(type, 10, CreateStatus());
         result.Do(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }

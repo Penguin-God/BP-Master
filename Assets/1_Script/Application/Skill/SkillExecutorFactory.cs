@@ -40,14 +40,17 @@ public static class SkillActionFactory
         {
             SkillType.AttackChanger => new AttackChanger(amount),
             SkillType.DefenseChanger => new DefenseChanger(amount),
-            SkillType.PercentAttackChanger => new AttackPercentChanger((float)amount / 100),
-            SkillType.PercentDefenseChanger => new DefensePercentChanger((float)amount / 100),
+            SkillType.PercentAttackChanger => new AttackPercentChanger(GetPercent(amount)),
+            SkillType.PercentDefenseChanger => new DefensePercentChanger(GetPercent(amount)),
             SkillType.SpeedChanger => new SpeedChanger(amount),
             SkillType.DefenseFixer => new DefenseFixer(amount),
             SkillType.TraitExcluder => new SkillExcluder(),
-
+            SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, GetPercent(amount)),
+            SkillType.Resonance => new Resonance(useChamp, GetPercent(amount)),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
+
+        float GetPercent(int amount) => (float)amount / 100;
     }
 }
 
