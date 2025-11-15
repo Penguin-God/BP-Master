@@ -36,7 +36,7 @@ MonoBehaviour:
     targetTrait: 0
   - targetSide: 1
     range: 4
-    traitType: 3
+    traitType: 5
     amount: -1
     conditionType: 6
     threshold: 0
