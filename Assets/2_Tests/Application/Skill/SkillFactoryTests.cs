@@ -29,6 +29,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
     [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
+    [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, System.Type expectedType)
     {
         var result = SkillActionFactory.CreateAction(type, 10, CreateStatus());

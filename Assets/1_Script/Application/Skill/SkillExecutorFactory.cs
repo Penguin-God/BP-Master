@@ -25,6 +25,7 @@ public static class SkillActionFactory
             SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, GetPercent(amount)),
             SkillType.Resonance => new Resonance(useChamp, GetPercent(amount)),
+            SkillType.AmplifyChanger => new AmplifyChanger(GetPercent(amount)),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
 

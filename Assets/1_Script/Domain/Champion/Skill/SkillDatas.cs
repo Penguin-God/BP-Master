@@ -11,6 +11,7 @@ public enum SkillType
     TraitExcluder,
     DefenseAbsorber,
     Resonance,
+    AmplifyChanger,
 }
 
 public enum Side { Self, Opponent, All }
