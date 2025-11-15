@@ -94,6 +94,7 @@ public class Resonance : ISkillAction
 
     public void Do(ChampionStatus target)
     {
+        if (target == User) return; // 자신은 제외
         int attAmount = (int)Math.Round(User.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
         new AttackChanger(attAmount).Do(target);
 
