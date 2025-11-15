@@ -14,7 +14,7 @@ public class SkillUseController
         var targets = targetSlots.Select(x => statusSlots.GetSlot(x));
         foreach (var skillData in skillDatas)
         {
-            var executor = new SkillExecutorFactory().CreateExecutor(skillData, statusSlots.GetSlot(skillSlot).Stat);
+            var executor = new SkillExecutorFactory().CreateExecutor(skillData, statusSlots.GetSlot(skillSlot));
             executor.ExecuteSkill(targets);
         }
         OnUseSkill?.Invoke(skillSlot);
