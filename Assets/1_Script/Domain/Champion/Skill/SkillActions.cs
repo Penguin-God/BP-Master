@@ -81,3 +81,23 @@ public class DefenseAbsorber : ISkillAction
         new DefenseChanger(amount * -1).Do(target);
     }
 }
+
+public class Resonance : ISkillAction
+{
+    readonly ChampionStatus User;
+    readonly float Percent;
+    public Resonance(ChampionStatus user, float percent)
+    {
+        User = user;
+        Percent = percent;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+        int attAmount = (int)Math.Round(User.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
+        new AttackChanger(attAmount).Do(target);
+
+        int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
+        new DefenseChanger(attAmount).Do(target);
+    }
+}
