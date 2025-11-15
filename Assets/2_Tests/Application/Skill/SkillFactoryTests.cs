@@ -13,7 +13,7 @@ public class SkillFactoryTests
         // att가 기준값 이상일 때 Attack +10
         SkillConditionData condition = CreateThresholdCondition(StatConditionType.AttackAtLeast, attThreshold);
         var data = CreateSkillData(SkillType.AttackChanger, 10, condition, SelfAllRule);
-        var result = new SkillExecutorFactory().CreateExecutor(data, default);
+        var result = new SkillExecutorFactory().CreateExecutor(data, CreateStat());
 
         result.ExecuteSkill(new ChampionStatus[] { champion });
 
