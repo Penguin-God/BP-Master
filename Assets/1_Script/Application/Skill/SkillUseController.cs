@@ -9,6 +9,7 @@ public class SkillUseController
 
     public SkillUseController(SlotStorage<ChampionStatus> statusSlots) => this.statusSlots = statusSlots;
 
+    // 사용 부분만 함수로
     public void UseSkill(SlotData skillSlot, IEnumerable<SlotData> targetSlots, IEnumerable<SkillData> skillDatas)
     {
         var targets = targetSlots.Select(x => statusSlots.GetSlot(x));
