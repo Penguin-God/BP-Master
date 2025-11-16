@@ -29,7 +29,7 @@ public class AI_TraitAgent
         var targetSlots = skillSlotFilter.FilteringTargetSlots(Team, targetSides).ToList();
 
         int targetCount = targetCounter.CalculateTargetCount(EnumCaster.MergeRule(useSkill.Rules));
-        skillController.UseSkill(SkillToSlot(useSkill), SelectSkillTarget(targetSlots, targetCount), useSkill.SkillDatas);
+        skillController.UseSkill(SkillToSlot(useSkill), SelectSkillTarget(targetSlots, targetCount), useSkill);
     }
 
     SlotData SkillToSlot(Skill skill) => skillSlots.GetAllSlotDatas().First(x => skillSlots.GetSlot(x) == skill);

@@ -37,7 +37,7 @@ public class SkillUseController_UI : MonoBehaviour
         if (traitUsePresenter.IsUseable)
         {
             if (traitUsePresenter.SelectTarget(clickSlot, out var useSlot))
-                skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, skillSlots.GetSlot(useSlot).SkillDatas);
+                skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, skillSlots.GetSlot(useSlot));
         }
         else
         {
