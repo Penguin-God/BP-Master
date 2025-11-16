@@ -28,7 +28,7 @@ public class SkillUsePersenter
     public bool IsUseable => useSlot.HasValue;
     public SlotData UseSlot => useSlot.Value;
     SlotData? useSlot;
-    public void SelectUseSkill(SlotData useSlot, TraitTargetRule rule)
+    public void SelectUseSkill(SlotData useSlot, SkillTargetRule rule)
     {
         this.useSlot = useSlot;
         traitTargetSelector = new TraitTargetSelector(TeamSize, rule);

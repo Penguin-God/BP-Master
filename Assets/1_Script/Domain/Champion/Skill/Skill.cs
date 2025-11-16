@@ -8,6 +8,6 @@ public class Skill
 
     public bool IsFreeCondition => SkillDatas.All(x => x.ConditionData.ConditionType == ConditionType.None);
 
-    public IEnumerable<TraitTargetRule> Rules => SkillDatas.Select(x => x.TargetRule);
+    public IEnumerable<SkillTargetRule> Rules => SkillDatas.Select(x => x.TargetRule);
     public IEnumerable<Side> Sides => Rules.Select(x => x.TargetSide);
 }

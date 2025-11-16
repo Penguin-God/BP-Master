@@ -3,7 +3,7 @@ using static TestHelper;
 
 public class SkillTextBuildTests
 {
-    TraitUI_Data CreateData(SkillType traitType, int amount, SkillConditionData condition, TraitTargetRule rule) => new TraitUI_Data(traitType, amount, condition, rule);
+    TraitUI_Data CreateData(SkillType traitType, int amount, SkillConditionData condition, SkillTargetRule rule) => new TraitUI_Data(traitType, amount, condition, rule);
 
     [Test]
     public void 특성_타입에_맞는_텍스트_생성()
@@ -11,10 +11,10 @@ public class SkillTextBuildTests
         var sut = new SkillTextBuilder();
         
         // 편의 함수
-        string GetTraitText(SkillType traitType, int amount, TraitTargetRule rule) => sut.BuildTraitText(CreateData(traitType, amount, default, rule));
+        string GetTraitText(SkillType traitType, int amount, SkillTargetRule rule) => sut.BuildTraitText(CreateData(traitType, amount, default, rule));
 
         Assert.AreEqual("선택한 적군 둘의 공격력 10 증가", GetTraitText(SkillType.AttackChanger, 10, OpponentDoubleRule));
-        Assert.AreEqual("선택한 셋의 방어력 10 감소", GetTraitText(SkillType.DefenseChanger, -10, new TraitTargetRule(Side.All, TargetRange.Triple)));
+        Assert.AreEqual("선택한 셋의 방어력 10 감소", GetTraitText(SkillType.DefenseChanger, -10, new SkillTargetRule(Side.All, TargetRange.Triple)));
         Assert.AreEqual("선택한 아군 둘의 속도 2 증가", GetTraitText(SkillType.SpeedChanger, 2, SelfDouble));
         Assert.AreEqual("양팀 전체 공격력 50 증가", GetTraitText(SkillType.AttackChanger, 50, AllRule));
         Assert.AreEqual("선택한 아군 셋의 방어력 100으로 고정", GetTraitText(SkillType.DefenseFixer, 100, SelfTriple));

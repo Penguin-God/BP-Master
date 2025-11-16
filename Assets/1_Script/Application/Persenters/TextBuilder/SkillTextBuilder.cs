@@ -8,12 +8,12 @@ public readonly struct TraitUI_Data
     public readonly int Amount;
 
     public readonly SkillConditionData Condition;
-    public readonly TraitTargetRule Rule;
+    public readonly SkillTargetRule Rule;
 
     public readonly Side TargetSide => Rule.TargetSide;
     public readonly TargetRange Range => Rule.TargetRange;
 
-    public TraitUI_Data(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule)
+    public TraitUI_Data(SkillType traitType, int amount, SkillConditionData conditionData, SkillTargetRule traitTargetRule)
     {
         TraitType = traitType;
         Amount = amount;

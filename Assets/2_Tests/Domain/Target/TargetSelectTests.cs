@@ -5,7 +5,7 @@ using static TestHelper;
 public class TraitTargetSelectTests
 {
     int[] AllIndexs = new int[] { 0, 1, 2, 3, 4 };
-    TraitTargetRule CreateDoubleRule(Side side) => new TraitTargetRule(side, TargetRange.Double);
+    SkillTargetRule CreateDoubleRule(Side side) => new SkillTargetRule(side, TargetRange.Double);
     void Select(TraitTargetSelector sut, SlotData slot) => sut.Select(slot);
 
     [Test]
@@ -22,7 +22,7 @@ public class TraitTargetSelectTests
     [Test]
     public void 특정_사이드_All은_선택한_팀_전체_세팅()
     {
-        TraitTargetSelector sut = new TraitTargetSelector(5, new TraitTargetRule(Side.Opponent, TargetRange.All));
+        TraitTargetSelector sut = new TraitTargetSelector(5, new SkillTargetRule(Side.Opponent, TargetRange.All));
 
         Select(sut, BlueZeroSlot);
 

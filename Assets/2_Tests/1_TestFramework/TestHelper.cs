@@ -31,12 +31,12 @@ public static class TestHelper
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
     public static SkillData[] CreateSkills(params SkillData[] traits) => traits;
 
-    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, TraitTargetRule rule = default) => new SkillData(type, amount, default, rule);
+    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => new SkillData(type, amount, default, rule);
 
-    public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, TraitTargetRule traitTargetRule = default)
+    public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, SkillTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, conditionData, traitTargetRule);
 
-    public static Skill CreateSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, TraitTargetRule rule = default)
+    public static Skill CreateSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
         => new Skill(CreateSkills(CreateSkillData(skillType, amount, conditionData, rule)));
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
@@ -44,17 +44,17 @@ public static class TestHelper
     public static SkillConditionData CreateConditionData(ConditionType conditionType, StatConditionType statType = StatConditionType.None, int threshold = 0, TraitType traitType = TraitType.None)
         => new SkillConditionData(statType, threshold, traitType, conditionType);
 
+    static SkillTargetRule CreateRule(Side side, TargetRange range) => new SkillTargetRule(side, range);
+    public static SkillTargetRule SelfSingleRule => CreateRule(Side.Self, TargetRange.Single);
+    public static SkillTargetRule SelfDouble => CreateRule(Side.Self, TargetRange.Double);
+    public static SkillTargetRule SelfTriple => CreateRule(Side.Self, TargetRange.Triple);
+    public static SkillTargetRule SelfAllRule => CreateRule(Side.Self, TargetRange.All);
 
-    public static TraitTargetRule SelfSingleRule => new TraitTargetRule(Side.Self, TargetRange.Single);
-    public static TraitTargetRule SelfDouble => new TraitTargetRule(Side.Self, TargetRange.Double);
-    public static TraitTargetRule SelfTriple => new TraitTargetRule(Side.Self, TargetRange.Triple);
-    public static TraitTargetRule SelfAllRule => new TraitTargetRule(Side.Self, TargetRange.All);
+    public static SkillTargetRule OpponentSingleRule => CreateRule(Side.Opponent, TargetRange.Single);
+    public static SkillTargetRule OpponentDoubleRule => CreateRule(Side.Opponent, TargetRange.Double);
+    public static SkillTargetRule OpponentAllRule => CreateRule(Side.Opponent, TargetRange.All);
 
-    public static TraitTargetRule OpponentSingleRule => new TraitTargetRule(Side.Opponent, TargetRange.Single);
-    public static TraitTargetRule OpponentDoubleRule => new TraitTargetRule(Side.Opponent, TargetRange.Double);
-    public static TraitTargetRule OpponentAllRule => new TraitTargetRule(Side.Opponent, TargetRange.All);
-
-    public static TraitTargetRule AllRule => new TraitTargetRule(Side.All, TargetRange.All);
+    public static SkillTargetRule AllRule => CreateRule(Side.All, TargetRange.All);
 
     public static SlotData RedZeroSlot => CreateRedSlot(0);
     public static SlotData RedOneSlot => CreateRedSlot(1);

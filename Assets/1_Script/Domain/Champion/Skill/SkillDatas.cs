@@ -24,12 +24,12 @@ public enum TargetRange
     All,
 }
 
-public readonly struct TraitTargetRule
+public readonly struct SkillTargetRule
 {
     public readonly Side TargetSide;
     public readonly TargetRange TargetRange;
 
-    public TraitTargetRule(Side targetSide, TargetRange targetRange)
+    public SkillTargetRule(Side targetSide, TargetRange targetRange)
     {
         TargetSide = targetSide;
         TargetRange = targetRange;
@@ -65,9 +65,9 @@ public readonly struct SkillData
     public readonly SkillType TraitType;
     public readonly int Amount;
     public readonly SkillConditionData ConditionData;
-    public readonly TraitTargetRule TargetRule;
+    public readonly SkillTargetRule TargetRule;
 
-    public SkillData(SkillType traitType, int amount, SkillConditionData conditionData, TraitTargetRule traitTargetRule)
+    public SkillData(SkillType traitType, int amount, SkillConditionData conditionData, SkillTargetRule traitTargetRule)
     {
         TraitType = traitType;
         Amount = amount;

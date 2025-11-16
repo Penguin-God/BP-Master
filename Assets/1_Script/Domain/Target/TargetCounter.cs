@@ -4,7 +4,7 @@ public class TargetCounter
     public readonly int TeamSize;
     public TargetCounter(int teamSize) => TeamSize = teamSize;
 
-    public int CalculateTargetCount(TraitTargetRule rule)
+    public int CalculateTargetCount(SkillTargetRule rule)
     {
         if (rule.TargetRange == TargetRange.All)
             return rule.TargetSide == Side.All ? TeamSize * 2 : TeamSize; // side도 all이면 양쪽 다 타게팅 가능

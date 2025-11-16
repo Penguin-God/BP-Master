@@ -6,7 +6,7 @@ public class SkillUsePresenterTests
     [Test]
     public void 스킬_선택_후_타겟_가득_차면_참_반환()
     {
-        var rule = new TraitTargetRule(Side.Opponent, TargetRange.Double);
+        var rule = new SkillTargetRule(Side.Opponent, TargetRange.Double);
         var sut = new SkillUsePersenter(teamSize: 2);
 
         SlotData useSlot = BlueZeroSlot;

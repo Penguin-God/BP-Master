@@ -4,7 +4,6 @@ public class SkillPreviewer
     public SlotStorage<ChampionStatus> PreviewSkill(SlotStorage<ChampionStatus> originSlots, Skill skill)
     {
         var copiedSlots = CloneSlots(originSlots);
-
         // 복사된 슬롯으로만 동작하는 컨트롤러 생성
         var previewController = new SkillUseController(copiedSlots);
 

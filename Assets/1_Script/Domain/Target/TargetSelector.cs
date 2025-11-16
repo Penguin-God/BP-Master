@@ -7,9 +7,9 @@ public class TraitTargetSelector
     public IEnumerable<SlotData> Targets => selected;
 
     readonly int TeamSize;
-    readonly TraitTargetRule Rule;
+    readonly SkillTargetRule Rule;
     readonly TargetCounter targetCounter;
-    public TraitTargetSelector(int teamSize, TraitTargetRule rule)
+    public TraitTargetSelector(int teamSize, SkillTargetRule rule)
     {
         TeamSize = teamSize;
         targetCounter = new TargetCounter(teamSize);

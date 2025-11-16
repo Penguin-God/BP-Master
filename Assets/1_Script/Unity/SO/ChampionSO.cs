@@ -8,7 +8,7 @@ public class TraitDataConfig
     [Header("범위")]
     [SerializeField] Side targetSide;
     [SerializeField] TargetRange range;
-    TraitTargetRule Rule => new TraitTargetRule(targetSide, range);
+    SkillTargetRule Rule => new SkillTargetRule(targetSide, range);
 
     [Header("액션")]
     [SerializeField] SkillType traitType;

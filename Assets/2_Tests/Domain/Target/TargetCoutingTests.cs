@@ -28,8 +28,8 @@ public class TargetCoutingTests
     {
         var sut = new TargetCounter(5);
 
-        Assert.AreEqual(1, sut.CalculateTargetCount(new TraitTargetRule(Side.All, TargetRange.Single)));
-        Assert.AreEqual(2, sut.CalculateTargetCount(new TraitTargetRule(Side.Opponent, TargetRange.Double)));
-        Assert.AreEqual(3, sut.CalculateTargetCount(new TraitTargetRule(Side.Self, TargetRange.Triple)));
+        Assert.AreEqual(1, sut.CalculateTargetCount(new SkillTargetRule(Side.All, TargetRange.Single)));
+        Assert.AreEqual(2, sut.CalculateTargetCount(new SkillTargetRule(Side.Opponent, TargetRange.Double)));
+        Assert.AreEqual(3, sut.CalculateTargetCount(new SkillTargetRule(Side.Self, TargetRange.Triple)));
     }
 }

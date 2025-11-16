@@ -2,10 +2,10 @@ using System;
 
 public class SkillExecutorFactory
 {
-    public SkillExecutor CreateExecutor(SkillData traitData, ChampionStatus useChamp)
+    public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp)
     {
-        ISkillAction action = SkillActionFactory.CreateAction(traitData.TraitType, traitData.Amount, useChamp);
-        IChampionCondition condition = SkillCondtionFactory.CreateCondition(traitData.ConditionData, useChamp.Stat);
+        ISkillAction action = SkillActionFactory.CreateAction(skillData.TraitType, skillData.Amount, useChamp);
+        IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, useChamp.Stat);
         return new SkillExecutor(action, condition);
     }
 }
