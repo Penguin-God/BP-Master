@@ -29,6 +29,17 @@ public class TraitActionTests
     }
 
     [Test]
+    public void 챔피언_방_변경()
+    {
+        var target = TestHelper.CreateStatus(0, 10, 0);
+        var sut = new DefenseChanger(new ValueCalculator(100));
+
+        sut.Do2(target);
+
+        Assert.AreEqual(110, target.Stat.Defense);
+    }
+
+    [Test]
     [TestCase(3, 10)]
     [TestCase(-2, 5)]
     public void 챔피언상태_속_변경(int amount, int expected)

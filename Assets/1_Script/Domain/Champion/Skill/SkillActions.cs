@@ -16,7 +16,16 @@ public class DefenseChanger : ISkillAction
 {
     readonly int Amount;
     public DefenseChanger(int amount) => Amount = amount;
+
+    readonly ISkillAmountCalculator AmountCalculator;
+    public DefenseChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
     public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
+
+    public void Do2(ChampionStatus target)
+    {
+        int amount = AmountCalculator.Calculate(target.Stat.Defense);
+        target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + amount));
+    }
 }
 
 public class SpeedChanger : ISkillAction
@@ -106,15 +115,9 @@ public class Resonance : ISkillAction
 
 public class AmplifyChanger : ISkillAction
 {
-    private float amount;
+    readonly float amount;
 
-    public AmplifyChanger(float amount)
-    {
-        this.amount = amount;
-    }
+    public AmplifyChanger(float amount) => this.amount = amount;
 
-    public void Do(ChampionStatus target)
-    {
-        target.AddUpRate(amount);
-    }
+    public void Do(ChampionStatus target) => target.AddUpRate(amount);
 }
