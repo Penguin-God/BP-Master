@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a80e5930ef66d04493dd3f62985ec6a, type: 3}
   m_Name: TestSO
   m_EditorClassIdentifier: 
-  skill:
+  skillType: 0
+  skillAmount:
     Type: 1
-    FixValue: 0
+    ValueAmount: 0
     PercentValue: 0
+    FixValue: 0

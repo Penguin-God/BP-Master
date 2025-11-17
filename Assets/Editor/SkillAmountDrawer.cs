@@ -8,9 +8,10 @@ public class SkillAmountDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
-        var typeProp = property.FindPropertyRelative("Type");
-        var fixProp = property.FindPropertyRelative("FixValue");
-        var percentProp = property.FindPropertyRelative("PercentValue");
+        var typeProp = property.FindPropertyRelative(nameof(SkillAmount.Type));
+        var valueProp = property.FindPropertyRelative(nameof(SkillAmount.ValueAmount));
+        var percentProp = property.FindPropertyRelative(nameof(SkillAmount.PercentValue));
+        var fixProp = property.FindPropertyRelative(nameof(SkillAmount.FixValue));
 
         // Type enum 표시
         var typeRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
@@ -20,12 +21,18 @@ public class SkillAmountDrawer : PropertyDrawer
         var valueRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2,
                                  position.width, EditorGUIUtility.singleLineHeight);
 
-        if (typeProp.enumValueIndex == 0) // Fix
-            EditorGUI.PropertyField(valueRect, fixProp, new GUIContent("Fix Value"));
-        else                               // Percent
-            EditorGUI.PropertyField(valueRect, percentProp, new GUIContent("Percent Value"));
+        DrawAmountField(valueProp, AmountType.Value, "Value");
+        DrawAmountField(percentProp, AmountType.Percent, "Percent");
+        DrawAmountField(fixProp, AmountType.Fix, "Fix");
 
         EditorGUI.EndProperty();
+
+
+        void DrawAmountField(SerializedProperty property, AmountType type, string content)
+        {
+            if (typeProp.enumValueIndex == (int)type)
+                EditorGUI.PropertyField(valueRect, property, new GUIContent(content));
+        }
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
