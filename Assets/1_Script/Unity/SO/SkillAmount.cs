@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public enum AmountType { None, Value, Percent, Fix }
 
@@ -10,10 +9,4 @@ public class SkillAmount
     public int ValueAmount;
     public float PercentValue;
     public int FixValue;
-}
-
-[CreateAssetMenu(fileName = "TestSO", menuName = "Scriptable Objects/TestSO")]
-public class TestSO : ScriptableObject
-{
-    [SerializeField] SkillAmount skillAmount;
 }
