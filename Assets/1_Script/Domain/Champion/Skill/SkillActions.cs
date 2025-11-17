@@ -35,15 +35,6 @@ public class SpeedChanger : ISkillAction
     public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeSpeed(target.Stat.Speed + Amount));
 }
 
-
-public class DefenseFixer : ISkillAction
-{
-    readonly int Value;
-    public DefenseFixer(int value) => this.Value = value;
-
-    public void Do(ChampionStatus target) => target.ChangeStat(new ChampionStatData(target.Stat.Attack, Value, target.Stat.Speed));
-}
-
 public class SkillExcluder : ISkillAction
 {
     public void Do(ChampionStatus target) => target.TraitExcluded();

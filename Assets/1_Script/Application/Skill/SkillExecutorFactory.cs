@@ -22,7 +22,6 @@ public static class SkillActionFactory
             SkillType.PercentAttackChanger => new AttackPercentChanger(GetPercent(amount)),
             SkillType.PercentDefenseChanger => new DefensePercentChanger(GetPercent(amount)),
             SkillType.SpeedChanger => new SpeedChanger(amount),
-            SkillType.DefenseFixer => new DefenseFixer(amount),
             SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, GetPercent(amount)),
             SkillType.Resonance => new Resonance(useChamp, GetPercent(amount)),
