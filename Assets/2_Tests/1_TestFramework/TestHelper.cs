@@ -31,7 +31,7 @@ public static class TestHelper
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
     public static SkillData[] CreateSkills(params SkillData[] traits) => traits;
 
-    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => new SkillData(type, amount, new ValueCalculator(amount), default, rule);
+    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateSkillData(type, amount, default, rule);
 
     public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, SkillTargetRule traitTargetRule = default)
         => new SkillData(traitType, amount, new ValueCalculator(amount), conditionData, traitTargetRule);

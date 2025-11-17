@@ -7,9 +7,6 @@ public interface ISkillAction
 
 public class AttackChanger : ISkillAction
 {
-    readonly int Amount;
-    public AttackChanger(int amount) => Amount = amount;
-
     readonly ISkillAmountCalculator AmountCalculator;
     public AttackChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
     public void Do(ChampionStatus target) => target.AddAttackWithRate(AmountCalculator.Calculate(target.Stat.Attack));
