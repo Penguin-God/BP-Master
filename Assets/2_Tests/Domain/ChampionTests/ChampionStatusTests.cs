@@ -62,9 +62,11 @@ public class ChampionStatusTests
 
         status.AddAttackWithRate(-50);
         status.AddDefenseWithRate(60);
+        status.AddSpeedWithRate(1);
 
         Assert.AreEqual(50, status.Stat.Attack);
         Assert.AreEqual(100, status.Stat.Defense);
+        Assert.AreEqual(2, status.Stat.Speed);
     }
 
     [Test]

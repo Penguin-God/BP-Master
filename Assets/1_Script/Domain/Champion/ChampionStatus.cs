@@ -30,6 +30,7 @@ public class ChampionStatus
 
     public void AddAttackWithRate(int att) => ChangeStatWithRate(Stat.ChangeAttack(att + Stat.Attack));
     public void AddDefenseWithRate(int def) => ChangeStatWithRate(Stat.ChangeDefense(def + Stat.Defense));
+    public void AddSpeedWithRate(int speed) => ChangeStatWithRate(Stat.ChangeSpeed(speed + Stat.Speed));
     public void ChangeStatWithRate(ChampionStatData desiredStat)
     {
         int newAttack = ApplyRate(Stat.Attack, desiredStat.Attack);
