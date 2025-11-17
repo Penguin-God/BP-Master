@@ -20,7 +20,7 @@ public class SkillEvaluator
         if (skill.ConditionData.ConditionType == ConditionType.None)
         {
             if (skill.TargetRule.TargetSide == Side.All) return 0;
-            return sign * skill.Amount * TeamSize;
+            return sign * skill.AmountData.ValueAmount * TeamSize;
         }
         else return GetConditionValueSum(skill, team);
     }
@@ -40,7 +40,7 @@ public class SkillEvaluator
 
     int GetConditionValue(SkillData skill, Team targetTeam)
     {
-        int pickSlotValue = skill.Amount * statuses.GetTeam(targetTeam).Where(x => SkillCondtionFactory.CreateCondition(skill.ConditionData, default).Check(x)).Count();
+        int pickSlotValue = skill.AmountData.ValueAmount * statuses.GetTeam(targetTeam).Where(x => SkillCondtionFactory.CreateCondition(skill.ConditionData, default).Check(x)).Count();
         return pickSlotValue + CalculateEmptySlotValue(targetTeam, skill);
     }
 
@@ -48,6 +48,6 @@ public class SkillEvaluator
     {
         int currentPickedCount = statuses.GetTeamCount(targetTeam);
         int emptySlotCount = TeamSize - currentPickedCount;
-        return (int)Math.Round(skill.Amount * EmptySlotHalfWeight * emptySlotCount, MidpointRounding.AwayFromZero); 
+        return (int)Math.Round(skill.AmountData.ValueAmount * EmptySlotHalfWeight * emptySlotCount, MidpointRounding.AwayFromZero); 
     }
 }

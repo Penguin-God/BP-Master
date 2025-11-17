@@ -4,8 +4,7 @@ public class SkillExecutorFactory
 {
     public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp)
     {
-        // ISkillAction action = SkillActionFactory.CreateAction(skillData.TraitType, skillData.Amount, useChamp);
-        ISkillAction action = SkillActionFactory.CreateAction(skillData.TraitType, skillData.Amount, skillData.AmountCalculator, useChamp);
+        ISkillAction action = SkillActionFactory.CreateAction(skillData.TraitType, skillData.AmountData, useChamp);
         IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, useChamp.Stat);
         return new SkillExecutor(action, condition);
     }
@@ -13,8 +12,9 @@ public class SkillExecutorFactory
 
 public static class SkillActionFactory
 {
-    public static ISkillAction CreateAction(SkillType actionType, int amount, ISkillAmountCalculator amountCalculator, ChampionStatus useChamp)
+    public static ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus useChamp)
     {
+        var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
         return actionType switch
         {
             SkillType.AttackChanger => new AttackChanger(amountCalculator),
@@ -22,12 +22,10 @@ public static class SkillActionFactory
             SkillType.SpeedChanger => new SpeedChanger(amountCalculator),
             SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, amountCalculator),
-            SkillType.Resonance => new Resonance(useChamp, GetPercent(amount)),
-            SkillType.AmplifyChanger => new AmplifyChanger(GetPercent(amount)),
+            SkillType.Resonance => new Resonance(useChamp, amountData.PercentValue),
+            SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
-
-        float GetPercent(int amount) => (float)amount / 100;
     }
 }
 
