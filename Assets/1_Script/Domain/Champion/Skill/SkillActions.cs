@@ -1,5 +1,4 @@
 using System;
-using static Codice.Client.Common.EventTracking.TrackFeatureUseEvent.Features.DesktopGUI.Filters;
 
 public interface ISkillAction
 {
@@ -15,13 +14,8 @@ public class AttackChanger : ISkillAction
 
 public class DefenseChanger : ISkillAction
 {
-    readonly int Amount;
-    public DefenseChanger(int amount) => Amount = amount;
-
     readonly ISkillAmountCalculator AmountCalculator;
     public DefenseChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
-    public void Do2(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
-
     public void Do(ChampionStatus target) => target.AddDefenseWithRate(AmountCalculator.Calculate(target.Stat.Defense));
 }
 
@@ -52,18 +46,11 @@ public class AttackPercentChanger : ISkillAction
 public class DefenseAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
-    readonly float Percent;
     readonly ISkillAmountCalculator AmountCalculator;
     public DefenseAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator)
     {
         User = user;
         AmountCalculator = amountCalculator;
-    }
-
-    public DefenseAbsorber(ChampionStatus user, float percent)
-    {
-        User = user;
-        Percent = percent;
     }
 
     public void Do(ChampionStatus target)
@@ -91,7 +78,7 @@ public class Resonance : ISkillAction
         new AttackChanger(attAmount).Do(target);
 
         int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        new DefenseChanger(attAmount).Do2(target);
+        target.AddDefenseWithRate(defAmount);
     }
 }
 
