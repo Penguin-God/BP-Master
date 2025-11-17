@@ -30,7 +30,7 @@ public class TraitActionTests
     public void 챔피언상태_속_변경(int amount, int expected)
     {
         var target = TestHelper.CreateStatus(0, 0, 7);
-        var sut = new SpeedChanger(amount);
+        var sut = new SpeedChanger(new ValueCalculator(amount));
 
         sut.Do(target);
 
@@ -47,17 +47,6 @@ public class TraitActionTests
 
         Assert.IsTrue(target.IsSkillExcluded);
     }
-
-    //[Test]
-    //public void 퍼센트로_공격값_바꾸기()
-    //{
-    //    var target = TestHelper.CreateStatus(100, 0);
-    //    var sut = new AttackPercentChanger(0.5f);
-
-    //    sut.Do(target);
-
-    //    Assert.AreEqual(150, target.Stat.Attack);
-    //}
 
     [Test]
     public void 퍼센트_방어_흡수()

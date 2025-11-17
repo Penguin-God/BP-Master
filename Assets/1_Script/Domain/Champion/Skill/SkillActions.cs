@@ -21,9 +21,9 @@ public class DefenseChanger : ISkillAction
 
 public class SpeedChanger : ISkillAction
 {
-    readonly int Amount;
-    public SpeedChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeSpeed(target.Stat.Speed + Amount));
+    readonly ISkillAmountCalculator AmountCalculator;
+    public SpeedChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
+    public void Do(ChampionStatus target) => target.AddSpeedWithRate(AmountCalculator.Calculate(target.Stat.Speed));
 }
 
 public class SkillExcluder : ISkillAction

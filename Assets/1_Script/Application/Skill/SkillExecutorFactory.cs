@@ -19,7 +19,7 @@ public static class SkillActionFactory
         {
             SkillType.AttackChanger => new AttackChanger(amountCalculator),
             SkillType.DefenseChanger => new DefenseChanger(amountCalculator),
-            SkillType.SpeedChanger => new SpeedChanger(amount),
+            SkillType.SpeedChanger => new SpeedChanger(amountCalculator),
             SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, amountCalculator),
             SkillType.Resonance => new Resonance(useChamp, GetPercent(amount)),
