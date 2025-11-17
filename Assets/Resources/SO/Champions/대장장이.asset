@@ -22,8 +22,8 @@ MonoBehaviour:
     range: 1
     traitType: 1
     skillAmount:
-      Type: 0
-      ValueAmount: 0
+      Type: 1
+      ValueAmount: 60
       PercentValue: 0
       FixValue: 0
     amount: 60
