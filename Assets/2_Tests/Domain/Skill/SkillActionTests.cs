@@ -66,7 +66,7 @@ public class TraitActionTests
     {
         var user = TestHelper.CreateStatus();
         var target = TestHelper.CreateStatus(0, def: 100);
-        var sut = new DefenseAbsorber(user, 0.5f);
+        var sut = new DefenseAbsorber(user, new PercentCalculator(0.5f));
 
         sut.Do(target);
 

@@ -1,4 +1,5 @@
 using System;
+using static Codice.Client.Common.EventTracking.TrackFeatureUseEvent.Features.DesktopGUI.Filters;
 
 public interface ISkillAction
 {
@@ -67,9 +68,9 @@ public class DefenseAbsorber : ISkillAction
 
     public void Do(ChampionStatus target)
     {
-        int amount = (int)Math.Round(target.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        new DefenseChanger(amount).Do2(User);
-        new DefenseChanger(amount * -1).Do2(target);
+        int amount = AmountCalculator.Calculate(target.Stat.Defense);
+        User.AddDefenseWithRate(amount);
+        target.AddDefenseWithRate(amount * -1);
     }
 }
 
