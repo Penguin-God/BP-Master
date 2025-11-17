@@ -28,6 +28,8 @@ public class ChampionStatus
 
     public ChampionStatus DeepCopy() => new ChampionStatus(Stat, TraitType, IsSkillExcluded, UpRate, DownRate);
 
+    public void ChangeAttackWithRate(int att) => ChangeStatWithRate(Stat.ChangeAttack(att));
+    public void ChangeDefenseWithRate(int def) => ChangeStatWithRate(Stat.ChangeDefense(def));
     public void ChangeStatWithRate(ChampionStatData desiredStat)
     {
         int newAttack = ApplyRate(Stat.Attack, desiredStat.Attack);
