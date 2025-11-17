@@ -22,7 +22,7 @@ public class TraitDataConfig
     [SerializeField] TraitType targetTrait;
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
 
-    public SkillData CreateTraitData() => new SkillData(traitType, SkillAmountCalculatorFactory.Create(skillAmount), Condition, Rule);
+    public SkillData CreateTraitData() => new SkillData(traitType, amount, SkillAmountCalculatorFactory.Create(skillAmount), Condition, Rule);
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, amount, Condition, Rule);
 }
 

@@ -19,9 +19,9 @@ public class DefenseChanger : ISkillAction
 
     readonly ISkillAmountCalculator AmountCalculator;
     public DefenseChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
-    public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
+    public void Do2(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
 
-    public void Do2(ChampionStatus target)
+    public void Do(ChampionStatus target)
     {
         int amount = AmountCalculator.Calculate(target.Stat.Defense);
         target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + amount));
@@ -69,7 +69,7 @@ public class DefensePercentChanger : ISkillAction
     public void Do(ChampionStatus target)
     {
         int amount = (int)Math.Round(target.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        new DefenseChanger(amount).Do(target);
+        new DefenseChanger(amount).Do2(target);
     }
 }
 
@@ -86,8 +86,8 @@ public class DefenseAbsorber : ISkillAction
     public void Do(ChampionStatus target)
     {
         int amount = (int)Math.Round(target.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        new DefenseChanger(amount).Do(User);
-        new DefenseChanger(amount * -1).Do(target);
+        new DefenseChanger(amount).Do2(User);
+        new DefenseChanger(amount * -1).Do2(target);
     }
 }
 
@@ -108,7 +108,7 @@ public class Resonance : ISkillAction
         new AttackChanger(attAmount).Do(target);
 
         int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        new DefenseChanger(attAmount).Do(target);
+        new DefenseChanger(attAmount).Do2(target);
     }
 }
 

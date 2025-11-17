@@ -32,7 +32,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, System.Type expectedType)
     {
-        var result = SkillActionFactory.CreateAction(type, 10, CreateStatus());
+        var result = SkillActionFactory.CreateAction(type, 10, new FixCalculator(100), CreateStatus());
         result.Do(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }

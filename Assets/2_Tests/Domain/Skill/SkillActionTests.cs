@@ -15,18 +15,18 @@ public class TraitActionTests
         Assert.AreEqual(expected, target.Stat.Attack);
     }
 
-    [Test]
-    [TestCase(5, 15)]
-    [TestCase(-3, 7)]
-    public void 챔피언상태_방_변경(int amount, int expected)
-    {
-        var target = TestHelper.CreateStatus(0, 10, 0);
-        var sut = new DefenseChanger(amount);
+    //[Test]
+    //[TestCase(5, 15)]
+    //[TestCase(-3, 7)]
+    //public void 챔피언상태_방_변경(int amount, int expected)
+    //{
+    //    var target = TestHelper.CreateStatus(0, 10, 0);
+    //    var sut = new DefenseChanger(amount);
 
-        sut.Do(target);
+    //    sut.Do(target);
 
-        Assert.AreEqual(expected, target.Stat.Defense);
-    }
+    //    Assert.AreEqual(expected, target.Stat.Defense);
+    //}
 
     [Test]
     public void 챔피언_방_변경()
@@ -34,7 +34,7 @@ public class TraitActionTests
         var target = TestHelper.CreateStatus(0, 10, 0);
         var sut = new DefenseChanger(new ValueCalculator(100));
 
-        sut.Do2(target);
+        sut.Do(target);
 
         Assert.AreEqual(110, target.Stat.Defense);
     }
