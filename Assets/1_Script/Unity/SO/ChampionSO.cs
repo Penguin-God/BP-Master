@@ -22,7 +22,7 @@ public class TraitDataConfig
     [SerializeField] TraitType targetTrait;
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
 
-    public SkillData CreateTraitData() => new SkillData(traitType, amount, SkillAmountCalculatorFactory.Create(skillAmount), Condition, Rule);
+    public SkillData CreateTraitData() => new SkillData(traitType, amount, SkillAmountCalculatorFactory.Create(skillAmount.ToData()), Condition, Rule);
     public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, amount, Condition, Rule);
 }
 
@@ -65,18 +65,4 @@ public class ChampionSO : ScriptableObject
     [SerializeField] TraitType traitType;
 
     public ChampionData CreateData() => new ChampionData(StatData, traitType, default);
-}
-
-
-
-public static class SkillAmountCalculatorFactory
-{
-    public static ISkillAmountCalculator Create(SkillAmount amount)
-        => amount.Type switch
-        {
-            AmountType.Value => new ValueCalculator(amount.ValueAmount),
-            AmountType.Percent => new PercentCalculator(amount.PercentValue),
-            AmountType.Fix => new FixCalculator(amount.FixValue),
-            _ => null,
-        };
 }

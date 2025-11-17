@@ -45,3 +45,35 @@ public static class SkillCondtionFactory
         };
     }
 }
+
+
+public enum AmountType { None, Value, Percent, Fix }
+
+public readonly struct SkillAmountData
+{
+    public readonly AmountType Type;
+    public readonly int ValueAmount;
+    public readonly float PercentValue;
+    public readonly int FixValue;
+
+    public SkillAmountData(AmountType amountType, int value, float percent, int fix)
+    {
+        Type = amountType;
+        ValueAmount = value;
+        PercentValue = percent;
+        FixValue = fix;
+    }
+}
+
+
+public static class SkillAmountCalculatorFactory
+{
+    public static ISkillAmountCalculator Create(SkillAmountData amountData)
+        => amountData.Type switch
+        {
+            AmountType.Value => new ValueCalculator(amountData.ValueAmount),
+            AmountType.Percent => new PercentCalculator(amountData.PercentValue),
+            AmountType.Fix => new FixCalculator(amountData.FixValue),
+            _ => null,
+        };
+}

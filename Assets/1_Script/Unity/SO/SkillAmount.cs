@@ -1,7 +1,5 @@
 using System;
 
-public enum AmountType { None, Value, Percent, Fix }
-
 [Serializable]
 public class SkillAmount
 {
@@ -9,4 +7,6 @@ public class SkillAmount
     public int ValueAmount;
     public float PercentValue;
     public int FixValue;
+
+    public SkillAmountData ToData() => new SkillAmountData(Type, ValueAmount, PercentValue, FixValue);
 }

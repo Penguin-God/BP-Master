@@ -45,4 +45,16 @@ public class SkillFactoryTests
         result.Check(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }
+
+
+    [Test]
+    [TestCase(AmountType.Value, typeof(ValueCalculator))]
+    [TestCase(AmountType.Percent, typeof(PercentCalculator))]
+    [TestCase(AmountType.Fix, typeof(FixCalculator))]
+    public void 타입에_맞는_계산기_객체_생성(AmountType amountType, System.Type expectedType)
+    {
+        ISkillAmountCalculator result = SkillAmountCalculatorFactory.Create(new SkillAmountData(amountType, 1, 1, 1));
+        result.Calculate(100); // 에러만 체크
+        Assert.IsInstanceOf(expectedType, result);
+    }
 }
