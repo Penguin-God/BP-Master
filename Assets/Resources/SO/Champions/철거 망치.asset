@@ -21,6 +21,11 @@ MonoBehaviour:
   - targetSide: 1
     range: 3
     traitType: 4
+    skillAmount:
+      Type: 2
+      ValueAmount: 0
+      PercentValue: -0.25
+      FixValue: 0
     amount: -25
     conditionType: 0
     threshold: 0
