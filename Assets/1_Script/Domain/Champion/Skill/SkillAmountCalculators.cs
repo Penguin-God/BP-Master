@@ -23,3 +23,11 @@ public class PercentCalculator : ISkillAmountCalculator
         return (int)Math.Round(raw, MidpointRounding.AwayFromZero);
     }
 }
+
+public class FixCalculator : ISkillAmountCalculator
+{
+    readonly int FixValue;
+    public FixCalculator(int amount) => this.FixValue = amount;
+
+    public int Calculate(int currentValue) => FixValue - currentValue;
+}

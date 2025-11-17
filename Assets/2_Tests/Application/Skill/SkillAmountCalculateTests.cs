@@ -17,4 +17,13 @@ public class SkillAmountCalculateTests
         Assert.AreEqual(10, sut.Calculate(100));
         Assert.AreEqual(-3, sut.Calculate(-25));
     }
+
+    [Test]
+    public void 현재값이_고정값에_가기위해_필요한_값_반환()
+    {
+        ISkillAmountCalculator sut = new FixCalculator(100);
+
+        Assert.AreEqual(10, sut.Calculate(90));
+        Assert.AreEqual(500, sut.Calculate(-400));
+    }
 }
