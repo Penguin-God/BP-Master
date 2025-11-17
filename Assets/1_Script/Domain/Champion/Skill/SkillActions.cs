@@ -9,7 +9,7 @@ public class AttackChanger : ISkillAction
 {
     readonly int Amount;
     public AttackChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
+    public void Do(ChampionStatus target) => target.AddAttackWithRate(Amount);
 }
 
 public class DefenseChanger : ISkillAction
@@ -21,11 +21,7 @@ public class DefenseChanger : ISkillAction
     public DefenseChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
     public void Do2(ChampionStatus target) => target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + Amount));
 
-    public void Do(ChampionStatus target)
-    {
-        int amount = AmountCalculator.Calculate(target.Stat.Defense);
-        target.ChangeStatWithRate(target.Stat.ChangeDefense(target.Stat.Defense + amount));
-    }
+    public void Do(ChampionStatus target) => target.AddDefenseWithRate(AmountCalculator.Calculate(target.Stat.Defense));
 }
 
 public class SpeedChanger : ISkillAction
@@ -56,6 +52,13 @@ public class DefenseAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
     readonly float Percent;
+    readonly ISkillAmountCalculator AmountCalculator;
+    public DefenseAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator)
+    {
+        User = user;
+        AmountCalculator = amountCalculator;
+    }
+
     public DefenseAbsorber(ChampionStatus user, float percent)
     {
         User = user;

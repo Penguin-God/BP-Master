@@ -57,14 +57,14 @@ public class ChampionStatusTests
     [Test]
     public void 개별_스탯_변경()
     {
-        var status = CreateStatus(att:100);
+        var status = CreateStatus(att:100, def:10);
         status.AddUpRate(0.5f);
 
-        status.ChangeAttackWithRate(30);
-        status.ChangeDefenseWithRate(50);
+        status.AddAttackWithRate(-50);
+        status.AddDefenseWithRate(60);
 
-        Assert.AreEqual(30, status.Stat.Attack);
-        Assert.AreEqual(75, status.Stat.Defense);
+        Assert.AreEqual(50, status.Stat.Attack);
+        Assert.AreEqual(100, status.Stat.Defense);
     }
 
     [Test]
