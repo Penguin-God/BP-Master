@@ -23,7 +23,6 @@ public class SkillFactoryTests
     [TestCase(SkillType.AttackChanger, typeof(AttackChanger))]
     [TestCase(SkillType.DefenseChanger, typeof(DefenseChanger))]
     [TestCase(SkillType.PercentAttackChanger, typeof(AttackPercentChanger))]
-    [TestCase(SkillType.PercentDefenseChanger, typeof(DefensePercentChanger))]
     [TestCase(SkillType.SpeedChanger, typeof(SpeedChanger))]
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
     [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]

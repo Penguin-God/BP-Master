@@ -15,19 +15,6 @@ public class TraitActionTests
         Assert.AreEqual(expected, target.Stat.Attack);
     }
 
-    //[Test]
-    //[TestCase(5, 15)]
-    //[TestCase(-3, 7)]
-    //public void 챔피언상태_방_변경(int amount, int expected)
-    //{
-    //    var target = TestHelper.CreateStatus(0, 10, 0);
-    //    var sut = new DefenseChanger(amount);
-
-    //    sut.Do(target);
-
-    //    Assert.AreEqual(expected, target.Stat.Defense);
-    //}
-
     [Test]
     public void 챔피언_방_변경()
     {
@@ -52,17 +39,6 @@ public class TraitActionTests
         Assert.AreEqual(expected, target.Stat.Speed);
     }
 
-    //[Test]
-    //public void 챔피언_방어만_지정값으로_고정()
-    //{
-    //    var target = TestHelper.CreateStatus(0, 0, 7);
-    //    var sut = new DefenseFixer(100);
-
-    //    sut.Do(target);
-
-    //    Assert.AreEqual(TestHelper.CreateStat(0, 100, 7), target.Stat);
-    //}
-
     [Test]
     public void 특성_제외시키기()
     {
@@ -83,17 +59,6 @@ public class TraitActionTests
         sut.Do(target);
 
         Assert.AreEqual(150, target.Stat.Attack);
-    }
-
-    [Test]
-    public void 퍼센트로_방어값_바꾸기()
-    {
-        var target = TestHelper.CreateStatus(0, def: 100);
-        var sut = new DefensePercentChanger(-0.3f);
-
-        sut.Do(target);
-
-        Assert.AreEqual(70, target.Stat.Defense);
     }
 
     [Test]

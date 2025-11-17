@@ -52,18 +52,6 @@ public class AttackPercentChanger : ISkillAction
     }
 }
 
-public class DefensePercentChanger : ISkillAction
-{
-    readonly float Percent;
-    public DefensePercentChanger(float percent) => Percent = percent;
-
-    public void Do(ChampionStatus target)
-    {
-        int amount = (int)Math.Round(target.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        new DefenseChanger(amount).Do2(target);
-    }
-}
-
 public class DefenseAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
