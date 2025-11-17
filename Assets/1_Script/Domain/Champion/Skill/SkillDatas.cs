@@ -64,6 +64,7 @@ public readonly struct SkillData
 {
     public readonly SkillType TraitType;
     public readonly int Amount;
+    public readonly ISkillAmountCalculator AmountCalculator;
     public readonly SkillConditionData ConditionData;
     public readonly SkillTargetRule TargetRule;
 
@@ -71,6 +72,16 @@ public readonly struct SkillData
     {
         TraitType = traitType;
         Amount = amount;
+        TargetRule = traitTargetRule;
+        ConditionData = conditionData;
+        AmountCalculator = null;
+    }
+
+    public SkillData(SkillType traitType, ISkillAmountCalculator amountCalculator, SkillConditionData conditionData, SkillTargetRule traitTargetRule)
+    {
+        TraitType = traitType;
+        Amount = 0;
+        AmountCalculator = amountCalculator;
         TargetRule = traitTargetRule;
         ConditionData = conditionData;
     }
