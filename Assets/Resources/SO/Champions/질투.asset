@@ -48,8 +48,8 @@ MonoBehaviour:
     range: 4
     traitType: 5
     skillAmount:
-      Type: 0
-      ValueAmount: 0
+      Type: 1
+      ValueAmount: -1
       PercentValue: 0
       FixValue: 0
     amount: -1
