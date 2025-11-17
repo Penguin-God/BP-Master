@@ -9,7 +9,10 @@ public class AttackChanger : ISkillAction
 {
     readonly int Amount;
     public AttackChanger(int amount) => Amount = amount;
-    public void Do(ChampionStatus target) => target.AddAttackWithRate(Amount);
+
+    readonly ISkillAmountCalculator AmountCalculator;
+    public AttackChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
+    public void Do(ChampionStatus target) => target.AddAttackWithRate(AmountCalculator.Calculate(target.Stat.Attack));
 }
 
 public class DefenseChanger : ISkillAction
@@ -29,18 +32,6 @@ public class SpeedChanger : ISkillAction
 public class SkillExcluder : ISkillAction
 {
     public void Do(ChampionStatus target) => target.TraitExcluded();
-}
-
-public class AttackPercentChanger : ISkillAction
-{
-    readonly float Percent;
-    public AttackPercentChanger(float percent) => Percent = percent;
-
-    public void Do(ChampionStatus target)
-    {
-        int amount = (int)Math.Round(target.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
-        new AttackChanger(amount).Do(target);
-    }
 }
 
 public class DefenseAbsorber : ISkillAction
@@ -75,7 +66,7 @@ public class Resonance : ISkillAction
     {
         if (target == User) return; // 자신은 제외
         int attAmount = (int)Math.Round(User.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
-        new AttackChanger(attAmount).Do(target);
+        target.AddAttackWithRate(attAmount);
 
         int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
         target.AddDefenseWithRate(defAmount);

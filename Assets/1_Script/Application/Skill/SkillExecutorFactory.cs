@@ -17,9 +17,9 @@ public static class SkillActionFactory
     {
         return actionType switch
         {
-            SkillType.AttackChanger => new AttackChanger(amount),
+            SkillType.AttackChanger => new AttackChanger(amountCalculator),
             SkillType.DefenseChanger => new DefenseChanger(amountCalculator),
-            SkillType.PercentAttackChanger => new AttackPercentChanger(GetPercent(amount)),
+            //SkillType.PercentAttackChanger => new AttackPercentChanger(GetPercent(amount)),
             SkillType.SpeedChanger => new SpeedChanger(amount),
             SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, amountCalculator),
