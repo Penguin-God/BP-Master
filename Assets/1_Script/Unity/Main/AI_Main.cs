@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class AI_Main : MonoBehaviour
@@ -6,8 +5,8 @@ public class AI_Main : MonoBehaviour
     Team Team;
     PhaseEventDispatcher phaseEventDispatcher;
 
-    [SerializeField] MasteryGenerator masterGenerator;
-    [SerializeField] BuildPrioritySO[] buildDatas;
+    [SerializeField] MasteryGenerator masteryGenerator;
+    [SerializeField] MultiPrioritySelector_SO multiPrioritySelector_SO;
 
     public void Init(Team team, PhaseEventDispatcher phaseEventDispatcher)
     {
@@ -17,8 +16,7 @@ public class AI_Main : MonoBehaviour
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
-        MultiPrioritySelector selector = new MultiPrioritySelector(new MasteryManager(masterGenerator.GetTeamMasteries(Team)), buildDatas.Select(x => new PrioritySelector(x.Bans, x.Picks)));
-        // var ai = new AI_SelectAgent(Team, phaseManager, storage, new RandomBan(), new StaticValuePick(catalog, evaluator));
+        MultiPrioritySelector selector = multiPrioritySelector_SO.CraeteSeletor(masteryGenerator.GetTeamMasteryManager(Team));
         var ai = new AI_SelectAgent(Team, phaseManager, storage, selector, selector);
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;

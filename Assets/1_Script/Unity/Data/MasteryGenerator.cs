@@ -11,6 +11,8 @@ public class MasteryGenerator : MonoBehaviour
 
     public IEnumerable<ChampionMastery> GetTeamMasteries(Team team) => team == Team.Blue ? Blues : Reds;
 
+    public MasteryManager GetTeamMasteryManager(Team team) => new MasteryManager(GetTeamMasteries(team));
+
     public void CreateRandomRoster(int teamSize)
     {
         var drawer = new MasteryDrawer(championRepository.AllId);

@@ -15,7 +15,6 @@ MonoBehaviour:
   bans:
   - {fileID: 11400000, guid: bf1e46797b2102f4995e5dbc047357ab, type: 2}
   - {fileID: 11400000, guid: 05764b6ed32fca74d93311ab047dd117, type: 2}
-  - {fileID: 11400000, guid: 512104aaadb965640950d26d5e496bf8, type: 2}
   picks:
   - {fileID: 11400000, guid: bae25939c5722db438b3cdf8300db2e0, type: 2}
   - {fileID: 11400000, guid: dd2a439d0aa446149aff7b1d1a126d70, type: 2}
