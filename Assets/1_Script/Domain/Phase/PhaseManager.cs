@@ -67,7 +67,6 @@ public class PhaseManager
     }
     bool AllTeamsSubmitted() => _submittedTeams.Contains(Team.Blue) && _submittedTeams.Contains(Team.Red);
 
-
     void Advance()
     {
         if (_current.Phase.IsDone) _current = _phases.Dequeue();
