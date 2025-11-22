@@ -22,7 +22,7 @@ public class AI_TraitUseTests
         skillStorage.AddSlot(Team.Red, null);
 
         var filter = new SkillSlotFilter(flags);
-        var sut = new AI_TraitAgent(Team.Blue, filter, skillStorage, facade, new TargetCounter(2));
+        var sut = new AI_SkillAgent(Team.Blue, filter, skillStorage, facade, new TargetCounter(2));
 
         sut.UseTrait(Team.Blue);
 

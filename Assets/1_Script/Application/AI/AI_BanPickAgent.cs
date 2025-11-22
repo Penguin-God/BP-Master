@@ -1,5 +1,5 @@
 
-public class AI_SelectAgent
+public class AI_BanPickAgent
 {
     readonly Team Team;
     readonly PhaseManager phaseManager;
@@ -7,7 +7,7 @@ public class AI_SelectAgent
     readonly IBanSelector banSelector;
     readonly IPickSelector pickSelector;
 
-    public AI_SelectAgent(Team team, PhaseManager phaseManager, GameBanPickStorage storage, IBanSelector banSelector, IPickSelector pickSelector)
+    public AI_BanPickAgent(Team team, PhaseManager phaseManager, GameBanPickStorage storage, IBanSelector banSelector, IPickSelector pickSelector)
     {
         Team = team;
         this.phaseManager = phaseManager;

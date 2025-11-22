@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class AI_MonoBehaviourAgent : MonoBehaviour
 {
-    AI_TraitAgent traitAgent;
-    public void Init(AI_TraitAgent aI_TraitAgent)
+    AI_SkillAgent traitAgent;
+    public void Init(AI_SkillAgent aI_TraitAgent)
     {
         traitAgent = aI_TraitAgent;
     }

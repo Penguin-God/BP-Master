@@ -27,7 +27,7 @@ public class AI_AgentTests
         return pm;
     }
 
-    AI_SelectAgent CreateFirstSelectSut(Team team, PhaseManager pm, GameBanPickStorage storage) => new AI_SelectAgent(team, pm, storage, new FirstBan(), new FirstPick());
+    AI_BanPickAgent CreateFirstSelectSut(Team team, PhaseManager pm, GameBanPickStorage storage) => new AI_BanPickAgent(team, pm, storage, new FirstBan(), new FirstPick());
 
     [Test]
     public void 규칙에_맞게_밴_선택_후_저장_및_턴_진행()

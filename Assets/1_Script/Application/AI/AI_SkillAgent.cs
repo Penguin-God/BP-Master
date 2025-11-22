@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class AI_TraitAgent
+public class AI_SkillAgent
 {
     readonly Team Team;
     readonly SkillUseController skillController;
@@ -10,7 +10,7 @@ public class AI_TraitAgent
     readonly TargetCounter targetCounter;
     readonly AI_SKillDicision sKillDicision = new AI_SKillDicision();
 
-    public AI_TraitAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<Skill> skills, SkillUseController skillController, TargetCounter targetCounter)
+    public AI_SkillAgent(Team team, SkillSlotFilter skillSlotFilter, SlotStorage<Skill> skills, SkillUseController skillController, TargetCounter targetCounter)
     {
         Team = team;
         this.skillSlotFilter = skillSlotFilter;

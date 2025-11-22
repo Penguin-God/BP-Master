@@ -17,14 +17,14 @@ public class AI_Main : MonoBehaviour
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
         selectorsCreatetor.Init(masteryGenerator.GetTeamMasteryManager(Team));
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
+        var ai = new AI_BanPickAgent(Team, phaseManager, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }
 
     public void InitAI_Trait(SkillSlotFilter filter, SlotStorageManager slotManager, SkillUseController skillController, int teamSize)
     {
-        var skill_ai = new AI_TraitAgent(Team, filter, slotManager.SkillSlots, skillController, new TargetCounter(teamSize));
+        var skill_ai = new AI_SkillAgent(Team, filter, slotManager.SkillSlots, skillController, new TargetCounter(teamSize));
         var ai_agent = GetComponent<AI_MonoBehaviourAgent>();
         ai_agent.Init(skill_ai);
         phaseEventDispatcher.OnPhaseSkill += ai_agent.UseTrait;
