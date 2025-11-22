@@ -8,6 +8,8 @@ public class BuildPrioritySO : ScriptableObject
     [SerializeField] ChampionSO[] bans;
     [SerializeField] ChampionSO[] picks;
 
-    public IEnumerable<int> Bans => bans.Select(x => x.Id);
-    public IEnumerable<int> Picks => picks.Select(x => x.Id);
+    IEnumerable<int> Bans => bans.Select(x => x.Id);
+    IEnumerable<int> Picks => picks.Select(x => x.Id);
+
+    public PrioritySelector CreateSelector() => new PrioritySelector(Bans, Picks);
 }

@@ -6,5 +6,5 @@ public class MultiPrioritySelector_SO : ScriptableObject
 {
     [SerializeField] BuildPrioritySO[] buildDatas;
 
-    public MultiPrioritySelector CraeteSeletor(MasteryManager masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => new PrioritySelector(x.Bans, x.Picks)));
+    public MultiPrioritySelector CraeteSeletor(MasteryManager masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.CreateSelector()));
 }
