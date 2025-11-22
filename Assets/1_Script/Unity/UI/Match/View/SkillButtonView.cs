@@ -19,6 +19,7 @@ public class SkillButtonView : MonoBehaviour
 
         buttonSlots.AddSlots(Team.Blue, blueSkills);
         buttonSlots.AddSlots(Team.Red, redSkills);
+        RefreshButtonsByTurn(team);
     }
 
     void InActiveAllBtns()

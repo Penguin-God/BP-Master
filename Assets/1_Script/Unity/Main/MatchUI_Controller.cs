@@ -29,7 +29,7 @@ public class MatchUI_Controller : MonoBehaviour
         masteryView.ViewMastery(championRepository);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
-        masteryHighlighter.Highlight(playerTeam); // championSelector 뒤에
+        masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
 
         storage.OnBan += banView.UpdateBanList;
         storage.OnPick += banPickView.PickChampion;
@@ -60,7 +60,6 @@ public class MatchUI_Controller : MonoBehaviour
         skillButtonView.Init(filter, playerTeam);
         traitUseView.Init(new SkillUsePersenter(matchConfig.TeamSize), slotStorageManager.SkillSlots, skillController);
         eventDispatcher.OnPhaseSkill += skillButtonView.RefreshButtonsByTurn;
-        skillButtonView.RefreshButtonsByTurn(Team.Blue);
 
         gameFlowView.Init(slotStorageManager.ChampionDataSlots);
         skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
