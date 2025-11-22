@@ -2512,13 +2512,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masteryGenerator: {fileID: 1410148730}
-  buildDatas:
-  - {fileID: 11400000, guid: 7b7bf1b37ab430f47982c751134a5a94, type: 2}
-  - {fileID: 11400000, guid: 3e3b70f80649f8a4885ad829c3d869ed, type: 2}
-  - {fileID: 11400000, guid: d8b6bcc3aa684e14bbf4c3781502668e, type: 2}
-  - {fileID: 11400000, guid: 694e19d76a70ca848b8e4dea2e51095a, type: 2}
-  - {fileID: 11400000, guid: dfe7d91c570c4f9459180378153f6293, type: 2}
   multiPrioritySelector_SO: {fileID: 11400000, guid: d9ba61d9a8e859d4c918361af396338b, type: 2}
+  selectorsCreatetor: {fileID: 11400000, guid: d9ba61d9a8e859d4c918361af396338b, type: 2}
 --- !u!114 &758303702
 MonoBehaviour:
   m_ObjectHideFlags: 0

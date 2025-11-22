@@ -2,9 +2,12 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MultiPrioritySelector", menuName = "BP Master/MultiPrioritySelector")]
-public class MultiPrioritySelector_SO : ScriptableObject
+public class MultiPrioritySelector_SO : SelectorsCreatetorSO
 {
     [SerializeField] BuildPrioritySO[] buildDatas;
 
-    public MultiPrioritySelector CraeteSeletor(MasteryManager masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.CreateSelector()));
+    public override IBanSelector CreateBanSelector() => CreateSelector(masteryManager);
+    public override IPickSelector CreatePickSelector() => CreateSelector(masteryManager);
+
+    MultiPrioritySelector CreateSelector(MasteryManager masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.CreateSelector()));
 }

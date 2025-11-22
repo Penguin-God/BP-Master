@@ -6,7 +6,7 @@ public class AI_Main : MonoBehaviour
     PhaseEventDispatcher phaseEventDispatcher;
 
     [SerializeField] MasteryGenerator masteryGenerator;
-    [SerializeField] MultiPrioritySelector_SO multiPrioritySelector_SO;
+    [SerializeField] SelectorsCreatetorSO selectorsCreatetor;
 
     public void Init(Team team, PhaseEventDispatcher phaseEventDispatcher)
     {
@@ -16,8 +16,8 @@ public class AI_Main : MonoBehaviour
 
     public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
     {
-        MultiPrioritySelector selector = multiPrioritySelector_SO.CraeteSeletor(masteryGenerator.GetTeamMasteryManager(Team));
-        var ai = new AI_SelectAgent(Team, phaseManager, storage, selector, selector);
+        selectorsCreatetor.Init(masteryGenerator.GetTeamMasteryManager(Team));
+        var ai = new AI_SelectAgent(Team, phaseManager, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
     }
