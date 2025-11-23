@@ -20,8 +20,14 @@ public class AI_BattleSimulator
         return null;
     }
 
-    public MatchInfo RunBanPick(AI_BanPickAgent blue, AI_BanPickAgent red)
+    public void RunBanPick(AI_BanPickAgent blue, AI_BanPickAgent red)
     {
-        return default;
+        phaseEventDispatcher.OnPhaseBan += blue.Ban;
+        phaseEventDispatcher.OnPhasePick += blue.Pick;
+
+        phaseEventDispatcher.OnPhaseBan += red.Ban;
+        phaseEventDispatcher.OnPhasePick += red.Pick;
+
+        phaseManager.Start();
     }
 }

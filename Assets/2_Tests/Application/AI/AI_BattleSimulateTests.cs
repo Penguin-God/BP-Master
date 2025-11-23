@@ -21,12 +21,12 @@ public class AI_BattleSimulateTests
         var redSelector = new PrioritySelector(new int[] { 4 }, new int[] { 5, 6 });
         var red = new AI_BanPickAgent(Team.Red, phaseManager, storage, redSelector, redSelector);
 
-        var result = sut.RunBanPick(blue, red);
+        sut.RunBanPick(blue, red);
 
         CollectionAssert.AreEqual(storage.BanStorage[Team.Blue], new int[] { 1 });
         CollectionAssert.AreEqual(storage.BanStorage[Team.Red], new int[] { 4 });
 
         CollectionAssert.AreEqual(storage.PickIds.GetTeam(Team.Blue), new int[] { 2, 3 });
-        CollectionAssert.AreEqual(storage.PickIds.GetTeam(Team.Blue), new int[] { 5, 6 });
+        CollectionAssert.AreEqual(storage.PickIds.GetTeam(Team.Red), new int[] { 5, 6 });
     }
 }
