@@ -1,10 +1,9 @@
 using NUnit.Framework;
 using System;
+using static TestHelper;
 
 public class PhaseTests
 {
-    PhaseData CreateData(GamePhase phase, params Team[] order) => new PhaseData(phase, new Phase(order));
-    PhaseManager CreateSut(PhaseData[] phaseDatas) => new PhaseManager(phaseDatas, new PhaseEventDispatcher());
     GameFlowData CreateFlow(GamePhase phase, Team team) => new GameFlowData(phase, team);   
 
 
@@ -26,13 +25,13 @@ public class PhaseTests
         Phase phase = new(new Team[] { Team.Red });
 
         phase.GetNext();
-        Assert.Throws<System.InvalidOperationException>(() => phase.GetNext());
+        Assert.Throws<InvalidOperationException>(() => phase.GetNext());
     }
 
     [Test]
     public void Start_호출시_첫_흐름이_진행()
     {
-        var sut = CreateSut(new[] { CreateData(GamePhase.Ban, Team.Blue) });
+        var sut = CreatePhaseManager(CreatePhaseData(GamePhase.Ban, Team.Blue));
 
         sut.Start();
 
@@ -42,11 +41,7 @@ public class PhaseTests
     [Test]
     public void 올바른_팀_제출시_다음_흐름_진행()
     {
-        var sut = CreateSut(new[]
-        {
-            CreateData(GamePhase.Ban,  Team.Blue, Team.Red),
-            CreateData(GamePhase.Pick, Team.Blue)
-        });
+        var sut = CreatePhaseManager(CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Red), CreatePhaseData(GamePhase.Pick, Team.Blue));
 
         sut.Start();
 
@@ -60,7 +55,7 @@ public class PhaseTests
     [Test]
     public void 잘못된_팀_제출시_에러()
     {
-        var sut = CreateSut(new[] { CreateData(GamePhase.Ban, Team.Blue) });
+        var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Ban, Team.Blue) });
         sut.Start();
 
         Assert.Throws<Exception>(() => sut.SubmitAction(Team.Red));
@@ -69,7 +64,7 @@ public class PhaseTests
     [Test]
     public void TeamAll_은_양팀_모두_제출해야_진행한다()
     {
-        var sut = CreateSut(new[] { CreateData(GamePhase.Skill, Team.All) });
+        var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Skill, Team.All) });
         sut.Start();
 
         sut.SubmitAction(Team.Blue);
@@ -84,10 +79,10 @@ public class PhaseTests
     public void 디스패처에서_이벤트_발생()
     {
         var dispatcher = new PhaseEventDispatcher();
-        var sut = new PhaseManager(new[] { CreateData(GamePhase.Ban, Team.Blue), }, dispatcher);
         bool isCall = false;
         dispatcher.OnPhaseBan += _ => isCall = true;
 
+        var sut = CreatePhaseManager(dispatcher, CreatePhaseData(GamePhase.Ban, Team.Blue));
         sut.Start();
 
         Assert.IsTrue(isCall);

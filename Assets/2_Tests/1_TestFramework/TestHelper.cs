@@ -63,6 +63,11 @@ public static class TestHelper
 
     public static TraitConfig CreateTraitConfig(int chargeAttack = 0, float guardBonusRate = 0, float ampliyRate = 0, float breakRate = 0) 
         => new TraitConfig(chargeAttack, guardBonusRate, ampliyRate, breakRate);
+
+
+    public static PhaseData CreatePhaseData(GamePhase phase, params Team[] order) => new PhaseData(phase, new Phase(order));
+    public static PhaseManager CreatePhaseManager(params PhaseData[] phaseDatas) => CreatePhaseManager(new PhaseEventDispatcher(), phaseDatas);
+    public static PhaseManager CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseManager(phaseDatas, eventDispatcher);
 }
 
 public class TestAttackChangeAction : ISkillAction
