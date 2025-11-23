@@ -15,11 +15,6 @@ public class AI_BattleSimulator
         this.phaseEventDispatcher = phaseEventDispatcher;
     }
 
-    public IEnumerable<MatchInfo> Run(int battleCount)
-    {
-        return null;
-    }
-
     public void RunBanPick(AI_BanPickAgent blue, AI_BanPickAgent red)
     {
         phaseEventDispatcher.OnPhaseBan += blue.Ban;
@@ -29,5 +24,10 @@ public class AI_BattleSimulator
         phaseEventDispatcher.OnPhasePick += red.Pick;
 
         phaseManager.Start();
+    }
+
+    public void RunSkill(AI_SkillAgent blue, AI_SkillAgent red)
+    {
+
     }
 }
