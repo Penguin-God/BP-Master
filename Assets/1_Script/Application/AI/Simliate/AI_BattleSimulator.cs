@@ -20,7 +20,7 @@ public class AI_BattleSimulator
         return null;
     }
 
-    public MatchInfo Run(AI_Agent blue, AI_Agent red)
+    public MatchInfo RunBanPick(AI_BanPickAgent blue, AI_BanPickAgent red)
     {
         return default;
     }

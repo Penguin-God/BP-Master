@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static TestHelper;
 
 public class SelectSaveTests
 {
@@ -35,5 +36,4 @@ public class SelectSaveTests
     }
 
     void Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
-    GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
 }
