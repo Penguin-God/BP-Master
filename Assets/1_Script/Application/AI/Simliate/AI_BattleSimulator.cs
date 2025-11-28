@@ -1,9 +1,3 @@
-
-public readonly struct MatchInfo
-{
-    public readonly Team Winner;
-}
-
 public class AI_BattleSimulator
 {
     readonly PhaseManager phaseManager;
