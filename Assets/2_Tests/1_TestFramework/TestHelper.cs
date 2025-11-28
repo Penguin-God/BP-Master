@@ -31,13 +31,13 @@ public static class TestHelper
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
     public static SkillData[] CreateSkills(params SkillData[] traits) => traits;
 
-    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateSkillData(type, amount, default, rule);
+    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateValueSkillData(type, amount, default, rule);
 
-    public static SkillData CreateSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, SkillTargetRule traitTargetRule = default)
+    public static SkillData CreateValueSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, SkillTargetRule traitTargetRule = default)
         => new SkillData(traitType, new SkillAmountData(AmountType.Value, amount, 0, 0), conditionData, traitTargetRule);
 
-    public static Skill CreateSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
-        => new Skill(CreateSkills(CreateSkillData(skillType, amount, conditionData, rule)));
+    public static Skill CreateValueSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+        => new Skill(CreateSkills(CreateValueSkillData(skillType, amount, conditionData, rule)));
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
     public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);

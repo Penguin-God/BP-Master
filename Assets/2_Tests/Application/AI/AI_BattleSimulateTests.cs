@@ -33,25 +33,29 @@ public class AI_BattleSimulateTests
     public void 주입한_AI로_스킬_진행()
     {
         var eventDispatcher = new PhaseEventDispatcher();
-        var phaseManager = CreatePhaseManager(eventDispatcher,
-            CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Red),
-            CreatePhaseData(GamePhase.Pick, Team.Blue, Team.Red, Team.Red, Team.Blue)
-            );
+        var phaseManager = CreatePhaseManager(eventDispatcher, CreatePhaseData(GamePhase.Skill, Team.Blue, Team.Red));
         var sut = new AI_BattleSimulator(phaseManager, eventDispatcher);
 
         SlotStorage<bool> skillUseStorage = new SlotStorage<bool>();
         skillUseStorage.AddSlot(Team.Blue, false);
         skillUseStorage.AddSlot(Team.Red, false);
+
         var filter = new SkillSlotFilter(skillUseStorage);
         var counter = new TargetCounter(teamSize: 1);
 
-        // 이거 설정해야됨
-        SlotStorage<ChampionStatus> statusSlots = new SlotStorage<ChampionStatus>();
-        
-        var blue = new AI_SkillAgent(Team.Blue, filter, null, null, counter);
+        SlotStorage<ChampionStatus> statusSlots = CreateOneSlotStatus(att: 100);
+        var skillController = new SkillUseController(statusSlots);
 
-        var red = new AI_SkillAgent(Team.Red, filter, null, null, counter);
+        SlotStorage<Skill> skillSlots = new SlotStorage<Skill>();
+        skillSlots.AddSlot(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule));
+        skillSlots.AddSlot(Team.Red, CreateValueSkill(SkillType.AttackChanger, 30, default, SelfAllRule));
+
+        var blue = new AI_SkillAgent(Team.Blue, filter, skillSlots, skillController, counter);
+        var red = new AI_SkillAgent(Team.Red, filter, skillSlots, skillController, counter);
 
         sut.RunSkill(blue, red);
+
+        Assert.AreEqual(statusSlots.GetSlot(BlueZeroSlot).Stat.Attack, 110);
+        Assert.AreEqual(statusSlots.GetSlot(RedZeroSlot).Stat.Attack, 130);
     }
 }

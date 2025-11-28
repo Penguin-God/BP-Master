@@ -8,9 +8,9 @@ public class SKillDicisionTests
     public void 조건_불만족_시_스탯업()
     {
         var slots = CreateOneSlotStatus();
-        var skill1 = CreateSkill(SkillType.AttackChanger, 100);
-        var skill2 = CreateSkill(SkillType.DefenseChanger, 100, CreateThresholdCondition(StatConditionType.AttackBelow, 50), SelfAllRule);
-        var skill3 = CreateSkill(SkillType.PercentAttackChanger, 100);
+        var skill1 = CreateValueSkill(SkillType.AttackChanger, 100);
+        var skill2 = CreateValueSkill(SkillType.DefenseChanger, 100, CreateThresholdCondition(StatConditionType.AttackBelow, 50), SelfAllRule);
+        var skill3 = CreateValueSkill(SkillType.PercentAttackChanger, 100);
 
         var sut = new AI_SKillDicision();
 

@@ -9,7 +9,7 @@ public class SkillPreviewTests
         var slots = CreateOneSlotStatus();
         var sut = new SkillPreviewer();
 
-        var result = sut.PreviewSkill(slots, CreateSkill(SkillType.AttackChanger, 100, rule: SelfAllRule));
+        var result = sut.PreviewSkill(slots, CreateValueSkill(SkillType.AttackChanger, 100, rule: SelfAllRule));
 
         Assert.AreEqual(0, slots.GetSlot(BlueZeroSlot).Stat.Attack);
         Assert.AreEqual(100, result.GetSlot(BlueZeroSlot).Stat.Attack);
