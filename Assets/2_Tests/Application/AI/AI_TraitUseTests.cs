@@ -24,7 +24,7 @@ public class AI_TraitUseTests
         var filter = new SkillSlotFilter(flags);
         var sut = new AI_SkillAgent(Team.Blue, filter, skillStorage, facade, new TargetCounter(2));
 
-        sut.UseTrait(Team.Blue);
+        sut.UseSkill(Team.Blue);
 
         Assert.AreEqual(10, statuses.GetSlot(RedZeroSlot).Stat.Attack);
         Assert.AreEqual(10, statuses.GetSlot(RedOneSlot).Stat.Attack);

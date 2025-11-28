@@ -45,6 +45,7 @@ public class AI_BattleSimulateTests
 
         SlotStorage<ChampionStatus> statusSlots = CreateOneSlotStatus(att: 100);
         var skillController = new SkillUseController(statusSlots);
+        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
 
         SlotStorage<Skill> skillSlots = new SlotStorage<Skill>();
         skillSlots.AddSlot(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule));
@@ -54,8 +55,9 @@ public class AI_BattleSimulateTests
         var red = new AI_SkillAgent(Team.Red, filter, skillSlots, skillController, counter);
 
         sut.RunSkill(blue, red);
+        phaseManager.Start();
 
-        Assert.AreEqual(statusSlots.GetSlot(BlueZeroSlot).Stat.Attack, 110);
-        Assert.AreEqual(statusSlots.GetSlot(RedZeroSlot).Stat.Attack, 130);
+        Assert.AreEqual(110, statusSlots.GetSlot(BlueZeroSlot).Stat.Attack);
+        Assert.AreEqual(130, statusSlots.GetSlot(RedZeroSlot).Stat.Attack);
     }
 }

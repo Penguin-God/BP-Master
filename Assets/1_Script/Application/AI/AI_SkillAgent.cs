@@ -19,7 +19,7 @@ public class AI_SkillAgent
         this.targetCounter = targetCounter;
     }
 
-    public void UseTrait(Team team)
+    public void UseSkill(Team team)
     {
         if (Team != team) return;
         var usableSlots = skillSlotFilter.FilteringUseableSlots(Team).ToList();

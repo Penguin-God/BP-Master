@@ -27,6 +27,7 @@ public class AI_BattleSimulator
 
     public void RunSkill(AI_SkillAgent blue, AI_SkillAgent red)
     {
-
+        phaseEventDispatcher.OnPhaseSkill += blue.UseSkill;
+        phaseEventDispatcher.OnPhaseSkill += red.UseSkill;
     }
 }

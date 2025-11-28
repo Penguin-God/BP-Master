@@ -28,6 +28,6 @@ public class AI_Main : MonoBehaviour
         var ai_agent = GetComponent<AI_MonoBehaviourAgent>();
         ai_agent.Init(skill_ai);
         phaseEventDispatcher.OnPhaseSkill += ai_agent.UseTrait;
-        if (Team == Team.Blue) skill_ai.UseTrait(Team.Blue);
+        if (Team == Team.Blue) skill_ai.UseSkill(Team.Blue);
     }
 }

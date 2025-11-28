@@ -14,6 +14,6 @@ public class AI_MonoBehaviourAgent : MonoBehaviour
     IEnumerator Co_UseTrait(Team team)
     {
         yield return new WaitForSeconds(1.5f);
-        traitAgent.UseTrait(team);
+        traitAgent.UseSkill(team);
     }
 }
