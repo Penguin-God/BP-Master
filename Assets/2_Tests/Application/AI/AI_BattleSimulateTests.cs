@@ -33,7 +33,7 @@ public class AI_BattleSimulateTests
     public void 주입한_AI로_스킬_진행()
     {
         var eventDispatcher = new PhaseEventDispatcher();
-        var phaseManager = CreatePhaseManager(eventDispatcher, CreatePhaseData(GamePhase.Skill, Team.Blue, Team.Red));
+        var phaseManager = CreatePhaseManager(eventDispatcher, CreatePhaseData(GamePhase.Skill, Team.Blue, Team.Red, Team.Red, Team.Blue));
         var sut = new AI_BattleSimulator(phaseManager, eventDispatcher);
 
         SlotStorage<bool> skillUseStorage = new SlotStorage<bool>();
@@ -43,11 +43,13 @@ public class AI_BattleSimulateTests
         var filter = new SkillSlotFilter(skillUseStorage);
         var counter = new TargetCounter(teamSize: 1);
 
-        SlotStorage<ChampionStatus> statusSlots = CreateOneSlotStatus(att: 100);
+        SlotStorage<ChampionStatus> statusSlots = CreateTwoSlotStatus(att: 100);
         var skillController = new SkillUseController(statusSlots);
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
 
         SlotStorage<Skill> skillSlots = new SlotStorage<Skill>();
+        skillSlots.AddSlot(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule));
+        skillSlots.AddSlot(Team.Red, CreateValueSkill(SkillType.AttackChanger, 30, default, SelfAllRule));
         skillSlots.AddSlot(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule));
         skillSlots.AddSlot(Team.Red, CreateValueSkill(SkillType.AttackChanger, 30, default, SelfAllRule));
 
@@ -57,7 +59,7 @@ public class AI_BattleSimulateTests
         sut.RunSkill(blue, red);
         phaseManager.Start();
 
-        Assert.AreEqual(110, statusSlots.GetSlot(BlueZeroSlot).Stat.Attack);
-        Assert.AreEqual(130, statusSlots.GetSlot(RedZeroSlot).Stat.Attack);
+        Assert.AreEqual(120, statusSlots.GetSlot(BlueZeroSlot).Stat.Attack);
+        Assert.AreEqual(160, statusSlots.GetSlot(RedZeroSlot).Stat.Attack);
     }
 }
