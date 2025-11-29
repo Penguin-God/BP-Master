@@ -14,7 +14,9 @@ public class AI_SimulateMainTests
         };
         Champion[] champions = new Champion[] { CreateChampion(10), CreateChampion(20), CreateChampion(30), CreateChampion(100), CreateChampion(100), CreateChampion(60), };
 
-        var sut = new AI_SimulateMain(phases, teamSize, champions);
+
+
+        var sut = new BattleMain(phases, teamSize, champions, null, null);
 
         MatchInfo result = sut.Run();
 
