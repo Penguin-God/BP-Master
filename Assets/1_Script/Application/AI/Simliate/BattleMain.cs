@@ -48,17 +48,29 @@ public class BattleMain
     PhaseEventDispatcher phaseEventDispatcher;
     readonly int TeamSize;
     Champion[] champions;
-
-    public BattleMain(PhaseData[] phases, int teamSize, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
+    IPhaseAgent blue;
+    IPhaseAgent red;
+    public BattleMain(PhaseManager phaseManager, PhaseEventDispatcher phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
     {
-        phaseEventDispatcher = new PhaseEventDispatcher();
-        phaseManager = new PhaseManager(phases, phaseEventDispatcher);
-        this.TeamSize = teamSize;
+        this.phaseEventDispatcher = phaseEventDispatcher;
+        this.phaseManager = phaseManager;
         this.champions = champions;
+        this.blue = blue;
+        this.red = red;
     }
 
     public MatchInfo Run()
     {
-        throw new NotImplementedException();
+        SubscribePhaseEvent(blue);
+        SubscribePhaseEvent(red);
+        phaseManager.Start();
+        return default;
+    }
+
+    private void SubscribePhaseEvent(IPhaseAgent phaseAgent)
+    {
+        phaseEventDispatcher.OnPhaseBan += phaseAgent.OnBan;
+        phaseEventDispatcher.OnPhasePick += phaseAgent.OnPick;
+        phaseEventDispatcher.OnPhaseSkill += phaseAgent.OnSkill;
     }
 }

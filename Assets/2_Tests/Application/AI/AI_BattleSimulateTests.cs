@@ -38,10 +38,12 @@ public class AI_BattleSimulateTests
 
         SlotStorage<bool> skillUseStorage = new SlotStorage<bool>();
         skillUseStorage.AddSlot(Team.Blue, false);
+        skillUseStorage.AddSlot(Team.Blue, false);
+        skillUseStorage.AddSlot(Team.Red, false);
         skillUseStorage.AddSlot(Team.Red, false);
 
         var filter = new SkillSlotFilter(skillUseStorage);
-        var counter = new TargetCounter(teamSize: 1);
+        var counter = new TargetCounter(teamSize: 2);
 
         SlotStorage<ChampionStatus> statusSlots = CreateTwoSlotStatus(att: 100);
         var skillController = new SkillUseController(statusSlots);
