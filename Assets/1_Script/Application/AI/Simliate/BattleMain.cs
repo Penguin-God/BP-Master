@@ -1,4 +1,3 @@
-using System;
 
 public readonly struct MatchInfo
 {
@@ -67,10 +66,19 @@ public class BattleMain
         return default;
     }
 
-    private void SubscribePhaseEvent(IPhaseAgent phaseAgent)
+    void SubscribePhaseEvent(IPhaseAgent phaseAgent)
     {
         phaseEventDispatcher.OnPhaseBan += phaseAgent.OnBan;
         phaseEventDispatcher.OnPhasePick += phaseAgent.OnPick;
         phaseEventDispatcher.OnPhaseSkill += phaseAgent.OnSkill;
+    }
+
+    bool initSkill = false;
+    void InitSkillPhase()
+    {
+        if (initSkill) return;
+        initSkill = true;
+
+
     }
 }
