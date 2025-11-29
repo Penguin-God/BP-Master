@@ -5,49 +5,58 @@ using System.Linq;
 public readonly struct TraitUI_Data
 {
     public readonly SkillType TraitType;
-    public readonly int Amount;
-
+    public readonly SkillAmountData AmountData;
+    
     public readonly SkillConditionData Condition;
     public readonly SkillTargetRule Rule;
 
     public readonly Side TargetSide => Rule.TargetSide;
     public readonly TargetRange Range => Rule.TargetRange;
 
-    public TraitUI_Data(SkillType traitType, int amount, SkillConditionData conditionData, SkillTargetRule traitTargetRule)
+    public TraitUI_Data(SkillData skillData)
     {
-        TraitType = traitType;
-        Amount = amount;
-        Condition = conditionData;
-        Rule = traitTargetRule;
+        TraitType = skillData.TraitType;
+        AmountData = skillData.AmountData;
+        Condition = skillData.ConditionData;
+        Rule = skillData.TargetRule;
     }
 }
 
 public class SkillTextBuilder
 {
     readonly SkillConditionTextBuilder ConditionTextBuilder = new SkillConditionTextBuilder();
-    public string BuildSkillText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildTraitText(x)));
+    public string BuildSkillText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
 
-    public string BuildTraitText(TraitUI_Data traitData)
+    public string BuildSkillText(TraitUI_Data traitData)
     {
         var conditoin = ConditionTextBuilder.BuildConditionText(traitData.Condition);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(traitData.TargetSide, traitData.Range);
-        var action = BuildActionText(traitData.TraitType, traitData.Amount);
+        var action = BuildActionText(traitData.TraitType, traitData.AmountData);
 
         // 조건이 있으면 "조건 + 공백"을 앞에 붙이고, 없으면 그대로
         return $"{conditoin}{space}{target} {action}";
     }
 
-    string BuildActionText(SkillType traitType, int amount) => (traitType) switch
+    string BuildActionText(SkillType skillType, SkillAmountData skillAmountData) => (skillType) switch
     {
-        SkillType.AttackChanger => $"공격력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        SkillType.DefenseChanger => $"방어력 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        SkillType.SpeedChanger => $"속도 {Math.Abs(amount)} {GetChangeLabel(amount)}",
-        SkillType.DefenseFixer => $"방어력 {Math.Abs(amount)}으로 고정",
+        SkillType.AttackChanger => $"공격력 {GetChangeLabel(skillAmountData)}",
+        SkillType.DefenseChanger => $"방어력 {GetChangeLabel(skillAmountData)}",
+        SkillType.SpeedChanger => $"속도 {GetChangeLabel(skillAmountData)}",
         SkillType.TraitExcluder => $"스탯은 특성으로 인한 변화를 무시",
-        SkillType.PercentAttackChanger => $"공격력 {Math.Abs(amount)}% {GetChangeLabel(amount)}",
-        SkillType.PercentDefenseChanger => $"방어력 {Math.Abs(amount)}% {GetChangeLabel(amount)}",
+        SkillType.AmplifyChanger => $"스탯은 특성으로 인한 변화를 무시",
+        _ => ""
+    };
+
+
+    string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
+
+    string GetChangeLabel(SkillAmountData amountData) => (amountData.Type) switch
+    {
+        AmountType.Value => $"{MathF.Abs(amountData.ValueAmount)} {GetChangeLabel(amountData.ValueAmount)}",
+        AmountType.Percent => $"{MathF.Abs((int)MathF.Round(amountData.PercentValue * 100))}% {GetChangeLabel((int)MathF.Round(amountData.PercentValue * 100))}",
+        AmountType.Fix => $"{amountData.FixValue}으로 고정",
         _ => ""
     };
 
@@ -67,8 +76,6 @@ public class SkillTextBuilder
         (Side.All, TargetRange.Triple) => "선택한 셋의",
         _ => "대상 없음"
     };
-
-    string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
 }
 
 

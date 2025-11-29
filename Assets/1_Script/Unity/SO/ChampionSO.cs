@@ -1,6 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+
+[Serializable]
+public class SkillAmount
+{
+    public AmountType Type;
+    public int ValueAmount;
+    public float PercentValue;
+    public int FixValue;
+
+    public SkillAmountData ToData() => new SkillAmountData(Type, ValueAmount, PercentValue, FixValue);
+}
 
 [System.Serializable]
 public class TraitDataConfig
@@ -23,7 +36,7 @@ public class TraitDataConfig
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
 
     public SkillData CreateTraitData() => new SkillData(traitType, skillAmount.ToData(), Condition, Rule);
-    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(traitType, amount, Condition, Rule);
+    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(CreateTraitData());
 }
 
 public readonly struct ChampionModel
