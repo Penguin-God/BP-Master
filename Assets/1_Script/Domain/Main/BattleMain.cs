@@ -31,8 +31,8 @@ public class AI_PhaseAgent : IPhaseAgent
 
 public class Champion
 {
-    readonly Skill Skill;
-    readonly ChampionStatus Status;
+    public readonly Skill Skill;
+    public readonly ChampionStatus Status;
 
     public Champion(Skill skill, ChampionStatus status)
     {
@@ -41,7 +41,7 @@ public class Champion
     }
 }
 
-public class BattleMain
+public class BattleMain // 게임 돌리는게 목표
 {
     PhaseManager phaseManager;
     PhaseEventDispatcher phaseEventDispatcher;
@@ -58,12 +58,11 @@ public class BattleMain
         this.red = red;
     }
 
-    public MatchInfo Run()
+    public void Run()
     {
         SubscribePhaseEvent(blue);
         SubscribePhaseEvent(red);
         phaseManager.Start();
-        return default;
     }
 
     void SubscribePhaseEvent(IPhaseAgent phaseAgent)

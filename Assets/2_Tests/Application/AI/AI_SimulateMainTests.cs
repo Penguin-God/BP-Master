@@ -26,13 +26,11 @@ public class AI_SimulateMainTests
         var blue = new AI_PhaseAgent(blueBanPick, null);
         var red = new AI_PhaseAgent(redBanPick, null);
 
-        //var sut = new BattleMain(phaseManager, eventDispatcher, champions, blue, red);
+        var sut = new BattleMain(phaseManager, eventDispatcher, champions, blue, red);
 
-        //MatchInfo result = sut.Run();
+        sut.Run();
 
-        //Assert.AreEqual(Team.Red, result.Winner);
-        //Assert.AreEqual(380, result.BlueScore);
-        //Assert.AreEqual(600, result.RedScore);
+        Assert.AreEqual(110, storage.PickIds.GetSlot(BlueOneSlot));
     }
 
     Champion CreateChampion(int skillValue) => new Champion(CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule), CreateStatus(att: 100));

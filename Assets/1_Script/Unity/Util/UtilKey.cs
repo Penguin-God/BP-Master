@@ -15,8 +15,6 @@ public class UtilKey : MonoBehaviour
     int id = 0;
     void Update()
     {
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
         if (Input.GetKeyDown(KeyCode.F) && id == 0)
         {
             foreach (var item in ban.Turns)
