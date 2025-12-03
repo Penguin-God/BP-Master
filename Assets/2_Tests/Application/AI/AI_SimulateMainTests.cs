@@ -23,15 +23,41 @@ public class AI_SimulateMainTests
         var redSelector = new PrioritySelector(new int[] { 4 }, new int[] { 5, 6 });
         var redBanPick = new AI_BanPickAgent(Team.Red, phaseManager, storage, redSelector, redSelector);
 
-        var blue = new AI_PhaseAgent(blueBanPick, null);
-        var red = new AI_PhaseAgent(redBanPick, null);
+        SlotStorage<bool> skillUseStorage = new SlotStorage<bool>();
+        skillUseStorage.AddSlot(Team.Blue, false);
+        skillUseStorage.AddSlot(Team.Blue, false);
+        skillUseStorage.AddSlot(Team.Red, false);
+        skillUseStorage.AddSlot(Team.Red, false);
+
+        var filter = new SkillSlotFilter(skillUseStorage);
+        var counter = new TargetCounter(teamSize: 2);
+
+        SlotStorage<ChampionStatus> statusSlots = CreateTwoSlotStatus(att: 100);
+        var skillController = new SkillUseController(statusSlots);
+        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
+
+        SlotStorage<Skill> skillSlots = new SlotStorage<Skill>();
+        skillSlots.AddSlot(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule));
+        skillSlots.AddSlot(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule));
+        skillSlots.AddSlot(Team.Red, CreateValueSkill(SkillType.AttackChanger, 30, default, SelfAllRule));
+        skillSlots.AddSlot(Team.Red, CreateValueSkill(SkillType.AttackChanger, 30, default, SelfAllRule));
+
+        var blueSkill = new AI_SkillAgent(Team.Blue, filter, skillSlots, skillController, counter);
+        var redSkill = new AI_SkillAgent(Team.Red, filter, skillSlots, skillController, counter);
+
+        var blue = new AI_PhaseAgent(blueBanPick, blueSkill);
+        var red = new AI_PhaseAgent(redBanPick, redSkill);
 
         var sut = new BattleMain(phaseManager, eventDispatcher, champions, blue, red);
 
-        //sut.Run();
+        sut.Run();
 
-        //Assert.AreEqual(110, storage.PickIds.GetSlot(BlueOneSlot));
+        Assert.AreEqual(2, storage.PickIds.GetSlot(BlueZeroSlot));
+        Assert.AreEqual(3, storage.PickIds.GetSlot(BlueOneSlot));
+
+        Assert.AreEqual(5, storage.PickIds.GetSlot(RedZeroSlot));
+        Assert.AreEqual(6, storage.PickIds.GetSlot(RedOneSlot));
     }
 
-    Champion CreateChampion(int skillValue) => new Champion(CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule), CreateStatus(att: 100));
+    Champion CreateChampion(int skillValue) => new Champion(1, CreateValueSkill(SkillType.AttackChanger, 10, default, SelfAllRule), CreateStatus(att: 100));
 }

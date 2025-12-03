@@ -1,3 +1,4 @@
+using System.Linq;
 
 public readonly struct MatchInfo
 {
@@ -29,19 +30,23 @@ public class AI_PhaseAgent : IPhaseAgent
     public void OnSkill(Team team) => skillAgent.UseSkill(team);
 }
 
-public class BattleMain // 게임 돌리는게 목표
+public class BattleMain
 {
-    PhaseManager phaseManager;
-    PhaseEventDispatcher phaseEventDispatcher;
+    readonly GameBanPickStorage banPickStorage;
+    readonly PhaseManager phaseManager;
+    readonly PhaseEventDispatcher phaseEventDispatcher;
+    readonly ChampionCatalog championCatalog;
     readonly int TeamSize;
-    Champion[] champions;
-    IPhaseAgent blue;
-    IPhaseAgent red;
+    readonly IPhaseAgent blue;
+    readonly IPhaseAgent red;
+    
     public BattleMain(PhaseManager phaseManager, PhaseEventDispatcher phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
     {
+        banPickStorage = new GameBanPickStorage(champions.Select(x => x.Id));
+        championCatalog = new ChampionCatalog(champions);
+
         this.phaseEventDispatcher = phaseEventDispatcher;
         this.phaseManager = phaseManager;
-        this.champions = champions;
         this.blue = blue;
         this.red = red;
     }

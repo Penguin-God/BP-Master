@@ -1,12 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class Champion
 {
+    public readonly int Id;
     public readonly Skill Skill;
     public readonly ChampionStatus Status;
 
-    public Champion(Skill skill, ChampionStatus status)
+    public Champion(int id, Skill skill, ChampionStatus status)
     {
+        Id = id;
         Skill = skill;
         Status = status;
     }
@@ -14,7 +17,7 @@ public class Champion
 
 public class ChampionCatalog
 {
-    readonly IReadOnlyDictionary<int, Champion> DataById;
-    public ChampionCatalog(Dictionary<int, Champion> data) => DataById = data;
-    public Champion GetChampion(int id) => DataById[id];
+    readonly IEnumerable<Champion> Champions;
+    public ChampionCatalog(IEnumerable<Champion> champions) => Champions = champions;
+    public Champion GetChampion(int id) => Champions.First(x => x.Id == id);
 }

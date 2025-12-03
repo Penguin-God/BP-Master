@@ -6,12 +6,7 @@ public class SelectChampsTests
     [Test]
     public void 가장_정적_가치가_높은_챔피언_픽()
     {
-        ChampionCatalog catalog = new ChampionCatalog(new Dictionary<int, Champion>()
-        {
-            {1, Champ(10, 20) },
-            {2, Champ(10, 50) },
-            {3, Champ(100, 50) },
-        });
+        ChampionCatalog catalog = new ChampionCatalog(new Champion[] { Champ(1, 10, 20), Champ(2, 10, 50), Champ(3, 100, 50) });
         StaticValueEvaluator evaluator = new StaticValueEvaluator(new ChampionMastery[0]);
         StaticValuePick sut = new StaticValuePick(catalog, evaluator);
 
@@ -20,5 +15,5 @@ public class SelectChampsTests
         Assert.AreEqual(3, result);
     }
 
-    Champion Champ(int att, int def) => new Champion(new Skill(null), TestHelper.CreateStatus(att, def));
+    Champion Champ(int id, int att, int def) => new Champion(id, new Skill(null), TestHelper.CreateStatus(att, def));
 }
