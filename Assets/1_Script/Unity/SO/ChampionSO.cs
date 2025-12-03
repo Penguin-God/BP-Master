@@ -75,4 +75,6 @@ public class ChampionSO : ScriptableObject
 
     [Header("특성")]
     [SerializeField] TraitType traitType;
+
+    public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
 }

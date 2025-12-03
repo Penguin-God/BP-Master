@@ -15,6 +15,10 @@ public class MatchDI : MonoBehaviour
     [SerializeField] AI_Main ai_main;
     Team playerTeam;
     [SerializeField] UtilKey utilKey;
+
+    SlotStorage<Champion> championSlots = new();
+    SlotStorage<ChampionStatus> statusSlots = new();
+
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
@@ -26,14 +30,23 @@ public class MatchDI : MonoBehaviour
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
         utilKey.Init(storage, phaseManager);
 
-        phaseEventDispatcher.OnPhaseSkill += Trait;
+        // phaseEventDispatcher.OnPhaseSkill += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
+        storage.OnPick += OnPick;
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, statusSlots); // start보다 먼저
 
         ai_main.InitAI_BanPick(phaseManager, storage);
 
         phaseManager.Start();
+    }
+
+    void OnPick(SlotData slotData, int id)
+    {
+        var champion = champManager.GetChampionData(id).CreateChampion();
+        championSlots.AddSlot(slotData.Team, champion);
+        statusSlots.AddSlot(slotData.Team, champion.Status);
+        new TraitFactory(matchConfig.TraitConfig, statusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
     }
 
     bool initTrait;
@@ -67,6 +80,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
     {
+        slotManager = new SlotStorageManager(storage, champManager);
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
         matchUI_Controller.Done(result);

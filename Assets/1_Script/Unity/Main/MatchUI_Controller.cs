@@ -7,7 +7,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ChampionSelector_UI championSelector;
     [SerializeField] ChampionButtonView championDrawer;
     [SerializeField] SkillUseController_UI traitUseView;
-    [SerializeField] SlotViewOrchestrator banPickView;
+    [SerializeField] SlotViewOrchestrator slotViews;
     [SerializeField] ScoreView scoreView;
     
     [SerializeField] GameFlowView gameFlowView;
@@ -23,22 +23,24 @@ public class MatchUI_Controller : MonoBehaviour
         masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(true);
     }
 
-    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher)
+    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots)
     {
-        banPickView.InitSlotView();
+        slotViews.InitSlotView();
         masteryView.ViewMastery(championRepository);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
         masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
 
         storage.OnBan += banView.UpdateBanList;
-        storage.OnPick += banPickView.PickChampion;
+        storage.OnPick += slotViews.PickChampion;
 
         storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
         storage.OnPick += (slot, id) => championDrawer.InActiveButton(id);
 
         eventDispatcher.OnPhaseSkill += _ => banView.HideBan();
         eventDispatcher.OnPhaseSkill += _ => championDrawer.HideView();
+
+        storage.OnPick += (slot, id) => slotViews.InitTrackerViewSlots(statusSlots);
 
         traitUseView.gameObject.SetActive(false);
 
@@ -54,8 +56,6 @@ public class MatchUI_Controller : MonoBehaviour
     {
         skillUseLog.SetActive(true);
         masteryView.gameObject.SetActive(false);
-
-        banPickView.InitTrackerViewSlots(slotStorageManager.StatusSlots);
         
         skillButtonView.Init(filter, playerTeam);
         traitUseView.Init(new SkillUsePersenter(matchConfig.TeamSize), slotStorageManager.SkillSlots, skillController);

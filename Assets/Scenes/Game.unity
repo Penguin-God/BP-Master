@@ -4811,7 +4811,7 @@ MonoBehaviour:
   championSelector: {fileID: 1027524855}
   championDrawer: {fileID: 1027524856}
   traitUseView: {fileID: 2045637438}
-  banPickView: {fileID: 1919757232}
+  slotViews: {fileID: 1919757232}
   scoreView: {fileID: 670859827}
   gameFlowView: {fileID: 1107171632}
   skillButtonView: {fileID: 2045637439}
