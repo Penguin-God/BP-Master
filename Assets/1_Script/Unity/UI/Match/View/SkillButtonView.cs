@@ -19,7 +19,7 @@ public class SkillButtonView : MonoBehaviour
 
         buttonSlots.AddSlots(Team.Blue, blueSkills);
         buttonSlots.AddSlots(Team.Red, redSkills);
-        RefreshButtonsByTurn(team);
+        // RefreshButtonsByTurn(team);
     }
 
     void InActiveAllBtns()
@@ -45,7 +45,7 @@ public class SkillButtonView : MonoBehaviour
     public void ActiveTargets(Skill skill, IEnumerable<SlotData> currentTargets)
     {
         InActiveAllBtns();
-        var slots = traitSlotFilter.FilteringTargetSlots(team, skill.Sides).Except(currentTargets);
+        var slots = traitSlotFilter.FilteringTargetSlots(team, skill.Sides, 1).Except(currentTargets);
         foreach (var slot in slots)
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }

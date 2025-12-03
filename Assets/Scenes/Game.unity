@@ -4810,7 +4810,7 @@ MonoBehaviour:
   matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   championSelector: {fileID: 1027524855}
   championDrawer: {fileID: 1027524856}
-  traitUseView: {fileID: 2045637438}
+  skillUseView: {fileID: 2045637438}
   slotViews: {fileID: 1919757232}
   scoreView: {fileID: 670859827}
   gameFlowView: {fileID: 1107171632}

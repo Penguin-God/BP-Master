@@ -18,6 +18,7 @@ public class MatchDI : MonoBehaviour
 
     SlotStorage<Champion> championSlots = new();
     SlotStorage<ChampionStatus> statusSlots = new();
+    SlotStorage<Skill> skillSlots = new();
 
     public void GameStart(Team playerTeam)
     {
@@ -34,18 +35,22 @@ public class MatchDI : MonoBehaviour
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, statusSlots); // start보다 먼저
+        skillController = new SkillUseController(statusSlots);
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, statusSlots, skillSlots, skillController); // start보다 먼저
 
         ai_main.InitAI_BanPick(phaseManager, storage);
 
         phaseManager.Start();
-    }
 
+        
+    }
+    SkillUseController skillController;
     void OnPick(SlotData slotData, int id)
     {
         var champion = champManager.GetChampionData(id).CreateChampion();
         championSlots.AddSlot(slotData.Team, champion);
         statusSlots.AddSlot(slotData.Team, champion.Status);
+        skillSlots.AddSlot(slotData.Team, champion.Skill);
         new TraitFactory(matchConfig.TraitConfig, statusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
     }
 
@@ -71,7 +76,7 @@ public class MatchDI : MonoBehaviour
         ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
     }
 
-    void ApplyMastery()
+    void ApplyMastery() // 픽과 동시에 적용
     {
         new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), masteryGenerator.GetTeamMasteries(Team.Blue));
         new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), masteryGenerator.GetTeamMasteries(Team.Red));
