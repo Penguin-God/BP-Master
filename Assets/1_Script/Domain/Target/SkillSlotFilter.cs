@@ -21,10 +21,41 @@ public class SkillSlotFilter
         var side = EnumCaster.MergeSide(sides);
         return new SkillTargetFinder(TeamSize).GetTargetableSlot(team, side);
     }
+}
 
-    public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides, int teamSize)
+public class TeamCounter
+{
+    readonly int BlueCount;
+    readonly int RedCount;
+
+    public TeamCounter(int blueCount, int redCount)
+    {
+        BlueCount = blueCount;
+        RedCount = redCount;
+    }
+
+    public int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
+}
+
+public class SkillTargetFilter
+{
+    readonly TeamCounter TeamCounter;
+    public SkillTargetFilter(TeamCounter teamCounter) => TeamCounter = teamCounter;
+
+    IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
+    {
+        Team targetTeam = EnumCaster.GetTargetTeam(team, side);
+
+        if (targetTeam == Team.All) return GetAllSlots();
+        else return GetTeamSlots(targetTeam);
+    }
+
+    IEnumerable<SlotData> GetTeamSlots(Team team) => Enumerable.Range(0, TeamCounter.GetTeamCount(team)).Select(i => new SlotData(team, i));
+    IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(x => GetTeamSlots(x));
+
+    public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {
         var side = EnumCaster.MergeSide(sides);
-        return new SkillTargetFinder(teamSize).GetTargetableSlot(team, side);
+        return GetTargetableSlot(team, side);
     }
 }
