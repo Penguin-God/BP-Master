@@ -30,6 +30,7 @@ public class SlotStorage<T>
     public T GetSlot(SlotData slot) => slots[slot];
 
     public int GetTeamCount(Team team) => GetTeam(team).Count();
+    public TeamCounter GetTeamCounter() => new TeamCounter(GetTeamCount(Team.Blue), GetTeamCount(Team.Red));
     public IEnumerable<T> GetTeam(Team team) 
         => slots
             .Where(kv => kv.Key.Team == team)

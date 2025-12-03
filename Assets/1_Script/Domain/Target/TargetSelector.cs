@@ -28,7 +28,6 @@ public class TraitTargetSelector
     public bool CanSelected(SlotData target) => selected.Contains(target) == false && IsFull == false;
     public void Select(SlotData target)
     {
-        
         if(CanSelected(target) == false) return;
 
         if (Rule.TargetRange == TargetRange.All) SelectAll(target);

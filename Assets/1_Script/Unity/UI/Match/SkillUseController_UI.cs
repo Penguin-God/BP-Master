@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,7 +53,7 @@ public class SkillUseController_UI : MonoBehaviour
     void OnClickSkillSlot(SlotData clickSlot)
     {
         targetSelector.Select(clickSlot);
-        skillButtonView.ActiveTargets(skillSlots.GetSlot(useSlot), traitUsePresenter.CurrentTargets);
+        skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), traitUsePresenter.CurrentTargets);
     }
 
     TraitTargetSelector targetSelector;
@@ -69,6 +70,7 @@ public class SkillUseController_UI : MonoBehaviour
     IEnumerator Co_SelectTargets(SlotData useSlot, TraitTargetSelector selector)
     {
         yield return new WaitUntil(() => selector.IsFull);
+        print(selector.Targets.Count());
         skillUseController.UseSkill(useSlot, selector.Targets, skillSlots.GetSlot(useSlot));
     }
 }

@@ -33,7 +33,8 @@ public class ChampionSelector_UI : MonoBehaviour
     void NailDownChampion()
     {
         championSelector.NailDownChampion(phaseManager.CurrentFlow);
-        phaseManager.SubmitAction(phaseManager.CurrentTurn);
+        if(phaseManager.CurrentFlow.Phase == GamePhase.Ban)
+            phaseManager.SubmitAction(phaseManager.CurrentTurn);
         championFocusView.ClearDisplay();
     }
 }

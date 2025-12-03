@@ -49,4 +49,12 @@ public class SkillButtonView : MonoBehaviour
         foreach (var slot in slots)
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }
+
+    public void ActiveTargets(SkillTargetFilter skillTargetFilter, Skill skill, IEnumerable<SlotData> currentTargets)
+    {
+        InActiveAllBtns();
+        var slots = skillTargetFilter.FilteringTargetSlots(team, skill.Sides).Except(currentTargets);
+        foreach (var slot in slots)
+            ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
+    }
 }
