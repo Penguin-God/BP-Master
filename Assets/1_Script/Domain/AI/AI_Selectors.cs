@@ -37,5 +37,5 @@ public class StaticValuePick : IPickSelector
             .OrderByDescending(x => GetValue(x))
             .First();
 
-    int GetValue(int id) => Evaluator.Evaluate(id, Catalog.GetChampionData(id).Stat);
+    int GetValue(int id) => Evaluator.Evaluate(id, Catalog.GetChampion(id).Status.Stat);
 }

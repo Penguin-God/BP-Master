@@ -75,6 +75,4 @@ public class ChampionSO : ScriptableObject
 
     [Header("특성")]
     [SerializeField] TraitType traitType;
-
-    public ChampionData CreateData() => new ChampionData(StatData, traitType, default);
 }

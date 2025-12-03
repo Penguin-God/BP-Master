@@ -29,18 +29,6 @@ public class AI_PhaseAgent : IPhaseAgent
     public void OnSkill(Team team) => skillAgent.UseSkill(team);
 }
 
-public class Champion
-{
-    public readonly Skill Skill;
-    public readonly ChampionStatus Status;
-
-    public Champion(Skill skill, ChampionStatus status)
-    {
-        Skill = skill;
-        Status = status;
-    }
-}
-
 public class BattleMain // 게임 돌리는게 목표
 {
     PhaseManager phaseManager;

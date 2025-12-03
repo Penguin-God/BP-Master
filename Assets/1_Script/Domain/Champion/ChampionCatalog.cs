@@ -1,22 +1,20 @@
 using System.Collections.Generic;
 
-public readonly struct ChampionData
+public class Champion
 {
-    public readonly ChampionStatData Stat;
-    public readonly TraitType TraitType;
-    public readonly SkillData SkillData;
+    public readonly Skill Skill;
+    public readonly ChampionStatus Status;
 
-    public ChampionData(ChampionStatData stat, TraitType traitType, SkillData skillData)
+    public Champion(Skill skill, ChampionStatus status)
     {
-        Stat = stat;
-        TraitType = traitType;
-        SkillData = skillData;
+        Skill = skill;
+        Status = status;
     }
 }
 
 public class ChampionCatalog
 {
-    readonly IReadOnlyDictionary<int, ChampionData> DataById;
-    public ChampionCatalog(Dictionary<int, ChampionData> data) => DataById = data;
-    public ChampionData GetChampionData(int id) => DataById[id];
+    readonly IReadOnlyDictionary<int, Champion> DataById;
+    public ChampionCatalog(Dictionary<int, Champion> data) => DataById = data;
+    public Champion GetChampion(int id) => DataById[id];
 }

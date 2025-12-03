@@ -6,7 +6,7 @@ public class SelectChampsTests
     [Test]
     public void 가장_정적_가치가_높은_챔피언_픽()
     {
-        ChampionCatalog catalog = new ChampionCatalog(new Dictionary<int, ChampionData>()
+        ChampionCatalog catalog = new ChampionCatalog(new Dictionary<int, Champion>()
         {
             {1, Champ(10, 20) },
             {2, Champ(10, 50) },
@@ -20,5 +20,5 @@ public class SelectChampsTests
         Assert.AreEqual(3, result);
     }
 
-    ChampionData Champ(int att, int def) => new ChampionData(TestHelper.CreateStat(att, def), TraitType.None, default);
+    Champion Champ(int att, int def) => new Champion(new Skill(null), TestHelper.CreateStatus(att, def));
 }
