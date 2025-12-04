@@ -22,7 +22,7 @@ public class AI_BanPickAgent
         if (team != Team) return;
         if (selectType == SelectType.Ban) storage.SaveSelect(new SelectInfo(Team, selectType, banSelector.Ban(storage.SelectableIds)));
         else storage.SaveSelect(new SelectInfo(Team, selectType, pickSelector.Pick(storage.SelectableIds)));
-        phaseManager.SubmitAction(Team);
+        // phaseManager.SubmitAction(Team);
     }
 
     public void Ban(Team team) => Select(team, SelectType.Ban);

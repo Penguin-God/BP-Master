@@ -51,6 +51,7 @@ public class PhaseManager
 
     public void SubmitAction(Team actingTeam)
     {
+        UnityEngine.Debug.Log(actingTeam);
         if (_current.GamePhase == GamePhase.Done) return;
 
         if (CurrentTurn == Team.All)

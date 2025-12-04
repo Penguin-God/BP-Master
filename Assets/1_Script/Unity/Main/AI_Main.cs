@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,8 +18,10 @@ public class AI_Main : MonoBehaviour
     }
 
     SlotStorage<Skill> skillSlots;
-    public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage, SlotStorage<Skill> skillSlots)
+    SkillUseController skillUseController;
+    public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
     {
+        this.skillUseController = skillUseController;
         selectorsCreatetor.Init(masteryGenerator.GetTeamMasteryManager(Team));
         var ai = new AI_BanPickAgent(Team, phaseManager, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
@@ -30,9 +33,17 @@ public class AI_Main : MonoBehaviour
     void OnPick(SlotData slotData, int id)
     {
         if (slotData.Team != Team) return;
+        StartCoroutine(Co_UseTrait(slotData));
+    }
+
+    IEnumerator Co_UseTrait(SlotData slotData)
+    {
+        yield return new WaitForSeconds(1.5f);
         var teamCount = skillSlots.GetTeamCounter();
         var filter = new SkillTargetFilter(teamCount);
-        SelectSkillTarget(filter.FilteringTargetSlots(Team, skillSlots.GetSlot(slotData).Sides).ToList(), teamCount.CalculateTargetCount(Team, EnumCaster.MergeRule(skillSlots.GetSlot(slotData).Rules)));
+        var useSkill = skillSlots.GetSlot(slotData);
+        var targets = SelectSkillTarget(filter.FilteringTargetSlots(Team, useSkill.Sides).ToList(), teamCount.CalculateTargetCount(Team, EnumCaster.MergeRule(useSkill.Rules)));
+        skillUseController.UseSkill(slotData, targets, useSkill);
     }
 
     IEnumerable<SlotData> SelectSkillTarget(List<SlotData> targetSlots, int targetCount)
