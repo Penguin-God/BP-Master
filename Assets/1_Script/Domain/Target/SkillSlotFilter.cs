@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,14 +45,16 @@ public class TeamCounter
             else return GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
         }
 
-        return rule.TargetRange switch
-        {
-            TargetRange.Single => 1,
-            TargetRange.Double => 2,
-            TargetRange.Triple => 3,
-            _ => 0
-        };
+        return Math.Min(GetTeamCount(team), CalculateFixedCount(rule.TargetRange));
     }
+
+    int CalculateFixedCount(TargetRange targetRange) => targetRange switch
+    {
+        TargetRange.Single => 1,
+        TargetRange.Double => 2,
+        TargetRange.Triple => 3,
+        _ => 0
+    };
 }
 
 public class SkillTargetFilter

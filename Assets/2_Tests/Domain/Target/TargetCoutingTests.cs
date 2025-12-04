@@ -34,8 +34,7 @@ public class TargetCoutingTests
     }
 
 
-    TeamCounter CreateSut(int blue = 3, int red = 2)
-    => new TeamCounter(blue, red);
+    TeamCounter CreateSut(int blue = 3, int red = 2) => new TeamCounter(blue, red);
 
     SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule (side, range);
 
@@ -103,5 +102,13 @@ public class TargetCoutingTests
         Assert.AreEqual(3, sut.CalculateTargetCount(
             Team.Blue,
             CreateRule(TargetRange.Triple, Side.Opponent)));
+    }
+
+    [Test]
+    public void 고정값_시_팀_카운트를_넘기면_팀_수를_반환()
+    {
+        var sut = CreateSut(blue: 2);
+
+        Assert.AreEqual(2, sut.CalculateTargetCount(Team.Blue, CreateRule(TargetRange.Triple, Side.Opponent)));
     }
 }
