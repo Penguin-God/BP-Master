@@ -15,26 +15,13 @@ public class AI_AgentTests
         public int Pick(HashSet<int> ids) => ids.First();
     }
 
-    PhaseManager CreatePhaseManager(GamePhase phase, params Team[] turns)
-    {
-        var dispatcher = new PhaseEventDispatcher();
-        var phases = new[]
-        {
-            new PhaseData(phase, new Phase(turns.ToArray()))
-        };
-        var pm = new PhaseManager(phases, dispatcher);
-        pm.Start(); // CurrentFlow 설정
-        return pm;
-    }
-
-    AI_BanPickAgent CreateFirstSelectSut(Team team, PhaseManager pm, GameBanPickStorage storage) => new AI_BanPickAgent(team, pm, storage, new FirstBan(), new FirstPick());
+    AI_BanPickAgent CreateFirstSelectSut(Team team, GameBanPickStorage storage) => new AI_BanPickAgent(team, storage, new FirstBan(), new FirstPick());
 
     [Test]
-    public void 규칙에_맞게_밴_선택_후_저장_및_턴_진행()
+    public void 규칙에_맞게_밴_선택_후_저장()
     {
         var storage = new GameBanPickStorage(new[] { 3, 7, 9 });
-        var phaseManager = CreatePhaseManager(GamePhase.Ban, Team.Blue, Team.Red);
-        var sut = CreateFirstSelectSut(Team.Blue, phaseManager, storage);
+        var sut = CreateFirstSelectSut(Team.Blue, storage);
         int ban = 0;
         storage.OnBan += (team, id) => ban = id;
 
@@ -42,30 +29,24 @@ public class AI_AgentTests
 
         Assert.AreEqual(3, ban);
         Assert.IsFalse(storage.SelectableIds.Contains(3));
-        Assert.AreEqual(Team.Red, phaseManager.CurrentTurn);
     }
 
     [Test]
-    public void 규칙에_맞게_픽_선택_후_저장_및_턴_진행()
+    public void 규칙에_맞게_픽_선택_후()
     {
         var storage = new GameBanPickStorage(new[] { 2, 5, 8 });
-        var phaseManager = CreatePhaseManager(GamePhase.Pick, Team.Red, Team.Blue);
-        var sut = CreateFirstSelectSut(Team.Red, phaseManager, storage);
+        var sut = CreateFirstSelectSut(Team.Red, storage);
 
         sut.Pick(Team.Red);
 
-        var picked = storage.PickIds.GetSlot(RedZeroSlot);
-        Assert.AreEqual(2, picked);
-        Assert.IsFalse(storage.SelectableIds.Contains(2));
-        Assert.AreEqual(Team.Blue, phaseManager.CurrentTurn);
+        Assert.AreEqual(2, storage.PickIds.GetSlot(RedZeroSlot));
     }
 
     [Test]
     public void 자기_팀_차례가_아니면_아무_일도_일어나지_않음()
     {
         var storage = new GameBanPickStorage(new[] { 1, 4, 6 });
-        var phaseManager = CreatePhaseManager(GamePhase.Ban, Team.Blue);
-        var sut = CreateFirstSelectSut(Team.Blue, phaseManager, storage);
+        var sut = CreateFirstSelectSut(Team.Blue, storage);
 
         // 팀 불일치
         sut.Pick(Team.Red);

@@ -30,7 +30,7 @@ public class AI_PhaseAgent : IPhaseAgent
     public void OnSkill(Team team) => skillAgent.UseSkill(team);
 }
 
-public class BattleMain
+public class MatchRunner
 {
     readonly GameBanPickStorage banPickStorage;
     readonly PhaseManager phaseManager;
@@ -40,7 +40,7 @@ public class BattleMain
     readonly IPhaseAgent blue;
     readonly IPhaseAgent red;
     
-    public BattleMain(PhaseManager phaseManager, PhaseEventDispatcher phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
+    public MatchRunner(PhaseManager phaseManager, PhaseEventDispatcher phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
     {
         banPickStorage = new GameBanPickStorage(champions.Select(x => x.Id));
         championCatalog = new ChampionCatalog(champions);

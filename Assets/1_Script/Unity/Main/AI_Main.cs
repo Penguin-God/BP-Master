@@ -19,11 +19,11 @@ public class AI_Main : MonoBehaviour
 
     SlotStorage<Skill> skillSlots;
     SkillUseController skillUseController;
-    public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
+    public void InitAI_BanPick(GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
     {
         this.skillUseController = skillUseController;
         selectorsCreatetor.Init(masteryGenerator.GetTeamMasteryManager(Team));
-        var ai = new AI_BanPickAgent(Team, phaseManager, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
+        var ai = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
         phaseEventDispatcher.OnPhaseBan += ai.Ban;
         phaseEventDispatcher.OnPhasePick += ai.Pick;
         storage.OnPick += OnPick;
