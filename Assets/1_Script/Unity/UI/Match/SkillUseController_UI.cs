@@ -31,26 +31,10 @@ public class SkillUseController_UI : MonoBehaviour
         }
     }
 
-    //void OnClickSkillSlot(SlotData clickSlot)
-    //{
-    //    if (traitUsePresenter.IsUseable)
-    //    {
-    //        if (traitUsePresenter.SelectTarget(clickSlot, out var useSlot))
-    //            skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, skillSlots.GetSlot(useSlot));
-    //    }
-    //    else
-    //    {
-    //        var rules = skillSlots.GetSlot(clickSlot).Rules;
-    //        traitUsePresenter.SelectUseSkill(clickSlot, EnumCaster.MergeRule(rules));
-    //    }
-
-    //    if (traitUsePresenter.IsUseable) skillButtonView.ActiveTargets(skillSlots.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
-    //}
-
     void OnClickSkillSlot(SlotData clickSlot)
     {
         targetSelector.Select(clickSlot);
-        skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
+        RefeshButton();
     }
 
     TraitTargetSelector targetSelector;
@@ -62,8 +46,11 @@ public class SkillUseController_UI : MonoBehaviour
         // 전체 타겟, 상대 수보다 많은 타겟 문제
         targetSelector = new TraitTargetSelector(skillSlots.GetTeamCount(EnumCaster.GetTargetTeam(useSlot.Team, rule.TargetSide)), rule);
         StartCoroutine(Co_SelectTargets(useSlot, targetSelector));
-        skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
+        RefeshButton();
     }
+
+    void RefeshButton()
+        => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
 
     IEnumerator Co_SelectTargets(SlotData useSlot, TraitTargetSelector selector)
     {

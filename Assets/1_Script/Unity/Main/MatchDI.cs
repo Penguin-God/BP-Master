@@ -31,7 +31,6 @@ public class MatchDI : MonoBehaviour
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
         utilKey.Init(storage, phaseManager);
 
-        // phaseEventDispatcher.OnPhaseSkill += Trait;
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
 

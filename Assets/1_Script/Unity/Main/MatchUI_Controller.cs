@@ -46,7 +46,7 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);
-        skillButtonView.Init(new SkillSlotFilter(new()), playerTeam);
+        skillButtonView.Init(playerTeam);
         skillUseView.Init(new SkillUsePersenter(matchConfig.TeamSize), skillSlots, skillController);
 
         storage.OnPick += (slot, id) => scoreView.UpdateTeamScore(IdToStatus(storage.PickIds), slot.Team);
@@ -68,10 +68,8 @@ public class MatchUI_Controller : MonoBehaviour
         skillUseLog.SetActive(true);
         masteryView.gameObject.SetActive(false);
         
-        skillButtonView.Init(filter, playerTeam);
         skillUseView.Init(new SkillUsePersenter(matchConfig.TeamSize), slotStorageManager.SkillSlots, skillController);
-        eventDispatcher.OnPhaseSkill += skillButtonView.RefreshButtonsByTurn;
-
+        
         gameFlowView.Init(slotStorageManager.ChampionDataSlots);
         skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
 
