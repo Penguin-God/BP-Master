@@ -35,6 +35,23 @@ public class TeamCounter
     }
 
     public int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
+
+    public int CalculateTargetCount(Team team, SkillTargetRule rule)
+    {
+        if (rule.TargetRange == TargetRange.All)
+        {
+            if(rule.TargetSide == Side.All) return BlueCount + RedCount;
+            else return GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
+        }
+
+        return rule.TargetRange switch
+        {
+            TargetRange.Single => 1,
+            TargetRange.Double => 2,
+            TargetRange.Triple => 3,
+            _ => 0
+        };
+    }
 }
 
 public class SkillTargetFilter

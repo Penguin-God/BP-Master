@@ -23,8 +23,10 @@ public class MatchUI_Controller : MonoBehaviour
         masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(true);
     }
 
+    Team team;
     public void Init(Team playerTeam, GameBanPickStorage storage, PhaseManager phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUseController skillController)
     {
+        team = playerTeam;
         slotViews.InitSlotView();
         masteryView.ViewMastery(championRepository);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
@@ -41,7 +43,7 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnPhaseSkill += _ => championDrawer.HideView();
 
         storage.OnPick += (slot, id) => slotViews.InitTrackerViewSlots(statusSlots);
-        storage.OnPick += (slot, id) => skillUseView.UseSkill(slot);
+        storage.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);
         skillButtonView.Init(new SkillSlotFilter(new()), playerTeam);
@@ -50,6 +52,12 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnPick += (slot, id) => scoreView.UpdateTeamScore(IdToStatus(storage.PickIds), slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
+    }
+
+    void OnPick(SlotData slotData, int id)
+    {
+        if (slotData.Team != team) return;
+        skillUseView.UseSkill(slotData);
     }
 
     SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 

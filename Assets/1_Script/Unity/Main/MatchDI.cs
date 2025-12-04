@@ -40,7 +40,7 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, statusSlots, skillSlots, skillController); // start보다 먼저
 
-        ai_main.InitAI_BanPick(phaseManager, storage);
+        ai_main.InitAI_BanPick(phaseManager, storage, skillSlots);
 
         phaseManager.Start();
 

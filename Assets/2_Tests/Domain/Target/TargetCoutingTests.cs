@@ -32,4 +32,76 @@ public class TargetCoutingTests
         Assert.AreEqual(2, sut.CalculateTargetCount(new SkillTargetRule(Side.Opponent, TargetRange.Double)));
         Assert.AreEqual(3, sut.CalculateTargetCount(new SkillTargetRule(Side.Self, TargetRange.Triple)));
     }
+
+
+    TeamCounter CreateSut(int blue = 3, int red = 2)
+    => new TeamCounter(blue, red);
+
+    SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule (side, range);
+
+    [Test]
+    public void GetTeamCount_팀별_카운트_정상반환()
+    {
+        var sut = CreateSut(blue: 3, red: 2);
+
+        Assert.AreEqual(3, sut.GetTeamCount(Team.Blue));
+        Assert.AreEqual(2, sut.GetTeamCount(Team.Red));
+    }
+
+    [Test]
+    public void All범위_All사이드면_양팀_전체합을_반환()
+    {
+        var sut = CreateSut(blue: 3, red: 2);
+        var rule = CreateRule(TargetRange.All, Side.All);
+
+        var countBlue = sut.CalculateTargetCount(Team.Blue, rule);
+        var countRed = sut.CalculateTargetCount(Team.Red, rule);
+
+        Assert.AreEqual(5, countBlue);
+        Assert.AreEqual(5, countRed);
+    }
+
+    [Test]
+    public void All범위_Self사이드면_자기팀_카운트_반환()
+    {
+        var sut = CreateSut(blue: 3, red: 2);
+        var rule = CreateRule(TargetRange.All, Side.Self);
+
+        var fromBlue = sut.CalculateTargetCount(Team.Blue, rule);
+        var fromRed = sut.CalculateTargetCount(Team.Red, rule);
+
+        Assert.AreEqual(3, fromBlue); // Blue 자기 자신
+        Assert.AreEqual(2, fromRed);  // Red 자기 자신
+    }
+
+    [Test]
+    public void All범위_Opponent사이드면_상대팀_카운트_반환()
+    {
+        var sut = CreateSut(blue: 3, red: 2);
+        var rule = CreateRule(TargetRange.All, Side.Opponent);
+
+        var fromBlue = sut.CalculateTargetCount(Team.Blue, rule);
+        var fromRed = sut.CalculateTargetCount(Team.Red, rule);
+
+        Assert.AreEqual(2, fromBlue); // Blue의 상대 = Red
+        Assert.AreEqual(3, fromRed);  // Red의 상대 = Blue
+    }
+
+    [Test]
+    public void Single_Double_Triple_범위는_고정값을_반환()
+    {
+        var sut = CreateSut(blue: 10, red: 10);
+
+        Assert.AreEqual(1, sut.CalculateTargetCount(
+            Team.Blue,
+            CreateRule(TargetRange.Single, Side.All)));
+
+        Assert.AreEqual(2, sut.CalculateTargetCount(
+            Team.Red,
+            CreateRule(TargetRange.Double, Side.Self)));
+
+        Assert.AreEqual(3, sut.CalculateTargetCount(
+            Team.Blue,
+            CreateRule(TargetRange.Triple, Side.Opponent)));
+    }
 }
