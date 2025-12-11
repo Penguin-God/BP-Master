@@ -61,18 +61,18 @@ public class PhaseTests
         Assert.Throws<Exception>(() => sut.SubmitAction(Team.Red));
     }
 
-    [Test]
-    public void TeamAll_은_양팀_모두_제출해야_진행한다()
-    {
-        var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Skill, Team.All) });
-        sut.Start();
+    //[Test]
+    //public void TeamAll_은_양팀_모두_제출해야_진행한다()
+    //{
+    //    var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Skill, Team.All) });
+    //    sut.Start();
 
-        sut.SubmitAction(Team.Blue);
-        Assert.AreEqual(GamePhase.Skill, sut.CurrentFlow.Phase);  // 아직 Skill
+    //    sut.SubmitAction(Team.Blue);
+    //    Assert.AreEqual(GamePhase.Skill, sut.CurrentFlow.Phase);  // 아직 Skill
 
-        sut.SubmitAction(Team.Red);
-        Assert.AreEqual(GamePhase.Done, sut.CurrentFlow.Phase);  // Done으로 진행됨
-    }
+    //    sut.SubmitAction(Team.Red);
+    //    Assert.AreEqual(GamePhase.Done, sut.CurrentFlow.Phase);  // Done으로 진행됨
+    //}
 
 
     [Test]

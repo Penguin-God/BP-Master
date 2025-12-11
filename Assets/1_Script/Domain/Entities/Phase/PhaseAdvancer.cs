@@ -1,10 +1,5 @@
 using System.Collections.Generic;
 
-public interface IPhaseEvent
-{
-    void Dispatch(GamePhase phase, Team turn);
-}
-
 public enum GamePhase { Ban, Pick, Skill, Done }
 
 public readonly struct GameFlowData
@@ -19,21 +14,19 @@ public readonly struct GameFlowData
     }
 }
 
-public class PhaseManager
+public class PhaseAdvancer
 {
     readonly Queue<PhaseData> _phases;
     PhaseData _current;
-    public Team CurrentTurn => CurrentFlow.Turn;
-    public GameFlowData CurrentFlow { get; private set; }
-    readonly HashSet<Team> _submittedTeams = new();
-    private readonly IPhaseEvent _dispatcher;
 
-    public PhaseManager(PhaseData[] phaseDatas, IPhaseEvent dispatcher)
+    public GameFlowData CurrentFlow { get; private set; }
+    public Team CurrentTurn => CurrentFlow.Turn;
+
+    public PhaseAdvancer(PhaseData[] phaseDatas)
     {
         _phases = new Queue<PhaseData>(phaseDatas);
         // Done은 마지막 고정
         _phases.Enqueue(new PhaseData(GamePhase.Done, new Phase(new[] { Team.All })));
-        _dispatcher = dispatcher;
     }
 
     public void Start()
@@ -42,29 +35,22 @@ public class PhaseManager
         Advance();
     }
 
-    public void SubmitAction(Team actingTeam)
+    public bool SubmitAction(Team actingTeam)
     {
-        if (_current.GamePhase == GamePhase.Done) return;
+        if (_current.GamePhase == GamePhase.Done) return false;
 
-        if (CurrentTurn == Team.All)
+        if (actingTeam == CurrentTurn)
         {
-            _submittedTeams.Add(actingTeam);
-            if (AllTeamsSubmitted())
-            {
-                Advance();
-                _submittedTeams.Clear();
-            }
+            Advance();
+            return true;
         }
-        else if (actingTeam == CurrentTurn) Advance();
         else throw new System.Exception($"현재 턴 {CurrentTurn}, 행동 팀 {actingTeam}");
     }
-    bool AllTeamsSubmitted() => _submittedTeams.Contains(Team.Blue) && _submittedTeams.Contains(Team.Red);
 
     void Advance()
     {
-        if (_current.Phase.IsDone) _current = _phases.Dequeue();
+        if (_current == null || _current.Phase.IsDone) _current = _phases.Dequeue();
         ProgressFlow();
-        _dispatcher.Dispatch(CurrentFlow.Phase, CurrentFlow.Turn);
     }
 
     void ProgressFlow() => CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());

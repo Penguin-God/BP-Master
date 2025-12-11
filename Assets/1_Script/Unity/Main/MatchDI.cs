@@ -8,7 +8,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
     GameBanPickStorage storage;
 
-    PhaseManager phaseManager;
+    PhaseFlowOrchestrator phaseManager;
     PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] MasteryGenerator masteryGenerator;

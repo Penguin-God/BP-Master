@@ -33,14 +33,14 @@ public class AI_PhaseAgent : IPhaseAgent
 public class MatchRunner
 {
     readonly GameBanPickStorage banPickStorage;
-    readonly PhaseManager phaseManager;
-    readonly IPhaseEvent phaseEventDispatcher;
+    readonly PhaseFlowOrchestrator phaseManager;
+    readonly PhaseEventDispatcher phaseEventDispatcher;
     readonly ChampionCatalog championCatalog;
     readonly int TeamSize;
     readonly IPhaseAgent blue;
     readonly IPhaseAgent red;
     
-    public MatchRunner(PhaseManager phaseManager, IPhaseEvent phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
+    public MatchRunner(PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
     {
         banPickStorage = new GameBanPickStorage(champions.Select(x => x.Id));
         championCatalog = new ChampionCatalog(champions);

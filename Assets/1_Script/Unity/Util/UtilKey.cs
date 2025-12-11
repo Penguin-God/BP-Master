@@ -3,10 +3,10 @@ using UnityEngine;
 public class UtilKey : MonoBehaviour
 {
     GameBanPickStorage storage;
-    PhaseManager phaseManager;
+    PhaseFlowOrchestrator phaseManager;
     [SerializeField] DraftTurnSO ban;
     [SerializeField] DraftTurnSO pick;
-    public void Init(GameBanPickStorage storage, PhaseManager phaseManager)
+    public void Init(GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager)
     {
         this.storage = storage;
         this.phaseManager = phaseManager;

@@ -8,10 +8,10 @@ public class ChampionSelector_UI : MonoBehaviour
     [SerializeField] ChampionRepository championManager;
 
     ChampionSelectPresenter championSelector = null;
-    PhaseManager phaseManager;
+    PhaseFlowOrchestrator phaseManager;
     [SerializeField] ChampionButtonView champBtnView;
 
-    public void Init(ChampionSelectPresenter presenter, PhaseManager pm)
+    public void Init(ChampionSelectPresenter presenter, PhaseFlowOrchestrator pm)
     {
         gameObject.SetActive(true);
 
