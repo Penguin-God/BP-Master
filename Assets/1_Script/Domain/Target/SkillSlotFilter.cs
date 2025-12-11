@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SocialPlatforms;
 
 public class SkillSlotFilter
 {
@@ -24,12 +25,12 @@ public class SkillSlotFilter
     }
 }
 
-public class TeamCounter
+public class SkillTargetCounter
 {
     readonly int BlueCount;
     readonly int RedCount;
 
-    public TeamCounter(int blueCount, int redCount)
+    public SkillTargetCounter(int blueCount, int redCount)
     {
         BlueCount = blueCount;
         RedCount = redCount;
@@ -45,8 +46,10 @@ public class TeamCounter
             else return GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
         }
 
-        return Math.Min(GetTeamCount(team), CalculateFixedCount(rule.TargetRange));
+        return GetTargetableCount(team, rule.TargetRange);
     }
+
+    int GetTargetableCount(Team team, TargetRange range) => Math.Min(GetTeamCount(team), CalculateFixedCount(range));
 
     int CalculateFixedCount(TargetRange targetRange) => targetRange switch
     {
@@ -59,8 +62,8 @@ public class TeamCounter
 
 public class SkillTargetFilter
 {
-    readonly TeamCounter TeamCounter;
-    public SkillTargetFilter(TeamCounter teamCounter) => TeamCounter = teamCounter;
+    readonly SkillTargetCounter TeamCounter;
+    public SkillTargetFilter(SkillTargetCounter teamCounter) => TeamCounter = teamCounter;
 
     IEnumerable<SlotData> GetTargetableSlot(Team team, Side side)
     {

@@ -34,7 +34,7 @@ public class TargetCoutingTests
     }
 
 
-    TeamCounter CreateSut(int blue = 3, int red = 2) => new TeamCounter(blue, red);
+    SkillTargetCounter CreateSut(int blue = 3, int red = 2) => new SkillTargetCounter(blue, red);
 
     SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule (side, range);
 
