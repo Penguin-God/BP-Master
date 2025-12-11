@@ -1,5 +1,10 @@
 using System.Collections.Generic;
 
+public interface IPhaseEvent
+{
+    void Dispatch(GamePhase phase, Team turn);
+}
+
 public enum GamePhase { Ban, Pick, Skill, Done }
 
 public readonly struct GameFlowData
@@ -21,9 +26,9 @@ public class PhaseManager
     public Team CurrentTurn => CurrentFlow.Turn;
     public GameFlowData CurrentFlow { get; private set; }
     readonly HashSet<Team> _submittedTeams = new();
-    private readonly PhaseEventDispatcher _dispatcher;
+    private readonly IPhaseEvent _dispatcher;
 
-    public PhaseManager(PhaseData[] phaseDatas, PhaseEventDispatcher dispatcher)
+    public PhaseManager(PhaseData[] phaseDatas, IPhaseEvent dispatcher)
     {
         _phases = new Queue<PhaseData>(phaseDatas);
         // Done은 마지막 고정

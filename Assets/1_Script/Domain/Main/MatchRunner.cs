@@ -34,13 +34,13 @@ public class MatchRunner
 {
     readonly GameBanPickStorage banPickStorage;
     readonly PhaseManager phaseManager;
-    readonly PhaseEventDispatcher phaseEventDispatcher;
+    readonly IPhaseEvent phaseEventDispatcher;
     readonly ChampionCatalog championCatalog;
     readonly int TeamSize;
     readonly IPhaseAgent blue;
     readonly IPhaseAgent red;
     
-    public MatchRunner(PhaseManager phaseManager, PhaseEventDispatcher phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
+    public MatchRunner(PhaseManager phaseManager, IPhaseEvent phaseEventDispatcher, Champion[] champions, IPhaseAgent blue, IPhaseAgent red)
     {
         banPickStorage = new GameBanPickStorage(champions.Select(x => x.Id));
         championCatalog = new ChampionCatalog(champions);
