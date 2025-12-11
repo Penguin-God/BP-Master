@@ -47,6 +47,9 @@ public class SkillUseController_UI : MonoBehaviour
         var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
         targetSelector = new SkillTargetSelector(useSlot.Team, skillSlots.GetTeamCounter(), rule);
         RefeshButton();
+        // 타겟이 아예 없는 경우
+        if (targetSelector.IsFull)
+            skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
     }
 
     void RefeshButton() => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
