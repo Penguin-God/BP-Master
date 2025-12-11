@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.IO;
 using static TestHelper;
 
 public class TargetCoutingTests
@@ -37,6 +38,7 @@ public class TargetCoutingTests
     SkillTargetCounter CreateSut(int blue = 3, int red = 2) => new SkillTargetCounter(blue, red);
 
     SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule (side, range);
+    int CalculateTargetCount(SkillTargetCounter sut, Team team, SkillTargetRule targetRule) => sut.CalculateTargetCount(team, targetRule);
 
     [Test]
     public void GetTeamCount_팀별_카운트_정상반환()
@@ -53,8 +55,8 @@ public class TargetCoutingTests
         var sut = CreateSut(blue: 3, red: 2);
         var rule = CreateRule(TargetRange.All, Side.All);
 
-        var countBlue = sut.CalculateTargetCount(Team.Blue, rule);
-        var countRed = sut.CalculateTargetCount(Team.Red, rule);
+        var countBlue = CalculateTargetCount(sut, Team.Blue, rule);
+        var countRed = CalculateTargetCount(sut, Team.Red, rule);
 
         Assert.AreEqual(5, countBlue);
         Assert.AreEqual(5, countRed);
@@ -66,8 +68,8 @@ public class TargetCoutingTests
         var sut = CreateSut(blue: 3, red: 2);
         var rule = CreateRule(TargetRange.All, Side.Self);
 
-        var fromBlue = sut.CalculateTargetCount(Team.Blue, rule);
-        var fromRed = sut.CalculateTargetCount(Team.Red, rule);
+        var fromBlue = CalculateTargetCount(sut, Team.Blue, rule);
+        var fromRed = CalculateTargetCount(sut, Team.Red, rule);
 
         Assert.AreEqual(3, fromBlue); // Blue 자기 자신
         Assert.AreEqual(2, fromRed);  // Red 자기 자신
@@ -79,8 +81,8 @@ public class TargetCoutingTests
         var sut = CreateSut(blue: 3, red: 2);
         var rule = CreateRule(TargetRange.All, Side.Opponent);
 
-        var fromBlue = sut.CalculateTargetCount(Team.Blue, rule);
-        var fromRed = sut.CalculateTargetCount(Team.Red, rule);
+        var fromBlue = CalculateTargetCount(sut, Team.Blue, rule);
+        var fromRed = CalculateTargetCount(sut, Team.Red, rule);
 
         Assert.AreEqual(2, fromBlue); // Blue의 상대 = Red
         Assert.AreEqual(3, fromRed);  // Red의 상대 = Blue
@@ -91,24 +93,16 @@ public class TargetCoutingTests
     {
         var sut = CreateSut(blue: 10, red: 10);
 
-        Assert.AreEqual(1, sut.CalculateTargetCount(
-            Team.Blue,
-            CreateRule(TargetRange.Single, Side.All)));
-
-        Assert.AreEqual(2, sut.CalculateTargetCount(
-            Team.Red,
-            CreateRule(TargetRange.Double, Side.Self)));
-
-        Assert.AreEqual(3, sut.CalculateTargetCount(
-            Team.Blue,
-            CreateRule(TargetRange.Triple, Side.Opponent)));
+        Assert.AreEqual(1, CalculateTargetCount(sut, Team.Blue, SelfSingleRule));
+        Assert.AreEqual(2, CalculateTargetCount(sut, Team.Red, SelfDouble));
+        Assert.AreEqual(3, CalculateTargetCount(sut, Team.Blue, SelfTriple));
     }
 
     [Test]
-    public void 고정값_시_팀_카운트를_넘기면_팀_수를_반환()
+    public void 고정값이_팀_카운트를_넘기면_팀_수를_반환()
     {
         var sut = CreateSut(blue: 2);
 
-        Assert.AreEqual(2, sut.CalculateTargetCount(Team.Blue, CreateRule(TargetRange.Triple, Side.Opponent)));
+        Assert.AreEqual(2, CalculateTargetCount(sut, Team.Blue, CreateRule(TargetRange.Triple, Side.Opponent)));
     }
 }

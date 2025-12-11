@@ -51,17 +51,20 @@ public class SkillTargetSelectTests
         Assert.AreEqual(1, sut.Targets.Count());
     }
 
-    //[Test]
-    //public void 고정_개수_저장()
-    //{
-    //    var sut = CreateSut(5, 5, CreateDoubleRule(Side.All));
+    [Test]
+    public void 타겟_수가_팀보다_크면_팀을_다_고르면_Full()
+    {
+        var sut = CreateSut(Team.Blue, 2, 2, SelfTriple);
 
-    //    Select(sut, BlueZeroSlot);
-    //    Assert.IsFalse(sut.IsFull);
-    //    Select(sut, BlueOneSlot);
+        Select(sut, BlueZeroSlot);
+        Select(sut, BlueOneSlot);
+        Assert.IsTrue(sut.IsFull);
+    }
 
-    //    Assert.IsTrue(sut.IsFull);
-    //    Assert.AreEqual(2, sut.Targets.Count());
-    //    CollectionAssert.AreEquivalent(CreateBlueSlots(0, 1), sut.Targets);
-    //}
+    [Test]
+    public void 팀_수가_0이면_Full()
+    {
+        var sut = CreateSut(Team.Blue, 0, 0, SelfTriple);
+        Assert.IsTrue(sut.IsFull);
+    }
 }
