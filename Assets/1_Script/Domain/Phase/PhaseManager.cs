@@ -2,18 +2,6 @@ using System.Collections.Generic;
 
 public enum GamePhase { Ban, Pick, Skill, Done }
 
-public class PhaseData
-{
-    readonly public GamePhase GamePhase;
-    readonly public Phase Phase;
-
-    public PhaseData(GamePhase gamePhase, Phase phase)
-    {
-        GamePhase = gamePhase;
-        Phase = phase;
-    }
-}
-
 public readonly struct GameFlowData
 {
     public readonly GamePhase Phase;
@@ -51,7 +39,6 @@ public class PhaseManager
 
     public void SubmitAction(Team actingTeam)
     {
-        UnityEngine.Debug.Log(actingTeam);
         if (_current.GamePhase == GamePhase.Done) return;
 
         if (CurrentTurn == Team.All)

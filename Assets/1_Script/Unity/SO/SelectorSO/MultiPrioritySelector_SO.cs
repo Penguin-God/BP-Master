@@ -9,5 +9,5 @@ public class MultiPrioritySelector_SO : SelectorsCreatetorSO
     public override IBanSelector CreateBanSelector() => CreateSelector(masteryManager);
     public override IPickSelector CreatePickSelector() => CreateSelector(masteryManager);
 
-    MultiPrioritySelector CreateSelector(MasteryManager masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.CreateSelector()));
+    MultiPrioritySelector CreateSelector(MasteryCollection masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.CreateSelector()));
 }

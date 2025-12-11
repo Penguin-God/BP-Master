@@ -4,9 +4,9 @@ using System.Linq;
 public sealed class MultiPrioritySelector : IBanSelector, IPickSelector
 {
     readonly IEnumerable<PrioritySelector> selectors;
-    readonly MasteryManager mastery;
+    readonly MasteryCollection mastery;
 
-    public MultiPrioritySelector(MasteryManager mastery, IEnumerable<PrioritySelector> selectors)
+    public MultiPrioritySelector(MasteryCollection mastery, IEnumerable<PrioritySelector> selectors)
     {
         this.mastery = mastery;
         this.selectors = selectors.ToArray();

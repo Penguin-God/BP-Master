@@ -1,9 +1,7 @@
 {
     "name": "Domain",
     "rootNamespace": "",
-    "references": [
-        "GUID:fc46ad0e17129fd4694206dd6c5b7a23"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

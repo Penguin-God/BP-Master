@@ -1,6 +1,18 @@
 using System;
 using System.Collections.Generic;
 
+public class PhaseData
+{
+    readonly public GamePhase GamePhase;
+    readonly public Phase Phase;
+
+    public PhaseData(GamePhase gamePhase, Phase phase)
+    {
+        GamePhase = gamePhase;
+        Phase = phase;
+    }
+}
+
 public class Phase
 {
     Queue<Team> actionTeams;
