@@ -49,8 +49,7 @@ public class SkillUseController_UI : MonoBehaviour
         RefeshButton();
     }
 
-    void RefeshButton()
-        => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
+    void RefeshButton() => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
 
     IEnumerator Co_SelectTargets(SlotData useSlot, TraitTargetSelector selector)
     {

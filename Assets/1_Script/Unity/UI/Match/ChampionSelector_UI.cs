@@ -32,7 +32,11 @@ public class ChampionSelector_UI : MonoBehaviour
 
     void NailDownChampion()
     {
+        if (phaseManager.CurrentFlow.Phase == GamePhase.Pick)
+            ButtonUtil.InActiveButton(nailDownBtn);
         championSelector.NailDownChampion(phaseManager.CurrentFlow);
         championFocusView.ClearDisplay();
     }
+
+    public void EnterPick(Team team) => ButtonUtil.ActiveButton(nailDownBtn);
 }

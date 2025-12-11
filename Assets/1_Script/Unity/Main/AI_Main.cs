@@ -33,10 +33,10 @@ public class AI_Main : MonoBehaviour
     void OnPick(SlotData slotData, int id)
     {
         if (slotData.Team != Team) return;
-        StartCoroutine(Co_UseTrait(slotData));
+        StartCoroutine(Co_UseSkill(slotData));
     }
 
-    IEnumerator Co_UseTrait(SlotData slotData)
+    IEnumerator Co_UseSkill(SlotData slotData)
     {
         yield return new WaitForSeconds(1.5f);
         var teamCount = skillSlots.GetTeamCounter();
