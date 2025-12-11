@@ -35,6 +35,8 @@ public class SkillUseController_UI : MonoBehaviour
     {
         targetSelector.Select(clickSlot);
         RefeshButton();
+        if(targetSelector.IsFull)
+            skillUseController.UseSkill(useSlot, targetSelector.Targets, skillSlots.GetSlot(useSlot));
     }
 
     TraitTargetSelector targetSelector;
@@ -45,15 +47,8 @@ public class SkillUseController_UI : MonoBehaviour
         var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
         // 전체 타겟, 상대 수보다 많은 타겟 문제
         targetSelector = new TraitTargetSelector(skillSlots.GetTeamCount(EnumCaster.GetTargetTeam(useSlot.Team, rule.TargetSide)), rule);
-        StartCoroutine(Co_SelectTargets(useSlot, targetSelector));
         RefeshButton();
     }
 
     void RefeshButton() => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
-
-    IEnumerator Co_SelectTargets(SlotData useSlot, TraitTargetSelector selector)
-    {
-        yield return new WaitUntil(() => selector.IsFull);
-        skillUseController.UseSkill(useSlot, selector.Targets, skillSlots.GetSlot(useSlot));
-    }
 }
