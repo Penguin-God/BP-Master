@@ -11,7 +11,7 @@ public class SkillUseController_UI : MonoBehaviour
     SlotStorage<Skill> skillSlots;
     SkillUseController skillUseController;
 
-    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
+    public void Init(SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
     {
         gameObject.SetActive(true);
         this.skillSlots = skillSlots;
@@ -39,14 +39,13 @@ public class SkillUseController_UI : MonoBehaviour
             skillUseController.UseSkill(useSlot, targetSelector.Targets, skillSlots.GetSlot(useSlot));
     }
 
-    TraitTargetSelector targetSelector;
+    SkillTargetSelector targetSelector;
     SlotData useSlot;
     public void UseSkill(SlotData useSlot)
     {
         this.useSlot = useSlot;
         var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
-        // 전체 타겟, 상대 수보다 많은 타겟 문제
-        targetSelector = new TraitTargetSelector(skillSlots.GetTeamCount(EnumCaster.GetTargetTeam(useSlot.Team, rule.TargetSide)), rule);
+        targetSelector = new SkillTargetSelector(useSlot.Team, skillSlots.GetTeamCounter(), rule);
         RefeshButton();
     }
 

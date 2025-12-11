@@ -42,14 +42,14 @@ public class SkillTargetCounter
     {
         if (rule.TargetRange == TargetRange.All)
         {
-            if(rule.TargetSide == Side.All) return BlueCount + RedCount;
+            if (rule.TargetSide == Side.All) return BlueCount + RedCount;
             else return GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
         }
 
-        return GetTargetableCount(team, rule.TargetRange);
+        return GetTargetableCount(team, rule);
     }
 
-    int GetTargetableCount(Team team, TargetRange range) => Math.Min(GetTeamCount(team), CalculateFixedCount(range));
+    int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
 
     int CalculateFixedCount(TargetRange targetRange) => targetRange switch
     {

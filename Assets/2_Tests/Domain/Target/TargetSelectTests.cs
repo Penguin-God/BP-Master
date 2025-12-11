@@ -54,10 +54,9 @@ public class SkillTargetSelectTests
     [Test]
     public void 타겟_수가_팀보다_크면_팀을_다_고르면_Full()
     {
-        var sut = CreateSut(Team.Blue, 2, 2, SelfTriple);
+        var sut = CreateSut(Team.Blue, 1, 1, OpponentDoubleRule);
 
         Select(sut, BlueZeroSlot);
-        Select(sut, BlueOneSlot);
         Assert.IsTrue(sut.IsFull);
     }
 

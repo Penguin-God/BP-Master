@@ -48,6 +48,7 @@ public class AI_Main : MonoBehaviour
 
     IEnumerable<SlotData> SelectSkillTarget(List<SlotData> targetSlots, int targetCount)
     {
+        print(targetCount);
         List<SlotData> result = new();
         for (int i = 0; i < targetCount; i++)
         {

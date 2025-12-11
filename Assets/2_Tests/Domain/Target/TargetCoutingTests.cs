@@ -101,8 +101,8 @@ public class TargetCoutingTests
     [Test]
     public void 고정값이_팀_카운트를_넘기면_팀_수를_반환()
     {
-        var sut = CreateSut(blue: 2);
+        var sut = CreateSut(blue: 2, red: 1);
 
-        Assert.AreEqual(2, CalculateTargetCount(sut, Team.Blue, CreateRule(TargetRange.Triple, Side.Opponent)));
+        Assert.AreEqual(1, CalculateTargetCount(sut, Team.Blue, OpponentDoubleRule));
     }
 }
