@@ -8639,7 +8639,6 @@ MonoBehaviour:
   - {fileID: 212632266}
   - {fileID: 1657165901}
   - {fileID: 1681239419}
-  champSelectBtn: {fileID: 919244431}
 --- !u!114 &2045637439
 MonoBehaviour:
   m_ObjectHideFlags: 0
