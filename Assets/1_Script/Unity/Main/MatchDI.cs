@@ -56,27 +56,27 @@ public class MatchDI : MonoBehaviour
         new TraitFactory(matchConfig.TraitConfig, statusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
     }
 
-    bool initTrait;
-    void Trait(Team team)
-    {
-        if (initTrait) return;
-        initTrait = true;
-        slotManager = new SlotStorageManager(storage, champManager);
+    //bool initTrait;
+    //void Trait(Team team)
+    //{
+    //    if (initTrait) return;
+    //    initTrait = true;
+    //    slotManager = new SlotStorageManager(storage, champManager);
 
-        var skillController = new SkillUseController(slotManager.StatusSlots);
-        skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
-        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-        var filter = new SkillSlotFilter(slotManager.SkillUseFlagSlot);
+    //    var skillController = new SkillUseController(slotManager.StatusSlots);
+    //    skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
+    //    skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
+    //    var filter = new SkillSlotFilter(slotManager.SkillUseFlagSlot);
 
-        matchUI_Controller.SkillUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
+    //    matchUI_Controller.SkillUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
 
-        var traitFactory = new TraitFactory(matchConfig.TraitConfig, slotManager.StatusSlots);
-        var traitExecutor = new TraitExecutor(traitFactory);
-        traitExecutor.ExecuteAllTriat(slotManager.StatusSlots);
+    //    var traitFactory = new TraitFactory(matchConfig.TraitConfig, slotManager.StatusSlots);
+    //    var traitExecutor = new TraitExecutor(traitFactory);
+    //    traitExecutor.ExecuteAllTriat(slotManager.StatusSlots);
 
-        ApplyMastery(); // 마지막에
-        ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
-    }
+    //    ApplyMastery(); // 마지막에
+    //    ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
+    //}
 
     void ApplyMastery() // 픽과 동시에 적용
     {
