@@ -26,7 +26,7 @@ public class PhaseFlowTests
         var sut = new PhaseAdvancer(phases);
         sut.Start(); // Blue 턴
 
-        sut.SubmitAction(Team.Blue);
+        sut.TryAdvance(Team.Blue);
 
         Assert.AreEqual(Team.Red, sut.CurrentTurn);
     }
@@ -43,7 +43,7 @@ public class PhaseFlowTests
         var sut = new PhaseAdvancer(phases);
         sut.Start();
 
-        sut.SubmitAction(Team.Blue); // Ban 끝 → Pick 시작
+        sut.TryAdvance(Team.Blue); // Ban 끝 → Pick 시작
 
         Assert.AreEqual(GamePhase.Pick, sut.CurrentFlow.Phase);
         Assert.AreEqual(Team.Red, sut.CurrentFlow.Turn);
@@ -57,6 +57,6 @@ public class PhaseFlowTests
         var sut = new PhaseAdvancer(phases);
         sut.Start();
 
-        Assert.Throws<Exception>(() => sut.SubmitAction(Team.Red));
+        Assert.Throws<Exception>(() => sut.TryAdvance(Team.Red));
     }
 }

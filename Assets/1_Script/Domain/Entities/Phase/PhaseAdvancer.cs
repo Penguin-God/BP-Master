@@ -35,7 +35,7 @@ public class PhaseAdvancer
         Advance();
     }
 
-    public bool SubmitAction(Team actingTeam)
+    public bool TryAdvance(Team actingTeam)
     {
         if (_current.GamePhase == GamePhase.Done) return false;
 
