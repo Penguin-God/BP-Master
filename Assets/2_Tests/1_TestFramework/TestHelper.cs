@@ -22,6 +22,8 @@ public static class TestHelper
         return result;
     }
 
+
+
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
 
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));

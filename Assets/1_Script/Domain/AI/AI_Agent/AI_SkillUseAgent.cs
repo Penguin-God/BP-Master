@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 
 public class AI_SkillUseAgent
@@ -12,7 +11,7 @@ public class AI_SkillUseAgent
         this.skillUseController = skillUseController;
     }
 
-    void UseSkill(SlotData slotData)
+    public void UseSkill(SlotData slotData)
     {
         var teamCount = skillSlots.GetTeamCounter();
         var filter = new SkillTargetFilter(teamCount);
