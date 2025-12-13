@@ -19,15 +19,19 @@ public class MatchDI : MonoBehaviour
     SlotStorage<ChampionStatus> statusSlots = new();
     SlotStorage<Skill> skillSlots = new();
 
+    [SerializeField] ChampionSelector_UI championSelector;
+
     public void GameStart(Team playerTeam)
     {
         this.playerTeam = playerTeam;
         masteryGenerator.CreateRandomRoster(matchConfig.TeamSize);
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
+        // ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
 
-        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, null);
+        IPhaseEntry blue = playerTeam == Team.Blue ? championSelector : ai_main;
+        IPhaseEntry red = playerTeam == Team.Red ? championSelector : ai_main;
+        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
 
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
@@ -38,7 +42,8 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, statusSlots, skillSlots, skillController); // start보다 먼저
 
-        ai_main.InitAI_BanPick(storage, skillSlots, skillController);
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher, storage, skillSlots, skillController);
+        // ai_main.InitAI_BanPick();
 
         phaseManager.Start();
     }

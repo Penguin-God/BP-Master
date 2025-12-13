@@ -1,9 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-public class AI_MonoBehaviourAgent : MonoBehaviour
+public class AI_MonoBehaviourAgent : MonoBehaviour, IPhaseEntry
 {
     AI_SkillUseAgent traitAgent;
+
+    public void EnterBan()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void EnterPick()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void Init(AI_SkillUseAgent aI_TraitAgent)
     {
         traitAgent = aI_TraitAgent;

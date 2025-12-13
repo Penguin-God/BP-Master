@@ -4000,8 +4000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9449960ced8d5b24d9f98b8f4f188c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ban: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
-  pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
 --- !u!1 &1089112379
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,7 +5671,7 @@ MonoBehaviour:
   matchUI_Controller: {fileID: 1213870346}
   masteryGenerator: {fileID: 1410148730}
   ai_main: {fileID: 758303701}
-  utilKey: {fileID: 1049145345}
+  championSelector: {fileID: 1027524855}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!114 &1420292366
 MonoBehaviour:

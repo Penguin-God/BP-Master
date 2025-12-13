@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChampionSelector_UI : MonoBehaviour
+public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 {
     [SerializeField] Button nailDownBtn;
     [SerializeField] ChampionView championFocusView;
@@ -38,5 +38,6 @@ public class ChampionSelector_UI : MonoBehaviour
         championFocusView.ClearDisplay();
     }
 
-    public void EnterPick(Team team) => ButtonUtil.ActiveButton(nailDownBtn);
+    public void EnterBan() {}
+    public void EnterPick() => ButtonUtil.ActiveButton(nailDownBtn);
 }
