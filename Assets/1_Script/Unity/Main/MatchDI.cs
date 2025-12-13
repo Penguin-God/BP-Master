@@ -54,6 +54,8 @@ public class MatchDI : MonoBehaviour
         statusSlots.AddSlot(slotData.Team, champion.Status);
         skillSlots.AddSlot(slotData.Team, champion.Skill);
         new TraitFactory(matchConfig.TraitConfig, statusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
+        if (masteryGenerator.GetTeamMasteries(Team.Blue).Select(x => x.ChampionId).Contains(id))
+            new TeamMasteryApplier().ApplyStatChange(champion.Status, masteryGenerator.GetTeamMasteries(Team.Blue).First(x => x.ChampionId == id).Level);
     }
 
     //bool initTrait;

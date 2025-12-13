@@ -15,7 +15,7 @@ public class TeamMasteryApplier
         }
     }
 
-    void ApplyStatChange(ChampionStatus status, int masteryLevel)
+    public void ApplyStatChange(ChampionStatus status, int masteryLevel)
     {
         var oldStat = status.Stat;
         var newStat = new ChampionStatData(
