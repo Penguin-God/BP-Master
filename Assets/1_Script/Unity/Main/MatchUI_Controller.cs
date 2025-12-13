@@ -62,19 +62,6 @@ public class MatchUI_Controller : MonoBehaviour
     SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 
         => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championRepository.GetChampionData(id).StatData, TraitType.None));
 
-    public void SkillUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager)
-    {
-        skillUseLog.SetActive(true);
-        masteryView.gameObject.SetActive(false);
-        
-        skillUseView.Init(slotStorageManager.SkillSlots, skillController);
-        
-        gameFlowView.Init(slotStorageManager.ChampionDataSlots);
-        skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
-
-        eventDispatcher.OnPhaseSkill += (team) => scoreView.UpdateTeamScore(slotStorageManager.StatusSlots, team);
-    }
-
     [SerializeField] GameObject scores;
     [SerializeField] TextMeshProUGUI textBlue;
     [SerializeField] TextMeshProUGUI textRed;

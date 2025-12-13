@@ -13,7 +13,6 @@ public class MatchDI : MonoBehaviour
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] MasteryGenerator masteryGenerator;
     [SerializeField] AI_Main ai_main;
-    Team playerTeam;
 
     SlotStorage<Champion> championSlots = new();
     SlotStorage<ChampionStatus> statusSlots = new();
@@ -23,12 +22,11 @@ public class MatchDI : MonoBehaviour
 
     public void GameStart(Team playerTeam)
     {
-        this.playerTeam = playerTeam;
         masteryGenerator.CreateRandomRoster(matchConfig.TeamSize);
 
-        // ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
 
+        // 이런 생성 로직들을 처리해주는 어댑터
         IPhaseEntry blue = playerTeam == Team.Blue ? championSelector : ai_main;
         IPhaseEntry red = playerTeam == Team.Red ? championSelector : ai_main;
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
@@ -42,8 +40,7 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, statusSlots, skillSlots, skillController); // start보다 먼저
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher, storage, skillSlots, skillController);
-        // ai_main.InitAI_BanPick();
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, skillSlots, skillController);
 
         phaseManager.Start();
     }
@@ -58,34 +55,6 @@ public class MatchDI : MonoBehaviour
         new TraitFactory(matchConfig.TraitConfig, statusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
         if (masteryGenerator.GetTeamMasteries(Team.Blue).Select(x => x.ChampionId).Contains(id))
             new TeamMasteryApplier().ApplyStatChange(champion.Status, masteryGenerator.GetTeamMasteries(Team.Blue).First(x => x.ChampionId == id).Level);
-    }
-
-    //bool initTrait;
-    //void Trait(Team team)
-    //{
-    //    if (initTrait) return;
-    //    initTrait = true;
-    //    slotManager = new SlotStorageManager(storage, champManager);
-
-    //    var skillController = new SkillUseController(slotManager.StatusSlots);
-    //    skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
-    //    skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-    //    var filter = new SkillSlotFilter(slotManager.SkillUseFlagSlot);
-
-    //    matchUI_Controller.SkillUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
-
-    //    var traitFactory = new TraitFactory(matchConfig.TraitConfig, slotManager.StatusSlots);
-    //    var traitExecutor = new TraitExecutor(traitFactory);
-    //    traitExecutor.ExecuteAllTriat(slotManager.StatusSlots);
-
-    //    ApplyMastery(); // 마지막에
-    //    ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
-    //}
-
-    void ApplyMastery() // 픽과 동시에 적용
-    {
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), masteryGenerator.GetTeamMasteries(Team.Blue));
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), masteryGenerator.GetTeamMasteries(Team.Red));
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
