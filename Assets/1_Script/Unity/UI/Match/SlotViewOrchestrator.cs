@@ -28,7 +28,7 @@ public class SlotViewOrchestrator : MonoBehaviour
 
     public void PickChampion(SlotData pickSlot, int id)
     {
-        slotViews.GetSlot(pickSlot).UpdateChampion(id);
+        slotViews.GetSlot(pickSlot).UpdateChampion(statusSlots.GetSlot(pickSlot), id);
         trackerViewSlots.GetSlot(pickSlot).Init(statusSlots.GetSlot(pickSlot));
     }
 }
