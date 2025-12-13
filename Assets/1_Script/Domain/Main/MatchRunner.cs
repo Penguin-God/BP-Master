@@ -17,17 +17,15 @@ public interface IPhaseAgent
 public class AI_PhaseAgent : IPhaseAgent
 {
     readonly AI_BanPickAgent banPickAgent;
-    readonly AI_SkillAgent skillAgent;
 
-    public AI_PhaseAgent(AI_BanPickAgent banPickAgent, AI_SkillAgent skillAgent)
+    public AI_PhaseAgent(AI_BanPickAgent banPickAgent)
     {
         this.banPickAgent = banPickAgent;
-        this.skillAgent = skillAgent;
     }
 
     public void OnBan(Team team) => banPickAgent.Ban(team);
     public void OnPick(Team team) => banPickAgent.Pick(team);
-    public void OnSkill(Team team) => skillAgent.UseSkill(team);
+    public void OnSkill(Team team) => banPickAgent.Pick(team); //skillAgent.UseSkill(team);
 }
 
 public class MatchRunner

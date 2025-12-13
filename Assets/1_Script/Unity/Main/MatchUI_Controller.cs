@@ -65,7 +65,7 @@ public class MatchUI_Controller : MonoBehaviour
     SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 
         => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championRepository.GetChampionData(id).StatData, TraitType.None));
 
-    public void SkillUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager, SkillSlotFilter filter)
+    public void SkillUI_Init(Team playerTeam, PhaseEventDispatcher eventDispatcher, SkillUseController skillController, SlotStorageManager slotStorageManager)
     {
         skillUseLog.SetActive(true);
         masteryView.gameObject.SetActive(false);
