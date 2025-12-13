@@ -69,7 +69,7 @@ public static class TestHelper
 
     public static PhaseData CreatePhaseData(GamePhase phase, params Team[] order) => new PhaseData(phase, new Phase(order));
     public static PhaseFlowOrchestrator CreatePhaseManager(params PhaseData[] phaseDatas) => CreatePhaseManager(new PhaseEventDispatcher(), phaseDatas);
-    public static PhaseFlowOrchestrator CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseFlowOrchestrator(phaseDatas, eventDispatcher, null);
+    public static PhaseFlowOrchestrator CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseFlowOrchestrator(phaseDatas, eventDispatcher, new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
     public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 }
@@ -80,4 +80,12 @@ public class TestAttackChangeAction : ISkillAction
     public TestAttackChangeAction(int amount) => Amount = amount;
 
     public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
+}
+
+public class TestEntry : IPhaseEntry
+{
+    public int Count = 0;
+
+    public void EnterBan() => Count++;
+    public void EnterPick() => Count += 2;
 }

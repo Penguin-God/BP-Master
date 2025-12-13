@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 
 public interface IPhaseEvent
 {
@@ -12,7 +13,7 @@ public class PhaseFlowOrchestrator
 
     public GameFlowData CurrentFlow => phaseAdvancer.CurrentFlow;
 
-    public PhaseFlowOrchestrator(PhaseData[] phaseDatas, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
+    public PhaseFlowOrchestrator(IEnumerable<PhaseData> phaseDatas, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
     {
         this.phaseAdvancer = new PhaseAdvancer(phaseDatas);
         this.dispatcher = dispatcher;
@@ -23,6 +24,7 @@ public class PhaseFlowOrchestrator
     {
         phaseAdvancer.Start();
         Disphatch();
+        entryDispatcher.EnterPhase(CurrentFlow);
     }
 
     public void SubmitAction(Team actingTeam)
@@ -30,7 +32,7 @@ public class PhaseFlowOrchestrator
         if (phaseAdvancer.TryAdvance(actingTeam))
         {
             Disphatch();
-            // entryDispatcher.EnterPhase(CurrentFlow);
+            entryDispatcher.EnterPhase(CurrentFlow);
         }
     }
 

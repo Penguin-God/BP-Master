@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using static Codice.CM.Common.CmCallContext;
 
 public enum GamePhase { Ban, Pick, Skill, Done }
 
