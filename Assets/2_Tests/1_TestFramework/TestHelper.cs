@@ -86,6 +86,14 @@ public class TestEntry : IPhaseEntry
 {
     public int Count = 0;
 
-    public void EnterBan() => Count++;
-    public void EnterPick() => Count += 2;
+    readonly int BanCount;
+    readonly int PickCount;
+    public TestEntry(int banCount = 0, int pickCount = 0)
+    {
+        BanCount = banCount;
+        PickCount = pickCount;
+    }
+
+    public void EnterBan() => Count += BanCount;
+    public void EnterPick() => Count += PickCount;
 }

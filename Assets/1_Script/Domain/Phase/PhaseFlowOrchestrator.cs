@@ -23,18 +23,18 @@ public class PhaseFlowOrchestrator
     public void Start()
     {
         phaseAdvancer.Start();
-        Disphatch();
-        entryDispatcher.EnterPhase(CurrentFlow);
+        AnnouncedGameFlow(CurrentFlow);
     }
 
     public void SubmitAction(Team actingTeam)
     {
         if (phaseAdvancer.TryAdvance(actingTeam))
-        {
-            Disphatch();
-            entryDispatcher.EnterPhase(CurrentFlow);
-        }
+            AnnouncedGameFlow(CurrentFlow);
     }
 
-    void Disphatch() => dispatcher.Dispatch(phaseAdvancer.CurrentFlow.Phase, phaseAdvancer.CurrentFlow.Turn);
+    void AnnouncedGameFlow(GameFlowData flow)
+    {
+        entryDispatcher.EnterPhase(flow);
+        dispatcher.Dispatch(flow.Phase, flow.Turn);
+    }
 }

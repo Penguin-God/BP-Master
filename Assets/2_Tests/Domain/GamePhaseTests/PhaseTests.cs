@@ -65,7 +65,7 @@ public class PhaseTests
     [Test]
     public void 페이즈_진입_에이전트_호출()
     {
-        var blue = new TestEntry();
+        var blue = new TestEntry(banCount: 1);
         var sut = new PhaseFlowOrchestrator(new PhaseData[] { CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Blue) }, new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(blue, new TestEntry()));
         sut.Start();
         sut.SubmitAction(Team.Blue);
