@@ -27,7 +27,7 @@ public class MatchUI_Controller : MonoBehaviour
     public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUseController skillController)
     {
         team = playerTeam;
-        slotViews.InitSlotView();
+        slotViews.InitSlotView(statusSlots);
         masteryView.ViewMastery(championRepository);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
@@ -44,7 +44,6 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnPhaseSkill += _ => banView.HideBan();
         eventDispatcher.OnPhaseSkill += _ => championDrawer.HideView();
 
-        storage.OnPick += (slot, id) => slotViews.InitTrackerViewSlots(statusSlots);
         storage.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);

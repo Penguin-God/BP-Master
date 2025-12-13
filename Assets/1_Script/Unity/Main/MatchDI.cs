@@ -43,9 +43,8 @@ public class MatchDI : MonoBehaviour
         ai_main.InitAI_BanPick(storage, skillSlots, skillController);
 
         phaseManager.Start();
-
-        
     }
+
     SkillUseController skillController;
     void OnPick(SlotData slotData, int id)
     {

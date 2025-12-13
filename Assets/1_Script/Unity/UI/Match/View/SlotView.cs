@@ -9,6 +9,7 @@ public class SlotView : MonoBehaviour
     ChampionRepository championManager;
     int id;
     ChampionView championFocusView;
+    ChampionStatus status;
 
     void Start()
     {
@@ -24,6 +25,12 @@ public class SlotView : MonoBehaviour
     public void UpdateChampion(int id)
     {
         this.id = id;
+        championView.UpdateChampion(championManager.GetChampionData(id).CreateChampionModel());
+    }
+
+    public void UpdateChampion(ChampionStatus status, int id)
+    {
+        this.status = status;
         championView.UpdateChampion(championManager.GetChampionData(id).CreateChampionModel());
     }
 
