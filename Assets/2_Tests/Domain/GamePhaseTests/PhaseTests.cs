@@ -4,9 +4,6 @@ using static TestHelper;
 
 public class PhaseTests
 {
-    GameFlowData CreateFlow(GamePhase phase, Team team) => new GameFlowData(phase, team);   
-
-
     [Test]
     public void 다음턴_반환()
     {
@@ -60,20 +57,6 @@ public class PhaseTests
 
         Assert.Throws<Exception>(() => sut.SubmitAction(Team.Red));
     }
-
-    //[Test]
-    //public void TeamAll_은_양팀_모두_제출해야_진행한다()
-    //{
-    //    var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Skill, Team.All) });
-    //    sut.Start();
-
-    //    sut.SubmitAction(Team.Blue);
-    //    Assert.AreEqual(GamePhase.Skill, sut.CurrentFlow.Phase);  // 아직 Skill
-
-    //    sut.SubmitAction(Team.Red);
-    //    Assert.AreEqual(GamePhase.Done, sut.CurrentFlow.Phase);  // Done으로 진행됨
-    //}
-
 
     [Test]
     public void 디스패처에서_이벤트_발생()

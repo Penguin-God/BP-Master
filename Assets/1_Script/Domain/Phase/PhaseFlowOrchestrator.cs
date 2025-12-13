@@ -6,44 +6,17 @@ public interface IPhaseEvent
 
 public class PhaseFlowOrchestrator
 {
-    readonly PhaseAdvancer _phaseFlow;
-    readonly IPhaseEvent _dispatcher;
-
-    public GameFlowData CurrentFlow => _phaseFlow.CurrentFlow;
-
-    public PhaseFlowOrchestrator(PhaseData[] phaseDatas, IPhaseEvent dispatcher)
-    {
-        _phaseFlow = new PhaseAdvancer(phaseDatas);
-        _dispatcher = dispatcher;
-    }
-
-    public void Start()
-    {
-        _phaseFlow.Start();
-        Disphatch();
-    }
-
-    public void SubmitAction(Team actingTeam)
-    {
-        if (_phaseFlow.TryAdvance(actingTeam))
-             Disphatch();
-    }
-
-    void Disphatch() => _dispatcher.Dispatch(_phaseFlow.CurrentFlow.Phase, _phaseFlow.CurrentFlow.Turn);
-}
-
-
-public class PhaseFlowOrchestrator2
-{
     readonly PhaseAdvancer phaseAdvancer;
     readonly IPhaseEvent dispatcher;
+    readonly TeamPhaseEntryDispatcher entryDispatcher;
 
     public GameFlowData CurrentFlow => phaseAdvancer.CurrentFlow;
 
-    public PhaseFlowOrchestrator2(PhaseAdvancer phaseAdvancer, IPhaseEvent dispatcher)
+    public PhaseFlowOrchestrator(PhaseData[] phaseDatas, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
     {
-        this.phaseAdvancer = phaseAdvancer;
+        this.phaseAdvancer = new PhaseAdvancer(phaseDatas);
         this.dispatcher = dispatcher;
+        entryDispatcher = teamPhaseEntryDispatcher;
     }
 
     public void Start()
@@ -57,7 +30,7 @@ public class PhaseFlowOrchestrator2
         if (phaseAdvancer.TryAdvance(actingTeam))
         {
             Disphatch();
-            // phaseAdvancer.CurrentTurn
+            // entryDispatcher.EnterPhase(CurrentFlow);
         }
     }
 

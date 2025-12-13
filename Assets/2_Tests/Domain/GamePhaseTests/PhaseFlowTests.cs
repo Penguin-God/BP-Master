@@ -5,14 +5,18 @@ using static TestHelper;
 [TestFixture]
 public class PhaseFlowTests
 {
+    PhaseAdvancer CreateAndStartAdvancer(PhaseData[] phaseDatas)
+    {
+        var sut = new PhaseAdvancer(phaseDatas);
+        sut.Start();
+        return sut;
+    }
+
     [Test]
     public void Start_첫_페이즈_첫_턴으로_진행()
     {
         var phases = new[] {CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Red)};
-
-        var sut = new PhaseAdvancer(phases);
-
-        sut.Start();
+        var sut = CreateAndStartAdvancer(phases);
 
         Assert.AreEqual(GamePhase.Ban, sut.CurrentFlow.Phase);
         Assert.AreEqual(Team.Blue, sut.CurrentFlow.Turn);
@@ -22,9 +26,7 @@ public class PhaseFlowTests
     public void SubmitAction_올바른_팀이면_다음_턴으로_진행()
     {
         var phases = new[] {CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Red)};
-
-        var sut = new PhaseAdvancer(phases);
-        sut.Start(); // Blue 턴
+        var sut = CreateAndStartAdvancer(phases);
 
         sut.TryAdvance(Team.Blue);
 
@@ -40,8 +42,7 @@ public class PhaseFlowTests
             CreatePhaseData(GamePhase.Pick, Team.Red)
         };
 
-        var sut = new PhaseAdvancer(phases);
-        sut.Start();
+        var sut = CreateAndStartAdvancer(phases);
 
         sut.TryAdvance(Team.Blue); // Ban 끝 → Pick 시작
 
@@ -53,10 +54,7 @@ public class PhaseFlowTests
     public void 잘못된_팀이_SubmitAction하면_예외()
     {
         var phases = new[]{CreatePhaseData(GamePhase.Ban, Team.Blue)};
-
-        var sut = new PhaseAdvancer(phases);
-        sut.Start();
-
+        var sut = CreateAndStartAdvancer(phases);
         Assert.Throws<Exception>(() => sut.TryAdvance(Team.Red));
     }
 }

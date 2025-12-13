@@ -27,7 +27,7 @@ public class MatchDI : MonoBehaviour
         ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
         storage = new GameBanPickStorage(champManager.AllId);
 
-        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
+        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, null);
 
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;

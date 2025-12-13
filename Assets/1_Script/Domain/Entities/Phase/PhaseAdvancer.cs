@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using static Codice.CM.Common.CmCallContext;
 
 public enum GamePhase { Ban, Pick, Skill, Done }
 
@@ -16,28 +17,25 @@ public readonly struct GameFlowData
 
 public class PhaseAdvancer
 {
-    readonly Queue<PhaseData> _phases;
-    PhaseData _current;
+    readonly Queue<PhaseData> phases;
+    PhaseData current;
 
     public GameFlowData CurrentFlow { get; private set; }
     public Team CurrentTurn => CurrentFlow.Turn;
 
-    public PhaseAdvancer(PhaseData[] phaseDatas)
+    public PhaseAdvancer(IEnumerable<PhaseData> phaseDatas)
     {
-        _phases = new Queue<PhaseData>(phaseDatas);
+        phases = new Queue<PhaseData>(phaseDatas);
         // Done은 마지막 고정
-        _phases.Enqueue(new PhaseData(GamePhase.Done, new Phase(new[] { Team.All })));
+        phases.Enqueue(new PhaseData(GamePhase.Done, new Phase(new[] { Team.All })));
+        current = phases.Dequeue();
     }
 
-    public void Start()
-    {
-        _current = _phases.Dequeue();
-        Advance();
-    }
+    public void Start() => Advance();
 
     public bool TryAdvance(Team actingTeam)
     {
-        if (_current.GamePhase == GamePhase.Done) return false;
+        if (current.GamePhase == GamePhase.Done) return false;
 
         if (actingTeam == CurrentTurn)
         {
@@ -49,9 +47,7 @@ public class PhaseAdvancer
 
     void Advance()
     {
-        if (_current == null || _current.Phase.IsDone) _current = _phases.Dequeue();
-        ProgressFlow();
+        if (current.Phase.IsDone) current = phases.Dequeue();
+        CurrentFlow = new GameFlowData(current.GamePhase, current.Phase.GetNext());
     }
-
-    void ProgressFlow() => CurrentFlow = new GameFlowData(_current.GamePhase, _current.Phase.GetNext());
 }

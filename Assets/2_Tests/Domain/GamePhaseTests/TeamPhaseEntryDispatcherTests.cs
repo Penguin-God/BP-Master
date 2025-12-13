@@ -18,8 +18,8 @@ public class TeamPhaseEntryDispatcherTests
         TestEntry red = new TestEntry();
         var sut = new TeamPhaseEntryDispatcher(blue, red);
 
-        sut.EnterPhase(CreateFlow(Team.Blue, GamePhase.Ban));
-        sut.EnterPhase(CreateFlow(Team.Red, GamePhase.Pick));
+        sut.EnterPhase(CreateFlow(GamePhase.Ban, Team.Blue));
+        sut.EnterPhase(CreateFlow(GamePhase.Pick, Team.Red));
 
         Assert.AreEqual(1, blue.Count);
         Assert.AreEqual(2, red.Count);
