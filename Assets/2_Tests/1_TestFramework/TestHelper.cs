@@ -71,6 +71,7 @@ public static class TestHelper
     public static PhaseFlowOrchestrator CreatePhaseManager(params PhaseData[] phaseDatas) => CreatePhaseManager(new PhaseEventDispatcher(), phaseDatas);
     public static PhaseFlowOrchestrator CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseFlowOrchestrator(phaseDatas, eventDispatcher);
     public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
+    public static GameFlowData CreateFlow(Team turn, GamePhase phase) => new GameFlowData(phase, turn);
 }
 
 public class TestAttackChangeAction : ISkillAction
