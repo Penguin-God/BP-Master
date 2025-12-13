@@ -14,7 +14,6 @@ public class MatchDI : MonoBehaviour
     [SerializeField] MasteryGenerator masteryGenerator;
     [SerializeField] AI_Main ai_main;
     Team playerTeam;
-    [SerializeField] UtilKey utilKey;
 
     SlotStorage<Champion> championSlots = new();
     SlotStorage<ChampionStatus> statusSlots = new();
@@ -29,7 +28,6 @@ public class MatchDI : MonoBehaviour
         storage = new GameBanPickStorage(champManager.AllId);
 
         phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
-        utilKey.Init(storage, phaseManager);
 
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
