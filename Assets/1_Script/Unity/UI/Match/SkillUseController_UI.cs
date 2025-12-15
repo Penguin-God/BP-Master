@@ -35,8 +35,11 @@ public class SkillUseController_UI : MonoBehaviour
     {
         targetSelector.Select(clickSlot);
         RefeshButton();
-        if(targetSelector.IsFull)
+        if (targetSelector.IsFull)
+        {
             skillUseController.UseSkill(useSlot, targetSelector.Targets, skillSlots.GetSlot(useSlot));
+            skillButtonView.InActiveAllBtns();
+        }
     }
 
     SkillTargetSelector targetSelector;

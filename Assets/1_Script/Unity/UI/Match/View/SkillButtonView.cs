@@ -18,7 +18,7 @@ public class SkillButtonView : MonoBehaviour
         buttonSlots.AddSlots(Team.Red, redSkills);
     }
 
-    void InActiveAllBtns()
+    public void InActiveAllBtns()
     {
         foreach (Button btn in buttonSlots.GetAll())
             ButtonUtil.InActiveButton(btn);
