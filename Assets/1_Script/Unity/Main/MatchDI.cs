@@ -5,10 +5,7 @@ public class MatchDI : MonoBehaviour
 {
     [SerializeField] MatchConfigSO matchConfig;
     [SerializeField] ChampionRepository champManager;
-    GameBanPickStorage storage;
 
-    PhaseFlowOrchestrator phaseManager;
-    PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] MasteryGenerator masteryGenerator;
     [SerializeField] AI_Main ai_main;
@@ -23,12 +20,13 @@ public class MatchDI : MonoBehaviour
     {
         masteryGenerator.CreateRandomRoster(matchConfig.TeamSize);
 
-        storage = new GameBanPickStorage(champManager.AllId);
+        var storage = new GameBanPickStorage(champManager.AllId);
 
         // 이런 생성 로직들을 처리해주는 어댑터
         IPhaseEntry blue = playerTeam == Team.Blue ? championSelector : ai_main;
         IPhaseEntry red = playerTeam == Team.Red ? championSelector : ai_main;
-        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
+        var phaseEventDispatcher = new PhaseEventDispatcher();
+        PhaseFlowOrchestrator phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
 
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
