@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   bonusDatas:
-  - Threshold: 500
-    Bonus: 150
-  - Threshold: 750
+  - Threshold: 300
+    Bonus: 100
+  - Threshold: 650
     Bonus: 250
   - Threshold: 1000
     Bonus: 500

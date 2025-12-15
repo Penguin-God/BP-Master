@@ -16,10 +16,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5845e19649f08d247b70aac6efe18d8f, type: 2}
   - {fileID: 11400000, guid: 603c87e43456fd44286208c78097ee82, type: 2}
   picks:
-  - {fileID: 11400000, guid: efc97c7ed14228b44b5409f4547a3892, type: 2}
-  - {fileID: 11400000, guid: 96e5b2be14ec2e44fb3a39b5e7d7f8b5, type: 2}
-  - {fileID: 11400000, guid: e1a3b2221509f4f41a0ba6f414d92291, type: 2}
-  - {fileID: 11400000, guid: a7f0e72230ce72a45be4b0a9a420d812, type: 2}
-  - {fileID: 11400000, guid: 48f3b9de02336554d9a03a30d49140fb, type: 2}
+  - {fileID: 11400000, guid: de981b4337927514d81fd75ae700058e, type: 2}
+  - {fileID: 11400000, guid: f8affce91ca1c634c8f1c9b128bea301, type: 2}
   - {fileID: 11400000, guid: 05764b6ed32fca74d93311ab047dd117, type: 2}
+  - {fileID: 11400000, guid: fb992e3516fe1cb4abc73e44bf105be7, type: 2}
+  - {fileID: 11400000, guid: efc97c7ed14228b44b5409f4547a3892, type: 2}
+  - {fileID: 11400000, guid: 68db2d501243ac24a8432076374f5535, type: 2}
   - {fileID: 11400000, guid: 5d38329471112af438d2c472494c7427, type: 2}
