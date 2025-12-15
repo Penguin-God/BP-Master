@@ -4,7 +4,6 @@ using UnityEngine;
 public class MatchDI : MonoBehaviour
 {
     [SerializeField] MatchConfigSO matchConfig;
-    SlotStorageManager slotManager;
     [SerializeField] ChampionRepository champManager;
     GameBanPickStorage storage;
 
@@ -60,9 +59,8 @@ public class MatchDI : MonoBehaviour
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
     {
-        slotManager = new SlotStorageManager(storage, champManager);
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
+        MatchResult result = new MatchResultConverter(builder).ToResult(statusSlots);
         matchUI_Controller.Done(result);
     }
 }
