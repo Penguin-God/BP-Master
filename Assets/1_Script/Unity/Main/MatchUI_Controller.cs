@@ -48,9 +48,21 @@ public class MatchUI_Controller : MonoBehaviour
         skillButtonView.Init(playerTeam);
         skillUseView.Init(skillSlots, skillController);
 
-        storage.OnPick += (slot, id) => scoreView.UpdateTeamScore(IdToStatus(storage.PickIds), slot.Team);
+        storage.OnPick += (slot, id) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
+        skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
+    }
+
+    void SkillUI_Init(SkillUseController skillController, SlotStorageManager slotStorageManager)
+    {
+        skillUseLog.SetActive(true);
+        masteryView.gameObject.SetActive(false);
+
+        skillUseView.Init(slotStorageManager.SkillSlots, skillController);
+
+        gameFlowView.Init(slotStorageManager.ChampionDataSlots);
+        skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
     }
 
     void OnPick(SlotData slotData, int id)
@@ -58,9 +70,6 @@ public class MatchUI_Controller : MonoBehaviour
         if (slotData.Team != team) return;
         skillUseView.UseSkill(slotData);
     }
-
-    SlotStorage<ChampionStatus> IdToStatus(SlotStorage<int> idStorage) 
-        => StorageConverter.ConvertStorage(idStorage, id => new ChampionStatus(championRepository.GetChampionData(id).StatData, TraitType.None));
 
     [SerializeField] GameObject scores;
     [SerializeField] TextMeshProUGUI textBlue;
