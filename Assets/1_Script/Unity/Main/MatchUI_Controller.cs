@@ -39,9 +39,6 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
         storage.OnPick += (slot, id) => championDrawer.InActiveButton(id);
 
-        eventDispatcher.OnPhaseSkill += _ => banView.HideBan();
-        eventDispatcher.OnPhaseSkill += _ => championDrawer.HideView();
-
         storage.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);
@@ -52,8 +49,7 @@ public class MatchUI_Controller : MonoBehaviour
         skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
-
-        eventDispatcher.OnPhaseDone += () => championDrawer.gameObject.SetActive(false);
+        eventDispatcher.OnGameProgress += (flow) => print(flow.Phase);
     }
 
     void SkillUI_Init(SkillUseController skillController, SlotStorageManager slotStorageManager)
@@ -78,7 +74,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] TextMeshProUGUI textRed;
     public void Done(MatchResult result)
     {
-        skillButtonView.gameObject.SetActive(false);
+        championDrawer.gameObject.SetActive(false);
         scores.SetActive(true);
         textBlue.text = new ScoreTextBuilder().BuildText(result.BlueInfo);
         textRed.text = new ScoreTextBuilder().BuildText(result.RedInfo);

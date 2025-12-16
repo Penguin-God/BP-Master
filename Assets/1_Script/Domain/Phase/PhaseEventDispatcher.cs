@@ -6,7 +6,6 @@ public class PhaseEventDispatcher : IPhaseEvent
     public event Action<Team> OnPhaseBan;
     public event Action<Team> OnPhasePick;
     
-    public event Action<Team> OnPhaseSkill;
     public event Action OnPhaseDone;
 
     public void Dispatch(GamePhase phase, Team turn)
@@ -27,7 +26,6 @@ public class PhaseEventDispatcher : IPhaseEvent
         {
             case GamePhase.Ban: OnPhaseBan?.Invoke(turn); break;
             case GamePhase.Pick: OnPhasePick?.Invoke(turn); break;
-            case GamePhase.Skill: OnPhaseSkill?.Invoke(turn); break;
             case GamePhase.Done: OnPhaseDone?.Invoke(); break;
         }
     }
