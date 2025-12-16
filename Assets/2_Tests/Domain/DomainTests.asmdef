@@ -1,12 +1,13 @@
 {
-    "name": "DomainTest",
+    "name": "DomainTests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Domain",
-        "2_Tests",
-        "Presenter"
+        "Presenter",
+        "UseCase",
+        "2_Tests"
     ],
     "includePlatforms": [
         "Editor"
