@@ -3,8 +3,9 @@ using System.Linq;
 
 public static class TestHelper
 {
-    public static SlotData CreateBlueSlot(int index) => new SlotData(Team.Blue, index);
-    public static SlotData CreateRedSlot(int index) => new SlotData(Team.Red, index);
+    public static SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
+    public static SlotData CreateBlueSlot(int index) => CreateSlot(Team.Blue, index);
+    public static SlotData CreateRedSlot(int index) => CreateSlot(Team.Red, index);
 
     public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None)
     {
@@ -22,10 +23,7 @@ public static class TestHelper
         return result;
     }
 
-
-
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
-
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
 
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
