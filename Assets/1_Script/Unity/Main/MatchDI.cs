@@ -46,7 +46,7 @@ public class MatchDI : MonoBehaviour
         pickSlotFacade.Add(slotData.Team, champion);
         new TraitFactory(matchConfig.TraitConfig, pickSlotFacade.StatusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
         if (masteryGenerator.GetTeamMasteries(Team.Blue).Select(x => x.ChampionId).Contains(id))
-            new TeamMasteryApplier().ApplyStatChange(champion.Status, masteryGenerator.GetTeamMasteries(Team.Blue).First(x => x.ChampionId == id).Level);
+            new MasteryApplier().ApplyStatChange(champion.Status, masteryGenerator.GetTeamMasteries(Team.Blue).First(x => x.ChampionId == id).Level);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;

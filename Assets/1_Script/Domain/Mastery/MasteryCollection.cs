@@ -11,7 +11,8 @@ public class MasteryCollection
         masteryMap = masteries.ToDictionary(m => m.ChampionId, m => m.Level);
     }
 
-    public int GetMastery(int championId) => masteryMap.TryGetValue(championId, out int level) ? level : 0;
+    public int GetMastery(int championId) => HasMastery(championId) ? masteryMap[championId] : 0;
+    public bool HasMastery(int championId) => masteryMap.ContainsKey(championId);
 
     public void AddMastery(int champId)
     {

@@ -9,9 +9,9 @@ public class MasteryTests
 
         MasteryCollection sut = new(data);
 
-        Assert.AreEqual(10, sut.GetMastery(12));
-        Assert.AreEqual(20, sut.GetMastery(11));
-        Assert.AreEqual(0, sut.GetMastery(44));
+        Assert.AreEqual(10, GetMastery(sut, 12));
+        Assert.AreEqual(20, GetMastery(sut, 11));
+        Assert.AreEqual(0, GetMastery(sut, 44));
         CollectionAssert.AreEquivalent(data, sut.AllMasteries);
     }
 
@@ -22,7 +22,7 @@ public class MasteryTests
 
         sut.AddMastery(10);
 
-        Assert.AreEqual(6, sut.GetMastery(10));
+        Assert.AreEqual(6, GetMastery(sut, 10));
     }
 
     [Test]
@@ -32,6 +32,8 @@ public class MasteryTests
 
         sut.AddMastery(44);
 
-        Assert.AreEqual(1, sut.GetMastery(44));
+        Assert.AreEqual(1, GetMastery(sut, 44));
     }
+
+    int GetMastery(MasteryCollection sut, int id) => sut.GetMastery(id);
 }

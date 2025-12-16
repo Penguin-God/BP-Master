@@ -1,5 +1,5 @@
 
-public class TeamMasteryApplier
+public class MasteryApplier
 {
     public void ApplyStatChange(ChampionStatus status, int masteryLevel)
     {
