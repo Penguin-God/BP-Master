@@ -35,5 +35,5 @@ public class MasteryTests
         Assert.AreEqual(1, GetMastery(sut, 44));
     }
 
-    int GetMastery(MasteryCollection sut, int id) => sut.GetMastery(id);
+    int GetMastery(MasteryCollection sut, int id) => sut.GetMasteryLevel(id);
 }

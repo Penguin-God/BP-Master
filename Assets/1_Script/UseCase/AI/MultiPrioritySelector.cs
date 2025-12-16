@@ -17,7 +17,7 @@ public sealed class MultiPrioritySelector : IBanSelector, IPickSelector
             .OrderByDescending(x => SumPickMastery(x))
             .FirstOrDefault();
 
-    int SumPickMastery(PrioritySelector selector) => selector.PickPlan.Sum(id => mastery.GetMastery(id));
+    int SumPickMastery(PrioritySelector selector) => selector.PickPlan.Sum(id => mastery.GetMasteryLevel(id));
 
     public int Pick(HashSet<int> selectableIds) => SelectBuild().Pick(selectableIds);
     public int Ban(HashSet<int> selectableIds) => SelectBuild().Ban(selectableIds);
