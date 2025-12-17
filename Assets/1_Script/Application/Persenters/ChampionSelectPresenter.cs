@@ -3,7 +3,6 @@ public class ChampionSelectPresenter
 {
     readonly GameBanPickStorage storage;
     int selectId = -1;
-    public int SelectId => selectId;
     public ChampionSelectPresenter(GameBanPickStorage storage) => this.storage = storage;
 
     public void SelectChamp(int id) => selectId = id;

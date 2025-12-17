@@ -23,6 +23,7 @@ public class MatchDI : MonoBehaviour
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
 
+        // 로직 추출하기
         var skillController = new SkillUseController(pickSlotFacade.StatusSlots);
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
