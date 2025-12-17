@@ -116,3 +116,16 @@ public class SkillConditionTextBuilder
 
     string BuildTriatText(TraitType traitType) => $"특성이 {new ChampionStatusTextBuilder().BuildTraitText(traitType)}인";
 }
+
+public class SkillAmountTextBuilder
+{
+    public string BuildAmountText(SkillAmountData data) => data.Type switch
+    {
+        AmountType.Value => data.ValueAmount.ToString(),
+        AmountType.Percent => $"{ToPercentInt(data.PercentValue)}%",
+        AmountType.Fix => data.FixValue.ToString(),
+        _ => ""
+    };
+
+    static int ToPercentInt(float value) => (int)System.MathF.Round(value * 100f);
+}

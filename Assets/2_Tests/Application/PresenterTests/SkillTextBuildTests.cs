@@ -17,6 +17,20 @@ public class SkillTextBuildTests
         Assert.AreEqual("아군 전체 공격력 50% 증가", GetTraitText(AmountType.Percent));
     }
 
+    [Test]
+    [TestCase(AmountType.Value, "100")]
+    [TestCase(AmountType.Percent, "50%")]
+    [TestCase(AmountType.Fix, "120")]
+    public void 값_타입에_따라_텍스트반환(AmountType amountType, string expected)
+    {
+        SkillAmountData data = new SkillAmountData(amountType, 100, 0.5f, 120);
+        var sut = new SkillAmountTextBuilder();
+
+        string result = sut.BuildAmountText(data);
+
+        Assert.AreEqual(expected, result);
+    }
+
     //[Test]
     //public void 스킬_텍스트는_조건_타겟_액션의_조합()
     //{
