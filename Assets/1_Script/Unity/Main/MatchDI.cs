@@ -17,16 +17,13 @@ public class MatchDI : MonoBehaviour
         masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
         var storage = new GameBanPickStorage(champManager.AllId);
 
-        // 이런 생성 로직들을 처리해주는 어댑터
-        IPhaseEntry blue = playerTeam == Team.Blue ? championSelector : ai_main;
-        IPhaseEntry red = playerTeam == Team.Red ? championSelector : ai_main;
         var phaseEventDispatcher = new PhaseEventDispatcher();
-        PhaseFlowOrchestrator phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
+        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
 
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
 
-        skillController = new SkillUseController(pickSlotFacade.StatusSlots);
+        var skillController = new SkillUseController(pickSlotFacade.StatusSlots);
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 
@@ -37,7 +34,13 @@ public class MatchDI : MonoBehaviour
         phaseManager.Start();
     }
 
-    SkillUseController skillController;
+    PhaseFlowOrchestrator CreatePhaseOrchestrator(PhaseEventDispatcher phaseEventDispatcher, IPhaseEntry player, IPhaseEntry ai, Team playerTeam)
+    {
+        IPhaseEntry blue = playerTeam == Team.Blue ? player : ai;
+        IPhaseEntry red = playerTeam == Team.Red ? player : ai;
+        return new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
+    }
+
     void OnPick(SlotData slotData, int id)
     {
         var traitFactory = new TraitFactory(matchConfig.TraitConfig, pickSlotFacade.StatusSlots);
