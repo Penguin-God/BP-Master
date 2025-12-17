@@ -35,7 +35,7 @@ public class TraitDataConfig
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
 
     public SkillData CreateTraitData() => new SkillData(traitType, skillAmount.ToData(), Condition, Rule);
-    public TraitUI_Data CreateUI_Data() => new TraitUI_Data(CreateTraitData());
+    public SkillUI_Data CreateUI_Data() => new SkillUI_Data(CreateTraitData());
 }
 
 public readonly struct ChampionModel
@@ -71,7 +71,7 @@ public class ChampionSO : ScriptableObject
     public Skill Skill => new Skill(skillDatas.Select(x => x.CreateTraitData()));
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
     public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData, traitType);
-    public IEnumerable<TraitUI_Data> CreateSkill_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
+    public IEnumerable<SkillUI_Data> CreateSkill_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
 
     [Header("특성")]
     [SerializeField] TraitType traitType;

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public readonly struct TraitUI_Data
+public readonly struct SkillUI_Data
 {
-    public readonly SkillType TraitType;
+    public readonly SkillType ActionType;
     public readonly SkillAmountData AmountData;
     
     public readonly SkillConditionData Condition;
@@ -13,9 +13,9 @@ public readonly struct TraitUI_Data
     public readonly Side TargetSide => Rule.TargetSide;
     public readonly TargetRange Range => Rule.TargetRange;
 
-    public TraitUI_Data(SkillData skillData)
+    public SkillUI_Data(SkillData skillData)
     {
-        TraitType = skillData.TraitType;
+        ActionType = skillData.TraitType;
         AmountData = skillData.AmountData;
         Condition = skillData.ConditionData;
         Rule = skillData.TargetRule;
@@ -25,15 +25,22 @@ public readonly struct TraitUI_Data
 public class SkillTextBuilder
 {
     readonly SkillConditionTextBuilder ConditionTextBuilder = new SkillConditionTextBuilder();
-    public string BuildSkillText(IEnumerable<TraitUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
+    readonly SkillTextConverter skillTextConverter;
 
-    public string BuildSkillText(TraitUI_Data traitData)
+    public SkillTextBuilder(SkillTextConverter skillTextConverter)
+    {
+        this.skillTextConverter = skillTextConverter;
+    }
+
+    public string BuildSkillText(IEnumerable<SkillUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
+
+    public string BuildSkillText(SkillUI_Data traitData)
     {
         var conditoin = ConditionTextBuilder.BuildConditionText(traitData.Condition);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(traitData.TargetSide, traitData.Range);
-        var action = BuildActionText(traitData.TraitType, traitData.AmountData);
+        var action = skillTextConverter.BuildActionText(traitData.ActionType, traitData.AmountData);
 
         // 조건이 있으면 "조건 + 공백"을 앞에 붙이고, 없으면 그대로
         return $"{conditoin}{space}{target} {action}";

@@ -3,8 +3,8 @@ using static TestHelper;
 
 public class SkillTextBuildTests
 {
-    TraitUI_Data CreateData(SkillType traitType, int amount, SkillConditionData condition, SkillTargetRule rule) => new TraitUI_Data(new SkillData(traitType, new SkillAmountData(AmountType.Value, 0, 0, 0), condition, rule));
-    TraitUI_Data CreateData(SkillType traitType, SkillAmountData amountData, SkillConditionData condition, SkillTargetRule rule) => new TraitUI_Data(new SkillData(traitType, amountData, condition, rule));
+    SkillUI_Data CreateData(SkillType traitType, int amount, SkillConditionData condition, SkillTargetRule rule) => new SkillUI_Data(new SkillData(traitType, new SkillAmountData(AmountType.Value, 0, 0, 0), condition, rule));
+    SkillUI_Data CreateData(SkillType traitType, SkillAmountData amountData, SkillConditionData condition, SkillTargetRule rule) => new SkillUI_Data(new SkillData(traitType, amountData, condition, rule));
     [Test]
     public void 특성_액션에_맞는_텍스트_생성()
     {
