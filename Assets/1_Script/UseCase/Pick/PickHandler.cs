@@ -1,11 +1,26 @@
 
 public class PickHandler
 {
-    var champion = champManager.GetChampionData(id).CreateChampion();
-    pickSlotFacade.Add(slotData.Team, champion);
-        new TraitFactory(matchConfig.TraitConfig, pickSlotFacade.StatusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
+    readonly ChampionCatalog championCatalog;
+    readonly PickSlotFacade pickSlotFacade;
+    readonly TraitFactory traitFactory;
+    readonly MasteryCollection masteryCollection;
 
-    MasteryCollection masteryCollection = masteryGenerator.GetTeamMasteryManager(slotData.Team);
+    public PickHandler(ChampionCatalog championCatalog, PickSlotFacade pickSlotFacade, TraitFactory traitFactory, MasteryCollection masteryCollection)
+    {
+        this.championCatalog = championCatalog;
+        this.pickSlotFacade = pickSlotFacade;
+        this.traitFactory = traitFactory;
+        this.masteryCollection = masteryCollection;
+    }
+
+    public void Pick(Team team, int id)
+    {
+        var champion = championCatalog.GetChampion(id);
+        pickSlotFacade.Add(team, champion);
+        traitFactory.Create(team, champion.Status.TraitType).Do();
+
         if (masteryCollection.HasMastery(id))
             new MasteryApplier().ApplyStatChange(champion.Status, masteryCollection.GetMasteryLevel(id));
+    }
 }
