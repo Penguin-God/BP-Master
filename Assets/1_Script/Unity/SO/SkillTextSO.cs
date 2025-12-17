@@ -14,9 +14,15 @@ public class SkillTextSO : ScriptableObject
     [SerializeField] string increaseText;
     [SerializeField] string decreaseText;
     [SerializeField] string fixText;
+
+    [SerializeField] string valueKey;
+    [SerializeField] string actionKey;
+
     [SerializeField] SkillActionTextField[] skillActionTextFields;
 
-    public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text), new SkillAmountTextBuilder(new AmountChangeTextModel(increaseText, decreaseText, fixText)));
+
+    SkillAmountTextBuilder CreateAmountBuilder() => new SkillAmountTextBuilder(new AmountChangeTextModel(increaseText, decreaseText, fixText));
+    public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text), CreateAmountBuilder(), new SkillConvertKeyRecord(valueKey, actionKey));
 
     public SkillTextBuilder CreateSkillTextBuilder() => new SkillTextBuilder(CreateSkillConverter());
 }

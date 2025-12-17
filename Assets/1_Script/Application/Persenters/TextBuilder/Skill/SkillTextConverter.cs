@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 
+public record SkillConvertKeyRecord(string Value, string Action);
+
 public class SkillTextConverter
 {
     readonly IReadOnlyDictionary<SkillType, string> textBySkill;
     readonly SkillAmountTextBuilder skillAmountTextBuilder;
-    public SkillTextConverter(IReadOnlyDictionary<SkillType, string> textBySkill, SkillAmountTextBuilder skillAmountTextBuilder)
+    readonly SkillConvertKeyRecord skillConvertKey;
+    public SkillTextConverter(IReadOnlyDictionary<SkillType, string> textBySkill, SkillAmountTextBuilder skillAmountTextBuilder, SkillConvertKeyRecord skillConvertKey)
     {
         this.textBySkill = textBySkill;
         this.skillAmountTextBuilder = skillAmountTextBuilder;
+        this.skillConvertKey = skillConvertKey;
     }
 
     public string BuildActionText(SkillType skillType, SkillAmountData data)
@@ -15,10 +19,10 @@ public class SkillTextConverter
         if (textBySkill.TryGetValue(skillType, out var template) == false) return "";
 
         string valueText = skillAmountTextBuilder.BuildAmountText(data).Replace("-", string.Empty);
-        string changeText = skillAmountTextBuilder.BuildChangeText(data);
+        string actionText = skillAmountTextBuilder.BuildChangeText(data);
 
         return template
-            .Replace("{Value}", valueText)
-            .Replace("{Change}", changeText);
+            .Replace(skillConvertKey.Value, valueText)
+            .Replace(skillConvertKey.Action, actionText);
     }
 }
