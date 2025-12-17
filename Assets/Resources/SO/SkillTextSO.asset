@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e0592796735714f90af387ce0480f3, type: 3}
+  m_Name: SkillTextSO
+  m_EditorClassIdentifier: 
+  skillActionTextFields:
+  - Type: 1
+    Text: "\uACF5\uACA9\uB825 {Value} {Change}"
+  - Type: 3
+    Text: 
+  - Type: 0
+    Text: 
+  - Type: 0
+    Text: 
+  - Type: 0
+    Text: 
+  - Type: 0
+    Text: 
