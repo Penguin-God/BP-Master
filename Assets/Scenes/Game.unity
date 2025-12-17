@@ -5611,6 +5611,7 @@ MonoBehaviour:
   nameText: {fileID: 741026030}
   statView: {fileID: 1640189474}
   skillText: {fileID: 1194289692}
+  skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
 --- !u!114 &1640189474
 MonoBehaviour:
   m_ObjectHideFlags: 0

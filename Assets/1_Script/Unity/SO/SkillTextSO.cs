@@ -11,7 +11,12 @@ public class SkillActionTextField
 [CreateAssetMenu(fileName = "SkillTextSO", menuName = "BP Master/SkillTextSO")]
 public class SkillTextSO : ScriptableObject
 {
+    [SerializeField] string increaseText;
+    [SerializeField] string decreaseText;
+    [SerializeField] string fixText;
     [SerializeField] SkillActionTextField[] skillActionTextFields;
 
-    // public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text));
+    public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text), new SkillAmountTextBuilder(new AmountChangeTextModel(increaseText, decreaseText, fixText)));
+
+    public SkillTextBuilder CreateSkillTextBuilder() => new SkillTextBuilder(CreateSkillConverter());
 }

@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e0592796735714f90af387ce0480f3, type: 3}
   m_Name: SkillTextSO
   m_EditorClassIdentifier: 
+  increaseText: "\uC99D\uAC00"
+  decreaseText: "\uAC10\uC18C"
+  fixText: "\uC73C\uB85C \uACE0"
   skillActionTextFields:
   - Type: 1
     Text: "\uACF5\uACA9\uB825 {Value} {Change}"
   - Type: 3
-    Text: 
-  - Type: 0
-    Text: 
-  - Type: 0
-    Text: 
-  - Type: 0
-    Text: 
-  - Type: 0
-    Text: 
+    Text: "\uBC29\uC5B4\uB825 {Value} {Change}"
+  - Type: 5
+    Text: "\uC18D\uB3C4 {Value} {Change}"
+  - Type: 7
+    Text: "\uD2B9\uC131\uC73C\uB85C \uC778\uD55C \uC2A4\uD0EF \uBCC0\uD654 \uBB34\uC2DC"
+  - Type: 10
+    Text: "\uC99D\uAC00\uC728 {Value} {Change}"
+  - Type: 9
+    Text: "\uC790\uC2E0\uC758 \uACF5\uACA9, \uBC29\uC5B4 {Value}\uB9CC\uD07C \uC544\uAD70
+      \uC2A4\uD0EF \uC99D\uAC00"
+  - Type: 8
+    Text: "\uBC29\uC5B4\uB825 {Value} \uD761\uC218"

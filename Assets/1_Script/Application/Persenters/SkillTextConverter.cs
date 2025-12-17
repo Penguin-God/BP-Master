@@ -14,7 +14,7 @@ public class SkillTextConverter
     {
         if (textBySkill.TryGetValue(skillType, out var template) == false) return "";
 
-        string valueText = skillAmountTextBuilder.BuildAmountText(data);
+        string valueText = skillAmountTextBuilder.BuildAmountText(data).Replace("-", string.Empty);
         string changeText = skillAmountTextBuilder.BuildChangeText(data);
 
         return template
