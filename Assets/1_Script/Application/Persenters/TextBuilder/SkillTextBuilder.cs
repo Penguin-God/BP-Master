@@ -124,8 +124,29 @@ public class SkillConditionTextBuilder
     string BuildTriatText(TraitType traitType) => $"특성이 {new ChampionStatusTextBuilder().BuildTraitText(traitType)}인";
 }
 
+public readonly struct AmountChangeTextModel
+{
+    public readonly string Increased;
+    public readonly string Decreased;
+    public readonly string Fix;
+
+    public AmountChangeTextModel(string increased, string decreased, string fix)
+    {
+        Increased = increased;
+        Decreased = decreased;
+        Fix = fix;
+    }
+}
+
 public class SkillAmountTextBuilder
 {
+    readonly AmountChangeTextModel _changeText;
+
+    public SkillAmountTextBuilder(AmountChangeTextModel changeText)
+    {
+        _changeText = changeText;
+    }
+
     public string BuildAmountText(SkillAmountData data) => data.Type switch
     {
         AmountType.Value => data.ValueAmount.ToString(),
@@ -134,5 +155,13 @@ public class SkillAmountTextBuilder
         _ => ""
     };
 
-    static int ToPercentInt(float value) => (int)System.MathF.Round(value * 100f);
+    public string BuildChangeText(SkillAmountData data) => data.Type switch
+    {
+        AmountType.Fix => _changeText.Fix,
+        AmountType.Value => data.ValueAmount < 0 ? _changeText.Decreased : _changeText.Increased,
+        AmountType.Percent => data.PercentValue < 0 ? _changeText.Decreased : _changeText.Increased,
+        _ => ""
+    };
+
+    int ToPercentInt(float value) => (int)System.MathF.Round(value * 100f);
 }

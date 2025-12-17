@@ -13,5 +13,5 @@ public class SkillTextSO : ScriptableObject
 {
     [SerializeField] SkillActionTextField[] skillActionTextFields;
 
-    public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text));
+    // public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text));
 }

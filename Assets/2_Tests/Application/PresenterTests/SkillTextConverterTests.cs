@@ -9,7 +9,7 @@ public class SkillTextConverterTests
         Dictionary<SkillType, string> textBySkill = new Dictionary<SkillType, string>();
         textBySkill.Add(SkillType.AttackChanger, "공격력 {Value} {Change}");
         SkillAmountData data = new SkillAmountData(AmountType.Value, value: 100, 0, 0);
-        var sut = new SkillTextConverter(textBySkill);
+        var sut = new SkillTextConverter(textBySkill, new SkillAmountTextBuilder(new AmountChangeTextModel("증가", "감소", "고정")));
 
         string result = sut.BuildActionText(SkillType.AttackChanger, data);
 
