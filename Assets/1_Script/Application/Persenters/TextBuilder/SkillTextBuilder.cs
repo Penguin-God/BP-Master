@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,28 +44,6 @@ public class SkillTextBuilder
         // 조건이 있으면 "조건 + 공백"을 앞에 붙이고, 없으면 그대로
         return $"{conditoin}{space}{target} {action}";
     }
-
-    string BuildActionText(SkillType skillType, SkillAmountData skillAmountData) => (skillType) switch
-    {
-        SkillType.AttackChanger => $"공격력 {GetChangeLabel(skillAmountData)}",
-        SkillType.DefenseChanger => $"방어력 {GetChangeLabel(skillAmountData)}",
-        SkillType.SpeedChanger => $"속도 {GetChangeLabel(skillAmountData)}",
-        SkillType.TraitExcluder => $"스탯은 특성으로 인한 변화를 무시",
-        SkillType.AmplifyChanger => $"증가율 {skillAmountData.PercentValue} 증가",
-        SkillType.DefenseAbsorber => $"방어를 {GetPercent(skillAmountData.PercentValue)}만큼 흡수",
-        SkillType.Resonance => $"자신의 공격, 방어 {GetPercent(skillAmountData.PercentValue)}만큼 아군 스탯 증가",
-        _ => ""
-    };
-
-    string GetChangeLabel(SkillAmountData amountData) => (amountData.Type) switch
-    {
-        AmountType.Value => $"{MathF.Abs(amountData.ValueAmount)} {GetChangeLabel(amountData.ValueAmount)}",
-        AmountType.Percent => $"{GetPercent(amountData.PercentValue)} {GetChangeLabel((int)MathF.Round(amountData.PercentValue * 100))}",
-        AmountType.Fix => $"{amountData.FixValue}으로 고정",
-        _ => ""
-    };
-    string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
-    string GetPercent(float value) => $"{MathF.Abs((int)MathF.Round(value * 100))}%";
 
     string BuildTargetRuleText(Side side, TargetRange range) => range == TargetRange.All ? $"{SideText(side)} 전체" : $"{SideText(side)} {CountText(range)}의";
     string SideText(Side side) => side switch
