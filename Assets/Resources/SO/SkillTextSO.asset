@@ -15,17 +15,19 @@ MonoBehaviour:
   increaseText: "\uC99D\uAC00"
   decreaseText: "\uAC10\uC18C"
   fixText: "\uC73C\uB85C \uACE0"
+  valueKey: '{Value}'
+  actionKey: '{Action}'
   skillActionTextFields:
   - Type: 1
-    Text: "\uACF5\uACA9\uB825 {Value} {Change}"
+    Text: "\uACF5\uACA9\uB825 {Value} {Action}"
   - Type: 3
-    Text: "\uBC29\uC5B4\uB825 {Value} {Change}"
+    Text: "\uBC29\uC5B4\uB825 {Value} {Action}"
   - Type: 5
-    Text: "\uC18D\uB3C4 {Value} {Change}"
+    Text: "\uC18D\uB3C4 {Value} {Action}"
   - Type: 7
     Text: "\uD2B9\uC131\uC73C\uB85C \uC778\uD55C \uC2A4\uD0EF \uBCC0\uD654 \uBB34\uC2DC"
   - Type: 10
-    Text: "\uC99D\uAC00\uC728 {Value} {Change}"
+    Text: "\uC99D\uAC00\uC728 {Value} {Action}"
   - Type: 9
     Text: "\uC790\uC2E0\uC758 \uACF5\uACA9, \uBC29\uC5B4 {Value}\uB9CC\uD07C \uC544\uAD70
       \uC2A4\uD0EF \uC99D\uAC00"
