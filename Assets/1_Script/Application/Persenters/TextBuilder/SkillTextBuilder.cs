@@ -61,21 +61,21 @@ public class SkillTextBuilder
     string GetChangeLabel(int amount) => amount > 0 ? "증가" : "감소";
     string GetPercent(float value) => $"{MathF.Abs((int)MathF.Round(value * 100))}%";
 
-    string BuildTargetRuleText(Side side, TargetRange range) => (side, range) switch
+    string BuildTargetRuleText(Side side, TargetRange range) => range == TargetRange.All ? $"{SideText(side)} 전체" : $"{SideText(side)} {CountText(range)}의";
+    string SideText(Side side) => side switch
     {
-        (Side.Self, TargetRange.Single) => "선택한 아군 하나의",
-        (Side.Self, TargetRange.Double) => "선택한 아군 둘의",
-        (Side.Self, TargetRange.Triple) => "선택한 아군 셋의",
-        (Side.Self, TargetRange.All) => "아군 전체",
-        (Side.Opponent, TargetRange.Single) => "선택한 적군 하나의",
-        (Side.Opponent, TargetRange.Double) => "선택한 적군 둘의",
-        (Side.Opponent, TargetRange.Triple) => "선택한 적군 셋의",
-        (Side.Opponent, TargetRange.All) => "적군 전체",
-        (Side.All, TargetRange.All) => "양팀 전체",
-        (Side.All, TargetRange.Single) => "선택한 하나의",
-        (Side.All, TargetRange.Double) => "선택한 둘의",
-        (Side.All, TargetRange.Triple) => "선택한 셋의",
+        Side.Self => "아군",
+        Side.Opponent => "적군",
+        Side.All => "양팀",
         _ => "대상 없음"
+    };
+
+    string CountText(TargetRange range) => range switch
+    {
+        TargetRange.Single => "하나",
+        TargetRange.Double => "둘",
+        TargetRange.Triple => "셋",
+        _ => string.Empty
     };
 }
 
