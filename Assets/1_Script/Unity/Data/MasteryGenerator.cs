@@ -13,7 +13,7 @@ public class MasteryGenerator : MonoBehaviour
 
     public MasteryCollection GetTeamMasteryManager(Team team) => new MasteryCollection(GetTeamMasteries(team));
 
-    public void CreateRandomRoster(int teamSize)
+    public void SettingRandomMastery(int teamSize)
     {
         var drawer = new MasteryDrawer(championRepository.AllId);
         Blues = drawer.DrawRandoms(masteryLevels);

@@ -49,7 +49,6 @@ public class MatchUI_Controller : MonoBehaviour
         skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
-        eventDispatcher.OnGameProgress += (flow) => print(flow.Phase);
     }
 
     void SkillUI_Init(SkillUseController skillController, SlotStorageManager slotStorageManager)

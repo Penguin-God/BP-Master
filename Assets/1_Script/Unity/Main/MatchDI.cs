@@ -14,8 +14,7 @@ public class MatchDI : MonoBehaviour
 
     public void GameStart(Team playerTeam)
     {
-        masteryGenerator.CreateRandomRoster(matchConfig.TeamSize);
-
+        masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
         var storage = new GameBanPickStorage(champManager.AllId);
 
         // 이런 생성 로직들을 처리해주는 어댑터
@@ -41,13 +40,9 @@ public class MatchDI : MonoBehaviour
     SkillUseController skillController;
     void OnPick(SlotData slotData, int id)
     {
-        var champion = champManager.GetChampionData(id).CreateChampion();
-        pickSlotFacade.Add(slotData.Team, champion);
-        new TraitFactory(matchConfig.TraitConfig, pickSlotFacade.StatusSlots).Create(slotData.Team, champion.Status.TraitType).Do();
-
-        MasteryCollection masteryCollection = masteryGenerator.GetTeamMasteryManager(slotData.Team);
-        if (masteryCollection.HasMastery(id))
-            new MasteryApplier().ApplyStatChange(champion.Status, masteryCollection.GetMasteryLevel(id));
+        var traitFactory = new TraitFactory(matchConfig.TraitConfig, pickSlotFacade.StatusSlots);
+        var pickHandler = new PickHandler(champManager.GetCatalog(), pickSlotFacade, traitFactory, masteryGenerator.GetTeamMasteryManager(slotData.Team));
+        pickHandler.Pick(slotData.Team, id);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
