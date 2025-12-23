@@ -25,4 +25,6 @@ public class TooltipView : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+
 }

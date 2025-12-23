@@ -2415,17 +2415,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6398811513567092281, guid: 8bfe2be65cc8e12429ac17280c64d491, type: 3}
   m_PrefabInstance: {fileID: 765582497}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &765582499 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8857027800176845249, guid: 8bfe2be65cc8e12429ac17280c64d491, type: 3}
-  m_PrefabInstance: {fileID: 765582497}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43ae09737caff6e47ad5646f0dec2683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: App::TooltipView
 --- !u!1001 &782294407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4922,7 +4911,6 @@ GameObject:
   - component: {fileID: 1277024994}
   - component: {fileID: 1277024993}
   - component: {fileID: 1277024992}
-  - component: {fileID: 1277024995}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5032,21 +5020,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277024990}
   m_CullTransparentMesh: 1
---- !u!114 &1277024995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277024990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02368b1e94e1b2542a131a2037fec9bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: App::TooltipTrigger
-  tooltip: {fileID: 765582499}
-  tooltipSize: {x: 300, y: 100}
-  positionOffset: {x: 50, y: 50, z: 0}
 --- !u!1 &1366672692
 GameObject:
   m_ObjectHideFlags: 0
