@@ -9584,7 +9584,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::MasteryTooltipTrigger
   tooltip: {fileID: 765582499}
   tooltipSize: {x: 300, y: 700}
-  positionOffset: {x: 350, y: -230, z: 0}
+  direction: 3
+  spacing: 10
   championRepository: {fileID: 1420292359}
   masteryData: {fileID: 1410148730}
   team: 0
@@ -9647,7 +9648,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::MasteryTooltipTrigger
   tooltip: {fileID: 765582499}
   tooltipSize: {x: 300, y: 700}
-  positionOffset: {x: -350, y: -230, z: 0}
+  direction: 2
+  spacing: 10
   championRepository: {fileID: 1420292359}
   masteryData: {fileID: 1410148730}
   team: 1
