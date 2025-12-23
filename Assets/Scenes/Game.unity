@@ -2415,6 +2415,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6398811513567092281, guid: 8bfe2be65cc8e12429ac17280c64d491, type: 3}
   m_PrefabInstance: {fileID: 765582497}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &765582499 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8857027800176845249, guid: 8bfe2be65cc8e12429ac17280c64d491, type: 3}
+  m_PrefabInstance: {fileID: 765582497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ae09737caff6e47ad5646f0dec2683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::TooltipView
 --- !u!1001 &782294407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8513,6 +8524,7 @@ GameObject:
   - component: {fileID: 8207948910857500560}
   - component: {fileID: 4782385026975337732}
   - component: {fileID: 8207948910857500561}
+  - component: {fileID: 8207948910857500562}
   m_Layer: 0
   m_Name: RedScore
   m_TagString: Untagged
@@ -8533,6 +8545,7 @@ GameObject:
   - component: {fileID: 8207948910718123626}
   - component: {fileID: 4782385026905687294}
   - component: {fileID: 8207948910718123627}
+  - component: {fileID: 8207948910718123628}
   m_Layer: 0
   m_Name: BlueScore
   m_TagString: Untagged
@@ -9557,6 +9570,24 @@ MonoBehaviour:
   attackText: {fileID: 8338956856838379574}
   defenseText: {fileID: 8182956778805697826}
   speedText: {fileID: 3938318211044108050}
+--- !u!114 &8207948910718123628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294972648652065465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f221fd008bac34b81fc9f6454c8225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::MasteryTooltipTrigger
+  tooltip: {fileID: 765582499}
+  tooltipSize: {x: 300, y: 700}
+  positionOffset: {x: 350, y: -230, z: 0}
+  championRepository: {fileID: 1420292359}
+  masteryData: {fileID: 1410148730}
+  team: 0
 --- !u!114 &8207948910857500560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9602,6 +9633,24 @@ MonoBehaviour:
   attackText: {fileID: 8338956857002922444}
   defenseText: {fileID: 8182956778700002520}
   speedText: {fileID: 3938318210920820456}
+--- !u!114 &8207948910857500562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294972648557609795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f221fd008bac34b81fc9f6454c8225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::MasteryTooltipTrigger
+  tooltip: {fileID: 765582499}
+  tooltipSize: {x: 300, y: 700}
+  positionOffset: {x: -350, y: -230, z: 0}
+  championRepository: {fileID: 1420292359}
+  masteryData: {fileID: 1410148730}
+  team: 1
 --- !u!114 &8338956856838379574
 MonoBehaviour:
   m_ObjectHideFlags: 0
