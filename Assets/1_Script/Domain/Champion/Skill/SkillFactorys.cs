@@ -46,22 +46,7 @@ public static class SkillCondtionFactory
 
 
 public enum AmountType { None, Value, Percent, Fix }
-
-public readonly struct SkillAmountData
-{
-    public readonly AmountType Type;
-    public readonly int ValueAmount;
-    public readonly float PercentValue;
-    public readonly int FixValue;
-
-    public SkillAmountData(AmountType amountType, int value, float percent, int fix)
-    {
-        Type = amountType;
-        ValueAmount = value;
-        PercentValue = percent;
-        FixValue = fix;
-    }
-}
+public record SkillAmountData(AmountType Type, int ValueAmount, float PercentValue, int FixValue);
 
 
 public static class SkillAmountCalculatorFactory
