@@ -14,8 +14,6 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] SkillButtonView skillButtonView;
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] BanView banView;
-    [SerializeField] MasteryView masteryView;
-    [SerializeField] GameObject skillUseLog;
 
     MasteryButtonHighlighter masteryHighlighter;
     public void Awake()
@@ -28,7 +26,6 @@ public class MatchUI_Controller : MonoBehaviour
     {
         team = playerTeam;
         slotViews.InitSlotView(statusSlots);
-        masteryView.ViewMastery(championRepository);
         championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
 
         masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
@@ -53,9 +50,6 @@ public class MatchUI_Controller : MonoBehaviour
 
     void SkillUI_Init(SkillUseController skillController, SlotStorageManager slotStorageManager)
     {
-        skillUseLog.SetActive(true);
-        masteryView.gameObject.SetActive(false);
-
         skillUseView.Init(slotStorageManager.SkillSlots, skillController);
 
         gameFlowView.Init(slotStorageManager.ChampionDataSlots);
@@ -74,7 +68,7 @@ public class MatchUI_Controller : MonoBehaviour
     public void Done(MatchResult result)
     {
         championDrawer.gameObject.SetActive(false);
-        scores.SetActive(true);
+        Instantiate(scores);
         textBlue.text = new ScoreTextBuilder().BuildText(result.BlueInfo);
         textRed.text = new ScoreTextBuilder().BuildText(result.RedInfo);
         print($"승자 : {result.Winner}");
