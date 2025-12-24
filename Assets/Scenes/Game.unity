@@ -1599,8 +1599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0f75355c7386a40aca3048f8c73309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusData: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
-  bonusInfo: {fileID: 0}
   blueScoreView: {fileID: 8207948910718123627}
   redScoreView: {fileID: 8207948910857500561}
 --- !u!1001 &723248606
@@ -3393,6 +3391,7 @@ GameObject:
   - component: {fileID: 1092727264}
   - component: {fileID: 1092727263}
   - component: {fileID: 1092727262}
+  - component: {fileID: 1092727265}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -3502,6 +3501,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092727260}
   m_CullTransparentMesh: 1
+--- !u!114 &1092727265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092727260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957498d8108009a418aa3ca92c9b4e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::TraitTooltipTrigger
+  tooltip: {fileID: 765582499}
+  tooltipSize: {x: 700, y: 500}
+  direction: 1
+  spacing: 10
+  matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
 --- !u!1 &1101418752
 GameObject:
   m_ObjectHideFlags: 0
@@ -7236,10 +7252,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: "\uD2B9\uC131"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6be753b50a214cf4a858731bd5a25fe2, type: 2}
+  m_sharedMaterial: {fileID: -6326918841155640024, guid: 6be753b50a214cf4a858731bd5a25fe2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
