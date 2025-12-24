@@ -63,14 +63,9 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     [SerializeField] GameObject scores;
-    [SerializeField] TextMeshProUGUI textBlue;
-    [SerializeField] TextMeshProUGUI textRed;
     public void Done(MatchResult result)
     {
         championDrawer.gameObject.SetActive(false);
-        Instantiate(scores);
-        textBlue.text = new ScoreTextBuilder().BuildText(result.BlueInfo);
-        textRed.text = new ScoreTextBuilder().BuildText(result.RedInfo);
-        print($"승자 : {result.Winner}");
+        Instantiate(scores, transform).GetComponent<MatchResultView>().ShowResult(result);
     }
 }
