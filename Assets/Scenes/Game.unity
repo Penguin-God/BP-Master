@@ -4575,8 +4575,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ban: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
+  ban2: {fileID: 11400000, guid: cce5390d5c3bf0c4b8f3404478cac7f4, type: 2}
   pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
-  trait: {fileID: 11400000, guid: d038f885ef77efe498ecb1f882a1b41e, type: 2}
+  pick2: {fileID: 11400000, guid: 0c7b4cea28ec90b45a505456b330adbb, type: 2}
 --- !u!1001 &1424524783
 PrefabInstance:
   m_ObjectHideFlags: 0

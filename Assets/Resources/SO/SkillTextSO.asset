@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   increaseText: "\uC99D\uAC00"
   decreaseText: "\uAC10\uC18C"
-  fixText: "\uC73C\uB85C \uACE0"
+  fixText: "\uC73C\uB85C \uACE0\uC815"
   valueKey: '{Value}'
   actionKey: '{Action}'
   skillActionTextFields:

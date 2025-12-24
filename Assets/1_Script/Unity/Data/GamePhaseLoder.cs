@@ -3,8 +3,9 @@ using UnityEngine;
 public class GamePhaseLoder : MonoBehaviour
 {
     [SerializeField] DraftTurnSO ban;
+    [SerializeField] DraftTurnSO ban2;
     [SerializeField] DraftTurnSO pick;
-    [SerializeField] DraftTurnSO trait;
+    [SerializeField] DraftTurnSO pick2;
 
     public PhaseData[] LoadPhase()
     {
@@ -12,7 +13,8 @@ public class GamePhaseLoder : MonoBehaviour
         {
             new PhaseData(GamePhase.Ban, new Phase(ban.Turns)),
             new PhaseData(GamePhase.Pick, new Phase(pick.Turns)),
-            // new PhaseData(GamePhase.Skill, new Phase(trait.Turns)),
+            new PhaseData(GamePhase.Ban, new Phase(ban2.Turns)),
+            new PhaseData(GamePhase.Pick, new Phase(pick2.Turns)),
         };
         return phase;
     }

@@ -38,6 +38,6 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         championFocusView.ClearDisplay();
     }
 
-    public void EnterBan() {}
+    public void EnterBan() => ButtonUtil.ActiveButton(nailDownBtn);
     public void EnterPick() => ButtonUtil.ActiveButton(nailDownBtn);
 }
