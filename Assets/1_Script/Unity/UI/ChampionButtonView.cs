@@ -19,7 +19,11 @@ public class ChampionButtonView : MonoBehaviour
     public void CreateButtons() => buttons = new ChampionButtonCreator().DrawChampionButtons(content, championManager.AllChampion, championBtn);
 
     public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
-    public void InActiveButton(int id) => ButtonUtil.InActiveButton(GetButton(id));
+    public void InActiveButton(int id)
+    {
+        ButtonUtil.InActiveButton(GetButton(id));
+        GetButton(id).GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
+    }
     public void AddEvent(UnityAction<ChampionIdentify> action)
     {
         foreach (var btn in buttons)
