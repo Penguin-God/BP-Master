@@ -11,7 +11,7 @@ public class PickHandlerTests
         var catalog = new ChampionCatalog(new Champion[] { champion });
         var masteries = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(CHAMP_ID, 10) });
         var slotFacade = new PickSlotFacade();
-        var traitFactory = new TraitFactory(new TraitConfig(0, 0, ampliRate: 0.1f, 0), slotFacade.StatusSlots);
+        var traitFactory = new TraitFactory(new TraitConfig(0, 0, AmpilyRate: 0.1f, 0), slotFacade.StatusSlots);
 
         var sut = new PickHandler(catalog, slotFacade, traitFactory, masteries);
 

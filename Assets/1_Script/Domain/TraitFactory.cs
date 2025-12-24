@@ -1,18 +1,4 @@
-public readonly struct TraitConfig
-{
-    public readonly int ChargeAttack;
-    public readonly float GuardBonusRate;
-    public readonly float AmpilyRate;
-    public readonly float BreakRate;
-
-    public TraitConfig(int chargeAttack, float guardBonusRate, float ampliRate, float breakRate)
-    {
-        this.ChargeAttack = chargeAttack;
-        this.GuardBonusRate = guardBonusRate;
-        AmpilyRate = ampliRate;
-        BreakRate = breakRate;
-    }
-}
+public record TraitConfig(int ChargeAttack, float GuardBonusRate, float AmpilyRate, float BreakRate);
 
 public class TraitFactory
 {
