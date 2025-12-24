@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MasteryTooltipTrigger : TooltipTrigger
 {
-    [SerializeField] ChampionRepository championRepository;  
+    [SerializeField] ChampionRepository championRepository;
     [SerializeField] MasteryGenerator masteryData;
     [SerializeField] Team team;
 

@@ -24,7 +24,7 @@ public abstract class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoi
     }
 
     // 좌표 계산 핵심 로직 (피벗/앵커 무시 버전)
-    private Vector2 CalculatePosition()
+    Vector2 CalculatePosition()
     {
         // 1. 코너 좌표 가져오기
         Vector3[] corners = new Vector3[4];
