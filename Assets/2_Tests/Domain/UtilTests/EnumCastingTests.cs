@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System;
-using System.Linq;
 
 public class EnumCastingTests
 {
@@ -9,13 +8,6 @@ public class EnumCastingTests
     {
         Assert.AreEqual(Team.Blue, EnumCaster.GetTargetTeam(Team.Blue, Side.Self));
         Assert.AreEqual(Team.Red, EnumCaster.GetTargetTeam(Team.Blue, Side.Opponent));
-    }
-
-
-    public void 페이즈를_선택으로_반환()
-    {
-        Assert.AreEqual(SelectType.Ban, EnumCaster.PhaseToSelect(GamePhase.Ban));
-        Assert.AreEqual(SelectType.Pick, EnumCaster.PhaseToSelect(GamePhase.Pick));
     }
 
     [Test]

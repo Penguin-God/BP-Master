@@ -1,27 +1,13 @@
 using System;
 using System.Collections.Generic;
-
-public readonly struct SelectInfo
-{
-    public readonly Team Team;
-    public readonly SelectType Select;
-    public readonly int Id;
-
-    public SelectInfo(Team team, SelectType select, int id)
-    {
-        Team = team;
-        Select = select;
-        Id = id;
-    }
-}
+using System.Linq;
 
 public enum Team { Blue, Red, All }
-public enum SelectType { Ban, Pick}
 
 public class GameBanPickStorage
 {
     readonly Dictionary<Team, HashSet<int>> banStorage = new();
-    public SlotStorage<int> PickIds { get; set; } = new();
+    public SlotStorage<int> PickIds { get; private set; } = new();
 
     public event Action<Team, int> OnBan;
     public event Action<SlotData, int> OnPick;
@@ -35,26 +21,27 @@ public class GameBanPickStorage
         banStorage.Add(Team.Blue, new());
     }
 
-    public bool CanSelected(int id) => SelectableIds.Contains(id);
+    bool IdIsSelected(int id) => SelectableIds.Contains(id);
 
-    public void SaveSelect(SelectInfo info)
+    readonly IEnumerable<GamePhase> VaildPhases = new GamePhase[] { GamePhase.Ban, GamePhase.Pick };
+    public void SaveSelect(GameFlowData flow, int selectedId)
     {
-        if (CanSelected(info.Id) == false) return;
-        SelectableIds.Remove(info.Id);
+        if (IdIsSelected(selectedId) == false || VaildPhases.Contains(flow.Phase) == false) throw new Exception();
 
-        if (info.Select == SelectType.Ban) Ban(info);
-        else Pick(info);
+        SelectableIds.Remove(selectedId);
+        if (flow.Phase == GamePhase.Ban) Ban(flow.Turn, selectedId);
+        else Pick(flow.Turn, selectedId);
     }
 
-    void Ban(SelectInfo info)
+    void Ban(Team team, int id)
     {
-        banStorage[info.Team].Add(info.Id);
-        OnBan?.Invoke(info.Team, info.Id);
+        banStorage[team].Add(id);
+        OnBan?.Invoke(team, id);
     }
 
-    void Pick(SelectInfo info)
+    void Pick(Team team, int id)
     {
-        PickIds.AddSlot(info.Team, info.Id);
-        OnPick?.Invoke(new SlotData(info.Team, PickIds.GetTeamCount(info.Team) - 1), info.Id);
+        PickIds.AddSlot(team, id);
+        OnPick?.Invoke(new SlotData(team, PickIds.GetTeamCount(team) - 1), id);
     }
 }

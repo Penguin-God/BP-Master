@@ -13,9 +13,7 @@ public class TimeoutHandler
     public void Execute()
     {
         GameFlowData flow = phaseAdvancer.CurrentFlow;
-
-        if (flow.Phase == GamePhase.Pick) storage.SaveSelect(new SelectInfo(flow.Turn, SelectType.Pick, GetRandomSelect()));
-        else if (flow.Phase == GamePhase.Ban) storage.SaveSelect(new SelectInfo(flow.Turn, SelectType.Ban, GetRandomSelect()));
+        storage.SaveSelect(flow, GetRandomSelect());
     }
 
     int GetRandomSelect() => RandomUtil.DrawRandom(storage.SelectableIds);

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static TestHelper;
 
 public class TraitActionTests
 {
@@ -83,5 +84,12 @@ public class TraitActionTests
         sut.Do(target);
 
         Assert.AreEqual(1.5f, target.UpRate);
+    }
+
+    [Test]
+    public void 픽한_아군_스탯_증가()
+    {
+        var storage = CreateStorage(1, 2, 3);
+
     }
 }

@@ -15,13 +15,12 @@ public class AI_BanPickAgent
     }
 
 
-    void Select(Team team, SelectType selectType)
+    void Select(Team team, GamePhase phase, int id)
     {
         if (team != Team) return;
-        if (selectType == SelectType.Ban) storage.SaveSelect(new SelectInfo(Team, selectType, banSelector.Ban(storage.SelectableIds)));
-        else storage.SaveSelect(new SelectInfo(Team, selectType, pickSelector.Pick(storage.SelectableIds)));
+        storage.SaveSelect(new GameFlowData(phase, Team), id);
     }
 
-    public void Ban(Team team) => Select(team, SelectType.Ban);
-    public void Pick(Team team) => Select(team, SelectType.Pick);
+    public void Ban(Team team) => Select(team, GamePhase.Ban, banSelector.Ban(storage.SelectableIds));
+    public void Pick(Team team) => Select(team, GamePhase.Pick, pickSelector.Pick(storage.SelectableIds));
 }

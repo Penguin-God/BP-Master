@@ -20,10 +20,9 @@ public class MatchDI : MonoBehaviour
         var phaseEventDispatcher = new PhaseEventDispatcher();
         PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
 
+        // 로직 추출하기
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
-
-        // 로직 추출하기
         var skillController = new SkillUseController(pickSlotFacade.StatusSlots);
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
