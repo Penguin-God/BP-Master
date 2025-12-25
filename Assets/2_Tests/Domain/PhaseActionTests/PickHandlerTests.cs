@@ -10,11 +10,16 @@ public class PickHandlerTests
         var champion = new Champion(CHAMP_ID, null, CreateStatus(10, 10, 10, TraitType.Amplifier));
         var catalog = new ChampionCatalog(new Champion[] { champion });
         var slotFacade = new PickSlotFacade();
+        var storage = CreateStorage(CHAMP_ID);
+        Champion champ = null;
 
-        var sut = new PickHandler(catalog, slotFacade);
+
+        var sut = new PickHandler(catalog, slotFacade, storage);
+        sut.OnChampionPick += cham => champ = cham;
 
         sut.Pick(Team.Blue, CHAMP_ID);
 
         Assert.IsNotNull(slotFacade.StatusSlots.GetSlot(BlueZeroSlot));
+        Assert.AreEqual(10, champ.Status.Stat.Attack);
     }
 }

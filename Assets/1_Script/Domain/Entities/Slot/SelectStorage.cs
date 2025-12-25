@@ -21,7 +21,7 @@ public class GameBanPickStorage
         banStorage.Add(Team.Blue, new());
     }
 
-    bool IdIsSelected(int id) => SelectableIds.Contains(id);
+    public bool IdIsSelected(int id) => SelectableIds.Contains(id);
 
     readonly IEnumerable<GamePhase> VaildPhases = new GamePhase[] { GamePhase.Ban, GamePhase.Pick };
     public void SaveSelect(GameFlowData flow, int selectedId)
