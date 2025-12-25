@@ -21,7 +21,6 @@ public enum SelectType { Ban, Pick}
 public class GameBanPickStorage
 {
     readonly Dictionary<Team, HashSet<int>> banStorage = new();
-    public IReadOnlyDictionary<Team, HashSet<int>> BanStorage => banStorage;
     public SlotStorage<int> PickIds { get; set; } = new();
 
     public event Action<Team, int> OnBan;
