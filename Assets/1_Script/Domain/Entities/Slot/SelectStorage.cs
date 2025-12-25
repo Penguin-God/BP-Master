@@ -21,12 +21,12 @@ public class GameBanPickStorage
         banStorage.Add(Team.Blue, new());
     }
 
-    public bool IdIsSelected(int id) => SelectableIds.Contains(id);
+    public bool CanSelected(int id) => SelectableIds.Contains(id);
 
     readonly IEnumerable<GamePhase> VaildPhases = new GamePhase[] { GamePhase.Ban, GamePhase.Pick };
     public void SaveSelect(GameFlowData flow, int selectedId)
     {
-        if (IdIsSelected(selectedId) == false || VaildPhases.Contains(flow.Phase) == false) throw new Exception();
+        if (CanSelected(selectedId) == false || VaildPhases.Contains(flow.Phase) == false) throw new Exception();
 
         SelectableIds.Remove(selectedId);
         if (flow.Phase == GamePhase.Ban) Ban(flow.Turn, selectedId);
