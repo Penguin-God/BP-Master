@@ -22,7 +22,7 @@ public class MatchDI : MonoBehaviour
         PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
 
         // 로직 추출하기
-        pickHandler = new PickHandler(champManager.GetCatalog(), storage);
+        pickHandler = new PickHandler(champManager.GetCatalog(), null);
         phaseEventDispatcher.OnPhaseDone += OnDone;
         storage.OnPick += OnPick;
         var skillController = new SkillUseController(PickSlotFacade.StatusSlots);

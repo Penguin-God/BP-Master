@@ -1,18 +1,13 @@
 
-using System;
-
 public class PickHandler
 {
     readonly ChampionCatalog championCatalog;
     public readonly PickSlotFacade PickSlotFacade = new();
-    readonly GameBanPickStorage gameBanPickStorage;
-    public event Action<int> OnPick;
-    public event Action<Champion> OnChampionPick;
-
-    public PickHandler(ChampionCatalog championCatalog, GameBanPickStorage gameBanPickStorage)
+    readonly PhaseActionEventDispatcher eventDispatcher;
+    public PickHandler(ChampionCatalog championCatalog, PhaseActionEventDispatcher eventDispatcher)
     {
         this.championCatalog = championCatalog;
-        this.gameBanPickStorage = gameBanPickStorage;
+        this.eventDispatcher = eventDispatcher;
     }
 
     public void Pick(Team team, int id)
@@ -20,7 +15,6 @@ public class PickHandler
         // if(gameBanPickStorage.CanSelected(id) == false) throw new Exception($"픽할 수 없는 ID : {id}");
         var champion = championCatalog.GetChampion(id);
         PickSlotFacade.Add(team, champion);
-        OnPick?.Invoke(id);
-        OnChampionPick?.Invoke(champion);
+        eventDispatcher.RaisePick(champion);
     }
 }

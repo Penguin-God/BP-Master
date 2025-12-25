@@ -10,11 +10,11 @@ public class PickHandlerTests
         var champion = new Champion(CHAMP_ID, null, CreateStatus(10, 10, 10, TraitType.Amplifier));
         var catalog = new ChampionCatalog(new Champion[] { champion });
         var storage = CreateStorage(CHAMP_ID);
+        var eventDispathcer = new PhaseActionEventDispatcher();
         Champion champ = null;
 
-
-        var sut = new PickHandler(catalog, storage);
-        sut.OnChampionPick += cham => champ = cham;
+        var sut = new PickHandler(catalog, eventDispathcer);
+        eventDispathcer.OnChampionPick += cham => champ = cham;
 
         sut.Pick(Team.Blue, CHAMP_ID);
 
