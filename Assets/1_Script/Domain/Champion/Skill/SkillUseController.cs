@@ -8,7 +8,6 @@ public class SkillUseController
     readonly SkillExecutorFactory skillExecutorFactory;
     public event Action<SlotData> OnUseSkill;
 
-    public SkillUseController(SlotStorage<ChampionStatus> statusSlots) => this.statusSlots = statusSlots;
     public SkillUseController(SlotStorage<ChampionStatus> statusSlots, SkillExecutorFactory skillExecutorFactory)
     {
         this.statusSlots = statusSlots;
