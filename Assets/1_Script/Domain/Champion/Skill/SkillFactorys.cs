@@ -2,17 +2,29 @@ using System;
 
 public class SkillExecutorFactory
 {
+    readonly SkillActionFactory skillActionFactory;
+    public SkillExecutorFactory(SkillActionFactory skillActionFactory)
+    {
+        this.skillActionFactory = skillActionFactory;
+    }
+
     public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp)
     {
-        ISkillAction action = SkillActionFactory.CreateAction(skillData.TraitType, skillData.AmountData, useChamp);
+        ISkillAction action = skillActionFactory.CreateAction(skillData.TraitType, skillData.AmountData, useChamp);
         IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, useChamp.Stat);
         return new SkillExecutor(action, condition);
     }
 }
 
-public static class SkillActionFactory
+public class SkillActionFactory
 {
-    public static ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus useChamp)
+    readonly PhaseActionEventDispatcher phaseActionEventDispatcher;
+    public SkillActionFactory(PhaseActionEventDispatcher phaseActionEventDispatcher)
+    {
+        this.phaseActionEventDispatcher = phaseActionEventDispatcher;
+    }
+
+    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus useChamp)
     {
         var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
         return actionType switch
@@ -24,6 +36,7 @@ public static class SkillActionFactory
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, amountCalculator),
             SkillType.Resonance => new Resonance(useChamp, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
+            SkillType.PickBuffer => new PickChampBuffer(phaseActionEventDispatcher, amountData.ValueAmount),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }

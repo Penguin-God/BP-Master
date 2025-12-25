@@ -89,7 +89,14 @@ public class TraitActionTests
     [Test]
     public void 픽한_아군_스탯_증가()
     {
-        var storage = CreateStorage(1, 2, 3);
+        var champ = new Champion(1, null, CreateStatus());
+        var eventDispatcher = new PhaseActionEventDispatcher();
+        var sut = new PickChampBuffer(eventDispatcher, 100);
 
+        sut.Do(null);
+        eventDispatcher.RaisePick(champ);
+
+
+        Assert.AreEqual(100, champ.Status.Stat.Attack);
     }
 }

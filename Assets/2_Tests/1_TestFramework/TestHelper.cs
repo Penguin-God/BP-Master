@@ -70,6 +70,9 @@ public static class TestHelper
     public static PhaseFlowOrchestrator CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseFlowOrchestrator(phaseDatas, eventDispatcher, new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
     public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
+
+    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher());
+    public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
 }
 
 public class TestAttackChangeAction : ISkillAction

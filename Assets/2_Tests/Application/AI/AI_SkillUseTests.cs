@@ -7,7 +7,7 @@ public class AI_SkillUseTests
     public void UseSkill_호출하면_SkillUseController_OnUseSkill_이벤트가_발생한다()
     {
         var statuses = CreateTwoSlotStatus();
-        var skillUseController = new SkillUseController(statuses);
+        var skillUseController = new SkillUseController(statuses, CreateSkillExceutorFactory());
 
         var skill = CreateValueSkill(SkillType.AttackChanger, 10, rule: SelfTriple);
         var skillSlots = new SlotStorage<Skill>();

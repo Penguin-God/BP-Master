@@ -12,6 +12,7 @@ public enum SkillType
     DefenseAbsorber,
     Resonance,
     AmplifyChanger,
+    PickBuffer,
 }
 
 public enum Side { Self, Opponent, All }
