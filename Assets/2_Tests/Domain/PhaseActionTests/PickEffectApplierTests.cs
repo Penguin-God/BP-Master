@@ -17,7 +17,6 @@ public class PickEffectApplierTests
 
         var sut = new PickEffectApplier(traitFactory, masteries);
 
-        // Act
         sut.Apply(Team.Blue, champion);
 
         Assert.AreEqual(20, champion.Status.Stat.Attack, "숙련도에 의해 공격력이 증가해야 한다.");
