@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
@@ -46,14 +45,6 @@ public class MatchUI_Controller : MonoBehaviour
         skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
-    }
-
-    void SkillUI_Init(SkillUseController skillController, SlotStorageManager slotStorageManager)
-    {
-        skillUseView.Init(slotStorageManager.SkillSlots, skillController);
-
-        gameFlowView.Init(slotStorageManager.ChampionDataSlots);
-        skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
     }
 
     void OnPick(SlotData slotData, int id)
