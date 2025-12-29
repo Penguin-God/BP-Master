@@ -16,17 +16,17 @@ MonoBehaviour:
   championName: "\uBC14\uB78C \uBC29\uD328"
   attack: 80
   defense: 120
-  speed: 5
+  speed: 6
   skillDatas:
   - targetSide: 0
     range: 4
     traitType: 3
     skillAmount:
       Type: 1
-      ValueAmount: 40
+      ValueAmount: 50
       PercentValue: 0
       FixValue: 0
-    amount: 40
+    amount: 50
     conditionType: 6
     threshold: 6
     conditionCheckerType: 1

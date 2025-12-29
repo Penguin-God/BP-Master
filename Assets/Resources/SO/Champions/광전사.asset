@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 7
   championName: "\uAD11\uC804\uC0AC"
   attack: 180
-  defense: 80
+  defense: 60
   speed: 5
   skillDatas:
   - targetSide: 0

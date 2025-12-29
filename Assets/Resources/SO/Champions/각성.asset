@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   championName: "\uAC01\uC131"
-  attack: 140
-  defense: 90
-  speed: 4
+  attack: 130
+  defense: 70
+  speed: 5
   skillDatas:
   - targetSide: 0
     range: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
     skillAmount:
       Type: 2
       ValueAmount: 120
-      PercentValue: 0.7
+      PercentValue: 0.5
       FixValue: 0
     amount: 0
     conditionType: 0

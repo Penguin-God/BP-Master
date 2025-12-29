@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6
   championName: "\uACFC\uBCF4\uD638"
-  attack: 80
+  attack: 60
   defense: 150
   speed: 3
   skillDatas:

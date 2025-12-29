@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 33
   championName: "\uC9C8\uD22C"
-  attack: 130
-  defense: 130
-  speed: 5
+  attack: 120
+  defense: 120
+  speed: 4
   skillDatas:
   - targetSide: 1
     range: 4
     traitType: 1
     skillAmount:
       Type: 1
-      ValueAmount: -25
+      ValueAmount: -30
       PercentValue: 0
       FixValue: 0
-    amount: -25
+    amount: -30
     conditionType: 4
     threshold: 0
     conditionCheckerType: 2
@@ -36,10 +36,10 @@ MonoBehaviour:
     traitType: 3
     skillAmount:
       Type: 1
-      ValueAmount: -25
+      ValueAmount: -30
       PercentValue: 0
       FixValue: 0
-    amount: -25
+    amount: -30
     conditionType: 2
     threshold: 0
     conditionCheckerType: 2
