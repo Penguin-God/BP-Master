@@ -19,7 +19,7 @@ public class MatchDI : MonoBehaviour
         var storage = new GameBanPickStorage(champManager.AllId);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
-        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
+        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, championSelector, playerTeam);
 
         // 로직 추출하기
         var actionEventDispathcer = new PhaseActionEventDispatcher();
@@ -32,7 +32,7 @@ public class MatchDI : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade.StatusSlots, PickSlotFacade.SkillSlots, skillController); // start보다 먼저
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController);
+        // ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController);
 
         phaseManager.Start();
     }

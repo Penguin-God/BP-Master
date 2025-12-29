@@ -55,5 +55,5 @@ public class SkillUseController_UI : MonoBehaviour
             skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
     }
 
-    void RefeshButton() => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
+    void RefeshButton() => skillButtonView.ActiveTargets(useSlot.Team, new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
 }
