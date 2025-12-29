@@ -25,7 +25,7 @@ public class MatchUI_Controller : MonoBehaviour
     {
         team = playerTeam;
         slotViews.InitSlotView(statusSlots);
-        championSelector.Init(new ChampionSelectPresenter(storage), phaseManager);
+        championSelector.Init(storage, phaseManager);
 
         masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
 
