@@ -1,13 +1,26 @@
+using System.Collections.Generic;
+using System.Linq;
 
 public class SkillPreviewer
 {
-    public SlotStorage<ChampionStatus> PreviewSkill(SlotStorage<ChampionStatus> originSlots, Skill skill)
+    readonly SkillExecutorFactory skillExecutorFactory;
+    readonly SlotStorage<ChampionStatus> originSlots;
+    public SkillPreviewer(SkillExecutorFactory skillExecutorFactory, SlotStorage<ChampionStatus> originSlots)
+    {
+        this.skillExecutorFactory = skillExecutorFactory;
+        this.originSlots = originSlots;
+    }
+
+    public SlotStorage<ChampionStatus> PreviewSkill(Champion champion, IEnumerable<SlotData> targetSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
-        // 복사된 슬롯으로만 동작하는 컨트롤러 생성
-        var previewController = new SkillUseController(copiedSlots, null);
 
-        previewController.UseSkill(default, new SlotData[] { new SlotData(Team.Blue, 0) }, skill);
+        var targets = targetSlots.Select(x => copiedSlots.GetSlot(x));
+        foreach (var skillData in champion.Skill.SkillDatas)
+        {
+            var executor = skillExecutorFactory.CreateExecutor(skillData, champion.Status);
+            executor.ExecuteSkill(targets);
+        }
         return copiedSlots;
     }
 
