@@ -2,9 +2,9 @@
   <Project Path="App.csproj" />
   <Project Path="Domain.csproj" />
   <Project Path="UseCase.csproj" />
-  <Project Path="DomainTests.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Presenter.csproj" />
+  <Project Path="DomainTests.csproj" />
   <Project Path="ApplicationTests.csproj" />
   <Project Path="2_Tests.csproj" />
   <Project Path="Util.csproj" />
