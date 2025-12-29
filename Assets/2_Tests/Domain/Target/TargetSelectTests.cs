@@ -6,7 +6,7 @@ public class SkillTargetSelectTests
 {
     SkillTargetRule CreateDoubleRule(Side side) => new SkillTargetRule(side, TargetRange.Double);
     void Select(SkillTargetSelector sut, SlotData slot) => sut.Select(slot);
-    SkillTargetSelector CreateSut(Team team, int blueSize, int redSize, SkillTargetRule rule) => new SkillTargetSelector(team, new SkillTargetCounter(blueSize, redSize), rule);
+    SkillTargetSelector CreateSut(Team team, int blueSize, int redSize, SkillTargetRule rule) => new SkillTargetSelector(team, new TargetCountCalculator(blueSize, redSize), rule);
 
     [Test]
     public void 전체_All은_전부_넣음()
@@ -65,5 +65,24 @@ public class SkillTargetSelectTests
     {
         var sut = CreateSut(Team.Blue, 0, 0, SelfTriple);
         Assert.IsTrue(sut.IsFull);
+    }
+
+
+    [Test]
+    public void 타겟_범위가_없을_경우_빈_슬롯_반환()
+    {
+
+    }
+
+    [Test]
+    public void 타겟_범위가_전체인_경우_자동_선택()
+    {
+
+    }
+
+    [Test]
+    public void 타겟_선택_시_저장()
+    {
+
     }
 }

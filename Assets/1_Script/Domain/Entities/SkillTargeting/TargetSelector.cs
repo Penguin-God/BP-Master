@@ -8,8 +8,8 @@ public class SkillTargetSelector
 
     readonly Team Team;
     readonly SkillTargetRule Rule;
-    readonly SkillTargetCounter targetCounter;
-    public SkillTargetSelector(Team team, SkillTargetCounter skillTargetCounter, SkillTargetRule rule)
+    readonly TargetCountCalculator targetCounter;
+    public SkillTargetSelector(Team team, TargetCountCalculator skillTargetCounter, SkillTargetRule rule)
     {
         Team = team;
         targetCounter = skillTargetCounter;

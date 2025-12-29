@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SkillTargetCounter
+public class TargetCountCalculator
 {
     readonly int BlueCount;
     readonly int RedCount;
 
-    public SkillTargetCounter(int blueCount, int redCount)
+    public TargetCountCalculator(int blueCount, int redCount)
     {
         BlueCount = blueCount;
         RedCount = redCount;
@@ -39,8 +39,8 @@ public class SkillTargetCounter
 
 public class SkillTargetFilter
 {
-    readonly SkillTargetCounter TeamCounter;
-    public SkillTargetFilter(SkillTargetCounter teamCounter) => TeamCounter = teamCounter;
+    readonly TargetCountCalculator TeamCounter;
+    public SkillTargetFilter(TargetCountCalculator teamCounter) => TeamCounter = teamCounter;
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {

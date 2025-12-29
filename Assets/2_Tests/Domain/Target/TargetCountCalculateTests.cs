@@ -1,12 +1,12 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class TargetCoutingTests
+public class TargetCountCalculateTests
 {
-    SkillTargetCounter CreateSut(int blue = 3, int red = 2) => new SkillTargetCounter(blue, red);
+    TargetCountCalculator CreateSut(int blue = 3, int red = 2) => new TargetCountCalculator(blue, red);
 
     SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule (side, range);
-    int CalculateTargetCount(SkillTargetCounter sut, Team team, SkillTargetRule targetRule) => sut.CalculateTargetCount(team, targetRule);
+    int CalculateTargetCount(TargetCountCalculator sut, Team team, SkillTargetRule targetRule) => sut.CalculateTargetCount(team, targetRule);
 
     [Test]
     public void GetTeamCount_팀별_카운트_정상반환()
