@@ -18,7 +18,6 @@ public class StaticEvalueatorTests
         Assert.AreEqual(excpected, result);
     }
 
-
     SkillEvaluator CreateEvaluator(int teamSize, SlotStorage<ChampionStatus> statusSlots) => new SkillEvaluator(statusSlots, teamSize);
 
 
@@ -40,7 +39,7 @@ public class StaticEvalueatorTests
     [TestCase(Side.Self, 250)]
     [TestCase(Side.Opponent, -200)]
     [TestCase(Side.All, 50)]
-    public void 조건_스킬은_이미_픽한_경우_검사하지만_빈_슬롯은_값의_절반으로_계산(Side side, int expected)
+    public void 조건_스킬은_검사_후_계산(Side side, int expected)
     {
         var skill = CreateValueSkillData(SkillType.DefenseChanger, 100, CreateThresholdCondition(StatConditionType.AttackAtLeast, 100), new SkillTargetRule(side, TargetRange.All));
         var statusSlots = CreateOneSlotStatus();

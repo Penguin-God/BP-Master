@@ -7,5 +7,4 @@
   <Project Path="DomainTests.csproj" />
   <Project Path="ApplicationTests.csproj" />
   <Project Path="2_Tests.csproj" />
-  <Project Path="Util.csproj" />
 </Solution>
