@@ -11,6 +11,7 @@ public class SkillPreviewer
         this.originSlots = originSlots;
     }
 
+    // 타겟 직접 선택. 에이저트 가져오기
     public SlotStorage<ChampionStatus> PreviewSkill(Champion champion, IEnumerable<SlotData> targetSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
