@@ -20,12 +20,14 @@ public class MatchUI_Controller : MonoBehaviour
         masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(true);
     }
 
+    Team team;
     public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUseController skillController)
     {
+        team = playerTeam;
         slotViews.InitSlotView(statusSlots);
         championSelector.Init(storage, phaseManager);
 
-        // masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
+        masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
 
         storage.OnBan += banView.UpdateBanList;
         storage.OnPick += slotViews.PickChampion;
@@ -47,7 +49,7 @@ public class MatchUI_Controller : MonoBehaviour
 
     void OnPick(SlotData slotData, int id)
     {
-        // if (slotData.Team != team) return;
+        if (slotData.Team != team) return;
         skillUseView.UseSkill(slotData);
     }
 

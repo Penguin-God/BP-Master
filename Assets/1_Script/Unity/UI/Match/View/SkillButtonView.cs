@@ -24,7 +24,7 @@ public class SkillButtonView : MonoBehaviour
             ButtonUtil.InActiveButton(btn);
     }
 
-    public void ActiveTargets(Team team, SkillTargetFilter skillTargetFilter, Skill skill, IEnumerable<SlotData> currentTargets)
+    public void ActiveTargets(SkillTargetFilter skillTargetFilter, Skill skill, IEnumerable<SlotData> currentTargets)
     {
         InActiveAllBtns();
         var slots = skillTargetFilter.FilteringTargetSlots(team, skill.Sides).Except(currentTargets);
