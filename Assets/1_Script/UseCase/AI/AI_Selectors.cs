@@ -21,12 +21,12 @@ public class RandomPick : IPickSelector
     public int Pick(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
 }
 
-public class StaticValuePick : IPickSelector
+public class ValuePick : IPickSelector
 {
     readonly ChampionCatalog Catalog;
-    readonly StaticValueEvaluator Evaluator;
+    readonly ChampionStatValueCalculator Evaluator;
 
-    public StaticValuePick(ChampionCatalog catalog, StaticValueEvaluator valueEvaluator)
+    public ValuePick(ChampionCatalog catalog, ChampionStatValueCalculator valueEvaluator)
     {
         Catalog = catalog;
         Evaluator = valueEvaluator;
@@ -37,5 +37,5 @@ public class StaticValuePick : IPickSelector
             .OrderByDescending(x => GetValue(x))
             .First();
 
-    int GetValue(int id) => Evaluator.Evaluate(id, Catalog.GetChampion(id).Status.Stat);
+    int GetValue(int id) => Evaluator.CalculateStatValue(Catalog.GetChampion(id).Status.Stat);
 }

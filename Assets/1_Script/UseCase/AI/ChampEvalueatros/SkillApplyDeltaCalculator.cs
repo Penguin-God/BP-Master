@@ -5,11 +5,11 @@ public record TeamStatChangeInfo(int Att, int Def, int Speed);
 public record GameStatChangeInfo(TeamStatChangeInfo Blue, TeamStatChangeInfo Red);
 
 
-public class PickScoreDeltaCalculator
+public class SkillApplyDeltaCalculator
 {
     readonly SkillPreviewer previewer;
     readonly SlotStorage<ChampionStatus> originalSlots;
-    public PickScoreDeltaCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> originalSlots)
+    public SkillApplyDeltaCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> originalSlots)
     {
         this.previewer = previewer;
         this.originalSlots = originalSlots;

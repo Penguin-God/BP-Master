@@ -33,8 +33,8 @@ public static class TestHelper
 
     public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateValueSkillData(type, amount, default, rule);
 
-    public static SkillData CreateValueSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, SkillTargetRule traitTargetRule = default)
-        => new SkillData(traitType, new SkillAmountData(AmountType.Value, amount, 0, 0), conditionData, traitTargetRule);
+    public static SkillData CreateValueSkillData(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+        => new SkillData(skillType, new SkillAmountData(AmountType.Value, amount, 0, 0), conditionData, rule);
 
     public static Skill CreateValueSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
         => new Skill(CreateSkills(CreateValueSkillData(skillType, amount, conditionData, rule)));
@@ -73,6 +73,8 @@ public static class TestHelper
 
     public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher());
     public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
+
+    public static Champion CreateChampion(int id, int att = 0, int def = 0, int speed = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def, speed));
 }
 
 public class TestAttackChangeAction : ISkillAction

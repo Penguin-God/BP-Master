@@ -22,7 +22,7 @@ public class SkillPreviewTests
     {
         var slots = CreateTwoSlotStatus(att:1000);
         var previewer = new SkillPreviewer(CreateSkillExceutorFactory(), slots);
-        var sut = new PickScoreDeltaCalculator(previewer, slots);
+        var sut = new SkillApplyDeltaCalculator(previewer, slots);
         var champion = new Champion(1, CreateValueSkill(SkillType.AttackChanger, 100, rule: SelfAllRule), CreateStatus());
 
         GameStatChangeInfo result = sut.CalculateApplySkillStat(champion, CreateBlueSlots(0, 1));

@@ -1,21 +1,29 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using static TestHelper;
 
 public class StaticEvalueatorTests
 {
     [Test]
-    [TestCase(1, 75)]
-    [TestCase(2, 60)]
-    public void 정적_가치는_공방과_숙련도의_합(int champId, int excpected)
+    public void 속도_가치에_따라_스탯_총합_계산()
     {
-        IEnumerable<ChampionMastery> masteries = new ChampionMastery[] { new ChampionMastery(1, 15) };
-        var sut = new StaticValueEvaluator(masteries);
-        ChampionStatData stat = CreateStat(att: 20, def: 40);
+        var sut = new ChampionStatValueCalculator(10);
+        ChampionStatData stat = CreateStat(att: 20, def: 40, speed:5);
 
-        int result = sut.Evaluate(champId, stat);
+        int result = sut.CalculateStatValue(stat);
 
-        Assert.AreEqual(excpected, result);
+        Assert.AreEqual(110, result);
+    }
+
+    [Test]
+    public void 팀에_따라_아군_적군_합해서_밸류_계산()
+    {
+        var sut = new ChampionStatValueCalculator(10);
+        var data = new GameStatChangeInfo(new TeamStatChangeInfo(100, 100, 5), new TeamStatChangeInfo(-500, 300, 0));
+
+        int result = sut.CalcualteTeamStatValue(data, Team.Blue);
+
+        // 250 + 200 = 450
+        Assert.AreEqual(450, result);
     }
 
     SkillEvaluator CreateEvaluator(int teamSize, SlotStorage<ChampionStatus> statusSlots) => new SkillEvaluator(statusSlots, teamSize);

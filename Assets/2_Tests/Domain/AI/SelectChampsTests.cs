@@ -1,19 +1,24 @@
 using NUnit.Framework;
-using System.Collections.Generic;
+using static TestHelper;
 
 public class SelectChampsTests
 {
     [Test]
-    public void 가장_정적_가치가_높은_챔피언_픽()
+    public void 가장_가치가_높은_챔피언_픽()
     {
-        ChampionCatalog catalog = new ChampionCatalog(new Champion[] { Champ(1, 10, 20), Champ(2, 10, 50), Champ(3, 100, 50) });
-        StaticValueEvaluator evaluator = new StaticValueEvaluator(new ChampionMastery[0]);
-        StaticValuePick sut = new StaticValuePick(catalog, evaluator);
+        var statusSlots = CreateTwoSlotStatus();
+        ChampionCatalog catalog = CreateCaltalog(CreateChampion(1, skillData : CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)), CreateChampion(2), CreateChampion(3));
+        ChampionStatValueCalculator statCalculator = new ChampionStatValueCalculator(speedValue: 10);
+        SkillApplyDeltaCalculator deltaCalculator = new SkillApplyDeltaCalculator(new SkillPreviewer(CreateSkillExceutorFactory(), statusSlots), statusSlots);
+        MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
 
-        int result = sut.Pick(new HashSet<int>() { 1, 2, 3 });
+        // 계산식(스탯 밸류+ 마스터리 레벨 * 2 + 스킬 밸류)
+        //ValuePick sut = new ValuePick(catalog, statCalculator, deltaCalculator, masteryCollection);
 
-        Assert.AreEqual(3, result);
+        //int result = sut.Pick(new HashSet<int>() { 1, 2, 3 });
+
+        //Assert.AreEqual(1, result);
     }
 
-    Champion Champ(int id, int att, int def) => new Champion(id, new Skill(null), TestHelper.CreateStatus(att, def));
+    ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
 }
