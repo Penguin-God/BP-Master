@@ -16,4 +16,20 @@ public class SkillPreviewTests
         Assert.AreEqual(100, result.GetSlot(BlueOneSlot).Stat.Attack);
         Assert.AreEqual(0, result.GetSlot(RedZeroSlot).Stat.Attack);
     }
+
+    [Test]
+    public void 스킬_적용_전후_점수차_계산()
+    {
+        var slots = CreateTwoSlotStatus(att:1000);
+        var previewer = new SkillPreviewer(CreateSkillExceutorFactory(), slots);
+        var sut = new PickScoreDeltaCalculator(previewer, slots);
+        var champion = new Champion(1, CreateValueSkill(SkillType.AttackChanger, 100, rule: SelfAllRule), CreateStatus());
+
+        GameStatChangeInfo result = sut.CalculateApplySkillStat(champion, CreateBlueSlots(0, 1));
+        Assert.AreEqual(200, result.Blue.Att);
+
+        champion = new Champion(1, CreateValueSkill(SkillType.AttackChanger, -100, rule: SelfAllRule), CreateStatus());
+        result = sut.CalculateApplySkillStat(champion, CreateRedSlots(0, 1));
+        Assert.AreEqual(-200, result.Red.Att);
+    }
 }

@@ -51,6 +51,3 @@ public class SkillEvaluator
         return (int)Math.Round(skill.AmountData.ValueAmount * EmptySlotHalfWeight * emptySlotCount, MidpointRounding.AwayFromZero); 
     }
 }
-
-public record TeamStatChangeInfo(int Att, int Def, int Speed);
-public record GameStatChangeInfo(TeamStatChangeInfo Blue, TeamStatChangeInfo Red);

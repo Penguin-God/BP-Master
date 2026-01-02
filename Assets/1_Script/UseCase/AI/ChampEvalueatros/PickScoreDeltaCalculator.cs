@@ -1,6 +1,48 @@
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+
+public record TeamStatChangeInfo(int Att, int Def, int Speed);
+public record GameStatChangeInfo(TeamStatChangeInfo Blue, TeamStatChangeInfo Red);
+
 
 public class PickScoreDeltaCalculator
 {
-    
+    readonly SkillPreviewer previewer;
+    readonly SlotStorage<ChampionStatus> originalSlots;
+    public PickScoreDeltaCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> originalSlots)
+    {
+        this.previewer = previewer;
+        this.originalSlots = originalSlots;
+    }
+
+    public GameStatChangeInfo CalculateApplySkillStat(Champion champion, IEnumerable<SlotData> targets)
+    {
+        SlotStorage<ChampionStatus> skillApplySlots = previewer.PreviewSkill(champion, targets);
+
+        TeamStatChangeInfo blueDelta = CalculateTeamDelta(skillApplySlots, Team.Blue);
+        TeamStatChangeInfo redDelta = CalculateTeamDelta(skillApplySlots, Team.Red);
+
+        return new GameStatChangeInfo(blueDelta, redDelta);
+    }
+
+    TeamStatChangeInfo CalculateTeamDelta(SlotStorage<ChampionStatus> after, Team team)
+    {
+        int totalAtt = 0;
+        int totalDef = 0;
+        int totalSpd = 0;
+
+        var teamSlots = originalSlots.GetAllSlotDatas().Where(s => s.Team == team);
+
+        foreach (var slotData in teamSlots)
+        {
+            ChampionStatus beforeStatus = originalSlots.GetSlot(slotData);
+            ChampionStatus afterStatus = after.GetSlot(slotData);
+
+            totalAtt += afterStatus.Stat.Attack - beforeStatus.Stat.Attack;
+            totalDef += afterStatus.Stat.Defense - beforeStatus.Stat.Defense;
+            totalSpd += afterStatus.Stat.Speed - beforeStatus.Stat.Speed;
+        }
+
+        return new TeamStatChangeInfo(totalAtt, totalDef, totalSpd);
+    }
 }
