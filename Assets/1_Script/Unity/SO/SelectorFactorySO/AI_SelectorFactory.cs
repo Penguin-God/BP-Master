@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SelectorCreatetorSO", menuName = "Scriptable Objects/SelectorCreatetorSO")]
-public abstract class SelectorsCreatetorSO : ScriptableObject
+public abstract class AI_SelectorFactory : ScriptableObject
 {
     protected MasteryCollection masteryManager;
     public void Init(MasteryCollection masteryManager) => this.masteryManager = masteryManager;

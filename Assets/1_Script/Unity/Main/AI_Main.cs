@@ -6,7 +6,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     Team Team;
 
     [SerializeField] MasteryGenerator masteryGenerator;
-    [SerializeField] SelectorsCreatetorSO selectorsCreatetor;
+    [SerializeField] AI_SelectorFactory selectorsCreatetor;
 
     AI_BanPickAgent banPickAgent;
     public void EnterBan() => StartCoroutine(CoBan());
