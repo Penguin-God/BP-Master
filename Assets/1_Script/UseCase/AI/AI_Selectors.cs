@@ -41,16 +41,25 @@ public class ValuePick : IPickSelector
 
     public int Pick(HashSet<int> candidateIds)
     {
-        UnityEngine.Debug.Log(string.Join("\n", candidateIds.Select(id => catalog.GetChampion(id)).OrderByDescending(CalculateScore).Select(x => $"{x.Id} : {CalculateScore(x)}")));
-        
         // 후보군 중 점수(Score)가 가장 높은 챔피언의 ID 반환
-        return candidateIds
+        //return candidateIds
+        //    .Select(id => catalog.GetChampion(id))
+        //    .OrderByDescending(CalculateScore) // 점수 내림차순 정렬
+        //    .First()
+        //    .Id;
+
+        var result = candidateIds
             .Select(id => catalog.GetChampion(id))
             .OrderByDescending(CalculateScore) // 점수 내림차순 정렬
             .First()
             .Id;
+
+        UnityEngine.Debug.Log(string.Join("\n", values.OrderByDescending(x => x.Value).Select(x => $"{x.Key} : {x.Value}")));
+        values.Clear();
+        return result;
     }
 
+    Dictionary<int, int> values = new();
     int CalculateScore(Champion champion)
     {
         int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
@@ -58,6 +67,7 @@ public class ValuePick : IPickSelector
 
         var statChangeInfo = deltaCalculator.CalculateApplySkillStat(champion);
         int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, myTeam);
+        values.Add(champion.Id, statScore + masteryScore + skillScore);
         return statScore + masteryScore + skillScore;
     }
 }
