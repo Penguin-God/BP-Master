@@ -18,11 +18,11 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
         banPickAgent.Ban(Team);
     }
 
-    public void Init(Team team, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
+    public void Init(Team team, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUseController skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog)
     {
         Team = team;
 
-        selectorsCreatetor.Init(masteryGenerator.GetTeamMasteryManager(Team));
+        selectorsCreatetor.Init(Team, championCatalog, masteryGenerator.GetTeamMasteryManager(Team), statusSlots);
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
         storage.OnPick += OnPick;
         GetComponent<AI_MonoBehaviourAgent>().Init(new AI_SkillUseAgent(skillSlots, skillUseController));

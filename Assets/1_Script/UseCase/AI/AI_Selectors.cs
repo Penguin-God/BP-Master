@@ -41,6 +41,8 @@ public class ValuePick : IPickSelector
 
     public int Pick(HashSet<int> candidateIds)
     {
+        UnityEngine.Debug.Log(string.Join("\n", candidateIds.Select(id => catalog.GetChampion(id)).OrderByDescending(CalculateScore).Select(x => $"{x.Id} : {CalculateScore(x)}")));
+        
         // 후보군 중 점수(Score)가 가장 높은 챔피언의 ID 반환
         return candidateIds
             .Select(id => catalog.GetChampion(id))
