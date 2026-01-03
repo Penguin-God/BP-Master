@@ -15,9 +15,9 @@ public class SkillApplyDeltaCalculator
         this.originalSlots = originalSlots;
     }
 
-    public GameStatChangeInfo CalculateApplySkillStat(Champion champion, IEnumerable<SlotData> targets)
+    public GameStatChangeInfo CalculateApplySkillStat(Champion champion)
     {
-        SlotStorage<ChampionStatus> skillApplySlots = previewer.PreviewSkill(champion, targets);
+        SlotStorage<ChampionStatus> skillApplySlots = previewer.PreviewSkill(champion);
 
         TeamStatChangeInfo blueDelta = CalculateTeamDelta(skillApplySlots, Team.Blue);
         TeamStatChangeInfo redDelta = CalculateTeamDelta(skillApplySlots, Team.Red);

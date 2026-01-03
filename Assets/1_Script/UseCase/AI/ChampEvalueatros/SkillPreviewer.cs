@@ -5,17 +5,20 @@ public class SkillPreviewer
 {
     readonly SkillExecutorFactory skillExecutorFactory;
     readonly SlotStorage<ChampionStatus> originSlots;
-    public SkillPreviewer(SkillExecutorFactory skillExecutorFactory, SlotStorage<ChampionStatus> originSlots)
+    readonly AI_SkillTargetSelector skillTargetSelector = new AI_SkillTargetSelector();
+    readonly Team Team;
+
+    public SkillPreviewer(Team team, SkillExecutorFactory skillExecutorFactory, SlotStorage<ChampionStatus> originSlots)
     {
+        Team = team;
         this.skillExecutorFactory = skillExecutorFactory;
         this.originSlots = originSlots;
     }
 
-    public SlotStorage<ChampionStatus> PreviewSkill(Champion champion, IEnumerable<SlotData> targetSlots)
+    public SlotStorage<ChampionStatus> PreviewSkill(Champion champion)
     {
         var copiedSlots = CloneSlots(originSlots);
-
-        var targets = targetSlots.Select(x => copiedSlots.GetSlot(x));
+        var targets = skillTargetSelector.SelectSkillTargets(Team, champion.Skill, originSlots.GetTeamCounter()).Select(x => copiedSlots.GetSlot(x));
         foreach (var skillData in champion.Skill.SkillDatas)
         {
             var executor = skillExecutorFactory.CreateExecutor(skillData, champion.Status);

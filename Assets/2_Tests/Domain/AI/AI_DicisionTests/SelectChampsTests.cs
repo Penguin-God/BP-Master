@@ -9,8 +9,8 @@ public class SelectChampsTests
         var statusSlots = CreateTwoSlotStatus();
         ChampionCatalog catalog = CreateCaltalog(CreateChampion(1, skillData : CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)), CreateChampion(2), CreateChampion(3));
         ChampionStatValueCalculator statCalculator = new ChampionStatValueCalculator(speedValue: 10);
-        SkillApplyDeltaCalculator deltaCalculator = new SkillApplyDeltaCalculator(new SkillPreviewer(CreateSkillExceutorFactory(), statusSlots), statusSlots);
-        MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
+        //SkillApplyDeltaCalculator deltaCalculator = new SkillApplyDeltaCalculator(new SkillPreviewer(CreateSkillExceutorFactory(), statusSlots), statusSlots);
+        //MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
 
         // 계산식(스탯 밸류+ 마스터리 레벨 * 2 + 스킬 밸류)
         //ValuePick sut = new ValuePick(catalog, statCalculator, deltaCalculator, masteryCollection);
