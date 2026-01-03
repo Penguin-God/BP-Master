@@ -29,10 +29,36 @@ public class AI_SkillTargetSelectorTests
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
         var sut = new AI_SkillTargetSelector();
 
-        var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkillData(SkillType.AttackChanger, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
+        var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
 
         Assert.AreEqual(resultCount, result.Count());
         CollectionAssert.AllItemsAreUnique(result);
         Assert.IsTrue(result.All(x => x.Team == Team.Red));
+    }
+
+    [Test]
+    public void All은_전부_반환()
+    {
+        const int TARGET_COUNT = 4;
+        var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
+        var sut = new AI_SkillTargetSelector();
+
+        var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 100, rule: AllRule), countCalculator);
+
+        Assert.AreEqual(8, result.Count());
+        CollectionAssert.AllItemsAreUnique(result);
+    }
+
+    [Test]
+    public void 스킬_2개는_범위_합치기()
+    {
+        const int TARGET_COUNT = 4;
+        var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
+        var sut = new AI_SkillTargetSelector();
+
+        var result = sut.SelectSkillTargets(Team.Blue, CreateSkill(CreateValueSkillData(SkillType.AttackChanger, 100, rule: OpponentAllRule), CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)), countCalculator);
+
+        Assert.AreEqual(8, result.Count());
+        CollectionAssert.AllItemsAreUnique(result);
     }
 }

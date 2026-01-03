@@ -4,11 +4,11 @@ using System.Linq;
 
 public class AI_SkillTargetSelector
 {
-    public IEnumerable<SlotData> SelectSkillTargets(Team casterTeam, SkillData skillData, TargetCountCalculator calculator)
+    public IEnumerable<SlotData> SelectSkillTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator)
     {
-        int count = calculator.CalculateTargetCount(casterTeam, skillData.TargetRule);
+        int count = calculator.CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
         var filter = new SkillTargetFilter(calculator);
-        var candidates = filter.FilteringTargetSlots(casterTeam, new[] { skillData.TargetRule.TargetSide });
+        var candidates = filter.FilteringTargetSlots(casterTeam, skill.Sides);
 
         return SelectRandom(candidates, count);
     }

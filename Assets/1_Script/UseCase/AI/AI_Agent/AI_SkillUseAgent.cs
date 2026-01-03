@@ -1,4 +1,3 @@
-using System.Linq;
 
 public class AI_SkillUseAgent
 {
@@ -14,9 +13,8 @@ public class AI_SkillUseAgent
     public void UseSkill(SlotData slotData)
     {
         var teamCount = skillSlots.GetTeamCounter();
-        var filter = new SkillTargetFilter(teamCount);
         var useSkill = skillSlots.GetSlot(slotData);
-        var targets = targetSelector.SelectRandom(filter.FilteringTargetSlots(slotData.Team, useSkill.Sides).ToList(), teamCount.CalculateTargetCount(slotData.Team, EnumCaster.MergeRule(useSkill.Rules)));
+        var targets = targetSelector.SelectSkillTargets(slotData.Team, useSkill, teamCount);
         skillUseController.UseSkill(slotData, targets, useSkill);
     }
 }

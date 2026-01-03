@@ -29,7 +29,8 @@ public static class TestHelper
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
-    public static SkillData[] CreateSkills(params SkillData[] traits) => traits;
+    public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
+    public static SkillData[] CreateSkills(params SkillData[] skills) => skills;
 
     public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateValueSkillData(type, amount, default, rule);
 
