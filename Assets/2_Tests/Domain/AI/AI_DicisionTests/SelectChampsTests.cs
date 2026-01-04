@@ -15,7 +15,7 @@ public class SelectChampsTests
         MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
 
         // 계산식(스탯 밸류+ 마스터리 레벨 * 2 + 스킬 밸류)
-        ValuePick sut = new ValuePick(catalog, statCalculator, deltaCalculator, masteryCollection, Team.Blue);
+        ValuePick sut = new ValuePick(catalog, new ChampionValueCalculator(statCalculator, deltaCalculator, masteryCollection, Team));
 
         int result = sut.Pick(new HashSet<int>() { 1, 2, 3 });
 
