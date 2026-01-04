@@ -6,6 +6,7 @@ public class ChampionValueCalculator
     readonly MasteryCollection masteryCollection;
     readonly Team myTeam;
 
+    // SkillValueCalculator 쓰도록 변경
     public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team myTeam)
     {
         this.statCalculator = statCalculator;
