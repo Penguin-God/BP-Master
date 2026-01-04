@@ -21,15 +21,10 @@ public class RandomPick : IPickSelector
     public int Pick(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
 }
 
-public class ValuePick : IPickSelector
+public class ValuePick : IPickSelector // 로그용 인터페이스 따로 만들기
 {
     readonly ChampionCatalog catalog;
-    readonly ChampionStatValueCalculator statCalculator;
-    readonly SkillApplyDeltaCalculator deltaCalculator;
-    readonly MasteryCollection masteryCollection;
-    readonly Team myTeam;
 
-    // 생성자: 테스트 코드 시그니처에 맞춤 (team은 선택적 파라미터로 처리하여 기존 테스트 호환)
     public ValuePick(ChampionCatalog catalog, ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team team)
     {
         this.catalog = catalog;
@@ -60,6 +55,11 @@ public class ValuePick : IPickSelector
     }
 
     Dictionary<int, int> values = new();
+
+    readonly ChampionStatValueCalculator statCalculator;
+    readonly SkillApplyDeltaCalculator deltaCalculator;
+    readonly MasteryCollection masteryCollection;
+    readonly Team myTeam;
     int CalculateScore(Champion champion)
     {
         int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
