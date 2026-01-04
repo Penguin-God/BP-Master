@@ -1,5 +1,4 @@
 
-
 public class ChampionStatValueCalculator
 {
     readonly int SPPED_VALUE;
