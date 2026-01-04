@@ -11,6 +11,6 @@ public class ValueSelectSO : AI_SelectorFactory
         var statCalculator = new ChampionStatValueCalculator(speedValue);
         var skillExecutorFactory = new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher())); // 실제 사용중인 객체로 하면 안됨
         var skillValueCalculator = new SkillApplyDeltaCalculator(new SkillPreviewer(team, skillExecutorFactory, statusSlots), statusSlots);
-        return new ValuePick(championCatalog, statCalculator, skillValueCalculator, masteryManager, team);
+        return new ValuePickLog(championCatalog, statCalculator, skillValueCalculator, masteryManager, team);
     }
 }
