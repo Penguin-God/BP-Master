@@ -13,9 +13,10 @@ public class SelectChampsTests
         ChampionStatValueCalculator statCalculator = new ChampionStatValueCalculator(speedValue: 10);
         SkillApplyDeltaCalculator deltaCalculator = new SkillApplyDeltaCalculator();
         MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
+        SkillValueCalculator skillValueCalculator = new SkillValueCalculator(new SkillPreviewer(), statusSlots, deltaCalculator);
 
         // 계산식(스탯 밸류+ 마스터리 레벨 * 2 + 스킬 밸류)
-        ValuePick sut = new ValuePick(catalog, new ChampionValueCalculator(statCalculator, deltaCalculator, masteryCollection, Team));
+        ValuePick sut = new ValuePick(catalog, new ChampionValueCalculator(statCalculator, skillValueCalculator, masteryCollection, Team));
 
         int result = sut.Pick(new HashSet<int>() { 1, 2, 3 });
 
