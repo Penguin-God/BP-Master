@@ -3,10 +3,17 @@ public class ChampionValueCalculator
 {
     readonly ChampionStatValueCalculator statCalculator;
     readonly SkillApplyDeltaCalculator deltaCalculator;
+    readonly SkillValueCalculator skillValueCalculator;
     readonly MasteryCollection masteryCollection;
     readonly Team myTeam;
+    public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillValueCalculator skillValueCalculator, MasteryCollection masteryCollection, Team myTeam)
+    {
+        this.statCalculator = statCalculator;
+        this.skillValueCalculator = skillValueCalculator;
+        this.masteryCollection = masteryCollection;
+        this.myTeam = myTeam;
+    }
 
-    // SkillValueCalculator 쓰도록 변경
     public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team myTeam)
     {
         this.statCalculator = statCalculator;

@@ -19,9 +19,9 @@ public class SkillValueCaculatorTests
         var previewer = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), originSlots);
         var deltaCalculator = new SkillApplyDeltaCalculator();
 
-        var sut = new SkillValueCalculator(Team.Blue, previewer, statCalculator, deltaCalculator);
+        var sut = new SkillValueCalculator(previewer, statCalculator, deltaCalculator);
 
-        int result = sut.Calculate(champion, originSlots);
+        int result = sut.Calculate(Team.Blue, champion, originSlots);
 
         Assert.AreEqual(100, result);
     }

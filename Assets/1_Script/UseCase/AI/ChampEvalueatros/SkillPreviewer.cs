@@ -26,6 +26,18 @@ public class SkillPreviewer
         return copiedSlots;
     }
 
+    public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion)
+    {
+        var copiedSlots = CloneSlots(originSlots);
+        var targets = skillTargetSelector.SelectSkillTargets(team, champion.Skill, originSlots.GetTeamCounter()).Select(x => copiedSlots.GetSlot(x));
+        foreach (var skillData in champion.Skill.SkillDatas)
+        {
+            var executor = skillExecutorFactory.CreateExecutor(skillData, champion.Status);
+            executor.ExecuteSkill(targets);
+        }
+        return copiedSlots;
+    }
+
     SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)
     {
         var result = new SlotStorage<ChampionStatus>();

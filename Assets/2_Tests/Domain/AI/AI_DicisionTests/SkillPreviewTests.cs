@@ -9,7 +9,7 @@ public class SkillPreviewTests
         var slots = CreateTwoSlotStatus();
         var sut = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), slots);
 
-        var result = sut.PreviewSkill(CreateChampion(1, skillData: CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)));
+        var result = sut.PreviewSkill(Team.Blue, CreateChampion(1, skillData: CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)));
 
         Assert.AreEqual(0, slots.GetSlot(BlueZeroSlot).Stat.Attack); // 원본 스탯은 그대로
         Assert.AreEqual(100, result.GetSlot(BlueZeroSlot).Stat.Attack);
