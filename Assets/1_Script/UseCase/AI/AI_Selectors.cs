@@ -40,46 +40,46 @@ public class ValuePick : IPickSelector
             .Id;
 }
 
-public class ValuePickLog : IPickSelector
-{
-    readonly ChampionCatalog catalog;
+//public class ValuePickLog : IPickSelector
+//{
+//    readonly ChampionCatalog catalog;
 
-    public ValuePickLog(ChampionCatalog catalog, ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team team)
-    {
-        this.catalog = catalog;
-        this.statCalculator = statCalculator;
-        this.deltaCalculator = deltaCalculator;
-        this.masteryCollection = masteryCollection;
-        this.myTeam = team;
-    }
+//    public ValuePickLog(ChampionCatalog catalog, ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team team)
+//    {
+//        this.catalog = catalog;
+//        this.statCalculator = statCalculator;
+//        this.deltaCalculator = deltaCalculator;
+//        this.masteryCollection = masteryCollection;
+//        this.myTeam = team;
+//    }
 
-    public int Pick(HashSet<int> candidateIds)
-    {
-        var result = candidateIds
-            .Select(id => catalog.GetChampion(id))
-            .OrderByDescending(CalculateScore) // 점수 내림차순 정렬
-            .First()
-            .Id;
+//    public int Pick(HashSet<int> candidateIds)
+//    {
+//        var result = candidateIds
+//            .Select(id => catalog.GetChampion(id))
+//            .OrderByDescending(CalculateScore) // 점수 내림차순 정렬
+//            .First()
+//            .Id;
 
-        UnityEngine.Debug.Log(string.Join("\n", values.OrderByDescending(x => x.Value).Select(x => $"{x.Key} : {x.Value}")));
-        values.Clear();
-        return result;
-    }
+//        UnityEngine.Debug.Log(string.Join("\n", values.OrderByDescending(x => x.Value).Select(x => $"{x.Key} : {x.Value}")));
+//        values.Clear();
+//        return result;
+//    }
 
-    Dictionary<int, int> values = new();
+//    Dictionary<int, int> values = new();
 
-    readonly ChampionStatValueCalculator statCalculator;
-    readonly SkillApplyDeltaCalculator deltaCalculator;
-    readonly MasteryCollection masteryCollection;
-    readonly Team myTeam;
-    int CalculateScore(Champion champion)
-    {
-        int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
-        int masteryScore = masteryCollection.GetMasteryLevel(champion.Id) * 2;
+//    readonly ChampionStatValueCalculator statCalculator;
+//    readonly SkillApplyDeltaCalculator deltaCalculator;
+//    readonly MasteryCollection masteryCollection;
+//    readonly Team myTeam;
+//    int CalculateScore(Champion champion)
+//    {
+//        int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
+//        int masteryScore = masteryCollection.GetMasteryLevel(champion.Id) * 2;
 
-        var statChangeInfo = deltaCalculator.CalculateApplySkillStat(champion);
-        int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, myTeam);
-        values.Add(champion.Id, statScore + masteryScore + skillScore);
-        return statScore + masteryScore + skillScore;
-    }
-}
+//        var statChangeInfo = deltaCalculator.CalculateApplySkillStat(champion);
+//        int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, myTeam);
+//        values.Add(champion.Id, statScore + masteryScore + skillScore);
+//        return statScore + masteryScore + skillScore;
+//    }
+//}

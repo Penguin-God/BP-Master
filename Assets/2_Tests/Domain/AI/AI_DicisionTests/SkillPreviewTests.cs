@@ -9,28 +9,12 @@ public class SkillPreviewTests
         var slots = CreateTwoSlotStatus();
         var sut = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), slots);
 
-        var result = sut.PreviewSkill(Team.Blue, CreateChampion(1, skillData: CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)));
+        var result = sut.PreviewSkill(Team.Blue, CreateChampion(1, skillData: CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)), slots);
 
         Assert.AreEqual(0, slots.GetSlot(BlueZeroSlot).Stat.Attack); // 원본 스탯은 그대로
         Assert.AreEqual(100, result.GetSlot(BlueZeroSlot).Stat.Attack);
         Assert.AreEqual(100, result.GetSlot(BlueOneSlot).Stat.Attack);
         Assert.AreEqual(0, result.GetSlot(RedZeroSlot).Stat.Attack);
-    }
-
-    [Test]
-    public void 스킬_적용_전후_점수차_계산()
-    {
-        var slots = CreateTwoSlotStatus(att:1000);
-        var previewer = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), slots);
-        var sut = new SkillApplyDeltaCalculator(previewer, slots);
-        var champion = new Champion(1, CreateValueSkill(SkillType.AttackChanger, 100, rule: SelfAllRule), CreateStatus());
-
-        GameStatChangeInfo result = sut.CalculateApplySkillStat(champion);
-        Assert.AreEqual(200, result.Blue.Att);
-
-        champion = new Champion(1, CreateValueSkill(SkillType.AttackChanger, -100, rule: OpponentAllRule), CreateStatus());
-        result = sut.CalculateApplySkillStat(champion);
-        Assert.AreEqual(-200, result.Red.Att);
     }
 
     [Test]

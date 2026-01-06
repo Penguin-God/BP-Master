@@ -14,6 +14,11 @@ public class SkillPreviewer
         this.originSlots = originSlots;
     }
 
+    public SkillPreviewer()
+    {
+
+    }
+
     public SlotStorage<ChampionStatus> PreviewSkill(Champion champion)
     {
         var copiedSlots = CloneSlots(originSlots);
@@ -26,7 +31,7 @@ public class SkillPreviewer
         return copiedSlots;
     }
 
-    public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion)
+    public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
         var targets = skillTargetSelector.SelectSkillTargets(team, champion.Skill, originSlots.GetTeamCounter()).Select(x => copiedSlots.GetSlot(x));

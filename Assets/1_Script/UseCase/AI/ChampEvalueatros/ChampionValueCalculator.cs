@@ -5,13 +5,13 @@ public class ChampionValueCalculator
     readonly SkillApplyDeltaCalculator deltaCalculator;
     readonly SkillValueCalculator skillValueCalculator;
     readonly MasteryCollection masteryCollection;
-    readonly Team myTeam;
+    readonly Team team;
     public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillValueCalculator skillValueCalculator, MasteryCollection masteryCollection, Team myTeam)
     {
         this.statCalculator = statCalculator;
         this.skillValueCalculator = skillValueCalculator;
         this.masteryCollection = masteryCollection;
-        this.myTeam = myTeam;
+        this.team = myTeam;
     }
 
     public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team myTeam)
@@ -19,7 +19,7 @@ public class ChampionValueCalculator
         this.statCalculator = statCalculator;
         this.deltaCalculator = deltaCalculator;
         this.masteryCollection = masteryCollection;
-        this.myTeam = myTeam;
+        this.team = myTeam;
     }
 
     public int Calculate(Champion champion)
@@ -27,8 +27,8 @@ public class ChampionValueCalculator
         int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
         int masteryScore = masteryCollection.GetMasteryLevel(champion.Id) * 2;
 
-        var statChangeInfo = deltaCalculator.CalculateApplySkillStat(champion);
-        int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, myTeam);
+        var statChangeInfo = skillValueCalculator.Calculate(team, champion);
+        int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, team);
 
         return statScore + masteryScore + skillScore;
     }

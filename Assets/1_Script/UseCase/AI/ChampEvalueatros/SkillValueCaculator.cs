@@ -1,20 +1,19 @@
 public class SkillValueCalculator
 {
     readonly SkillPreviewer Previewer;
-    readonly ChampionStatValueCalculator StatCalculator;
     readonly SkillApplyDeltaCalculator DeltaCalculator;
+    SlotStorage<ChampionStatus> statusSlots;
 
-    public SkillValueCalculator(SkillPreviewer previewer, ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator)
+    public SkillValueCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> statusSlots, SkillApplyDeltaCalculator deltaCalculator)
     {
         Previewer = previewer;
-        StatCalculator = statCalculator;
+        this.statusSlots = statusSlots;
         DeltaCalculator = deltaCalculator;
     }
 
-    public int Calculate(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
+    public GameStatChangeInfo Calculate(Team team, Champion champion)
     {
-        var afterSlots = Previewer.PreviewSkill(team, champion);
-        var changeInfo = DeltaCalculator.CalculateStatDelta(originSlots, afterSlots);
-        return StatCalculator.CalcualteTeamStatValue(changeInfo, team);
+        var afterSlots = Previewer.PreviewSkill(team, champion, statusSlots);
+        return DeltaCalculator.CalculateStatDelta(statusSlots, afterSlots);
     }
 }
