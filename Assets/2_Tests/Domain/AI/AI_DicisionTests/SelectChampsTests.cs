@@ -11,9 +11,8 @@ public class SelectChampsTests
         var statusSlots = CreateTwoSlotStatus();
         ChampionCatalog catalog = CreateCaltalog(CreateChamp(1, 100), CreateChamp(2, 0), CreateChamp(3, 0));
         ChampionStatValueCalculator statCalculator = new ChampionStatValueCalculator(speedValue: 10);
-        SkillApplyDeltaCalculator deltaCalculator = new SkillApplyDeltaCalculator();
         MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
-        SkillValueCalculator skillValueCalculator = new SkillValueCalculator(new SkillPreviewer(), statusSlots, deltaCalculator);
+        SkillValueCalculator skillValueCalculator = new SkillValueCalculator(new SkillPreviewer(), statusSlots);
 
         // 계산식(스탯 밸류+ 마스터리 레벨 * 2 + 스킬 밸류)
         ValuePick sut = new ValuePick(catalog, new ChampionValueCalculator(statCalculator, skillValueCalculator, masteryCollection, Team));

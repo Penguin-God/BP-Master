@@ -2,7 +2,6 @@
 public class ChampionValueCalculator
 {
     readonly ChampionStatValueCalculator statCalculator;
-    readonly SkillApplyDeltaCalculator deltaCalculator;
     readonly SkillValueCalculator skillValueCalculator;
     readonly MasteryCollection masteryCollection;
     readonly Team team;
@@ -10,14 +9,6 @@ public class ChampionValueCalculator
     {
         this.statCalculator = statCalculator;
         this.skillValueCalculator = skillValueCalculator;
-        this.masteryCollection = masteryCollection;
-        this.team = myTeam;
-    }
-
-    public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team myTeam)
-    {
-        this.statCalculator = statCalculator;
-        this.deltaCalculator = deltaCalculator;
         this.masteryCollection = masteryCollection;
         this.team = myTeam;
     }

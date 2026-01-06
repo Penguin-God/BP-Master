@@ -19,12 +19,11 @@ public class ValueCalcualateTests
         var statCalculator = new ChampionStatValueCalculator(speedValue: 1);
 
         var previewer = new SkillPreviewer();
-        var deltaCalculator = new SkillApplyDeltaCalculator();
 
         var masteryCollection = new MasteryCollection(new[] { new ChampionMastery(CHAMP_ID, 10) });
 
         // SUT 생성 (Blue팀 기준)
-        var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots, deltaCalculator), masteryCollection, Team.Blue);
+        var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, Team.Blue);
 
         // Act
         int score = sut.Calculate(champion);
@@ -51,10 +50,9 @@ public class ValueCalcualateTests
 
         var statCalculator = new ChampionStatValueCalculator(0);
         var previewer = new SkillPreviewer();
-        var deltaCalculator = new SkillApplyDeltaCalculator();
         var masteryCollection = new MasteryCollection(new ChampionMastery[0]);
 
-        var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots, deltaCalculator), masteryCollection, Team.Blue);
+        var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, Team.Blue);
 
         // Act
         int score = sut.Calculate(champion);

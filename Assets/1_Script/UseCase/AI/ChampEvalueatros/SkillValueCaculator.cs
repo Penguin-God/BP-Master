@@ -1,14 +1,13 @@
 public class SkillValueCalculator
 {
     readonly SkillPreviewer Previewer;
-    readonly SkillApplyDeltaCalculator DeltaCalculator;
+    readonly SkillApplyDeltaCalculator DeltaCalculator = new SkillApplyDeltaCalculator();
     SlotStorage<ChampionStatus> statusSlots;
 
-    public SkillValueCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> statusSlots, SkillApplyDeltaCalculator deltaCalculator)
+    public SkillValueCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> statusSlots)
     {
         Previewer = previewer;
         this.statusSlots = statusSlots;
-        DeltaCalculator = deltaCalculator;
     }
 
     public GameStatChangeInfo Calculate(Team team, Champion champion)

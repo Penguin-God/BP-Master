@@ -14,12 +14,9 @@ public class SkillValueCaculatorTests
         // 스킬: 공격력 100 증가 (SelfAll) -> 점수 100 (아군 1명 기준)
         var skillData = CreateValueSkillData(SkillType.AttackChanger, SKILL_VALUE, rule: SelfAllRule);
         var champion = CreateChampion(id:1, skillData: skillData);
-
-        var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
         var previewer = new SkillPreviewer();
-        var deltaCalculator = new SkillApplyDeltaCalculator();
 
-        var sut = new SkillValueCalculator(previewer, originSlots, deltaCalculator);
+        var sut = new SkillValueCalculator(previewer, originSlots);
 
         GameStatChangeInfo result = sut.Calculate(Team.Blue, champion);
 
