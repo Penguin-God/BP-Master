@@ -9,8 +9,8 @@ public class ValueSelectSO : AI_SelectorFactory
     public override IPickSelector CreatePickSelector()
     {
         var statCalculator = new ChampionStatValueCalculator(speedValue);
-        var skillExecutorFactory = new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher())); // 실제 사용중인 객체로 하면 안됨
-        var skillValueCalculator = new SkillApplyDeltaCalculator();
-        return null; // new ValuePickLog(championCatalog, statCalculator, skillValueCalculator, masteryManager, team);
+        var skillExecutorFactory = new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
+        var valuePick = new ValuePick(championCatalog, new ChampionValueCalculator(statCalculator, new SkillValueCalculator(new SkillPreviewer(), statusSlots), masteryManager, team));
+        return new ValuePickLog(valuePick);
     }
 }

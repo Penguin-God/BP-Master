@@ -21,6 +21,8 @@ public class RandomPick : IPickSelector
     public int Pick(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
 }
 
+public record ChampionValue(int Id, int Value);
+
 public class ValuePick : IPickSelector
 {
     readonly ChampionCatalog catalog;
@@ -32,54 +34,28 @@ public class ValuePick : IPickSelector
         this.scoreCalculator = scoreCalculator;
     }
 
-    public int Pick(HashSet<int> candidateIds)
+    public int Pick(HashSet<int> candidateIds) => GetChampionRank(candidateIds).First().Id;
+
+    public IEnumerable<ChampionValue> GetChampionRank(HashSet<int> candidateIds)
         => candidateIds
-            .Select(id => catalog.GetChampion(id))
-            .OrderByDescending(scoreCalculator.Calculate) // 메서드 참조 전달
-            .First()
-            .Id;
+            .Select(id => new ChampionValue(id, scoreCalculator.Calculate(catalog.GetChampion(id))))
+            .OrderByDescending(x => x.Value);
 }
 
-//public class ValuePickLog : IPickSelector
-//{
-//    readonly ChampionCatalog catalog;
+public class ValuePickLog : IPickSelector
+{
+    readonly ValuePick valuePick;
 
-//    public ValuePickLog(ChampionCatalog catalog, ChampionStatValueCalculator statCalculator, SkillApplyDeltaCalculator deltaCalculator, MasteryCollection masteryCollection, Team team)
-//    {
-//        this.catalog = catalog;
-//        this.statCalculator = statCalculator;
-//        this.deltaCalculator = deltaCalculator;
-//        this.masteryCollection = masteryCollection;
-//        this.myTeam = team;
-//    }
+    public ValuePickLog(ValuePick valuePick)
+    {
+        this.valuePick = valuePick;
+    }
 
-//    public int Pick(HashSet<int> candidateIds)
-//    {
-//        var result = candidateIds
-//            .Select(id => catalog.GetChampion(id))
-//            .OrderByDescending(CalculateScore) // 점수 내림차순 정렬
-//            .First()
-//            .Id;
-
-//        UnityEngine.Debug.Log(string.Join("\n", values.OrderByDescending(x => x.Value).Select(x => $"{x.Key} : {x.Value}")));
-//        values.Clear();
-//        return result;
-//    }
-
-//    Dictionary<int, int> values = new();
-
-//    readonly ChampionStatValueCalculator statCalculator;
-//    readonly SkillApplyDeltaCalculator deltaCalculator;
-//    readonly MasteryCollection masteryCollection;
-//    readonly Team myTeam;
-//    int CalculateScore(Champion champion)
-//    {
-//        int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
-//        int masteryScore = masteryCollection.GetMasteryLevel(champion.Id) * 2;
-
-//        var statChangeInfo = deltaCalculator.CalculateApplySkillStat(champion);
-//        int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, myTeam);
-//        values.Add(champion.Id, statScore + masteryScore + skillScore);
-//        return statScore + masteryScore + skillScore;
-//    }
-//}
+    public int Pick(HashSet<int> candidateIds)
+    {
+        var rank = valuePick.GetChampionRank(candidateIds);
+        var logs = rank.Select(x => $"{x.Id} : {x.Value}");
+        UnityEngine.Debug.Log(string.Join("\n", logs));
+        return rank.First().Id;
+    }
+}
