@@ -7,7 +7,7 @@ public class SkillPreviewTests
     public void 현재_밴픽_상황과_스킬_주면_새로운_깊은복사한_객체에_적용후_반환()
     {
         var slots = CreateTwoSlotStatus();
-        var sut = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), slots);
+        var sut = new SkillPreviewer();
 
         var result = sut.PreviewSkill(Team.Blue, CreateChampion(1, skillData: CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)), slots);
 

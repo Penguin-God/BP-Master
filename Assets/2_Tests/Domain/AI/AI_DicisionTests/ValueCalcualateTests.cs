@@ -18,7 +18,7 @@ public class ValueCalcualateTests
 
         var statCalculator = new ChampionStatValueCalculator(speedValue: 1);
 
-        var previewer = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), originSlots);
+        var previewer = new SkillPreviewer();
         var deltaCalculator = new SkillApplyDeltaCalculator();
 
         var masteryCollection = new MasteryCollection(new[] { new ChampionMastery(CHAMP_ID, 10) });
@@ -50,7 +50,7 @@ public class ValueCalcualateTests
         var champion = CreateChampion(CHAMP_ID, att: 0, def: 0, speed: 0, skillData);
 
         var statCalculator = new ChampionStatValueCalculator(0);
-        var previewer = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), originSlots);
+        var previewer = new SkillPreviewer();
         var deltaCalculator = new SkillApplyDeltaCalculator();
         var masteryCollection = new MasteryCollection(new ChampionMastery[0]);
 

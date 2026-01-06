@@ -16,7 +16,7 @@ public class SkillValueCaculatorTests
         var champion = CreateChampion(id:1, skillData: skillData);
 
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
-        var previewer = new SkillPreviewer(Team.Blue, CreateSkillExceutorFactory(), originSlots);
+        var previewer = new SkillPreviewer();
         var deltaCalculator = new SkillApplyDeltaCalculator();
 
         var sut = new SkillValueCalculator(previewer, originSlots, deltaCalculator);
