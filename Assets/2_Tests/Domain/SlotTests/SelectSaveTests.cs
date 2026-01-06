@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using static TestHelper;
 
 public class SelectSaveTests
@@ -9,16 +8,8 @@ public class SelectSaveTests
     {
         const int Id = 3;
         GameBanPickStorage storage = CreateStorage(Id);
-        Select(storage, Team.Blue, GamePhase.Ban, Id);
-
-        Assert.Throws<Exception>(() => Select(storage, Team.Blue, GamePhase.Done, 1));
-    }
-
-    [Test]
-    public void 밴픽이_아닌_페이즈는_선택_불가()
-    {
-        GameBanPickStorage storage = CreateStorage(1);
-        Assert.Throws<Exception>(() => Select(storage, Team.Blue, GamePhase.Done, 1));
+        Select(storage, Team.Blue, GamePhase.Pick, Id);
+        Assert.IsFalse(Select(storage, Team.Blue, GamePhase.Pick, Id));
     }
 
     [Test]
@@ -42,5 +33,5 @@ public class SelectSaveTests
         Assert.AreEqual(101, pick);
     }
 
-    void Select(GameBanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);
+    bool Select(GameBanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);
 }

@@ -33,9 +33,11 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 
     void NailDownChampion()
     {
-        ButtonUtil.InActiveButton(nailDownBtn);
-        storage.SaveSelect(phaseManager.CurrentFlow, selectId);
-        championFocusView.ClearDisplay();
+        if(storage.SaveSelect(phaseManager.CurrentFlow, selectId))
+        {
+            ButtonUtil.InActiveButton(nailDownBtn);
+            championFocusView.ClearDisplay();
+        }
     }
 
     public void EnterBan() => ButtonUtil.ActiveButton(nailDownBtn);
