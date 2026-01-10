@@ -76,6 +76,7 @@ public static class TestHelper
     public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
 
     public static Champion CreateChampion(int id, int att = 0, int def = 0, int speed = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def, speed));
+    public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
 }
 
 public class TestAttackChangeAction : ISkillAction

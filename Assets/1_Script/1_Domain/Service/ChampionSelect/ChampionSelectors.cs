@@ -1,3 +1,4 @@
+using PlasticPipe.Server;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,74 +22,33 @@ public class RandomPick : IPickSelector
     public int Pick(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
 }
 
-public record ChampionValue(int Id, int Value);
-
 
 public class ValuePick : IPickSelector
 {
     readonly ChampionRanker ranker;
     public ValuePick(ChampionRanker ranker) => this.ranker = ranker;
-    public int Pick(HashSet<int> candidateIds) => ranker.GetChampionRank(candidateIds).First().Id;
+    public int Pick(HashSet<int> candidateIds) => ranker.GetChampionRank(candidateIds).First();
 }
 
-public class ChampionRanker
-{
-    readonly ChampionCatalog catalog;
-    readonly ChampionValueCalculator calculator;
 
-    public ChampionRanker(ChampionCatalog catalog, ChampionValueCalculator calculator)
-    {
-        this.catalog = catalog;
-        this.calculator = calculator;
-    }
-
-    public IEnumerable<ChampionValue> GetChampionRank(IEnumerable<int> candidateIds)
-    {
-        return candidateIds
-            .Select(id => new ChampionValue(id, calculator.Calculate(catalog.GetChampion(id))))
-            .OrderByDescending(x => x.Value);
-    }
-}
-
-public class ValueBan : IBanSelector
-{
-    readonly ChampionCatalog catalog;
-    readonly ChampionValueCalculator scoreCalculator; // 분리된 계산기 사용
-
-    public ValueBan(ChampionCatalog catalog, ChampionValueCalculator scoreCalculator)
-    {
-        this.catalog = catalog;
-        this.scoreCalculator = scoreCalculator;
-    }
-
-    public int Pick(HashSet<int> candidateIds) => GetChampionRank(candidateIds).First().Id;
-
-    public IEnumerable<ChampionValue> GetChampionRank(HashSet<int> candidateIds)
-        => candidateIds
-            .Select(id => new ChampionValue(id, scoreCalculator.Calculate(catalog.GetChampion(id))))
-            .OrderByDescending(x => x.Value);
-
-    public int Ban(HashSet<int> ids)
-    {
-        throw new System.NotImplementedException();
-    }
-}
-
+public record ChampionValueLog(int Id, int Value);
 public class ValuePickLog : IPickSelector // 데코레이트
 {
-    readonly ChampionRanker championRanker;
+    readonly IChampionEvaluator evaluator;
     readonly ValuePick valuePick;
-
-    public ValuePickLog(ValuePick valuePick, ChampionRanker championRanker)
+    readonly ChampionCatalog catalog;
+    public ValuePickLog(ValuePick valuePick, IChampionEvaluator evaluator, ChampionCatalog catalog)
     {
-        this.championRanker = championRanker;
+        this.catalog = catalog;
+        this.evaluator = evaluator;
         this.valuePick = valuePick;
     }
 
     public int Pick(HashSet<int> candidateIds)
     {
-        var rank = championRanker.GetChampionRank(candidateIds);
-        var logs = rank.Select(x => $"{x.Id} : {x.Value}");
+        var logs = candidateIds
+            .Select(id => new ChampionValueLog(id, evaluator.Evaluate(catalog.GetChampion(id))))
+            .OrderByDescending(x => x.Value);
         UnityEngine.Debug.Log(string.Join("\n", logs));
         return valuePick.Pick(candidateIds);
     }

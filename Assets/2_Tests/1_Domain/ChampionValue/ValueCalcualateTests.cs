@@ -26,7 +26,7 @@ public class ValueCalcualateTests
         var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, Team.Blue);
 
         // Act
-        int score = sut.Calculate(champion);
+        int score = sut.Evaluate(champion);
 
         // 예상 점수 합산:
         // 1. 스탯 점수: 10
@@ -55,7 +55,7 @@ public class ValueCalcualateTests
         var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, Team.Blue);
 
         // Act
-        int score = sut.Calculate(champion);
+        int score = sut.Evaluate(champion);
 
         // Assert
         // 내 팀(Blue) 기준에서 적(Red)의 스탯이 올랐으므로 점수는 마이너스여야 함

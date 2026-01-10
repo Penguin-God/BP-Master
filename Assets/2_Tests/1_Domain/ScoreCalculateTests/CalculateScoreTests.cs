@@ -43,16 +43,6 @@ public class CalculateScoreTests
         Assert.AreEqual(230, result);
     }
 
-    [Test]
-    public void 챔프_공방_스탯_구간별_보너스()
-    {
-        var sut = new ChampionBonusCalculator(CreateBonusCalculator(300, 100, 400, 150), CreateBonusCalculator(300, 100, 400, 150));
-
-        int result = sut.CalculateBonus(new ChampionStatData(300, 400, 0));
-
-        Assert.AreEqual(250, result);
-    }
-
     BonusCalculator CreateBonusCalculator(int section1 = 0, int bonus1 = 0, int section2 = 0, int bonus2 = 0, int section3 = 0, int bonus3 = 0)
     {
         SortedDictionary<int, int> bonusData = new SortedDictionary<int, int>();

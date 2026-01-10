@@ -1,5 +1,5 @@
 
-public class ChampionValueCalculator
+public class ChampionValueCalculator : IChampionEvaluator
 {
     readonly ChampionStatValueCalculator statCalculator;
     readonly SkillValueCalculator skillValueCalculator;
@@ -13,7 +13,7 @@ public class ChampionValueCalculator
         this.team = myTeam;
     }
 
-    public int Calculate(Champion champion)
+    public int Evaluate(Champion champion)
     {
         int statScore = statCalculator.CalculateStatValue(champion.Status.Stat);
         int masteryScore = masteryCollection.GetMasteryLevel(champion.Id) * 2;
