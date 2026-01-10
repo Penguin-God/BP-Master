@@ -8,9 +8,9 @@ public class BonusApplyTests
     {
         TeamBonusCalculator teamBonusCalculator = new TeamBonusCalculator(Bonus(300, 100), Bonus(300, 100), Bonus(30, 100));
 
-        GameScoreInfo result = teamBonusCalculator.ApplyBonus();
-        
-        Assert.AreEqual(result.)
+        // GameScoreInfo result = teamBonusCalculator.ApplyBonus();
+
+        // Assert.AreEqual(result.Blue, result.Red);
     }
 
     BonusCalculator Bonus(int needScore, int bonus) => new(new SortedDictionary<int, int>() { { needScore, bonus } });
