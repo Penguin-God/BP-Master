@@ -52,14 +52,8 @@ public class ChampionValueSelectTests
 
         // Assert
         Assert.AreEqual(3, result.Count);
-
-        // 1등 확인 (ID 20)
         Assert.AreEqual(20, result[0].Id);
-
-        // 2등 확인 (ID 10)
         Assert.AreEqual(10, result[1].Id);
-
-        // 3등 확인 (ID 30)
         Assert.AreEqual(30, result[2].Id);
     }
 }
