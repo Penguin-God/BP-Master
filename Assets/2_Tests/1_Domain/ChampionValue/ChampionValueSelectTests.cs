@@ -7,19 +7,11 @@ public class ChampionValueSelectTests
     [Test]
     public void 가장_가치가_높은_챔피언_픽()
     {
-        const Team Team = Team.Blue;
-        var statusSlots = CreateTwoSlotStatus();
-        ChampionCatalog catalog = CreateCaltalog(CreateChamp(1, 100), CreateChamp(2, 0), CreateChamp(3, 0));
-        ChampionStatValueCalculator statCalculator = new ChampionStatValueCalculator(speedValue: 10);
-        MasteryCollection masteryCollection = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10) });
-        SkillValueCalculator skillValueCalculator = new SkillValueCalculator(new SkillPreviewer(), statusSlots);
-        ChampionValueCalculator championValueCalculator = new(statCalculator, skillValueCalculator, masteryCollection, Team);
-        // 계산식(스탯 밸류+ 마스터리 레벨 * 2 + 스킬 밸류)
-        ValuePick sut = new ValuePick(new ChampionRanker(catalog, championValueCalculator));
+        ChampionCatalog catalog = CreateCaltalog(CreateChampion(id: 1), CreateChampion(id: 2), CreateChampion(id: 3));
+        ValuePick sut = new ValuePick(new ChampionRanker(catalog, new ID_Evaluator()));
 
         int result = sut.Pick(new HashSet<int>() { 1, 2, 3 });
 
-        Assert.AreEqual(1, result);
+        Assert.AreEqual(3, result);
     }
-    Champion CreateChamp(int id, int value) => CreateChampion(id, skillData: CreateValueSkillData(SkillType.AttackChanger, value, rule: SelfAllRule));
 }

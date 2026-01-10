@@ -5,7 +5,7 @@ using static TestHelper;
 public class ValueRankingTests
 {
     [Test]
-    public void 점수가_높은_순서대로_정렬하여_반환한다()
+    public void 평가값이_높은_ID순으로_정렬하여_반환한다()
     {
         var c1 = CreateChampion(id: 100);
         var c2 = CreateChampion(id: 300);
@@ -17,9 +17,9 @@ public class ValueRankingTests
 
         CollectionAssert.AreEqual(new int[] { 500, 300, 100 }, result);
     }
+}
 
-    public class ID_Evaluator : IChampionEvaluator
-    {
-        public int Evaluate(Champion champion) => champion.Id;
-    }
+public class ID_Evaluator : IChampionEvaluator
+{
+    public int Evaluate(Champion champion) => champion.Id;
 }
