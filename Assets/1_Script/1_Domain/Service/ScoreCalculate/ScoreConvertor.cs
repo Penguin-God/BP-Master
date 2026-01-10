@@ -12,20 +12,10 @@ public class ScoreConvertor
 
     ScoreInfo CalculateTeamScore(SlotStorage<ChampionStatus> storage, Team team)
     {
-        int totalAtt = 0;
-        int totalDef = 0;
-        int totalSpd = 0;
-
-        foreach (var slotData in storage.GetAllSlotDatas().Where(s => s.Team == team))
-        {
-            var status = storage.GetSlot(slotData);
-            if (status != null)
-            {
-                totalAtt += status.Stat.Attack;
-                totalDef += status.Stat.Defense;
-                totalSpd += status.Stat.Speed;
-            }
-        }
+        var stats = storage.GetTeam(team).Select(x => x.Stat);
+        int totalAtt = ScoreCalculator.CalculateAttack(stats);
+        int totalDef = ScoreCalculator.CalculateDefense(stats);
+        int totalSpd = ScoreCalculator.CalculateSpeed(stats);
 
         return new ScoreInfo(totalAtt, totalDef, totalSpd);
     }

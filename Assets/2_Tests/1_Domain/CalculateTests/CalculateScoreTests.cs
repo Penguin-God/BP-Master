@@ -19,12 +19,11 @@ public class CalculateScoreTests
     [Test]
     public void 기본_점수는_공방의_합()
     {
-        DefaultScoreCalculator sut = new();
         ChampionStatData[] team = new ChampionStatData[] { new(150, 150, 10), new(100, 200, 15) };
 
-        Assert.AreEqual(250, sut.CalculateAttack(team));
-        Assert.AreEqual(350, sut.CalculateDefense(team));
-        Assert.AreEqual(600, sut.CalculateDefaultScore(team));
+        Assert.AreEqual(250, ScoreCalculator.CalculateAttack(team));
+        Assert.AreEqual(350, ScoreCalculator.CalculateDefense(team));
+        Assert.AreEqual(600, ScoreCalculator.CalculateDefaultScore(team));
     }
 
     [Test]

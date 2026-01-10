@@ -40,7 +40,6 @@ public readonly struct MatchResult
 
 public class MatchResultBuilder
 {
-    readonly DefaultScoreCalculator scoreCalculator = new DefaultScoreCalculator();
     readonly TeamBonusCalculator teamBonusCalculator;
     public MatchResultBuilder(TeamBonusCalculator teamBonusCalculator)
     {
@@ -61,8 +60,8 @@ public class MatchResultBuilder
     }
 
     TeamScoreInfo CreateInfo(IEnumerable<ChampionStatData> team) => new TeamScoreInfo(
-        scoreCalculator.CalculateAttack(team),
-        scoreCalculator.CalculateDefense(team),
+        ScoreCalculator.CalculateAttack(team),
+        ScoreCalculator.CalculateDefense(team),
         teamBonusCalculator.CalculateAttackBonus(team),
         teamBonusCalculator.CalculateDefenseBonus(team),
         teamBonusCalculator.CalculateSpeedBonus(team)

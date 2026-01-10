@@ -7,12 +7,13 @@ public class StatusSlotConvertTests
     public void 현재_상태를_점수로_반환()
     {
         var sut = new ScoreConvertor();
-        var statusSlots = CreateTwoSlotStatus(att: 100);
+        var statusSlots = CreateTwoSlotStatus(att: 100, speed:2);
 
         GameScoreInfo result = sut.Convert(statusSlots);
 
         Assert.AreEqual(result.Blue.Att, 200);
         Assert.AreEqual(result.Blue.Def, 0);
         Assert.AreEqual(result.Red.Att, 200);
+        Assert.AreEqual(result.Red.Speed, 4);
     }
 }
