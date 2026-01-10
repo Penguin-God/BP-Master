@@ -3,9 +3,9 @@ using System.Linq;
 public record ScoreInfo(int Att, int Def, int Speed);
 public record GameScoreInfo(ScoreInfo Blue, ScoreInfo Red);
 
-public class ScoreDeltaCalculator
+public static class ScoreDeltaCalculator
 {
-    public GameScoreInfo CalculateStatDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after)
+    public static GameScoreInfo CalculateStatDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after)
     {
         ScoreInfo blueDelta = CalculateTeamDelta(origin, after, Team.Blue);
         ScoreInfo redDelta = CalculateTeamDelta(origin, after, Team.Red);
@@ -13,7 +13,7 @@ public class ScoreDeltaCalculator
         return new GameScoreInfo(blueDelta, redDelta);
     }
 
-    ScoreInfo CalculateTeamDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after, Team team)
+    static ScoreInfo CalculateTeamDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after, Team team)
     {
         int totalAtt = 0;
         int totalDef = 0;
