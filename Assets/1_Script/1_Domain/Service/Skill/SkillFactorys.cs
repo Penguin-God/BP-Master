@@ -57,11 +57,6 @@ public static class SkillCondtionFactory
     }
 }
 
-
-public enum AmountType { None, Value, Percent, Fix }
-public record SkillAmountData(AmountType Type, int ValueAmount, float PercentValue, int FixValue);
-
-
 public static class SkillAmountCalculatorFactory
 {
     public static ISkillAmountCalculator Create(SkillAmountData amountData)
