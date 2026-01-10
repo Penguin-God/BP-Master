@@ -47,7 +47,8 @@ public class ValuePickLog : IPickSelector // 데코레이트
     {
         var logs = candidateIds
             .Select(id => new ChampionValueLog(id, evaluator.Evaluate(catalog.GetChampion(id))))
-            .OrderByDescending(x => x.Value);
+            .OrderByDescending(x => x.Value)
+            .Select(x => $"Id : {x.Id}, Value : {x.Value}");
         UnityEngine.Debug.Log(string.Join("\n", logs));
         return valuePick.Pick(candidateIds);
     }
