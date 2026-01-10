@@ -5,9 +5,9 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Domain",
-        "Presenter",
-        "UseCase",
-        "2_Tests"
+        "2_Tests",
+        "Application",
+        "Adapter"
     ],
     "includePlatforms": [
         "Editor"

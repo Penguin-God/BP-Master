@@ -1,9 +1,8 @@
 {
-    "name": "Presenter",
+    "name": "Application",
     "rootNamespace": "",
     "references": [
-        "GUID:07b003c5450d2f840a353d27e010fd0a",
-        "GUID:726e115a29f63b84d818976f741dcbc4"
+        "GUID:07b003c5450d2f840a353d27e010fd0a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
