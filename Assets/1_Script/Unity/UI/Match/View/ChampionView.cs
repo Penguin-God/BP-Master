@@ -6,15 +6,14 @@ public class ChampionView : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] StatView statView;
     [SerializeField] TextMeshProUGUI skillText;
-
+    [SerializeField] SkillTextSO skillTextSO;
     void Start() => ClearDisplay();
 
-    readonly SkillTextBuilder skillTextBuilder = new();
     readonly ChampionStatusTextBuilder statusTextBuilder = new();
     public void UpdateDisplay(ChampionSO champion)
     {
         UpdateChampion(champion.CreateChampionModel());
-        skillText.text = skillTextBuilder.BuildSkillText(champion.CreateSkill_UI_Datas());
+        skillText.text = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.CreateSkill_UI_Datas());
     }
 
     public void UpdateChampion(ChampionModel model)

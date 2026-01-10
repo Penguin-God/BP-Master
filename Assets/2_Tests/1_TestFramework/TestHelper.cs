@@ -3,8 +3,9 @@ using System.Linq;
 
 public static class TestHelper
 {
-    public static SlotData CreateBlueSlot(int index) => new SlotData(Team.Blue, index);
-    public static SlotData CreateRedSlot(int index) => new SlotData(Team.Red, index);
+    public static SlotData CreateSlot(Team team, int index) => new SlotData(team, index);
+    public static SlotData CreateBlueSlot(int index) => CreateSlot(Team.Blue, index);
+    public static SlotData CreateRedSlot(int index) => CreateSlot(Team.Red, index);
 
     public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None)
     {
@@ -23,18 +24,18 @@ public static class TestHelper
     }
 
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
-
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
 
     public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0, TraitType traitType = TraitType.None) => new ChampionStatus(CreateStat(att, def, speed), traitType);
-    public static SkillData[] CreateSkills(params SkillData[] traits) => traits;
+    public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
+    public static SkillData[] CreateSkills(params SkillData[] skills) => skills;
 
     public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateValueSkillData(type, amount, default, rule);
 
-    public static SkillData CreateValueSkillData(SkillType traitType, int amount, SkillConditionData conditionData = default, SkillTargetRule traitTargetRule = default)
-        => new SkillData(traitType, new SkillAmountData(AmountType.Value, amount, 0, 0), conditionData, traitTargetRule);
+    public static SkillData CreateValueSkillData(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+        => new SkillData(skillType, new SkillAmountData(AmountType.Value, amount, 0, 0), conditionData, rule);
 
     public static Skill CreateValueSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
         => new Skill(CreateSkills(CreateValueSkillData(skillType, amount, conditionData, rule)));
@@ -66,9 +67,15 @@ public static class TestHelper
 
 
     public static PhaseData CreatePhaseData(GamePhase phase, params Team[] order) => new PhaseData(phase, new Phase(order));
-    public static PhaseManager CreatePhaseManager(params PhaseData[] phaseDatas) => CreatePhaseManager(new PhaseEventDispatcher(), phaseDatas);
-    public static PhaseManager CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseManager(phaseDatas, eventDispatcher);
+    public static PhaseFlowOrchestrator CreatePhaseManager(params PhaseData[] phaseDatas) => CreatePhaseManager(new PhaseEventDispatcher(), phaseDatas);
+    public static PhaseFlowOrchestrator CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseFlowOrchestrator(phaseDatas, eventDispatcher, new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
     public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
+    public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
+
+    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher());
+    public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
+
+    public static Champion CreateChampion(int id, int att = 0, int def = 0, int speed = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def, speed));
 }
 
 public class TestAttackChangeAction : ISkillAction
@@ -77,4 +84,20 @@ public class TestAttackChangeAction : ISkillAction
     public TestAttackChangeAction(int amount) => Amount = amount;
 
     public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
+}
+
+public class TestEntry : IPhaseEntry
+{
+    public int Count = 0;
+
+    readonly int BanCount;
+    readonly int PickCount;
+    public TestEntry(int banCount = 0, int pickCount = 0)
+    {
+        BanCount = banCount;
+        PickCount = pickCount;
+    }
+
+    public void EnterBan() => Count += BanCount;
+    public void EnterPick() => Count += PickCount;
 }

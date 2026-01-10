@@ -13,6 +13,8 @@ public class ChampionRepository : MonoBehaviour
         allChampion = LoadAllChampions();
         NameCatalog = allChampion.ToDictionary(x => x.Id, x => x.ChampionName);
     }
+    public ChampionCatalog GetCatalog() => new ChampionCatalog(AllChampion.Select(x => x.CreateChampion()));
     public ChampionSO GetChampionData(int id) => allChampion.First(x =>  x.Id == id);
+    public string GetChampionName(int id) => allChampion.First(x => x.Id == id).ChampionName;
     ChampionSO[] LoadAllChampions() => Resources.LoadAll<ChampionSO>("SO/Champions");
 }

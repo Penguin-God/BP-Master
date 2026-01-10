@@ -8,10 +8,8 @@ public class SelectSaveTests
     {
         const int Id = 3;
         GameBanPickStorage storage = CreateStorage(Id);
-
-        Assert.IsTrue(storage.CanSelected(Id));
-        Select(storage, Team.Blue, SelectType.Ban, Id);
-        Assert.IsFalse(storage.CanSelected(Id));
+        Select(storage, Team.Blue, GamePhase.Pick, Id);
+        Assert.IsFalse(Select(storage, Team.Blue, GamePhase.Pick, Id));
     }
 
     [Test]
@@ -26,14 +24,14 @@ public class SelectSaveTests
         storage.OnBan += (team, id) => ban = id;
         storage.OnPick += (SlotData, id) => (pickSlot, pick) = (SlotData, id);
 
-        Select(storage, Team.Blue, SelectType.Ban, 201);
-        Select(storage, Team.Blue, SelectType.Pick, 11);
-        Select(storage, Team.Blue, SelectType.Pick, 101);
+        Select(storage, Team.Blue, GamePhase.Ban, 201);
+        Select(storage, Team.Blue, GamePhase.Pick, 11);
+        Select(storage, Team.Blue, GamePhase.Pick, 101);
 
         Assert.AreEqual(201, ban);
-        Assert.AreEqual(TestHelper.BlueOneSlot, pickSlot);
+        Assert.AreEqual(BlueOneSlot, pickSlot);
         Assert.AreEqual(101, pick);
     }
 
-    void Select(GameBanPickStorage storage, Team team, SelectType select, int id) => storage.SaveSelect(new SelectInfo(team, select, id));
+    bool Select(GameBanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);
 }

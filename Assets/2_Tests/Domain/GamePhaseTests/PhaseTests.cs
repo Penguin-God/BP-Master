@@ -4,9 +4,6 @@ using static TestHelper;
 
 public class PhaseTests
 {
-    GameFlowData CreateFlow(GamePhase phase, Team team) => new GameFlowData(phase, team);   
-
-
     [Test]
     public void 다음턴_반환()
     {
@@ -53,29 +50,6 @@ public class PhaseTests
     }
 
     [Test]
-    public void 잘못된_팀_제출시_에러()
-    {
-        var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Ban, Team.Blue) });
-        sut.Start();
-
-        Assert.Throws<Exception>(() => sut.SubmitAction(Team.Red));
-    }
-
-    [Test]
-    public void TeamAll_은_양팀_모두_제출해야_진행한다()
-    {
-        var sut = CreatePhaseManager(new[] { CreatePhaseData(GamePhase.Skill, Team.All) });
-        sut.Start();
-
-        sut.SubmitAction(Team.Blue);
-        Assert.AreEqual(GamePhase.Skill, sut.CurrentFlow.Phase);  // 아직 Skill
-
-        sut.SubmitAction(Team.Red);
-        Assert.AreEqual(GamePhase.Done, sut.CurrentFlow.Phase);  // Done으로 진행됨
-    }
-
-
-    [Test]
     public void 디스패처에서_이벤트_발생()
     {
         var dispatcher = new PhaseEventDispatcher();
@@ -86,5 +60,16 @@ public class PhaseTests
         sut.Start();
 
         Assert.IsTrue(isCall);
+    }
+
+    [Test]
+    public void 페이즈_진입_에이전트_호출()
+    {
+        var blue = new TestEntry(banCount: 1);
+        var sut = new PhaseFlowOrchestrator(new PhaseData[] { CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Blue) }, new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(blue, new TestEntry()));
+        sut.Start();
+        sut.SubmitAction(Team.Blue);
+
+        Assert.AreEqual(2, blue.Count);
     }
 }

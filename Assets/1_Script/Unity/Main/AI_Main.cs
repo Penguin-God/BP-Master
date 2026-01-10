@@ -1,33 +1,36 @@
+using System.Collections;
 using UnityEngine;
 
-public class AI_Main : MonoBehaviour
+public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
-    PhaseEventDispatcher phaseEventDispatcher;
 
     [SerializeField] MasteryGenerator masteryGenerator;
-    [SerializeField] SelectorsCreatetorSO selectorsCreatetor;
+    [SerializeField] AI_SelectorFactory selectorsCreatetor;
 
-    public void Init(Team team, PhaseEventDispatcher phaseEventDispatcher)
+    AI_BanPickAgent banPickAgent;
+    public void EnterBan() => StartCoroutine(CoBan());
+    public void EnterPick() => banPickAgent.Pick(Team);
+
+    IEnumerator CoBan()
+    {
+        yield return new WaitForSeconds(0.5f);
+        banPickAgent.Ban(Team);
+    }
+
+    public void Init(Team team, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUseController skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog)
     {
         Team = team;
-        this.phaseEventDispatcher = phaseEventDispatcher;
+
+        selectorsCreatetor.Init(Team, championCatalog, masteryGenerator.GetTeamMasteryManager(Team), statusSlots);
+        banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
+        storage.OnPick += OnPick;
+        GetComponent<AI_MonoBehaviourAgent>().Init(new AI_SkillUseAgent(skillSlots, skillUseController));
     }
 
-    public void InitAI_BanPick(PhaseManager phaseManager, GameBanPickStorage storage)
+    void OnPick(SlotData slotData, int id)
     {
-        selectorsCreatetor.Init(masteryGenerator.GetTeamMasteryManager(Team));
-        var ai = new AI_BanPickAgent(Team, phaseManager, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
-        phaseEventDispatcher.OnPhaseBan += ai.Ban;
-        phaseEventDispatcher.OnPhasePick += ai.Pick;
-    }
-
-    public void InitAI_Trait(SkillSlotFilter filter, SlotStorageManager slotManager, SkillUseController skillController, int teamSize)
-    {
-        var skill_ai = new AI_SkillAgent(Team, filter, slotManager.SkillSlots, skillController, new TargetCounter(teamSize));
-        var ai_agent = GetComponent<AI_MonoBehaviourAgent>();
-        ai_agent.Init(skill_ai);
-        phaseEventDispatcher.OnPhaseSkill += ai_agent.UseTrait;
-        if (Team == Team.Blue) skill_ai.UseSkill(Team.Blue);
+        if (slotData.Team != Team) return;
+        GetComponent<AI_MonoBehaviourAgent>().UseSkill(slotData);
     }
 }

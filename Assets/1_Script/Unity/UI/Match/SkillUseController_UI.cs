@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,13 +9,11 @@ public class SkillUseController_UI : MonoBehaviour
     SkillButtonView skillButtonView;
 
     SlotStorage<Skill> skillSlots;
-    SkillUsePersenter traitUsePresenter;
     SkillUseController skillUseController;
 
-    public void Init(SkillUsePersenter traitUsePresenter, SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
+    public void Init(SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
     {
         gameObject.SetActive(true);
-        this.traitUsePresenter = traitUsePresenter;
         this.skillSlots = skillSlots;
         this.skillUseController = skillUseController;
 
@@ -34,17 +33,27 @@ public class SkillUseController_UI : MonoBehaviour
 
     void OnClickSkillSlot(SlotData clickSlot)
     {
-        if (traitUsePresenter.IsUseable)
+        targetSelector.Select(clickSlot);
+        RefeshButton();
+        if (targetSelector.IsFull)
         {
-            if (traitUsePresenter.SelectTarget(clickSlot, out var useSlot))
-                skillUseController.UseSkill(useSlot, traitUsePresenter.CurrentTargets, skillSlots.GetSlot(useSlot));
+            skillUseController.UseSkill(useSlot, targetSelector.Targets, skillSlots.GetSlot(useSlot));
+            skillButtonView.InActiveAllBtns();
         }
-        else
-        {
-            var rules = skillSlots.GetSlot(clickSlot).Rules;
-            traitUsePresenter.SelectUseSkill(clickSlot, EnumCaster.MergeRule(rules));
-        }
-
-        if (traitUsePresenter.IsUseable) skillButtonView.ActiveTargets(skillSlots.GetSlot(traitUsePresenter.UseSlot), traitUsePresenter.CurrentTargets);
     }
+
+    SkillTargetSelector targetSelector;
+    SlotData useSlot;
+    public void UseSkill(SlotData useSlot)
+    {
+        this.useSlot = useSlot;
+        var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
+        targetSelector = new SkillTargetSelector(useSlot.Team, skillSlots.GetTeamCounter(), rule);
+        RefeshButton();
+        // 타겟이 아예 없는 경우
+        if (targetSelector.IsFull)
+            skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
+    }
+
+    void RefeshButton() => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);
 }

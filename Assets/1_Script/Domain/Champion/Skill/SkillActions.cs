@@ -79,3 +79,19 @@ public class AmplifyChanger : ISkillAction
 
     public void Do(ChampionStatus target) => target.AddUpRate(amount);
 }
+
+public class PickChampBuffer : ISkillAction
+{
+    readonly PhaseActionEventDispatcher eventDispatcher;
+    readonly int Amount;
+    public PickChampBuffer(PhaseActionEventDispatcher eventDispatcher, int amount)
+    {
+        this.eventDispatcher = eventDispatcher;
+        this.Amount = amount;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+        eventDispatcher.OnChampionPick += (champ) => champ.Status.AddAttackWithRate(Amount);
+    }
+}

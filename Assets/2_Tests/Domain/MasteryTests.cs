@@ -7,31 +7,33 @@ public class MasteryTests
     {
         ChampionMastery[] data = new ChampionMastery[]{new ChampionMastery(12, 10), new ChampionMastery(11, 20)};
 
-        MasteryManager sut = new(data);
+        MasteryCollection sut = new(data);
 
-        Assert.AreEqual(10, sut.GetMastery(12));
-        Assert.AreEqual(20, sut.GetMastery(11));
-        Assert.AreEqual(0, sut.GetMastery(44));
+        Assert.AreEqual(10, GetMastery(sut, 12));
+        Assert.AreEqual(20, GetMastery(sut, 11));
+        Assert.AreEqual(0, GetMastery(sut, 44));
         CollectionAssert.AreEquivalent(data, sut.AllMasteries);
     }
 
     [Test]
     public void 기존_챔피언은_숙련도_1_증가()
     {
-        var sut = new MasteryManager(new[] { new ChampionMastery(10, 5) });
+        var sut = new MasteryCollection(new[] { new ChampionMastery(10, 5) });
 
         sut.AddMastery(10);
 
-        Assert.AreEqual(6, sut.GetMastery(10));
+        Assert.AreEqual(6, GetMastery(sut, 10));
     }
 
     [Test]
     public void 없는_챔피언은_숙련도_1로_추가()
     {
-        var sut = new MasteryManager(new[] { new ChampionMastery(10, 5) });
+        var sut = new MasteryCollection(new[] { new ChampionMastery(10, 5) });
 
         sut.AddMastery(44);
 
-        Assert.AreEqual(1, sut.GetMastery(44));
+        Assert.AreEqual(1, GetMastery(sut, 44));
     }
+
+    int GetMastery(MasteryCollection sut, int id) => sut.GetMasteryLevel(id);
 }

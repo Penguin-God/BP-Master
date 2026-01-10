@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class TraitExecuteTests
+public class SkillExecuteTests
 {
     [Test]
     public void 특성_적용_제외된_경우_무시()

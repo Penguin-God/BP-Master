@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static TestHelper;
 
 public class TraitActionTests
 {
@@ -83,5 +84,19 @@ public class TraitActionTests
         sut.Do(target);
 
         Assert.AreEqual(1.5f, target.UpRate);
+    }
+
+    [Test]
+    public void 픽한_아군_스탯_증가()
+    {
+        var champ = new Champion(1, null, CreateStatus());
+        var eventDispatcher = new PhaseActionEventDispatcher();
+        var sut = new PickChampBuffer(eventDispatcher, 100);
+
+        sut.Do(null);
+        eventDispatcher.RaisePick(champ);
+
+
+        Assert.AreEqual(100, champ.Status.Stat.Attack);
     }
 }

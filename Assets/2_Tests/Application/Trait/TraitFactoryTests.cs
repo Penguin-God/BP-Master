@@ -10,7 +10,7 @@ public class TraitFactoryTests
     [TestCase(TraitType.Break, typeof(Break))]
     public void Type에_맞는_Action_객체_생성(TraitType type, System.Type expectedType)
     {
-        var sut = new TraitFactory(default, CreateOneSlotStatus());
+        var sut = new TraitFactory(new TraitConfig(0, 0, 0, 0), CreateOneSlotStatus());
 
         var result = sut.Create(Team.Blue, type);
 

@@ -1,19 +1,30 @@
 using System.Collections;
 using UnityEngine;
 
-public class AI_MonoBehaviourAgent : MonoBehaviour
+public class AI_MonoBehaviourAgent : MonoBehaviour, IPhaseEntry
 {
-    AI_SkillAgent traitAgent;
-    public void Init(AI_SkillAgent aI_TraitAgent)
+    AI_SkillUseAgent traitAgent;
+
+    public void EnterBan()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void EnterPick()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Init(AI_SkillUseAgent aI_TraitAgent)
     {
         traitAgent = aI_TraitAgent;
     }
 
-    public void UseTrait(Team team) => StartCoroutine(Co_UseTrait(team));
+    public void UseSkill(SlotData slot) => StartCoroutine(Co_UseTrait(slot));
 
-    IEnumerator Co_UseTrait(Team team)
+    IEnumerator Co_UseTrait(SlotData slot)
     {
         yield return new WaitForSeconds(1.5f);
-        traitAgent.UseSkill(team);
+        traitAgent.UseSkill(slot);
     }
 }

@@ -1,74 +1,62 @@
-using System.Linq;
 using UnityEngine;
 
 public class MatchDI : MonoBehaviour
 {
     [SerializeField] MatchConfigSO matchConfig;
-    SlotStorageManager slotManager;
     [SerializeField] ChampionRepository champManager;
-    GameBanPickStorage storage;
 
-    PhaseManager phaseManager;
-    PhaseEventDispatcher phaseEventDispatcher = new PhaseEventDispatcher();
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] MasteryGenerator masteryGenerator;
     [SerializeField] AI_Main ai_main;
-    Team playerTeam;
-    [SerializeField] UtilKey utilKey;
+
+    PickSlotFacade PickSlotFacade => pickHandler.PickSlotFacade;
+    [SerializeField] ChampionSelector_UI championSelector;
+    PickHandler pickHandler;
+
     public void GameStart(Team playerTeam)
     {
-        this.playerTeam = playerTeam;
-        masteryGenerator.CreateRandomRoster(matchConfig.TeamSize);
+        masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
+        var storage = new GameBanPickStorage(champManager.AllId);
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), phaseEventDispatcher);
-        storage = new GameBanPickStorage(champManager.AllId);
+        var phaseEventDispatcher = new PhaseEventDispatcher();
+        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
 
-        phaseManager = new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher);
-        utilKey.Init(storage, phaseManager);
-
-        phaseEventDispatcher.OnPhaseSkill += Trait;
+        // 로직 추출하기
+        var actionEventDispathcer = new PhaseActionEventDispatcher();
+        pickHandler = new PickHandler(champManager.GetCatalog(), actionEventDispathcer);
         phaseEventDispatcher.OnPhaseDone += OnDone;
+        storage.OnPick += OnPick;
+        var skillController = new SkillUseController(PickSlotFacade.StatusSlots, new SkillExecutorFactory(new SkillActionFactory(actionEventDispathcer)));
+        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
+        storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade.StatusSlots, PickSlotFacade.SkillSlots, skillController); // start보다 먼저
 
-        ai_main.InitAI_BanPick(phaseManager, storage);
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController, PickSlotFacade.StatusSlots, champManager.GetCatalog());
 
         phaseManager.Start();
     }
 
-    bool initTrait;
-    void Trait(Team team)
+    PhaseFlowOrchestrator CreatePhaseOrchestrator(PhaseEventDispatcher phaseEventDispatcher, IPhaseEntry player, IPhaseEntry ai, Team playerTeam)
     {
-        if (initTrait) return;
-        initTrait = true;
-        slotManager = new SlotStorageManager(storage, champManager);
-
-        var skillController = new SkillUseController(slotManager.StatusSlots);
-        skillController.OnUseSkill += slot => slotManager.SkillUseFlagSlot.ChangeSlot(slot, true);
-        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-        var filter = new SkillSlotFilter(slotManager.SkillUseFlagSlot);
-
-        matchUI_Controller.SkillUI_Init(playerTeam, phaseEventDispatcher, skillController, slotManager, filter);
-
-        var traitFactory = new TraitFactory(matchConfig.TraitConfig, slotManager.StatusSlots);
-        var traitExecutor = new TraitExecutor(traitFactory);
-        traitExecutor.ExecuteAllTriat(slotManager.StatusSlots);
-
-        ApplyMastery(); // 마지막에
-        ai_main.InitAI_Trait(filter, slotManager, skillController, matchConfig.TeamSize);
+        IPhaseEntry blue = playerTeam == Team.Blue ? player : ai;
+        IPhaseEntry red = playerTeam == Team.Red ? player : ai;
+        return new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
     }
 
-    void ApplyMastery()
+    void OnPick(SlotData slotData, int id)
     {
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Blue).ToArray(), slotManager.StatusSlots.GetTeam(Team.Blue).ToArray(), masteryGenerator.GetTeamMasteries(Team.Blue));
-        new TeamMasteryApplier().ApplyMastery(storage.PickIds.GetTeam(Team.Red).ToArray(), slotManager.StatusSlots.GetTeam(Team.Red).ToArray(), masteryGenerator.GetTeamMasteries(Team.Red));
+        var traitFactory = new TraitFactory(matchConfig.TraitConfig, PickSlotFacade.StatusSlots);
+        PickEffectApplier pickEffectApplier = new PickEffectApplier(traitFactory, masteryGenerator.GetTeamMasteryManager(slotData.Team));
+        pickHandler.Pick(slotData.Team, id);
+        pickEffectApplier.Apply(slotData.Team, PickSlotFacade.ChampionSlots.GetSlot(slotData));
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultConverter(builder).ToResult(slotManager.StatusSlots);
+        MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
         matchUI_Controller.Done(result);
     }
 }

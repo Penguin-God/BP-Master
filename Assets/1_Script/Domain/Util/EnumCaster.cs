@@ -15,13 +15,6 @@ public static class EnumCaster
         _ => throw new ArgumentOutOfRangeException(nameof(side), $"없는 조합: {selfTeam}, {side}")
     };
 
-    public static SelectType PhaseToSelect(GamePhase phase)
-    {
-        if (phase == GamePhase.Pick) return SelectType.Pick;
-        else if (phase == GamePhase.Ban) return SelectType.Ban;
-        else throw new Exception($"밴과 픽 중 하나여야 함 : {phase}");
-    }
-
     public static Side MergeSide(IEnumerable<Side> sides)
     {
         if (sides.All(s => s == Side.Self)) return Side.Self;

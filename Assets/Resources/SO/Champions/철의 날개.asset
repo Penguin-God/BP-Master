@@ -18,7 +18,7 @@ MonoBehaviour:
   defense: 140
   speed: 4
   skillDatas:
-  - targetSide: 2
+  - targetSide: 0
     range: 4
     traitType: 5
     skillAmount:
