@@ -12,7 +12,6 @@ public class PickHandler
 
     public void Pick(Team team, int id)
     {
-        // if(gameBanPickStorage.CanSelected(id) == false) throw new Exception($"픽할 수 없는 ID : {id}");
         var champion = championCatalog.GetChampion(id);
         PickSlotFacade.Add(team, champion);
         eventDispatcher.RaisePick(champion);

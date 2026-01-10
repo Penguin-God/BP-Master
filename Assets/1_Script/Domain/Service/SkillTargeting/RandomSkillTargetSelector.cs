@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class AI_SkillTargetSelector
+public class RandomSkillTargetSelector
 {
     public IEnumerable<SlotData> SelectSkillTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator)
     {

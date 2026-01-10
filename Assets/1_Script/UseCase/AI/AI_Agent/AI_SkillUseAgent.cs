@@ -3,7 +3,7 @@ public class AI_SkillUseAgent
 {
     readonly SlotStorage<Skill> skillSlots;
     readonly SkillUseController skillUseController;
-    readonly AI_SkillTargetSelector targetSelector = new AI_SkillTargetSelector();
+    readonly RandomSkillTargetSelector targetSelector = new RandomSkillTargetSelector();
     public AI_SkillUseAgent(SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
     {
         this.skillSlots = skillSlots;

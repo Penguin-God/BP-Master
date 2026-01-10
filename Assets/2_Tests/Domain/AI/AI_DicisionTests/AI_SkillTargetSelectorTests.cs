@@ -4,7 +4,7 @@ using static TestHelper;
 
 public class AI_SkillTargetSelectorTests
 {
-    public AI_SkillTargetSelector CreateSelector() => new AI_SkillTargetSelector();
+    public RandomSkillTargetSelector CreateSelector() => new RandomSkillTargetSelector();
 
     [Test]
     public void 요청한_개수만큼_반환하고_원본에서_제거한다()
@@ -27,7 +27,7 @@ public class AI_SkillTargetSelectorTests
     {
         const int TARGET_COUNT = 4;
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
-        var sut = new AI_SkillTargetSelector();
+        var sut = new RandomSkillTargetSelector();
 
         var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
 
@@ -41,7 +41,7 @@ public class AI_SkillTargetSelectorTests
     {
         const int TARGET_COUNT = 4;
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
-        var sut = new AI_SkillTargetSelector();
+        var sut = new RandomSkillTargetSelector();
 
         var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkill(SkillType.AttackChanger, 100, rule: AllRule), countCalculator);
 
@@ -54,7 +54,7 @@ public class AI_SkillTargetSelectorTests
     {
         const int TARGET_COUNT = 4;
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
-        var sut = new AI_SkillTargetSelector();
+        var sut = new RandomSkillTargetSelector();
 
         var result = sut.SelectSkillTargets(Team.Blue, CreateSkill(CreateValueSkillData(SkillType.AttackChanger, 100, rule: OpponentAllRule), CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule)), countCalculator);
 

@@ -3,7 +3,7 @@ using System.Linq;
 public class SkillPreviewer
 {
     readonly SkillExecutorFactory skillExecutorFactory = new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
-    readonly AI_SkillTargetSelector skillTargetSelector = new AI_SkillTargetSelector();
+    readonly RandomSkillTargetSelector skillTargetSelector = new RandomSkillTargetSelector();
 
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
