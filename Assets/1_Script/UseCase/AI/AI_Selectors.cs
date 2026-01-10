@@ -27,17 +27,8 @@ public record ChampionValue(int Id, int Value);
 public class ValuePick : IPickSelector
 {
     readonly ChampionRanker ranker;
-
-    public ValuePick(ChampionRanker ranker)
-    {
-        this.ranker = ranker;
-    }
-
-    public int Pick(HashSet<int> candidateIds)
-    {
-        // 랭커에게 순위를 매겨달라고 하고, 가장 높은(First) 챔피언의 ID를 반환
-        return ranker.GetChampionRank(candidateIds).First().Id;
-    }
+    public ValuePick(ChampionRanker ranker) => this.ranker = ranker;
+    public int Pick(HashSet<int> candidateIds) => ranker.GetChampionRank(candidateIds).First().Id;
 }
 
 public class ChampionRanker
