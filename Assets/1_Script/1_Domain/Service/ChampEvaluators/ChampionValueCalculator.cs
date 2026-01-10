@@ -20,7 +20,6 @@ public class ChampionValueCalculator : IChampionEvaluator
 
         var statChangeInfo = skillValueCalculator.Calculate(team, champion);
         int skillScore = statCalculator.CalcualteTeamStatValue(statChangeInfo, team);
-
         return statScore + masteryScore + skillScore;
     }
 }
