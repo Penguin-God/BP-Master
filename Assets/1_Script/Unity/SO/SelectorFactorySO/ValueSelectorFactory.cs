@@ -10,7 +10,8 @@ public class ValueSelectSO : AI_SelectorFactory
     {
         var statCalculator = new ChampionStatValueCalculator(speedValue);
         var skillExecutorFactory = new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
-        var valuePick = new ValuePickLog(new ChampionRanker(championCatalog, new ChampionValueCalculator(statCalculator, new SkillValueCalculator(new SkillPreviewer(), statusSlots), masteryManager, team)));
-        return valuePick;
+        var championRanker = new ChampionRanker(championCatalog, new ChampionValueCalculator(statCalculator, new SkillValueCalculator(new SkillPreviewer(), statusSlots), masteryManager, team));
+        var valuePick = new ValuePick(championRanker);
+        return new ValuePickLog(valuePick, championRanker);
     }
 }

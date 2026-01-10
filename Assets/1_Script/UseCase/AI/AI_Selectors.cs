@@ -74,13 +74,15 @@ public class ValueBan : IBanSelector
     }
 }
 
-public class ValuePickLog : IPickSelector
+public class ValuePickLog : IPickSelector // 데코레이트
 {
     readonly ChampionRanker championRanker;
+    readonly ValuePick valuePick;
 
-    public ValuePickLog(ChampionRanker championRanker)
+    public ValuePickLog(ValuePick valuePick, ChampionRanker championRanker)
     {
         this.championRanker = championRanker;
+        this.valuePick = valuePick;
     }
 
     public int Pick(HashSet<int> candidateIds)
@@ -88,6 +90,6 @@ public class ValuePickLog : IPickSelector
         var rank = championRanker.GetChampionRank(candidateIds);
         var logs = rank.Select(x => $"{x.Id} : {x.Value}");
         UnityEngine.Debug.Log(string.Join("\n", logs));
-        return rank.First().Id;
+        return valuePick.Pick(candidateIds);
     }
 }
