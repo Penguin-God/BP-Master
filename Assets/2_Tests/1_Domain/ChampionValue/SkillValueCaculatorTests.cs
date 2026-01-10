@@ -18,7 +18,7 @@ public class SkillValueCaculatorTests
 
         var sut = new SkillValueCalculator(previewer, originSlots);
 
-        GameStatChangeInfo result = sut.Calculate(Team.Blue, champion);
+        GameScoreInfo result = sut.Calculate(Team.Blue, champion);
 
         Assert.AreEqual(100, result.Blue.Att);
         Assert.AreEqual(0, result.Red.Att);

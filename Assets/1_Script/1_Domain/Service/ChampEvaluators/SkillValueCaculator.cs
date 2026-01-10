@@ -1,7 +1,7 @@
 public class SkillValueCalculator
 {
     readonly SkillPreviewer Previewer;
-    readonly SkillApplyDeltaCalculator DeltaCalculator = new SkillApplyDeltaCalculator();
+    readonly ScoreDeltaCalculator DeltaCalculator = new ScoreDeltaCalculator();
     SlotStorage<ChampionStatus> statusSlots;
 
     public SkillValueCalculator(SkillPreviewer previewer, SlotStorage<ChampionStatus> statusSlots)
@@ -10,7 +10,7 @@ public class SkillValueCalculator
         this.statusSlots = statusSlots;
     }
 
-    public GameStatChangeInfo Calculate(Team team, Champion champion)
+    public GameScoreInfo Calculate(Team team, Champion champion)
     {
         var afterSlots = Previewer.PreviewSkill(team, champion, statusSlots);
         return DeltaCalculator.CalculateStatDelta(statusSlots, afterSlots);

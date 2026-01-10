@@ -22,7 +22,7 @@ public class SkillPreviewTests
     {
         var originSlots = CreateTwoSlotStatus(att: 1000, def: 100, speed:5);
         var afterSlots = CreateTwoSlotStatus(att: 800);
-        var sut = new SkillApplyDeltaCalculator();
+        var sut = new ScoreDeltaCalculator();
 
         var result = sut.CalculateStatDelta(originSlots, afterSlots);
         Assert.AreEqual(-400, result.Red.Att);
