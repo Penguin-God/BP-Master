@@ -1,12 +1,12 @@
 
-public class PickValueCalculator : IChampionEvaluator
+public class PickValueEvaluator : IChampionEvaluator
 {
     readonly ChampionStatValueCalculator statCalculator;
     readonly ChampionValueApplier skillValueCalculator;
     readonly BonusDeltaCalculator bonusDeltaCalculator;
     readonly Team team;
     readonly SlotStorage<ChampionStatus> originStats;
-    public PickValueCalculator(ChampionStatValueCalculator statCalculator, ChampionValueApplier skillValueCalculator, BonusDeltaCalculator bonusDeltaCalculator, Team myTeam, SlotStorage<ChampionStatus> originStats)
+    public PickValueEvaluator(ChampionStatValueCalculator statCalculator, ChampionValueApplier skillValueCalculator, BonusDeltaCalculator bonusDeltaCalculator, Team myTeam, SlotStorage<ChampionStatus> originStats)
     {
         this.statCalculator = statCalculator;
         this.skillValueCalculator = skillValueCalculator;

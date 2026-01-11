@@ -1,12 +1,6 @@
 public class ChampionValueApplier
 {
     readonly SkillPreviewer Previewer;
-
-    public ChampionValueApplier(SkillPreviewer previewer, SlotStorage<ChampionStatus> statusSlots)
-    {
-        Previewer = previewer;
-    }
-
     readonly MasteryApplier masteryApplier;
     public ChampionValueApplier(SkillPreviewer previewer, MasteryApplier masteryApplier)
     {

@@ -1,10 +1,10 @@
 ﻿<Solution>
   <Project Path="ApplicationTests.csproj" />
-  <Project Path="Domain.csproj" />
   <Project Path="DomainTests.csproj" />
   <Project Path="App.csproj" />
   <Project Path="Adapter.csproj" />
   <Project Path="Application.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Domain.csproj" />
   <Project Path="2_Tests.csproj" />
 </Solution>

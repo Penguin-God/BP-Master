@@ -4,17 +4,6 @@ using static TestHelper;
 public class StaticEvalueatorTests
 {
     [Test]
-    public void 속도_가치에_따라_스탯_총합_계산()
-    {
-        var sut = new ChampionStatValueCalculator(10);
-        ChampionStatData stat = CreateStat(att: 20, def: 40, speed:5);
-
-        int result = sut.CalculateStatValue(stat);
-
-        Assert.AreEqual(110, result);
-    }
-
-    [Test]
     public void 팀에_따라_아군_적군_합해서_밸류_계산()
     {
         var sut = new ChampionStatValueCalculator(10);

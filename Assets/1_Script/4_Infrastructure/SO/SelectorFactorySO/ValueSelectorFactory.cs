@@ -4,15 +4,27 @@ using UnityEngine;
 public class ValueSelectSO : AI_SelectorFactory
 {
     [SerializeField] int speedValue;
-    public override IBanSelector CreateBanSelector() => new RandomBan();
+    [SerializeField] BonusDataFactory bonusDataFactory;
+    public override IBanSelector CreateBanSelector()
+    {
+        var valueBan = new ValueBan(CreateRanker(EnumCaster.GetOppoentTeam(team)));
+        return new ValueBanLog(valueBan, CreateValueLogger(EnumCaster.GetOppoentTeam(team)));
+    }
 
     public override IPickSelector CreatePickSelector()
     {
-        var statCalculator = new ChampionStatValueCalculator(speedValue);
-        var skillExecutorFactory = new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
-        var evaluator = new PickValueCalculator(statCalculator, new ChampionValueApplier(new SkillPreviewer(), statusSlots), null, team, null);
-        var championRanker = new ChampionRanker(championCatalog, evaluator);
-        var valuePick = new ValuePick(championRanker);
-        return new ValuePickLog(valuePick, evaluator, championCatalog);
+        var valuePick = new ValuePick(CreateRanker(team));
+        return new ValuePickLog(valuePick, CreateValueLogger(team));
     }
+
+    PickValueEvaluator CreateEvaluator(Team team)
+    {
+        var statCalculator = new ChampionStatValueCalculator(speedValue);
+        var masteryAppiler = new MasteryApplier(masteryManager);
+        return new PickValueEvaluator(statCalculator, new ChampionValueApplier(new SkillPreviewer(), masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus), team, statusSlots);
+    }
+
+    ChampionRanker CreateRanker(Team team) => new ChampionRanker(championCatalog, CreateEvaluator(team));
+
+    ValueLogger CreateValueLogger(Team team) => new ValueLogger(championCatalog, CreateEvaluator(team));
 }

@@ -4,14 +4,14 @@ using static TestHelper;
 public class ValueCalcualateTests
 {
     int CHAMP_ID = 1;
-    PickValueCalculator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
+    PickValueEvaluator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
     {
         var originSlots = CreateTwoSlotStatus();
 
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
         var previewer = new SkillPreviewer();
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueCalculator(statCalculator, new ChampionValueApplier(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
+        return new PickValueEvaluator(statCalculator, new ChampionValueApplier(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
     }
 
     [Test]

@@ -4,7 +4,6 @@ public class ChampionStatValueCalculator
     readonly int SPPED_VALUE;
 
     public ChampionStatValueCalculator(int speedValue) => SPPED_VALUE = speedValue;
-    public int CalculateStatValue(ChampionStatData stat) => stat.Attack + stat.Defense + stat.Speed * SPPED_VALUE;
 
     public int CalcualteTeamStatValue(GameScoreInfo data, Team myTeam)
     {
