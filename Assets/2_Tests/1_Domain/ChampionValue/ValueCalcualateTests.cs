@@ -3,17 +3,16 @@ using static TestHelper;
 
 public class ValueCalcualateTests
 {
-    ChampionValueCalculator CreateSut(BonusCalculator bonusCalculator)
+    int CHAMP_ID = 1;
+    ChampionValueCalculator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
     {
-        var originSlots = CreateTwoSlotStatus(att: 100);
-        var skillData = CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule);
+        var originSlots = CreateTwoSlotStatus();
 
-        var statCalculator = new ChampionStatValueCalculator(0);
+        var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
         var previewer = new SkillPreviewer();
-        var masteryCollection = new MasteryCollection(new ChampionMastery[0]);
-
-        var sut = new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, Team.Blue);
-        return sut;
+        var masteryCollection = CreateMasteryCollection(new ChampionMastery(CHAMP_ID, masteryLevel));
+        var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
+        return new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, bonus, Team.Blue, originSlots);
     }
 
     //[Test]
@@ -71,16 +70,17 @@ public class ValueCalcualateTests
     //}
 
     [Test]
-    public void 보너스도_적용하기()
+    [TestCase(0, 320)] // 원래 받는 보너스는 점수 반영 X
+    [TestCase(150, 420)] // stat 100 + mastery 20 + skill 200 + bonus 100
+    public void 스탯_숙련도_스킬_보너스_적용한_챔피언_가치(int bounsNeed, int result)
     {
         var skillData = CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule);
-        var champion = CreateChampion(skillData: skillData);
-        var sut = CreateSut(CreateBonus(300, 100));
+        var champion = CreateChampion(CHAMP_ID, att: 100, skillData: skillData);
+        var sut = CreateSut(CreateBonus(bounsNeed, 100), masteryLevel: 10);
 
         // Act
         int score = sut.Evaluate(champion);
 
-        // skill 200 + bonus 100
-        // Assert.AreEqual(300, score);
+        Assert.AreEqual(result, score);
     }
 }

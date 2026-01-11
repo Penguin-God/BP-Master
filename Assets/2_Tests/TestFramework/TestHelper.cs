@@ -79,6 +79,8 @@ public static class TestHelper
     public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
 
     public static BonusCalculator CreateBonus(int needScore, int bonus) => new BonusCalculator(new SortedDictionary<int, int>() { { needScore, bonus } });
+
+    public static MasteryCollection CreateMasteryCollection(params ChampionMastery[] masteries) => new MasteryCollection(masteries);
 }
 
 public class TestAttackChangeAction : ISkillAction

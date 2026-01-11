@@ -1,8 +1,8 @@
 using System.Linq;
 
-public class ScoreConvertor
+public static class ScoreConvertor
 {
-    public GameScoreInfo Convert(SlotStorage<ChampionStatus> storage)
+    public static GameScoreInfo Convert(SlotStorage<ChampionStatus> storage)
     {
         ScoreInfo blueScore = CalculateTeamScore(storage, Team.Blue);
         ScoreInfo redScore = CalculateTeamScore(storage, Team.Red);
@@ -10,7 +10,7 @@ public class ScoreConvertor
         return new GameScoreInfo(blueScore, redScore);
     }
 
-    ScoreInfo CalculateTeamScore(SlotStorage<ChampionStatus> storage, Team team)
+    static ScoreInfo CalculateTeamScore(SlotStorage<ChampionStatus> storage, Team team)
     {
         var stats = storage.GetTeam(team).Select(x => x.Stat);
         int totalAtt = ScoreCalculator.CalculateAttack(stats);
