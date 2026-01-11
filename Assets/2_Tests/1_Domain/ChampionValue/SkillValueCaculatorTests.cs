@@ -33,7 +33,7 @@ public class SkillValueCaculatorTests
         var champion = CreateChampion(id: 1, att:100, skillData: skillData);
         var previewer = new SkillPreviewer();
 
-        var sut = new SkillValueCalculator(previewer, CreateMasteryCollection(new ChampionMastery(1, 10)));
+        var sut = new ChampionValueApplier(previewer, CreateMasteryApplier(new ChampionMastery(1, 10)));
 
         GameScoreInfo result = sut.Calculate(Team.Blue, champion, originSlots);
 

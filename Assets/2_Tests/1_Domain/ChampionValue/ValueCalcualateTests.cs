@@ -12,7 +12,7 @@ public class ValueCalcualateTests
         var previewer = new SkillPreviewer();
         var masteryCollection = CreateMasteryCollection(new ChampionMastery(CHAMP_ID, masteryLevel));
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new ChampionValueCalculator(statCalculator, new SkillValueCalculator(previewer, originSlots), masteryCollection, bonus, Team.Blue, originSlots);
+        return new ChampionValueCalculator(statCalculator, new ChampionValueApplier(previewer, originSlots), masteryCollection, bonus, Team.Blue, originSlots);
     }
 
     //[Test]

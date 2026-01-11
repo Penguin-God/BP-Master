@@ -1,23 +1,18 @@
 public class PickEffectApplier
 {
     readonly TraitFactory traitFactory;
-    readonly MasteryCollection masteryCollection;
+    readonly MasteryApplier masteryApplier;
 
     public PickEffectApplier(TraitFactory traitFactory, MasteryCollection masteryCollection)
     {
         this.traitFactory = traitFactory;
-        this.masteryCollection = masteryCollection;
+        this.masteryApplier = new MasteryApplier(masteryCollection);
     }
 
     public void Apply(Team team, Champion champion)
     {
         ApplyTrait(team, champion.Status.TraitType);
-
-        if (masteryCollection.HasMastery(champion.Id))
-        {
-            int level = masteryCollection.GetMasteryLevel(champion.Id);
-            new MasteryApplier().ApplyStatChange(champion.Status, level);
-        }
+        masteryApplier.ApplyMastery(champion.Id, champion.Status);
     }
 
     void ApplyTrait(Team team, TraitType traitType) => traitFactory.Create(team, traitType).Do();

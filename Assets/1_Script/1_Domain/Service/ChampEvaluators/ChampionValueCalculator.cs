@@ -2,12 +2,12 @@
 public class ChampionValueCalculator : IChampionEvaluator
 {
     readonly ChampionStatValueCalculator statCalculator;
-    readonly SkillValueCalculator skillValueCalculator;
+    readonly ChampionValueApplier skillValueCalculator;
     readonly MasteryCollection masteryCollection;
     readonly BonusDeltaCalculator bonusDeltaCalculator;
     readonly Team team;
     readonly SlotStorage<ChampionStatus> originStats;
-    public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, SkillValueCalculator skillValueCalculator, MasteryCollection masteryCollection, BonusDeltaCalculator bonusDeltaCalculator, Team myTeam, SlotStorage<ChampionStatus> originStats)
+    public ChampionValueCalculator(ChampionStatValueCalculator statCalculator, ChampionValueApplier skillValueCalculator, MasteryCollection masteryCollection, BonusDeltaCalculator bonusDeltaCalculator, Team myTeam, SlotStorage<ChampionStatus> originStats)
     {
         this.statCalculator = statCalculator;
         this.skillValueCalculator = skillValueCalculator;
