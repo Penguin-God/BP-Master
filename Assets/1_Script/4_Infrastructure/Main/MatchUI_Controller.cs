@@ -17,7 +17,7 @@ public class MatchUI_Controller : MonoBehaviour
     MasteryButtonHighlighter masteryHighlighter;
     public void Awake()
     {
-        masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(true);
+        masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(includeInactive: true);
     }
 
     Team team;
@@ -32,8 +32,8 @@ public class MatchUI_Controller : MonoBehaviour
         storage.OnBan += banView.UpdateBanList;
         storage.OnPick += slotViews.PickChampion;
 
-        storage.OnBan += (team, id) => championDrawer.InActiveButton(id);
-        storage.OnPick += (slot, id) => championDrawer.InActiveButton(id);
+        storage.OnBan += (_, id) => championDrawer.InActiveButton(id);
+        storage.OnPick += (_, id) => championDrawer.InActiveButton(id);
 
         storage.OnPick += OnPick;
 
@@ -41,7 +41,7 @@ public class MatchUI_Controller : MonoBehaviour
         skillButtonView.Init(playerTeam);
         skillUseView.Init(skillSlots, skillController);
 
-        storage.OnPick += (slot, id) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
+        storage.OnPick += (slot, _) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
         skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
