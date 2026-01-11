@@ -1,12 +1,10 @@
 public class ChampionValueApplier
 {
     readonly SkillPreviewer Previewer;
-    SlotStorage<ChampionStatus> statusSlots;
 
     public ChampionValueApplier(SkillPreviewer previewer, SlotStorage<ChampionStatus> statusSlots)
     {
         Previewer = previewer;
-        this.statusSlots = statusSlots;
     }
 
     readonly MasteryApplier masteryApplier;
@@ -15,13 +13,6 @@ public class ChampionValueApplier
         Previewer = previewer;
         this.masteryApplier = masteryApplier;
     }
-
-    public GameScoreInfo Calculate(Team team, Champion champion)
-    {
-        var afterSlots = Previewer.PreviewSkill(team, champion, statusSlots);
-        return ScoreDeltaCalculator.CalculateStatDelta(statusSlots, afterSlots);
-    }
-
 
     public GameScoreInfo Calculate(Team team, Champion champion, SlotStorage<ChampionStatus> before)
     {
