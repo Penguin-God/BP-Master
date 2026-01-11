@@ -34,8 +34,8 @@ public static class TestHelper
 
     public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateValueSkillData(type, amount, default, rule);
 
-    public static SkillData CreateValueSkillData(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
-        => new SkillData(skillType, new SkillAmountData(AmountType.Value, amount, 0, 0), conditionData, rule);
+    public static SkillData CreateValueSkillData(SkillType skillType, int value, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+        => new SkillData(skillType, new SkillAmountData(AmountType.Value, value, 0, 0), conditionData, rule);
 
     public static Skill CreateValueSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
         => new Skill(CreateSkills(CreateValueSkillData(skillType, amount, conditionData, rule)));

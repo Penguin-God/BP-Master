@@ -71,7 +71,7 @@ public class ValueCalcualateTests
 
     [Test]
     [TestCase(0, 320)] // 원래 받는 보너스는 점수 반영 X
-    [TestCase(150, 420)] // stat 100 + mastery 20 + skill 200 + bonus 100
+    [TestCase(300, 420)] // stat 100 + mastery 20 + skill 200 + bonus 100
     public void 스탯_숙련도_스킬_보너스_적용한_챔피언_가치(int bounsNeed, int result)
     {
         var skillData = CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule);

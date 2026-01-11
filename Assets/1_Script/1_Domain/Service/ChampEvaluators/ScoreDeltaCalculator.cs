@@ -1,7 +1,16 @@
 using System.Linq;
 
-public record ScoreInfo(int Att, int Def, int Speed);
-public record GameScoreInfo(ScoreInfo Blue, ScoreInfo Red);
+public record ScoreInfo(int Att, int Def, int Speed)
+{
+    public static ScoreInfo operator +(ScoreInfo a, ScoreInfo b) => new(a.Att + b.Att, a.Def + b.Def, a.Speed + b.Speed);
+    public static ScoreInfo operator -(ScoreInfo a, ScoreInfo b) => new(a.Att - b.Att, a.Def - b.Def, a.Speed - b.Speed);
+}
+
+public record GameScoreInfo(ScoreInfo Blue, ScoreInfo Red)
+{
+    public static GameScoreInfo operator +(GameScoreInfo a, GameScoreInfo b)=> new(a.Blue + b.Blue, a.Red + b.Red);
+    public static GameScoreInfo operator -(GameScoreInfo a, GameScoreInfo b) => new(a.Blue - b.Blue, a.Red - b.Red);
+}
 
 public static class ScoreDeltaCalculator
 {
