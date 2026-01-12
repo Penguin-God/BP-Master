@@ -25,7 +25,6 @@ public class TraitDataConfig
     [Header("액션")]
     [SerializeField] SkillType traitType;
     [SerializeField] SkillAmount skillAmount;
-    [SerializeField] int amount;
 
     [Header("조건")]
     [SerializeField] StatConditionType conditionType;
