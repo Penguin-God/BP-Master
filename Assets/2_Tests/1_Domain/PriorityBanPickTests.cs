@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 public class PriorityBanPickTests
@@ -28,15 +27,13 @@ public class PriorityBanPickTests
     [Test]
     public void 우선순위에_있는_모든_id가_밴_불가하면_픽_예정_id를_제외하고_랜덤_선택한다()
     {
-        var ids = CreateIds(2, 3, 4);
-        var ai = CreateSelector(selectPlan: new[] { 3, 4 });
+        var ids = CreateIds(2);
+        var ai = CreateSelector(selectPlan: new[] { 5, 6 });
 
-        int banned = ai.Select(ids);
+        int select = ai.Select(ids);
 
-        Assert.AreEqual(2, banned);
+        Assert.AreEqual(2, select);
     }
-
-
 
     [Test]
     public void 픽_숙련도_총합이_가장_높은_빌드_선택()

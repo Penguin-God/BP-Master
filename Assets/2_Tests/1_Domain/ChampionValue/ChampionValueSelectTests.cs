@@ -8,9 +8,9 @@ public class ChampionValueSelectTests
     public void 가장_가치가_높은_챔피언_픽()
     {
         ChampionCatalog catalog = CreateCaltalog(CreateChampion(id: 1), CreateChampion(id: 2), CreateChampion(id: 3));
-        ValuePick sut = new ValuePick(new ChampionRanker(catalog, new ID_Evaluator()));
+        ValueSelector sut = new ValueSelector(new ChampionRanker(catalog, new ID_Evaluator()));
 
-        int result = sut.Pick(new HashSet<int>() { 1, 2, 3 });
+        int result = sut.Select(new HashSet<int>() { 1, 2, 3 });
 
         Assert.AreEqual(3, result);
     }
