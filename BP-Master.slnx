@@ -1,5 +1,5 @@
 ﻿<Solution>
-  <Project Path="ApplicationTests.csproj" />
+  <Project Path="AdapterTests.csproj" />
   <Project Path="DomainTests.csproj" />
   <Project Path="App.csproj" />
   <Project Path="Adapter.csproj" />

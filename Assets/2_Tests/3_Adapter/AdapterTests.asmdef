@@ -1,5 +1,5 @@
 {
-    "name": "ApplicationTests",
+    "name": "AdapterTests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
