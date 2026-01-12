@@ -5,16 +5,16 @@ public class ValueSelectSO : AI_SelectorFactory
 {
     [SerializeField] int speedValue;
     [SerializeField] BonusDataFactory bonusDataFactory;
-    public override IBanSelector CreateBanSelector()
+    public override IChampionSelector CreateBanSelector()
     {
-        var valueBan = new ValueBan(CreateRanker(EnumCaster.GetOppoentTeam(team)));
-        return new ValueBanLog(valueBan, CreateValueLogger(EnumCaster.GetOppoentTeam(team)));
+        var selector = new ValueSelector(CreateRanker(EnumCaster.GetOppoentTeam(team)));
+        return new ValueSelectorLog(selector, CreateValueLogger(EnumCaster.GetOppoentTeam(team)));
     }
 
-    public override IPickSelector CreatePickSelector()
+    public override IChampionSelector CreatePickSelector()
     {
-        var valuePick = new ValuePick(CreateRanker(team));
-        return new ValuePickLog(valuePick, CreateValueLogger(team));
+        var selector = new ValueSelector(CreateRanker(team));
+        return new ValueSelectorLog(selector, CreateValueLogger(team));
     }
 
     PickValueEvaluator CreateEvaluator(Team team)

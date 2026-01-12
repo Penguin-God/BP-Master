@@ -1,6 +1,41 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public interface IChampionSelector
+{
+    public int Select(HashSet<int> ids);
+}
+
+public class RandomSelector : IChampionSelector
+{
+    public int Select(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
+}
+
+public class ValueSelector : IChampionSelector
+{
+    readonly ChampionRanker ranker;
+    public ValueSelector(ChampionRanker ranker) => this.ranker = ranker;
+    public int Select(HashSet<int> ids) => ranker.GetChampionRank(ids).First();
+}
+
+public class ValueSelectorLog : IChampionSelector
+{
+    readonly ValueSelector selector;
+    readonly ValueLogger logger;
+
+    public ValueSelectorLog(ValueSelector selector, ValueLogger logger)
+    {
+        this.selector = selector;
+        this.logger = logger;
+    }
+
+    public int Select(HashSet<int> ids)
+    {
+        logger.LogValue(ids);
+        return selector.Select(ids);
+    }
+}
+
 public interface IBanSelector
 {
     public int Ban(HashSet<int> ids);
@@ -10,17 +45,6 @@ public interface IPickSelector
 {
     public int Pick(HashSet<int> ids);
 }
-
-public class RandomBan : IBanSelector
-{
-    public int Ban(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
-}
-
-public class RandomPick : IPickSelector
-{
-    public int Pick(HashSet<int> ids) => RandomUtil.DrawRandom(ids);
-}
-
 
 public class ValuePick : IPickSelector
 {

@@ -3,10 +3,10 @@ public class AI_BanPickAgent
 {
     readonly Team Team;
     readonly GameBanPickStorage storage;
-    readonly IBanSelector banSelector;
-    readonly IPickSelector pickSelector;
+    readonly IChampionSelector banSelector;
+    readonly IChampionSelector pickSelector;
 
-    public AI_BanPickAgent(Team team, GameBanPickStorage storage, IBanSelector banSelector, IPickSelector pickSelector)
+    public AI_BanPickAgent(Team team, GameBanPickStorage storage, IChampionSelector banSelector, IChampionSelector pickSelector)
     {
         Team = team;
         this.storage = storage;
@@ -21,6 +21,6 @@ public class AI_BanPickAgent
         storage.SaveSelect(new GameFlowData(phase, Team), id);
     }
 
-    public void Ban(Team team) => Select(team, GamePhase.Ban, banSelector.Ban(storage.SelectableIds));
-    public void Pick(Team team) => Select(team, GamePhase.Pick, pickSelector.Pick(storage.SelectableIds));
+    public void Ban(Team team) => Select(team, GamePhase.Ban, banSelector.Select(storage.SelectableIds));
+    public void Pick(Team team) => Select(team, GamePhase.Pick, pickSelector.Select(storage.SelectableIds));
 }

@@ -6,8 +6,9 @@ public class MultiPrioritySelector_SO : AI_SelectorFactory
 {
     [SerializeField] BuildPrioritySO[] buildDatas;
 
-    public override IBanSelector CreateBanSelector() => CreateSelector(masteryManager);
-    public override IPickSelector CreatePickSelector() => CreateSelector(masteryManager);
+    public override IChampionSelector CreateBanSelector() => CreateSelector(masteryManager);
+    public override IChampionSelector CreatePickSelector() => CreatePickSelector(masteryManager);
 
-    MultiPrioritySelector CreateSelector(MasteryCollection masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.CreateSelector()));
+    MultiPrioritySelector CreateSelector(MasteryCollection masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.BanSelector()));
+    MultiPrioritySelector CreatePickSelector(MasteryCollection masteryManager) => new MultiPrioritySelector(masteryManager, buildDatas.Select(x => x.PickSelector()));
 }

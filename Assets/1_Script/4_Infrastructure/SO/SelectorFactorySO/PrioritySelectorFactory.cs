@@ -11,8 +11,9 @@ public class BuildPrioritySO : AI_SelectorFactory
     IEnumerable<int> Bans => bans.Select(x => x.Id);
     IEnumerable<int> Picks => picks.Select(x => x.Id);
 
-    public override IBanSelector CreateBanSelector() => CreateSelector();
-    public override IPickSelector CreatePickSelector() => CreateSelector();
+    public override IChampionSelector CreateBanSelector() => BanSelector();
+    public override IChampionSelector CreatePickSelector() => PickSelector();
 
-    public PrioritySelector CreateSelector() => new PrioritySelector(Bans, Picks);
+    public PrioritySelector BanSelector() => new PrioritySelector(Bans);
+    public PrioritySelector PickSelector() => new PrioritySelector(Picks);
 }

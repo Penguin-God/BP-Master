@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public sealed class MultiPrioritySelector : IBanSelector, IPickSelector
+public sealed class MultiPrioritySelector : IChampionSelector
 {
     readonly IEnumerable<PrioritySelector> selectors;
     readonly MasteryCollection mastery;
@@ -17,8 +17,7 @@ public sealed class MultiPrioritySelector : IBanSelector, IPickSelector
             .OrderByDescending(x => SumPickMastery(x))
             .FirstOrDefault();
 
-    int SumPickMastery(PrioritySelector selector) => selector.PickPlan.Sum(id => mastery.GetMasteryLevel(id));
+    int SumPickMastery(PrioritySelector selector) => selector.Plan.Sum(id => mastery.GetMasteryLevel(id));
 
-    public int Pick(HashSet<int> selectableIds) => SelectBuild().Pick(selectableIds);
-    public int Ban(HashSet<int> selectableIds) => SelectBuild().Ban(selectableIds);
+    public int Select(HashSet<int> selectableIds) => SelectBuild().Select(selectableIds);
 }

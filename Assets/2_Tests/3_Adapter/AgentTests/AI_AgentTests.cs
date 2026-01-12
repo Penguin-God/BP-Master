@@ -6,16 +6,12 @@ using static TestHelper;
 public class AI_AgentTests
 {
     // Fake
-    class FirstBan : IBanSelector
+    class FirstSelect : IChampionSelector
     {
-        public int Ban(HashSet<int> ids) => ids.First();
-    }
-    class FirstPick : IPickSelector
-    {
-        public int Pick(HashSet<int> ids) => ids.First();
+        public int Select(HashSet<int> ids) => ids.First();
     }
 
-    AI_BanPickAgent CreateFirstSelectSut(Team team, GameBanPickStorage storage) => new AI_BanPickAgent(team, storage, new FirstBan(), new FirstPick());
+    AI_BanPickAgent CreateFirstSelectSut(Team team, GameBanPickStorage storage) => new AI_BanPickAgent(team, storage, new FirstSelect(), new FirstSelect());
 
     [Test]
     public void 규칙에_맞게_밴_선택_후_저장()

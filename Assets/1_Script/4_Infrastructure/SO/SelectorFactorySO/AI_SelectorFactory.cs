@@ -15,6 +15,6 @@ public abstract class AI_SelectorFactory : ScriptableObject
         this.statusSlots = statusSlots;
     }
 
-    public abstract IBanSelector CreateBanSelector();
-    public abstract IPickSelector CreatePickSelector();
+    public abstract IChampionSelector CreateBanSelector();
+    public abstract IChampionSelector CreatePickSelector();
 }
