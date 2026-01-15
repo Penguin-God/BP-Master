@@ -1,18 +1,15 @@
 
 public enum SkillType
 {
-    None,
-    AttackChanger,
-    PercentAttackChanger,
-    DefenseChanger,
-    PercentDefenseChanger,
-    SpeedChanger,
-    DefenseFixer,
-    TraitExcluder,
-    DefenseAbsorber,
-    Resonance,
-    AmplifyChanger,
-    PickBuffer,
+    None = 0,
+    AttackChanger = 1,
+    DefenseChanger = 3,
+    SpeedChanger = 5,
+    TraitExcluder = 7,
+    DefenseAbsorber = 8,
+    Resonance = 9,
+    AmplifyChanger = 10,
+    PickBuffer = 11,
 }
 
 public enum Side { Self, Opponent, All }
