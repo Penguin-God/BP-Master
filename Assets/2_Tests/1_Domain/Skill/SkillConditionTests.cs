@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class TraitConditionTests // StatThresholdChecker는 이상, 이하. StatComparisonChecker는 초과, 미만
+public class SkillConditionTests // StatThresholdChecker는 이상, 이하. StatComparisonChecker는 초과, 미만
 {
     [Test]
     public void None은_무조건_참() => Assert.IsTrue(Check(StatConditionType.None, 0, default));

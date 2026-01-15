@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class TraitActionTests
+public class SkillActionTests
 {
     [Test]
     [TestCase(StatType.Attack, 110, 100, 100)]
