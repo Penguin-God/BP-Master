@@ -27,11 +27,13 @@ public class SkillActionFactory
     public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus useChamp)
     {
         var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
+
         return actionType switch
         {
-            SkillType.AttackChanger => new AttackChanger(amountCalculator),
-            SkillType.DefenseChanger => new DefenseChanger(amountCalculator),
-            SkillType.SpeedChanger => new SpeedChanger(amountCalculator),
+            SkillType.AttackChanger => new StatChanger(StatType.Attack, amountCalculator),
+            SkillType.DefenseChanger => new StatChanger(StatType.Defense, amountCalculator),
+            SkillType.SpeedChanger => new StatChanger(StatType.Speed, amountCalculator),
+
             SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, amountCalculator),
             SkillType.Resonance => new Resonance(useChamp, amountData.PercentValue),
@@ -41,7 +43,6 @@ public class SkillActionFactory
         };
     }
 }
-
 public static class SkillCondtionFactory
 {
     public static IChampionCondition CreateCondition(SkillConditionData data, ChampionStatData useChamp)

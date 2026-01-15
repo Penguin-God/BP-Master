@@ -20,9 +20,9 @@ public class SkillFactoryTests
         Assert.AreEqual(expected, champion.Stat.Attack);
     }
 
-    [TestCase(SkillType.AttackChanger, typeof(AttackChanger))]
-    [TestCase(SkillType.DefenseChanger, typeof(DefenseChanger))]
-    [TestCase(SkillType.SpeedChanger, typeof(SpeedChanger))]
+    [TestCase(SkillType.AttackChanger, typeof(StatChanger))]
+    [TestCase(SkillType.DefenseChanger, typeof(StatChanger))]
+    [TestCase(SkillType.SpeedChanger, typeof(StatChanger))] 
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
     [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
