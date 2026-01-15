@@ -4,6 +4,22 @@ using static TestHelper;
 public class TraitActionTests
 {
     [Test]
+    [TestCase(StatType.Attack, 110, 100, 100)]
+    [TestCase(StatType.Defense, 100, 110, 100)]
+    [TestCase(StatType.Speed, 100, 100, 110)]
+    public void 챔피언_스탯_변경(StatType statType, int att, int def, int speed)
+    {
+        var target = CreateStatus(100, 100, 100);
+        var sut = new StatChanger(statType, new PercentCalculator(0.1f));
+
+        sut.Do(target);
+
+        Assert.AreEqual(att, target.Stat.Attack);
+        Assert.AreEqual(def, target.Stat.Defense);
+        Assert.AreEqual(speed, target.Stat.Speed);
+    }
+
+    [Test]
     public void 챔피언_공_변경()
     {
         var target = TestHelper.CreateStatus(11, 0, 0);

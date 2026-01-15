@@ -5,6 +5,50 @@ public interface ISkillAction
     void Do(ChampionStatus target);
 }
 
+public enum StatType
+{
+    Attack,
+    Defense,
+    Speed,
+}
+
+public class StatChanger : ISkillAction
+{
+    private readonly StatType StatType;
+    private readonly ISkillAmountCalculator Calculator;
+
+    public StatChanger(StatType statType, ISkillAmountCalculator calculator)
+    {
+        StatType = statType;
+        Calculator = calculator;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+        var stat = target.Stat;
+
+        int baseValue = StatType switch
+        {
+            StatType.Attack => stat.Attack,
+            StatType.Defense => stat.Defense,
+            StatType.Speed => stat.Speed,
+            _ => 0
+        };
+
+        int amount = Calculator.Calculate(baseValue);
+
+        target.ChangeStat(CreateNewStat(amount, stat));
+    }
+
+    ChampionStatData CreateNewStat(int amount, ChampionStatData stat) => StatType switch
+    {
+        StatType.Attack => new ChampionStatData(stat.Attack + amount, stat.Defense, stat.Speed),
+        StatType.Defense => new ChampionStatData(stat.Attack, stat.Defense + amount, stat.Speed),
+        StatType.Speed => new ChampionStatData(stat.Attack, stat.Defense, stat.Speed + amount),
+        _ => stat
+    };
+}
+
 public class AttackChanger : ISkillAction
 {
     readonly ISkillAmountCalculator AmountCalculator;
