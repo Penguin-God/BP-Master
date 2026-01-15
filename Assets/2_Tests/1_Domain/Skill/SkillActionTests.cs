@@ -80,4 +80,16 @@ public class SkillActionTests
 
         Assert.AreEqual(100, champ.Status.Stat.Attack);
     }
+
+    [Test]
+    public void 상대_스탯_복사()
+    {
+        var target = CreateStatus(10, 20, 30);
+        var caster = CreateStatus();
+        var sut = new Doppelganger(caster);
+
+        sut.Do(target);
+
+        Assert.AreEqual(caster.Stat, target.Stat);
+    }
 }

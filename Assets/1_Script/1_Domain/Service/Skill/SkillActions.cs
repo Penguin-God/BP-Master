@@ -118,3 +118,10 @@ public class PickChampBuffer : ISkillAction
         eventDispatcher.OnChampionPick += (champ) => champ.Status.AddAttackWithRate(Amount);
     }
 }
+
+public class Doppelganger : ISkillAction
+{
+    readonly ChampionStatus caster;
+    public Doppelganger(ChampionStatus caster) => this.caster = caster;
+    public void Do(ChampionStatus target) => caster.ChangeStat(target.Stat);
+}
