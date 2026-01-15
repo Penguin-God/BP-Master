@@ -46,13 +46,22 @@ public class SkillUseController_UI : MonoBehaviour
     SlotData useSlot;
     public void UseSkill(SlotData useSlot)
     {
+        if (skillSlots.GetSlot(useSlot).IsEmpty)
+        {
+            skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
+            return;
+        }
+
         this.useSlot = useSlot;
         var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
         targetSelector = new SkillTargetSelector(useSlot.Team, skillSlots.GetTeamCounter(), rule);
         RefeshButton();
-        // 타겟이 아예 없는 경우
+        // 타겟이 없는 경우
         if (targetSelector.IsFull)
+        {
             skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
+
+        }
     }
 
     void RefeshButton() => skillButtonView.ActiveTargets(new SkillTargetFilter(skillSlots.GetTeamCounter()), skillSlots.GetSlot(useSlot), targetSelector.Targets);

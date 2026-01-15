@@ -8,6 +8,7 @@ public class SkillPreviewer
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
+        if (champion.Skill.IsEmpty) return copiedSlots;
         var targets = skillTargetSelector.SelectSkillTargets(team, champion.Skill, originSlots.GetTeamCounter()).Select(x => copiedSlots.GetSlot(x));
         foreach (var skillData in champion.Skill.SkillDatas)
         {

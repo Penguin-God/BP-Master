@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0656e101a5f827e4b9a91ce33f2577b5, type: 3}
+  m_Name: TestBuild
+  m_EditorClassIdentifier: 
+  bans: []
+  picks:
+  - {fileID: 11400000, guid: 5f5c7591caea4e04b816869d96af3a1f, type: 2}
