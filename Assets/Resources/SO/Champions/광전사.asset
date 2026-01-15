@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
   m_Name: "\uAD11\uC804\uC0AC"
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   id: 7
   championName: "\uAD11\uC804\uC0AC"
   attack: 180
@@ -20,26 +29,24 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 0
     range: 4
-    traitType: 3
+    skillType: 3
     skillAmount:
       Type: 1
       ValueAmount: -30
       PercentValue: 0
       FixValue: 0
-    amount: -30
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
     targetTrait: 0
   - targetSide: 0
     range: 4
-    traitType: 1
+    skillType: 1
     skillAmount:
       Type: 1
       ValueAmount: 50
       PercentValue: 0
       FixValue: 0
-    amount: 50
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0

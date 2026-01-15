@@ -13,17 +13,18 @@ public class TraitDataConfig
     SkillTargetRule Rule => new SkillTargetRule(targetSide, range);
 
     [Header("액션")]
-    [SerializeField] SkillType traitType;
+    [SerializeField] SkillType skillType;
     [SerializeField] SkillAmount skillAmount;
 
     [Header("조건")]
     [SerializeField] StatConditionType conditionType;
     [SerializeField] int threshold;
     [SerializeField] ConditionType conditionCheckerType;
-    [SerializeField] TraitType targetTrait;
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
 
-    public SkillData CreateTraitData() => new SkillData(traitType, skillAmount.ToData(), Condition, Rule);
+    [SerializeField] TraitType targetTrait;
+
+    public SkillData CreateTraitData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
     public SkillUI_Data CreateUI_Data() => new SkillUI_Data(CreateTraitData());
 }
 
