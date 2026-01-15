@@ -49,27 +49,6 @@ public class StatChanger : ISkillAction
     };
 }
 
-public class AttackChanger : ISkillAction
-{
-    readonly ISkillAmountCalculator AmountCalculator;
-    public AttackChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
-    public void Do(ChampionStatus target) => target.AddAttackWithRate(AmountCalculator.Calculate(target.Stat.Attack));
-}
-
-public class DefenseChanger : ISkillAction
-{
-    readonly ISkillAmountCalculator AmountCalculator;
-    public DefenseChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
-    public void Do(ChampionStatus target) => target.AddDefenseWithRate(AmountCalculator.Calculate(target.Stat.Defense));
-}
-
-public class SpeedChanger : ISkillAction
-{
-    readonly ISkillAmountCalculator AmountCalculator;
-    public SpeedChanger(ISkillAmountCalculator amountCalculator) => AmountCalculator = amountCalculator;
-    public void Do(ChampionStatus target) => target.AddSpeedWithRate(AmountCalculator.Calculate(target.Stat.Speed));
-}
-
 public class SkillExcluder : ISkillAction
 {
     public void Do(ChampionStatus target) => target.TraitExcluded();

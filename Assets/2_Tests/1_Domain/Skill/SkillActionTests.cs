@@ -20,41 +20,6 @@ public class SkillActionTests
     }
 
     [Test]
-    public void 챔피언_공_변경()
-    {
-        var target = TestHelper.CreateStatus(11, 0, 0);
-        var sut = new AttackChanger(new FixCalculator(100));
-
-        sut.Do(target);
-
-        Assert.AreEqual(100, target.Stat.Attack);
-    }
-
-    [Test]
-    public void 챔피언_방_변경()
-    {
-        var target = TestHelper.CreateStatus(0, 10, 0);
-        var sut = new DefenseChanger(new ValueCalculator(100));
-
-        sut.Do(target);
-
-        Assert.AreEqual(110, target.Stat.Defense);
-    }
-
-    [Test]
-    [TestCase(3, 10)]
-    [TestCase(-2, 5)]
-    public void 챔피언상태_속_변경(int amount, int expected)
-    {
-        var target = TestHelper.CreateStatus(0, 0, 7);
-        var sut = new SpeedChanger(new ValueCalculator(amount));
-
-        sut.Do(target);
-
-        Assert.AreEqual(expected, target.Stat.Speed);
-    }
-
-    [Test]
     public void 특성_제외시키기()
     {
         var target = TestHelper.CreateStatus(0, 0, 7);
