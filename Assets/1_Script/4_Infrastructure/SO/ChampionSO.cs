@@ -1,20 +1,10 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public class SkillAmount
-{
-    public AmountType Type;
-    public int ValueAmount;
-    public float PercentValue;
-    public int FixValue;
-
-    public SkillAmountData ToData() => new SkillAmountData(Type, ValueAmount, PercentValue, FixValue);
-}
-
-[System.Serializable]
 public class TraitDataConfig
 {
     [Header("범위")]
@@ -52,7 +42,7 @@ public readonly struct ChampionModel
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]
-public class ChampionSO : ScriptableObject
+public class ChampionSO : SerializedScriptableObject
 {
     [SerializeField] int id;
     public int Id => id;
