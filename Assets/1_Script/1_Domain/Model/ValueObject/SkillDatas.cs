@@ -11,6 +11,7 @@ public enum SkillType
     Resonance = 9,
     AmplifyChanger = 10,
     PickBuffer = 11,
+    Doppelganger = 12,
 }
 
 public enum Side { Self, Opponent, All }

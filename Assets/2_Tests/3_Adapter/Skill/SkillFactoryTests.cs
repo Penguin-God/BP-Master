@@ -22,12 +22,13 @@ public class SkillFactoryTests
 
     [TestCase(SkillType.AttackChanger, typeof(StatChanger))]
     [TestCase(SkillType.DefenseChanger, typeof(StatChanger))]
-    [TestCase(SkillType.SpeedChanger, typeof(StatChanger))] 
+    [TestCase(SkillType.SpeedChanger, typeof(StatChanger))]
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
     [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
     [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     [TestCase(SkillType.PickBuffer, typeof(PickChampBuffer))]
+    [TestCase(SkillType.Doppelganger, typeof(Doppelganger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, System.Type expectedType)
     {
         var result = CreateSkillActionFactory().CreateAction(type, new SkillAmountData(AmountType.Fix, 1, 1, 1), CreateStatus());

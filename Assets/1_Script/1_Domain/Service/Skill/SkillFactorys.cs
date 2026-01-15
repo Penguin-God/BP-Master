@@ -39,6 +39,7 @@ public class SkillActionFactory
             SkillType.Resonance => new Resonance(useChamp, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             SkillType.PickBuffer => new PickChampBuffer(phaseActionEventDispatcher, amountData.ValueAmount),
+            SkillType.Doppelganger => new Doppelganger(useChamp),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }
