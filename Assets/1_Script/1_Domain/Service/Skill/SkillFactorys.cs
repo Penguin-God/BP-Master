@@ -19,9 +19,11 @@ public class SkillExecutorFactory
 public class SkillActionFactory
 {
     readonly PhaseActionEventDispatcher phaseActionEventDispatcher;
-    public SkillActionFactory(PhaseActionEventDispatcher phaseActionEventDispatcher)
+    readonly PhaseEventDispatcher phaseEventDispatcher;
+    public SkillActionFactory(PhaseActionEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
         this.phaseActionEventDispatcher = phaseActionEventDispatcher;
+        this.phaseEventDispatcher = phaseEventDispatcher;
     }
 
     public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster)
@@ -40,6 +42,7 @@ public class SkillActionFactory
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             SkillType.PickBuffer => new PickChampBuffer(phaseActionEventDispatcher, amountData.ValueAmount),
             SkillType.Doppelganger => new Doppelganger(caster),
+            SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }

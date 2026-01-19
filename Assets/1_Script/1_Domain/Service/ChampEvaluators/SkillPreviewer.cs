@@ -3,7 +3,7 @@ using System.Linq;
 public class SkillPreviewer
 {
     // 비어있는 PhaseActionEventDispatcher를 사용해야 함
-    readonly SkillRunner _skillRunner = new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher())));
+    readonly SkillRunner _skillRunner = new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher())));
     readonly RandomSkillTargetSelector _skillTargetSelector = new();
 
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)

@@ -29,6 +29,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     [TestCase(SkillType.PickBuffer, typeof(PickChampBuffer))]
     [TestCase(SkillType.Doppelganger, typeof(Doppelganger))]
+    [TestCase(SkillType.FinalStatChanger, typeof(FinalStatChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, System.Type expectedType)
     {
         var result = CreateSkillActionFactory().CreateAction(type, new SkillAmountData(AmountType.Fix, 1, 1, 1), CreateStatus());

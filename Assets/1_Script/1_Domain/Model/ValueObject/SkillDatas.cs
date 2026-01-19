@@ -12,6 +12,7 @@ public enum SkillType
     AmplifyChanger = 10,
     PickBuffer = 11,
     Doppelganger = 12,
+    FinalStatChanger = 13,
 }
 
 public enum Side { Self, Opponent, All }

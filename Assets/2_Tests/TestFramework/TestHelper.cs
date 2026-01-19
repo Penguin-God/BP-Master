@@ -72,7 +72,7 @@ public static class TestHelper
     public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 
-    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher());
+    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher());
     public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(CreateSkillActionFactory());
     public static SkillRunner CreateSkillRunner() => new SkillRunner(CreateSkillExceutorFactory());
 
