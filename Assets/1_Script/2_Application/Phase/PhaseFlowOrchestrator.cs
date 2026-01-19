@@ -1,10 +1,5 @@
 using System.Collections.Generic;
 
-public interface IPhaseEvent
-{
-    void Dispatch(GamePhase phase, Team turn);
-}
-
 public class PhaseFlowOrchestrator
 {
     readonly PhaseAdvancer phaseAdvancer;

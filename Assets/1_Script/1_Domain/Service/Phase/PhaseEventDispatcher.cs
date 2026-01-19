@@ -1,5 +1,10 @@
 using System;
 
+public interface IPhaseEvent
+{
+    void Dispatch(GamePhase phase, Team turn);
+}
+
 public class PhaseEventDispatcher : IPhaseEvent
 {
     public event Action<GameFlowData> OnGameProgress;

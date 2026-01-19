@@ -125,3 +125,31 @@ public class Doppelganger : ISkillAction
     public Doppelganger(ChampionStatus caster) => this.caster = caster;
     public void Do(ChampionStatus target) => caster.ChangeStat(target.Stat);
 }
+
+public class FinalStatChanger : ISkillAction
+{
+    readonly ChampionStatus _caster;
+    readonly PhaseEventDispatcher _dispatcher;
+    readonly ISkillAmountCalculator _calculator;
+
+    public FinalStatChanger(ChampionStatus caster, PhaseEventDispatcher dispatcher, ISkillAmountCalculator calculator)
+    {
+        _caster = caster;
+        _dispatcher = dispatcher;
+        _calculator = calculator;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+        _dispatcher.OnPhaseDone += OnGameEnd;
+    }
+
+    void OnGameEnd()
+    {
+        _dispatcher.OnPhaseDone -= OnGameEnd;
+        var s = _caster.Stat;
+        _caster.AddAttackWithRate(_calculator.Calculate(s.Attack));
+        _caster.AddDefenseWithRate(_calculator.Calculate(s.Defense));
+        _caster.AddSpeedWithRate(_calculator.Calculate(s.Speed));
+    }
+}
