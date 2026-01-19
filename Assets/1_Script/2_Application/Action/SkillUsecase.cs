@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SkillUseController
+public class SkillUsecase
 {
     private readonly SlotStorage<ChampionStatus> _statusSlots;
     private readonly SkillRunner _skillRunner;
     public event Action<SlotData> OnUseSkill;
 
-    public SkillUseController(SlotStorage<ChampionStatus> statusSlots, SkillRunner skillRunner)
+    public SkillUsecase(SlotStorage<ChampionStatus> statusSlots, SkillRunner skillRunner)
     {
         _statusSlots = statusSlots;
         _skillRunner = skillRunner;

@@ -9,9 +9,9 @@ public class SkillUseController_UI : MonoBehaviour
     SkillButtonView skillButtonView;
 
     SlotStorage<Skill> skillSlots;
-    SkillUseController skillUseController;
+    SkillUsecase skillUseController;
 
-    public void Init(SlotStorage<Skill> skillSlots, SkillUseController skillUseController)
+    public void Init(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController)
     {
         gameObject.SetActive(true);
         this.skillSlots = skillSlots;
