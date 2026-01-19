@@ -20,9 +20,7 @@ public class TraitDataConfig
     [SerializeField] StatConditionType conditionType;
     [SerializeField] int threshold;
     [SerializeField] ConditionType conditionCheckerType;
-    SkillConditionData Condition => new SkillConditionData(conditionType, threshold, targetTrait, conditionCheckerType);
-
-    [SerializeField] TraitType targetTrait;
+    SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
     public SkillData CreateTraitData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
     public SkillUI_Data CreateUI_Data() => new SkillUI_Data(CreateTraitData());
@@ -32,13 +30,11 @@ public readonly struct ChampionModel
 {
     public readonly string Name;
     public readonly ChampionStatData Stat;
-    public readonly TraitType TraitType;
 
-    public ChampionModel(string name, ChampionStatData stat, TraitType traitType)
+    public ChampionModel(string name, ChampionStatData stat)
     {
         Name = name;
         Stat = stat;
-        TraitType = traitType;
     }
 }
 
@@ -59,12 +55,9 @@ public class ChampionSO : SerializedScriptableObject
     [Header("스킬")]
     [SerializeField] TraitDataConfig[] skillDatas;
     public Skill Skill => new Skill(skillDatas.Select(x => x.CreateTraitData()));
-    public ChampionStatus CreateStatus() => new ChampionStatus(StatData, traitType);
-    public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData, traitType);
+    public ChampionStatus CreateStatus() => new ChampionStatus(StatData);
+    public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData);
     public IEnumerable<SkillUI_Data> CreateSkill_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());
-
-    [Header("특성")]
-    [SerializeField] TraitType traitType;
 
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
 }

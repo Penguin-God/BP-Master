@@ -9,7 +9,6 @@ public class ChampionView : MonoBehaviour
     [SerializeField] SkillTextSO skillTextSO;
     void Start() => ClearDisplay();
 
-    readonly ChampionStatusTextBuilder statusTextBuilder = new();
     public void UpdateDisplay(ChampionSO champion)
     {
         UpdateChampion(champion.CreateChampionModel());
@@ -18,7 +17,7 @@ public class ChampionView : MonoBehaviour
 
     public void UpdateChampion(ChampionModel model)
     {
-        nameText.text = $"{model.Name}({statusTextBuilder.BuildTraitText(model.TraitType)})";
+        nameText.text = $"{model.Name}";
         statView.UpdateStat(model.Stat);
     }
 

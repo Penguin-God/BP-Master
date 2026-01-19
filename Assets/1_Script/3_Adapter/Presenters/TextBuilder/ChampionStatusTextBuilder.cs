@@ -1,4 +1,3 @@
-using System;
 
 public readonly struct StatViewModel
 {
@@ -34,16 +33,6 @@ public class ChampionStatusTextBuilder
         $"방 {stat.Defense}",
         $"속도 {stat.Speed}"
     );
-
-    public string BuildTraitText(TraitType traitType) => traitType switch
-    {
-        TraitType.None => "무개성",
-        TraitType.Charge => "돌진",
-        TraitType.Guard => "가드",
-        TraitType.Amplifier => "증폭",
-        TraitType.Break => "파괴",
-        _ => throw new NotImplementedException(),
-    };
 
     public CombatModifierTextModel BuildCombatModel(float increaseRate, float decreaseRate)
     {

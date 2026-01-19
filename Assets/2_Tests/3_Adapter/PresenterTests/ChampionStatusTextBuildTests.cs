@@ -14,20 +14,6 @@ public class ChampionStatusTextBuildTests
         Assert.AreEqual("속도 6", result.Speed);
     }
 
-
-    [Test]
-    [TestCase(TraitType.None, "무개성")]
-    [TestCase(TraitType.Charge, "돌진")]
-    [TestCase(TraitType.Guard, "가드")]
-    [TestCase(TraitType.Amplifier, "증폭")]
-    [TestCase(TraitType.Break, "파괴")]
-    public void 특성_텍스트_빌드(TraitType traitType, string expected)
-    {
-        string result = sut.BuildTraitText(traitType);
-
-        Assert.AreEqual(expected, result);
-    }
-
     public void 전투_보정치_텍스트_빌드()
     {
         CombatModifierTextModel result = sut.BuildCombatModel(1.699999f, 1.3f);

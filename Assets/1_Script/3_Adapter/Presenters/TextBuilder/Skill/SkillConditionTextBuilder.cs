@@ -5,7 +5,6 @@ public class SkillConditionTextBuilder
         ConditionType.None => "",
         ConditionType.Threshold => BuildThresholdText(conditionData.StatType, conditionData.Threshold),
         ConditionType.Compare => BuildCompareText(conditionData.StatType),
-        ConditionType.Trait => BuildTriatText(conditionData.TraitType),
     };
 
     string BuildThresholdText(StatConditionType conditionType, int threshold) => conditionType switch
@@ -31,6 +30,4 @@ public class SkillConditionTextBuilder
         StatConditionType.SpeedBelow => $"속도가 자신보다 낮은",
         _ => ""
     };
-
-    string BuildTriatText(TraitType traitType) => $"특성이 {new ChampionStatusTextBuilder().BuildTraitText(traitType)}인";
 }

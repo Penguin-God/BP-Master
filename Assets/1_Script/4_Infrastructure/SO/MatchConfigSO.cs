@@ -18,6 +18,4 @@ public class MatchConfigSO : ScriptableObject
     public float AmplifyBonusRate => amplifyBonusRate;
 
     [SerializeField] float breakRate;
-
-    public TraitConfig TraitConfig => new TraitConfig(chargeAttackBonus, guardBonusRate, amplifyBonusRate, breakRate);
 }

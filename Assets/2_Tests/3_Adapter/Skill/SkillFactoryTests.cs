@@ -40,7 +40,6 @@ public class SkillFactoryTests
     [TestCase(ConditionType.None, typeof(NullChecker))]
     [TestCase(ConditionType.Threshold, typeof(StatThresholdChecker))]
     [TestCase(ConditionType.Compare, typeof(StatComparisonChecker))]
-    [TestCase(ConditionType.Trait, typeof(TraitCondition))]
     public void 타입에_맞는_조건_객체_생성(ConditionType checkerType, System.Type expectedType)
     {
         SkillConditionData data = CreateConditionData(checkerType);

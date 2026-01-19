@@ -46,8 +46,7 @@ public class MatchDI : MonoBehaviour
 
     void OnPick(SlotData slotData, int id)
     {
-        var traitFactory = new TraitFactory(matchConfig.TraitConfig, PickSlotFacade.StatusSlots);
-        PickEffectApplier pickEffectApplier = new PickEffectApplier(traitFactory, masteryGenerator.GetTeamMasteryManager(slotData.Team));
+        PickEffectApplier pickEffectApplier = new PickEffectApplier(masteryGenerator.GetTeamMasteryManager(slotData.Team));
         pickHandler.Pick(slotData.Team, id);
         pickEffectApplier.Apply(slotData.Team, PickSlotFacade.ChampionSlots.GetSlot(slotData));
     }

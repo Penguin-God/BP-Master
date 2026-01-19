@@ -86,7 +86,7 @@ public class ChampionStatusTests
     [Test]
     public void 상태_깊은복사_시_값은_동일하지만_이벤트_구독자는_초기화()
     {
-        var original = new ChampionStatus(CreateStat(10, 20, 30), TraitType.Charge);
+        var original = new ChampionStatus(CreateStat(10, 20, 30));
         original.AddUpRate(0.5f);
         original.TraitExcluded();
 
@@ -96,7 +96,6 @@ public class ChampionStatusTests
         var copy = original.DeepCopy();
 
         Assert.AreEqual(original.Stat, copy.Stat);
-        Assert.AreEqual(original.TraitType, copy.TraitType);
         Assert.AreEqual(original.IsSkillExcluded, copy.IsSkillExcluded);
         Assert.AreEqual(original.UpRate, copy.UpRate, delta: 1e-6f);
         Assert.AreEqual(original.DownRate, copy.DownRate, delta: 1e-6f);

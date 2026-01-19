@@ -46,21 +46,6 @@ public class SkillTextBuildTests
         Assert.AreEqual(expected, result);
     }
 
-    //[Test]
-    //public void 스킬_텍스트는_조건_타겟_액션의_조합()
-    //{
-    //    var sut = new SkillTextBuilder();
-
-    //    // 편의 함수
-    //    string GetTraitText(StatConditionType conditionType, int thershold) 
-    //        => sut.BuildSkillText(CreateData(SkillType.DefenseChanger, -10, CreateThresholdCondition(conditionType, thershold), OpponentAllRule));
-
-    //    Assert.AreEqual("방어력 100 이상인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.DefenseAtLeast, 100));
-    //    Assert.AreEqual("방어력 10 이하인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.DefenseBelow, 10));
-    //    Assert.AreEqual("공격력 100 이상인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.AttackAtLeast, 100));
-    //    Assert.AreEqual("공격력 120 이하인 적군 전체 방어력 10 감소", GetTraitText(StatConditionType.AttackBelow, 120));
-    //}
-
     [Test]
     public void 조건_타입과_인자값에_맞는_텍스트_생성()
     {
@@ -69,7 +54,6 @@ public class SkillTextBuildTests
         // 편의 함수
         string GetText(SkillConditionData conditionData) => sut.BuildConditionText(conditionData);
 
-        Assert.AreEqual("특성이 가드인", GetText(CreateConditionData(ConditionType.Trait, traitType: TraitType.Guard)));
         Assert.AreEqual("방어력이 자신보다 높은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.DefenseAtLeast)));
         Assert.AreEqual("방어력이 자신보다 낮은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.DefenseBelow)));
         Assert.AreEqual("공격력이 자신보다 낮은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.AttackBelow)));
@@ -77,20 +61,4 @@ public class SkillTextBuildTests
         Assert.AreEqual("공격력 120 이상인", GetText(CreateConditionData(ConditionType.Threshold, statType: StatConditionType.AttackAtLeast, 120)));
         Assert.AreEqual("방어력 120 이상인", GetText(CreateConditionData(ConditionType.Threshold, statType: StatConditionType.DefenseAtLeast, 120)));
     }
-
-
-    //[Test]
-    //public void 특성_컬랙션은_텍스트_합쳐서_반환()
-    //{
-    //    var sut = new SkillTextBuilder();
-    //    var datas = new TraitUI_Data[]
-    //    {
-    //        CreateData(SkillType.AttackChanger, -10, default, OpponentAllRule),
-    //        CreateData(SkillType.DefenseChanger, -10, default, OpponentAllRule),
-    //    };
-
-    //    string result = sut.BuildSkillText(datas);
-
-    //    Assert.AreEqual("적군 전체 공격력 10 감소, 적군 전체 방어력 10 감소", result);
-    //}
 }

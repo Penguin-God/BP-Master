@@ -85,11 +85,3 @@ public class StatComparisonChecker : IChampionCondition // 초과, 미만
         };
     }
 }
-
-public class TraitCondition : IChampionCondition
-{
-    readonly TraitType TargetType;
-    public TraitCondition(TraitType targetType) => TargetType = targetType;
-
-    public bool Check(ChampionStatus target) => target.TraitType == TargetType;
-}
