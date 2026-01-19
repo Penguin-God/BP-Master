@@ -24,7 +24,7 @@ public class SkillActionFactory
         this.phaseActionEventDispatcher = phaseActionEventDispatcher;
     }
 
-    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus useChamp)
+    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster)
     {
         var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
 
@@ -35,11 +35,11 @@ public class SkillActionFactory
             SkillType.SpeedChanger => new StatChanger(StatType.Speed, amountCalculator),
 
             SkillType.TraitExcluder => new SkillExcluder(),
-            SkillType.DefenseAbsorber => new DefenseAbsorber(useChamp, amountCalculator),
-            SkillType.Resonance => new Resonance(useChamp, amountData.PercentValue),
+            SkillType.DefenseAbsorber => new DefenseAbsorber(caster, amountCalculator),
+            SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             SkillType.PickBuffer => new PickChampBuffer(phaseActionEventDispatcher, amountData.ValueAmount),
-            SkillType.Doppelganger => new Doppelganger(useChamp),
+            SkillType.Doppelganger => new Doppelganger(caster),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }
