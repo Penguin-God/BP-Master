@@ -13,7 +13,7 @@ public class SkillRunnerTest
         var target = CreateStatus(100, 100, 100);
 
         var skill = CreateMultiAttackSkill(firstAmount, secondAmount);
-        var sut = CreateSut();
+        var sut = CreateSkillRunner();
 
         sut.Run(skill, caster, new[] { target });
 
@@ -24,19 +24,11 @@ public class SkillRunnerTest
     public void 빈_스킬은_아무런_동작도_하지_않아야_함()
     {
         var target = CreateStatus(100, 100, 100);
-        var sut = CreateSut();
+        var sut = CreateSkillRunner();
 
         sut.Run(CreateSkill(), null, new[] { target });
 
         Assert.AreEqual(100, target.Stat.Attack);
-    }
-
-    SkillRunner CreateSut()
-    {
-        var dispatcher = new PhaseActionEventDispatcher();
-        var actionFactory = new SkillActionFactory(dispatcher);
-        var executorFactory = new SkillExecutorFactory(actionFactory);
-        return new SkillRunner(executorFactory);
     }
 
     Skill CreateMultiAttackSkill(int amount1, int amount2)

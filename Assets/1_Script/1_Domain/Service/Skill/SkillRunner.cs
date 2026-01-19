@@ -14,9 +14,6 @@ public class SkillRunner
         if (skill.IsEmpty) return;
 
         foreach (var skillData in skill.SkillDatas)
-        {
-            var executor = _factory.CreateExecutor(skillData, caster);
-            executor.ExecuteSkill(targets);
-        }
+            _factory.CreateExecutor(skillData, caster).ExecuteSkill(targets);
     }
 }

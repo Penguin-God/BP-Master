@@ -2,15 +2,9 @@ using System.Linq;
 
 public class SkillPreviewer
 {
-    private readonly SkillRunner _skillRunner = new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher())));
-    private readonly RandomSkillTargetSelector _skillTargetSelector = new();
-
-    public SkillPreviewer(SkillRunner skillRunner)
-    {
-        _skillRunner = skillRunner;
-    }
-
-    public SkillPreviewer(){}
+    // 비어있는 PhaseActionEventDispatcher를 사용해야 함
+    readonly SkillRunner _skillRunner = new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher())));
+    readonly RandomSkillTargetSelector _skillTargetSelector = new();
 
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
@@ -25,7 +19,7 @@ public class SkillPreviewer
         return copiedSlots;
     }
 
-    private SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)
+    SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)
     {
         var result = new SlotStorage<ChampionStatus>();
         foreach (var slot in origin.GetAllSlotDatas())
