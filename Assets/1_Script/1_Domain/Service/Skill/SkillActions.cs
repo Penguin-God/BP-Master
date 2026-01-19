@@ -141,12 +141,12 @@ public class FinalStatChanger : ISkillAction
 
     public void Do(ChampionStatus target)
     {
-        _dispatcher.OnPhaseDone += OnGameEnd;
+        _dispatcher.OnPhaseDone += ChangeStat;
     }
 
-    void OnGameEnd()
+    void ChangeStat()
     {
-        _dispatcher.OnPhaseDone -= OnGameEnd;
+        _dispatcher.OnPhaseDone -= ChangeStat;
         var s = _caster.Stat;
         _caster.AddAttackWithRate(_calculator.Calculate(s.Attack));
         _caster.AddDefenseWithRate(_calculator.Calculate(s.Defense));

@@ -7,6 +7,7 @@ public class PhaseFlowOrchestrator
     readonly TeamPhaseEntryDispatcher entryDispatcher;
 
     public GameFlowData CurrentFlow => phaseAdvancer.CurrentFlow;
+    public System.Action OnGameEnd;
 
     public PhaseFlowOrchestrator(IEnumerable<PhaseData> phaseDatas, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
     {
@@ -18,18 +19,19 @@ public class PhaseFlowOrchestrator
     public void Start()
     {
         phaseAdvancer.Start();
-        AnnouncedGameFlow(CurrentFlow);
+        NotifyNewFlow(CurrentFlow);
     }
 
     public void SubmitAction(Team actingTeam)
     {
         if (phaseAdvancer.TryAdvance(actingTeam))
-            AnnouncedGameFlow(CurrentFlow);
+            NotifyNewFlow(CurrentFlow);
     }
 
-    void AnnouncedGameFlow(GameFlowData flow)
+    void NotifyNewFlow(GameFlowData flow)
     {
         entryDispatcher.EnterPhase(flow);
         dispatcher.Dispatch(flow.Phase, flow.Turn);
+        if (flow.Phase == GamePhase.Done) OnGameEnd?.Invoke();
     }
 }
