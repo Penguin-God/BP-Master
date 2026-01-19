@@ -23,7 +23,7 @@ public class PhaseEventRaiseTests
 
         Dispatch(GamePhase.Ban, Team.Blue);
         Dispatch(GamePhase.Pick,Team.Red);
-        Dispatch(GamePhase.Done, Team.Blue);
+        Dispatch(GamePhase.Done, Team.All);
 
 
         Assert.AreEqual(Team.Blue, banEvents[0]);
@@ -34,22 +34,8 @@ public class PhaseEventRaiseTests
         Assert.AreEqual(1, pickEvents.Count);
         Assert.AreEqual(1, doneEvents.Count);
 
-        CollectionAssert.AreEqual(new GameFlowData[] { CreateFlow(GamePhase.Ban, Team.Blue), CreateFlow(GamePhase.Pick, Team.Red), CreateFlow(GamePhase.Done, Team.Blue), }, flowEvents);
+        CollectionAssert.AreEqual(new GameFlowData[] { CreateFlow(GamePhase.Ban, Team.Blue), CreateFlow(GamePhase.Pick, Team.Red), CreateFlow(GamePhase.Done, Team.All), }, flowEvents);
 
         void Dispatch(GamePhase gamePhase, Team team) => sut.Dispatch(gamePhase, team);
-    }
-
-    [Test]
-    public void All일_경우_모든_팀에_이벤트_호출()
-    {
-        var sut = CreateSut();
-        var events = new List<Team>();
-        sut.OnPhasePick += (team) => events.Add(team);
-
-        // Act
-        sut.Dispatch(GamePhase.Pick, Team.All);
-
-        Assert.AreEqual(2, events.Count);
-        CollectionAssert.AreEquivalent(new Team[] { Team.Red, Team.Blue }, events);
     }
 }

@@ -55,6 +55,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
     {
+        print("@;");
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
         matchUI_Controller.Done(result);
