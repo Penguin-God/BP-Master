@@ -31,7 +31,7 @@ public class SkillRunnerTest
         Assert.AreEqual(100, target.Stat.Attack);
     }
 
-    private SkillRunner CreateSut()
+    SkillRunner CreateSut()
     {
         var dispatcher = new PhaseActionEventDispatcher();
         var actionFactory = new SkillActionFactory(dispatcher);
@@ -39,21 +39,11 @@ public class SkillRunnerTest
         return new SkillRunner(executorFactory);
     }
 
-    private Skill CreateMultiAttackSkill(int amount1, int amount2)
+    Skill CreateMultiAttackSkill(int amount1, int amount2)
     {
-        var data1 = CreateValueSkillData(SkillType.AttackChanger, amount1);
-        var data2 = CreateValueSkillData(SkillType.AttackChanger, amount2);
+        var data1 = CreateValueSkillData(SkillType.AttackChanger, amount1, rule: AllRule);
+        var data2 = CreateValueSkillData(SkillType.AttackChanger, amount2, rule: AllRule);
 
         return new Skill(new List<SkillData> { data1, data2 });
-    }
-
-    private SkillData CreateValueSkillData(SkillType type, int amount)
-    {
-        return new SkillData(
-            type,
-            new SkillAmountData(AmountType.Value, amount, 0, 0),
-            new SkillConditionData(StatConditionType.None, 0, TraitType.None, ConditionType.None),
-            new SkillTargetRule(Side.All, TargetRange.All)
-        );
     }
 }
