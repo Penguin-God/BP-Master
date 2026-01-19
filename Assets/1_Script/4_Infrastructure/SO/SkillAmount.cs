@@ -12,7 +12,7 @@ public class SkillAmount
     int ValueAmount;
 
     [ShowIf(nameof(Type), AmountType.Percent)] [Indent]
-    [SuffixLabel("%", overlay: false)]
+    [SuffixLabel("X100", overlay: false)]
     [SerializeField] float PercentValue;
 
     [ShowIf(nameof(Type), AmountType.Fix)] [Indent] [SerializeField] 
