@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
-  m_Name: "\uD53C\uC758 \uCD95\uBCF5"
+  m_Name: "\uBC1C\uBAA9\uC7A1\uAE30"
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,34 +21,22 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 52
-  championName: "\uD53C\uC758 \uCD95\uBCF5"
-  attack: 140
-  defense: 90
+  id: 23
+  championName: "\uBC1C\uBAA9\uC7A1\uAE30"
+  attack: 150
+  defense: 100
   speed: 5
   skillDatas:
-  - targetSide: 2
-    range: 4
-    skillType: 3
-    skillAmount:
-      Type: 1
-      ValueAmount: 30
-      PercentValue: 0
-      FixValue: 0
-    conditionType: 4
-    threshold: 150
-    conditionCheckerType: 1
-    targetTrait: 0
-  - targetSide: 2
+  - targetSide: 1
     range: 4
     skillType: 1
     skillAmount:
-      Type: 1
-      ValueAmount: 30
+      Type: 3
+      ValueAmount: 0
       PercentValue: 0
-      FixValue: 0
-    conditionType: 4
-    threshold: 150
-    conditionCheckerType: 1
+      FixValue: 5
+    conditionType: 6
+    threshold: 5
+    conditionCheckerType: 0
     targetTrait: 0
-  traitType: 0
+  traitType: 1

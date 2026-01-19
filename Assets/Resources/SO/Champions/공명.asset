@@ -21,11 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 5
+  id: 6
   championName: "\uACF5\uBA85"
-  attack: 90
-  defense: 90
-  speed: 4
+  attack: 110
+  defense: 110
+  speed: 3
   skillDatas:
   - targetSide: 0
     range: 4
