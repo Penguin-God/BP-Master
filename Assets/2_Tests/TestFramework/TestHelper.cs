@@ -73,8 +73,8 @@ public static class TestHelper
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 
     public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher());
-    public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher()));
-    public static SkillRunner CreateSkillRunner() => new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher())));
+    public static SkillExecutorFactory CreateSkillExceutorFactory() => new SkillExecutorFactory(CreateSkillActionFactory());
+    public static SkillRunner CreateSkillRunner() => new SkillRunner(CreateSkillExceutorFactory());
 
     public static Champion CreateChampion(int id = 0, int att = 0, int def = 0, int speed = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def, speed));
     public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
