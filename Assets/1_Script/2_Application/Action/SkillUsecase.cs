@@ -19,7 +19,6 @@ public class SkillUsecase
         var caster = _statusSlots.GetSlot(skillSlot);
         var targets = targetSlots.Select(x => _statusSlots.GetSlot(x));
 
-        // 복잡한 순회 로직 대신 SkillRunner를 호출합니다.
         _skillRunner.Run(skill, caster, targets);
 
         OnUseSkill?.Invoke(skillSlot);

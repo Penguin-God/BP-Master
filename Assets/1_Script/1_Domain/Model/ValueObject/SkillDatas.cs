@@ -65,14 +65,14 @@ public record SkillAmountData(AmountType Type, int ValueAmount, float PercentVal
 
 public readonly struct SkillData
 {
-    public readonly SkillType TraitType;
+    public readonly SkillType SkillType;
     public readonly SkillAmountData AmountData;
     public readonly SkillConditionData ConditionData;
     public readonly SkillTargetRule TargetRule;
 
-    public SkillData(SkillType traitType, SkillAmountData amountData, SkillConditionData conditionData, SkillTargetRule traitTargetRule)
+    public SkillData(SkillType skillType, SkillAmountData amountData, SkillConditionData conditionData, SkillTargetRule traitTargetRule)
     {
-        TraitType = traitType;
+        SkillType = skillType;
         AmountData = amountData;
         TargetRule = traitTargetRule;
         ConditionData = conditionData;

@@ -14,7 +14,7 @@ public readonly struct SkillUI_Data
 
     public SkillUI_Data(SkillData skillData)
     {
-        ActionType = skillData.TraitType;
+        ActionType = skillData.SkillType;
         AmountData = skillData.AmountData;
         Condition = skillData.ConditionData;
         Rule = skillData.TargetRule;
