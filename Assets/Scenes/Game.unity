@@ -3334,7 +3334,7 @@ GameObject:
   - component: {fileID: 1049145344}
   - component: {fileID: 1049145345}
   m_Layer: 0
-  m_Name: Util
+  m_Name: MatchManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3364,9 +3364,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1049145343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9449960ced8d5b24d9f98b8f4f188c08, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a8020aa9c9d74e43b513b2f571f3550, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: App::MatchManager
+  targetWin: 2
 --- !u!1 &1089112379
 GameObject:
   m_ObjectHideFlags: 0
