@@ -12,9 +12,13 @@ public class MatchDI : MonoBehaviour
     PickSlotFacade PickSlotFacade => pickHandler.PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
     PickHandler pickHandler;
-
+    MatchFlowUsecase matchFlowUsecase;
+    MatchRecord matchRecord;
     public void GameStart(Team playerTeam)
     {
+        var matchManager = FindAnyObjectByType<MatchManager>();
+        matchRecord = matchManager.Record;
+        matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
         masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
         var storage = new GameBanPickStorage(champManager.AllId);
 
@@ -56,6 +60,7 @@ public class MatchDI : MonoBehaviour
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-        matchUI_Controller.Done(result);
+        matchFlowUsecase.EndMatch(result.Winner);
+        matchUI_Controller.Done(result, matchRecord.IsMatchFinished);
     }
 }

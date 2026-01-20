@@ -11,7 +11,7 @@ public class MatchFlowUsecaseTests
         var record = CreateRecord(2);
         var sut = CreateSut(record, playerSide);
 
-        sut.ProcessResult(winnerSide);
+        sut.EndMatch(winnerSide);
 
         Assert.AreEqual(expPlayer, record.PlayerWins);
         Assert.AreEqual(expAi, record.AiWins);
@@ -23,7 +23,7 @@ public class MatchFlowUsecaseTests
         var record = CreateRecord(1);
         var sut = CreateSut(record, Team.Blue);
 
-        sut.ProcessResult(Team.Blue);
+        sut.EndMatch(Team.Blue);
 
         Assert.IsTrue(record.IsMatchFinished);
         Assert.AreEqual(Participant.Player, record.MatchWinner);

@@ -54,10 +54,9 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     [SerializeField] GameObject scores;
-    public void Done(MatchResult result)
+    public void Done(MatchResult result, bool isGameEnd)
     {
         championDrawer.gameObject.SetActive(false);
-        var matchManager = FindAnyObjectByType<MatchManager>();
-        Instantiate(scores, transform).GetComponent<MatchResultView>().ShowResult(result, matchManager);
+        Instantiate(scores, transform).GetComponent<MatchResultView>().ShowResult(result, isGameEnd);
     }
 }
