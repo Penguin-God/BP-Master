@@ -3,28 +3,34 @@ using NUnit.Framework;
 public class MatchRecordTests
 {
     [Test]
-    [TestCase(Team.Blue, 1, 0)]
-    [TestCase(Team.Red, 0, 1)]
-    public void 승리_기록_시_해당_팀의_점수만_올라가야_함(Team winner, int expectedBlue, int expectedRed)
+    [TestCase(Participant.Player, 1, 0)]
+    [TestCase(Participant.AI, 0, 1)]
+    public void 주체별_승리_기록_테스트(Participant winner, int expectedPlayer, int expectedAi)
     {
-        var sut = CreateMatchRecord(2);
+        // Arrange
+        var sut = new MatchRecord(2);
 
+        // Act
         sut.AddWin(winner);
 
-        Assert.AreEqual(expectedBlue, sut.BlueWins);
-        Assert.AreEqual(expectedRed, sut.RedWins);
+        // Assert
+        Assert.AreEqual(expectedPlayer, sut.PlayerWins);
+        Assert.AreEqual(expectedAi, sut.AiWins);
     }
 
     [Test]
-    public void 목표_승수_도달_시_매치가_종료되어야_함()
+    public void 플레이어_최종_우승_판정()
     {
-        var sut = CreateMatchRecord(2);
+        // Arrange
+        var sut = new MatchRecord(2);
 
-        sut.AddWin(Team.Red);
-        sut.AddWin(Team.Red);
+        // Act
+        sut.AddWin(Participant.Player);
+        sut.AddWin(Participant.Player);
 
+        // Assert
         Assert.IsTrue(sut.IsMatchFinished);
-        Assert.AreEqual(Team.Red, sut.MatchWinner);
+        Assert.AreEqual(Participant.Player, sut.MatchWinner);
     }
 
     private MatchRecord CreateMatchRecord(int targetWins) => new MatchRecord(targetWins);

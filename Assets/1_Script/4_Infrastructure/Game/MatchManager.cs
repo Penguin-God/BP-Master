@@ -20,13 +20,11 @@ public class MatchManager : MonoBehaviour
         _record = new MatchRecord(targetWin);
     }
 
-    public void AddWin(Team winner) => _record.AddWin(winner);
-
     [ContextMenu("Red ")] void 주작() => HandleRoundEnd(Team.Red);
 
     public void HandleRoundEnd(Team winner)
     {
-        _record.AddWin(winner);
+        // _record.AddWin(winner);
         if (_record.IsMatchFinished)
         {
             Debug.Log($"최종 승리 팀: {_record.MatchWinner}");
