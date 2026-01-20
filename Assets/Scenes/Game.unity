@@ -3367,6 +3367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8020aa9c9d74e43b513b2f571f3550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::MatchManager
+  champManager: {fileID: 1420292359}
   targetWin: 2
 --- !u!1 &1089112379
 GameObject:

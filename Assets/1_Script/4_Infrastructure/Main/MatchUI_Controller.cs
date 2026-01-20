@@ -28,6 +28,7 @@ public class MatchUI_Controller : MonoBehaviour
         championSelector.Init(storage, phaseManager);
 
         masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
+        championDrawer.InActiveButtons(storage.SelectableIds);
 
         storage.OnBan += banView.UpdateBanList;
         storage.OnPick += slotViews.PickChampion;

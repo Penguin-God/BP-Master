@@ -30,7 +30,11 @@ public class ChampionButtonView : MonoBehaviour
             btn.onClick.AddListener(() => action(btn.GetComponent<ChampionIdentify>()));
     }
 
-    public void HideView() => gameObject.SetActive(false);
+    public void InActiveButtons(IEnumerable<int> selectableIds)
+    {
+        foreach (var btn in buttons.Where(x => selectableIds.Contains(x.GetComponent<ChampionIdentify>().Id) == false))
+            InActiveButton(btn.GetComponent<ChampionIdentify>().Id);
+    }
 }
 
 

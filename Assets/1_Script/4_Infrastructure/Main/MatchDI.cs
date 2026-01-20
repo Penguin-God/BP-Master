@@ -20,11 +20,13 @@ public class MatchDI : MonoBehaviour
         matchRecord = matchManager.Record;
         matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
         masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
-        var storage = new GameBanPickStorage(champManager.AllId);
+        // var storage = new GameBanPickStorage(champManager.AllId);
+        var storage = matchManager.Storage;
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
         phaseManager.OnGameEnd += OnDone;
+        phaseManager.OnGameEnd += matchManager.EndMatch;
 
         // 로직 추출하기
         var actionEventDispathcer = new PhaseActionEventDispatcher();
