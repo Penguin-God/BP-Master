@@ -57,6 +57,7 @@ public class MatchUI_Controller : MonoBehaviour
     public void Done(MatchResult result)
     {
         championDrawer.gameObject.SetActive(false);
-        Instantiate(scores, transform).GetComponent<MatchResultView>().ShowResult(result);
+        var matchManager = FindAnyObjectByType<MatchManager>();
+        Instantiate(scores, transform).GetComponent<MatchResultView>().ShowResult(result, matchManager);
     }
 }
