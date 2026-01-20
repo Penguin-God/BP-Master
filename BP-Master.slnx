@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="AdapterTests.csproj" />
+  <Project Path="2_Tests.csproj" />
   <Project Path="DomainTests.csproj" />
   <Project Path="App.csproj" />
   <Project Path="Adapter.csproj" />
@@ -7,5 +8,4 @@
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Domain.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
-  <Project Path="2_Tests.csproj" />
 </Solution>
