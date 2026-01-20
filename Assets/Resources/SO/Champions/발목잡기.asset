@@ -29,7 +29,7 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 1
     range: 4
-    skillType: 1
+    skillType: 5
     skillAmount:
       Type: 3
       ValueAmount: 0
@@ -37,6 +37,4 @@ MonoBehaviour:
       FixValue: 5
     conditionType: 6
     threshold: 5
-    conditionCheckerType: 0
-    targetTrait: 0
-  traitType: 1
+    conditionCheckerType: 1
