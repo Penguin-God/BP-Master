@@ -20,7 +20,6 @@ public class MatchDI : MonoBehaviour
         matchRecord = matchManager.Record;
         matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
         masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
-        // var storage = new GameBanPickStorage(champManager.AllId);
         var storage = matchManager.Storage;
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
