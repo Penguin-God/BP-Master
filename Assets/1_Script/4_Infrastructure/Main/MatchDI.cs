@@ -14,9 +14,10 @@ public class MatchDI : MonoBehaviour
     PickHandler pickHandler;
     MatchFlowUsecase matchFlowUsecase;
     MatchRecord matchRecord;
+    MatchManager matchManager;
     public void GameStart(Team playerTeam)
     {
-        var matchManager = FindAnyObjectByType<MatchManager>();
+        matchManager = FindAnyObjectByType<MatchManager>();
         matchRecord = matchManager.Record;
         matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
         masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);

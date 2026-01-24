@@ -3369,6 +3369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::MatchManager
   champManager: {fileID: 1420292359}
   targetWin: 2
+  masteryLevels: 0f0000000f0000000f00000014000000140000001400000014000000190000001900000019000000
 --- !u!1 &1089112379
 GameObject:
   m_ObjectHideFlags: 0
