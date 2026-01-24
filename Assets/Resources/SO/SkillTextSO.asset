@@ -33,3 +33,10 @@ MonoBehaviour:
       \uC2A4\uD0EF \uC99D\uAC00"
   - Type: 8
     Text: "\uBC29\uC5B4\uB825 {Value} \uD761\uC218"
+  - Type: 13
+    Text: "\uAC8C\uC784\uC774 \uB05D\uB0A0 \uB54C \uC790\uC2E0\uC758 \uC2A4\uD0EF
+      {Value}\uC99D\uAC00"
+  - Type: 11
+    Text: "\uC774\uD6C4 \uD53D\uD55C \uC544\uAD70 \uACF5\uACA9\uB825 {Value}\uC99D\uAC00"
+  - Type: 12
+    Text: "\uC2A4\uD0EF \uBCF5\uC0AC"
