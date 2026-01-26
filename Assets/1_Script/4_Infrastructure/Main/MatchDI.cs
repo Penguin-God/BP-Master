@@ -6,7 +6,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
 
     [SerializeField] MatchUI_Controller matchUI_Controller;
-    [SerializeField] MasteryRegistory masteryGenerator;
+    [SerializeField] MasteryRegistry masteryRegistry;
     [SerializeField] AI_Main ai_main;
 
     PickSlotFacade PickSlotFacade => pickHandler.PickSlotFacade;
@@ -20,8 +20,10 @@ public class MatchDI : MonoBehaviour
         matchManager = FindAnyObjectByType<MatchManager>();
         matchRecord = matchManager.Record;
         matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
-        masteryGenerator.SettingRandomMastery(matchConfig.TeamSize);
         var storage = matchManager.Storage;
+
+        masteryRegistry.SetMastery(playerTeam, matchManager.participantRepository.Get(Participant.Player).Mastery);
+        masteryRegistry.SetMastery(EnumCaster.GetOppoentTeam(playerTeam), matchManager.participantRepository.Get(Participant.AI).Mastery);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
@@ -52,7 +54,7 @@ public class MatchDI : MonoBehaviour
 
     void OnPick(SlotData slotData, int id)
     {
-        PickEffectApplier pickEffectApplier = new PickEffectApplier(masteryGenerator.GetTeamMasteryManager(slotData.Team));
+        PickEffectApplier pickEffectApplier = new PickEffectApplier(masteryRegistry.GetTeamMasteryManager(slotData.Team));
         pickHandler.Pick(slotData.Team, id);
         pickEffectApplier.Apply(slotData.Team, PickSlotFacade.ChampionSlots.GetSlot(slotData));
     }

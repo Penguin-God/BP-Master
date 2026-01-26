@@ -5,7 +5,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
 
-    [SerializeField] MasteryRegistory masteryGenerator;
+    [SerializeField] MasteryRegistry masteryGenerator;
     [SerializeField] AI_SelectorFactory selectorsCreatetor;
 
     AI_BanPickAgent banPickAgent;
