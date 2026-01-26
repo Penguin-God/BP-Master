@@ -47,6 +47,6 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         selectBtn.GetComponentInChildren<TextMeshProUGUI>().text = label;
     }
 
-    public void EnterBan() => SetupSelectButton("픽");
-    public void EnterPick() => SetupSelectButton("밴");
+    public void EnterBan() => SetupSelectButton("밴");
+    public void EnterPick() => SetupSelectButton("픽");
 }
