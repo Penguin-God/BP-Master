@@ -5,26 +5,34 @@ using UnityEngine;
 public class GameFlowView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI gameFlowText;
-    [SerializeField] TextMeshProUGUI traitUseText;
-
-    public void ViewGameFlow(GameFlowData flow) => gameFlowText.text = new GameFlowTextBuilder().BuildFlowText(flow);
-
-    SlotStorage<ChampionSO> champions;
-    public void Init(SlotStorage<ChampionSO> champions)
+    [SerializeField] ChampionRepository championRepository;
+    public void ViewGameFlow(GameFlowData flow)
     {
-        this.champions = champions;
+        if(flow.Phase == GamePhase.Done)
+        {
+            gameFlowText.text = string.Empty;
+            return;
+        }
+        gameFlowText.text = new GameFlowTextBuilder().BuildFlowText(flow);
+    }
+
+    SlotStorage<int> ids;
+    public void Init(SlotStorage<int> ids)
+    {
+        this.ids = ids;
     }
 
     public void UpdateUseSkill(SlotData useSlot)
     {
-        string skillChamp = champions.GetSlot(useSlot).ChampionName;
+        string skillChamp = championRepository.GetChampionName(ids.GetSlot(useSlot));
         StartCoroutine(Co_ViewTriatUseLog(skillChamp));
     }
 
     IEnumerator Co_ViewTriatUseLog(string name)
     {
-        traitUseText.text = $"{name} 특성 사용!";
+        string temp = gameFlowText.text;
+        gameFlowText.text = $"{name} 스킬 사용!";
         yield return new WaitForSeconds(1f);
-        traitUseText.text = string.Empty;
+        gameFlowText.text = temp;
     }
 }

@@ -1,6 +1,5 @@
 
 public class GameFlowTextBuilder
-
 {
     public string BuildFlowText(GameFlowData flow) => $"{BuildTurnText(flow.Turn)} {BuildPhaseText(flow.Phase)} 단계";
 

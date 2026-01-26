@@ -24,10 +24,10 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     Team team;
-    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord)
+    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, PickSlotFacade pickSlotFacade, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord)
     {
         team = playerTeam;
-        slotViews.InitSlotView(statusSlots);
+        slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(storage, phaseManager);
 
         participantView.ViewParticipant(matchRecord, playerTeam);
@@ -46,10 +46,13 @@ public class MatchUI_Controller : MonoBehaviour
 
         skillUseView.gameObject.SetActive(false);
         skillButtonView.Init(playerTeam);
-        skillUseView.Init(skillSlots, skillController);
+        skillUseView.Init(pickSlotFacade.SkillSlots, skillController);
 
-        storage.OnPick += (slot, _) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
-        skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(statusSlots, slot.Team);
+        gameFlowView.Init(pickSlotFacade.IdSlots);
+        skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
+
+        storage.OnPick += (slot, _) => scoreView.UpdateTeamScore(pickSlotFacade.StatusSlots, slot.Team);
+        skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(pickSlotFacade.StatusSlots, slot.Team);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
     }

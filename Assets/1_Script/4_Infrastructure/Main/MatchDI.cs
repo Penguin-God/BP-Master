@@ -38,7 +38,7 @@ public class MatchDI : MonoBehaviour
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade.StatusSlots, PickSlotFacade.SkillSlots, skillController, masteryRegistry, matchRecord); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade, skillController, masteryRegistry, matchRecord); // start보다 먼저
 
         ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController, PickSlotFacade.StatusSlots, champManager.GetCatalog(), masteryRegistry);
 
