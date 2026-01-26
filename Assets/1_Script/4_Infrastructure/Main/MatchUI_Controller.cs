@@ -16,6 +16,7 @@ public class MatchUI_Controller : MonoBehaviour
     
     [SerializeField] MasteryTooltipTrigger redMasteryTooltipTrigger;
     [SerializeField] MasteryTooltipTrigger blueMasteryTooltipTrigger;
+    [SerializeField] ParticipantView participantView;
 
     MasteryButtonHighlighter masteryHighlighter;
     public void Awake()
@@ -24,12 +25,13 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     Team team;
-    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUsecase skillController, MasteryRegistry masteryRegistry)
+    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord)
     {
         team = playerTeam;
         slotViews.InitSlotView(statusSlots);
         championSelector.Init(storage, phaseManager);
 
+        participantView.ViewParticipant(matchRecord, playerTeam);
         masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작
         redMasteryTooltipTrigger.Inject(masteryRegistry);
         blueMasteryTooltipTrigger.Inject(masteryRegistry);

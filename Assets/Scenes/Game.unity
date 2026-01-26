@@ -1596,8 +1596,9 @@ GameObject:
   m_Component:
   - component: {fileID: 670859826}
   - component: {fileID: 670859827}
+  - component: {fileID: 670859828}
   m_Layer: 5
-  m_Name: ScoreInfo
+  m_Name: ParticipantInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1638,6 +1639,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blueScoreView: {fileID: 8207948910718123627}
   redScoreView: {fileID: 8207948910857500561}
+--- !u!114 &670859828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670859825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf63fd00bdbc3a4fadfbdf15d5512eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::ParticipantView
+  blueText: {fileID: 3678684029784300721}
+  redText: {fileID: 3678684029981119819}
 --- !u!1001 &723248606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4045,6 +4060,7 @@ MonoBehaviour:
   banView: {fileID: 1089112381}
   redMasteryTooltipTrigger: {fileID: 8207948910857500562}
   blueMasteryTooltipTrigger: {fileID: 8207948910718123628}
+  participantView: {fileID: 670859828}
   scores: {fileID: 6302358083907961661, guid: 1d344e9f842836d4ca88de77a671c476, type: 3}
 --- !u!114 &1250498148 stripped
 MonoBehaviour:
@@ -4393,50 +4409,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394800987}
   m_CullTransparentMesh: 1
---- !u!1 &1410148728
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1410148729}
-  - component: {fileID: 1410148730}
-  m_Layer: 0
-  m_Name: Mastery
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1410148729
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410148728}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1420292360}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1410148730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410148728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e831dcc1b6b144f82f86e7f275e0e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1420292358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4482,7 +4454,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 758303700}
-  - {fileID: 1410148729}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1420292363
@@ -7140,7 +7111,7 @@ GameObject:
   - component: {fileID: 8207948910857500561}
   - component: {fileID: 8207948910857500562}
   m_Layer: 0
-  m_Name: RedScore
+  m_Name: RedParticipant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7161,7 +7132,7 @@ GameObject:
   - component: {fileID: 8207948910718123627}
   - component: {fileID: 8207948910718123628}
   m_Layer: 0
-  m_Name: BlueScore
+  m_Name: BlueParticipant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
