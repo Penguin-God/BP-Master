@@ -2059,7 +2059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dbeee157e288a4b96aee9297d8ddd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masteryGenerator: {fileID: 1410148730}
   selectorsCreatetor: {fileID: 11400000, guid: bf9c851059a3b63478be516f7bbb8fe3, type: 2}
 --- !u!114 &758303702
 MonoBehaviour:
@@ -3321,7 +3320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362420e07c8344b43aa956d700eafbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masteryGenerator: {fileID: 1410148730}
   championButtonView: {fileID: 1027524856}
 --- !u!1 &1049145343
 GameObject:
@@ -4045,6 +4043,8 @@ MonoBehaviour:
   skillButtonView: {fileID: 1919757233}
   championRepository: {fileID: 1420292359}
   banView: {fileID: 1089112381}
+  redMasteryTooltipTrigger: {fileID: 8207948910857500562}
+  blueMasteryTooltipTrigger: {fileID: 8207948910718123628}
   scores: {fileID: 6302358083907961661, guid: 1d344e9f842836d4ca88de77a671c476, type: 3}
 --- !u!114 &1250498148 stripped
 MonoBehaviour:
@@ -4437,8 +4437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e831dcc1b6b144f82f86e7f275e0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championRepository: {fileID: 1420292359}
-  masteryLevels: 0f0000000f0000000f0000001400000014000000140000001900000019000000
 --- !u!1 &1420292358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4502,7 +4500,6 @@ MonoBehaviour:
   matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   champManager: {fileID: 1420292359}
   matchUI_Controller: {fileID: 1213870346}
-  masteryGenerator: {fileID: 1410148730}
   ai_main: {fileID: 758303701}
   championSelector: {fileID: 1027524855}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
@@ -8204,7 +8201,6 @@ MonoBehaviour:
   direction: 3
   spacing: 10
   championRepository: {fileID: 1420292359}
-  masteryData: {fileID: 1410148730}
   team: 0
 --- !u!114 &8207948910857500560
 MonoBehaviour:
@@ -8268,7 +8264,6 @@ MonoBehaviour:
   direction: 2
   spacing: 10
   championRepository: {fileID: 1420292359}
-  masteryData: {fileID: 1410148730}
   team: 1
 --- !u!114 &8338956856838379574
 MonoBehaviour:

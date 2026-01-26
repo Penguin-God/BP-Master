@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class MasteryButtonHighlighter : MonoBehaviour
 {
-    [SerializeField] MasteryRegistry masteryGenerator;
     [SerializeField] ChampionButtonView championButtonView;
     
-    public void Highlight(Team team)
+    public void Highlight(Team team, MasteryRegistry masteryRegistry)
     {
-        var masteredIds = masteryGenerator.GetTeamMasteryManager(team).AllMasteries.Select(x => x.ChampionId);
+        var masteredIds = masteryRegistry.GetTeamMasteryManager(team).AllMasteries.Select(x => x.ChampionId);
 
         championButtonView
             .Buttons

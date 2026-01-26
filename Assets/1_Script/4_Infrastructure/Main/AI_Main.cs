@@ -4,8 +4,6 @@ using UnityEngine;
 public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
-
-    [SerializeField] MasteryRegistry masteryGenerator;
     [SerializeField] AI_SelectorFactory selectorsCreatetor;
 
     AI_BanPickAgent banPickAgent;
@@ -18,11 +16,11 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
         banPickAgent.Ban(Team);
     }
 
-    public void Init(Team team, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog)
+    public void Init(Team team, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry)
     {
         Team = team;
 
-        selectorsCreatetor.Init(Team, championCatalog, masteryGenerator.GetTeamMasteryManager(Team), statusSlots);
+        selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), statusSlots);
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector());
         storage.OnPick += OnPick;
         GetComponent<AI_MonoBehaviourAgent>().Init(new AI_SkillUseAgent(skillSlots, skillUseController));

@@ -13,6 +13,9 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] SkillButtonView skillButtonView;
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] BanView banView;
+    
+    [SerializeField] MasteryTooltipTrigger redMasteryTooltipTrigger;
+    [SerializeField] MasteryTooltipTrigger blueMasteryTooltipTrigger;
 
     MasteryButtonHighlighter masteryHighlighter;
     public void Awake()
@@ -21,13 +24,15 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     Team team;
-    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUsecase skillController)
+    public void Init(Team playerTeam, GameBanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SlotStorage<ChampionStatus> statusSlots, SlotStorage<Skill> skillSlots, SkillUsecase skillController, MasteryRegistry masteryRegistry)
     {
         team = playerTeam;
         slotViews.InitSlotView(statusSlots);
         championSelector.Init(storage, phaseManager);
 
-        masteryHighlighter.Highlight(playerTeam); // championSelector 이후에 시작
+        masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작
+        redMasteryTooltipTrigger.Inject(masteryRegistry);
+        blueMasteryTooltipTrigger.Inject(masteryRegistry);
         championDrawer.InActiveButtons(storage.SelectableIds);
 
         storage.OnBan += banView.UpdateBanList;

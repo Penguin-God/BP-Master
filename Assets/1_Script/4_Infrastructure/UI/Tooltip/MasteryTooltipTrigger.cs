@@ -3,8 +3,13 @@ using UnityEngine;
 public class MasteryTooltipTrigger : TooltipTrigger
 {
     [SerializeField] ChampionRepository championRepository;
-    [SerializeField] MasteryRegistry masteryData;
     [SerializeField] Team team;
 
-    protected override string BuildText() => new MasteryTextBuilder(championRepository.NameCatalog).BuildMasteriesText(masteryData.GetTeamMasteryManager(team).AllMasteries);
+    MasteryRegistry masteryRegistry;
+    public void Inject(MasteryRegistry registry) => this.masteryRegistry = registry;
+    protected override string BuildText()
+    {
+        if (masteryRegistry == null) return "";
+        return new MasteryTextBuilder(championRepository.NameCatalog).BuildMasteriesText(masteryRegistry.GetTeamMasteryManager(team).AllMasteries);
+    }
 }

@@ -6,11 +6,11 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
 
     [SerializeField] MatchUI_Controller matchUI_Controller;
-    [SerializeField] MasteryRegistry masteryRegistry;
     [SerializeField] AI_Main ai_main;
 
     PickSlotFacade PickSlotFacade => pickHandler.PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
+    MasteryRegistry masteryRegistry = new();
     PickHandler pickHandler;
     MatchFlowUsecase matchFlowUsecase;
     MatchRecord matchRecord;
@@ -22,8 +22,8 @@ public class MatchDI : MonoBehaviour
         matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
         var storage = matchManager.Storage;
 
-        masteryRegistry.SetMastery(playerTeam, matchManager.participantRepository.Get(Participant.Player).Mastery);
-        masteryRegistry.SetMastery(EnumCaster.GetOppoentTeam(playerTeam), matchManager.participantRepository.Get(Participant.AI).Mastery);
+        masteryRegistry.InitTeamMastery(playerTeam, matchManager.participantRepository.Get(Participant.Player).Mastery);
+        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), matchManager.participantRepository.Get(Participant.AI).Mastery);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
@@ -38,9 +38,9 @@ public class MatchDI : MonoBehaviour
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade.StatusSlots, PickSlotFacade.SkillSlots, skillController); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade.StatusSlots, PickSlotFacade.SkillSlots, skillController, masteryRegistry); // start보다 먼저
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController, PickSlotFacade.StatusSlots, champManager.GetCatalog());
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController, PickSlotFacade.StatusSlots, champManager.GetCatalog(), masteryRegistry);
 
         phaseManager.Start();
     }

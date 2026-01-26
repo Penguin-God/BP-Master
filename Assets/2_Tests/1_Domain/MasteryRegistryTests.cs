@@ -11,7 +11,7 @@ public class MasteryRegistryTests
         var sut = CreateSut();
         var expected = CreateEmptyCollection();
 
-        sut.SetMastery(team, expected);
+        sut.InitTeamMastery(team, expected);
         var result = sut.GetTeamMasteryManager(team);
 
         Assert.AreSame(expected, result);
