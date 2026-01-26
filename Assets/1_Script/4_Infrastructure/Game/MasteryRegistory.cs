@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MasteryGenerator : MonoBehaviour
+public class MasteryRegistory : MonoBehaviour
 {
     [SerializeField] ChampionRepository championRepository;
     [SerializeField] int[] masteryLevels;

@@ -12,7 +12,7 @@ public class MatchManager : MonoBehaviour
     MatchRecord _record;
     public MatchRecord Record => _record;
     IEnumerable<int> selectableIds;
-    ParticipantRepository participantRepository;
+    public ParticipantRepository participantRepository = new ParticipantRepository();
 
     void Awake() // 유일객체 구현
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MasteryButtonHighlighter : MonoBehaviour
 {
-    [SerializeField] MasteryGenerator masteryGenerator;
+    [SerializeField] MasteryRegistory masteryGenerator;
     [SerializeField] ChampionButtonView championButtonView;
     
     public void Highlight(Team team)

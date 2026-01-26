@@ -6,7 +6,7 @@ public class MatchDI : MonoBehaviour
     [SerializeField] ChampionRepository champManager;
 
     [SerializeField] MatchUI_Controller matchUI_Controller;
-    [SerializeField] MasteryGenerator masteryGenerator;
+    [SerializeField] MasteryRegistory masteryGenerator;
     [SerializeField] AI_Main ai_main;
 
     PickSlotFacade PickSlotFacade => pickHandler.PickSlotFacade;
