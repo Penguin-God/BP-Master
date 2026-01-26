@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class SkillUseController_UI : MonoBehaviour
 {
-    [SerializeField] Button[] blueChamps;
-    [SerializeField] Button[] redChamps;
+    [SerializeField] Transform blueParent;
+    [SerializeField] Transform redParent;
     SkillButtonView skillButtonView;
 
     SlotStorage<Skill> skillSlots;
@@ -17,8 +17,8 @@ public class SkillUseController_UI : MonoBehaviour
         this.skillSlots = skillSlots;
         this.skillUseController = skillUseController;
 
-        SetupChampionButtons(blueChamps, Team.Blue);
-        SetupChampionButtons(redChamps, Team.Red);
+        SetupChampionButtons(blueParent.GetComponentsInChildren<Button>(), Team.Blue);
+        SetupChampionButtons(redParent.GetComponentsInChildren<Button>(), Team.Red);
         skillButtonView = GetComponent<SkillButtonView>();
     }
 

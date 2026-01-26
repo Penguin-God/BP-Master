@@ -11,7 +11,6 @@ public class MatchUI_Controller : MonoBehaviour
     
     [SerializeField] GameFlowView gameFlowView;
     [SerializeField] SkillButtonView skillButtonView;
-    [SerializeField] ChampionRepository championRepository;
     [SerializeField] BanView banView;
     
     [SerializeField] MasteryTooltipTrigger redMasteryTooltipTrigger;

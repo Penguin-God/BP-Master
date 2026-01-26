@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SkillButtonView : MonoBehaviour
 {
-    [SerializeField] Button[] blueSkills;
-    [SerializeField] Button[] redSkills;
+    [SerializeField] Transform blueParent;
+    [SerializeField] Transform redParent;
     SlotStorage<Button> buttonSlots = new();
     Team team;
     public void Init(Team team)
@@ -14,8 +14,8 @@ public class SkillButtonView : MonoBehaviour
         gameObject.SetActive(true);
         this.team = team;
 
-        buttonSlots.AddSlots(Team.Blue, blueSkills);
-        buttonSlots.AddSlots(Team.Red, redSkills);
+        buttonSlots.AddSlots(Team.Blue, blueParent.GetComponentsInChildren<Button>());
+        buttonSlots.AddSlots(Team.Red, redParent.GetComponentsInChildren<Button>());
     }
 
     public void InActiveAllBtns()
