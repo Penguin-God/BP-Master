@@ -1,9 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 {
-    [SerializeField] Button nailDownBtn;
+    [SerializeField] Button selectBtn;
     [SerializeField] ChampionView championFocusView;
     [SerializeField] ChampionRepository championManager;
 
@@ -21,7 +22,7 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         this.storage = storage;
         phaseManager = pm;
 
-        nailDownBtn.onClick.AddListener(NailDownChampion);
+        selectBtn.onClick.AddListener(NailDownChampion);
     }
 
     int selectId = -1;
@@ -35,11 +36,17 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     {
         if(storage.SaveSelect(phaseManager.CurrentFlow, selectId))
         {
-            ButtonUtil.InActiveButton(nailDownBtn);
+            ButtonUtil.InActiveButton(selectBtn);
             championFocusView.ClearDisplay();
         }
     }
 
-    public void EnterBan() => ButtonUtil.ActiveButton(nailDownBtn);
-    public void EnterPick() => ButtonUtil.ActiveButton(nailDownBtn);
+    void SetupSelectButton(string label)
+    {
+        ButtonUtil.ActiveButton(selectBtn);
+        selectBtn.GetComponentInChildren<TextMeshProUGUI>().text = label;
+    }
+
+    public void EnterBan() => SetupSelectButton("픽");
+    public void EnterPick() => SetupSelectButton("밴");
 }

@@ -1661,7 +1661,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 50, y: 30}
-  m_SizeDelta: {x: 154.6599, y: 200}
+  m_SizeDelta: {x: 165, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &741026030
 MonoBehaviour:
@@ -1710,8 +1710,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2889,7 +2889,6 @@ GameObject:
   - component: {fileID: 1027524851}
   - component: {fileID: 1027524854}
   - component: {fileID: 1027524852}
-  - component: {fileID: 1027524855}
   - component: {fileID: 1027524856}
   - component: {fileID: 1027524857}
   - component: {fileID: 1027524858}
@@ -2958,22 +2957,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027524850}
   m_CullTransparentMesh: 1
---- !u!114 &1027524855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027524850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17fd1a7ffc1d02c46ba912cc70a2a69a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nailDownBtn: {fileID: 919244431}
-  championFocusView: {fileID: 1640189473}
-  championManager: {fileID: 1420292359}
-  champBtnView: {fileID: 1027524856}
 --- !u!114 &1027524856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3702,7 +3685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
-  championSelector: {fileID: 1027524855}
+  championSelector: {fileID: 1640189475}
   championDrawer: {fileID: 1027524856}
   skillUseView: {fileID: 1164166379}
   slotViews: {fileID: 1164166382}
@@ -4179,6 +4162,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
+      propertyPath: team
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
+      propertyPath: tooltip
+      value: 
+      objectReference: {fileID: 765582499}
+    - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
+      propertyPath: direction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
+      propertyPath: championRepository
+      value: 
+      objectReference: {fileID: 1420292359}
     - target: {fileID: 2542274960472672858, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4381,7 +4380,7 @@ MonoBehaviour:
   champManager: {fileID: 1420292359}
   matchUI_Controller: {fileID: 1213870346}
   ai_main: {fileID: 758303701}
-  championSelector: {fileID: 1027524855}
+  championSelector: {fileID: 1640189475}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!114 &1420292366
 MonoBehaviour:
@@ -4686,6 +4685,7 @@ GameObject:
   - component: {fileID: 1640189471}
   - component: {fileID: 1640189473}
   - component: {fileID: 1640189474}
+  - component: {fileID: 1640189475}
   m_Layer: 5
   m_Name: ChampionFocusView
   m_TagString: Untagged
@@ -4785,6 +4785,22 @@ MonoBehaviour:
   attackText: {fileID: 864049216}
   defenseText: {fileID: 73557872}
   speedText: {fileID: 1614600243}
+--- !u!114 &1640189475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640189469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fd1a7ffc1d02c46ba912cc70a2a69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectBtn: {fileID: 919244431}
+  championFocusView: {fileID: 1640189473}
+  championManager: {fileID: 1420292359}
+  champBtnView: {fileID: 1027524856}
 --- !u!1 &1668292111
 GameObject:
   m_ObjectHideFlags: 0
@@ -4937,7 +4953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cda04c6bea654449928f16e86347c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  banPickUI: {fileID: 1027524855}
+  banPickUI: {fileID: 1640189475}
   match: {fileID: 1420292363}
   blueButton: {fileID: 1366672694}
   redButton: {fileID: 1394800989}
