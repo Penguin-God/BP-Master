@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
@@ -51,8 +52,9 @@ public class MatchUI_Controller : MonoBehaviour
         gameFlowView.Init(pickSlotFacade.IdSlots);
         skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
 
-        storage.OnPick += (slot, _) => scoreView.UpdateTeamScore(pickSlotFacade.StatusSlots, slot.Team);
-        skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(pickSlotFacade.StatusSlots, slot.Team);
+        //storage.OnPick += (slot, _) => scoreView.UpdateTeamScore(pickSlotFacade.StatusSlots, slot.Team);
+        //skillController.OnUseSkill += (slot) => scoreView.UpdateTeamScore(pickSlotFacade.StatusSlots, slot.Team);
+        scoreView.Init(pickSlotFacade.StatusSlots);
 
         eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
     }
