@@ -7,7 +7,7 @@ public enum SkillType
     DefenseChanger = 3,
     SpeedChanger = 5,
     TraitExcluder = 7,
-    DefenseAbsorber = 8,
+    StatAbsorber = 8,
     Resonance = 9,
     AmplifyChanger = 10,
     PickBuffer = 11,

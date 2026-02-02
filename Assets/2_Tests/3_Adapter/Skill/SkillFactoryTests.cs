@@ -25,7 +25,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.DefenseChanger, typeof(StatChanger))]
     [TestCase(SkillType.SpeedChanger, typeof(StatChanger))]
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
-    [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]
+    [TestCase(SkillType.StatAbsorber, typeof(DefenseAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
     [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     [TestCase(SkillType.PickBuffer, typeof(PickChampStatChanger))]
