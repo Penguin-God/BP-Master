@@ -1,10 +1,10 @@
-public readonly struct AmountChangeTextModel
+public readonly struct AmountTextData
 {
     public readonly string Increased;
     public readonly string Decreased;
     public readonly string Fix;
 
-    public AmountChangeTextModel(string increased, string decreased, string fix)
+    public AmountTextData(string increased, string decreased, string fix)
     {
         Increased = increased;
         Decreased = decreased;
@@ -14,9 +14,9 @@ public readonly struct AmountChangeTextModel
 
 public class SkillAmountTextBuilder
 {
-    readonly AmountChangeTextModel changeText;
+    readonly AmountTextData changeText;
 
-    public SkillAmountTextBuilder(AmountChangeTextModel changeText)
+    public SkillAmountTextBuilder(AmountTextData changeText)
     {
         this.changeText = changeText;
     }
@@ -34,6 +34,14 @@ public class SkillAmountTextBuilder
         AmountType.Fix => changeText.Fix,
         AmountType.Value => data.ValueAmount < 0 ? changeText.Decreased : changeText.Increased,
         AmountType.Percent => data.PercentValue < 0 ? changeText.Decreased : changeText.Increased,
+        _ => ""
+    };
+
+    public string BuildStatText(StatType statType) => statType switch
+    {
+        StatType.Attack => "공격력",
+        StatType.Defense => "방어력",
+        StatType.Speed => "속도",
         _ => ""
     };
 

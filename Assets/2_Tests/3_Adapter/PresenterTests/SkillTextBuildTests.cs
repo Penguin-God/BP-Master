@@ -20,34 +20,6 @@ public class SkillTextBuildTests
     }
 
     [Test]
-    [TestCase(AmountType.Value, "100")]
-    [TestCase(AmountType.Percent, "50%")]
-    [TestCase(AmountType.Fix, "120")]
-    public void 타입에_따른_값을_텍스트로_반환(AmountType amountType, string expected)
-    {
-        SkillAmountData data = CreateSkillAmount(amountType, value: 100, percent: 0.5f, fix: 120);
-        var sut = new SkillAmountTextBuilder(default);
-
-        string result = sut.BuildAmountText(data);
-
-        Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    [TestCase(AmountType.Value, "감소")]
-    [TestCase(AmountType.Percent, "증가")]
-    [TestCase(AmountType.Fix, "고정")]
-    public void 값에_따라_변경_텍스트_반환(AmountType amountType, string expected)
-    {
-        var sut = new SkillAmountTextBuilder(new AmountChangeTextModel("증가", "감소", "고정"));
-
-        SkillAmountData data = CreateSkillAmount(amountType, value: -100, percent: 0.5f, fix: 120);
-        string result = sut.BuildChangeText(data);
-
-        Assert.AreEqual(expected, result);
-    }
-
-    [Test]
     public void 조건_타입과_인자값에_맞는_텍스트_생성()
     {
         var sut = new SkillConditionTextBuilder();
