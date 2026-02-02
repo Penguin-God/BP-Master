@@ -34,11 +34,10 @@ MonoBehaviour:
       Type: 3
       ValueAmount: -65
       PercentValue: 0
-      FixValue: 100
+      FixValue: 99
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    targetTrait: 0
   - targetSide: 0
     range: 4
     skillType: 3
@@ -46,9 +45,7 @@ MonoBehaviour:
       Type: 3
       ValueAmount: -65
       PercentValue: 0
-      FixValue: 100
+      FixValue: 99
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    targetTrait: 0
-  traitType: 0

@@ -29,14 +29,12 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 1
     range: 4
-    skillType: 8
+    skillType: 3
     skillAmount:
       Type: 2
       ValueAmount: 0
-      PercentValue: 0.3
+      PercentValue: -0.3
       FixValue: 0
     conditionType: 2
     threshold: 150
     conditionCheckerType: 1
-    targetTrait: 0
-  traitType: 2

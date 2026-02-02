@@ -24,7 +24,7 @@ MonoBehaviour:
   id: 45
   championName: "\uCCA0\uAC70 \uB9DD\uCE58"
   attack: 130
-  defense: 80
+  defense: 90
   speed: 5
   skillDatas:
   - targetSide: 1
@@ -33,10 +33,8 @@ MonoBehaviour:
     skillAmount:
       Type: 2
       ValueAmount: 0
-      PercentValue: -0.25
+      PercentValue: -0.2
       FixValue: 0
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    targetTrait: 0
-  traitType: 4

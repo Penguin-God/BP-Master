@@ -8,8 +8,8 @@ using UnityEngine;
 public class TraitDataConfig
 {
     [Header("범위")]
-    [SerializeField] Side targetSide;
-    [SerializeField] TargetRange range;
+    [EnumToggleButtons] [SerializeField] Side targetSide;
+    [EnumToggleButtons][SerializeField] TargetRange range;
     SkillTargetRule Rule => new SkillTargetRule(targetSide, range);
 
     [Header("액션")]
@@ -22,8 +22,8 @@ public class TraitDataConfig
     [SerializeField] ConditionType conditionCheckerType;
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
-    public SkillData CreateTraitData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
-    public SkillUI_Data CreateUI_Data() => new SkillUI_Data(CreateTraitData());
+    public SkillData CreateSkillData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
+    public SkillUI_Data CreateUI_Data() => new SkillUI_Data(CreateSkillData());
 }
 
 public readonly struct ChampionModel
@@ -54,7 +54,7 @@ public class ChampionSO : SerializedScriptableObject
 
     [Header("스킬")]
     [SerializeField] TraitDataConfig[] skillDatas;
-    public Skill Skill => new Skill(skillDatas.Select(x => x.CreateTraitData()));
+    public Skill Skill => new Skill(skillDatas.Select(x => x.CreateSkillData()));
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData);
     public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData);
     public IEnumerable<SkillUI_Data> CreateSkill_UI_Datas() => skillDatas.Select(x => x.CreateUI_Data());

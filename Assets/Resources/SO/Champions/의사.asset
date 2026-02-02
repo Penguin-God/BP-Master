@@ -23,9 +23,9 @@ MonoBehaviour:
     SerializationNodes: []
   id: 38
   championName: "\uC758\uC0AC"
-  attack: 130
-  defense: 80
-  speed: 4
+  attack: 110
+  defense: 99
+  speed: 7
   skillDatas:
   - targetSide: 0
     range: 4
@@ -34,9 +34,7 @@ MonoBehaviour:
       Type: 3
       ValueAmount: 0
       PercentValue: 0
-      FixValue: 100
+      FixValue: 99
     conditionType: 1
-    threshold: 100
+    threshold: 99
     conditionCheckerType: 1
-    targetTrait: 0
-  traitType: 2
