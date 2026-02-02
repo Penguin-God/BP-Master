@@ -17,7 +17,7 @@ public class ValueCalcualateTests
     [Test]
     public void 적군에게_이득을_주는_스킬은_점수가_차감된다()
     {
-        var skillData = CreateValueSkillData(SkillType.AttackChanger, 100, rule: OpponentAllRule);
+        var skillData = CreateAttackChangeSkill(100, rule: OpponentAllRule);
         var champion = CreateChampion(CHAMP_ID, skillData: skillData);
         var sut = CreateSut(CreateBonus(0, 0), masteryLevel: 0);
 
@@ -33,7 +33,7 @@ public class ValueCalcualateTests
     [TestCase(300, 420)] // stat 100 + mastery 20 + skill 200 + bonus 100
     public void 스탯_숙련도_스킬_보너스_적용한_챔피언_가치(int bounsNeed, int result)
     {
-        var skillData = CreateValueSkillData(SkillType.AttackChanger, 100, rule: SelfAllRule);
+        var skillData = CreateAttackChangeSkill(100, rule: SelfAllRule);
         var champion = CreateChampion(CHAMP_ID, att: 100, skillData: skillData);
         var sut = CreateSut(CreateBonus(bounsNeed, 100), masteryLevel: 10);
 

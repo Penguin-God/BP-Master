@@ -32,16 +32,18 @@ public static class TestHelper
     public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
     public static SkillData[] CreateSkills(params SkillData[] skills) => skills;
 
-    public static SkillData CreateConditionFreeSkill(SkillType type, int amount, SkillTargetRule rule = default) => CreateValueSkillData(type, amount, default, rule);
+    public static SkillData CreateConditionFreeSkill(StatType statType, int amount, SkillTargetRule rule = default) => CreateValueSkillData(statType, amount, default, rule);
 
-    public static SkillData CreateValueSkillData(SkillType skillType, int value, SkillConditionData conditionData = default, SkillTargetRule rule = default)
-        => new SkillData(skillType, CreateSkillAmount(AmountType.Value, StatType.Attack, value: value), conditionData, rule);
+    public static SkillData CreateValueSkillData(StatType statType, int value, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+        => new SkillData(SkillType.StatChanger, CreateSkillAmount(AmountType.Value, statType, value: value), conditionData, rule);
+
+    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, SkillTargetRule rule = default) => CreateValueSkillData(StatType.Attack, value, conditionData, rule);
 
     public static SkillAmountData CreateSkillAmount(AmountType amountType, StatType statType = StatType.Attack, int value = 0, float percent = 0, int fix = 0)
         => new SkillAmountData(amountType, statType, value, percent, fix);
 
-    public static Skill CreateValueSkill(SkillType skillType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
-        => new Skill(CreateSkills(CreateValueSkillData(skillType, amount, conditionData, rule)));
+    public static Skill CreateValueSkill(StatType statType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+        => new Skill(CreateSkills(CreateValueSkillData(statType, amount, conditionData, rule)));
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
     public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);

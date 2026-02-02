@@ -24,7 +24,7 @@ public class StaticEvalueatorTests
     [TestCase(Side.All, 0)]
     public void 조건_없는_스킬은_값과_타겟_범위에_따라_평가(Side side, int expected)
     {
-        var skill = CreateValueSkillData(SkillType.AttackChanger, 100, default, new SkillTargetRule(side, TargetRange.All));
+        var skill = CreateValueSkillData(StatType.Attack, 100, default, new SkillTargetRule(side, TargetRange.All));
         var sut = CreateEvaluator(5, CreateTwoSlotStatus());
 
         int result = sut.Evaluate(skill, Team.Blue);
@@ -38,7 +38,7 @@ public class StaticEvalueatorTests
     [TestCase(Side.All, 50)]
     public void 조건_스킬은_검사_후_계산(Side side, int expected)
     {
-        var skill = CreateValueSkillData(SkillType.DefenseChanger, 100, CreateThresholdCondition(StatConditionType.AttackAtLeast, 100), new SkillTargetRule(side, TargetRange.All));
+        var skill = CreateValueSkillData(StatType.Defense, 100, CreateThresholdCondition(StatConditionType.AttackAtLeast, 100), new SkillTargetRule(side, TargetRange.All));
         var statusSlots = CreateOneSlotStatus();
         var sut = CreateEvaluator(5, statusSlots);
         statusSlots.AddSlot(Team.Blue, CreateStatus(att: 100));

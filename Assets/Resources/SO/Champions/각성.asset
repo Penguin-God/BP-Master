@@ -29,7 +29,7 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 0
     range: 1
-    skillType: 1
+    skillType: 2
     skillAmount:
       Type: 2
       StatType: 0

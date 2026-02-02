@@ -2,10 +2,7 @@
 public enum SkillType
 {
     None = 0,
-    AttackChanger = 1,
     StatChanger = 2,
-    DefenseChanger = 3,
-    SpeedChanger = 5,
     TraitExcluder = 7,
     StatAbsorber = 8,
     Resonance = 9,

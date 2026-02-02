@@ -8,11 +8,11 @@ public class SkillTextConverterTests
     {
         SkillConvertKeyRecord keyRecord = new SkillConvertKeyRecord("{Value}", "{Action}");
         Dictionary<SkillType, string> textBySkill = new Dictionary<SkillType, string>();
-        textBySkill.Add(SkillType.AttackChanger, $"공격력 {keyRecord.Value} {keyRecord.Action}");
+        textBySkill.Add(SkillType.StatChanger, $"공격력 {keyRecord.Value} {keyRecord.Action}");
         SkillAmountData data = TestHelper.CreateSkillAmount(AmountType.Value, StatType.Attack, value: 100);
         var sut = new SkillTextConverter(textBySkill, new SkillAmountTextBuilder(new AmountChangeTextModel("증가", "감소", "고정")), keyRecord);
 
-        string result = sut.BuildActionText(SkillType.AttackChanger, data);
+        string result = sut.BuildActionText(SkillType.StatChanger, data);
 
         Assert.AreEqual("공격력 100 증가", result);
     }

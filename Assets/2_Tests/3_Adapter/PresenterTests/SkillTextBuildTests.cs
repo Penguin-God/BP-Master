@@ -8,10 +8,10 @@ public class SkillTextBuildTests
     [Test]
     public void 특성_액션에_맞는_텍스트_생성()
     {
-        var converter = new SkillTextConverter(new Dictionary<SkillType, string>() { {SkillType.AttackChanger, "공격력 {Value}{Action}" } } , new SkillAmountTextBuilder(new AmountChangeTextModel(" 증가", " 감소", "으로 고정")), new SkillConvertKeyRecord("{Value}", "{Action}"));
+        var converter = new SkillTextConverter(new Dictionary<SkillType, string>() { {SkillType.StatChanger, "공격력 {Value}{Action}" } } , new SkillAmountTextBuilder(new AmountChangeTextModel(" 증가", " 감소", "으로 고정")), new SkillConvertKeyRecord("{Value}", "{Action}"));
         var sut = new SkillTextBuilder(converter);
         
-        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateData(SkillType.AttackChanger, CreateSkillAmount(amountType, value: 10, percent: 0.5f, fix: 100), default, SelfAllRule));
+        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateData(SkillType.StatChanger, CreateSkillAmount(amountType, value: 10, percent: 0.5f, fix: 100), default, SelfAllRule));
 
         Assert.AreEqual("아군 전체 공격력 10 증가", GetSkillText(AmountType.Value));
         Assert.AreEqual("아군 전체 공격력 100으로 고정", GetSkillText(AmountType.Fix));

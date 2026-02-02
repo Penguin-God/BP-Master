@@ -9,7 +9,7 @@ public class PickSlotFacadeTests
     {
         var sut = new PickSlotFacade();
 
-        var champion = new Champion(10, CreateValueSkill(SkillType.AttackChanger, 100), CreateStatus(att: 150));
+        var champion = new Champion(10, CreateValueSkill(StatType.Attack, 100), CreateStatus(att: 150));
         sut.Add(team, champion);
 
         Assert.AreEqual(10, sut.IdSlots.GetSlot(CreateSlot(team, 0)));

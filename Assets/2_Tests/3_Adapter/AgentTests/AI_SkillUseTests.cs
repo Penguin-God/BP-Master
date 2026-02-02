@@ -9,7 +9,7 @@ public class AI_SkillUseTests
         var statuses = CreateTwoSlotStatus();
         var skillUseController = new SkillUsecase(statuses, CreateSkillRunner());
 
-        var skill = CreateValueSkill(SkillType.AttackChanger, 10, rule: SelfTriple);
+        var skill = CreateValueSkill(StatType.Attack, 10, rule: SelfTriple);
         var skillSlots = new SlotStorage<Skill>();
         skillSlots.AddSlot(Team.Blue, skill);
         skillSlots.AddSlot(Team.Blue, skill);

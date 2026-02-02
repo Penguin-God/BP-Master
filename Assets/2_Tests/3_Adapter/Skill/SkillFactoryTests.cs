@@ -13,7 +13,7 @@ public class SkillFactoryTests
 
         // att가 기준값 이상일 때 Attack +10
         SkillConditionData condition = CreateThresholdCondition(StatConditionType.AttackAtLeast, attThreshold);
-        var data = CreateValueSkillData(SkillType.AttackChanger, 10, condition, SelfAllRule);
+        var data = CreateValueSkillData(StatType.Attack, 10, condition, SelfAllRule);
         var result = CreateSkillExceutorFactory().CreateExecutor(data, champion);
 
         result.ExecuteSkill(new ChampionStatus[] { champion });
@@ -21,9 +21,6 @@ public class SkillFactoryTests
         Assert.AreEqual(expected, champion.Stat.Attack);
     }
 
-    [TestCase(SkillType.AttackChanger, typeof(StatChanger))]
-    [TestCase(SkillType.DefenseChanger, typeof(StatChanger))]
-    [TestCase(SkillType.SpeedChanger, typeof(StatChanger))]
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
     [TestCase(SkillType.StatAbsorber, typeof(DefenseAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]

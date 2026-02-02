@@ -33,8 +33,8 @@ public class SkillRunnerTest
 
     Skill CreateMultiAttackSkill(int amount1, int amount2)
     {
-        var data1 = CreateValueSkillData(SkillType.AttackChanger, amount1, rule: AllRule);
-        var data2 = CreateValueSkillData(SkillType.AttackChanger, amount2, rule: AllRule);
+        var data1 = CreateAttackChangeSkill(amount1, rule: AllRule);
+        var data2 = CreateAttackChangeSkill(amount2, rule: AllRule);
 
         return new Skill(new List<SkillData> { data1, data2 });
     }

@@ -33,10 +33,6 @@ public class SkillActionFactory
 
         return actionType switch
         {
-            SkillType.AttackChanger => statChanger,
-            SkillType.DefenseChanger => statChanger,
-            SkillType.SpeedChanger => statChanger,
-
             SkillType.StatChanger => statChanger,
             SkillType.StatAbsorber => new DefenseAbsorber(caster, amountCalculator, amountData.StatType),
             SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger),
