@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public interface ISkillActionTextBuilder
+{
+    string BuildText(SkillType skillType, SkillAmountData data);
+}
+
 public readonly struct SkillUI_Data
 {
     public readonly SkillType ActionType;
@@ -24,12 +29,9 @@ public readonly struct SkillUI_Data
 public class SkillTextBuilder
 {
     readonly SkillConditionTextBuilder ConditionTextBuilder = new SkillConditionTextBuilder();
-    readonly SkillTextConverter skillTextConverter;
+    readonly ISkillActionTextBuilder actionTextBuilder;
 
-    public SkillTextBuilder(SkillTextConverter skillTextConverter)
-    {
-        this.skillTextConverter = skillTextConverter;
-    }
+    public SkillTextBuilder(ISkillActionTextBuilder actionTextBuilder) => this.actionTextBuilder = actionTextBuilder;
 
     public string BuildSkillText(IEnumerable<SkillUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
 
@@ -39,7 +41,7 @@ public class SkillTextBuilder
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(skillData.TargetSide, skillData.Range);
-        var action = skillTextConverter.BuildActionText(skillData.ActionType, skillData.AmountData);
+        var action = actionTextBuilder.BuildText(skillData.ActionType, skillData.AmountData);
 
         // 조건이 있으면 "조건 + 공백"을 앞에 붙이고, 없으면 그대로
         return $"{conditoin}{space}{target} {action}";

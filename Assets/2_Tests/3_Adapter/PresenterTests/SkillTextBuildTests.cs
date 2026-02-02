@@ -1,21 +1,22 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using static TestHelper;
+
+public class TestTextBuilder : ISkillActionTextBuilder
+{
+    public string BuildText(SkillType skillType, SkillAmountData data) => "액숀";
+}
 
 public class SkillTextBuildTests
 {
     SkillUI_Data CreateData(SkillType traitType, SkillAmountData amountData, SkillConditionData condition, SkillTargetRule rule) => new SkillUI_Data(new SkillData(traitType, amountData, condition, rule));
     [Test]
-    public void 특성_액션에_맞는_텍스트_생성()
+    public void 스킬_텍스트_전체_생성()
     {
-        var converter = new SkillTextConverter(new Dictionary<SkillType, string>() { {SkillType.StatChanger, "공격력 {Value}{Action}" } } , new SkillAmountTextBuilder(new AmountChangeTextModel(" 증가", " 감소", "으로 고정")), new SkillConvertKeyRecord("{Value}", "{Action}"));
-        var sut = new SkillTextBuilder(converter);
+        var sut = new SkillTextBuilder(new TestTextBuilder());
         
         string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateData(SkillType.StatChanger, CreateSkillAmount(amountType, value: 10, percent: 0.5f, fix: 100), default, SelfAllRule));
 
-        Assert.AreEqual("아군 전체 공격력 10 증가", GetSkillText(AmountType.Value));
-        Assert.AreEqual("아군 전체 공격력 100으로 고정", GetSkillText(AmountType.Fix));
-        Assert.AreEqual("아군 전체 공격력 50% 증가", GetSkillText(AmountType.Percent));
+        Assert.AreEqual("아군 전체 액숀", GetSkillText(AmountType.Value));
     }
 
     [Test]

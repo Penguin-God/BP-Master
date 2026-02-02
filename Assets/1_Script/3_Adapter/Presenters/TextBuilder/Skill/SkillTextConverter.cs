@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public record SkillConvertKeyRecord(string Value, string Action);
 
-public class SkillTextConverter
+public class SkillTextConverter : ISkillActionTextBuilder
 {
     readonly IReadOnlyDictionary<SkillType, string> textBySkill;
     readonly SkillAmountTextBuilder skillAmountTextBuilder;
@@ -14,7 +14,7 @@ public class SkillTextConverter
         this.skillConvertKey = skillConvertKey;
     }
 
-    public string BuildActionText(SkillType skillType, SkillAmountData data)
+    public string BuildText(SkillType skillType, SkillAmountData data)
     {
         if (textBySkill.TryGetValue(skillType, out var template) == false) return "";
 

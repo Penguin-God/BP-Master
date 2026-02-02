@@ -12,7 +12,7 @@ public class SkillTextConverterTests
         SkillAmountData data = TestHelper.CreateSkillAmount(AmountType.Value, StatType.Attack, value: 100);
         var sut = new SkillTextConverter(textBySkill, new SkillAmountTextBuilder(new AmountChangeTextModel("증가", "감소", "고정")), keyRecord);
 
-        string result = sut.BuildActionText(SkillType.StatChanger, data);
+        string result = sut.BuildText(SkillType.StatChanger, data);
 
         Assert.AreEqual("공격력 100 증가", result);
     }
