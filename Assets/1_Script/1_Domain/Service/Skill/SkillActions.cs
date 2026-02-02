@@ -25,25 +25,9 @@ public class StatChanger : ISkillAction
 
     public void Do(ChampionStatus target)
     {
-        int changeAmount = Calculator.Calculate(GetStatAmount(target.Stat));
-        target.ChangeStat(GetChangeStat(changeAmount, target.Stat));
+        int changeAmount = Calculator.Calculate(target.GetStatAmount(StatType));
+        target.ChangeStat(changeAmount, StatType);
     }
-
-    int GetStatAmount(ChampionStatData stat) => StatType switch
-    {
-        StatType.Attack => stat.Attack,
-        StatType.Defense => stat.Defense,
-        StatType.Speed => stat.Speed,
-        _ => 0
-    };
-
-    ChampionStatData GetChangeStat(int amount, ChampionStatData stat) => StatType switch
-    {
-        StatType.Attack => stat.ChangeAttack(stat.Attack + amount),
-        StatType.Defense => stat.ChangeDefense(stat.Defense + amount),
-        StatType.Speed => stat.ChangeSpeed(stat.Speed + amount),
-        _ => stat
-    };
 }
 
 public class SkillExcluder : ISkillAction

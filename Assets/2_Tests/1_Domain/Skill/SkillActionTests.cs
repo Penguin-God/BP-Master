@@ -75,21 +75,17 @@ public class SkillActionTests
     }
 
     [Test]
-    public void 픽한_아군_스탯_증가_StatChanger_버전()
+    public void 픽한_아군_스탯_변경_버전()
     {
-        // Arrange
         var champ = new Champion(1, null, TestHelper.CreateStatus());
         var eventDispatcher = new PhaseActionEventDispatcher();
 
-        // 공격력을 100 올려주는 StatChanger 주입
         var statChanger = new StatChanger(StatType.Attack, new ValueCalculator(100));
         var sut = new PickChampStatChanger(eventDispatcher, statChanger);
 
-        // Act
         sut.Do(null);
         eventDispatcher.RaisePick(champ);
 
-        // Assert
         Assert.AreEqual(100, champ.Status.Stat.Attack);
     }
 

@@ -45,6 +45,24 @@ public class ChampionStatus
         Stat = newStat;
     }
 
+    public void ChangeStat(int changeAmount, StatType statType) => ChangeStat(GetChangeStat(changeAmount, statType));
+
+    public int GetStatAmount(StatType statType) => statType switch
+    {
+        StatType.Attack => Stat.Attack,
+        StatType.Defense => Stat.Defense,
+        StatType.Speed => Stat.Speed,
+        _ => 0
+    };
+
+    ChampionStatData GetChangeStat(int amount, StatType statType) => statType switch
+    {
+        StatType.Attack => Stat.ChangeAttack(Stat.Attack + amount),
+        StatType.Defense => Stat.ChangeDefense(Stat.Defense + amount),
+        StatType.Speed => Stat.ChangeSpeed(Stat.Speed + amount),
+        _ => Stat
+    };
+
     int ApplyRate(int current, int desired)
     {
         int delta = desired - current;
