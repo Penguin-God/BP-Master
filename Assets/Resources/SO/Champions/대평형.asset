@@ -32,6 +32,7 @@ MonoBehaviour:
     skillType: 1
     skillAmount:
       Type: 3
+      StatType: 0
       ValueAmount: -65
       PercentValue: 0
       FixValue: 99
@@ -43,6 +44,7 @@ MonoBehaviour:
     skillType: 3
     skillAmount:
       Type: 3
+      StatType: 1
       ValueAmount: -65
       PercentValue: 0
       FixValue: 99

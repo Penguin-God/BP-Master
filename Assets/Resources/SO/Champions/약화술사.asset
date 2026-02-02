@@ -32,11 +32,10 @@ MonoBehaviour:
     skillType: 1
     skillAmount:
       Type: 1
+      StatType: 0
       ValueAmount: -40
       PercentValue: 0
       FixValue: 0
     conditionType: 0
     threshold: 0
     conditionCheckerType: 1
-    targetTrait: 0
-  traitType: 4
