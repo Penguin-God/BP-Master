@@ -14,8 +14,8 @@ public enum StatType
 
 public class StatChanger : ISkillAction
 {
-    private readonly StatType StatType;
-    private readonly ISkillAmountCalculator Calculator;
+    readonly StatType StatType;
+    readonly ISkillAmountCalculator Calculator;
 
     public StatChanger(StatType statType, ISkillAmountCalculator calculator)
     {
@@ -25,26 +25,23 @@ public class StatChanger : ISkillAction
 
     public void Do(ChampionStatus target)
     {
-        var stat = target.Stat;
-
-        int baseValue = StatType switch
-        {
-            StatType.Attack => stat.Attack,
-            StatType.Defense => stat.Defense,
-            StatType.Speed => stat.Speed,
-            _ => 0
-        };
-
-        int amount = Calculator.Calculate(baseValue);
-
-        target.ChangeStat(CreateNewStat(amount, stat));
+        int changeAmount = Calculator.Calculate(GetStatAmount(target.Stat));
+        target.ChangeStat(GetChangeStat(changeAmount, target.Stat));
     }
 
-    ChampionStatData CreateNewStat(int amount, ChampionStatData stat) => StatType switch
+    int GetStatAmount(ChampionStatData stat) => StatType switch
     {
-        StatType.Attack => new ChampionStatData(stat.Attack + amount, stat.Defense, stat.Speed),
-        StatType.Defense => new ChampionStatData(stat.Attack, stat.Defense + amount, stat.Speed),
-        StatType.Speed => new ChampionStatData(stat.Attack, stat.Defense, stat.Speed + amount),
+        StatType.Attack => stat.Attack,
+        StatType.Defense => stat.Defense,
+        StatType.Speed => stat.Speed,
+        _ => 0
+    };
+
+    ChampionStatData GetChangeStat(int amount, ChampionStatData stat) => StatType switch
+    {
+        StatType.Attack => stat.ChangeAttack(stat.Attack + amount),
+        StatType.Defense => stat.ChangeDefense(stat.Defense + amount),
+        StatType.Speed => stat.ChangeSpeed(stat.Speed + amount),
         _ => stat
     };
 }
