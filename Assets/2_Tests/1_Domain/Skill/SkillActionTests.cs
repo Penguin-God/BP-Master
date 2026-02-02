@@ -31,23 +31,16 @@ public class SkillActionTests
     }
 
     [Test]
-    public void 퍼센트_방어_흡수_StatChanger_버전()
+    public void 퍼센트_스탯_흡수()
     {
-        // Arrange
         var user = TestHelper.CreateStatus();
-        var target = TestHelper.CreateStatus(0, def: 100);
+        var target = TestHelper.CreateStatus(att: 100);
+        var sut = new DefenseAbsorber(user, new PercentCalculator(0.5f), StatType.Attack);
 
-        // 흡수 로직을 위해 미리 계산된 값을 가진 StatChanger들을 주입
-        var userChanger = new StatChanger(StatType.Defense, new ValueCalculator(50));
-        var targetChanger = new StatChanger(StatType.Defense, new ValueCalculator(-50));
-        var sut = new DefenseAbsorber(user, userChanger, targetChanger);
-
-        // Act
         sut.Do(target);
 
-        // Assert
-        Assert.AreEqual(50, target.Stat.Defense);
-        Assert.AreEqual(50, user.Stat.Defense);
+        Assert.AreEqual(50, target.Stat.Attack);
+        Assert.AreEqual(50, user.Stat.Attack);
     }
 
     [Test]

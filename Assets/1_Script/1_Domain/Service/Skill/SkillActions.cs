@@ -39,38 +39,20 @@ public class DefenseAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
     readonly ISkillAmountCalculator AmountCalculator; // 기존 로직용
-    readonly StatChanger _userChanger;
-    readonly StatChanger _targetChanger;
+    readonly StatType StatType;
 
-    // 기존 생성자 (하위 호환성 유지)
-    public DefenseAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator)
+    public DefenseAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator, StatType statType)
     {
         User = user;
         AmountCalculator = amountCalculator;
-    }
-
-    // 새로운 생성자: StatChanger를 직접 주입받음
-    public DefenseAbsorber(ChampionStatus user, StatChanger userChanger, StatChanger targetChanger)
-    {
-        User = user;
-        _userChanger = userChanger;
-        _targetChanger = targetChanger;
+        StatType = statType;
     }
 
     public void Do(ChampionStatus target)
     {
-        // 새로운 생성자로 생성된 경우 StatChanger를 사용
-        if (_userChanger != null && _targetChanger != null)
-        {
-            _targetChanger.Do(target);
-            _userChanger.Do(User);
-            return;
-        }
-
-        // 기존 로직 (하위 호환)
-        int amount = AmountCalculator.Calculate(target.Stat.Defense);
-        User.AddDefenseWithRate(amount);
-        target.AddDefenseWithRate(amount * -1);
+        int amount = AmountCalculator.Calculate(target.GetStatAmount(StatType));
+        User.ChangeStat(amount, StatType);
+        target.ChangeStat(amount * -1, StatType);
     }
 }
 public class Resonance : ISkillAction
