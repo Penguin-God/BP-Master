@@ -54,21 +54,41 @@ public class SkillExcluder : ISkillAction
 public class DefenseAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
-    readonly ISkillAmountCalculator AmountCalculator;
+    readonly ISkillAmountCalculator AmountCalculator; // 기존 로직용
+    readonly StatChanger _userChanger;
+    readonly StatChanger _targetChanger;
+
+    // 기존 생성자 (하위 호환성 유지)
     public DefenseAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator)
     {
         User = user;
         AmountCalculator = amountCalculator;
     }
 
+    // 새로운 생성자: StatChanger를 직접 주입받음
+    public DefenseAbsorber(ChampionStatus user, StatChanger userChanger, StatChanger targetChanger)
+    {
+        User = user;
+        _userChanger = userChanger;
+        _targetChanger = targetChanger;
+    }
+
     public void Do(ChampionStatus target)
     {
+        // 새로운 생성자로 생성된 경우 StatChanger를 사용
+        if (_userChanger != null && _targetChanger != null)
+        {
+            _targetChanger.Do(target);
+            _userChanger.Do(User);
+            return;
+        }
+
+        // 기존 로직 (하위 호환)
         int amount = AmountCalculator.Calculate(target.Stat.Defense);
         User.AddDefenseWithRate(amount);
         target.AddDefenseWithRate(amount * -1);
     }
 }
-
 public class Resonance : ISkillAction
 {
     readonly ChampionStatus User;
@@ -103,16 +123,32 @@ public class AmplifyChanger : ISkillAction
 public class PickChampBuffer : ISkillAction
 {
     readonly PhaseActionEventDispatcher eventDispatcher;
-    readonly int Amount;
+    readonly StatChanger _statChanger;
+    readonly int _amount; // 기존 로직용
+
+    // 기존 생성자
     public PickChampBuffer(PhaseActionEventDispatcher eventDispatcher, int amount)
     {
         this.eventDispatcher = eventDispatcher;
-        this.Amount = amount;
+        this._amount = amount;
+    }
+
+    // 새로운 생성자: StatChanger를 직접 주입받음
+    public PickChampBuffer(PhaseActionEventDispatcher eventDispatcher, StatChanger statChanger)
+    {
+        this.eventDispatcher = eventDispatcher;
+        this._statChanger = statChanger;
     }
 
     public void Do(ChampionStatus target)
     {
-        eventDispatcher.OnChampionPick += (champ) => champ.Status.AddAttackWithRate(Amount);
+        if (_statChanger != null)
+        {
+            eventDispatcher.OnChampionPick += (champ) => _statChanger.Do(champ.Status);
+            return;
+        }
+
+        eventDispatcher.OnChampionPick += (champ) => champ.Status.AddAttackWithRate(_amount);
     }
 }
 
