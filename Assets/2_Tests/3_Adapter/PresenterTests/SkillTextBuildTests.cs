@@ -11,7 +11,7 @@ public class SkillTextBuildTests
         var converter = new SkillTextConverter(new Dictionary<SkillType, string>() { {SkillType.AttackChanger, "공격력 {Value}{Action}" } } , new SkillAmountTextBuilder(new AmountChangeTextModel(" 증가", " 감소", "으로 고정")), new SkillConvertKeyRecord("{Value}", "{Action}"));
         var sut = new SkillTextBuilder(converter);
         
-        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateData(SkillType.AttackChanger, new SkillAmountData(amountType, 10, 0.5f, 100), default, SelfAllRule));
+        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateData(SkillType.AttackChanger, CreateSkillAmount(amountType, value: 10, percent: 0.5f, fix: 100), default, SelfAllRule));
 
         Assert.AreEqual("아군 전체 공격력 10 증가", GetSkillText(AmountType.Value));
         Assert.AreEqual("아군 전체 공격력 100으로 고정", GetSkillText(AmountType.Fix));
@@ -24,7 +24,7 @@ public class SkillTextBuildTests
     [TestCase(AmountType.Fix, "120")]
     public void 타입에_따른_값을_텍스트로_반환(AmountType amountType, string expected)
     {
-        SkillAmountData data = new SkillAmountData(amountType, 100, 0.5f, 120);
+        SkillAmountData data = CreateSkillAmount(amountType, value: 100, percent: 0.5f, fix: 120);
         var sut = new SkillAmountTextBuilder(default);
 
         string result = sut.BuildAmountText(data);
@@ -40,7 +40,7 @@ public class SkillTextBuildTests
     {
         var sut = new SkillAmountTextBuilder(new AmountChangeTextModel("증가", "감소", "고정"));
 
-        SkillAmountData data = new SkillAmountData(amountType, -100, 0.5f, 120);
+        SkillAmountData data = CreateSkillAmount(amountType, value: -100, percent: 0.5f, fix: 120);
         string result = sut.BuildChangeText(data);
 
         Assert.AreEqual(expected, result);

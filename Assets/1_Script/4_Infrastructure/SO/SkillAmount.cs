@@ -18,5 +18,5 @@ public class SkillAmount
     [ShowIf(nameof(Type), AmountType.Fix)] [Indent] [SerializeField] 
     int FixValue;
 
-    public SkillAmountData ToData() => new(Type, ValueAmount, PercentValue, FixValue);
+    public SkillAmountData ToData() => new(Type, StatType.Attack, ValueAmount, PercentValue, FixValue);
 }

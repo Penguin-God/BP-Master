@@ -59,7 +59,7 @@ public readonly struct SkillConditionData
 }
 
 public enum AmountType { None, Value, Percent, Fix }
-public record SkillAmountData(AmountType Type, int ValueAmount, float PercentValue, int FixValue);
+public record SkillAmountData(AmountType Type, StatType StatType, int ValueAmount, float PercentValue, int FixValue);
 
 public readonly struct SkillData
 {
