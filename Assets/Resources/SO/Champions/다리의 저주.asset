@@ -41,7 +41,7 @@ MonoBehaviour:
     conditionCheckerType: 0
   - targetSide: 0
     range: 4
-    skillType: 1
+    skillType: 2
     skillAmount:
       Type: 1
       StatType: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     conditionCheckerType: 0
   - targetSide: 0
     range: 4
-    skillType: 3
+    skillType: 2
     skillAmount:
       Type: 1
       StatType: 1

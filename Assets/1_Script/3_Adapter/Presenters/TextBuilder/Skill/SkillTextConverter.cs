@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public record SkillConvertKeyRecord(string Value, string Action);
+public record SkillConvertKeyRecord(string Value, string Action, string Stat);
 
 public class SkillTextConverter : ISkillActionTextBuilder
 {
@@ -23,6 +23,7 @@ public class SkillTextConverter : ISkillActionTextBuilder
 
         return template
             .Replace(skillConvertKey.Value, valueText)
-            .Replace(skillConvertKey.Action, actionText);
+            .Replace(skillConvertKey.Action, actionText)
+            .Replace(skillConvertKey.Stat, skillAmountTextBuilder.BuildStatText(data.StatType));
     }
 }

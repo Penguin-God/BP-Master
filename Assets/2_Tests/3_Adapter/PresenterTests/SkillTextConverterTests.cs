@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public class SkillTextConverterTests
 {
     [Test]
-    public void 특정_기호를_값으로_반환()
+    public void 딕셔너리로_받은_템플릿을_실제_텍스트로_변환()
     {
-        SkillConvertKeyRecord keyRecord = new SkillConvertKeyRecord("{Value}", "{Action}");
+        SkillConvertKeyRecord keyRecord = new SkillConvertKeyRecord("{Value}", "{Action}", "{Stat}");
         Dictionary<SkillType, string> textBySkill = new Dictionary<SkillType, string>();
-        textBySkill.Add(SkillType.StatChanger, $"공격력 {keyRecord.Value} {keyRecord.Action}");
+        textBySkill.Add(SkillType.StatChanger, $"{keyRecord.Stat} {keyRecord.Value} {keyRecord.Action}");
         SkillAmountData data = TestHelper.CreateSkillAmount(AmountType.Value, StatType.Attack, value: 100);
         var sut = new SkillTextConverter(textBySkill, new SkillAmountTextBuilder(new AmountTextData("증가", "감소", "고정")), keyRecord);
 
