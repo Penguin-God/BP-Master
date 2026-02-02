@@ -29,20 +29,21 @@ public class SkillActionFactory
     public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster)
     {
         var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
+        var statChanger = new StatChanger(amountData.StatType, amountCalculator);
 
         return actionType switch
         {
-            SkillType.AttackChanger => new StatChanger(StatType.Attack, amountCalculator),
-            SkillType.DefenseChanger => new StatChanger(StatType.Defense, amountCalculator),
-            SkillType.SpeedChanger => new StatChanger(StatType.Speed, amountCalculator),
+            SkillType.AttackChanger => statChanger,
+            SkillType.DefenseChanger => statChanger,
+            SkillType.SpeedChanger => statChanger,
 
-            SkillType.TraitExcluder => new SkillExcluder(),
             SkillType.DefenseAbsorber => new DefenseAbsorber(caster, amountCalculator),
+            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger),
             SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
-            SkillType.PickBuffer => new PickChampBuffer(phaseActionEventDispatcher, amountData.ValueAmount),
             SkillType.Doppelganger => new Doppelganger(caster),
             SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
+            SkillType.TraitExcluder => new SkillExcluder(),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }

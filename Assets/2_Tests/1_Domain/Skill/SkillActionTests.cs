@@ -83,7 +83,7 @@ public class SkillActionTests
 
         // 공격력을 100 올려주는 StatChanger 주입
         var statChanger = new StatChanger(StatType.Attack, new ValueCalculator(100));
-        var sut = new PickChampBuffer(eventDispatcher, statChanger);
+        var sut = new PickChampStatChanger(eventDispatcher, statChanger);
 
         // Act
         sut.Do(null);

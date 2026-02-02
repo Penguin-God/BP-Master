@@ -28,7 +28,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.DefenseAbsorber, typeof(DefenseAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
     [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
-    [TestCase(SkillType.PickBuffer, typeof(PickChampBuffer))]
+    [TestCase(SkillType.PickBuffer, typeof(PickChampStatChanger))]
     [TestCase(SkillType.Doppelganger, typeof(Doppelganger))]
     [TestCase(SkillType.FinalStatChanger, typeof(FinalStatChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, Type expectedType)

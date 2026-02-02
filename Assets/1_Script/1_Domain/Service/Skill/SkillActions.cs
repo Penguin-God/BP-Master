@@ -120,36 +120,18 @@ public class AmplifyChanger : ISkillAction
     public void Do(ChampionStatus target) => target.AddUpRate(amount);
 }
 
-public class PickChampBuffer : ISkillAction
+public class PickChampStatChanger : ISkillAction
 {
     readonly PhaseActionEventDispatcher eventDispatcher;
     readonly StatChanger _statChanger;
-    readonly int _amount; // 기존 로직용
 
-    // 기존 생성자
-    public PickChampBuffer(PhaseActionEventDispatcher eventDispatcher, int amount)
-    {
-        this.eventDispatcher = eventDispatcher;
-        this._amount = amount;
-    }
-
-    // 새로운 생성자: StatChanger를 직접 주입받음
-    public PickChampBuffer(PhaseActionEventDispatcher eventDispatcher, StatChanger statChanger)
+    public PickChampStatChanger(PhaseActionEventDispatcher eventDispatcher, StatChanger statChanger)
     {
         this.eventDispatcher = eventDispatcher;
         this._statChanger = statChanger;
     }
 
-    public void Do(ChampionStatus target)
-    {
-        if (_statChanger != null)
-        {
-            eventDispatcher.OnChampionPick += (champ) => _statChanger.Do(champ.Status);
-            return;
-        }
-
-        eventDispatcher.OnChampionPick += (champ) => champ.Status.AddAttackWithRate(_amount);
-    }
+    public void Do(ChampionStatus target) => eventDispatcher.OnChampionPick += (champ) => _statChanger.Do(champ.Status);
 }
 
 public class Doppelganger : ISkillAction
