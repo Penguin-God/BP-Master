@@ -19,7 +19,7 @@ public class SkillUsecase
         var caster = _statusSlots.GetSlot(skillSlot);
         var targets = targetSlots.Select(x => _statusSlots.GetSlot(x));
 
-        _skillRunner.Run(skill, caster, targets, skillSlot.Team);
+        _skillRunner.Run(skill, caster, targets);
 
         OnUseSkill?.Invoke(skillSlot);
     }

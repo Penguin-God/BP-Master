@@ -15,25 +15,7 @@ public class SkillActionFactory : ISkillActionFactory
     {
         this.phaseActionEventDispatcher = phaseActionEventDispatcher;
         this.phaseEventDispatcher = phaseEventDispatcher;
-    }
-
-    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team)
-    {
-        var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
-        var statChanger = new StatChanger(amountData.StatType, amountCalculator);
-
-        return actionType switch
-        {
-            SkillType.StatChanger => statChanger,
-            SkillType.StatAbsorber => new DefenseAbsorber(caster, amountCalculator, amountData.StatType),
-            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
-            SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
-            SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
-            SkillType.Doppelganger => new Doppelganger(caster),
-            SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
-            SkillType.TraitExcluder => new SkillExcluder(),
-            _ => throw new NotImplementedException($"Action not implemented: {actionType}")
-        };
+        Team = team;
     }
 
     public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster)

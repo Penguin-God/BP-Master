@@ -2,8 +2,6 @@ using System.Linq;
 
 public class SkillPreviewer
 {
-    // 비어있는 PhaseActionEventDispatcher를 사용해야 함
-    readonly SkillRunner _skillRunner = new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher())));
     readonly RandomSkillTargetSelector _skillTargetSelector = new();
 
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
@@ -15,7 +13,9 @@ public class SkillPreviewer
             .SelectSkillTargets(team, champion.Skill, originSlots.GetTeamCounter())
             .Select(x => copiedSlots.GetSlot(x));
 
-        _skillRunner.Run(champion.Skill, champion.Status, targets, team);
+        // 비어있는 PhaseActionEventDispatcher를 사용해야 함
+        var skillRunner = new SkillRunner(new SkillExecutorFactory(new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher(), team)));
+        skillRunner.Run(champion.Skill, champion.Status, targets);
         return copiedSlots;
     }
 

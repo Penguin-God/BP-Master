@@ -2,20 +2,20 @@ using System;
 
 public interface ISkillActionFactory
 {
-
+    ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster);
 }
 
 public class SkillExecutorFactory
 {
-    readonly SkillActionFactory skillActionFactory;
-    public SkillExecutorFactory(SkillActionFactory skillActionFactory)
+    readonly ISkillActionFactory skillActionFactory;
+    public SkillExecutorFactory(ISkillActionFactory skillActionFactory)
     {
         this.skillActionFactory = skillActionFactory;
     }
 
-    public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp, Team team)
+    public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp)
     {
-        ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, useChamp, team);
+        ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, useChamp);
         IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, useChamp.Stat);
         return new SkillExecutor(action, condition);
     }

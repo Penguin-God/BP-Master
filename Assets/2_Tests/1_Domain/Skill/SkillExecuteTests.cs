@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using static TestHelper;
 
 public class SkillExecuteTests
 {
@@ -7,7 +8,7 @@ public class SkillExecuteTests
     {
         var target = TestHelper.CreateStatus(0, 0, 0);
         target.TraitExcluded();
-        var sut = new SkillExecutor(new TestAttackChangeAction(5), new NullChecker());
+        var sut = CreateAttackChangeExecutor(5);
 
         sut.ExecuteSkill(new ChampionStatus[] { target });
 

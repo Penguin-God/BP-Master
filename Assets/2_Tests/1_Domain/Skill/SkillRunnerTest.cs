@@ -15,7 +15,7 @@ public class SkillRunnerTest
         var skill = CreateMultiAttackSkill(firstAmount, secondAmount);
         var sut = CreateSkillRunner();
 
-        sut.Run(skill, caster, new[] { target }, Team.Blue);
+        sut.Run(skill, caster, new[] { target });
 
         Assert.AreEqual(expectedAttack, target.Stat.Attack);
     }
@@ -26,7 +26,7 @@ public class SkillRunnerTest
         var target = CreateStatus(100, 100, 100);
         var sut = CreateSkillRunner();
 
-        sut.Run(CreateSkill(), null, new[] { target }, Team.Blue);
+        sut.Run(CreateSkill(), null, new[] { target });
 
         Assert.AreEqual(100, target.Stat.Attack);
     }
