@@ -1,5 +1,10 @@
 using System;
 
+public interface ISkillActionFactory
+{
+
+}
+
 public class SkillExecutorFactory
 {
     readonly SkillActionFactory skillActionFactory;
@@ -16,35 +21,6 @@ public class SkillExecutorFactory
     }
 }
 
-public class SkillActionFactory
-{
-    readonly PhaseActionEventDispatcher phaseActionEventDispatcher;
-    readonly PhaseEventDispatcher phaseEventDispatcher;
-    public SkillActionFactory(PhaseActionEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
-    {
-        this.phaseActionEventDispatcher = phaseActionEventDispatcher;
-        this.phaseEventDispatcher = phaseEventDispatcher;
-    }
-
-    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team)
-    {
-        var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
-        var statChanger = new StatChanger(amountData.StatType, amountCalculator);
-
-        return actionType switch
-        {
-            SkillType.StatChanger => statChanger,
-            SkillType.StatAbsorber => new DefenseAbsorber(caster, amountCalculator, amountData.StatType),
-            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, Team.Blue),
-            SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
-            SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
-            SkillType.Doppelganger => new Doppelganger(caster),
-            SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
-            SkillType.TraitExcluder => new SkillExcluder(),
-            _ => throw new NotImplementedException($"Action not implemented: {actionType}")
-        };
-    }
-}
 public static class SkillCondtionFactory
 {
     public static IChampionCondition CreateCondition(SkillConditionData data, ChampionStatData useChamp)
