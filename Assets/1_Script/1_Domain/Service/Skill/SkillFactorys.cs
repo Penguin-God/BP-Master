@@ -35,7 +35,7 @@ public class SkillActionFactory
         {
             SkillType.StatChanger => statChanger,
             SkillType.StatAbsorber => new DefenseAbsorber(caster, amountCalculator, amountData.StatType),
-            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger),
+            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, Team.Blue),
             SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             SkillType.Doppelganger => new Doppelganger(caster),

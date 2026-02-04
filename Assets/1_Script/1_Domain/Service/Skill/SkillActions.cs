@@ -90,18 +90,21 @@ public class PickChampStatChanger : ISkillAction
 {
     readonly PhaseActionEventDispatcher eventDispatcher;
     readonly StatChanger _statChanger;
+    readonly Team Team;
 
-    public PickChampStatChanger(PhaseActionEventDispatcher eventDispatcher, StatChanger statChanger)
+    public PickChampStatChanger(PhaseActionEventDispatcher eventDispatcher, StatChanger statChanger, Team team)
     {
         this.eventDispatcher = eventDispatcher;
         this._statChanger = statChanger;
+        this.Team = team;
     }
 
     public void Do(ChampionStatus target) => eventDispatcher.OnChampionPick += ChangeStat;
 
     void ChangeStat(Champion champion, Team team)
     {
-        _statChanger.Do(champion.Status);
+        if(Team == team)
+            _statChanger.Do(champion.Status);
     }
 }
 

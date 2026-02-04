@@ -74,7 +74,7 @@ public class SkillActionTests
         var eventDispatcher = new PhaseActionEventDispatcher();
 
         var statChanger = new StatChanger(StatType.Attack, new ValueCalculator(100));
-        var sut = new PickChampStatChanger(eventDispatcher, statChanger);
+        var sut = new PickChampStatChanger(eventDispatcher, statChanger, Team.Blue);
 
         sut.Do(null);
         eventDispatcher.RaisePick(champ, Team.Blue);
