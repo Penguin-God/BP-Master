@@ -15,7 +15,7 @@ public class SkillPreviewer
             .SelectSkillTargets(team, champion.Skill, originSlots.GetTeamCounter())
             .Select(x => copiedSlots.GetSlot(x));
 
-        _skillRunner.Run(champion.Skill, champion.Status, targets);
+        _skillRunner.Run(champion.Skill, champion.Status, targets, team);
         return copiedSlots;
     }
 

@@ -8,9 +8,9 @@ public class SkillExecutorFactory
         this.skillActionFactory = skillActionFactory;
     }
 
-    public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp)
+    public SkillExecutor CreateExecutor(SkillData skillData, ChampionStatus useChamp, Team team)
     {
-        ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, useChamp);
+        ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, useChamp, team);
         IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, useChamp.Stat);
         return new SkillExecutor(action, condition);
     }
@@ -26,7 +26,7 @@ public class SkillActionFactory
         this.phaseEventDispatcher = phaseEventDispatcher;
     }
 
-    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster)
+    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team)
     {
         var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
         var statChanger = new StatChanger(amountData.StatType, amountCalculator);

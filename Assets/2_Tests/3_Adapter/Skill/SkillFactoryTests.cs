@@ -14,7 +14,7 @@ public class SkillFactoryTests
         // att가 기준값 이상일 때 Attack +10
         SkillConditionData condition = CreateThresholdCondition(StatConditionType.AttackAtLeast, attThreshold);
         var data = CreateValueSkillData(StatType.Attack, 10, condition, SelfAllRule);
-        var result = CreateSkillExceutorFactory().CreateExecutor(data, champion);
+        var result = CreateSkillExceutorFactory().CreateExecutor(data, champion, Team.Blue);
 
         result.ExecuteSkill(new ChampionStatus[] { champion });
 
@@ -30,7 +30,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.FinalStatChanger, typeof(FinalStatChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, Type expectedType)
     {
-        var result = CreateSkillActionFactory().CreateAction(type, CreateSkillAmount(AmountType.Fix, StatType.Attack, 1, 1, 1), CreateStatus());
+        var result = CreateSkillActionFactory().CreateAction(type, CreateSkillAmount(AmountType.Fix, StatType.Attack, 1, 1, 1), CreateStatus(), Team.Blue);
         result.Do(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }
