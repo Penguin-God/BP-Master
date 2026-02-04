@@ -97,7 +97,12 @@ public class PickChampStatChanger : ISkillAction
         this._statChanger = statChanger;
     }
 
-    public void Do(ChampionStatus target) => eventDispatcher.OnChampionPick += (champ) => _statChanger.Do(champ.Status);
+    public void Do(ChampionStatus target) => eventDispatcher.OnChampionPick += ChangeStat;
+
+    void ChangeStat(Champion champion, Team team)
+    {
+        _statChanger.Do(champion.Status);
+    }
 }
 
 public class Doppelganger : ISkillAction

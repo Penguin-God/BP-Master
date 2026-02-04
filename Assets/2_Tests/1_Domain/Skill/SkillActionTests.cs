@@ -68,7 +68,7 @@ public class SkillActionTests
     }
 
     [Test]
-    public void 픽한_아군_스탯_변경_버전()
+    public void 픽한_아군_스탯_변경()
     {
         var champ = new Champion(1, null, TestHelper.CreateStatus());
         var eventDispatcher = new PhaseActionEventDispatcher();
@@ -77,8 +77,10 @@ public class SkillActionTests
         var sut = new PickChampStatChanger(eventDispatcher, statChanger);
 
         sut.Do(null);
-        eventDispatcher.RaisePick(champ);
-
+        eventDispatcher.RaisePick(champ, Team.Blue);
+        Assert.AreEqual(100, champ.Status.Stat.Attack);
+        // 타겟이 아닌 팀은 반영 X
+        eventDispatcher.RaisePick(champ, Team.Red);
         Assert.AreEqual(100, champ.Status.Stat.Attack);
     }
 
@@ -103,8 +105,7 @@ public class SkillActionTests
 
         sut.Do(null);
 
-        // 아직 종료 이벤트가 발생하지 않았으므로 스탯은 그대로여야 함
-        Assert.AreEqual(100, caster.Stat.Attack);
+        Assert.AreEqual(100, caster.Stat.Attack); // 아직 종료 이벤트가 발생하지 않았으므로 스탯은 그대로여야 함
         dispatcher.Dispatch(GamePhase.Done, Team.All);
         Assert.AreEqual(200, caster.Stat.Attack);
         Assert.AreEqual(200, caster.Stat.Defense);

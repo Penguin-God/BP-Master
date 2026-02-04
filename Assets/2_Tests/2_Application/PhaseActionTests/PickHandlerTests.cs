@@ -12,9 +12,10 @@ public class PickHandlerTests
         var storage = CreateStorage(CHAMP_ID);
         var eventDispathcer = new PhaseActionEventDispatcher();
         Champion champ = null;
+        Team team = Team.Red;
 
         var sut = new PickHandler(catalog, eventDispathcer);
-        eventDispathcer.OnChampionPick += cham => champ = cham;
+        eventDispathcer.OnChampionPick += (cham, _team) => (champ, team) = (cham, _team);
 
         sut.Pick(Team.Blue, CHAMP_ID);
 

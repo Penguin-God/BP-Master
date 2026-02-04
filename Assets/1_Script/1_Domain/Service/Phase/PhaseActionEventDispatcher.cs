@@ -2,11 +2,10 @@ using System;
 
 public class PhaseActionEventDispatcher
 {
-    public event Action<int> OnPick;
-    public event Action<Champion> OnChampionPick;
-    public void RaisePick(Champion champion)
+    public event Action<Champion, Team> OnChampionPick;
+
+    public void RaisePick(Champion champion, Team team)
     {
-        OnPick?.Invoke(champion.Id);
-        OnChampionPick?.Invoke(champion);
+        OnChampionPick?.Invoke(champion, team);
     }
 }

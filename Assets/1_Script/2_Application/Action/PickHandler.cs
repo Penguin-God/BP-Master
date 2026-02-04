@@ -14,6 +14,6 @@ public class PickHandler
     {
         var champion = championCatalog.GetChampion(id);
         PickSlotFacade.Add(team, champion);
-        eventDispatcher.RaisePick(champion);
+        eventDispatcher.RaisePick(champion, team);
     }
 }
