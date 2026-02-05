@@ -40,7 +40,7 @@ public class SkillEvaluator
 
     int GetConditionValue(SkillData skill, Team targetTeam)
     {
-        int pickSlotValue = skill.AmountData.ValueAmount * statuses.GetTeam(targetTeam).Where(x => SkillCondtionFactory.CreateCondition(skill.ConditionData, default).Check(x)).Count();
+        int pickSlotValue = skill.AmountData.ValueAmount * statuses.GetTeam(targetTeam).Where(x => new SkillCondtionFactory().CreateCondition(skill.ConditionData, default).Check(x)).Count();
         return pickSlotValue + CalculateEmptySlotValue(targetTeam, skill);
     }
 

@@ -37,3 +37,15 @@ public class SkillActionFactory : ISkillActionFactory
         };
     }
 }
+
+public static class SkillAmountCalculatorFactory
+{
+    public static ISkillAmountCalculator Create(SkillAmountData amountData)
+        => amountData.Type switch
+        {
+            AmountType.Value => new ValueCalculator(amountData.ValueAmount),
+            AmountType.Percent => new PercentCalculator(amountData.PercentValue),
+            AmountType.Fix => new FixCalculator(amountData.FixValue),
+            _ => null,
+        };
+}
