@@ -2,11 +2,12 @@ using System.Collections.Generic;
 
 public class SkillRunner
 {
-    private readonly SkillExecutorFactory _factory;
-
-    public SkillRunner(SkillExecutorFactory factory)
+    readonly ISkillActionFactory skillActionFactory;
+    readonly SkillCondtionFactory skillCondtionFactory;
+    public SkillRunner(ISkillActionFactory skillActionFactory, SkillCondtionFactory skillCondtionFactory)
     {
-        _factory = factory;
+        this.skillActionFactory = skillActionFactory;
+        this.skillCondtionFactory = skillCondtionFactory;
     }
 
     public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> targets)
@@ -14,6 +15,10 @@ public class SkillRunner
         if (skill.IsEmpty) return;
 
         foreach (var skillData in skill.SkillDatas)
-            _factory.CreateExecutor(skillData, caster).ExecuteSkill(targets);
+        {
+            ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, caster);
+            IChampionCondition condition = skillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
+            new SkillExecutor(action, condition).ExecuteSkill(targets);
+        }
     }
 }
