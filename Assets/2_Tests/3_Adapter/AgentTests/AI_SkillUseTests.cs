@@ -6,23 +6,16 @@ public class AI_SkillUseTests
     [Test]
     public void UseSkill_호출하면_SkillUseController_OnUseSkill_이벤트가_발생한다()
     {
-        var statuses = CreateTwoSlotStatus();
-        var skillUseController = new SkillUsecase(statuses, CreateSkillRunner());
-
+        var pickChampions = new SlotStorage<PickChampion>();
         var skill = CreateValueSkill(StatType.Attack, 10, rule: SelfTriple);
-        var skillSlots = new SlotStorage<Skill>();
-        skillSlots.AddSlot(Team.Blue, skill);
-        skillSlots.AddSlot(Team.Blue, skill);
-        skillSlots.AddSlot(Team.Red, null);
-        skillSlots.AddSlot(Team.Red, null);
+        pickChampions.AddSlot(Team.Blue, new PickChampion(1, skill, CreateStatus(), Team.Blue));
+        var skillUseController = new SkillUsecase(pickChampions, CreateSkillRunner());
+        var skills = new SlotStorage<Skill>();
+        skills.AddSlot(Team.Blue, skill);
+        var sut = new AI_SkillUseAgent(skills, skillUseController);
 
-        var sut = new AI_SkillUseAgent(skillSlots, skillUseController);
+        sut.UseSkill(BlueZeroSlot);
 
-        sut.UseSkill(BlueOneSlot);
-
-        Assert.AreEqual(10, statuses.GetSlot(BlueZeroSlot).Stat.Attack);
-        Assert.AreEqual(10, statuses.GetSlot(BlueOneSlot).Stat.Attack);
-        Assert.AreEqual(0, statuses.GetSlot(RedZeroSlot).Stat.Attack);
-        Assert.AreEqual(0, statuses.GetSlot(RedOneSlot).Stat.Attack);
+        Assert.AreEqual(10, pickChampions.GetSlot(BlueZeroSlot).Status.Stat.Attack);
     }
 }

@@ -37,7 +37,7 @@ public class SkillUseController_UI : MonoBehaviour
         RefeshButton();
         if (targetSelector.IsFull)
         {
-            skillUseController.UseSkill(useSlot, targetSelector.Targets, skillSlots.GetSlot(useSlot));
+            skillUseController.UseSkill(useSlot, targetSelector.Targets);
             skillButtonView.InActiveAllBtns();
         }
     }
@@ -48,7 +48,7 @@ public class SkillUseController_UI : MonoBehaviour
     {
         if (skillSlots.GetSlot(useSlot).IsEmpty)
         {
-            skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
+            skillUseController.UseSkill(useSlot, new SlotData[] { });
             return;
         }
 
@@ -59,7 +59,7 @@ public class SkillUseController_UI : MonoBehaviour
         // 타겟이 없는 경우
         if (targetSelector.IsFull)
         {
-            skillUseController.UseSkill(useSlot, new SlotData[] { }, skillSlots.GetSlot(useSlot));
+            skillUseController.UseSkill(useSlot, new SlotData[] { });
 
         }
     }

@@ -16,8 +16,3 @@ public class RandomSkillTargetSelector
     // 이렇게 고르는 부분은 다형성으로
     public IEnumerable<SlotData> SelectRandom(IEnumerable<SlotData> candidates, int count) => candidates.OrderBy(x => Guid.NewGuid()).Take(count);
 }
-
-public interface ISkillTargetSelector
-{
-    
-}

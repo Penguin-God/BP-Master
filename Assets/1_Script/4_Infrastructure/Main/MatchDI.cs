@@ -34,7 +34,7 @@ public class MatchDI : MonoBehaviour
         var actionEventDispathcer = new PhaseActionEventDispatcher();
         pickHandler = new PickHandler(champManager.GetCatalog(), actionEventDispathcer);
         storage.OnPick += OnPick;
-        var skillController = new SkillUsecase(PickSlotFacade.StatusSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
+        var skillController = new SkillUsecase(PickSlotFacade.PickChampions, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 

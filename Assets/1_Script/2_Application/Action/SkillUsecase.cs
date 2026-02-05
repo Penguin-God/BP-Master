@@ -4,22 +4,22 @@ using System.Linq;
 
 public class SkillUsecase
 {
-    private readonly SlotStorage<ChampionStatus> _statusSlots;
+    readonly SlotStorage<PickChampion> pickChampions;
     private readonly SkillRunner _skillRunner;
     public event Action<SlotData> OnUseSkill;
 
-    public SkillUsecase(SlotStorage<ChampionStatus> statusSlots, SkillRunner skillRunner)
+    public SkillUsecase(SlotStorage<PickChampion> pickChampions, SkillRunner skillRunner)
     {
-        _statusSlots = statusSlots;
+        this.pickChampions = pickChampions;
         _skillRunner = skillRunner;
     }
 
-    public void UseSkill(SlotData skillSlot, IEnumerable<SlotData> targetSlots, Skill skill)
+    public void UseSkill(SlotData skillSlot, IEnumerable<SlotData> targetSlots)
     {
-        var caster = _statusSlots.GetSlot(skillSlot);
-        var targets = targetSlots.Select(x => _statusSlots.GetSlot(x));
+        var champion = pickChampions.GetSlot(skillSlot);
+        var targets = targetSlots.Select(x => pickChampions.GetSlot(x).Status);
 
-        _skillRunner.Run(skill, caster, targets, skillSlot.Team);
+        _skillRunner.Run(champion.Skill, champion.Status, targets, champion.Team);
 
         OnUseSkill?.Invoke(skillSlot);
     }
