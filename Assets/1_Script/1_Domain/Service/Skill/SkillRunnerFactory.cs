@@ -2,8 +2,8 @@
 
 public static class SkillRunnerFactory
 {
-    public static SkillRunner CreateRunner(PhaseActionEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher, Team team)
+    public static SkillRunner CreateRunner(PhaseActionEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
-        return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher, team), new SkillCondtionFactory());
+        return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher), new SkillCondtionFactory());
     }
 }

@@ -14,8 +14,8 @@ public class SkillPreviewer
             .Select(x => copiedSlots.GetSlot(x));
 
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
-        var skillRunner = SkillRunnerFactory.CreateRunner(new PhaseActionEventDispatcher(), new PhaseEventDispatcher(), team);
-        skillRunner.Run(champion.Skill, champion.Status, targets);
+        var skillRunner = SkillRunnerFactory.CreateRunner(new PhaseActionEventDispatcher(), new PhaseEventDispatcher());
+        skillRunner.Run(champion.Skill, champion.Status, targets, team);
         return copiedSlots;
     }
 

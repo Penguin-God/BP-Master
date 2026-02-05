@@ -13,7 +13,7 @@ public class SkillFactoryTests
     [TestCase(SkillType.FinalStatChanger, typeof(FinalStatChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, Type expectedType)
     {
-        var result = CreateSkillActionFactory(Team.Blue).CreateAction(type, CreateSkillAmount(AmountType.Fix, StatType.Attack, 1, 1, 1), CreateStatus());
+        var result = CreateSkillActionFactory().CreateAction(type, CreateSkillAmount(AmountType.Fix, StatType.Attack, 1, 1, 1), CreateStatus(), Team.Blue);
         result.Do(CreateStatus()); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }

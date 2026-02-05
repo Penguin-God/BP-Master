@@ -72,9 +72,9 @@ public static class TestHelper
     public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 
-    public static SkillActionFactory CreateSkillActionFactory(Team team) => new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher(), team);
+    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher());
     public static SkillExecutor CreateAttackChangeExecutor(int value) => new SkillExecutor(new TestAttackChangeAction(value), new NullChecker());
-    public static SkillRunner CreateSkillRunner(Team team = Team.Blue) => new SkillRunner(CreateSkillActionFactory(team), new SkillCondtionFactory());
+    public static SkillRunner CreateSkillRunner() => new SkillRunner(CreateSkillActionFactory(), new SkillCondtionFactory());
 
     public static Champion CreateChampion(int id = 0, int att = 0, int def = 0, int speed = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def, speed));
     public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
