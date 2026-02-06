@@ -19,8 +19,6 @@ public class PickHandler
     }
 }
 
-
-
 public class BanPickHandler
 {
     readonly ChampionCatalog championCatalog;
