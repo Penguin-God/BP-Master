@@ -2,11 +2,11 @@
 public class AI_BanPickAgent
 {
     readonly Team Team;
-    readonly GameBanPickStorage storage;
+    readonly BanPickStorage storage;
     readonly IChampionSelector banSelector;
     readonly IChampionSelector pickSelector;
 
-    public AI_BanPickAgent(Team team, GameBanPickStorage storage, IChampionSelector banSelector, IChampionSelector pickSelector)
+    public AI_BanPickAgent(Team team, BanPickStorage storage, IChampionSelector banSelector, IChampionSelector pickSelector)
     {
         Team = team;
         this.storage = storage;

@@ -16,7 +16,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
         banPickAgent.Ban(Team);
     }
 
-    public void Init(Team team, GameBanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry)
+    public void Init(Team team, BanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry)
     {
         Team = team;
 

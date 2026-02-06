@@ -8,11 +8,11 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     [SerializeField] ChampionView championFocusView;
     [SerializeField] ChampionRepository championManager;
 
-    GameBanPickStorage storage;
+    BanPickStorage storage;
     PhaseFlowOrchestrator phaseManager;
     [SerializeField] ChampionButtonView champBtnView;
 
-    public void Init(GameBanPickStorage storage, PhaseFlowOrchestrator pm)
+    public void Init(BanPickStorage storage, PhaseFlowOrchestrator pm)
     {
         gameObject.SetActive(true);
 

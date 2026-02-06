@@ -4,7 +4,7 @@ using System.Linq;
 
 public enum Team { Blue, Red, All }
 
-public class GameBanPickStorage
+public class BanPickStorage
 {
     readonly Dictionary<Team, HashSet<int>> banStorage = new();
     public SlotStorage<int> PickIds { get; private set; } = new();
@@ -14,7 +14,7 @@ public class GameBanPickStorage
 
     public readonly HashSet<int> SelectableIds = new();
 
-    public GameBanPickStorage(IEnumerable<int> allIds)
+    public BanPickStorage(IEnumerable<int> allIds)
     {
         SelectableIds = new HashSet<int>(allIds);
         banStorage.Add(Team.Red, new());
@@ -40,7 +40,7 @@ public class GameBanPickStorage
         OnBan?.Invoke(team, id);
     }
 
-    void Pick(Team team, int id)
+    public void Pick(Team team, int id)
     {
         PickIds.AddSlot(team, id);
         OnPick?.Invoke(new SlotData(team, PickIds.GetTeamCount(team) - 1), id);

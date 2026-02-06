@@ -8,7 +8,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] int targetWin;
     [SerializeField] int[] masteryLevels;
 
-    public GameBanPickStorage Storage { get; private set; }
+    public BanPickStorage Storage { get; private set; }
     MatchRecord _record;
     public MatchRecord Record => _record;
     IEnumerable<int> selectableIds;
@@ -30,7 +30,7 @@ public class MatchManager : MonoBehaviour
     {
         _record = new MatchRecord(targetWin);
         selectableIds = new List<int>(champManager.AllId);
-        Storage = new GameBanPickStorage(selectableIds);
+        Storage = new BanPickStorage(selectableIds);
 
         var drawer = new MasteryDrawer(champManager.AllId);
         participantRepository.Save(Participant.Player, new ParticipantData("Player", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
@@ -40,6 +40,6 @@ public class MatchManager : MonoBehaviour
     public void EndMatch()
     {
         selectableIds = selectableIds.Except(Storage.PickIds.GetAll());
-        Storage = new GameBanPickStorage(selectableIds);
+        Storage = new BanPickStorage(selectableIds);
     }
 }

@@ -7,7 +7,7 @@ public class SelectSaveTests
     public void 중복_선택_불가()
     {
         const int Id = 3;
-        GameBanPickStorage storage = CreateStorage(Id);
+        BanPickStorage storage = CreateStorage(Id);
         Select(storage, Team.Blue, GamePhase.Pick, Id);
         Assert.IsFalse(Select(storage, Team.Blue, GamePhase.Pick, Id));
     }
@@ -33,5 +33,5 @@ public class SelectSaveTests
         Assert.AreEqual(101, pick);
     }
 
-    bool Select(GameBanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);
+    bool Select(BanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);
 }

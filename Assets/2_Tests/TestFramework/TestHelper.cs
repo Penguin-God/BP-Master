@@ -69,7 +69,7 @@ public static class TestHelper
     public static PhaseData CreatePhaseData(GamePhase phase, params Team[] order) => new PhaseData(phase, new Phase(order));
     public static PhaseFlowOrchestrator CreatePhaseManager(params PhaseData[] phaseDatas) => CreatePhaseManager(new PhaseEventDispatcher(), phaseDatas);
     public static PhaseFlowOrchestrator CreatePhaseManager(PhaseEventDispatcher eventDispatcher, params PhaseData[] phaseDatas) => new PhaseFlowOrchestrator(phaseDatas, eventDispatcher, new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
-    public static GameBanPickStorage CreateStorage(params int[] selectableIds) => new GameBanPickStorage(selectableIds);
+    public static BanPickStorage CreateStorage(params int[] selectableIds) => new BanPickStorage(selectableIds);
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 
     public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher());
