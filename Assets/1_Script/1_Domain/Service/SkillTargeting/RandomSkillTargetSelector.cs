@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class RandomSkillTargetSelector
+public interface ISkillTargetSelector
+{
+    IEnumerable<SlotData> SelectSkillTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator);
+}
+
+public class RandomSkillTargetSelector : ISkillTargetSelector
 {
     public IEnumerable<SlotData> SelectSkillTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator)
     {
@@ -13,6 +18,5 @@ public class RandomSkillTargetSelector
         return SelectRandom(candidates, count);
     }
 
-    // 이렇게 고르는 부분은 다형성으로
     public IEnumerable<SlotData> SelectRandom(IEnumerable<SlotData> candidates, int count) => candidates.OrderBy(x => Guid.NewGuid()).Take(count);
 }

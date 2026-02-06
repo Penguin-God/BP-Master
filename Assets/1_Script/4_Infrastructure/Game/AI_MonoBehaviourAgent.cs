@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AI_MonoBehaviourAgent : MonoBehaviour, IPhaseEntry
 {
-    AI_SkillUseAgent traitAgent;
+    AI_SkillExecutionUseCase skillUseCase;
 
     public void EnterBan()
     {
@@ -15,9 +15,9 @@ public class AI_MonoBehaviourAgent : MonoBehaviour, IPhaseEntry
         throw new System.NotImplementedException();
     }
 
-    public void Init(AI_SkillUseAgent aI_TraitAgent)
+    public void Init(AI_SkillExecutionUseCase aI_TraitAgent)
     {
-        traitAgent = aI_TraitAgent;
+        skillUseCase = aI_TraitAgent;
     }
 
     public void UseSkill(SlotData slot) => StartCoroutine(Co_UseTrait(slot));
@@ -25,6 +25,6 @@ public class AI_MonoBehaviourAgent : MonoBehaviour, IPhaseEntry
     IEnumerator Co_UseTrait(SlotData slot)
     {
         yield return new WaitForSeconds(1.5f);
-        traitAgent.UseSkill(slot);
+        skillUseCase.UseSkill(slot);
     }
 }
