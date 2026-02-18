@@ -16,7 +16,7 @@ public class BanPickHandlerTests
         Team team = Team.Red;
 
         var sut = new PickHandler(catalog, eventDispathcer);
-        eventDispathcer.OnChampionPick += (cham, _team) => (champ, team) = (cham, _team);
+        eventDispathcer.OnTeamChampionPick += (cham, _team) => (champ, team) = (cham, _team);
 
         sut.Pick(Team.Blue, CHAMP_ID);
 
@@ -37,8 +37,9 @@ public class BanPickHandlerTests
         var sut = new BanPickHandler(catalog, storage);
 
         PickChampion eventResult = null;
-        sut.OnChampionPick += (pc) => eventResult = pc;
+        sut.BanPickEventDispatcher.OnChampionPick += (pc) => eventResult = pc;
 
+        // Act
         sut.Pick(Team.Blue, CHAMP_ID);
 
         // 1. Storage 확인: PickIds에 해당 ID가 들어갔는가?

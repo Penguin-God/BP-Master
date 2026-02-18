@@ -99,7 +99,7 @@ public class PickChampStatChanger : ISkillAction
         this.Team = team;
     }
 
-    public void Do(ChampionStatus target) => eventDispatcher.OnChampionPick += ChangeStat;
+    public void Do(ChampionStatus target) => eventDispatcher.OnTeamChampionPick += ChangeStat;
 
     void ChangeStat(Champion champion, Team team)
     {
