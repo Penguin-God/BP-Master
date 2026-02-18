@@ -21,8 +21,7 @@ public class BanPickStorage
         banStorage.Add(Team.Blue, new());
     }
 
-    bool CanSelected(int id) => SelectableIds.Contains(id);
-
+    public bool CanSelected(int id) => SelectableIds.Contains(id);
     readonly IEnumerable<GamePhase> VaildPhases = new GamePhase[] { GamePhase.Ban, GamePhase.Pick };
     public bool SaveSelect(GameFlowData flow, int selectedId)
     {
@@ -34,7 +33,7 @@ public class BanPickStorage
         return true;
     }
 
-    void Ban(Team team, int id)
+    public void Ban(Team team, int id)
     {
         banStorage[team].Add(id);
         OnBan?.Invoke(team, id);
@@ -42,6 +41,7 @@ public class BanPickStorage
 
     public SlotData Pick(Team team, int id)
     {
+        SelectableIds.Remove(id);
         PickIds.AddSlot(team, id);
         SlotData saveSlot = new SlotData(team, PickIds.GetTeamCount(team) - 1);
         OnPick?.Invoke(saveSlot, id);

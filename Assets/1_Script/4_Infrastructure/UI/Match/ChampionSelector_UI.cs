@@ -8,18 +8,18 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     [SerializeField] ChampionView championFocusView;
     [SerializeField] ChampionRepository championManager;
 
-    BanPickStorage storage;
+    BanPickHandler banpickHandler;
     PhaseFlowOrchestrator phaseManager;
     [SerializeField] ChampionButtonView champBtnView;
 
-    public void Init(BanPickStorage storage, PhaseFlowOrchestrator pm)
+    public void Init(BanPickHandler storage, PhaseFlowOrchestrator pm)
     {
         gameObject.SetActive(true);
 
         champBtnView.CreateButtons();
         champBtnView.AddEvent(SelectChampion);
 
-        this.storage = storage;
+        this.banpickHandler = storage;
         phaseManager = pm;
 
         selectBtn.onClick.AddListener(NailDownChampion);
@@ -34,11 +34,9 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 
     void NailDownChampion()
     {
-        if(storage.SaveSelect(phaseManager.CurrentFlow, selectId))
-        {
-            ButtonUtil.InActiveButton(selectBtn);
-            championFocusView.ClearDisplay();
-        }
+        banpickHandler.SaveSelect(phaseManager.CurrentFlow, selectId);
+        ButtonUtil.InActiveButton(selectBtn);
+        championFocusView.ClearDisplay();
     }
 
     void SetupSelectButton(string label)

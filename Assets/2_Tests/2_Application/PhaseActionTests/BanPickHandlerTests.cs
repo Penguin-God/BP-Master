@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using static TestHelper;
 
 public class BanPickHandlerTests
@@ -39,7 +40,7 @@ public class BanPickHandlerTests
         sut.BanPickEventDispatcher.OnChampionPick += (pc) => eventResult = pc;
 
         // Act
-        sut.Pick(BlueZeroSlot, CHAMP_ID);
+        sut.Pick(Team.Blue, CHAMP_ID);
 
         // 1. Storage 확인: PickIds에 해당 ID가 들어갔는가?
         Assert.AreEqual(CHAMP_ID, storage.PickIds.GetSlot(BlueZeroSlot));
@@ -51,5 +52,47 @@ public class BanPickHandlerTests
         Assert.AreEqual(CHAMP_ID, eventResult.Id);
         Assert.AreEqual(Team.Blue, eventResult.SlotData.Team);
         Assert.AreSame(status, eventResult.Status);
+    }
+
+    [Test]
+    public void 픽_페이즈일_때_정상적으로_픽을_수행해야_함()
+    {
+        var id = 1;
+        var sut = CreateSut(id);
+        var flow = new GameFlowData(GamePhase.Pick, Team.Blue);
+
+        sut.SaveSelect(flow, id);
+
+        Assert.IsNotNull(sut.PickSlotFacade.StatusSlots.GetSlot(BlueZeroSlot));
+    }
+
+    [Test]
+    public void 선택_불가능한_ID를_전달하면_예외()
+    {
+        var id = 1;
+        var sut = CreateSut(id);
+        var flow = new GameFlowData(GamePhase.Pick, Team.Blue);
+        sut.SaveSelect(flow, 1);
+
+        Assert.Throws<ArgumentException>(() => sut.SaveSelect(flow, id));
+    }
+
+    [Test]
+    public void 허용되지_않은_페이즈일_경우_예외()
+    {
+        var id = 1;
+        var sut = CreateSut(id);
+        var flow = new GameFlowData(GamePhase.Done, Team.Blue);
+
+        Assert.Throws<ArgumentException>(() => sut.SaveSelect(flow, id));
+    }
+
+    // --- Helper ---
+    BanPickHandler CreateSut(int selectableId)
+    {
+        var champion = new Champion(selectableId, null, CreateStatus());
+        var catalog = new ChampionCatalog(new[] { champion });
+        var storage = new BanPickStorage(new[] { selectableId });
+        return new BanPickHandler(catalog, storage);
     }
 }

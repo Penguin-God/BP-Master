@@ -24,11 +24,11 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     Team team;
-    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, PickSlotFacade pickSlotFacade, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord)
+    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, PickSlotFacade pickSlotFacade, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord, BanPickHandler banPickHandler)
     {
         team = playerTeam;
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
-        championSelector.Init(storage, phaseManager);
+        championSelector.Init(banPickHandler, phaseManager);
 
         participantView.ViewParticipant(matchRecord, playerTeam);
         masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작

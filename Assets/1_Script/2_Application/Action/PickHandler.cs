@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PickHandler
 {
@@ -24,6 +27,7 @@ public class BanPickHandler
     public readonly PickSlotFacade PickSlotFacade = new();
     readonly BanPickStorage storage;
     public readonly BanPickEventDispatcher BanPickEventDispatcher = new();
+    readonly IEnumerable<GamePhase> VaildPhases = new GamePhase[] { GamePhase.Ban, GamePhase.Pick };
 
     public BanPickHandler(ChampionCatalog championCatalog, BanPickStorage storage)
     {
@@ -31,11 +35,25 @@ public class BanPickHandler
         this.storage = storage;
     }
 
-    public void Pick(SlotData slotData, int id)
+    public void Pick(Team team, int id)
     {
         var champion = championCatalog.GetChampion(id);
-        storage.Pick(slotData.Team, id);
+        var slotData = storage.Pick(team, id);
         PickSlotFacade.Add(slotData.Team, champion);
         BanPickEventDispatcher.RaisePick(champion, slotData);
+    }
+
+    public void Ban(Team team, int id)
+    {
+        storage.Ban(team, id);
+    }
+
+
+    public void SaveSelect(GameFlowData flow, int selectedId)
+    {
+        if (storage.CanSelected(selectedId) == false || VaildPhases.Contains(flow.Phase) == false) throw new ArgumentException($"선택 불가능. ID : {selectedId}, Phase : {flow.Phase}");
+
+        if (flow.Phase == GamePhase.Ban) Ban(flow.Turn, selectedId);
+        else Pick(flow.Turn, selectedId);
     }
 }
