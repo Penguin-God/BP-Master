@@ -31,12 +31,11 @@ public class BanPickHandler
         this.storage = storage;
     }
 
-    public void Pick(Team team, int id)
+    public void Pick(SlotData slotData, int id)
     {
         var champion = championCatalog.GetChampion(id);
-        storage.Pick(team, id);
-        PickSlotFacade.Add(team, champion);
-        // BanPickEventDispatcher.RaisePick(new PickChampion(id, champion.Skill, champion.Status, team));
-        // BanPickEventDispatcher.RaisePick(champion, team);
+        storage.Pick(slotData.Team, id);
+        PickSlotFacade.Add(slotData.Team, champion);
+        BanPickEventDispatcher.RaisePick(champion, slotData);
     }
 }
