@@ -4,11 +4,11 @@ using System.Linq;
 
 public class SkillUsecase
 {
-    readonly SlotStorage<PickChampion> pickChampions;
-    private readonly SkillRunner _skillRunner;
+    readonly SlotStorage<Champion> pickChampions;
+    readonly SkillRunner _skillRunner;
     public event Action<SlotData> OnUseSkill;
 
-    public SkillUsecase(SlotStorage<PickChampion> pickChampions, SkillRunner skillRunner)
+    public SkillUsecase(SlotStorage<Champion> pickChampions, SkillRunner skillRunner)
     {
         this.pickChampions = pickChampions;
         _skillRunner = skillRunner;
@@ -19,7 +19,7 @@ public class SkillUsecase
         var champion = pickChampions.GetSlot(skillSlot);
         var targets = targetSlots.Select(x => pickChampions.GetSlot(x).Status);
 
-        _skillRunner.Run(champion.Skill, champion.Status, targets, champion.Team);
+        _skillRunner.Run(champion.Skill, champion.Status, targets, skillSlot.Team);
 
         OnUseSkill?.Invoke(skillSlot);
     }

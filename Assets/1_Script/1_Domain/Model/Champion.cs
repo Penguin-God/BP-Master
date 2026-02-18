@@ -13,18 +13,17 @@ public class Champion
 }
 
 
-public class PickChampion
+public class SlotChampion
 {
-    public readonly int Id;
-    public readonly Skill Skill;
-    public readonly ChampionStatus Status;
-    public readonly Team Team;
+    public Champion Champion;
+    public int Id => Champion.Id;
+    public Skill Skill => Champion.Skill;
+    public ChampionStatus Status => Champion.Status;
+    public readonly SlotData SlotData;
 
-    public PickChampion(int id, Skill skill, ChampionStatus status, Team team)
+    public SlotChampion(Champion champion, SlotData slotData)
     {
-        Id = id;
-        Skill = skill;
-        Status = status;
-        Team = team;
+        Champion = champion;
+        SlotData = slotData;
     }
 }

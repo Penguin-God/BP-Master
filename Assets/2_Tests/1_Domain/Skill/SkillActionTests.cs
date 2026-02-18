@@ -77,10 +77,10 @@ public class SkillActionTests
         var sut = new PickChampStatChanger(eventDispatcher, statChanger, Team.Blue);
 
         sut.Do(null);
-        eventDispatcher.RaisePick(champ, Team.Blue);
+        eventDispatcher.RaisePick(champ, BlueZeroSlot);
         Assert.AreEqual(100, champ.Status.Stat.Attack);
         // 타겟이 아닌 팀은 반영 X
-        eventDispatcher.RaisePick(champ, Team.Red);
+        eventDispatcher.RaisePick(champ, RedZeroSlot);
         Assert.AreEqual(100, champ.Status.Stat.Attack);
     }
 

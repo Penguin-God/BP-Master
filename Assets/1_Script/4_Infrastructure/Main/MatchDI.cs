@@ -34,7 +34,7 @@ public class MatchDI : MonoBehaviour
         var actionEventDispathcer = new BanPickEventDispatcher();
         pickHandler = new PickHandler(champManager.GetCatalog(), actionEventDispathcer);
         storage.OnPick += OnPick;
-        var skillController = new SkillUsecase(PickSlotFacade.PickChampions, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
+        var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 
@@ -55,7 +55,7 @@ public class MatchDI : MonoBehaviour
     void OnPick(SlotData slotData, int id)
     {
         PickEffectApplier pickEffectApplier = new PickEffectApplier(masteryRegistry.GetTeamMasteryManager(slotData.Team));
-        pickHandler.Pick(slotData.Team, id);
+        pickHandler.Pick(slotData, id);
         pickEffectApplier.Apply(slotData.Team, PickSlotFacade.ChampionSlots.GetSlot(slotData));
     }
 

@@ -16,6 +16,5 @@ public class PickSlotFacadeTests
         Assert.AreEqual(champion, sut.ChampionSlots.GetSlot(CreateSlot(team, 0)));
         Assert.AreEqual(champion.Status, sut.StatusSlots.GetSlot(CreateSlot(team, 0)));
         Assert.AreEqual(champion.Skill, sut.SkillSlots.GetSlot(CreateSlot(team, 0)));
-        Assert.AreEqual(team, sut.PickChampions.GetSlot(CreateSlot(team, 0)).Team);
     }
 }

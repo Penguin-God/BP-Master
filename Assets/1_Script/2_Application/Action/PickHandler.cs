@@ -1,4 +1,3 @@
-using System;
 
 public class PickHandler
 {
@@ -11,11 +10,11 @@ public class PickHandler
         this.eventDispatcher = eventDispatcher;
     }
 
-    public void Pick(Team team, int id)
+    public void Pick(SlotData slotData, int id)
     {
         var champion = championCatalog.GetChampion(id);
-        PickSlotFacade.Add(team, champion);
-        eventDispatcher.RaisePick(champion, team);
+        PickSlotFacade.Add(slotData.Team, champion);
+        eventDispatcher.RaisePick(champion, slotData);
     }
 }
 
@@ -38,6 +37,6 @@ public class BanPickHandler
         storage.Pick(team, id);
         PickSlotFacade.Add(team, champion);
         // BanPickEventDispatcher.RaisePick(new PickChampion(id, champion.Skill, champion.Status, team));
-        BanPickEventDispatcher.RaisePick(champion, team);
+        // BanPickEventDispatcher.RaisePick(champion, team);
     }
 }
