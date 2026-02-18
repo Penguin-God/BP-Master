@@ -31,7 +31,7 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnGameEnd += matchManager.EndMatch;
 
         // 로직 추출하기
-        var actionEventDispathcer = new PhaseActionEventDispatcher();
+        var actionEventDispathcer = new BanPickEventDispatcher();
         pickHandler = new PickHandler(champManager.GetCatalog(), actionEventDispathcer);
         storage.OnPick += OnPick;
         var skillController = new SkillUsecase(PickSlotFacade.PickChampions, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));

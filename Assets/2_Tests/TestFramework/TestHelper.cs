@@ -72,7 +72,7 @@ public static class TestHelper
     public static BanPickStorage CreateStorage(params int[] selectableIds) => new BanPickStorage(selectableIds);
     public static GameFlowData CreateFlow(GamePhase phase, Team turn) => new GameFlowData(phase, turn);
 
-    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new PhaseActionEventDispatcher(), new PhaseEventDispatcher());
+    public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(new BanPickEventDispatcher(), new PhaseEventDispatcher());
     public static SkillExecutor CreateAttackChangeExecutor(int value) => new SkillExecutor(new TestAttackChangeAction(value), new NullChecker());
     public static SkillRunner CreateSkillRunner() => new SkillRunner(CreateSkillActionFactory(), new SkillCondtionFactory());
 

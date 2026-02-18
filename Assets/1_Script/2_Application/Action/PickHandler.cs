@@ -4,8 +4,8 @@ public class PickHandler
 {
     readonly ChampionCatalog championCatalog;
     public readonly PickSlotFacade PickSlotFacade = new();
-    readonly PhaseActionEventDispatcher eventDispatcher;
-    public PickHandler(ChampionCatalog championCatalog, PhaseActionEventDispatcher eventDispatcher)
+    readonly BanPickEventDispatcher eventDispatcher;
+    public PickHandler(ChampionCatalog championCatalog, BanPickEventDispatcher eventDispatcher)
     {
         this.championCatalog = championCatalog;
         this.eventDispatcher = eventDispatcher;

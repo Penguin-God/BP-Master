@@ -88,11 +88,11 @@ public class AmplifyChanger : ISkillAction
 
 public class PickChampStatChanger : ISkillAction
 {
-    readonly PhaseActionEventDispatcher eventDispatcher;
+    readonly BanPickEventDispatcher eventDispatcher;
     readonly StatChanger _statChanger;
     readonly Team Team;
 
-    public PickChampStatChanger(PhaseActionEventDispatcher eventDispatcher, StatChanger statChanger, Team team)
+    public PickChampStatChanger(BanPickEventDispatcher eventDispatcher, StatChanger statChanger, Team team)
     {
         this.eventDispatcher = eventDispatcher;
         this._statChanger = statChanger;

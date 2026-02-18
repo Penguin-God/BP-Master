@@ -11,7 +11,7 @@ public class BanPickHandlerTests
         var champion = new Champion(CHAMP_ID, null, CreateStatus(10, 10, 10));
         var catalog = new ChampionCatalog(new Champion[] { champion });
         var storage = CreateStorage(CHAMP_ID);
-        var eventDispathcer = new PhaseActionEventDispatcher();
+        var eventDispathcer = new BanPickEventDispatcher();
         Champion champ = null;
         Team team = Team.Red;
 
@@ -39,7 +39,6 @@ public class BanPickHandlerTests
         PickChampion eventResult = null;
         sut.OnChampionPick += (pc) => eventResult = pc;
 
-        // Act
         sut.Pick(Team.Blue, CHAMP_ID);
 
         // 1. Storage 확인: PickIds에 해당 ID가 들어갔는가?

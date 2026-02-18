@@ -7,9 +7,9 @@ public interface ISkillActionFactory
 
 public class SkillActionFactory : ISkillActionFactory
 {
-    readonly PhaseActionEventDispatcher phaseActionEventDispatcher;
+    readonly BanPickEventDispatcher phaseActionEventDispatcher;
     readonly PhaseEventDispatcher phaseEventDispatcher;
-    public SkillActionFactory(PhaseActionEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
+    public SkillActionFactory(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
         this.phaseActionEventDispatcher = phaseActionEventDispatcher;
         this.phaseEventDispatcher = phaseEventDispatcher;

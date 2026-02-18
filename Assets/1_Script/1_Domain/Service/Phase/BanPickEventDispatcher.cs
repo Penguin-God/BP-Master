@@ -1,6 +1,6 @@
 using System;
 
-public class PhaseActionEventDispatcher
+public class BanPickEventDispatcher
 {
     public event Action<Champion, Team> OnChampionPick;
 

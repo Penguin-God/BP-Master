@@ -71,7 +71,7 @@ public class SkillActionTests
     public void 픽한_아군_스탯_변경()
     {
         var champ = new Champion(1, null, TestHelper.CreateStatus());
-        var eventDispatcher = new PhaseActionEventDispatcher();
+        var eventDispatcher = new BanPickEventDispatcher();
 
         var statChanger = new StatChanger(StatType.Attack, new ValueCalculator(100));
         var sut = new PickChampStatChanger(eventDispatcher, statChanger, Team.Blue);
