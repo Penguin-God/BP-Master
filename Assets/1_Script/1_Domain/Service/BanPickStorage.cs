@@ -40,9 +40,11 @@ public class BanPickStorage
         OnBan?.Invoke(team, id);
     }
 
-    public void Pick(Team team, int id)
+    public SlotData Pick(Team team, int id)
     {
         PickIds.AddSlot(team, id);
-        OnPick?.Invoke(new SlotData(team, PickIds.GetTeamCount(team) - 1), id);
+        SlotData saveSlot = new SlotData(team, PickIds.GetTeamCount(team) - 1);
+        OnPick?.Invoke(saveSlot, id);
+        return saveSlot;
     }
 }
