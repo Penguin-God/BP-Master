@@ -37,12 +37,12 @@ public class MatchUI_Controller : MonoBehaviour
         championDrawer.InActiveButtons(storage.SelectableIds);
 
         storage.OnBan += banView.UpdateBanList;
-        storage.OnPick += slotViews.PickChampion;
+        banPickHandler.BanPickEventDispatcher.OnPick += slotViews.PickChampion;
 
         storage.OnBan += (_, id) => championDrawer.InActiveButton(id);
-        storage.OnPick += (_, id) => championDrawer.InActiveButton(id);
+        banPickHandler.BanPickEventDispatcher.OnPick += (_, id) => championDrawer.InActiveButton(id);
 
-        storage.OnPick += OnPick;
+        banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);
         skillButtonView.Init(playerTeam);
