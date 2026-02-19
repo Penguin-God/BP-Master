@@ -8,10 +8,11 @@ public class MatchDI : MonoBehaviour
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] AI_Main ai_main;
 
-    PickSlotFacade PickSlotFacade => pickHandler.PickSlotFacade;
+    PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
     MasteryRegistry masteryRegistry = new();
-    PickHandler pickHandler;
+    // PickHandler pickHandler;
+    BanPickHandler banPickHandler;
     MatchFlowUsecase matchFlowUsecase;
     MatchRecord matchRecord;
     MatchManager matchManager;
@@ -31,16 +32,16 @@ public class MatchDI : MonoBehaviour
         phaseManager.OnGameEnd += matchManager.EndMatch;
 
         // 로직 추출하기
+        banPickHandler = new BanPickHandler(champManager.GetCatalog(), storage);
         var actionEventDispathcer = new BanPickEventDispatcher();
-        pickHandler = new PickHandler(champManager.GetCatalog(), actionEventDispathcer);
         storage.OnPick += OnPick;
         var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade, skillController, masteryRegistry, matchRecord, null); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade, skillController, masteryRegistry, matchRecord, banPickHandler); // start보다 먼저
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController, PickSlotFacade.StatusSlots, champManager.GetCatalog(), masteryRegistry);
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, PickSlotFacade.SkillSlots, skillController, PickSlotFacade.StatusSlots, champManager.GetCatalog(), masteryRegistry, banPickHandler);
 
         phaseManager.Start();
     }
@@ -55,7 +56,7 @@ public class MatchDI : MonoBehaviour
     void OnPick(SlotData slotData, int id)
     {
         PickEffectApplier pickEffectApplier = new PickEffectApplier(masteryRegistry.GetTeamMasteryManager(slotData.Team));
-        pickHandler.Pick(slotData, id);
+        // pickHandler.Pick(slotData, id);
         pickEffectApplier.Apply(slotData.Team, PickSlotFacade.ChampionSlots.GetSlot(slotData));
     }
 

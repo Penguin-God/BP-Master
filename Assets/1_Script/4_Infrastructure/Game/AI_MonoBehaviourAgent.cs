@@ -20,9 +20,9 @@ public class AI_MonoBehaviourAgent : MonoBehaviour, IPhaseEntry
         skillUseCase = aI_TraitAgent;
     }
 
-    public void UseSkill(SlotData slot) => StartCoroutine(Co_UseTrait(slot));
+    public void UseSkill(SlotData slot) => StartCoroutine(Co_UseSkill(slot));
 
-    IEnumerator Co_UseTrait(SlotData slot)
+    IEnumerator Co_UseSkill(SlotData slot)
     {
         yield return new WaitForSeconds(1.5f);
         skillUseCase.UseSkill(slot);

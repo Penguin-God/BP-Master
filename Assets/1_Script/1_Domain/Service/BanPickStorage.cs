@@ -35,6 +35,7 @@ public class BanPickStorage
 
     public void Ban(Team team, int id)
     {
+        SelectableIds.Remove(id);
         banStorage[team].Add(id);
         OnBan?.Invoke(team, id);
     }
