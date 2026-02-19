@@ -24,9 +24,11 @@ public class MatchUI_Controller : MonoBehaviour
     }
 
     Team team;
-    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, PickSlotFacade pickSlotFacade, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord, BanPickHandler banPickHandler)
+    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord, BanPickHandler banPickHandler)
     {
         team = playerTeam;
+        var pickSlotFacade = banPickHandler.PickSlotFacade;
+
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, phaseManager);
 

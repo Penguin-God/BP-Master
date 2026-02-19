@@ -1910,7 +1910,6 @@ GameObject:
   m_Component:
   - component: {fileID: 758303700}
   - component: {fileID: 758303701}
-  - component: {fileID: 758303702}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -1946,18 +1945,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorsCreatetor: {fileID: 11400000, guid: b363c480518ccf24ba071b28819caa8d, type: 2}
---- !u!114 &758303702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758303699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dc5edc6e25f9fa4499ee084b23a589e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &765582497
 PrefabInstance:
   m_ObjectHideFlags: 0

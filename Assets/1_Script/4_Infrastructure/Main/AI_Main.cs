@@ -12,14 +12,14 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     public void EnterBan() => StartCoroutine(CoBan());
     public void EnterPick() => banPickAgent.Pick(Team);
 
-    public void Init(Team team, BanPickStorage storage, SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SlotStorage<ChampionStatus> statusSlots, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler)
+    public void Init(Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler)
     {
         Team = team;
 
-        selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), statusSlots);
+        selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
-        skillUseCase = new AI_SkillExecutionUseCase(skillSlots, skillUseController, new RandomSkillTargetSelector());
+        skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new RandomSkillTargetSelector());
     }
 
     IEnumerator CoBan()
