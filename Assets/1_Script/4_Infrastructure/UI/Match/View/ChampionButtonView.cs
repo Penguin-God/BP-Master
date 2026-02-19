@@ -34,10 +34,10 @@ public class ChampionButtonView : MonoBehaviour
     void Start()
     {
         var champions = championManager.AllChampion.Select(x => x.CreateChampion());
-        defaultTabBtn.onClick.AddListener(() => GetTabIds(champions, ChampionSortType.Default));
-        attackTabBtn.onClick.AddListener(() => GetTabIds(champions, ChampionSortType.Attack));
-        defenseTabBtn.onClick.AddListener(() => GetTabIds(champions, ChampionSortType.Default));
-        speedTabBtn.onClick.AddListener(() => GetTabIds(champions, ChampionSortType.Speed));
+        defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
+        attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
+        defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
+        speedTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Speed)));
     }
 
     public void CreateButtons() => CreateButtons(championManager.AllId);
@@ -46,7 +46,8 @@ public class ChampionButtonView : MonoBehaviour
     {
         foreach (Transform child in content) Destroy(child.gameObject);
         buttons = new ChampionButtonCreator().DrawChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
-        AppluEvnet(clickEvent);
+        if(clickEvent != null)
+            ApplyEvnet(clickEvent);
     }
 
     public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
@@ -59,11 +60,12 @@ public class ChampionButtonView : MonoBehaviour
     public void AddEvent(UnityAction<ChampionIdentify> action)
     {
         clickEvent += action;
-        AppluEvnet(action);
+        ApplyEvnet(action);
     }
 
-    void AppluEvnet(UnityAction<ChampionIdentify> action)
+    void ApplyEvnet(UnityAction<ChampionIdentify> action)
     {
+        print(action);
         foreach (var btn in buttons)
             btn.onClick.AddListener(() => action(btn.GetComponent<ChampionIdentify>()));
     }
