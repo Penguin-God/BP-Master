@@ -1,15 +1,18 @@
 using NUnit.Framework;
+using System;
 using static TestHelper;
 
 public class SelectSaveTests
 {
     [Test]
-    public void 중복_선택_불가()
+    public void 선택_불가능한_ID면_예외()
     {
-        const int Id = 3;
-        BanPickStorage sut = CreateStorage(Id);
-        Select(sut, Team.Blue, GamePhase.Pick, Id);
-        Assert.IsFalse(Select(sut, Team.Blue, GamePhase.Pick, Id));
+        BanPickStorage sut = CreateStorage(1);
+
+        sut.Ban(Team.Blue, 1);
+
+        Assert.Throws<ArgumentException>(() => sut.Pick(Team.Blue, 1));
+        Assert.Throws<ArgumentException>(() => sut.Ban(Team.Blue, 44));
     }
 
     [Test]
@@ -24,6 +27,4 @@ public class SelectSaveTests
         Assert.AreEqual(sut.PickIds.GetSlot(BlueOneSlot), 4);
         Assert.AreEqual(sut.PickIds.GetSlot(RedZeroSlot), 5);
     }
-
-    bool Select(BanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);
 }

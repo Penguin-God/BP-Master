@@ -46,17 +46,6 @@ public class BanPickHandlerTests
     }
 
     [Test]
-    public void 선택_불가능한_ID를_전달하면_예외()
-    {
-        var id = 1;
-        var sut = CreateSut(id);
-        var flow = new GameFlowData(GamePhase.Pick, Team.Blue);
-        sut.SaveSelect(flow, 1);
-
-        Assert.Throws<ArgumentException>(() => sut.SaveSelect(flow, id));
-    }
-
-    [Test]
     public void 허용되지_않은_페이즈일_경우_예외()
     {
         var id = 1;

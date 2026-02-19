@@ -33,7 +33,7 @@ public class BanPickHandler
 
     public void SaveSelect(GameFlowData flow, int selectedId)
     {
-        if (storage.CanSelected(selectedId) == false || VaildPhases.Contains(flow.Phase) == false) throw new ArgumentException($"선택 불가능. ID : {selectedId}, Phase : {flow.Phase}");
+        if (VaildPhases.Contains(flow.Phase) == false) throw new ArgumentException($"선택 불가능한 페이즈 : {flow.Phase}");
 
         if (flow.Phase == GamePhase.Ban) Ban(flow.Turn, selectedId);
         else Pick(flow.Turn, selectedId);
