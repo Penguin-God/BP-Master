@@ -9,8 +9,6 @@ public class BanPickStorage
     readonly Dictionary<Team, HashSet<int>> banStorage = new();
     public SlotStorage<int> PickIds { get; private set; } = new();
 
-    public event Action<Team, int> OnBan;
-
     public readonly HashSet<int> SelectableIds = new();
 
     public BanPickStorage(IEnumerable<int> allIds)
@@ -36,7 +34,6 @@ public class BanPickStorage
     {
         SelectableIds.Remove(id);
         banStorage[team].Add(id);
-        OnBan?.Invoke(team, id);
     }
 
     public SlotData Pick(Team team, int id)

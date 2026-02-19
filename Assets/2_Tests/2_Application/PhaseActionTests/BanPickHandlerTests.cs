@@ -5,28 +5,19 @@ using static TestHelper;
 public class BanPickHandlerTests
 {
     [Test]
-    public void 픽하면_해당_팀에_챔피언이_슬롯에_추가됨()
+    public void 밴하면_저장소에_등록_후_이벤트_발생()
     {
-        const int CHAMP_ID = 1;
-        var champion = new Champion(CHAMP_ID, null, CreateStatus(10, 10, 10));
-        var catalog = new ChampionCatalog(new Champion[] { champion });
-        var storage = CreateStorage(CHAMP_ID);
-        var eventDispathcer = new BanPickEventDispatcher();
-        Champion champ = null;
-        Team team = Team.Red;
+        var sut = CreateSut(1);
+        int banId = 0;
+        sut.BanPickEventDispatcher.OnBan += (id) => banId = id;
 
-        var sut = new PickHandler(catalog, eventDispathcer);
-        eventDispathcer.OnTeamChampionPick += (cham, _team) => (champ, team) = (cham, _team);
+        sut.SaveSelect(new GameFlowData(GamePhase.Ban, Team.Blue), 1);
 
-        sut.Pick(new SlotData(Team.Blue, 0), CHAMP_ID);
-
-        Assert.IsNotNull(sut.PickSlotFacade.StatusSlots.GetSlot(BlueZeroSlot));
-        Assert.AreEqual(10, champ.Status.Stat.Attack);
+        Assert.AreEqual(1, banId);
     }
 
-
     [Test]
-    public void 픽_호출_시_저장소와_파사드에_데이터가_쌓이고_이벤트가_발생해야_함()
+    public void 픽하면_저장소와_퍼사드에_데이터_등록_후_이벤트_발생()
     {
         const int CHAMP_ID = 7;
         var status = CreateStatus(att: 20);
@@ -40,7 +31,7 @@ public class BanPickHandlerTests
         sut.BanPickEventDispatcher.OnChampionPick += (pc) => eventResult = pc;
 
         // Act
-        sut.Pick(Team.Blue, CHAMP_ID);
+        sut.SaveSelect(new GameFlowData(GamePhase.Pick, Team.Blue), CHAMP_ID);
 
         // 1. Storage 확인: PickIds에 해당 ID가 들어갔는가?
         Assert.AreEqual(CHAMP_ID, storage.PickIds.GetSlot(BlueZeroSlot));
@@ -52,18 +43,6 @@ public class BanPickHandlerTests
         Assert.AreEqual(CHAMP_ID, eventResult.Id);
         Assert.AreEqual(Team.Blue, eventResult.SlotData.Team);
         Assert.AreSame(status, eventResult.Status);
-    }
-
-    [Test]
-    public void 픽_페이즈일_때_정상적으로_픽을_수행해야_함()
-    {
-        var id = 1;
-        var sut = CreateSut(id);
-        var flow = new GameFlowData(GamePhase.Pick, Team.Blue);
-
-        sut.SaveSelect(flow, id);
-
-        Assert.IsNotNull(sut.PickSlotFacade.StatusSlots.GetSlot(BlueZeroSlot));
     }
 
     [Test]

@@ -2,25 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PickHandler
-{
-    readonly ChampionCatalog championCatalog;
-    public readonly PickSlotFacade PickSlotFacade = new();
-    readonly BanPickEventDispatcher eventDispatcher;
-    public PickHandler(ChampionCatalog championCatalog, BanPickEventDispatcher eventDispatcher)
-    {
-        this.championCatalog = championCatalog;
-        this.eventDispatcher = eventDispatcher;
-    }
-
-    public void Pick(SlotData slotData, int id)
-    {
-        var champion = championCatalog.GetChampion(id);
-        PickSlotFacade.Add(slotData.Team, champion);
-        eventDispatcher.RaisePick(champion, slotData);
-    }
-}
-
 public class BanPickHandler
 {
     readonly ChampionCatalog championCatalog;
@@ -35,7 +16,7 @@ public class BanPickHandler
         this.storage = storage;
     }
 
-    public void Pick(Team team, int id)
+    void Pick(Team team, int id)
     {
         var champion = championCatalog.GetChampion(id);
         var slotData = storage.Pick(team, id);
@@ -43,7 +24,7 @@ public class BanPickHandler
         BanPickEventDispatcher.RaisePick(champion, slotData);
     }
 
-    public void Ban(Team team, int id)
+    void Ban(Team team, int id)
     {
         storage.Ban(team, id);
         BanPickEventDispatcher.RasieBan(team, id);
