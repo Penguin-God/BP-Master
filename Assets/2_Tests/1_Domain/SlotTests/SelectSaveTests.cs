@@ -31,19 +31,12 @@ public class SelectSaveTests
         var storage = CreateStorage(11, 22, 101, 102, 201);
 
         int ban = 0;
-        SlotData pickSlot = default;
-        int pick = 0;
-
+        
         storage.OnBan += (team, id) => ban = id;
-        storage.OnPick += (SlotData, id) => (pickSlot, pick) = (SlotData, id);
 
         Select(storage, Team.Blue, GamePhase.Ban, 201);
-        Select(storage, Team.Blue, GamePhase.Pick, 11);
-        Select(storage, Team.Blue, GamePhase.Pick, 101);
 
         Assert.AreEqual(201, ban);
-        Assert.AreEqual(BlueOneSlot, pickSlot);
-        Assert.AreEqual(101, pick);
     }
 
     bool Select(BanPickStorage storage, Team team, GamePhase phase, int id) => storage.SaveSelect(CreateFlow(phase, team), id);

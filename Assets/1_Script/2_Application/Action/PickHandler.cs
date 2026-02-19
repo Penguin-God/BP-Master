@@ -51,7 +51,6 @@ public class BanPickHandler
 
     public void SaveSelect(GameFlowData flow, int selectedId)
     {
-        UnityEngine.Debug.Log(storage.SelectableIds.Count);
         if (storage.CanSelected(selectedId) == false || VaildPhases.Contains(flow.Phase) == false) throw new ArgumentException($"선택 불가능. ID : {selectedId}, Phase : {flow.Phase}");
 
         if (flow.Phase == GamePhase.Ban) Ban(flow.Turn, selectedId);

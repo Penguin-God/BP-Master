@@ -10,7 +10,6 @@ public class BanPickStorage
     public SlotStorage<int> PickIds { get; private set; } = new();
 
     public event Action<Team, int> OnBan;
-    public event Action<SlotData, int> OnPick;
 
     public readonly HashSet<int> SelectableIds = new();
 
@@ -44,8 +43,6 @@ public class BanPickStorage
     {
         SelectableIds.Remove(id);
         PickIds.AddSlot(team, id);
-        SlotData saveSlot = new SlotData(team, PickIds.GetTeamCount(team) - 1);
-        OnPick?.Invoke(saveSlot, id);
-        return saveSlot;
+        return new SlotData(team, PickIds.GetTeamCount(team) - 1);
     }
 }
