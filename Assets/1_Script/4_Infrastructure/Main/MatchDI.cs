@@ -34,7 +34,7 @@ public class MatchDI : MonoBehaviour
         // 로직 추출하기
         banPickHandler = new BanPickHandler(champManager.GetCatalog(), storage);
         var actionEventDispathcer = new BanPickEventDispatcher();
-        banPickHandler.BanPickEventDispatcher.OnPick += ApplyMastery;
+        banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
         var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
@@ -53,10 +53,10 @@ public class MatchDI : MonoBehaviour
         return new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
     }
 
-    void ApplyMastery(SlotData slotData, int id)
+    void ApplyMastery(Champion champion, Team team)
     {
-        PickEffectApplier pickEffectApplier = new PickEffectApplier(masteryRegistry.GetTeamMasteryManager(slotData.Team));
-        pickEffectApplier.Apply(slotData.Team, PickSlotFacade.ChampionSlots.GetSlot(slotData));
+        var masteryApplier = new MasteryApplier(masteryRegistry.GetTeamMasteryManager(team));
+        masteryApplier.ApplyMastery(champion.Id, champion.Status);
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
