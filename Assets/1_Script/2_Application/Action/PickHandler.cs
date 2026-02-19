@@ -46,6 +46,7 @@ public class BanPickHandler
     public void Ban(Team team, int id)
     {
         storage.Ban(team, id);
+        BanPickEventDispatcher.RasieBan(team, id);
     }
 
 

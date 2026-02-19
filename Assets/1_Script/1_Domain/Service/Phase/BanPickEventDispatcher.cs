@@ -12,4 +12,12 @@ public class BanPickEventDispatcher
         OnChampionPick?.Invoke(new SlotChampion(champion, slotData));
         OnPick?.Invoke(slotData, champion.Id);
     }
+
+    public event Action<Team, int> OnTeamBan;
+    public event Action<int> OnBan;
+    public void RasieBan(Team team, int id)
+    {
+        OnTeamBan?.Invoke(team, id);
+        OnBan?.Invoke(id);
+    }
 }

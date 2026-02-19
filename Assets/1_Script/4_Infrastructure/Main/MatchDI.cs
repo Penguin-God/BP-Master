@@ -11,7 +11,6 @@ public class MatchDI : MonoBehaviour
     PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
     MasteryRegistry masteryRegistry = new();
-    // PickHandler pickHandler;
     BanPickHandler banPickHandler;
     MatchFlowUsecase matchFlowUsecase;
     MatchRecord matchRecord;
@@ -37,7 +36,8 @@ public class MatchDI : MonoBehaviour
         banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
         var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-        storage.OnBan += (team, id) => phaseManager.SubmitAction(team);
+
+        banPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => phaseManager.SubmitAction(team);
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, PickSlotFacade, skillController, masteryRegistry, matchRecord, banPickHandler); // start보다 먼저
 

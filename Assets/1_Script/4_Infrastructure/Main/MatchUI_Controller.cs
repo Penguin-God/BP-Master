@@ -36,10 +36,10 @@ public class MatchUI_Controller : MonoBehaviour
         blueMasteryTooltipTrigger.Inject(masteryRegistry);
         championDrawer.InActiveButtons(storage.SelectableIds);
 
-        storage.OnBan += banView.UpdateBanList;
+        banPickHandler.BanPickEventDispatcher.OnTeamBan += banView.UpdateBanList;
         banPickHandler.BanPickEventDispatcher.OnPick += slotViews.PickChampion;
 
-        storage.OnBan += (_, id) => championDrawer.InActiveButton(id);
+        banPickHandler.BanPickEventDispatcher.OnBan += championDrawer.InActiveButton;
         banPickHandler.BanPickEventDispatcher.OnPick += (_, id) => championDrawer.InActiveButton(id);
 
         banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
