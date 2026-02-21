@@ -5,13 +5,6 @@ public interface ISkillAction
     void Do(ChampionStatus target);
 }
 
-public enum StatType
-{
-    Attack,
-    Defense,
-    Speed,
-}
-
 public class StatChanger : ISkillAction
 {
     readonly StatType StatType;

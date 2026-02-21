@@ -1,3 +1,10 @@
+public enum StatType
+{
+    Attack,
+    Defense,
+    Speed,
+}
+
 public readonly struct ChampionStatData
 {
     public readonly int Attack;
@@ -15,4 +22,12 @@ public readonly struct ChampionStatData
     public readonly ChampionStatData ChangeAttack(int att) => new ChampionStatData(att, Defense, Speed);
     public readonly ChampionStatData ChangeDefense(int def) => new ChampionStatData(Attack, def, Speed);
     public readonly ChampionStatData ChangeSpeed(int speed) => new ChampionStatData(Attack, Defense, speed);
+
+    public int GetStatValue(StatType statType) => statType switch
+    {
+        StatType.Attack => Attack,
+        StatType.Defense => Defense,
+        StatType.Speed => Speed,
+        _ => 0
+    };
 }
