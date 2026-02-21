@@ -16,7 +16,6 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     {
         gameObject.SetActive(true);
 
-        champBtnView.CreateButtons();
         champBtnView.AddEvent(SelectChampion);
 
         this.banpickHandler = storage;

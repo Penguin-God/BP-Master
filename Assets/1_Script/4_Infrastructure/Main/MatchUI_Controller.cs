@@ -17,12 +17,6 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] MasteryTooltipTrigger blueMasteryTooltipTrigger;
     [SerializeField] ParticipantView participantView;
 
-    MasteryButtonHighlighter masteryHighlighter;
-    public void Awake()
-    {
-        masteryHighlighter = GetComponentInChildren<MasteryButtonHighlighter>(includeInactive: true);
-    }
-
     Team team;
     public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord, BanPickHandler banPickHandler)
     {
@@ -30,13 +24,12 @@ public class MatchUI_Controller : MonoBehaviour
         var pickSlotFacade = banPickHandler.PickSlotFacade;
 
         championDrawer.Init(masteryRegistry.GetTeamMasteryManager(playerTeam).AllMasteries, storage);
-        // championDrawer.InActiveButtons(storage.SelectableIds);
+        championDrawer.CreateButtons();
 
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, phaseManager);
 
         participantView.ViewParticipant(matchRecord, playerTeam);
-        // masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작
         redMasteryTooltipTrigger.Inject(masteryRegistry);
         blueMasteryTooltipTrigger.Inject(masteryRegistry);
 
