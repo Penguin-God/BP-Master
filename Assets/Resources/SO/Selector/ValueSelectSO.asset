@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620fb8a46cdbc134a89345036b578aa0, type: 3}
   m_Name: ValueSelectSO
   m_EditorClassIdentifier: App::ValueSelectSO
-  speedValue: 3
+  speedValue: 7
   bonusDataFactory: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
