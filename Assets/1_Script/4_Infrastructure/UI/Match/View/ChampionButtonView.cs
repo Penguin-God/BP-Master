@@ -31,6 +31,7 @@ public class ChampionButtonView : MonoBehaviour
 
     UnityAction<ChampionIdentify> clickEvent;
 
+    HashSet<int> masteredChampIds = new HashSet<int>();
     void Start()
     {
         var champions = championManager.AllChampion.Select(x => x.CreateChampion());
@@ -48,6 +49,25 @@ public class ChampionButtonView : MonoBehaviour
         buttons = new ChampionButtonCreator().DrawChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
         if(clickEvent != null)
             ApplyEvnet(clickEvent);
+
+        ApplyMasteryColor();
+    }
+
+    public void SetMasteredChampions(IEnumerable<ChampionMastery> masteries)
+    {
+        masteredChampIds = new HashSet<int>(masteries.Select(x => x.ChampionId));
+        ApplyMasteryColor(); // 주입 즉시 현재 버튼들에도 적용
+    }
+
+    void ApplyMasteryColor()
+    {
+        if (buttons == null) return;
+
+        foreach (var btn in buttons)
+        {
+            if (masteredChampIds.Contains(btn.GetComponent<ChampionIdentify>().Id))
+                ButtonUtil.ChangeButtonColor(btn, new Color32(111, 233, 65, 255));
+        }
     }
 
     public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
@@ -65,7 +85,6 @@ public class ChampionButtonView : MonoBehaviour
 
     void ApplyEvnet(UnityAction<ChampionIdentify> action)
     {
-        print(action);
         foreach (var btn in buttons)
             btn.onClick.AddListener(() => action(btn.GetComponent<ChampionIdentify>()));
     }

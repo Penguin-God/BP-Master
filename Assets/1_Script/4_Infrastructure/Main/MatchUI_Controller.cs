@@ -33,10 +33,12 @@ public class MatchUI_Controller : MonoBehaviour
         championSelector.Init(banPickHandler, phaseManager);
 
         participantView.ViewParticipant(matchRecord, playerTeam);
-        masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작
+        // masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작
         redMasteryTooltipTrigger.Inject(masteryRegistry);
         blueMasteryTooltipTrigger.Inject(masteryRegistry);
+
         championDrawer.InActiveButtons(storage.SelectableIds);
+        championDrawer.SetMasteredChampions(masteryRegistry.GetTeamMasteryManager(playerTeam).AllMasteries);
 
         banPickHandler.BanPickEventDispatcher.OnTeamBan += banView.UpdateBanList;
         banPickHandler.BanPickEventDispatcher.OnPick += slotViews.PickChampion;
