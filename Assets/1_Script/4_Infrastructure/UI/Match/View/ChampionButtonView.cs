@@ -32,6 +32,7 @@ public class ChampionButtonView : MonoBehaviour
     UnityAction<ChampionIdentify> clickEvent;
 
     HashSet<int> masteredChampIds = new HashSet<int>();
+    BanPickStorage storage;
     void Start()
     {
         var champions = championManager.AllChampion.Select(x => x.CreateChampion());
@@ -46,15 +47,18 @@ public class ChampionButtonView : MonoBehaviour
     void CreateButtons(IEnumerable<int> Ids)
     {
         foreach (Transform child in content) Destroy(child.gameObject);
+
         buttons = new ChampionButtonCreator().DrawChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
         if(clickEvent != null)
             ApplyEvnet(clickEvent);
 
         ApplyMasteryColor();
+        InActiveButtons(storage.SelectableIds);
     }
 
-    public void SetMasteredChampions(IEnumerable<ChampionMastery> masteries)
+    public void Init(IEnumerable<ChampionMastery> masteries, BanPickStorage storage)
     {
+        this.storage = storage;
         masteredChampIds = new HashSet<int>(masteries.Select(x => x.ChampionId));
         ApplyMasteryColor(); // 주입 즉시 현재 버튼들에도 적용
     }

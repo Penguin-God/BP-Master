@@ -29,6 +29,9 @@ public class MatchUI_Controller : MonoBehaviour
         team = playerTeam;
         var pickSlotFacade = banPickHandler.PickSlotFacade;
 
+        championDrawer.Init(masteryRegistry.GetTeamMasteryManager(playerTeam).AllMasteries, storage);
+        // championDrawer.InActiveButtons(storage.SelectableIds);
+
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, phaseManager);
 
@@ -36,9 +39,6 @@ public class MatchUI_Controller : MonoBehaviour
         // masteryHighlighter.Highlight(playerTeam, masteryRegistry); // championSelector 이후에 시작
         redMasteryTooltipTrigger.Inject(masteryRegistry);
         blueMasteryTooltipTrigger.Inject(masteryRegistry);
-
-        championDrawer.InActiveButtons(storage.SelectableIds);
-        championDrawer.SetMasteredChampions(masteryRegistry.GetTeamMasteryManager(playerTeam).AllMasteries);
 
         banPickHandler.BanPickEventDispatcher.OnTeamBan += banView.UpdateBanList;
         banPickHandler.BanPickEventDispatcher.OnPick += slotViews.PickChampion;
