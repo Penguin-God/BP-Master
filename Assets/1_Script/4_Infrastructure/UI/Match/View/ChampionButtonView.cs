@@ -99,15 +99,19 @@ public class ChampionButtonView : MonoBehaviour
             InActiveButton(btn.GetComponent<ChampionIdentify>().Id);
     }
 
-    readonly ChampionStatSorter championStatSorter = new ChampionStatSorter();
     IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
     {
         ChampionSortType.Default => championManager.AllId,
-        ChampionSortType.Attack => championStatSorter.SortByStat(allChampions, StatType.Attack).Select(x => x.Id),
-        ChampionSortType.Defense => championStatSorter.SortByStat(allChampions, StatType.Defense).Select(x => x.Id),
-        ChampionSortType.Speed => championStatSorter.SortByStat(allChampions, StatType.Speed).Select(x => x.Id),
+        ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
+        ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
+        ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
         _ => throw new System.NotImplementedException(),
     };
+
+    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType) 
+        => champions
+            .OrderByDescending(c => c.Status.Stat.GetStatValue(statType))
+            .Select(x => x.Id);
 }
 
 public class ChampionButtonCreator
