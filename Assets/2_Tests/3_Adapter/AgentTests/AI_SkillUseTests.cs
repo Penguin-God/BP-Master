@@ -29,6 +29,6 @@ public class AI_SkillUseTests
         private readonly IEnumerable<SlotData> _fixedTargets;
         public StubTargetSelector(IEnumerable<SlotData> targets) => _fixedTargets = targets;
 
-        public IEnumerable<SlotData> SelectSkillTargets(Team team, Skill skill, TargetCountCalculator count) => _fixedTargets;
+        public IEnumerable<SlotData> SelectTargets(Team team, Skill skill, TargetCountCalculator count) => _fixedTargets;
     }
 }

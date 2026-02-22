@@ -16,7 +16,7 @@ public class AI_SkillExecutionUseCase
         var teamCount = _skillSlots.GetTeamCounter();
         var useSkill = _skillSlots.GetSlot(slotData);
 
-        var targets = _targetSelector.SelectSkillTargets(slotData.Team, useSkill, teamCount);
+        var targets = _targetSelector.SelectTargets(slotData.Team, useSkill, teamCount);
 
         _skillUseController.UseSkill(slotData, targets);
     }

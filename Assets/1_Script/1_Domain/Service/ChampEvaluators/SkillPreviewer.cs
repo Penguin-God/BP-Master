@@ -10,7 +10,7 @@ public class SkillPreviewer
         if (champion.Skill.IsEmpty) return copiedSlots;
 
         var targets = _skillTargetSelector
-            .SelectSkillTargets(team, champion.Skill, originSlots.GetTeamCounter())
+            .SelectTargets(team, champion.Skill, originSlots.GetTeamCounter())
             .Select(x => copiedSlots.GetSlot(x));
 
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함

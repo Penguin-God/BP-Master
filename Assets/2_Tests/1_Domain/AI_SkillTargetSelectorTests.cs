@@ -29,7 +29,7 @@ public class AI_SkillTargetSelectorTests
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
         var sut = new RandomSkillTargetSelector();
 
-        var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
+        var result = sut.SelectTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
 
         Assert.AreEqual(resultCount, result.Count());
         CollectionAssert.AllItemsAreUnique(result);
@@ -43,7 +43,7 @@ public class AI_SkillTargetSelectorTests
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
         var sut = new RandomSkillTargetSelector();
 
-        var result = sut.SelectSkillTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: AllRule), countCalculator);
+        var result = sut.SelectTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: AllRule), countCalculator);
 
         Assert.AreEqual(8, result.Count());
         CollectionAssert.AllItemsAreUnique(result);
@@ -56,7 +56,7 @@ public class AI_SkillTargetSelectorTests
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
         var sut = new RandomSkillTargetSelector();
 
-        var result = sut.SelectSkillTargets(Team.Blue, CreateSkill(CreateValueSkillData(StatType.Attack, 100, rule: OpponentAllRule), CreateValueSkillData(StatType.Attack, 100, rule: SelfAllRule)), countCalculator);
+        var result = sut.SelectTargets(Team.Blue, CreateSkill(CreateValueSkillData(StatType.Attack, 100, rule: OpponentAllRule), CreateValueSkillData(StatType.Attack, 100, rule: SelfAllRule)), countCalculator);
 
         Assert.AreEqual(8, result.Count());
         CollectionAssert.AllItemsAreUnique(result);
