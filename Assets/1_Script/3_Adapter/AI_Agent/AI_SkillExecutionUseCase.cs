@@ -2,13 +2,12 @@ public class AI_SkillExecutionUseCase
 {
     readonly SlotStorage<Skill> _skillSlots;
     readonly SkillUsecase _skillUseController;
-    readonly ISkillTargetSelector _targetSelector;
     readonly SkillTargetService skillTargetService;
-    public AI_SkillExecutionUseCase(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, ISkillTargetSelector targetSelector)
+    public AI_SkillExecutionUseCase(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SkillTargetService targetService)
     {
         _skillSlots = skillSlots;
         _skillUseController = skillUseController;
-        _targetSelector = targetSelector;
+        skillTargetService = targetService;
     }
 
     public void UseSkill(SlotData slotData)

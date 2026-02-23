@@ -19,7 +19,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
         selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
-        skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new RandomSkillTargetSelector());
+        skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new SkillTargetService(new RandomSkillTargetSelector()));
     }
 
     IEnumerator CoBan()

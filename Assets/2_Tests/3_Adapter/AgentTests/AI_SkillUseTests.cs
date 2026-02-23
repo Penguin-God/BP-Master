@@ -16,7 +16,7 @@ public class AI_SkillUseTests
         skills.AddSlot(Team.Blue, skill);
         var stubSelector = new FakeTargetSelector(new[] { BlueZeroSlot });
 
-        var sut = new AI_SkillExecutionUseCase(skills, skillUseController, stubSelector);
+        var sut = new AI_SkillExecutionUseCase(skills, skillUseController, new SkillTargetService(stubSelector));
 
         sut.UseSkill(BlueZeroSlot);
 

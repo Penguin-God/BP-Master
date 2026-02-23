@@ -2,8 +2,7 @@ using System.Linq;
 
 public class SkillPreviewer
 {
-    readonly RandomSkillTargetSelector _skillTargetSelector = new();
-    readonly SkillTargetService skillTargetService;
+    readonly SkillTargetService skillTargetService = new SkillTargetService(new RandomSkillTargetSelector());
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
