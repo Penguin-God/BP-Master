@@ -22,7 +22,7 @@ public class HighStatTargetSelector : ISkillTargetSelector
 
     public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill)
     {
-        var percentData = skill.SkillDatas.First(x => x.AmountData.Type == AmountType.Percent);
+        var percentData = skill.SkillDatas.First();
 
         return candidates
             .OrderByDescending(slot => statusStorage.GetSlot(slot).Stat.GetStatValue(percentData.AmountData.StatType))

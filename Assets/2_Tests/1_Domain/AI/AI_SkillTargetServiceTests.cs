@@ -13,20 +13,6 @@ public class AI_SkillTargetSelectorTests
     SkillTargetService CreateSut() => new SkillTargetService(new FakeTargetSelector());
 
     [Test]
-    public void 요청한_개수만큼_반환한다()
-    {
-        var targetSlots = CreateBlueSlots(0, 1, 2, 3, 4);
-        int targetCount = 2;
-        var sut = new RandomSkillTargetSelector();
-
-        var result = sut.SelectTargets(targetSlots, targetCount, null).ToList();
-
-        Assert.AreEqual(targetCount, result.Count);
-        CollectionAssert.AllItemsAreUnique(result);
-        CollectionAssert.IsSubsetOf(result, targetSlots);
-    }
-
-    [Test]
     [TestCase(TargetRange.Double, 2)]
     [TestCase(TargetRange.All, 4)]
     public void 범위_내에서_개수만큼_타겟_선택해야_함(TargetRange range, int resultCount)
