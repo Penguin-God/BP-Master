@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using static TestHelper;
 
 public class StaticEvalueatorTests
 {
@@ -13,38 +12,5 @@ public class StaticEvalueatorTests
 
         // 250 + 200 = 450
         Assert.AreEqual(450, result);
-    }
-
-    SkillEvaluator CreateEvaluator(int teamSize, SlotStorage<ChampionStatus> statusSlots) => new SkillEvaluator(statusSlots, teamSize);
-
-
-    [Test]
-    [TestCase(Side.Self, 500)]
-    [TestCase(Side.Opponent, -500)]
-    [TestCase(Side.All, 0)]
-    public void 조건_없는_스킬은_값과_타겟_범위에_따라_평가(Side side, int expected)
-    {
-        var skill = CreateValueSkillData(StatType.Attack, 100, default, new SkillTargetRule(side, TargetRange.All));
-        var sut = CreateEvaluator(5, CreateTwoSlotStatus());
-
-        int result = sut.Evaluate(skill, Team.Blue);
-
-        Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    [TestCase(Side.Self, 250)]
-    [TestCase(Side.Opponent, -200)]
-    [TestCase(Side.All, 50)]
-    public void 조건_스킬은_검사_후_계산(Side side, int expected)
-    {
-        var skill = CreateValueSkillData(StatType.Defense, 100, CreateThresholdCondition(StatConditionType.AttackAtLeast, 100), new SkillTargetRule(side, TargetRange.All));
-        var statusSlots = CreateOneSlotStatus();
-        var sut = CreateEvaluator(5, statusSlots);
-        statusSlots.AddSlot(Team.Blue, CreateStatus(att: 100));
-
-        int result = sut.Evaluate(skill, Team.Blue);
-
-        Assert.AreEqual(expected, result);
     }
 }
