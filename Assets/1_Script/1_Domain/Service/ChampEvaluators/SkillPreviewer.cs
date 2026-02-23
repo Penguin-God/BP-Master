@@ -2,13 +2,12 @@ using System.Linq;
 
 public class SkillPreviewer
 {
-    readonly SkillTargetService skillTargetService = new SkillTargetService(new RandomSkillTargetSelector());
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
         if (champion.Skill.IsEmpty) return copiedSlots;
 
-        var targets = skillTargetService
+        var targets = new SkillTargetService(new HighStatTargetSelector(originSlots))
             .GetTargets(team, champion.Skill, originSlots.GetTeamCounter())
             .Select(x => copiedSlots.GetSlot(x));
 
