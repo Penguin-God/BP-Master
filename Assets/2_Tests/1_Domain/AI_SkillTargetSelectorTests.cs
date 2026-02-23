@@ -1,19 +1,25 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using static TestHelper;
 
 public class AI_SkillTargetSelectorTests
 {
-    public RandomSkillTargetSelector CreateSelector() => new RandomSkillTargetSelector();
+    class FakeTargetSelector : ISkillTargetSelector
+    {
+        public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill) => candidates.Take(count);
+    }
+
+    SkillTargetService CreateSut() => new SkillTargetService(new FakeTargetSelector());
 
     [Test]
-    public void 요청한_개수만큼_반환하고_원본에서_제거한다()
+    public void 요청한_개수만큼_반환한다()
     {
         var targetSlots = CreateBlueSlots(0, 1, 2, 3, 4);
         int targetCount = 2;
-        var sut = CreateSelector();
+        var sut = new RandomSkillTargetSelector();
 
-        var result = sut.SelectRandom(targetSlots.ToList(), targetCount).ToList();
+        var result = sut.SelectTargets(targetSlots, targetCount, null).ToList();
 
         Assert.AreEqual(targetCount, result.Count);
         CollectionAssert.AllItemsAreUnique(result);
@@ -23,13 +29,13 @@ public class AI_SkillTargetSelectorTests
     [Test]
     [TestCase(TargetRange.Double, 2)]
     [TestCase(TargetRange.All, 4)]
-    public void 스킬을_이용해_타겟_범위_계산_후_선택(TargetRange range, int resultCount)
+    public void 범위_내에서_개수만큼_타겟_선택해야_함(TargetRange range, int resultCount)
     {
         const int TARGET_COUNT = 4;
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
-        var sut = new RandomSkillTargetSelector();
+        var sut = CreateSut();
 
-        var result = sut.SelectTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
+        var result = sut.GetTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: new SkillTargetRule(Side.Opponent, range)), countCalculator);
 
         Assert.AreEqual(resultCount, result.Count());
         CollectionAssert.AllItemsAreUnique(result);
@@ -41,9 +47,9 @@ public class AI_SkillTargetSelectorTests
     {
         const int TARGET_COUNT = 4;
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
-        var sut = new RandomSkillTargetSelector();
+        var sut = CreateSut();
 
-        var result = sut.SelectTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: AllRule), countCalculator);
+        var result = sut.GetTargets(Team.Blue, CreateValueSkill(StatType.Attack, 100, rule: AllRule), countCalculator);
 
         Assert.AreEqual(8, result.Count());
         CollectionAssert.AllItemsAreUnique(result);
@@ -54,9 +60,9 @@ public class AI_SkillTargetSelectorTests
     {
         const int TARGET_COUNT = 4;
         var countCalculator = new TargetCountCalculator(TARGET_COUNT, TARGET_COUNT);
-        var sut = new RandomSkillTargetSelector();
+        var sut = CreateSut();
 
-        var result = sut.SelectTargets(Team.Blue, CreateSkill(CreateValueSkillData(StatType.Attack, 100, rule: OpponentAllRule), CreateValueSkillData(StatType.Attack, 100, rule: SelfAllRule)), countCalculator);
+        var result = sut.GetTargets(Team.Blue, CreateSkill(CreateValueSkillData(StatType.Attack, 100, rule: OpponentAllRule), CreateValueSkillData(StatType.Attack, 100, rule: SelfAllRule)), countCalculator);
 
         Assert.AreEqual(8, result.Count());
         CollectionAssert.AllItemsAreUnique(result);

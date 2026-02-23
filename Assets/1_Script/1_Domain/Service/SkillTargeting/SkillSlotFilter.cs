@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class TargetCountCalculator
+public readonly struct TargetCountCalculator
 {
     readonly int BlueCount;
     readonly int RedCount;
@@ -13,9 +13,9 @@ public class TargetCountCalculator
         RedCount = redCount;
     }
 
-    public int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
+    public readonly int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
 
-    public int CalculateTargetCount(Team team, SkillTargetRule rule)
+    public readonly int CalculateTargetCount(Team team, SkillTargetRule rule)
     {
         if (rule.TargetRange == TargetRange.All)
         {
@@ -26,9 +26,9 @@ public class TargetCountCalculator
         return GetTargetableCount(team, rule);
     }
 
-    int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
+    readonly int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
 
-    int CalculateFixedCount(TargetRange targetRange) => targetRange switch
+    readonly int CalculateFixedCount(TargetRange targetRange) => targetRange switch
     {
         TargetRange.Single => 1,
         TargetRange.Double => 2,

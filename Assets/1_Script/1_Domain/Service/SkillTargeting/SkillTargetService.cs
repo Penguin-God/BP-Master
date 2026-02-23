@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public interface ISkillTargetSelector
 {
-    IEnumerable<SlotData> SelectTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator);
+    IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill);
 }
 
 public class SkillTargetService
@@ -20,6 +20,6 @@ public class SkillTargetService
         var filter = new SkillTargetFilter(calculator);
         var candidates = filter.FilteringTargetSlots(casterTeam, skill.Sides);
 
-        return null; // selector.SelectTargets(candidates, count, skill);
+        return selector.SelectTargets(candidates, count, skill);
     }
 }

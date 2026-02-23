@@ -5,18 +5,11 @@ using System.Linq;
 
 public class RandomSkillTargetSelector : ISkillTargetSelector
 {
-    public IEnumerable<SlotData> SelectTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator)
+    public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill)
     {
-        int count = calculator.CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
-        var filter = new SkillTargetFilter(calculator);
-        var candidates = filter.FilteringTargetSlots(casterTeam, skill.Sides);
-
-        return SelectRandom(candidates, count);
+        return candidates.OrderBy(x => Guid.NewGuid()).Take(count);
     }
-
-    public IEnumerable<SlotData> SelectRandom(IEnumerable<SlotData> candidates, int count) => candidates.OrderBy(x => Guid.NewGuid()).Take(count);
 }
-
 
 public class HighStatTargetSelector : ISkillTargetSelector
 {
@@ -27,17 +20,12 @@ public class HighStatTargetSelector : ISkillTargetSelector
         this.statusStorage = statusStorage;
     }
 
-    public IEnumerable<SlotData> SelectTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator)
+    public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill)
     {
-        int count = calculator.CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
-        var filter = new SkillTargetFilter(calculator);
-        var candidates = filter.FilteringTargetSlots(casterTeam, skill.Sides);
-
-        var percentData = skill.SkillDatas.FirstOrDefault(x => x.AmountData.Type == AmountType.Percent);
-        var statType = percentData.AmountData.StatType;
+        var percentData = skill.SkillDatas.First(x => x.AmountData.Type == AmountType.Percent);
 
         return candidates
-            .OrderByDescending(slot => statusStorage.GetSlot(slot).Stat.GetStatValue(statType))
+            .OrderByDescending(slot => statusStorage.GetSlot(slot).Stat.GetStatValue(percentData.AmountData.StatType))
             .Take(count);
     }
 }

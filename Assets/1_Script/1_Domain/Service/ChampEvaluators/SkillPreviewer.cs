@@ -3,14 +3,14 @@ using System.Linq;
 public class SkillPreviewer
 {
     readonly RandomSkillTargetSelector _skillTargetSelector = new();
-
+    readonly SkillTargetService skillTargetService;
     public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
         if (champion.Skill.IsEmpty) return copiedSlots;
 
-        var targets = _skillTargetSelector
-            .SelectTargets(team, champion.Skill, originSlots.GetTeamCounter())
+        var targets = skillTargetService
+            .GetTargets(team, champion.Skill, originSlots.GetTeamCounter())
             .Select(x => copiedSlots.GetSlot(x));
 
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
