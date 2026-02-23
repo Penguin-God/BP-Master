@@ -11,7 +11,7 @@ public class ValueCalcualateTests
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
         var previewer = new SkillPreviewer();
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueEvaluator(statCalculator, new ChampionValueApplier(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
+        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
     }
 
     [Test]
@@ -26,6 +26,20 @@ public class ValueCalcualateTests
 
         // 내 팀(Blue) 기준에서 적(Red)의 스탯이 올랐으므로 점수는 마이너스여야 함
         Assert.AreEqual(-200, score);
+    }
+
+    [Test]
+    public void 적_점수_떨구는만큼_가치_증가()
+    {
+        var skillData = CreateAttackChangeSkill(-100, rule: OpponentAllRule);
+        var champion = CreateChampion(CHAMP_ID, skillData: skillData);
+        var sut = CreateSut(CreateBonus(0, 0), masteryLevel: 0);
+
+        // Act
+        int score = sut.Evaluate(champion);
+
+        // 내 팀(Blue) 기준에서 적(Red)의 스탯이 올랐으므로 점수는 마이너스여야 함
+        Assert.AreEqual(200, score);
     }
 
     [Test]

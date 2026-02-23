@@ -1,8 +1,8 @@
-public class ChampionValueApplier
+public class ChampionValueCalculator
 {
     readonly SkillPreviewer Previewer;
     readonly MasteryApplier masteryApplier;
-    public ChampionValueApplier(SkillPreviewer previewer, MasteryApplier masteryApplier)
+    public ChampionValueCalculator(SkillPreviewer previewer, MasteryApplier masteryApplier)
     {
         Previewer = previewer;
         this.masteryApplier = masteryApplier;
