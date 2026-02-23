@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BonusDeltaCalculateTests
 {
     [Test]
-    public void 보너스_차이_계산하기()
+    public void 보너스_오르는거_계산하기()
     {
         TeamBonusCalculator teamBonusCalculator = new TeamBonusCalculator(new BonusCalculator(new SortedDictionary<int, int>() { { 100, 100 }, { 200, 200 } }), CreateBonus(0, 0), CreateBonus(10, 100));
         var sut = new BonusDeltaCalculator(teamBonusCalculator);

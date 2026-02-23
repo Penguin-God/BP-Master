@@ -21,8 +21,7 @@ public class PickValueEvaluator : IChampionEvaluator
         var pickApplyinfo = championValueCalculator.Calculate(team, champion, originStats);
         int champPickValue = statCalculator.CalcualteTeamStatValue(pickApplyinfo, team);
 
-        // 상대 보너스 밸류 계산이 없다
-        int bonusValue = bonusDeltaCalculator.Calculate(before, pickApplyinfo, team);
+        int bonusValue = bonusDeltaCalculator.Calculate(before, before + pickApplyinfo, team);
         return champPickValue + bonusValue;
     }
 }

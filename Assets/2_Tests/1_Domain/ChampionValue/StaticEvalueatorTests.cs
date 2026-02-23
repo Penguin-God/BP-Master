@@ -10,7 +10,8 @@ public class StaticEvalueatorTests
 
         int result = sut.CalcualteTeamStatValue(data, Team.Blue);
 
-        // 250 + 200 = 450
+        // (100 + 100 + 50) = 250
+        // -500 +300 = -200을 상대팀이니까 +로 변환
         Assert.AreEqual(450, result);
     }
 }
