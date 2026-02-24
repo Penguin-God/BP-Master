@@ -16,14 +16,23 @@ public class PhaseData
 public class Phase
 {
     Queue<Team> actionTeams;
+    public bool HasNext => actionTeams.Count > 0;
+    public bool IsDone => actionTeams.Count == 0;
 
     public Phase(IEnumerable<Team> teams) => this.actionTeams = new Queue<Team>(teams);
-    public bool IsDone => actionTeams.Count == 0;
+    
     
     public Team GetNext()
     {
         if (actionTeams.Count == 0)
             throw new InvalidOperationException("턴이 없는데 턴을 달래");
         return actionTeams.Dequeue();
+    }
+
+    public Team PeekNext()
+    {
+        if (actionTeams.Count == 0)
+            throw new InvalidOperationException("턴이 없는데 턴을 달래");
+        return actionTeams.Peek();
     }
 }

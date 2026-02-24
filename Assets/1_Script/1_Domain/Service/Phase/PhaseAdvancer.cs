@@ -49,4 +49,19 @@ public class PhaseAdvancer
         if (current.Phase.IsDone) current = phases.Dequeue();
         CurrentFlow = new GameFlowData(current.GamePhase, current.Phase.GetNext());
     }
+
+    public GameFlowData PeekNextFlow()
+    {
+        if (current.Phase.HasNext)
+            return new GameFlowData(current.GamePhase, current.Phase.PeekNext());
+
+        if (phases.Count > 0)
+        {
+            var nextPhaseData = phases.Peek();
+            if (nextPhaseData.Phase.HasNext)
+                return new GameFlowData(nextPhaseData.GamePhase, nextPhaseData.Phase.PeekNext());
+        }
+
+        return new GameFlowData(GamePhase.Done, Team.All);
+    }
 }
