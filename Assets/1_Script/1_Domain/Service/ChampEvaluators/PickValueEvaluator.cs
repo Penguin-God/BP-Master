@@ -4,8 +4,8 @@ public class PickValueEvaluator : IChampionEvaluator
     readonly ChampionStatValueCalculator statCalculator;
     readonly ChampionValueCalculator championValueCalculator;
     readonly BonusDeltaCalculator bonusDeltaCalculator;
-    readonly Team team;
-    readonly SlotStorage<ChampionStatus> originStats;
+    Team team;
+    SlotStorage<ChampionStatus> originStats;
     public PickValueEvaluator(ChampionStatValueCalculator statCalculator, ChampionValueCalculator championValueCalculator, BonusDeltaCalculator bonusDeltaCalculator, Team myTeam, SlotStorage<ChampionStatus> originStats)
     {
         this.statCalculator = statCalculator;
@@ -23,5 +23,11 @@ public class PickValueEvaluator : IChampionEvaluator
 
         int bonusValue = bonusDeltaCalculator.Calculate(before, before + pickApplyinfo, team);
         return champPickValue + bonusValue;
+    }
+
+    public void Change(Team targetTeam, SlotStorage<ChampionStatus> targetStats)
+    {
+        team = targetTeam;
+        originStats = targetStats;
     }
 }
