@@ -17,7 +17,7 @@ public class ValueSelectSO : AI_SelectorFactory
         return new ValueSelectorLog(selector, CreateValueLogger(team));
     }
 
-    PickValueEvaluator CreateEvaluator(Team team)
+    public PickValueEvaluator CreateEvaluator(Team team)
     {
         var statCalculator = new ChampionStatValueCalculator(speedValue);
         var masteryAppiler = new MasteryApplier(masteryManager);

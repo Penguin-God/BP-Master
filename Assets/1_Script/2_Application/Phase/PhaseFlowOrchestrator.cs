@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class PhaseFlowOrchestrator
 {
-    readonly PhaseAdvancer phaseAdvancer;
+    public readonly PhaseAdvancer phaseAdvancer;
     readonly IPhaseEvent dispatcher;
     readonly TeamPhaseEntryDispatcher entryDispatcher;
 

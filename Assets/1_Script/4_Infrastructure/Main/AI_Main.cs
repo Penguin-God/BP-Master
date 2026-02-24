@@ -5,6 +5,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
     [SerializeField] AI_SelectorFactory selectorsCreatetor;
+    [SerializeField] PredictValueSelectorFactory predictValueSelectorFactory;
 
     AI_BanPickAgent banPickAgent;
     AI_SkillExecutionUseCase skillUseCase;
@@ -12,12 +13,17 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     public void EnterBan() => StartCoroutine(CoBan());
     public void EnterPick() => banPickAgent.Pick(Team);
 
-    public void Init(Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler)
+    public void Init(Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
     {
         Team = team;
 
-        selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
-        banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector(), banPickHandler);
+        //selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
+        //banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector(), banPickHandler);
+
+        predictValueSelectorFactory.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
+        predictValueSelectorFactory.Inject(storage, phaseAdvancer);
+
+        banPickAgent = new AI_BanPickAgent(Team, storage, predictValueSelectorFactory.CreateBanSelector(), predictValueSelectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
         skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new SkillTargetService(new HighStatTargetSelector(banPickHandler.PickSlotFacade.StatusSlots)));
     }

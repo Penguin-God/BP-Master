@@ -1129,6 +1129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorsCreatetor: {fileID: 11400000, guid: b363c480518ccf24ba071b28819caa8d, type: 2}
+  predictValueSelectorFactory: {fileID: 11400000, guid: 73f82a34c66ef4942a773c53924ef8d8, type: 2}
 --- !u!1001 &765582497
 PrefabInstance:
   m_ObjectHideFlags: 0
