@@ -25,7 +25,7 @@ MonoBehaviour:
   championName: "\uBD81\uC18C\uB9AC"
   attack: 130
   defense: 60
-  speed: 3
+  speed: 5
   skillDatas:
   - targetSide: 0
     range: 4
@@ -33,7 +33,7 @@ MonoBehaviour:
     skillAmount:
       Type: 1
       StatType: 0
-      ValueAmount: 25
+      ValueAmount: 40
       PercentValue: 0
       FixValue: 0
     conditionType: 0

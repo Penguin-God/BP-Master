@@ -23,17 +23,17 @@ MonoBehaviour:
     SerializationNodes: []
   id: 3
   championName: "\uAC15\uD654\uC220\uC0AC"
-  attack: 160
-  defense: 80
-  speed: 4
+  attack: 120
+  defense: 90
+  speed: 6
   skillDatas:
   - targetSide: 0
-    range: 3
+    range: 2
     skillType: 2
     skillAmount:
       Type: 1
       StatType: 0
-      ValueAmount: 30
+      ValueAmount: 50
       PercentValue: 0
       FixValue: 0
     conditionType: 0
