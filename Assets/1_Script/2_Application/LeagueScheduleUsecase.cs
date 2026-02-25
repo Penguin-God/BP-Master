@@ -1,6 +1,7 @@
 public interface IScheduleStorage
 {
     void SaveIndex(int index);
+    int LoadIndex();
 }
 
 public interface ISceneLoader
@@ -23,11 +24,11 @@ public class LeagueScheduleUsecase
 
     int _currentIndex;
 
-    public LeagueScheduleUsecase(ScheduleFlow flow, int playerId, int startIndex, IScheduleStorage storage, ISceneLoader sceneLoader, IAiBattleResolver aiResolver)
+    public LeagueScheduleUsecase(ScheduleFlow flow, int playerId, IScheduleStorage storage, ISceneLoader sceneLoader, IAiBattleResolver aiResolver)
     {
         _flow = flow;
         _playerId = playerId;
-        _currentIndex = startIndex;
+        _currentIndex = storage.LoadIndex();
         _storage = storage;
         _sceneLoader = sceneLoader;
         _aiResolver = aiResolver;
