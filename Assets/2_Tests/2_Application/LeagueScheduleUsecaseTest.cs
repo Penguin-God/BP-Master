@@ -5,7 +5,10 @@ public class LeagueScheduleUsecaseTest
     class FakeStorage : IScheduleStorage
     {
         public int SavedIndex;
+        public int InitialIndex;
+
         public void SaveIndex(int index) => SavedIndex = index;
+        public int LoadIndex() => InitialIndex;
     }
 
     class FakeSceneLoader : ISceneLoader
@@ -41,11 +44,11 @@ public class LeagueScheduleUsecaseTest
     TestContext CreateUsecase(MatchData[] matches, int playerId, int startIndex = 0)
     {
         var flow = new ScheduleFlow(matches);
-        var storage = new FakeStorage();
+        var storage = new FakeStorage { InitialIndex = startIndex };
         var sceneLoader = new FakeSceneLoader();
         var aiResolver = new FakeAiResolver();
 
-        var usecase = new LeagueScheduleUsecase(flow, playerId, startIndex, storage, sceneLoader, aiResolver);
+        var usecase = new LeagueScheduleUsecase(flow, playerId, storage, sceneLoader, aiResolver);
 
         return new TestContext
         {
