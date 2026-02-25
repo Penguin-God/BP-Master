@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MatchDI : MonoBehaviour
+public class BattleScene : MonoBehaviour
 {
     [SerializeField] MatchConfigSO matchConfig;
     [SerializeField] ChampionRepository champManager;

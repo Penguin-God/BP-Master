@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MatchStater : MonoBehaviour
 {
     [SerializeField] ChampionSelector_UI banPickUI;
-    [SerializeField] MatchDI match;
+    [SerializeField] BattleScene match;
     [SerializeField] Button blueButton;
     [SerializeField] Button redButton;
 
