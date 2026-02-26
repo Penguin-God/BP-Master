@@ -21,8 +21,18 @@ public class MatchResultView : MonoBehaviour
         redScoreText.text = new ScoreTextBuilder().BuildText(result.RedInfo);
         winnerText.text = $"승리 : {result.Winner.ToString()}";
 
-        if (isGameEnd) return;
         newGameButton.gameObject.SetActive(true);
-        newGameButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+        newGameButton.onClick.RemoveAllListeners();
+
+        if (isGameEnd)
+        {
+            newGameButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+            newGameButton.GetComponentInChildren<TextMeshProUGUI>().text = "로비로 돌아가기";
+        }
+        else
+        {
+            newGameButton.onClick.AddListener(() => SceneManager.LoadScene("Lobby"));
+            newGameButton.GetComponentInChildren<TextMeshProUGUI>().text = "다음 게임";
+        }
     }
 }

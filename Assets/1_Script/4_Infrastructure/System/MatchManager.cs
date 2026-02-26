@@ -42,4 +42,10 @@ public class MatchManager : MonoBehaviour
         selectableIds = selectableIds.Except(Storage.PickIds.GetAll());
         Storage = new BanPickStorage(selectableIds);
     }
+
+    public void Clear()
+    {
+        selectableIds = new int[0];
+        Storage = null;
+    }
 }
