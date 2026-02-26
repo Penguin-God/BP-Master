@@ -13,7 +13,7 @@ public class UnitySceneLoader : ISceneLoader
 
 public static class GameContext
 {
-    public static MatchData CurrentMatch { get; set; }
+    public static MatchData CurrentMatch { get; private set; } = new MatchData(0, 0);
 
     public static void SetupMatch(MatchData match)
     {

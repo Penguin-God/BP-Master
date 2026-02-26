@@ -4,8 +4,6 @@ using UnityEngine;
 public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
-    [SerializeField] AI_SelectorFactory selectorsCreatetor;
-    [SerializeField] PredictValueSelectorFactory predictValueSelectorFactory;
     [SerializeField] int defaultId;
     [SerializeField] AIFactorySO aiFactory;
 
@@ -18,10 +16,12 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     public void Init(Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
     {
         Team = team;
-
         AI_SelectorFactory selectorFactory = aiFactory.CreateAI(defaultId, Team, storage, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
-        //predictValueSelectorFactory.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
-        //predictValueSelectorFactory.Inject(storage, phaseAdvancer);
+
+        if (GameContext.CurrentMatch.Id1 != 1 && GameContext.CurrentMatch.Id1 > 0)
+            defaultId = GameContext.CurrentMatch.Id1;
+        else if(GameContext.CurrentMatch.Id2 != 1 && GameContext.CurrentMatch.Id2 > 0)
+            defaultId = GameContext.CurrentMatch.Id2;
 
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorFactory.CreateBanSelector(), selectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
