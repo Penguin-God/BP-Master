@@ -6,6 +6,7 @@ public class BattleScene : MonoBehaviour
 
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] AI_Main ai_main;
+    [SerializeField] GamePhaseLoderSO gamePhaseLoder;
 
     PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
@@ -49,7 +50,7 @@ public class BattleScene : MonoBehaviour
     {
         IPhaseEntry blue = playerTeam == Team.Blue ? player : ai;
         IPhaseEntry red = playerTeam == Team.Red ? player : ai;
-        return new(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
+        return new(gamePhaseLoder.LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
     }
 
     void ApplyMastery(Champion champion, Team team)

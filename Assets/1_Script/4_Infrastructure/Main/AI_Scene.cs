@@ -5,6 +5,7 @@ public class AI_Scene : MonoBehaviour
     [SerializeField] int ai_id1;
     [SerializeField] int ai_id2;
     [SerializeField] AIFactorySO aiFactory;
+    [SerializeField] GamePhaseLoderSO gamePhaseLoderSO;
 
     PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
     MasteryRegistry masteryRegistry = new();
@@ -30,8 +31,9 @@ public class AI_Scene : MonoBehaviour
         banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
         var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
 
-        var phaseAdvancer = new PhaseAdvancer(GetComponent<GamePhaseLoder>().LoadPhase());
-        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, CreateEntry(Team.Blue, ai_id1), CreateEntry(Team.Red, ai_id2));
+        var phaseAdvancer = new PhaseAdvancer(gamePhaseLoderSO.LoadPhase());
+        var phaseManager = new PhaseFlowOrchestrator(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(CreateEntry(Team.Blue, ai_id1), CreateEntry(Team.Red, ai_id2)));
+
         phaseManager.OnGameEnd += OnDone;
         // phaseManager.OnGameEnd += matchManager.EndMatch;
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
@@ -41,9 +43,6 @@ public class AI_Scene : MonoBehaviour
 
         AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, skillController, ChampionDataLoder.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
     }
-
-    PhaseFlowOrchestrator CreatePhaseOrchestrator(PhaseEventDispatcher phaseEventDispatcher, IPhaseEntry blue, IPhaseEntry red)
-        => new PhaseFlowOrchestrator(GetComponent<GamePhaseLoder>().LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
 
     void ApplyMastery(Champion champion, Team team)
     {

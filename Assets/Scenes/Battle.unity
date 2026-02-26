@@ -1128,8 +1128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dbeee157e288a4b96aee9297d8ddd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectorsCreatetor: {fileID: 11400000, guid: b363c480518ccf24ba071b28819caa8d, type: 2}
-  predictValueSelectorFactory: {fileID: 11400000, guid: 73f82a34c66ef4942a773c53924ef8d8, type: 2}
   defaultId: 2
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
 --- !u!1001 &765582497
@@ -1704,7 +1702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8020aa9c9d74e43b513b2f571f3550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::MatchManager
-  champManager: {fileID: 1420292359}
   targetWin: 2
   masteryLevels: 0f0000000f0000000f00000014000000140000001400000014000000190000001900000019000000
 --- !u!1 &1107171630
@@ -2835,7 +2832,6 @@ GameObject:
   - component: {fileID: 1420292360}
   - component: {fileID: 1420292359}
   - component: {fileID: 1420292363}
-  - component: {fileID: 1420292366}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -2883,28 +2879,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08c0b08665efa344881d3ec13785c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matchConfig: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   champManager: {fileID: 1420292359}
   matchUI_Controller: {fileID: 1213870346}
   ai_main: {fileID: 758303701}
+  gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   championSelector: {fileID: 1640189475}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
---- !u!114 &1420292366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420292358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8293859aa7a415a44bddeed6e7271f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ban: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
-  ban2: {fileID: 11400000, guid: cce5390d5c3bf0c4b8f3404478cac7f4, type: 2}
-  pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
-  pick2: {fileID: 11400000, guid: 0c7b4cea28ec90b45a505456b330adbb, type: 2}
 --- !u!1 &1434020710
 GameObject:
   m_ObjectHideFlags: 0

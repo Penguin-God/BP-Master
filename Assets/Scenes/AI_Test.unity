@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 481387475}
   - component: {fileID: 481387476}
-  - component: {fileID: 481387477}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -167,23 +166,8 @@ MonoBehaviour:
   ai_id1: 2
   ai_id2: 3
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
+  gamePhaseLoderSO: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
---- !u!114 &481387477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481387474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8293859aa7a415a44bddeed6e7271f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: App::GamePhaseLoder
-  ban: {fileID: 11400000, guid: 2472c9fd2c1cfbd4f854d2196ca133b7, type: 2}
-  ban2: {fileID: 11400000, guid: cce5390d5c3bf0c4b8f3404478cac7f4, type: 2}
-  pick: {fileID: 11400000, guid: e3b59e9864164134b98d16565f21ea7a, type: 2}
-  pick2: {fileID: 11400000, guid: 0c7b4cea28ec90b45a505456b330adbb, type: 2}
 --- !u!1 &1098848048
 GameObject:
   m_ObjectHideFlags: 0
