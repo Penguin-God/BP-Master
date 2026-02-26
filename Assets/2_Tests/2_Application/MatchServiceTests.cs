@@ -13,8 +13,8 @@ public class MatchFlowUsecaseTests
 
         sut.EndMatch(winnerSide);
 
-        Assert.AreEqual(expPlayer, record.PlayerWins);
-        Assert.AreEqual(expAi, record.AiWins);
+        Assert.AreEqual(expPlayer, record.PlayerWinCount);
+        Assert.AreEqual(expAi, record.AiWinCount);
     }
 
     [Test]

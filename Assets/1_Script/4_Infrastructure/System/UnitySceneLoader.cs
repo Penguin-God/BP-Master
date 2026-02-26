@@ -1,4 +1,5 @@
 using UnityEngine.SceneManagement;
+using Match;
 
 public class UnitySceneLoader : ISceneLoader
 {
@@ -6,17 +7,7 @@ public class UnitySceneLoader : ISceneLoader
 
     public void LoadBattleScene(MatchData match)
     {
-        GameContext.SetupMatch(match);
+        MatchContext.MatchInit(match, 2, new int[] { 1 }, ChampionDataLoder.AllId);
         SceneManager.LoadScene(BattleSceneName);
-    }
-}
-
-public static class GameContext
-{
-    public static MatchData CurrentMatch { get; private set; } = new MatchData(0, 0);
-
-    public static void SetupMatch(MatchData match)
-    {
-        CurrentMatch = match;
     }
 }

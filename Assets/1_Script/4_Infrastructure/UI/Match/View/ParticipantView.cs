@@ -8,8 +8,8 @@ public class ParticipantView : MonoBehaviour
 
     public void ViewParticipant(MatchRecord matchRecord, Team playerTeam)
     {
-        UpdateText(playerTeam, "Player", matchRecord.PlayerWins);
-        UpdateText(EnumCaster.GetOppoentTeam(playerTeam), "AI", matchRecord.AiWins);
+        UpdateText(playerTeam, "Player", matchRecord.PlayerWinCount);
+        UpdateText(EnumCaster.GetOppoentTeam(playerTeam), "AI", matchRecord.AiWinCount);
     }
 
     void UpdateText(Team team, string name, int win) => GetText(team).text = $"{name} : {win}";

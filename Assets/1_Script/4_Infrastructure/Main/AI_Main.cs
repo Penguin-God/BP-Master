@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Match;
 
 public class AI_Main : MonoBehaviour, IPhaseEntry
 {
@@ -16,10 +17,11 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     public void Init(Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
     {
         Team = team;
-        if (GameContext.CurrentMatch.Id1 != 1 && GameContext.CurrentMatch.Id1 > 0)
-            defaultId = GameContext.CurrentMatch.Id1;
-        else if (GameContext.CurrentMatch.Id2 != 1 && GameContext.CurrentMatch.Id2 > 0)
-            defaultId = GameContext.CurrentMatch.Id2;
+        var currentMatch = MatchContext.CurrentMatch;
+        if (currentMatch.Id1 != 1 && currentMatch.Id1 > 0)
+            defaultId = currentMatch.Id1;
+        else if (currentMatch.Id2 != 1 && currentMatch.Id2 > 0)
+            defaultId = currentMatch.Id2;
 
         AI_SelectorFactory selectorFactory = aiFactory.CreateAI(defaultId, Team, storage, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
 

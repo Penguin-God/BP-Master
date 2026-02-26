@@ -11,8 +11,8 @@ public class MatchRecordTests
 
         sut.AddWin(winner);
 
-        Assert.AreEqual(expectedPlayer, sut.PlayerWins);
-        Assert.AreEqual(expectedAi, sut.AiWins);
+        Assert.AreEqual(expectedPlayer, sut.PlayerWinCount);
+        Assert.AreEqual(expectedAi, sut.AiWinCount);
     }
 
     [Test]
