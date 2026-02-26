@@ -26,7 +26,8 @@ public class BattleScene : MonoBehaviour
         masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), matchManager.participantRepository.Get(Participant.AI).Mastery);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
-        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseEventDispatcher, championSelector, ai_main, playerTeam);
+        var phaseAdvancer = new PhaseAdvancer(gamePhaseLoder.LoadPhase());
+        PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseAdvancer, phaseEventDispatcher, championSelector, ai_main, playerTeam);
         phaseManager.OnGameEnd += OnDone;
         phaseManager.OnGameEnd += matchManager.EndMatch;
 
@@ -41,16 +42,16 @@ public class BattleScene : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, skillController, masteryRegistry, matchRecord, banPickHandler); // start보다 먼저
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseManager.phaseAdvancer);
+        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
 
         phaseManager.Start();
     }
 
-    PhaseFlowOrchestrator CreatePhaseOrchestrator(PhaseEventDispatcher phaseEventDispatcher, IPhaseEntry player, IPhaseEntry ai, Team playerTeam)
+    PhaseFlowOrchestrator CreatePhaseOrchestrator(PhaseAdvancer phaseAdvancer, PhaseEventDispatcher phaseEventDispatcher, IPhaseEntry player, IPhaseEntry ai, Team playerTeam)
     {
         IPhaseEntry blue = playerTeam == Team.Blue ? player : ai;
         IPhaseEntry red = playerTeam == Team.Red ? player : ai;
-        return new(gamePhaseLoder.LoadPhase(), phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
+        return new(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
     }
 
     void ApplyMastery(Champion champion, Team team)

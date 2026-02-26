@@ -66,7 +66,7 @@ public class PhaseTests
     public void 페이즈_진입_에이전트_호출()
     {
         var blue = new TestEntry(banCount: 1);
-        var sut = new PhaseFlowOrchestrator(new PhaseData[] { CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Blue) }, new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(blue, new TestEntry()));
+        var sut = new PhaseFlowOrchestrator(CreatePhaseAdvancer(CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Blue)), new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(blue, new TestEntry()));
         sut.Start();
         sut.SubmitAction(Team.Blue);
 
@@ -77,7 +77,7 @@ public class PhaseTests
     public void Done에_진입하면_마지막_이밴트_실행()
     {
         bool isEnd = false;
-        var sut = new PhaseFlowOrchestrator(new PhaseData[] { CreatePhaseData(GamePhase.Done, Team.Blue) }, new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
+        var sut = new PhaseFlowOrchestrator(CreatePhaseAdvancer(CreatePhaseData(GamePhase.Done, Team.Blue)), new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
         sut.OnGameEnd += () => isEnd = true;
         
         sut.Start();

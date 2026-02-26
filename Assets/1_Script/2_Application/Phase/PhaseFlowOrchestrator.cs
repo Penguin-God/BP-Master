@@ -2,19 +2,12 @@ using System.Collections.Generic;
 
 public class PhaseFlowOrchestrator
 {
-    public readonly PhaseAdvancer phaseAdvancer;
+    readonly PhaseAdvancer phaseAdvancer;
     readonly IPhaseEvent dispatcher;
     readonly TeamPhaseEntryDispatcher entryDispatcher;
 
     public GameFlowData CurrentFlow => phaseAdvancer.CurrentFlow;
     public System.Action OnGameEnd;
-
-    public PhaseFlowOrchestrator(IEnumerable<PhaseData> phaseDatas, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
-    {
-        this.phaseAdvancer = new PhaseAdvancer(phaseDatas);
-        this.dispatcher = dispatcher;
-        entryDispatcher = teamPhaseEntryDispatcher;
-    }
 
     public PhaseFlowOrchestrator(PhaseAdvancer phaseAdvancer, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
     {
