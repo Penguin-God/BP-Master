@@ -6,6 +6,8 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     Team Team;
     [SerializeField] AI_SelectorFactory selectorsCreatetor;
     [SerializeField] PredictValueSelectorFactory predictValueSelectorFactory;
+    [SerializeField] int defaultId;
+    [SerializeField] AIFactorySO aiFactory;
 
     AI_BanPickAgent banPickAgent;
     AI_SkillExecutionUseCase skillUseCase;
@@ -17,13 +19,11 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     {
         Team = team;
 
-        //selectorsCreatetor.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
-        //banPickAgent = new AI_BanPickAgent(Team, storage, selectorsCreatetor.CreateBanSelector(), selectorsCreatetor.CreatePickSelector(), banPickHandler);
+        AI_SelectorFactory selectorFactory = aiFactory.CreateAI(defaultId, Team, storage, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
+        //predictValueSelectorFactory.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
+        //predictValueSelectorFactory.Inject(storage, phaseAdvancer);
 
-        predictValueSelectorFactory.Init(Team, championCatalog, masteryRegistry.GetTeamMasteryManager(Team), banPickHandler.PickSlotFacade.StatusSlots);
-        predictValueSelectorFactory.Inject(storage, phaseAdvancer);
-
-        banPickAgent = new AI_BanPickAgent(Team, storage, predictValueSelectorFactory.CreateBanSelector(), predictValueSelectorFactory.CreatePickSelector(), banPickHandler);
+        banPickAgent = new AI_BanPickAgent(Team, storage, selectorFactory.CreateBanSelector(), selectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
         skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new SkillTargetService(new HighStatTargetSelector(banPickHandler.PickSlotFacade.StatusSlots)));
     }
