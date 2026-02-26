@@ -16,6 +16,13 @@ public class PhaseFlowOrchestrator
         entryDispatcher = teamPhaseEntryDispatcher;
     }
 
+    public PhaseFlowOrchestrator(PhaseAdvancer phaseAdvancer, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
+    {
+        this.phaseAdvancer = phaseAdvancer;
+        this.dispatcher = dispatcher;
+        entryDispatcher = teamPhaseEntryDispatcher;
+    }
+
     public void Start()
     {
         phaseAdvancer.Start();

@@ -18,3 +18,22 @@ public class ChampionRepository : MonoBehaviour
     public string GetChampionName(int id) => allChampion.First(x => x.Id == id).ChampionName;
     ChampionSO[] LoadAllChampions() => Resources.LoadAll<ChampionSO>("SO/Champions");
 }
+
+
+public static class ChampionDataLoder
+{
+    static ChampionSO[] _allChampions;
+    public static IReadOnlyList<ChampionSO> AllChampions
+    {
+        get
+        {
+            _allChampions ??= Resources.LoadAll<ChampionSO>("SO/Champions");
+            return _allChampions;
+        }
+    }
+
+    public static IEnumerable<int> AllId => AllChampions.Select(x => x.Id);
+    public static ChampionCatalog GetCatalog() => new ChampionCatalog(AllChampions.Select(x => x.CreateChampion()));
+    public static ChampionSO GetChampionData(int id) => AllChampions.First(x => x.Id == id);
+    public static string GetChampionName(int id) => GetChampionData(id).ChampionName;
+}

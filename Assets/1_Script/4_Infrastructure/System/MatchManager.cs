@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MatchManager : MonoBehaviour
 {
-    [SerializeField] ChampionRepository champManager;
     [SerializeField] int targetWin;
     [SerializeField] int[] masteryLevels;
 
@@ -29,10 +28,10 @@ public class MatchManager : MonoBehaviour
     void Start()
     {
         _record = new MatchRecord(targetWin);
-        selectableIds = new List<int>(champManager.AllId);
+        selectableIds = new List<int>(ChampionDataLoder.AllId);
         Storage = new BanPickStorage(selectableIds);
 
-        var drawer = new MasteryDrawer(champManager.AllId);
+        var drawer = new MasteryDrawer(ChampionDataLoder.AllId);
         participantRepository.Save(Participant.Player, new ParticipantData("Player", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
         participantRepository.Save(Participant.AI, new ParticipantData("AI", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
     }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BattleScene : MonoBehaviour
 {
-    [SerializeField] MatchConfigSO matchConfig;
     [SerializeField] ChampionRepository champManager;
 
     [SerializeField] MatchUI_Controller matchUI_Controller;
