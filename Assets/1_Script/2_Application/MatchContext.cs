@@ -12,7 +12,6 @@ namespace Match
 
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
-        // 인스펙터와 하드코딩으로 가져오던 외부 의존성을 매개변수로 주입받습니다.
         public static void MatchInit(MatchData match, int targetWin, int[] masteryLevels, IEnumerable<int> allChampionIds)
         {
             CurrentMatch = match;

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 
-public record MatchData(int Id1, int Id2);
+public record MatchData(int Id1, int Id2)
+{
+    public IEnumerable<int> AllDatas => new int[] { Id1, Id2 };
+};
 
 public class ScheduleFlow
 {

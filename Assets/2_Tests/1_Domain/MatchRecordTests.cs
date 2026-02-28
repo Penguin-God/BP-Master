@@ -28,4 +28,25 @@ public class MatchRecordTests
     }
 
     private MatchRecord CreateSut(int targetWins) => new MatchRecord(targetWins);
+
+    public void Id에_따라_승리_기록()
+    {
+        var sut = new MatchWinCounter(new MatchData(1, 2), 2);
+
+        sut.AddWin(1);
+
+        Assert.AreEqual(sut.GetWin(1), 1);
+        Assert.AreEqual(sut.GetWin(2), 0);
+    }
+
+    public void 승수를_채운_최초의_ID가_등장하면_매치_끝()
+    {
+        var sut = new MatchWinCounter(new MatchData(1, 2), 2);
+
+        sut.AddWin(1);
+        Assert.AreEqual(sut.IsMatchFinished, false);
+
+        sut.AddWin(1);
+        Assert.AreEqual(sut.IsMatchFinished, true);
+    }
 }
