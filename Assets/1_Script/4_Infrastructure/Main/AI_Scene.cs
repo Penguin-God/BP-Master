@@ -32,6 +32,7 @@ public class AI_Scene : MonoBehaviour
     void StartBattle(BanPickStorage storage)
     {
         Team playerTeam = Team.Blue;
+        // 숙련도 추가하기 전에는 1000겜 돌려도 의미 X
         masteryRegistry.InitTeamMastery(playerTeam, new MasteryCollection(new ChampionMastery[] { }));
         masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), new MasteryCollection(new ChampionMastery[] { }));
 
@@ -78,22 +79,26 @@ public class AI_Scene : MonoBehaviour
         if (result.Winner == Team.Blue) blueWin++;
         else redWin++;
 
-        StartCoroutine(Co_EndMatch(winnerId));
+        StartCoroutine(Co_EndMatch(winnerId, result.Winner));
     }
 
-    IEnumerator Co_EndMatch(int winnerId)
+    int blueMatchWin;
+    IEnumerator Co_EndMatch(int winnerId, Team winTeam)
     {
-        yield return null;
         yield return null;
 
         if (MatchContext.EndMatch(winnerId))
         {
-            matchCount--;
+            if(winTeam == Team.Blue) blueMatchWin++;
+
+                matchCount--;
             if (matchCount > 0) StartMatch();
             else
             {
                 print($"blue win : {blueWin}");
                 print($"red win : {redWin}");
+
+                print($"블루 매치 승 : {blueMatchWin}");
             }
         }
         else StartBattle(MatchContext.Storage);
