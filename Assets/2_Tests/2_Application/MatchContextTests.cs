@@ -32,22 +32,23 @@ public class MatchContextTests
         var initialStorage = MatchContext.Storage;
 
         MatchContext.Storage.Pick(Team.Blue, 10);
-        MatchContext.EndMatch(Participant.Player);
+        MatchContext.EndMatch(1);
 
-        Assert.AreEqual(1, MatchContext.Record.PlayerWinCount);
+        Assert.AreEqual(1, MatchContext.WinCounter.GetWin(1));
         CollectionAssert.AreEqual(new int[] { 20, 30 }, MatchContext.Storage.SelectableIds);
     }
 
     [Test]
-    public void Clear는_모든_상태를_null이나_기본값으로_초기화한다()
+    public void 승수를_채워서_매치가_끝나면_모든_상태를_비운다()
     {
         MatchContext.MatchInit(new MatchData(1, 100), 2, new int[0], new[] { 10 });
 
-        MatchContext.Clear();
+        MatchContext.EndMatch(1);
+        MatchContext.EndMatch(1);
 
         Assert.AreEqual(0, MatchContext.CurrentMatch.Id1);
         Assert.IsNull(MatchContext.Storage);
-        Assert.IsNull(MatchContext.Record);
+        Assert.IsNull(MatchContext.WinCounter);
         Assert.IsNull(MatchContext.ParticipantRepository);
     }
 }
