@@ -26,17 +26,18 @@ namespace Match
             ParticipantRepository.Save(Participant.AI, new ParticipantData("AI", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
         }
 
-        public static void EndMatch(int winner)
+        public static bool EndMatch(int winner)
         {
             WinCounter.AddWin(winner);
             if (WinCounter.IsMatchFinished)
             {
                 Clear();
-                return;
+                return true;
             }
 
             _selectableIds = _selectableIds.Except(Storage.PickIds.GetAll()).ToList();
             Storage = new BanPickStorage(_selectableIds);
+            return false;
         }
 
         public static void Clear()

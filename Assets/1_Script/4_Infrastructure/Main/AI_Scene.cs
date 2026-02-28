@@ -1,3 +1,6 @@
+using Match;
+using System.Collections;
+using Unity.VisualScripting.YamlDotNet.Core;
 using UnityEngine;
 
 public class AI_Scene : MonoBehaviour
@@ -6,22 +9,29 @@ public class AI_Scene : MonoBehaviour
     [SerializeField] int ai_id2;
     [SerializeField] AIFactorySO aiFactory;
     [SerializeField] GamePhaseLoderSO gamePhaseLoderSO;
+    [SerializeField] int matchCount;
+
 
     PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
     MasteryRegistry masteryRegistry = new();
     BanPickHandler banPickHandler;
-    MatchFlowUsecase matchFlowUsecase;
-    MatchRecord matchRecord;
-    MatchManager matchManager;
 
     void Awake()
     {
-        Team playerTeam = Team.Blue;
-        //matchManager = FindAnyObjectByType<MatchManager>();
-        //matchRecord = matchManager.Record;
-        //matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
-        var storage = new BanPickStorage(ChampionDataLoder.AllId);
+        StartMatch();
+    }
 
+    void StartMatch()
+    {
+        MatchContext.MatchInit(new MatchData(ai_id1, ai_id2), 2, new int[0], ChampionDataLoder.AllId);
+        var storage = MatchContext.Storage;
+
+        StartBattle(storage);
+    }
+
+    void StartBattle(BanPickStorage storage)
+    {
+        Team playerTeam = Team.Blue;
         masteryRegistry.InitTeamMastery(playerTeam, new MasteryCollection(new ChampionMastery[] { }));
         masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), new MasteryCollection(new ChampionMastery[] { }));
 
@@ -35,7 +45,6 @@ public class AI_Scene : MonoBehaviour
         var phaseManager = new PhaseFlowOrchestrator(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(CreateEntry(Team.Blue, ai_id1), CreateEntry(Team.Red, ai_id2)));
 
         phaseManager.OnGameEnd += OnDone;
-        // phaseManager.OnGameEnd += matchManager.EndMatch;
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         banPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => phaseManager.SubmitAction(team);
 
@@ -51,12 +60,43 @@ public class AI_Scene : MonoBehaviour
     }
 
     [SerializeField] BonusDataFactory bonusDataSO;
+    int blueWin;
+    int redWin;
     void OnDone()
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-        // matchFlowUsecase.EndMatch(result.Winner);
-        print(result.Winner);
+
+        if(result.Winner == Team.All)
+        {
+            print("이게 무승부네 ㅋㅋ");
+            StartBattle(MatchContext.Storage);
+        }
+
+        int winnerId = result.Winner == Team.Blue ? ai_id1 : ai_id2;
+
+        if (result.Winner == Team.Blue) blueWin++;
+        else redWin++;
+
+        StartCoroutine(Co_EndMatch(winnerId));
+    }
+
+    IEnumerator Co_EndMatch(int winnerId)
+    {
+        yield return null;
+        yield return null;
+
+        if (MatchContext.EndMatch(winnerId))
+        {
+            matchCount--;
+            if (matchCount > 0) StartMatch();
+            else
+            {
+                print($"blue win : {blueWin}");
+                print($"red win : {redWin}");
+            }
+        }
+        else StartBattle(MatchContext.Storage);
     }
 }
 

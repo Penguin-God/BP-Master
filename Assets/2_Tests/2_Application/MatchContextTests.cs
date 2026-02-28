@@ -43,8 +43,8 @@ public class MatchContextTests
     {
         MatchContext.MatchInit(new MatchData(1, 100), 2, new int[0], new[] { 10 });
 
-        MatchContext.EndMatch(1);
-        MatchContext.EndMatch(1);
+        Assert.IsFalse(MatchContext.EndMatch(1));
+        Assert.IsTrue(MatchContext.EndMatch(1));
 
         Assert.AreEqual(0, MatchContext.CurrentMatch.Id1);
         Assert.IsNull(MatchContext.Storage);
