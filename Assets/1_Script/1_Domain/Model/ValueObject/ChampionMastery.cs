@@ -1,5 +1,3 @@
-
-
 public readonly struct ChampionMastery
 {
     public readonly int ChampionId;
