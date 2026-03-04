@@ -21,11 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 34
+  id: 32
   championName: "\uC57D\uC790 \uBA78\uC2DC"
-  attack: 120
-  defense: 120
-  speed: 4
+  attack: 110
+  defense: 110
+  speed: 3
   skillDatas:
   - targetSide: 1
     range: 4
@@ -48,6 +48,6 @@ MonoBehaviour:
       ValueAmount: -30
       PercentValue: 0
       FixValue: 0
-    conditionType: 3
+    conditionType: 1
     threshold: 0
     conditionCheckerType: 2

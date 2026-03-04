@@ -21,19 +21,19 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 27
+  id: 25
   championName: "\uBD80\uD328"
-  attack: 100
-  defense: 150
+  attack: 90
+  defense: 120
   speed: 5
   skillDatas:
-  - targetSide: 2
+  - targetSide: 1
     range: 4
     skillType: 2
     skillAmount:
       Type: 1
       StatType: 1
-      ValueAmount: -50
+      ValueAmount: -40
       PercentValue: 0
       FixValue: 0
     conditionType: 0

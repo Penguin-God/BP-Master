@@ -33,7 +33,7 @@ MonoBehaviour:
     skillAmount:
       Type: 1
       StatType: 0
-      ValueAmount: 40
+      ValueAmount: 60
       PercentValue: 0
       FixValue: 0
     conditionType: 2

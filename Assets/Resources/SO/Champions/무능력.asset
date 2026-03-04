@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   id: 18
   championName: "\uBB34\uB2A5\uB825"
-  attack: 150
-  defense: 150
+  attack: 140
+  defense: 140
   speed: 7
   skillDatas: []

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11fe049c7adb06449e7195a1b7fb4b2, type: 3}
-  m_Name: "\uC218\uD638\uC790"
+  m_Name: "\uC694\uC0C8"
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 32
-  championName: "\uC218\uD638\uC790"
-  attack: 50
+  id: 36
+  championName: "\uC694\uC0C8"
+  attack: 60
   defense: 150
   speed: 5
   skillDatas:

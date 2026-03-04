@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 20
+  id: 19
   championName: "\uBBF8\uCE58\uAD11\uC774"
-  attack: 170
+  attack: 160
   defense: 80
   speed: 6
   skillDatas:

@@ -24,8 +24,8 @@ MonoBehaviour:
   id: 7
   championName: "\uACFC\uBCF4\uD638"
   attack: 60
-  defense: 150
-  speed: 3
+  defense: 130
+  speed: 4
   skillDatas:
   - targetSide: 0
     range: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
     skillAmount:
       Type: 1
       StatType: 1
-      ValueAmount: 120
+      ValueAmount: 150
       PercentValue: 0
       FixValue: 0
     conditionType: 0
