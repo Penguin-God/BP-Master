@@ -8,6 +8,13 @@ public class MasteryBoard
 
     const int MaxLevel = 1;
 
+    public MasteryBoard(int attackLevel = 0, int defenseLevel = 0, int speedLevel = 0)
+    {
+        AttackLevel = attackLevel;
+        DefenseLevel = defenseLevel;
+        SpeedLevel = speedLevel;
+    }
+
     public void Upgrade(StatType statType)
     {
         switch (statType)

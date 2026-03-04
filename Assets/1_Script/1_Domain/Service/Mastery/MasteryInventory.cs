@@ -13,6 +13,12 @@ public class MasteryInventory
             boards[id] = new MasteryBoard();
     }
 
+    public MasteryInventory(int savedPoints, Dictionary<int, MasteryBoard> savedBoards)
+    {
+        AvailablePoints = savedPoints;
+        boards = savedBoards;
+    }
+
     public MasteryBoard GetBoard(int championId)
     {
         if (boards.TryGetValue(championId, out var board))
