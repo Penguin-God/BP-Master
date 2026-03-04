@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dbeee157e288a4b96aee9297d8ddd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultId: 2
+  defaultId: 3
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
 --- !u!1001 &765582497
 PrefabInstance:
