@@ -25,16 +25,15 @@ public class AI_Scene : MonoBehaviour
         MatchContext.MatchInit(new MatchData(ai_id1, ai_id2), 2, new int[0], ChampionDataLoder.AllId);
         var storage = MatchContext.Storage;
 
+        Team playerTeam = Team.Blue;
+        masteryRegistry.InitTeamMastery(playerTeam, new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
+        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
+
         StartBattle(storage);
     }
 
     void StartBattle(BanPickStorage storage)
     {
-        Team playerTeam = Team.Blue;
-        // 숙련도 추가하기 전에는 1000겜 돌려도 의미 X
-        masteryRegistry.InitTeamMastery(playerTeam, new MasteryCollection(new ChampionMastery[] { }));
-        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), new MasteryCollection(new ChampionMastery[] { }));
-
         var phaseEventDispatcher = new PhaseEventDispatcher();
         banPickHandler = new BanPickHandler(ChampionDataLoder.GetCatalog(), storage);
         var actionEventDispathcer = new BanPickEventDispatcher();
@@ -82,15 +81,17 @@ public class AI_Scene : MonoBehaviour
     }
 
     int blueMatchWin;
+    int redMatchWin;
     IEnumerator Co_EndMatch(int winnerId, Team winTeam)
     {
         yield return null;
 
         if (MatchContext.EndMatch(winnerId))
         {
-            if(winTeam == Team.Blue) blueMatchWin++;
+            if (winTeam == Team.Blue) blueMatchWin++;
+            else redMatchWin++;
 
-                matchCount--;
+            matchCount--;
             if (matchCount > 0) StartMatch();
             else
             {
@@ -98,6 +99,7 @@ public class AI_Scene : MonoBehaviour
                 print($"red win : {redWin}");
 
                 print($"블루 매치 승 : {blueMatchWin}");
+                print($"레드 매치 승 : {redMatchWin}");
             }
         }
         else StartBattle(MatchContext.Storage);
