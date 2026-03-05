@@ -13,9 +13,9 @@ public class MasteryInventory
             boards[id] = new MasteryBoard();
     }
 
-    public MasteryInventory(int savedPoints, Dictionary<int, MasteryBoard> savedBoards)
+    public MasteryInventory(int point, Dictionary<int, MasteryBoard> savedBoards)
     {
-        AvailablePoints = savedPoints;
+        AvailablePoints = point;
         boards = savedBoards;
     }
 

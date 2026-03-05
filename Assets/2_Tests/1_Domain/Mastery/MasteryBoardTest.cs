@@ -45,7 +45,7 @@ public class MasteryBoardTest
             { 101, new MasteryBoard(attackLevel: 1, defenseLevel: 0, speedLevel: 1) },
             { 102, new MasteryBoard(attackLevel: 0, defenseLevel: 1, speedLevel: 0) }
         };
-        var inventory = new MasteryInventory(savedPoints: 15, savedBoards);
+        var inventory = new MasteryInventory(point: 15, savedBoards);
 
         var board101 = inventory.GetBoard(101);
         var board102 = inventory.GetBoard(102);
