@@ -1,11 +1,11 @@
 
-public readonly struct StatViewModel
+public readonly struct ChampionStatModel
 {
     public readonly string Attack;
     public readonly string Defense;
     public readonly string Speed;
 
-    public StatViewModel(string attack, string defense, string speed)
+    public ChampionStatModel(string attack, string defense, string speed)
     {
         Attack = attack;
         Defense = defense;
@@ -27,8 +27,8 @@ public readonly struct CombatModifierTextModel
 
 public class ChampionStatusTextBuilder
 {
-    public StatViewModel CreateStatViewModel(ChampionStatData stat) =>
-        new StatViewModel(
+    public ChampionStatModel CreateStatViewModel(ChampionStatData stat) =>
+        new ChampionStatModel(
         $"공 {stat.Attack}",
         $"방 {stat.Defense}",
         $"속도 {stat.Speed}"

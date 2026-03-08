@@ -16,8 +16,8 @@ public class MasteryPointPersenterTests
 
         var result = sut.GetMasteryPointModel(100);
 
-        Assert.AreEqual("공격Lv : 1", result.AttackText);
-        Assert.AreEqual("방어Lv : 0", result.DefenseText);
-        Assert.AreEqual("속도Lv : 0", result.SpeedText);
+        Assert.AreEqual("공격Lv : 1", result.Attack);
+        Assert.AreEqual("방어Lv : 0", result.Defense);
+        Assert.AreEqual("속도Lv : 0", result.Speed);
     }
 }

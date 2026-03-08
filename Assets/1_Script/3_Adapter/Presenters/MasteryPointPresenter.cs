@@ -1,4 +1,3 @@
-public record ChampionStatModel(string AttackText, string DefenseText, string SpeedText);
 public record MasteryPointModel(string PointText, ChampionStatModel ChampionStat, ChampionStatModel ChampionMastery);
 
 public class MasteryPointPresenter
