@@ -35,7 +35,7 @@ public class SkillTextBuilder
 
     public string BuildSkillText(IEnumerable<SkillUI_Data> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
 
-    public string BuildSkillText(SkillUI_Data skillData)
+    string BuildSkillText(SkillUI_Data skillData)
     {
         var conditoin = ConditionTextBuilder.BuildConditionText(skillData.Condition);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
