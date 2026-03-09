@@ -12,7 +12,7 @@ public class ChampionView : MonoBehaviour
     public void UpdateDisplay(ChampionSO champion)
     {
         UpdateChampion(champion.CreateChampionModel());
-        skillText.text = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.CreateSkill_UI_Datas());
+        skillText.text = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.Skill.SkillDatas);
     }
 
     public void UpdateChampion(ChampionModel model)
