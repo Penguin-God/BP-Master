@@ -15,7 +15,7 @@ public class ChampionView : MonoBehaviour
         skillText.text = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.Skill.SkillDatas);
     }
 
-    public void UpdateChampion(ChampionModel model)
+    public void UpdateChampion(ChampionTextModel model)
     {
         nameText.text = $"{model.Name}";
         statView.UpdateStat(model.Stat);

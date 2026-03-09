@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class TestTextBuilder : ISkillActionTextBuilder
+public class FakeTextBuilder : ISkillActionTextBuilder
 {
     public string BuildText(SkillType skillType, SkillAmountData data) => "액숀";
 }
@@ -11,11 +11,11 @@ public class SkillTextBuildTests
     [Test]
     public void 스킬_텍스트_전체_생성()
     {
-        var sut = new SkillTextBuilder(new TestTextBuilder());
+        var sut = new SkillTextBuilder(new FakeTextBuilder());
 
-        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateSkillDatas(CreateValueSkillData(StatType.Attack, 0, rule: SelfAllRule)));
+        var result = sut.BuildSkillText(CreateSkillDatas(CreateValueSkillData(StatType.Attack, 0, rule: SelfAllRule)));
 
-        Assert.AreEqual("아군 전체 액숀", GetSkillText(AmountType.Value));
+        Assert.AreEqual("아군 전체 액숀", result);
     }
 
     [Test]

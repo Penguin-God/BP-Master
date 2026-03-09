@@ -24,7 +24,7 @@ public class SlotView : MonoBehaviour
     public void UpdateChampion(ChampionStatus status, int id)
     {
         this.id = id;
-        championView.UpdateChampion(new ChampionModel(championManager.GetChampionName(id), status.Stat));
+        championView.UpdateChampion(new ChampionTextModel(championManager.GetChampionName(id), status.Stat));
     }
 
     void DrawTarget() => championFocusView.UpdateDisplay(championManager.GetChampionData(id));

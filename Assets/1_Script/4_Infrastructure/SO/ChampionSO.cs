@@ -25,18 +25,6 @@ public class TraitDataConfig
     public SkillData CreateSkillData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
 }
 
-public readonly struct ChampionModel
-{
-    public readonly string Name;
-    public readonly ChampionStatData Stat;
-
-    public ChampionModel(string name, ChampionStatData stat)
-    {
-        Name = name;
-        Stat = stat;
-    }
-}
-
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]
 public class ChampionSO : SerializedScriptableObject
 {
@@ -55,7 +43,7 @@ public class ChampionSO : SerializedScriptableObject
     [SerializeField] TraitDataConfig[] skillDatas;
     public Skill Skill => new Skill(skillDatas.Select(x => x.CreateSkillData()));
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData);
-    public ChampionModel CreateChampionModel() => new ChampionModel(championName, StatData);
+    public ChampionTextModel CreateChampionModel() => new ChampionTextModel(championName, StatData);
 
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
 }

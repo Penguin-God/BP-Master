@@ -23,7 +23,7 @@ public class SkillTextSO : ScriptableObject
 
 
     SkillAmountTextBuilder CreateAmountBuilder() => new SkillAmountTextBuilder(new AmountTextData(increaseText, decreaseText, fixText));
-    public SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text), CreateAmountBuilder(), new SkillConvertKeyRecord(valueKey, actionKey, statKey));
+    SkillTextConverter CreateSkillConverter() => new SkillTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text), CreateAmountBuilder(), new SkillConvertKeyRecord(valueKey, actionKey, statKey));
 
     public SkillTextBuilder CreateSkillTextBuilder() => new SkillTextBuilder(CreateSkillConverter());
 }

@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System.Linq;
-using static TestHelper;
 
 public class TraitTargetFilteringTests
 {
