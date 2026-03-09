@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AAAA : IChampionProvider
+public class AAAA : IChampionProvider // 데이터 매니저 만들기?
 {
     public ChampionProfile GetProfile(int id)
     {
