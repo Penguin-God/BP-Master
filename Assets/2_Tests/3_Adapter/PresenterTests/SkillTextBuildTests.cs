@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using static TestHelper;
 
 public class TestTextBuilder : ISkillActionTextBuilder
@@ -8,7 +9,8 @@ public class TestTextBuilder : ISkillActionTextBuilder
 
 public class SkillTextBuildTests
 {
-    SkillUI_Data CreateData(SkillType traitType, SkillAmountData amountData, SkillConditionData condition, SkillTargetRule rule) => new SkillUI_Data(new SkillData(traitType, amountData, condition, rule));
+    IEnumerable<SkillUI_Data> CreateData(SkillType traitType, SkillAmountData amountData, SkillConditionData condition, SkillTargetRule rule) => new SkillUI_Data[] { new SkillUI_Data(new SkillData(traitType, amountData, condition, rule)) };
+
     [Test]
     public void 스킬_텍스트_전체_생성()
     {
