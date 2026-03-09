@@ -15,11 +15,11 @@ public class ChampionStatusTrackerView : MonoBehaviour
         target.OnStatChanged += (be, af) => statChangeView.ChangeStat(new StatChangeData(be, af));
     }
 
-    void Update()
-    {
-        if (target == null) return;
-        var combatModifierTextModel = StatusTextBuilder.BuildCombatModel(target.UpRate, target.DownRate);
-        increaseRateText.text = combatModifierTextModel.IncreaseRateText;
-        decreaseRateText.text = combatModifierTextModel.DecreaseRateText;
-    }
+    //void Update()
+    //{
+    //    if (target == null) return;
+    //    var combatModifierTextModel = StatusTextBuilder.BuildCombatModel(target.UpRate, target.DownRate);
+    //    increaseRateText.text = combatModifierTextModel.IncreaseRateText;
+    //    decreaseRateText.text = combatModifierTextModel.DecreaseRateText;
+    //}
 }
