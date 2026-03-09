@@ -1,5 +1,3 @@
-using System;
-
 public readonly struct MasteryLevelModel
 {
     public readonly string AttackText;
@@ -18,7 +16,6 @@ public interface IMasteryPointView
 {
     void UpdatePoints(int points);
     void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel);
-    void ShowAlert(string message);
 }
 
 public class MasteryPointPresenter
@@ -51,17 +48,9 @@ public class MasteryPointPresenter
     {
         if (_currentSelectedId == -1) return;
 
-        try
-        {
-            _inventory.Upgrade(_currentSelectedId, statType);
-
-            _view.UpdatePoints(_inventory.AvailablePoints);
-            RefreshDetail();
-        }
-        catch (InvalidOperationException ex)
-        {
-            _view.ShowAlert(ex.Message);
-        }
+        _inventory.Upgrade(_currentSelectedId, statType);
+        _view.UpdatePoints(_inventory.AvailablePoints);
+        RefreshDetail();
     }
 
     void RefreshDetail()

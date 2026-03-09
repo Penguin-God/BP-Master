@@ -92,12 +92,6 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         _masterySpdText.text = masteryModel.SpeedText;
     }
 
-    public void ShowAlert(string message)
-    {
-        // 팝업 UI가 있다면 여기서 띄워줍니다. 현재는 로그로 대체합니다.
-        Debug.LogWarning($"[시스템 알림] {message}");
-    }
-
     void ClearDetailView()
     {
         _nameText.text = "챔피언을 선택하세요";
