@@ -30,7 +30,7 @@ public static class TestHelper
 
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
     public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
-    public static SkillData[] CreateSkills(params SkillData[] skills) => skills;
+    public static SkillData[] CreateSkillDatas(params SkillData[] skills) => skills;
 
     public static SkillData CreateConditionFreeSkill(StatType statType, int amount, SkillTargetRule rule = default) => CreateValueSkillData(statType, amount, default, rule);
 
@@ -43,7 +43,7 @@ public static class TestHelper
         => new SkillAmountData(amountType, statType, value, percent, fix);
 
     public static Skill CreateValueSkill(StatType statType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
-        => new Skill(CreateSkills(CreateValueSkillData(statType, amount, conditionData, rule)));
+        => new Skill(CreateSkillDatas(CreateValueSkillData(statType, amount, conditionData, rule)));
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
     public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);

@@ -7,7 +7,7 @@ public class SkillUseTests
     public void 스킬_사용()
     {
         SlotStorage<Champion> champions = new();
-        var datas = CreateSkills(CreateConditionFreeSkill(StatType.Attack, 10, SelfAllRule), CreateConditionFreeSkill(StatType.Attack, 20, SelfAllRule));
+        var datas = CreateSkillDatas(CreateConditionFreeSkill(StatType.Attack, 10, SelfAllRule), CreateConditionFreeSkill(StatType.Attack, 20, SelfAllRule));
         champions.AddSlot(Team.Blue, CreateChampion(skillData: datas));
         var sut = new SkillUsecase(champions, CreateSkillRunner());
         SlotData callSlot = RedOneSlot;

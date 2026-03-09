@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using static TestHelper;
 
 public class TestTextBuilder : ISkillActionTextBuilder
@@ -9,14 +8,12 @@ public class TestTextBuilder : ISkillActionTextBuilder
 
 public class SkillTextBuildTests
 {
-    IEnumerable<SkillData> CreateData(SkillType traitType, SkillAmountData amountData, SkillConditionData condition, SkillTargetRule rule) => new SkillData[] { new SkillData(traitType, amountData, condition, rule) };
-
     [Test]
     public void 스킬_텍스트_전체_생성()
     {
         var sut = new SkillTextBuilder(new TestTextBuilder());
 
-        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateData(SkillType.StatChanger, CreateSkillAmount(amountType, value: 10, percent: 0.5f, fix: 100), default, SelfAllRule));
+        string GetSkillText(AmountType amountType) => sut.BuildSkillText(CreateSkillDatas(CreateValueSkillData(StatType.Attack, 0, rule: SelfAllRule)));
 
         Assert.AreEqual("아군 전체 액숀", GetSkillText(AmountType.Value));
     }
