@@ -1,8 +1,7 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
-public class MasteryPresentTests
+public class MasteryTextBuilderTests
 {
     [Test]
     public void 숙련도_텍스트로_변환()
