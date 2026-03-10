@@ -47,8 +47,7 @@ public class BattleScene : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, skillController, masteryRegistry, banPickHandler); // start보다 먼저
 
-        int enemyId = playerTeam == Team.Blue ? MatchContext.CurrentMatch.Id2 : MatchContext.CurrentMatch.Id1;
-        ai_main.Init(enemyId, EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
+        ai_main.Init(ai_id, EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
 
         phaseManager.Start();
     }
@@ -71,7 +70,6 @@ public class BattleScene : MonoBehaviour
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-        // matchFlowUsecase.EndMatch(result.Winner);
         var matchEnd = MatchContext.EndMatch(idByTeam[result.Winner]);
         matchUI_Controller.Done(result, matchEnd);
     }
