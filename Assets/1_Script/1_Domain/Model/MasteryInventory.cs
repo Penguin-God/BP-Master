@@ -5,6 +5,7 @@ public class MasteryInventory
 {
     public int AvailablePoints { get; protected set; }
     readonly Dictionary<int, MasteryBoard> boards = new Dictionary<int, MasteryBoard>();
+    public IReadOnlyDictionary<int, MasteryBoard> Boards => boards;
 
     public MasteryInventory(IEnumerable<int> championIds, int startPoints = 0)
     {
