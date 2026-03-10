@@ -19,5 +19,4 @@ public class ParticipantRepository
     public void Save(Participant p, ParticipantData data) => _datas[p] = data;
 
     public ParticipantData Get(Participant p) => _datas[p];
-    public bool HasData => _datas.Count > 0;
 }

@@ -167,7 +167,7 @@ MonoBehaviour:
   ai_id2: 3
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
   gamePhaseLoderSO: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
-  matchCount: 50
+  matchCount: 10
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!1 &1098848048
 GameObject:

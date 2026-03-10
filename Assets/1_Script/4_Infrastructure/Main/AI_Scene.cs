@@ -1,5 +1,6 @@
 using Match;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_Scene : MonoBehaviour
@@ -17,6 +18,8 @@ public class AI_Scene : MonoBehaviour
 
     void Awake()
     {
+        idByTeam.Add(Team.Blue, ai_id1);
+        idByTeam.Add(Team.Red, ai_id2);
         StartMatch();
     }
 
@@ -25,9 +28,8 @@ public class AI_Scene : MonoBehaviour
         MatchContext.MatchInit(new MatchData(ai_id1, ai_id2), 2, new int[0], ChampionDataLoder.AllId);
         var storage = MatchContext.Storage;
 
-        Team playerTeam = Team.Blue;
-        masteryRegistry.InitTeamMastery(playerTeam, new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
-        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
+        masteryRegistry.InitTeamMastery(Team.Blue, new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
+        masteryRegistry.InitTeamMastery(Team.Red, new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
 
         StartBattle(storage);
     }
@@ -58,6 +60,8 @@ public class AI_Scene : MonoBehaviour
         masteryApplier.ApplyMastery(champion.Id, champion.Status);
     }
 
+    Dictionary<Team, int> idByTeam = new();
+
     [SerializeField] BonusDataFactory bonusDataSO;
     int blueWin;
     int redWin;
@@ -72,12 +76,10 @@ public class AI_Scene : MonoBehaviour
             StartBattle(MatchContext.Storage);
         }
 
-        int winnerId = result.Winner == Team.Blue ? ai_id1 : ai_id2;
-
         if (result.Winner == Team.Blue) blueWin++;
         else redWin++;
 
-        StartCoroutine(Co_EndMatch(winnerId, result.Winner));
+        StartCoroutine(Co_EndMatch(idByTeam[result.Winner], result.Winner));
     }
 
     int blueMatchWin;
