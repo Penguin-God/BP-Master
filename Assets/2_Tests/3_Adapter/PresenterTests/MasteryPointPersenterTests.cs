@@ -19,15 +19,10 @@ public class MasteryPointPersenterTests
         }
     }
 
-    // 테스트용 가짜 세이버
     class FakeMasterySaver : IMasterySaver
     {
         public bool IsSaved { get; private set; }
-
-        public void Save(MasteryInventory inventory)
-        {
-            IsSaved = true;
-        }
+        public void Save(MasteryInventory inventory) => IsSaved = true;
     }
 
     class FakeChampionProvider : IChampionProvider
@@ -87,7 +82,7 @@ public class MasteryPointPersenterTests
     }
 
     [Test]
-    public void 포인트가_없어_업그레이드_실패_시_저장되지_않는다()
+    public void 포인트_없이_업그레이드_시도할_경우_예외()
     {
         var inventory = new MasteryInventory(new[] { 1 }, startPoints: 0);
         var view = new FakeMasteryPointView();
