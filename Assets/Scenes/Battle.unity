@@ -1128,7 +1128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dbeee157e288a4b96aee9297d8ddd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultId: 3
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
 --- !u!1001 &765582497
 PrefabInstance:
@@ -2884,6 +2883,8 @@ MonoBehaviour:
   ai_main: {fileID: 758303701}
   gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   championSelector: {fileID: 1640189475}
+  playerId: 1
+  ai_id: 3
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!1 &1434020710
 GameObject:

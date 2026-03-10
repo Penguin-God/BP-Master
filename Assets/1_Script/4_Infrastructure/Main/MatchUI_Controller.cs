@@ -18,7 +18,7 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ParticipantView participantView;
 
     Team team;
-    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SkillUsecase skillController, MasteryRegistry masteryRegistry, MatchRecord matchRecord, BanPickHandler banPickHandler)
+    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SkillUsecase skillController, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler)
     {
         team = playerTeam;
         var pickSlotFacade = banPickHandler.PickSlotFacade;
@@ -29,7 +29,7 @@ public class MatchUI_Controller : MonoBehaviour
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, phaseManager);
 
-        participantView.ViewParticipant(matchRecord, playerTeam);
+        // participantView.ViewParticipant(matchRecord, playerTeam);
         redMasteryTooltipTrigger.Inject(masteryRegistry);
         blueMasteryTooltipTrigger.Inject(masteryRegistry);
 

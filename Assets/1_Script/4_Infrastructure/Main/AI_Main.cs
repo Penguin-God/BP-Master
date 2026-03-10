@@ -1,11 +1,11 @@
+using Match;
 using System.Collections;
 using UnityEngine;
-using Match;
 
 public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
-    [SerializeField] int defaultId;
+    int defaultId;
     [SerializeField] AIFactorySO aiFactory;
 
     AI_BanPickAgent banPickAgent;
@@ -14,8 +14,9 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     public void EnterBan() => StartCoroutine(CoBan());
     public void EnterPick() => banPickAgent.Pick(Team);
 
-    public void Init(Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
+    public void Init(int ai_id, Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
     {
+        defaultId = ai_id;
         Team = team;
         var currentMatch = MatchContext.CurrentMatch;
         if (currentMatch.Id1 != 1 && currentMatch.Id1 > 0)

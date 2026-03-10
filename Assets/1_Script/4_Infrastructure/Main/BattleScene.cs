@@ -1,4 +1,6 @@
 using UnityEngine;
+using Match;
+using System.Collections.Generic;
 
 public class BattleScene : MonoBehaviour
 {
@@ -12,24 +14,28 @@ public class BattleScene : MonoBehaviour
     [SerializeField] ChampionSelector_UI championSelector;
     MasteryRegistry masteryRegistry = new();
     BanPickHandler banPickHandler;
-    MatchFlowUsecase matchFlowUsecase;
-    MatchRecord matchRecord;
-    MatchManager matchManager;
+
+    [SerializeField] int playerId = 1;
+    [SerializeField] int ai_id;
+    readonly Dictionary<Team, int> idByTeam = new();
+
     public void GameStart(Team playerTeam)
     {
-        matchManager = FindAnyObjectByType<MatchManager>();
-        matchRecord = matchManager.Record;
-        matchFlowUsecase = new MatchFlowUsecase(matchRecord, playerTeam);
-        var storage = matchManager.Storage;
+        MatchContext.MatchInit(new MatchData(playerId, ai_id), 2, new int[] { 5, 15, 15 }, ChampionDataLoder.AllId);
+        var storage = MatchContext.Storage;
+        ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
 
-        masteryRegistry.InitTeamMastery(playerTeam, matchManager.participantRepository.Get(Participant.Player).Mastery);
-        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), matchManager.participantRepository.Get(Participant.AI).Mastery);
+        idByTeam.Add(playerTeam, playerId);
+        idByTeam.Add(EnumCaster.GetOppoentTeam(playerTeam), ai_id);
+
+        masteryRegistry.InitTeamMastery(playerTeam, MatchContext.ParticipantRepository.Get(Participant.Player).Mastery);
+        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.ParticipantRepository.Get(Participant.AI).Mastery);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoder.LoadPhase());
         PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseAdvancer, phaseEventDispatcher, championSelector, ai_main, playerTeam);
+
         phaseManager.OnGameEnd += OnDone;
-        phaseManager.OnGameEnd += matchManager.EndMatch;
 
         // 로직 추출하기
         banPickHandler = new BanPickHandler(champManager.GetCatalog(), storage);
@@ -40,9 +46,10 @@ public class BattleScene : MonoBehaviour
 
         banPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => phaseManager.SubmitAction(team);
 
-        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, skillController, masteryRegistry, matchRecord, banPickHandler); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, skillController, masteryRegistry, banPickHandler); // start보다 먼저
 
-        ai_main.Init(EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
+        int enemyId = playerTeam == Team.Blue ? MatchContext.CurrentMatch.Id2 : MatchContext.CurrentMatch.Id1;
+        ai_main.Init(enemyId, EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
 
         phaseManager.Start();
     }
@@ -65,7 +72,8 @@ public class BattleScene : MonoBehaviour
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-        matchFlowUsecase.EndMatch(result.Winner);
-        matchUI_Controller.Done(result, matchRecord.IsMatchFinished);
+        // matchFlowUsecase.EndMatch(result.Winner);
+        var matchEnd = MatchContext.EndMatch(idByTeam[result.Winner]);
+        matchUI_Controller.Done(result, matchEnd);
     }
 }
