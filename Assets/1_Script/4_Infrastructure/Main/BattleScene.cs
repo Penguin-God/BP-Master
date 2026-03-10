@@ -21,7 +21,6 @@ public class BattleScene : MonoBehaviour
 
     public void GameStart(Team playerTeam)
     {
-        MatchContext.MatchInit(new MatchData(playerId, ai_id), 2, new int[] { 5, 15, 15 }, ChampionDataLoder.AllId);
         var storage = MatchContext.Storage;
         ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
 
