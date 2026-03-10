@@ -39,7 +39,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
 
     void Start()
     {
-        Init(new MasteryPointPresenter(new MasteryInventory(ChampionDataLoder.AllId, 10), new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), this));
+        // Init(new MasteryPointPresenter(new MasteryInventory(ChampionDataLoder.AllId, 10), new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), this));
     }
 
     public void Init(MasteryPointPresenter presenter)

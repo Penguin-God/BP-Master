@@ -18,25 +18,29 @@ public interface IMasteryPointView
     void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel);
 }
 
+public interface IMasterySaver
+{
+    void Save(MasteryInventory inventory);
+}
+
 public class MasteryPointPresenter
 {
     readonly MasteryInventory _inventory;
     readonly ChampionTextBuilder _championTextBuilder;
     readonly IMasteryPointView _view;
+    readonly IMasterySaver _saver;
 
     int _currentSelectedId = -1;
 
-    public MasteryPointPresenter(MasteryInventory inventory, ChampionTextBuilder championTextBuilder, IMasteryPointView view)
+    public MasteryPointPresenter(MasteryInventory inventory, ChampionTextBuilder championTextBuilder, IMasteryPointView view, IMasterySaver saver)
     {
         _inventory = inventory;
         _championTextBuilder = championTextBuilder;
         _view = view;
+        _saver = saver;
     }
 
-    public void Initialize()
-    {
-        _view.UpdatePoints(_inventory.AvailablePoints);
-    }
+    public void Initialize() => _view.UpdatePoints(_inventory.AvailablePoints);
 
     public void SelectChampion(int id)
     {
@@ -51,6 +55,7 @@ public class MasteryPointPresenter
         _inventory.Upgrade(_currentSelectedId, statType);
         _view.UpdatePoints(_inventory.AvailablePoints);
         RefreshDetail();
+        _saver.Save(_inventory);
     }
 
     void RefreshDetail()
