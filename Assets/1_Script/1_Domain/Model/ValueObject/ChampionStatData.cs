@@ -30,4 +30,6 @@ public readonly struct ChampionStatData
         StatType.Speed => Speed,
         _ => 0
     };
+
+    public static ChampionStatData operator +(ChampionStatData a, ChampionStatData b) => new ChampionStatData(a.Attack + b.Attack, a.Defense + b.Defense, a.Speed + b.Speed);
 }

@@ -62,4 +62,17 @@ public class StatChangeTests
         var changedSpeed = sut.ChangeSpeed(-30);
         Assert.AreEqual(0, changedSpeed.Speed);
     }
+
+    [Test]
+    public void 스탯끼리_더하면_각_항목이_합산된다()
+    {
+        var stat1 = new ChampionStatData(attack: 10, defense: 5, speed: 2);
+        var stat2 = new ChampionStatData(attack: 15, defense: 10, speed: 3);
+
+        var result = stat1 + stat2;
+
+        Assert.AreEqual(25, result.Attack);
+        Assert.AreEqual(15, result.Defense);
+        Assert.AreEqual(5, result.Speed);
+    }
 }
