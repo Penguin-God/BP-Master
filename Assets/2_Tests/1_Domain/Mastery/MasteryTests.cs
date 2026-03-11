@@ -5,13 +5,15 @@ public class MasteryTests
     [Test]
     public void 숙련도_가져오기()
     {
-        ChampionMastery[] data = new ChampionMastery[]{new ChampionMastery(12, 10), new ChampionMastery(11, 20)};
+        ChampionMastery[] data = new ChampionMastery[] {
+            new ChampionMastery(11, 20)
+        };
 
         MasteryCollection sut = new(data);
 
-        Assert.AreEqual(10, GetMastery(sut, 12));
-        Assert.AreEqual(20, GetMastery(sut, 11));
-        Assert.AreEqual(0, GetMastery(sut, 44));
+        Assert.AreEqual(20, GetMasteryStat(sut, 11).Attack);
+        Assert.AreEqual(0, GetMasteryStat(sut, 44).Attack);
+
         CollectionAssert.AreEquivalent(data, sut.AllMasteries);
     }
 
@@ -22,7 +24,9 @@ public class MasteryTests
 
         sut.AddMastery(10);
 
-        Assert.AreEqual(6, GetMastery(sut, 10));
+        // 레벨이 5 -> 6으로 증가했으므로 스탯도 6이 됩니다.
+        Assert.AreEqual(6, GetMasteryStat(sut, 10).Attack);
+        Assert.AreEqual(6, GetMasteryStat(sut, 10).Defense);
     }
 
     [Test]
@@ -32,8 +36,9 @@ public class MasteryTests
 
         sut.AddMastery(44);
 
-        Assert.AreEqual(1, GetMastery(sut, 44));
+        Assert.AreEqual(1, GetMasteryStat(sut, 44).Attack);
     }
 
-    int GetMastery(MasteryCollection sut, int id) => sut.GetMasteryLevel(id);
+    // 헬퍼 함수가 단일 int 레벨이 아닌 ChampionStatData 전체를 반환하도록 변경했습니다.
+    ChampionStatData GetMasteryStat(MasteryCollection sut, int id) => sut.GetMasteryStat(id);
 }
