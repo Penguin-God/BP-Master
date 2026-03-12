@@ -82,6 +82,7 @@ public static class TestHelper
 
     public static BonusCalculator CreateBonus(int needScore, int bonus) => new BonusCalculator(new SortedDictionary<int, int>() { { needScore, bonus } });
 
+    public static ChampionMastery CreateMasteryData(int id, int lv) => new ChampionMastery(id, lv);
     public static MasteryCollection CreateMasteryCollection(params ChampionMastery[] masteries) => new MasteryCollection(masteries);
     public static MasteryApplier CreateMasteryApplier(params ChampionMastery[] masteries) => new MasteryApplier(CreateMasteryCollection(masteries));
 }
