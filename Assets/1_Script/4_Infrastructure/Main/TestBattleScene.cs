@@ -14,9 +14,10 @@ public class TestBattleScene : MonoBehaviour
     void Start()
     {
         Dictionary<int, PlayerData> dataByid = new();
-        // dataByid.Add(playerId, new PlayerData("Player",  )
+        dataByid.Add(playerId, new PlayerData("Player", playerMastery.CreateBoards()));
+        dataByid.Add(ai_id, new PlayerData("AI", aiMastery.CreateBoards()));
 
-        MatchContext.MatchInit(new MatchData(playerId, ai_id), 2, new int[] { 5, 15, 15 }, ChampionDataLoder.AllId);
+        MatchContext.MatchInit(new MatchData(playerId, ai_id), 2, dataByid, ChampionDataLoder.AllId);
         SceneManager.LoadScene("Battle");
     }
 }

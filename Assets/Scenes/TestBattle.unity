@@ -167,56 +167,32 @@ MonoBehaviour:
   ai_id: 3
   playerMastery:
     _masteryBoardDatas:
-    - Id: 0
-      AttackLevel: 0
+    - Id: 1
+      AttackLevel: 1
       DefenseLevel: 0
       SpeedLevel: 0
-    - Id: 0
+    - Id: 2
+      AttackLevel: 0
+      DefenseLevel: 1
+      SpeedLevel: 0
+    - Id: 3
       AttackLevel: 0
       DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
+      SpeedLevel: 1
   aiMastery:
     _masteryBoardDatas:
-    - Id: 0
-      AttackLevel: 0
+    - Id: 4
+      AttackLevel: 1
       DefenseLevel: 0
       SpeedLevel: 0
-    - Id: 0
+    - Id: 5
+      AttackLevel: 0
+      DefenseLevel: 1
+      SpeedLevel: 0
+    - Id: 6
       AttackLevel: 0
       DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Id: 0
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 0
+      SpeedLevel: 1
 --- !u!1 &1775200245
 GameObject:
   m_ObjectHideFlags: 0
