@@ -1,15 +1,15 @@
-
 public class MasteryApplier
 {
-    readonly MasteryCollection masteryCollection;
-    public MasteryApplier(MasteryCollection masteryCollection)
+    readonly IMasteryStatProvider _statProvider;
+
+    public MasteryApplier(IMasteryStatProvider statProvider)
     {
-        this.masteryCollection = masteryCollection;
+        _statProvider = statProvider;
     }
 
     public void ApplyMastery(int id, ChampionStatus status)
     {
-        var masteryStat = masteryCollection.GetMasteryStat(id);
+        var masteryStat = _statProvider.GetMasteryStat(id);
         var newStat = status.Stat + masteryStat;
         status.ChangeStat(newStat);
     }

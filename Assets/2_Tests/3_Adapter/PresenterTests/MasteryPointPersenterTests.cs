@@ -43,7 +43,7 @@ public class MasteryPointPersenterTests
     [Test]
     public void 초기화_시_보유_포인트를_뷰에_전달한다()
     {
-        var inventory = new MasteryInventory(new[] { 1 }, startPoints: 10);
+        var inventory = CreateMasteryInventory(10, 1);
         var view = new FakeMasteryPointView();
         var sut = CreateSut(inventory, view, new FakeMasterySaver());
 
@@ -55,7 +55,7 @@ public class MasteryPointPersenterTests
     [Test]
     public void 챔피언_선택_시_상세_정보를_갱신한다()
     {
-        var inventory = new MasteryInventory(new[] { 1 }, startPoints: 10);
+        var inventory = CreateMasteryInventory(10, 1);
         var view = new FakeMasteryPointView();
         var sut = CreateSut(inventory, view, new FakeMasterySaver());
 
@@ -68,7 +68,7 @@ public class MasteryPointPersenterTests
     [Test]
     public void 숙련도_업그레이드_성공_시_인벤토리가_저장되고_뷰가_갱신된다()
     {
-        var inventory = new MasteryInventory(new[] { 1 }, startPoints: 10);
+        var inventory = CreateMasteryInventory(10, 1);
         var view = new FakeMasteryPointView();
         var saver = new FakeMasterySaver();
         var sut = CreateSut(inventory, view, saver);
@@ -84,7 +84,7 @@ public class MasteryPointPersenterTests
     [Test]
     public void 포인트_없이_업그레이드_시도할_경우_예외()
     {
-        var inventory = new MasteryInventory(new[] { 1 }, startPoints: 0);
+        var inventory = CreateMasteryInventory(0, 1);
         var view = new FakeMasteryPointView();
         var saver = new FakeMasterySaver();
         var sut = CreateSut(inventory, view, saver);

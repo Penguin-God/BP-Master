@@ -1,7 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class MasteryCollection
+public interface IMasteryStatProvider
+{
+    ChampionStatData GetMasteryStat(int championId);
+}
+
+public record MasteryMultiplier(int Attack, int Defense, int Speed);
+
+public class MasteryCollection : IMasteryStatProvider
 {
     readonly Dictionary<int, ChampionMastery> masteryMap;
     public IEnumerable<ChampionMastery> AllMasteries => masteryMap.Values;
