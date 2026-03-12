@@ -1,17 +1,19 @@
+using System.Collections.Generic;
+
 public class InventoryMasteryConverter : IMasteryStatProvider
 {
-    readonly MasteryInventory _inventory;
+    readonly IReadOnlyDictionary<int, MasteryBoard> _boards;
     readonly MasteryMultiplier _multiplier;
 
-    public InventoryMasteryConverter(MasteryInventory inventory, MasteryMultiplier multiplier)
+    public InventoryMasteryConverter(IReadOnlyDictionary<int, MasteryBoard> boards, MasteryMultiplier multiplier)
     {
-        _inventory = inventory;
+        _boards = boards;
         _multiplier = multiplier;
     }
 
     public ChampionStatData GetMasteryStat(int championId)
     {
-        if (_inventory.Boards.TryGetValue(championId, out var board))
+        if (_boards.TryGetValue(championId, out var board))
         {
             return new ChampionStatData(
                 board.AttackLevel * _multiplier.Attack,

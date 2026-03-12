@@ -1,14 +1,14 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 
 public class InventoryMasteryConverterTests
 {
     [Test]
     public void 인벤토리에서_id를_찾아_보드_레벨과_배율을_곱해_변환한다()
     {
-        var inventory = new MasteryInventory(10, new() { { 101, new MasteryBoard(attackLevel: 1, speedLevel: 1) } });
-
+        var boards = new Dictionary<int, MasteryBoard>() { { 101, new MasteryBoard(attackLevel: 1, speedLevel: 1) } };
         var multiplier = new MasteryMultiplier(Attack: 15, Defense: 15, Speed: 2);
-        var sut = new InventoryMasteryConverter(inventory, multiplier);
+        var sut = new InventoryMasteryConverter(boards, multiplier);
 
         var result = sut.GetMasteryStat(101);
 

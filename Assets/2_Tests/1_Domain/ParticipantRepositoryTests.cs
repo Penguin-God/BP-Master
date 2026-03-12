@@ -19,9 +19,9 @@ public class ParticipantRepositoryTests
         Assert.AreEqual(expectedData.Mastery, result.Mastery);
     }
 
-    private ParticipantData CreateTestData(string name)
+    private PlayerData CreateTestData(string name)
     {
         var mastery = new MasteryCollection(new List<ChampionMastery>());
-        return new ParticipantData(name, mastery);
+        return new PlayerData(name, mastery);
     }
 }

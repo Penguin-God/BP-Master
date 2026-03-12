@@ -9,7 +9,7 @@ namespace Match
         public static BanPickStorage Storage { get; private set; }
         public static MatchWinCounter WinCounter { get; private set; }
         public static ParticipantRepository ParticipantRepository { get; private set; }
-
+        static Dictionary<int, PlayerData> _dataByid = new Dictionary<int, PlayerData>();
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
         public static void MatchInit(MatchData match, int targetWin, int[] masteryLevels, IEnumerable<int> allChampionIds)
@@ -22,8 +22,17 @@ namespace Match
             ParticipantRepository = new ParticipantRepository();
             var drawer = new MasteryDrawer(allChampionIds);
 
-            ParticipantRepository.Save(Participant.Player, new ParticipantData("Player", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
-            ParticipantRepository.Save(Participant.AI, new ParticipantData("AI", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
+            ParticipantRepository.Save(Participant.Player, new PlayerData("Player", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
+            ParticipantRepository.Save(Participant.AI, new PlayerData("AI", new MasteryCollection(drawer.DrawRandoms(masteryLevels))));
+        }
+
+        public static void MatchInit(MatchData match, int targetWin, Dictionary<int, PlayerData> dataByid, IEnumerable<int> allChampionIds)
+        {
+            CurrentMatch = match;
+            WinCounter = new MatchWinCounter(match, targetWin);
+            _selectableIds = allChampionIds.ToList();
+            Storage = new BanPickStorage(_selectableIds);
+            _dataByid = dataByid;
         }
 
         public static bool EndMatch(int winner)

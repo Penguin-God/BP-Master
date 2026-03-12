@@ -1,7 +1,7 @@
 using UnityEngine.SceneManagement;
 using Match;
 
-public class UnitySceneLoader : ISceneLoader
+public class BattleInintialzer : ISceneLoader
 {
     const string BattleSceneName = "Battle";
 
