@@ -11,7 +11,6 @@ public class InventoryMasteryConverter : IMasteryStatProvider
 
     public ChampionStatData GetMasteryStat(int championId)
     {
-        // 인벤토리에 해당 챔피언의 보드가 있다면 레벨 * 배율을 계산하여 반환합니다.
         if (_inventory.Boards.TryGetValue(championId, out var board))
         {
             return new ChampionStatData(
@@ -21,7 +20,6 @@ public class InventoryMasteryConverter : IMasteryStatProvider
             );
         }
 
-        // 보드가 없다면 빈 스탯(0, 0, 0)을 반환합니다.
         return default;
     }
 }
