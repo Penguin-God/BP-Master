@@ -7,18 +7,6 @@ public class MasteryApplier
         this.masteryCollection = masteryCollection;
     }
 
-    //public void ApplyMastery(int id, ChampionStatus status)
-    //{
-    //    int level = masteryCollection.GetMasteryLevel(id);
-    //    var oldStat = status.Stat;
-    //    var newStat = new ChampionStatData(
-    //        oldStat.Attack + level,
-    //        oldStat.Defense + level,
-    //        oldStat.Speed
-    //    );
-    //    status.ChangeStat(newStat);
-    //}
-
     public void ApplyMastery(int id, ChampionStatus status)
     {
         var masteryStat = masteryCollection.GetMasteryStat(id);
