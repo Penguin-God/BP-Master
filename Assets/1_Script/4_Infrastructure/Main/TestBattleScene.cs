@@ -7,6 +7,10 @@ public class TestBattleScene : MonoBehaviour
 {
     [SerializeField] int playerId = 1;
     [SerializeField] int ai_id;
+
+    [SerializeField] MasteryBoardSetup playerMastery;
+    [SerializeField] MasteryBoardSetup aiMastery;
+
     void Start()
     {
         Dictionary<int, PlayerData> dataByid = new();
