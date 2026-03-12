@@ -9,8 +9,8 @@ public class MasteryTextBuilderTests
     {
         List<ChampionMastery> masteries = new List<ChampionMastery>()
         {
-            CreateMasteryData(1, 2),
-            CreateMasteryData(2, 32)
+            CreateMasteryData(1, att: 2, def: 12),
+            CreateMasteryData(2, att: 32, speed: 3)
         };
 
         Dictionary<int, string> nameCatalog = new Dictionary<int, string>()
@@ -24,9 +24,9 @@ public class MasteryTextBuilderTests
         string result = sut.BuildMasteriesText(masteries);
 
         string expected =
-            "닉스 : 공 2, 방 2, 속도 0" +
+            "닉스 : 공 2, 방 12, 속도 0" +
             "\n" +
-            "아르카나 : 공 32, 방 32, 속도 0";
+            "아르카나 : 공 32, 방 0, 속도 3";
 
         Assert.AreEqual(expected, result);
     }

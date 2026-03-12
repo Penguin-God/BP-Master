@@ -9,4 +9,11 @@ public readonly struct ChampionMastery
         Level = level;
         MasteryStat = new ChampionStatData(level, level, 0);
     }
+
+    public ChampionMastery(int championId, ChampionStatData masteryStat)
+    {
+        ChampionId = championId;
+        Level = 0;
+        MasteryStat = masteryStat;
+    }
 }
