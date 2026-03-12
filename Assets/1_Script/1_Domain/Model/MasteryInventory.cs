@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MasteryInventory
 {
@@ -7,12 +8,7 @@ public class MasteryInventory
     readonly Dictionary<int, MasteryBoard> boards = new Dictionary<int, MasteryBoard>();
     public IReadOnlyDictionary<int, MasteryBoard> Boards => boards;
 
-    public MasteryInventory(IEnumerable<int> championIds, int startPoints = 0)
-    {
-        AvailablePoints = startPoints;
-        foreach (var id in championIds)
-            boards[id] = new MasteryBoard();
-    }
+    public MasteryInventory(IEnumerable<int> championIds, int startPoints = 0) : this(startPoints, championIds.ToDictionary(x => x, x => new MasteryBoard())) { }
 
     public MasteryInventory(int point, Dictionary<int, MasteryBoard> savedBoards)
     {

@@ -9,6 +9,6 @@ public class MasteryCollection
     public MasteryCollection(IEnumerable<ChampionMastery> masteries) => masteryMap = masteries.ToDictionary(m => m.ChampionId, m => m);
 
     public int GetMasteryLevel(int championId) => HasMastery(championId) ? masteryMap[championId].MasteryStat.Attack : 0;
-    public ChampionStatData GetMasteryStat(int championId) => HasMastery(championId) ? masteryMap[championId].MasteryStat : new ChampionStatData(0, 0, 0);
-    public bool HasMastery(int championId) => masteryMap.ContainsKey(championId);
+    public ChampionStatData GetMasteryStat(int championId) => HasMastery(championId) ? masteryMap[championId].MasteryStat : default;
+    bool HasMastery(int championId) => masteryMap.ContainsKey(championId);
 }
