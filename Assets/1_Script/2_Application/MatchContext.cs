@@ -35,6 +35,8 @@ namespace Match
             _dataByid = dataByid;
         }
 
+        public static PlayerData GetPlayerData(int id) => _dataByid.TryGetValue(id, out var data) ? data : null;
+
         public static bool EndMatch(int winner)
         {
             WinCounter.AddWin(winner);
@@ -56,6 +58,7 @@ namespace Match
             Storage = null;
             WinCounter = null;
             ParticipantRepository = null;
+            _dataByid.Clear();
         }
     }
 }
