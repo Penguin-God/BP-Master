@@ -25,7 +25,7 @@ public class BattleScene : MonoBehaviour
         ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
 
         idByTeam.Add(playerTeam, playerId);
-        idByTeam.Add(EnumCaster.GetOppoentTeam(playerTeam), ai_id);
+        idByTeam.Add(EnumCaster.GetOppoentTeam(playerTeam), ai_id); // 이거 문제 많음
 
         masteryRegistry.InitTeamMastery(playerTeam, MatchContext.ParticipantRepository.Get(Participant.Player).Mastery);
         masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.ParticipantRepository.Get(Participant.AI).Mastery);
