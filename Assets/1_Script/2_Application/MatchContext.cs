@@ -19,6 +19,14 @@ public class PlayerMatchData
         return null;
     }
 
+    public PlayerData GetOpponent(int id)
+    {
+        if (Player1.Id == id) return Player2;
+        if (Player2.Id == id) return Player1;
+
+        return null;
+    }
+
     public MatchData ToMatchData() => new MatchData(Player1.Id, Player2.Id);
 }
 

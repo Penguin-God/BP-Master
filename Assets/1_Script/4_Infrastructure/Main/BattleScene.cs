@@ -23,7 +23,6 @@ public class BattleScene : MonoBehaviour
     {
         var storage = MatchContext.Storage;
         ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
-
         idByTeam.Add(playerTeam, playerId);
         idByTeam.Add(EnumCaster.GetOppoentTeam(playerTeam), ai_id); // 이거 문제 많음
 
@@ -59,11 +58,7 @@ public class BattleScene : MonoBehaviour
         return new(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(blue, red));
     }
 
-    void ApplyMastery(Champion champion, Team team)
-    {
-        var masteryApplier = new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team));
-        masteryApplier.ApplyMastery(champion.Id, champion.Status);
-    }
+    void ApplyMastery(Champion champion, Team team) => new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);
 
     [SerializeField] BonusDataFactory bonusDataSO;
     void OnDone()
