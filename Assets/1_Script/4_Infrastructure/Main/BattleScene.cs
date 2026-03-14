@@ -29,8 +29,9 @@ public class BattleScene : MonoBehaviour
         playerDatas.Add(playerTeam, MatchContext.GetPlayerData(playerId));
         playerDatas.Add(aiTeam, MatchContext.PlayerMatchData.GetPlayer(ai_id));
 
-        // masteryRegistry.InitTeamMastery(playerTeam, playerDatas[playerTeam].MasteryBoardCollection);
-        // masteryRegistry.InitTeamMastery(aiTeam, playerDatas[aiTeam].MasteryBoardCollection);
+        var masteryFactory = new MasteryStatCollectionFactory(new MasteryMultiplier(15, 15, 1));
+        masteryRegistry.InitTeamMastery(playerTeam, masteryFactory.Create(playerDatas[playerTeam].MasteryBoardCollection));
+        masteryRegistry.InitTeamMastery(aiTeam, masteryFactory.Create(playerDatas[aiTeam].MasteryBoardCollection));
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoder.LoadPhase());
