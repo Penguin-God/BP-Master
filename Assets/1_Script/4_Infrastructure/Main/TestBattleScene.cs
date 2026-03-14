@@ -1,5 +1,4 @@
 using Match;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,11 +12,8 @@ public class TestBattleScene : MonoBehaviour
 
     void Start()
     {
-        Dictionary<int, PlayerData> dataByid = new();
-        //dataByid.Add(playerId, new PlayerData("Player", playerMastery.CreateBoardCollection()));
-        //dataByid.Add(ai_id, new PlayerData("AI", aiMastery.CreateBoardCollection()));
-
-        MatchContext.MatchInit(new MatchData(playerId, ai_id), 2, dataByid, ChampionDataLoder.AllId);
+        var playerDatas = new PlayerMatchData(new PlayerData(playerId, "@@", playerMastery.CreateBoardCollection()), new PlayerData(ai_id, "AI", aiMastery.CreateBoardCollection()));
+        MatchContext.MatchInit(playerDatas, 2, ChampionDataLoder.AllId);
         SceneManager.LoadScene("Battle");
     }
 }

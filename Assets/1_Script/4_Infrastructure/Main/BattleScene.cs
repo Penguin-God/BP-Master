@@ -27,8 +27,8 @@ public class BattleScene : MonoBehaviour
         idByTeam.Add(playerTeam, playerId);
         idByTeam.Add(EnumCaster.GetOppoentTeam(playerTeam), ai_id); // 이거 문제 많음
 
-        masteryRegistry.InitTeamMastery(playerTeam, MatchContext.ParticipantRepository.Get(Participant.Player).Mastery);
-        masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.ParticipantRepository.Get(Participant.AI).Mastery);
+        //masteryRegistry.InitTeamMastery(playerTeam, MatchContext.ParticipantRepository.Get(Participant.Player).Mastery);
+        //masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.ParticipantRepository.Get(Participant.AI).Mastery);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoder.LoadPhase());
