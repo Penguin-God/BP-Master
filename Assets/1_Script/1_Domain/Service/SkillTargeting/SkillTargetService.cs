@@ -1,10 +1,5 @@
 using System.Collections.Generic;
 
-public interface ISkillTargetSelector
-{
-    IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill);
-}
-
 public class SkillTargetService
 {
     readonly ISkillTargetSelector selector;

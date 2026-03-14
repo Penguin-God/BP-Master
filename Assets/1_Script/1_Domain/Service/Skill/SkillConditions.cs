@@ -14,11 +14,6 @@ public enum StatConditionType
     SpeedAtLeast,
 }
 
-public interface IChampionCondition
-{
-    public bool Check(ChampionStatus target);
-}
-
 public class NullChecker : IChampionCondition
 {
     public bool Check(ChampionStatus status) => true;

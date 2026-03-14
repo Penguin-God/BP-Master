@@ -1,11 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public interface IChampionEvaluator
-{
-    public int Evaluate(Champion champion);
-}
-
 public class ChampionRanker
 {
     readonly ChampionCatalog catalog;

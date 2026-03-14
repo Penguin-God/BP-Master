@@ -1,11 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public interface IChampionSelector
-{
-    public int Select(HashSet<int> ids);
-}
-
 public class RandomSelector : IChampionSelector
 {
     public int Select(HashSet<int> ids) => RandomUtil.DrawRandom(ids);

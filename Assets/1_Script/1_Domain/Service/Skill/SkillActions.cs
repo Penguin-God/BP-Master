@@ -1,10 +1,4 @@
 using System;
-
-public interface ISkillAction
-{
-    void Do(ChampionStatus target);
-}
-
 public class StatChanger : ISkillAction
 {
     readonly StatType StatType;

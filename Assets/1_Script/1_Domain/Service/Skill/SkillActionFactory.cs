@@ -1,10 +1,5 @@
 using System;
 
-public interface ISkillActionFactory
-{
-    ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team);
-}
-
 public class SkillActionFactory : ISkillActionFactory
 {
     readonly BanPickEventDispatcher phaseActionEventDispatcher;

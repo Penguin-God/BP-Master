@@ -1,8 +1,3 @@
-public interface IPhaseEntry
-{
-    void EnterBan();
-    void EnterPick();
-}
 
 public class TeamPhaseEntryDispatcher
 {

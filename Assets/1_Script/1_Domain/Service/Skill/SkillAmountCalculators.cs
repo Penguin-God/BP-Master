@@ -1,10 +1,5 @@
 using System;
 
-public interface ISkillAmountCalculator
-{
-    int Calculate(int currentValue);
-}
-
 public class ValueCalculator : ISkillAmountCalculator
 {
     readonly int Amount;

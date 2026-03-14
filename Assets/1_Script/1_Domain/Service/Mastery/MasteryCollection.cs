@@ -1,14 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public interface IMasteryStatProvider
-{
-    ChampionStatData GetMasteryStat(int championId);
-}
-
 public record MasteryMultiplier(int Attack, int Defense, int Speed);
 
-// 얘를 보드 컬랙터로 바꾸기
 public class MasteryCollection : IMasteryStatProvider
 {
     readonly Dictionary<int, ChampionMastery> masteryMap;
