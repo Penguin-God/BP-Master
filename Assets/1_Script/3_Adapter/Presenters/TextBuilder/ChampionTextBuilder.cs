@@ -1,10 +1,5 @@
 public record ChampionProfile(int Id, string Name, ChampionStatData Stat, Skill Skill);
 
-public interface IChampionProvider
-{
-    ChampionProfile GetProfile(int id);
-}
-
 public readonly struct ChampionTextModel
 {
     public readonly string Name;

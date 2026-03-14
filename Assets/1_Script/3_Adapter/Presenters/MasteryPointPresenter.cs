@@ -12,17 +12,6 @@ public readonly struct MasteryLevelModel
     }
 }
 
-public interface IMasteryPointView
-{
-    void UpdatePoints(int points);
-    void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel);
-}
-
-public interface IMasterySaver
-{
-    void Save(MasteryProfile inventory);
-}
-
 public class MasteryPointPresenter
 {
     readonly MasteryProfile _inventory;
