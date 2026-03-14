@@ -20,19 +20,19 @@ public interface IMasteryPointView
 
 public interface IMasterySaver
 {
-    void Save(MasteryInventory inventory);
+    void Save(MasteryProfile inventory);
 }
 
 public class MasteryPointPresenter
 {
-    readonly MasteryInventory _inventory;
+    readonly MasteryProfile _inventory;
     readonly ChampionTextBuilder _championTextBuilder;
     readonly IMasteryPointView _view;
     readonly IMasterySaver _saver;
 
     int _currentSelectedId = -1;
 
-    public MasteryPointPresenter(MasteryInventory inventory, ChampionTextBuilder championTextBuilder, IMasteryPointView view, IMasterySaver saver)
+    public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasteryPointView view, IMasterySaver saver)
     {
         _inventory = inventory;
         _championTextBuilder = championTextBuilder;

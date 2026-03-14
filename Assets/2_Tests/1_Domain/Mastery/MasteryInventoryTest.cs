@@ -3,10 +3,10 @@ using System;
 
 public class MasteryInventoryTest
 {
-    MasteryInventory CreateInventory(int startPoints = 10)
+    MasteryProfile CreateInventory(int startPoints = 10)
     {
         var championIds = new[] { 101, 102 };
-        return new MasteryInventory(championIds, startPoints);
+        return new MasteryProfile(championIds, startPoints);
     }
 
     [Test]

@@ -16,7 +16,7 @@ public class JsonMasterySaverTests
     public void 인벤토리를_저장하고_로드하면_데이터가_정확히_복원된다()
     {
         var sut = CreateSut();
-        var inventory = new MasteryInventory(new[] { 101, 102 }, startPoints: 10);
+        var inventory = new MasteryProfile(new[] { 101, 102 }, startPoints: 10);
         inventory.Upgrade(101, StatType.Attack);
         inventory.Upgrade(102, StatType.Speed);
 

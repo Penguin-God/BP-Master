@@ -22,7 +22,7 @@ public class MasteryPointPersenterTests
     class FakeMasterySaver : IMasterySaver
     {
         public bool IsSaved { get; private set; }
-        public void Save(MasteryInventory inventory) => IsSaved = true;
+        public void Save(MasteryProfile inventory) => IsSaved = true;
     }
 
     class FakeChampionProvider : IChampionProvider
@@ -30,7 +30,7 @@ public class MasteryPointPersenterTests
         public ChampionProfile GetProfile(int id) => new ChampionProfile(id, "펭귄", CreateStat(0, 0, 0), CreateSkill());
     }
 
-    MasteryPointPresenter CreateSut(MasteryInventory inventory, FakeMasteryPointView view, FakeMasterySaver saver)
+    MasteryPointPresenter CreateSut(MasteryProfile inventory, FakeMasteryPointView view, FakeMasterySaver saver)
     {
         var textBuilder = new ChampionTextBuilder(
             new FakeChampionProvider(),

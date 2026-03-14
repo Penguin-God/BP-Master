@@ -42,7 +42,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         var dataIO = new JsonMasterySaver();
         var inventory = dataIO.Load();
         if (inventory == null) 
-            inventory = new MasteryInventory(ChampionDataLoder.AllId, startPoints: 15);
+            inventory = new MasteryProfile(ChampionDataLoder.AllId, startPoints: 15);
 
         Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), this, dataIO));
     }

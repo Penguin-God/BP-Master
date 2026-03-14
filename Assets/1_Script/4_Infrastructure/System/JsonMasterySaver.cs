@@ -24,7 +24,7 @@ public class JsonMasterySaver : IMasterySaver
 
     public JsonMasterySaver(string saveKey = "MasterySaveData") => SaveKey = saveKey;
 
-    public void Save(MasteryInventory inventory)
+    public void Save(MasteryProfile inventory)
     {
         var saveData = new MasteryInventorySaveData
         {
@@ -32,7 +32,7 @@ public class JsonMasterySaver : IMasterySaver
             Boards = new List<MasteryBoardSaveData>()
         };
 
-        foreach (var kvp in inventory.Boards)
+        foreach (var kvp in inventory.BoardCollection.AllBoards)
         {
             saveData.Boards.Add(new MasteryBoardSaveData
             {
@@ -48,7 +48,7 @@ public class JsonMasterySaver : IMasterySaver
         PlayerPrefs.Save();
     }
 
-    public MasteryInventory Load()
+    public MasteryProfile Load()
     {
         if (PlayerPrefs.HasKey(SaveKey) == false)
             return null; // 저장된 데이터가 없으면 null을 반환하여 밖에서 새 게임을 만들게 유도합니다.
@@ -66,6 +66,6 @@ public class JsonMasterySaver : IMasterySaver
             );
         }
 
-        return new MasteryInventory(saveData.AvailablePoints, loadedBoards);
+        return new MasteryProfile(saveData.AvailablePoints, new MasteryBoardCollection(loadedBoards));
     }
 }
