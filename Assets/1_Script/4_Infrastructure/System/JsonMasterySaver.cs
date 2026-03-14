@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -9,6 +10,8 @@ public struct MasteryBoardSaveData
     public int AttackLevel;
     public int DefenseLevel;
     public int SpeedLevel;
+
+    public MasteryBoard CreateBoard() => new MasteryBoard(AttackLevel, DefenseLevel, SpeedLevel);
 }
 
 [Serializable]
@@ -50,21 +53,11 @@ public class JsonMasterySaver : IMasterySaver
 
     public MasteryProfile Load()
     {
-        if (PlayerPrefs.HasKey(SaveKey) == false)
-            return null; // 저장된 데이터가 없으면 null을 반환하여 밖에서 새 게임을 만들게 유도합니다.
+        if (PlayerPrefs.HasKey(SaveKey) == false) return null;
 
         string json = PlayerPrefs.GetString(SaveKey);
         var saveData = JsonUtility.FromJson<MasteryInventorySaveData>(json);
-
-        var loadedBoards = new Dictionary<int, MasteryBoard>();
-        foreach (var boardData in saveData.Boards)
-        {
-            loadedBoards[boardData.Id] = new MasteryBoard(
-                boardData.AttackLevel,
-                boardData.DefenseLevel,
-                boardData.SpeedLevel
-            );
-        }
+        var loadedBoards = saveData.Boards.ToDictionary(x => x.Id, x => x.CreateBoard());
 
         return new MasteryProfile(saveData.AvailablePoints, new MasteryBoardCollection(loadedBoards));
     }
