@@ -29,19 +29,4 @@ public class PlayerMatchDataTests
         Assert.AreEqual(10, matchData.Id1);
         Assert.AreEqual(20, matchData.Id2);
     }
-
-    [Test]
-    public void 아이디를_입력하면_상대방의_데이터를_반환한다()
-    {
-        var player1 = CreateDummyPlayer(1);
-        var player2 = CreateDummyPlayer(2);
-        var matchData = CreateMatchData(player1, player2);
-
-        var opponentOfPlayer1 = matchData.GetOpponent(1);
-        var opponentOfPlayer2 = matchData.GetOpponent(2);
-
-        Assert.AreEqual(player2, opponentOfPlayer1);
-        Assert.AreEqual(player1, opponentOfPlayer2);
-        Assert.IsNull(matchData.GetOpponent(0));
-    }
 }

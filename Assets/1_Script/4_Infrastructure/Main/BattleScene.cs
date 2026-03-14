@@ -16,15 +16,16 @@ public class BattleScene : MonoBehaviour
     BanPickHandler banPickHandler;
 
     [SerializeField] int playerId = 1;
-    [SerializeField] int ai_id;
-    readonly Dictionary<Team, int> idByTeam = new();
+
+    readonly Dictionary<Team, PlayerData> playerDatas = new();
 
     public void GameStart(Team playerTeam)
     {
         var storage = MatchContext.Storage;
-        ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
-        idByTeam.Add(playerTeam, playerId);
-        idByTeam.Add(EnumCaster.GetOppoentTeam(playerTeam), ai_id); // 이거 문제 많음
+        int ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
+
+        playerDatas.Add(playerTeam, MatchContext.GetPlayerData(playerId));
+        playerDatas.Add(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.PlayerMatchData.GetPlayer(ai_id));
 
         //masteryRegistry.InitTeamMastery(playerTeam, MatchContext.ParticipantRepository.Get(Participant.Player).Mastery);
         //masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.ParticipantRepository.Get(Participant.AI).Mastery);
@@ -65,7 +66,7 @@ public class BattleScene : MonoBehaviour
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-        var matchEnd = MatchContext.EndMatch(idByTeam[result.Winner]);
+        var matchEnd = MatchContext.EndMatch(playerDatas[result.Winner]);
         matchUI_Controller.Done(result, matchEnd);
     }
 }

@@ -19,14 +19,6 @@ public class PlayerMatchData
         return null;
     }
 
-    public PlayerData GetOpponent(int id)
-    {
-        if (Player1.Id == id) return Player2;
-        if (Player2.Id == id) return Player1;
-
-        return null;
-    }
-
     public MatchData ToMatchData() => new MatchData(Player1.Id, Player2.Id);
 }
 
@@ -38,7 +30,7 @@ namespace Match
         public static BanPickStorage Storage { get; private set; }
         public static MatchWinCounter WinCounter { get; private set; }
 
-        static PlayerMatchData _playerMatchData;
+        public static PlayerMatchData PlayerMatchData { get; private set; }
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
         public static void MatchInit(MatchData match, int targetWin, int[] masteryLevels, IEnumerable<int> allChampionIds)
@@ -52,7 +44,7 @@ namespace Match
 
         public static void MatchInit(PlayerMatchData playerMatchData, int targetWin, IEnumerable<int> allChampionIds)
         {
-            _playerMatchData = playerMatchData;
+            PlayerMatchData = playerMatchData;
             CurrentMatch = playerMatchData.ToMatchData();
 
             WinCounter = new MatchWinCounter(CurrentMatch, targetWin);
@@ -60,7 +52,7 @@ namespace Match
             Storage = new BanPickStorage(_selectableIds);
         }
 
-        public static PlayerData GetPlayerData(int id) => _playerMatchData?.GetPlayer(id);
+        public static PlayerData GetPlayerData(int id) => PlayerMatchData?.GetPlayer(id);
 
         public static bool EndMatch(int winner)
         {
@@ -82,7 +74,7 @@ namespace Match
             _selectableIds = Enumerable.Empty<int>();
             Storage = null;
             WinCounter = null;
-            _playerMatchData = null;
+            PlayerMatchData = null;
         }
     }
 }
