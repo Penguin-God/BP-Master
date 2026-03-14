@@ -39,7 +39,7 @@ public class PriorityBanPickTests
     public void 픽_숙련도_총합이_가장_높은_빌드_선택()
     {
         var selectable = new HashSet<int>(new int[] { 1, 2, 3, 4, 5, 6, 7 });
-        var masteryManager = new MasteryCollection(new ChampionMastery[] { new ChampionMastery(1, 10), new ChampionMastery(2, 20), new ChampionMastery(3, 30)});
+        var masteryManager = new MasteryStatCollection(new ChampionMastery[] { new ChampionMastery(1, 10), new ChampionMastery(2, 20), new ChampionMastery(3, 30)});
         var selector1 = CreateSelector(4, 5);
         var selector2 = CreateSelector(1, 2, 4);
         var selector3 = CreateSelector(3, 2, 1);

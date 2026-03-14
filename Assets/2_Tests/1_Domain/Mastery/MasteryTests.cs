@@ -9,7 +9,7 @@ public class MasteryTests
             new ChampionMastery(11, 20)
         };
 
-        MasteryCollection sut = new(data);
+        MasteryStatCollection sut = new(data);
 
         Assert.AreEqual(20, GetMasteryStat(sut, 11).Attack);
         Assert.AreEqual(0, GetMasteryStat(sut, 44).Attack);
@@ -17,5 +17,5 @@ public class MasteryTests
         CollectionAssert.AreEquivalent(data, sut.AllMasteries);
     }
 
-    ChampionStatData GetMasteryStat(MasteryCollection sut, int id) => sut.GetMasteryStat(id);
+    ChampionStatData GetMasteryStat(MasteryStatCollection sut, int id) => sut.GetMasteryStat(id);
 }

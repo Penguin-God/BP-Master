@@ -3,11 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SelectorCreatetorSO", menuName = "Scriptable Objects/SelectorCreatetorSO")]
 public abstract class AI_SelectorFactory : ScriptableObject
 {
-    protected MasteryCollection masteryManager;
+    protected MasteryStatCollection masteryManager;
     protected Team team;
     protected ChampionCatalog championCatalog;
     protected SlotStorage<ChampionStatus> statusSlots;
-    public void Init(Team team, ChampionCatalog catalog, MasteryCollection masteryManager, SlotStorage<ChampionStatus> statusSlots)
+    public void Init(Team team, ChampionCatalog catalog, MasteryStatCollection masteryManager, SlotStorage<ChampionStatus> statusSlots)
     {
         this.masteryManager = masteryManager;
         this.team = team;

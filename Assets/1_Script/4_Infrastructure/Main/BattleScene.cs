@@ -22,13 +22,15 @@ public class BattleScene : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         var storage = MatchContext.Storage;
+
         int ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
+        Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
         playerDatas.Add(playerTeam, MatchContext.GetPlayerData(playerId));
-        playerDatas.Add(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.PlayerMatchData.GetPlayer(ai_id));
+        playerDatas.Add(aiTeam, MatchContext.PlayerMatchData.GetPlayer(ai_id));
 
-        //masteryRegistry.InitTeamMastery(playerTeam, MatchContext.ParticipantRepository.Get(Participant.Player).Mastery);
-        //masteryRegistry.InitTeamMastery(EnumCaster.GetOppoentTeam(playerTeam), MatchContext.ParticipantRepository.Get(Participant.AI).Mastery);
+        // masteryRegistry.InitTeamMastery(playerTeam, playerDatas[playerTeam].MasteryBoardCollection);
+        // masteryRegistry.InitTeamMastery(aiTeam, playerDatas[aiTeam].MasteryBoardCollection);
 
         var phaseEventDispatcher = new PhaseEventDispatcher();
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoder.LoadPhase());
@@ -47,7 +49,7 @@ public class BattleScene : MonoBehaviour
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, skillController, masteryRegistry, banPickHandler); // start보다 먼저
 
-        ai_main.Init(ai_id, EnumCaster.GetOppoentTeam(playerTeam), storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
+        ai_main.Init(ai_id, aiTeam , storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
 
         phaseManager.Start();
     }
@@ -66,7 +68,7 @@ public class BattleScene : MonoBehaviour
     {
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-        var matchEnd = MatchContext.EndMatch(playerDatas[result.Winner]);
+        var matchEnd = MatchContext.EndMatch(playerDatas[result.Winner].Id);
         matchUI_Controller.Done(result, matchEnd);
     }
 }

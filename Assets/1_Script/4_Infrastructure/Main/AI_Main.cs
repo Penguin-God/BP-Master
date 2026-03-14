@@ -4,7 +4,6 @@ using UnityEngine;
 public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
-    int defaultId;
     [SerializeField] AIFactorySO aiFactory;
 
     AI_BanPickAgent banPickAgent;

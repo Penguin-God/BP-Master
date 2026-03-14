@@ -29,5 +29,5 @@ public class MasteryRegistryTests
 
     MasteryRegistry CreateSut() => new MasteryRegistry();
 
-    MasteryCollection CreateEmptyCollection() => new MasteryCollection(new List<ChampionMastery>());
+    MasteryStatCollection CreateEmptyCollection() => new MasteryStatCollection(new List<ChampionMastery>());
 }

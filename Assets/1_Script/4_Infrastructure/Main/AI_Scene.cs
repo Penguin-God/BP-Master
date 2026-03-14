@@ -28,8 +28,8 @@ public class AI_Scene : MonoBehaviour
         MatchContext.MatchInit(new MatchData(ai_id1, ai_id2), 2, new int[0], ChampionDataLoder.AllId);
         var storage = MatchContext.Storage;
 
-        masteryRegistry.InitTeamMastery(Team.Blue, new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
-        masteryRegistry.InitTeamMastery(Team.Red, new MasteryCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
+        masteryRegistry.InitTeamMastery(Team.Blue, new MasteryStatCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
+        masteryRegistry.InitTeamMastery(Team.Red, new MasteryStatCollection(new MasteryDrawer(storage.SelectableIds).DrawRandoms(new int[] { 15, 15, 15, 20, 20, 20, 20, 25, 25, 25 })));
 
         StartBattle(storage);
     }
