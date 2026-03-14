@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using static TestHelper;
 
 public class InventoryMasteryConverterTests
 {
@@ -8,7 +9,7 @@ public class InventoryMasteryConverterTests
     {
         var boards = new Dictionary<int, MasteryBoard>() { { 101, new MasteryBoard(attackLevel: 1, speedLevel: 1) } };
         var multiplier = new MasteryMultiplier(Attack: 15, Defense: 15, Speed: 2);
-        var sut = new InventoryMasteryConverter(boards, multiplier);
+        var sut = new ProfileMasteryConverter(CreateBoardCollection(boards), multiplier);
 
         var result = sut.GetMasteryStat(101);
 

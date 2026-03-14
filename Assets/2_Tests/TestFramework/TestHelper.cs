@@ -85,6 +85,7 @@ public static class TestHelper
     public static ChampionMastery CreateMasteryData(int id, int att = 0, int def = 0, int speed = 0) => new ChampionMastery(id, CreateStat(att, def, speed));
     public static MasteryApplier CreateMasteryApplier(params ChampionMastery[] masteries) => new MasteryApplier(new MasteryCollection(masteries));
     public static MasteryProfile CreateMasteryInventory(int point, params int[] ids) => new MasteryProfile(ids, point);
+    public static MasteryBoardCollection CreateBoardCollection(Dictionary<int, MasteryBoard> boards) => new MasteryBoardCollection(boards);
 }
 
 public class TestAttackChangeAction : ISkillAction
