@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public record MasteryMultiplier(int Attack, int Defense, int Speed);
 
@@ -11,24 +12,8 @@ public class MasteryStatCollectionFactory
         _multiplier = multiplier;
     }
 
-    public MasteryStatCollection Create(MasteryBoardCollection boardCollection)
-    {
-        var masteries = new List<ChampionMastery>();
+    public MasteryStatCollection Create(MasteryBoardCollection boardCollection) => new MasteryStatCollection(boardCollection.AllBoards.Select(x => new ChampionMastery(x.Key, CalculateStat(x.Value)))); 
 
-        foreach (var kvp in boardCollection.AllBoards)
-        {
-            int championId = kvp.Key;
-            MasteryBoard board = kvp.Value;
-
-            var statData = new ChampionStatData(
-                board.AttackLevel * _multiplier.Attack,
-                board.DefenseLevel * _multiplier.Defense,
-                board.SpeedLevel * _multiplier.Speed
-            );
-
-            masteries.Add(new ChampionMastery(championId, statData));
-        }
-
-        return new MasteryStatCollection(masteries);
-    }
+    ChampionStatData CalculateStat(MasteryBoard board)
+        => new ChampionStatData(board.AttackLevel * _multiplier.Attack, board.DefenseLevel * _multiplier.Defense, board.SpeedLevel * _multiplier.Speed);
 }
