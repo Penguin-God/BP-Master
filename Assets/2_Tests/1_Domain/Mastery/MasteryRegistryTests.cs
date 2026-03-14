@@ -12,7 +12,7 @@ public class MasteryRegistryTests
         var expected = CreateEmptyCollection();
 
         sut.InitTeamMastery(team, expected);
-        var result = sut.GetTeamMasteryManager(team);
+        var result = sut.GetTeamMasteryCollection(team);
 
         Assert.AreSame(expected, result);
     }
@@ -22,7 +22,7 @@ public class MasteryRegistryTests
     {
         var sut = CreateSut();
 
-        var result = sut.GetTeamMasteryManager(Team.Blue);
+        var result = sut.GetTeamMasteryCollection(Team.Blue);
 
         Assert.IsNull(result);
     }

@@ -10,6 +10,6 @@ public class MasteryTooltipTrigger : TooltipTrigger
     protected override string BuildText()
     {
         if (masteryRegistry == null) return "";
-        return new MasteryTextBuilder(championRepository.NameCatalog).BuildMasteriesText(masteryRegistry.GetTeamMasteryManager(team).AllMasteries);
+        return new MasteryTextBuilder(championRepository.NameCatalog).BuildMasteriesText(masteryRegistry.GetTeamMasteryCollection(team).AllMasteries);
     }
 }

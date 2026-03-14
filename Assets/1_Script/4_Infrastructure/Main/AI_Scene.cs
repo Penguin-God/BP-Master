@@ -56,7 +56,7 @@ public class AI_Scene : MonoBehaviour
 
     void ApplyMastery(Champion champion, Team team)
     {
-        var masteryApplier = new MasteryApplier(masteryRegistry.GetTeamMasteryManager(team));
+        var masteryApplier = new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team));
         masteryApplier.ApplyMastery(champion.Id, champion.Status);
     }
 

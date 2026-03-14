@@ -27,7 +27,7 @@ public class AIFactorySO : ScriptableObject
 
         var factory = Instantiate(config.SelectorFactory);
 
-        factory.Init(team, championCatalog, masteryRegistry.GetTeamMasteryManager(team), banPickHandler.PickSlotFacade.StatusSlots);
+        factory.Init(team, championCatalog, masteryRegistry.GetTeamMasteryCollection(team), banPickHandler.PickSlotFacade.StatusSlots);
 
         PredictValueSelectorFactory perdictFactory = factory as PredictValueSelectorFactory;
         if(perdictFactory != null)

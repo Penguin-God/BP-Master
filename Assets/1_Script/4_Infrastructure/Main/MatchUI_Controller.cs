@@ -23,7 +23,7 @@ public class MatchUI_Controller : MonoBehaviour
         team = playerTeam;
         var pickSlotFacade = banPickHandler.PickSlotFacade;
 
-        championDrawer.Init(masteryRegistry.GetTeamMasteryManager(playerTeam).AllMasteries, storage);
+        championDrawer.Init(masteryRegistry.GetTeamMasteryCollection(playerTeam).AllMasteries, storage);
         championDrawer.CreateButtons();
 
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
