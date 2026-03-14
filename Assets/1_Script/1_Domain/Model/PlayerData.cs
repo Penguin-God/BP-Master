@@ -1,20 +1,24 @@
+using log4net.Appender;
 using System.Collections.Generic;
 
 public class PlayerData
 {
-    public string Name { get; }
-    public MasteryCollection Mastery { get; }
-    public IReadOnlyDictionary<int, MasteryBoard> MasteryBoards;
+    public readonly int Id = 0;
+    public readonly string Name;
+    public readonly MasteryCollection Mastery;
+    public MasteryBoardCollection MasteryBoardCollection;
+
     public PlayerData(string name, MasteryCollection mastery)
     {
         Name = name;
         Mastery = mastery;
     }
 
-    public PlayerData(string name, IReadOnlyDictionary<int, MasteryBoard> masteryBoards)
+    public PlayerData(int id, string name, MasteryBoardCollection masteryBoardCollection)
     {
+        Id = id;
         Name = name;
-        MasteryBoards = masteryBoards;
+        MasteryBoardCollection = masteryBoardCollection;
     }
 }
 

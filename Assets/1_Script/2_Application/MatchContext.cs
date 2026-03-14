@@ -1,5 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
+public class PlayerMatchData
+{
+    public readonly PlayerData Player1;
+    public readonly PlayerData Player2;
+
+    public PlayerMatchData(PlayerData player1, PlayerData player2)
+    {
+        Player1 = player1;
+        Player2 = player2;
+    }
+
+    public PlayerData GetPlayer(int id)
+    {
+        if (Player1.Id == id) return Player1;
+        if (Player2.Id == id) return Player2;
+
+        return null;
+    }
+
+    public MatchData ToMatchData() => new MatchData(Player1.Id, Player2.Id);
+}
 
 namespace Match
 {
