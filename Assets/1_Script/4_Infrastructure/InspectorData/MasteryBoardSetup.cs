@@ -20,5 +20,5 @@ public class MasteryBoardSetup
 {
     [TableList(ShowIndexLabels = true, AlwaysExpanded = true)] [SerializeField] MasteryBoardData[] _masteryBoardDatas;
 
-    public IReadOnlyDictionary<int, MasteryBoard> CreateBoards() => _masteryBoardDatas.ToDictionary(x => x.Id, x => x.CreateBoard());
+    public MasteryBoardCollection CreateBoardCollection() => new MasteryBoardCollection(_masteryBoardDatas.ToDictionary(x => x.Id, x => x.CreateBoard()));
 }
