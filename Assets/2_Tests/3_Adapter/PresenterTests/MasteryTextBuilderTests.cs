@@ -24,9 +24,9 @@ public class MasteryTextBuilderTests
         string result = sut.BuildMasteriesText(masteries);
 
         string expected =
-            "닉스 : 공 2, 방 12, 속도 0" +
+            "닉스 : 공 2, 방 12" +
             "\n" +
-            "아르카나 : 공 32, 방 0, 속도 3";
+            "아르카나 : 공 32, 속도 3";
 
         Assert.AreEqual(expected, result);
     }

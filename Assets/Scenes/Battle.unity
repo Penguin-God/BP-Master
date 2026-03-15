@@ -2190,7 +2190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -68, y: 512}
+  m_AnchoredPosition: {x: 0, y: 512}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1277024993
@@ -2632,6 +2632,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
+      propertyPath: tooltipSize.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
       propertyPath: championRepository
       value: 
       objectReference: {fileID: 1420292359}
@@ -2838,7 +2842,6 @@ MonoBehaviour:
   gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   championSelector: {fileID: 1640189475}
   playerId: 1
-  ai_id: 3
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!1 &1434020710
 GameObject:
@@ -3648,6 +3651,10 @@ PrefabInstance:
       propertyPath: tooltip
       value: 
       objectReference: {fileID: 765582499}
+    - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
+      propertyPath: tooltipSize.x
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 2483296988703203927, guid: f0dfc841fc82fb74f865f4c2daf691b2, type: 3}
       propertyPath: championRepository
       value: 
