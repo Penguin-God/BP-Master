@@ -111,6 +111,7 @@ public class ChampionButtonView : MonoBehaviour
         GetButton(id).GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
     }
 }
+
 public class ChampionButtonCreator
 {
     public IEnumerable<Button> DrawChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject btnPrefab)

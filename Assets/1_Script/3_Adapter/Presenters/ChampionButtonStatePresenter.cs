@@ -1,21 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChampionButtonStateModel
-{
-    public readonly string Name;
-    public readonly Color32 ButtonColor;
-    public readonly Color32 TextColor;
-    public readonly bool IsEnabled;
-
-    public ChampionButtonStateModel(string name, Color32 buttonColor, Color32 textColor, bool isEnabled)
-    {
-        Name = name;
-        ButtonColor = buttonColor;
-        TextColor = textColor;
-        IsEnabled = isEnabled;
-    }
-}
+public record ChampionButtonStateModel(string Name, Color32 ButtonColor, Color32 TextColor, bool IsEnabled);
 
 public static class ChampionButtonPalette
 {
@@ -24,7 +10,7 @@ public static class ChampionButtonPalette
     public static readonly Color32 OpponentMastery = new Color32(233, 111, 111, 255); // 살짝 붉은색
     public static readonly Color32 DefaultButton = new Color32(255, 255, 255, 255);
 
-    public static readonly Color32 ActiveText = new Color32(50, 50, 50, 255);
+    public static readonly Color32 ActiveText = new Color32(255, 255, 255, 255);
     public static readonly Color32 InactiveText = new Color32(60, 60, 60, 255);
 }
 
