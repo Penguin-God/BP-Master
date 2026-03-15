@@ -7,7 +7,8 @@ public class BattleInintialzer : ISceneLoader
 
     public void LoadBattleScene(MatchData match)
     {
-        MatchContext.MatchInit(match, 2, new int[] { 1 }, ChampionDataLoder.AllId);
+        var playerDatas = new PlayerMatchData(new PlayerData(1, "@@", new JsonMasterySaver().Load().BoardCollection), new PlayerData(ai_id, "AI", aiMastery.CreateBoardCollection()));
+        MatchContext.MatchInit(playerDatas, 2, ChampionDataLoder.AllId);
         SceneManager.LoadScene(BattleSceneName);
     }
 }

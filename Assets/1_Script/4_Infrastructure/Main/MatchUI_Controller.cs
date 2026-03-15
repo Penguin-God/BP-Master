@@ -1,3 +1,4 @@
+using Match;
 using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
@@ -29,7 +30,7 @@ public class MatchUI_Controller : MonoBehaviour
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, phaseManager);
 
-        // participantView.ViewParticipant(matchRecord, playerTeam);
+        // participantView.ViewParticipant(MatchContext., playerTeam);
         redMasteryTooltipTrigger.Inject(masteryRegistry);
         blueMasteryTooltipTrigger.Inject(masteryRegistry);
 
