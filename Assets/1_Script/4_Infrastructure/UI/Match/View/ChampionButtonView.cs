@@ -27,7 +27,6 @@ public class ChampionButtonView : MonoBehaviour
     [SerializeField] Button speedTabBtn;
 
     IEnumerable<Button> buttons;
-    public IEnumerable<Button> Buttons => buttons;
 
     UnityAction<ChampionIdentify> clickEvent;
 
