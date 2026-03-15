@@ -33,9 +33,9 @@ public class ChampionButtonStatePresenter
     readonly HashSet<int> _myMasteryIds;
     readonly HashSet<int> _opponentMasteryIds;
     readonly HashSet<int> _selectableIds;
-    readonly Dictionary<int, string> _nameCatalog;
+    readonly IReadOnlyDictionary<int, string> _nameCatalog;
 
-    public ChampionButtonStatePresenter(IEnumerable<int> myMasteryIds,IEnumerable<int> opponentMasteryIds, IEnumerable<int> selectableIds, Dictionary<int, string> nameCatalog)
+    public ChampionButtonStatePresenter(IEnumerable<int> myMasteryIds,IEnumerable<int> opponentMasteryIds, IEnumerable<int> selectableIds, IReadOnlyDictionary<int, string> nameCatalog)
     {
         _myMasteryIds = new HashSet<int>(myMasteryIds);
         _opponentMasteryIds = new HashSet<int>(opponentMasteryIds);

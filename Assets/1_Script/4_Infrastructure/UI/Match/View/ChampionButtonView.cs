@@ -27,11 +27,9 @@ public class ChampionButtonView : MonoBehaviour
     [SerializeField] Button speedTabBtn;
 
     IEnumerable<Button> buttons;
-
     UnityAction<ChampionIdentify> clickEvent;
+    ChampionButtonStatePresenter _presenter;
 
-    HashSet<int> masteredChampIds = new HashSet<int>();
-    BanPickStorage storage;
     void Start()
     {
         var champions = championManager.AllChampion.Select(x => x.CreateChampion());
@@ -48,54 +46,48 @@ public class ChampionButtonView : MonoBehaviour
         foreach (Transform child in content) Destroy(child.gameObject);
 
         buttons = new ChampionButtonCreator().DrawChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
-        if(clickEvent != null)
-            ApplyEvnet(clickEvent);
 
-        ApplyMasteryColor();
-        InActiveButtons(storage.SelectableIds);
+        if (clickEvent != null)
+            ApplyEvent(clickEvent);
+
+        ApplyStates();
     }
 
-    public void Init(IEnumerable<ChampionMastery> masteries, BanPickStorage storage)
+    public void Init(ChampionButtonStatePresenter presenter)
     {
-        this.storage = storage;
-        masteredChampIds = new HashSet<int>(masteries.Select(x => x.ChampionId));
-        ApplyMasteryColor(); // 주입 즉시 현재 버튼들에도 적용
+        _presenter = presenter;
+        ApplyStates();
     }
 
-    void ApplyMasteryColor()
+    void ApplyStates()
     {
-        if (buttons == null) return;
+        if (buttons == null || _presenter == null) return;
 
         foreach (var btn in buttons)
         {
-            if (masteredChampIds.Contains(btn.GetComponent<ChampionIdentify>().Id))
-                ButtonUtil.ChangeButtonColor(btn, new Color32(111, 233, 65, 255));
-        }
-    }
+            var identify = btn.GetComponent<ChampionIdentify>();
+            var state = _presenter.GetState(identify.Id); // 단일 모델 반환
 
-    public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
-    public void InActiveButton(int id)
-    {
-        ButtonUtil.InActiveButton(GetButton(id));
-        GetButton(id).GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
+            var text = btn.GetComponentInChildren<TextMeshProUGUI>();
+            text.text = state.Name;
+            text.color = state.TextColor;
+            ButtonUtil.ChangeButtonColor(btn, state.ButtonColor);
+
+            if (state.IsEnabled == false) ButtonUtil.InActiveButton(btn);
+            else btn.interactable = true;
+        }
     }
 
     public void AddEvent(UnityAction<ChampionIdentify> action)
     {
         clickEvent += action;
-        ApplyEvnet(action);
+        ApplyEvent(action);
     }
 
-    void ApplyEvnet(UnityAction<ChampionIdentify> action)
+    void ApplyEvent(UnityAction<ChampionIdentify> action)
     {
         foreach (var btn in buttons)
             btn.onClick.AddListener(() => action(btn.GetComponent<ChampionIdentify>()));
-    }
-
-    public void InActiveButtons(IEnumerable<int> selectableIds)
-    {
-        foreach (var btn in buttons.Where(x => selectableIds.Contains(x.GetComponent<ChampionIdentify>().Id) == false))
-            InActiveButton(btn.GetComponent<ChampionIdentify>().Id);
     }
 
     IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
@@ -107,12 +99,18 @@ public class ChampionButtonView : MonoBehaviour
         _ => throw new System.NotImplementedException(),
     };
 
-    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType) 
+    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType)
         => champions
             .OrderByDescending(c => c.Status.Stat.GetStatValue(statType))
             .Select(x => x.Id);
-}
 
+    public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
+    public void InActiveButton(int id)
+    {
+        ButtonUtil.InActiveButton(GetButton(id));
+        GetButton(id).GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
+    }
+}
 public class ChampionButtonCreator
 {
     public IEnumerable<Button> DrawChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject btnPrefab)

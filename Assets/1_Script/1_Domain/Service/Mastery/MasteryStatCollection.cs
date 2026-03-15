@@ -5,6 +5,7 @@ public class MasteryStatCollection : IMasteryStatProvider
 {
     readonly Dictionary<int, ChampionMastery> masteryMap;
     public IEnumerable<ChampionMastery> AllMasteries => masteryMap.Values;
+    public IEnumerable<int> AllMasteryIds => AllMasteries.Select(x => x.ChampionId);
 
     public MasteryStatCollection(IEnumerable<ChampionMastery> masteries) => masteryMap = masteries.ToDictionary(m => m.ChampionId, m => m);
 
