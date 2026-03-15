@@ -5,9 +5,9 @@ public record ChampionButtonStateModel(string Name, Color32 ButtonColor, Color32
 
 public static class ChampionButtonPalette
 {
-    public static readonly Color32 BothMastered = new Color32(233, 233, 65, 255);  // 노란색
     public static readonly Color32 MyMastery = new Color32(111, 233, 65, 255); // 초록색
     public static readonly Color32 OpponentMastery = new Color32(233, 111, 111, 255); // 살짝 붉은색
+    public static readonly Color32 BothMastered = new Color32(172, 172, 88, 255);
     public static readonly Color32 DefaultButton = new Color32(255, 255, 255, 255);
 
     public static readonly Color32 ActiveText = new Color32(255, 255, 255, 255);
