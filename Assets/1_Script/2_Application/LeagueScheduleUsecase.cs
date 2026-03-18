@@ -29,7 +29,7 @@ public class LeagueScheduleUsecase
         _storage.SaveIndex(_currentIndex);
 
         if (IsPlayerMatch(currentMatch))
-            _sceneLoader.LoadBattleScene(currentMatch);
+            _sceneLoader.LoadBattleScene();
         else
             _aiResolver.Resolve(currentMatch);
     }

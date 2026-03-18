@@ -14,12 +14,7 @@ public class LeagueScheduleUsecaseTest
     class FakeSceneLoader : ISceneLoader
     {
         public bool IsLoaded;
-        public MatchData LoadedMatch;
-        public void LoadBattleScene(MatchData match)
-        {
-            IsLoaded = true;
-            LoadedMatch = match;
-        }
+        public void LoadBattleScene() => IsLoaded = true;
     }
 
     class FakeAiResolver : IAiBattleResolver

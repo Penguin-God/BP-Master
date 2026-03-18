@@ -6,7 +6,7 @@ public interface IScheduleStorage
 
 public interface ISceneLoader
 {
-    void LoadBattleScene(MatchData match);
+    void LoadBattleScene();
 }
 
 public interface IAiBattleResolver
