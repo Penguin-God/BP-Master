@@ -22,5 +22,5 @@ public class MasteryProfile
         AvailablePoints--;
     }
 
-    public MasteryBoard GetBoard(int championId) => BoardCollection.GetOrCreateBoard(championId);
+    public MasteryBoard GetBoard(int championId) => BoardCollection.TryGetBoard(championId, out var result) ? result : new MasteryBoard();
 }
