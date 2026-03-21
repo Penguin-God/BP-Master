@@ -3,14 +3,10 @@ using System;
 
 public class MasteryInventoryTest
 {
-    MasteryProfile CreateInventory(int startPoints = 10)
-    {
-        var championIds = new[] { 101, 102 };
-        return new MasteryProfile(championIds, startPoints);
-    }
+    MasteryProfile CreateInventory(int startPoints = 10) => new MasteryProfile(startPoints);
 
     [Test]
-    public void 챔피언의_숙련도를_올리면_포인트가_감소하고_해당_보드의_스탯만이_증가한다()
+    public void 챔피언의_숙련도를_올리면_포인트가_감소하고_새로운_보드가_생성되어_스탯이_증가한다()
     {
         var inventory = CreateInventory(startPoints: 10);
 
@@ -18,6 +14,7 @@ public class MasteryInventoryTest
 
         Assert.AreEqual(9, inventory.AvailablePoints);
         Assert.AreEqual(1, inventory.GetBoard(101).AttackLevel);
+
         Assert.AreEqual(0, inventory.GetBoard(102).AttackLevel);
     }
 
@@ -33,7 +30,7 @@ public class MasteryInventoryTest
     public void 보드의_최대_레벨에_도달하여_실패하면_포인트는_감소하지_않는다()
     {
         var inventory = CreateInventory(startPoints: 10);
-        inventory.Upgrade(101, StatType.Speed); // 1레벨 달성
+        inventory.Upgrade(101, StatType.Speed); // 1레벨 달성 (스피드 최대 레벨이 1이라고 가정)
 
         Assert.Throws<InvalidOperationException>(() => inventory.Upgrade(101, StatType.Speed));
         Assert.AreEqual(9, inventory.AvailablePoints);
