@@ -1,3 +1,4 @@
+using Match;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -34,18 +35,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     [SerializeField] Button _upDefBtn;
     [SerializeField] Button _upSpdBtn;
 
-    [SerializeField] SkillTextSO skillTextSO;
     MasteryPointPresenter _presenter;
-
-    void Start()
-    {
-        var dataIO = new JsonMasterySaver();
-        var inventory = dataIO.Load();
-        if (inventory == null) 
-            inventory = new MasteryProfile(startPoints: 15);
-
-        Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), this, dataIO));
-    }
 
     public void Init(MasteryPointPresenter presenter)
     {
