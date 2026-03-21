@@ -17,7 +17,7 @@ public class JsonMasterySaverTests
     {
         var sut = CreateSut();
 
-        var inventory = new MasteryProfile(startPoints: 10);
+        var inventory = TestHelper.CreateMasteryInventory(10);
         inventory.Upgrade(101, StatType.Attack);
         inventory.Upgrade(102, StatType.Speed);
 

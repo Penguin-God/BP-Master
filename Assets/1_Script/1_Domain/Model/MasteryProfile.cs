@@ -5,12 +5,7 @@ public class MasteryProfile
     public int AvailablePoints { get; protected set; }
     public MasteryBoardCollection BoardCollection { get; }
 
-    public MasteryProfile(int startPoints = 0)
-    {
-        AvailablePoints = startPoints;
-        BoardCollection = new MasteryBoardCollection(new());
-    }
-
+    public MasteryProfile(int startPoints = 0) : this(startPoints, new MasteryBoardCollection(new())) { }
     public MasteryProfile(int point, MasteryBoardCollection boards)
     {
         AvailablePoints = point;
