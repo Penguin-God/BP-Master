@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,9 +15,13 @@ public struct MasteryBoardData
 }
 
 [Serializable]
-public class MasteryBoardSetup
+public class PlayerDataInspector
 {
+    public int Id;
+    public string Name;
     [TableList(ShowIndexLabels = true, AlwaysExpanded = true)] [SerializeField] MasteryBoardData[] _masteryBoardDatas;
 
     public MasteryBoardCollection CreateBoardCollection() => new MasteryBoardCollection(_masteryBoardDatas.ToDictionary(x => x.Id, x => x.CreateBoard()));
+
+    public PlayerData ToData() => new PlayerData(Id, Name, CreateBoardCollection());
 }

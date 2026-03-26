@@ -1,17 +1,7 @@
-using Match;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class AAAA : IChampionProvider // 데이터 매니저 만들기?
-{
-    public ChampionProfile GetProfile(int id)
-    {
-        var so = ChampionDataLoder.GetChampionData(id);
-        return new ChampionProfile(id, so.name, so.StatData, so.Skill);
-    }
-}
 
 public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
 {
