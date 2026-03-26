@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class AI_Scene : MonoBehaviour
 {
-    [SerializeField] int ai_id1;
-    [SerializeField] int ai_id2;
+    [SerializeField] PlayerDataInspector ai1;
+    [SerializeField] PlayerDataInspector ai2;
     [SerializeField] AIFactorySO aiFactory;
     [SerializeField] GamePhaseLoderSO gamePhaseLoderSO;
     [SerializeField] int matchCount;
-
 
     PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
     MasteryRegistry masteryRegistry = new();
@@ -18,15 +17,18 @@ public class AI_Scene : MonoBehaviour
 
     void Awake()
     {
-        idByTeam.Add(Team.Blue, ai_id1);
-        idByTeam.Add(Team.Red, ai_id2);
+        idByTeam.Add(Team.Blue, ai1.Id);
+        idByTeam.Add(Team.Red, ai2.Id);
         StartMatch();
     }
 
     void StartMatch()
     {
-        // MatchContext.MatchInit(new PlayerMatchData(new PlayerData(ai_id1, "", masteries)), 2, ChampionDataLoder.AllId);
+        MatchContext.MatchInit(new PlayerMatchData(ai1.ToData(), ai2.ToData()), 2, ChampionDataLoder.AllId);
         var storage = MatchContext.Storage;
+
+        masteryRegistry.InitTeamMastery(Team.Blue, new MasteryStatCollection(new ChampionMastery[0]));
+        masteryRegistry.InitTeamMastery(Team.Red, new MasteryStatCollection(new ChampionMastery[0]));
 
         StartBattle(storage);
     }
@@ -40,7 +42,7 @@ public class AI_Scene : MonoBehaviour
         var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
 
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoderSO.LoadPhase());
-        var phaseManager = new PhaseFlowOrchestrator(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(CreateEntry(Team.Blue, ai_id1), CreateEntry(Team.Red, ai_id2)));
+        var phaseManager = new PhaseFlowOrchestrator(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(CreateEntry(Team.Blue, ai1.Id), CreateEntry(Team.Red, ai2.Id)));
 
         phaseManager.OnGameEnd += OnDone;
         skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
@@ -51,11 +53,7 @@ public class AI_Scene : MonoBehaviour
         AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, skillController, ChampionDataLoder.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
     }
 
-    void ApplyMastery(Champion champion, Team team)
-    {
-        var masteryApplier = new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team));
-        masteryApplier.ApplyMastery(champion.Id, champion.Status);
-    }
+    void ApplyMastery(Champion champion, Team team) => new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);
 
     Dictionary<Team, int> idByTeam = new();
 

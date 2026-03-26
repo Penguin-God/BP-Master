@@ -33,15 +33,6 @@ namespace Match
         public static PlayerMatchData PlayerMatchData { get; private set; }
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
-        public static void MatchInit(MatchData match, int targetWin, int[] masteryLevels, IEnumerable<int> allChampionIds)
-        {
-            CurrentMatch = match;
-            WinCounter = new MatchWinCounter(match, targetWin);
-            _selectableIds = allChampionIds.ToList();
-            Storage = new BanPickStorage(_selectableIds);
-            var drawer = new MasteryDrawer(allChampionIds);
-        }
-
         public static void MatchInit(PlayerMatchData playerMatchData, int targetWin, IEnumerable<int> allChampionIds)
         {
             PlayerMatchData = playerMatchData;

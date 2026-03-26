@@ -39,7 +39,6 @@ public class BattleScene : MonoBehaviour
 
         phaseManager.OnGameEnd += OnDone;
 
-        // 로직 추출하기
         banPickHandler = new BanPickHandler(champManager.GetCatalog(), storage);
         var actionEventDispathcer = new BanPickEventDispatcher();
         banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
