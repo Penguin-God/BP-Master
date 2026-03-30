@@ -4,16 +4,14 @@ using System.Collections.Generic;
 
 public class BattleScene : MonoBehaviour
 {
-    [SerializeField] ChampionRepository champManager;
+    // [SerializeField] ChampionRepository champManager;
 
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] AI_Main ai_main;
     [SerializeField] GamePhaseLoderSO gamePhaseLoder;
 
-    PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
+    PickSlotFacade PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
-    // MasteryRegistry masteryRegistry = new();
-    BanPickHandler banPickHandler;
 
     [SerializeField] int playerId = 1;
 
@@ -57,6 +55,7 @@ public class BattleScene : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         var storage = MatchContext.Storage;
+        // 전용 SO 만들기
         var masteryFactory = new MasteryStatCollectionFactory(new MasteryMultiplier(15, 15, 1));
 
         int ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
@@ -66,18 +65,20 @@ public class BattleScene : MonoBehaviour
         playerDatas.Add(aiTeam, MatchContext.PlayerMatchData.GetPlayer(ai_id));
 
         var phaseAdvancer = gamePhaseLoder.CreateAdvacer();
-        var core = new MatchCore(ChampionDataLoder.GetCatalog(), storage, phaseAdvancer, masteryFactory.Create(playerDatas[playerTeam].MasteryBoardCollection), masteryFactory.Create(playerDatas[aiTeam].MasteryBoardCollection));
+        var championCatalog = ChampionDataLoder.GetCatalog();
+        var core = new MatchCore(championCatalog, storage, phaseAdvancer, null);
 
         var masteryRegistry = core.MasteryRegistry;
 
         var (blue, red) = CreatePhaseOrchestrator(championSelector, ai_main, playerTeam);
         core.SetupPhaseManager(blue, red);
         var phaseManager = core.PhaseManager;
-        banPickHandler = core.BanPickHandler;
+        var banPickHandler = core.BanPickHandler;
+        PickSlotFacade = banPickHandler.PickSlotFacade;
 
         matchUI_Controller.Init(playerTeam, storage, phaseManager, core.PhaseEventDispatcher, core.SkillController, masteryRegistry, banPickHandler); // start보다 먼저
 
-        ai_main.Init(ai_id, aiTeam, storage, core.SkillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
+        ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
 
         phaseManager.OnGameEnd += OnDone;
         phaseManager.Start();

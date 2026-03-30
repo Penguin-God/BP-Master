@@ -1,15 +1,22 @@
+using System.Collections.Generic;
+
 public class MasteryRegistry
 {
-    MasteryStatCollection _blueMasteryCollection;
-    MasteryStatCollection _redMasteryCollection;
+    readonly Dictionary<Team, MasteryStatCollection> teamMasteryMap;
 
-    public MasteryStatCollection GetTeamMasteryCollection(Team team) => team == Team.Blue ? _blueMasteryCollection : _redMasteryCollection;
+    public MasteryRegistry() => teamMasteryMap = new Dictionary<Team, MasteryStatCollection>();
 
-    public void InitTeamMastery(Team team, MasteryStatCollection collection)
+    public MasteryRegistry(MasteryStatCollection blueMastery, MasteryStatCollection redMastery) : this()
     {
-        if (team == Team.Blue)
-            _blueMasteryCollection = collection;
-        else
-            _redMasteryCollection = collection;
+        InitTeamMastery(Team.Blue, blueMastery);
+        InitTeamMastery(Team.Red, redMastery);
+    }
+
+    public void InitTeamMastery(Team team, MasteryStatCollection collection) => teamMasteryMap[team] = collection;
+
+    public MasteryStatCollection GetTeamMasteryCollection(Team team)
+    {
+        if(teamMasteryMap.ContainsKey(team)) return teamMasteryMap[team];
+        else return null;
     }
 }

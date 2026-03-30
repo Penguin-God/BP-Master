@@ -15,6 +15,7 @@ public class AI_Scene : MonoBehaviour
     MasteryRegistry masteryRegistry = new();
     BanPickHandler banPickHandler;
 
+    Dictionary<Team, int> idByTeam = new();
     void Awake()
     {
         idByTeam.Add(Team.Blue, ai1.Id);
@@ -54,8 +55,6 @@ public class AI_Scene : MonoBehaviour
     }
 
     void ApplyMastery(Champion champion, Team team) => new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);
-
-    Dictionary<Team, int> idByTeam = new();
 
     [SerializeField] BonusDataFactory bonusDataSO;
     int blueWin;
