@@ -4,12 +4,7 @@ public interface IScheduleStorage
     int LoadIndex();
 }
 
-public interface ISceneLoader
-{
-    void LoadBattleScene();
-}
-
-public interface IAiBattleResolver
+public interface IBattleResolver
 {
     void Resolve(MatchData match);
 }

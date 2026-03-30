@@ -4,18 +4,18 @@ public class LeagueScheduleUsecase
     readonly ScheduleFlow _flow;
     readonly int _playerId;
     readonly IScheduleStorage _storage;
-    readonly ISceneLoader _sceneLoader;
-    readonly IAiBattleResolver _aiResolver;
+    readonly IBattleResolver _userBattleResolver;
+    readonly IBattleResolver _aiResolver;
 
     int _currentIndex;
 
-    public LeagueScheduleUsecase(ScheduleFlow flow, int playerId, IScheduleStorage storage, ISceneLoader sceneLoader, IAiBattleResolver aiResolver)
+    public LeagueScheduleUsecase(ScheduleFlow flow, int playerId, IScheduleStorage storage, IBattleResolver sceneLoader, IBattleResolver aiResolver)
     {
         _flow = flow;
         _playerId = playerId;
         _currentIndex = storage.LoadIndex();
         _storage = storage;
-        _sceneLoader = sceneLoader;
+        _userBattleResolver = sceneLoader;
         _aiResolver = aiResolver;
     }
 
@@ -29,7 +29,7 @@ public class LeagueScheduleUsecase
         _storage.SaveIndex(_currentIndex);
 
         if (IsPlayerMatch(currentMatch))
-            _sceneLoader.LoadBattleScene();
+            _userBattleResolver.Resolve(currentMatch);
         else
             _aiResolver.Resolve(currentMatch);
     }

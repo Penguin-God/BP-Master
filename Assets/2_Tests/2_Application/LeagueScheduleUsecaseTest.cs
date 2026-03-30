@@ -11,13 +11,8 @@ public class LeagueScheduleUsecaseTest
         public int LoadIndex() => InitialIndex;
     }
 
-    class FakeSceneLoader : ISceneLoader
-    {
-        public bool IsLoaded;
-        public void LoadBattleScene() => IsLoaded = true;
-    }
 
-    class FakeAiResolver : IAiBattleResolver
+    class FakeResolver : IBattleResolver
     {
         public bool IsResolved;
         public MatchData ResolvedMatch;
@@ -32,16 +27,16 @@ public class LeagueScheduleUsecaseTest
     {
         public LeagueScheduleUsecase Usecase;
         public FakeStorage Storage;
-        public FakeSceneLoader SceneLoader;
-        public FakeAiResolver AiResolver;
+        public FakeResolver UserResolver;
+        public FakeResolver AiResolver;
     }
 
     TestContext CreateUsecase(MatchData[] matches, int playerId, int startIndex = 0)
     {
         var flow = new ScheduleFlow(matches);
         var storage = new FakeStorage { InitialIndex = startIndex };
-        var sceneLoader = new FakeSceneLoader();
-        var aiResolver = new FakeAiResolver();
+        var sceneLoader = new FakeResolver();
+        var aiResolver = new FakeResolver();
 
         var usecase = new LeagueScheduleUsecase(flow, playerId, storage, sceneLoader, aiResolver);
 
@@ -49,7 +44,7 @@ public class LeagueScheduleUsecaseTest
         {
             Usecase = usecase,
             Storage = storage,
-            SceneLoader = sceneLoader,
+            UserResolver = sceneLoader,
             AiResolver = aiResolver
         };
     }
@@ -63,7 +58,7 @@ public class LeagueScheduleUsecaseTest
         context.Usecase.ProcessNextMatch();
 
         Assert.AreEqual(1, context.Storage.SavedIndex);
-        Assert.IsTrue(context.SceneLoader.IsLoaded);
+        Assert.IsTrue(context.UserResolver.IsResolved);
         Assert.IsFalse(context.AiResolver.IsResolved);
     }
 
@@ -76,7 +71,7 @@ public class LeagueScheduleUsecaseTest
         context.Usecase.ProcessNextMatch();
 
         Assert.AreEqual(1, context.Storage.SavedIndex);
-        Assert.IsFalse(context.SceneLoader.IsLoaded);
+        Assert.IsFalse(context.UserResolver.IsResolved);
         Assert.IsTrue(context.AiResolver.IsResolved);
     }
 

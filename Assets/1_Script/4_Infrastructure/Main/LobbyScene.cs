@@ -1,4 +1,3 @@
-using Match;
 using UnityEngine;
 
 public class AAAA : IChampionProvider // 데이터 매니저 만들기?
@@ -46,8 +45,5 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO));
-
-        var matchDatas = new MatchData(1, 2);
-        MatchContext.MatchInit(matchDatas, 2, ChampionDataLoder.AllId);
     }
 }
