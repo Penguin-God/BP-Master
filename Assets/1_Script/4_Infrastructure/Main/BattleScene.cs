@@ -14,7 +14,7 @@ public class BattleScene : MonoBehaviour
     [SerializeField] MasteryRegistryFactorySO masteryFactorySO;
     [SerializeField] int playerId = 1;
 
-    readonly Dictionary<Team, PlayerData> playerDatas = new();
+    Dictionary<Team, PlayerData> playerDatas = new();
 
     //public void GameStart(Team playerTeam)
     //{
@@ -62,8 +62,6 @@ public class BattleScene : MonoBehaviour
         var dataProvider = new PlayerDataProvider(mainPlayerId, localLoader, aiPlayerDataCatalog);
 
         int ai_id = MatchContext.CurrentMatch.GetOpponentId(mainPlayerId);
-
-        var storage = MatchContext.Storage;
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
         playerDatas.Add(playerTeam, dataProvider.GetPlayer(mainPlayerId));
@@ -71,6 +69,7 @@ public class BattleScene : MonoBehaviour
 
         var phaseAdvancer = gamePhaseLoder.CreateAdvacer();
         var championCatalog = ChampionDataLoder.GetCatalog();
+        var storage = MatchContext.Storage;
         var core = new MatchCore(championCatalog, storage, phaseAdvancer, masteryFactorySO.CreateRegistry(playerDatas));
 
         var masteryRegistry = core.MasteryRegistry;

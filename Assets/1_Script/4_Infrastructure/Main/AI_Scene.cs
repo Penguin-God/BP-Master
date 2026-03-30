@@ -10,12 +10,13 @@ public class AI_Scene : MonoBehaviour
     [SerializeField] AIFactorySO aiFactory;
     [SerializeField] GamePhaseLoderSO gamePhaseLoderSO;
     [SerializeField] int matchCount;
+    [SerializeField] BonusDataFactory bonusDataSO;
+    [SerializeField] AIPlayerDataCatalogSO aiDataCatalog;
+    [SerializeField] MasteryRegistryFactorySO masteryFactorySO;
 
-    PickSlotFacade PickSlotFacade => banPickHandler.PickSlotFacade;
-    MasteryRegistry masteryRegistry = new();
-    BanPickHandler banPickHandler;
-
+    PickSlotFacade PickSlotFacade;
     Dictionary<Team, int> idByTeam = new();
+
     void Awake()
     {
         idByTeam.Add(Team.Blue, ai1.Id);
@@ -25,38 +26,28 @@ public class AI_Scene : MonoBehaviour
 
     void StartMatch()
     {
-        MatchContext.MatchInit(new PlayerMatchData(ai1.ToData(), ai2.ToData()), 2, ChampionDataLoder.AllId);
-        var storage = MatchContext.Storage;
-
-        masteryRegistry.InitTeamMastery(Team.Blue, new MasteryStatCollection(new ChampionMastery[0]));
-        masteryRegistry.InitTeamMastery(Team.Red, new MasteryStatCollection(new ChampionMastery[0]));
-
-        StartBattle(storage);
+        MatchContext.MatchInit(new MatchData(ai1.Id, ai2.Id), 2, ChampionDataLoder.AllId);
+        StartBattle(MatchContext.Storage);
     }
 
     void StartBattle(BanPickStorage storage)
     {
-        var phaseEventDispatcher = new PhaseEventDispatcher();
-        banPickHandler = new BanPickHandler(ChampionDataLoder.GetCatalog(), storage);
-        var actionEventDispathcer = new BanPickEventDispatcher();
-        banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
-        var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
-
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoderSO.LoadPhase());
-        var phaseManager = new PhaseFlowOrchestrator(phaseAdvancer, phaseEventDispatcher, new TeamPhaseEntryDispatcher(CreateEntry(Team.Blue, ai1.Id), CreateEntry(Team.Red, ai2.Id)));
+        var catalog = ChampionDataLoder.GetCatalog();
+        var registry = masteryFactorySO.CreateRegistry(aiDataCatalog.LoadPlayer(ai1.Id).MasteryBoardCollection, aiDataCatalog.LoadPlayer(ai2.Id).MasteryBoardCollection);
+        var core = new MatchCore(catalog, storage, phaseAdvancer, registry);
 
-        phaseManager.OnGameEnd += OnDone;
-        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-        banPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => phaseManager.SubmitAction(team);
+        var blueEntry = CreateEntry(Team.Blue, ai1.Id);
+        var redEntry = CreateEntry(Team.Red, ai2.Id);
+        core.SetupPhaseManager(blueEntry, redEntry);
 
-        phaseManager.Start();
+        PickSlotFacade = core.BanPickHandler.PickSlotFacade;
+        core.PhaseManager.OnGameEnd += OnDone;
+        core.PhaseManager.Start();
 
-        AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, skillController, ChampionDataLoder.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
+        AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, core.SkillController, catalog, core.MasteryRegistry, core.BanPickHandler, phaseAdvancer);
     }
 
-    void ApplyMastery(Champion champion, Team team) => new MasteryApplier(masteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);
-
-    [SerializeField] BonusDataFactory bonusDataSO;
     int blueWin;
     int redWin;
     void OnDone()
@@ -64,7 +55,7 @@ public class AI_Scene : MonoBehaviour
         var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
         MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
 
-        if(result.Winner == Team.All)
+        if (result.Winner == Team.All)
         {
             print("이게 무승부네 ㅋㅋ");
             StartBattle(MatchContext.Storage);

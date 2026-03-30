@@ -41,6 +41,15 @@ namespace Match
             Storage = new BanPickStorage(_selectableIds);
         }
 
+        public static void MatchInit(MatchData matchData, int targetWin, IEnumerable<int> allChampionIds)
+        {
+            CurrentMatch = matchData;
+
+            WinCounter = new MatchWinCounter(CurrentMatch, targetWin);
+            _selectableIds = allChampionIds.ToList();
+            Storage = new BanPickStorage(_selectableIds);
+        }
+
         public static bool EndMatch(int winner)
         {
             WinCounter.AddWin(winner);

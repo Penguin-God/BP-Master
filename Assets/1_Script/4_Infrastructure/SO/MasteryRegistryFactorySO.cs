@@ -18,4 +18,15 @@ public class MasteryRegistryFactorySO : ScriptableObject
 
         return new MasteryRegistry(blueMastery, redMastery);
     }
+
+    public MasteryRegistry CreateRegistry(MasteryBoardCollection blueBoard, MasteryBoardCollection redBoard)
+    {
+        var multiplier = new MasteryMultiplier(atkMultiplier, hpMultiplier, speedMultiplier);
+        var factory = new MasteryStatCollectionFactory(multiplier);
+
+        var blueMastery = factory.Create(blueBoard);
+        var redMastery = factory.Create(redBoard);
+
+        return new MasteryRegistry(blueMastery, redMastery);
+    }
 }
