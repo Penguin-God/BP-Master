@@ -163,14 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe63526cf6bfad41924ba0b73a67937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::AI_Scene
-  ai1:
-    Id: 2
-    Name: 
-    _masteryBoardDatas: []
-  ai2:
-    Id: 4
-    Name: 
-    _masteryBoardDatas: []
+  ai_id1: 2
+  ai_id2: 4
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
   gamePhaseLoderSO: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   matchCount: 3

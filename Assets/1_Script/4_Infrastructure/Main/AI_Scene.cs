@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class AI_Scene : MonoBehaviour
 {
-    [SerializeField] PlayerDataInspector ai1;
-    [SerializeField] PlayerDataInspector ai2;
+    [SerializeField] int ai_id1;
+    [SerializeField] int ai_id2;
     [SerializeField] AIFactorySO aiFactory;
     [SerializeField] GamePhaseLoderSO gamePhaseLoderSO;
     [SerializeField] int matchCount;
@@ -19,14 +19,14 @@ public class AI_Scene : MonoBehaviour
 
     void Awake()
     {
-        idByTeam.Add(Team.Blue, ai1.Id);
-        idByTeam.Add(Team.Red, ai2.Id);
+        idByTeam.Add(Team.Blue, ai_id1);
+        idByTeam.Add(Team.Red, ai_id2);
         StartMatch();
     }
 
     void StartMatch()
     {
-        MatchContext.MatchInit(new MatchData(ai1.Id, ai2.Id), 2, ChampionDataLoder.AllId);
+        MatchContext.MatchInit(new MatchData(ai_id1, ai_id2), 2, ChampionDataLoder.AllId);
         StartBattle(MatchContext.Storage);
     }
 
@@ -34,11 +34,11 @@ public class AI_Scene : MonoBehaviour
     {
         var phaseAdvancer = new PhaseAdvancer(gamePhaseLoderSO.LoadPhase());
         var catalog = ChampionDataLoder.GetCatalog();
-        var registry = masteryFactorySO.CreateRegistry(aiDataCatalog.LoadPlayer(ai1.Id).MasteryBoardCollection, aiDataCatalog.LoadPlayer(ai2.Id).MasteryBoardCollection);
+        var registry = masteryFactorySO.CreateRegistry(aiDataCatalog.LoadPlayer(ai_id1).MasteryBoardCollection, aiDataCatalog.LoadPlayer(ai_id2).MasteryBoardCollection);
         var core = new MatchCore(catalog, storage, phaseAdvancer, registry);
 
-        var blueEntry = CreateEntry(Team.Blue, ai1.Id);
-        var redEntry = CreateEntry(Team.Red, ai2.Id);
+        var blueEntry = CreateEntry(Team.Blue, ai_id1);
+        var redEntry = CreateEntry(Team.Red, ai_id2);
         core.SetupPhaseManager(blueEntry, redEntry);
 
         PickSlotFacade = core.BanPickHandler.PickSlotFacade;

@@ -12,59 +12,23 @@ public class BattleScene : MonoBehaviour
 
     [SerializeField] GamePhaseLoderSO gamePhaseLoder;
     [SerializeField] MasteryRegistryFactorySO masteryFactorySO;
-    [SerializeField] int playerId = 1;
-
     Dictionary<Team, PlayerData> playerDatas = new();
 
-    //public void GameStart(Team playerTeam)
-    //{
-    //    var storage = MatchContext.Storage;
-
-    //    int ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
-    //    Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
-
-    //    playerDatas.Add(playerTeam, MatchContext.GetPlayerData(playerId));
-    //    playerDatas.Add(aiTeam, MatchContext.PlayerMatchData.GetPlayer(ai_id));
-
-    //    var masteryFactory = new MasteryStatCollectionFactory(new MasteryMultiplier(15, 15, 1));
-    //    masteryRegistry.InitTeamMastery(playerTeam, masteryFactory.Create(playerDatas[playerTeam].MasteryBoardCollection));
-    //    masteryRegistry.InitTeamMastery(aiTeam, masteryFactory.Create(playerDatas[aiTeam].MasteryBoardCollection));
-
-    //    var phaseEventDispatcher = new PhaseEventDispatcher();
-    //    var phaseAdvancer = new PhaseAdvancer(gamePhaseLoder.LoadPhase());
-    //    PhaseFlowOrchestrator phaseManager = CreatePhaseOrchestrator(phaseAdvancer, phaseEventDispatcher, championSelector, ai_main, playerTeam);
-
-    //    phaseManager.OnGameEnd += OnDone;
-
-    //    banPickHandler = new BanPickHandler(champManager.GetCatalog(), storage);
-    //    var actionEventDispathcer = new BanPickEventDispatcher();
-    //    banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
-    //    var skillController = new SkillUsecase(PickSlotFacade.ChampionSlots, new SkillRunner(new SkillActionFactory(actionEventDispathcer, phaseEventDispatcher), new SkillCondtionFactory()));
-    //    skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
-
-    //    banPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => phaseManager.SubmitAction(team);
-
-    //    matchUI_Controller.Init(playerTeam, storage, phaseManager, phaseEventDispatcher, skillController, masteryRegistry, banPickHandler); // start보다 먼저
-
-    //    ai_main.Init(ai_id, aiTeam , storage, skillController, champManager.GetCatalog(), masteryRegistry, banPickHandler, phaseAdvancer);
-
-    //    phaseManager.Start();
-    //}
 
     [SerializeField] AIPlayerDataCatalogSO aiPlayerDataCatalog;
-    [SerializeField] int mainPlayerId = 1;
+    [SerializeField] int userId = 1;
     [SerializeField] string mainPlayerName = "@@";
 
     public void GameStart(Team playerTeam)
     {
         IPlayerDataLoader localLoader = new LocalPlayerDataLoader(mainPlayerName, new JsonMasterySaver());
 
-        var dataProvider = new PlayerDataProvider(mainPlayerId, localLoader, aiPlayerDataCatalog);
+        var dataProvider = new PlayerDataProvider(userId, localLoader, aiPlayerDataCatalog);
 
-        int ai_id = MatchContext.CurrentMatch.GetOpponentId(mainPlayerId);
+        int ai_id = MatchContext.CurrentMatch.GetOpponentId(userId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
-        playerDatas.Add(playerTeam, dataProvider.GetPlayer(mainPlayerId));
+        playerDatas.Add(playerTeam, dataProvider.GetPlayer(userId));
         playerDatas.Add(aiTeam, dataProvider.GetPlayer(ai_id));
 
         var phaseAdvancer = gamePhaseLoder.CreateAdvacer();
