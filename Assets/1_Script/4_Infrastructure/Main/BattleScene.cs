@@ -51,10 +51,27 @@ public class BattleScene : MonoBehaviour
     //    phaseManager.Start();
     //}
 
+    [SerializeField] AIPlayerDataCatalogSO aiPlayerDataCatalog;
+    [SerializeField] int mainPlayerId = 1;
+    [SerializeField] string mainPlayerName = "@@";
+
     public void GameStart(Team playerTeam)
     {
+        var dataIO = new JsonMasterySaver();
+
+        // IPlayerDataLoader를 구현한 구체 클래스들을 주입합니다.
+        IPlayerDataLoader localLoader = new LocalPlayerDataLoader(mainPlayerName, dataIO);
+        IPlayerDataLoader aiLoader = aiPlayerDataCatalog;
+
+        var dataProvider = new PlayerDataProvider(mainPlayerId, localLoader, aiLoader);
+
+        int ai_id = MatchContext.CurrentMatch.GetOpponentId(mainPlayerId);
+
+        var playerDatass = new PlayerMatchData(dataProvider.GetPlayer(mainPlayerId), dataProvider.GetPlayer(ai_id));
+
+        // =======================================================
+
         var storage = MatchContext.Storage;
-        int ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
         playerDatas.Add(playerTeam, MatchContext.GetPlayerData(playerId));

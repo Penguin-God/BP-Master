@@ -10,6 +10,24 @@ public class AAAA : IChampionProvider // 데이터 매니저 만들기?
     }
 }
 
+public class LocalPlayerDataLoader : IPlayerDataLoader
+{
+    readonly string playerName;
+    readonly JsonMasterySaver saver;
+
+    public LocalPlayerDataLoader(string playerName, JsonMasterySaver saver)
+    {
+        this.playerName = playerName;
+        this.saver = saver;
+    }
+
+    public PlayerData LoadPlayer(int id)
+    {
+        var inventory = saver.Load();
+        return new PlayerData(id, playerName, inventory.BoardCollection);
+    }
+}
+
 public class LobbyScene : MonoBehaviour
 {
     [SerializeField] LeagueScheduleSO scheduleSO;
