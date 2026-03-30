@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class PlayerDataProvider
 {
     readonly int mainPlayerId;
@@ -12,4 +14,11 @@ public class PlayerDataProvider
     }
 
     public PlayerData GetPlayer(int id) => id == mainPlayerId ? localLoader.LoadPlayer(id) : aiLoader.LoadPlayer(id);
+
+    public Dictionary<Team, PlayerData> GetTeamPlayersDict(int blueId, int redId) 
+        => new Dictionary<Team, PlayerData>
+            {
+                { Team.Blue, GetPlayer(blueId) },
+                { Team.Red, GetPlayer(redId) }
+            };
 }

@@ -20,7 +20,6 @@ public class MatchCoreTests
         Assert.IsNotNull(matchCore.SkillController);
         Assert.IsNotNull(matchCore.MasteryRegistry);
         Assert.IsNotNull(matchCore.PhaseEventDispatcher);
-        Assert.IsNotNull(matchCore.PhaseAdvancer);
     }
 
     class DummyPhaseEntry : IPhaseEntry
