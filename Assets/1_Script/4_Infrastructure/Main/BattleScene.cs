@@ -4,15 +4,14 @@ using System.Collections.Generic;
 
 public class BattleScene : MonoBehaviour
 {
-    // [SerializeField] ChampionRepository champManager;
-
     [SerializeField] MatchUI_Controller matchUI_Controller;
     [SerializeField] AI_Main ai_main;
-    [SerializeField] GamePhaseLoderSO gamePhaseLoder;
 
     PickSlotFacade PickSlotFacade;
     [SerializeField] ChampionSelector_UI championSelector;
 
+    [SerializeField] GamePhaseLoderSO gamePhaseLoder;
+    [SerializeField] MasteryRegistryFactorySO masteryFactorySO;
     [SerializeField] int playerId = 1;
 
     readonly Dictionary<Team, PlayerData> playerDatas = new();
@@ -55,9 +54,6 @@ public class BattleScene : MonoBehaviour
     public void GameStart(Team playerTeam)
     {
         var storage = MatchContext.Storage;
-        // 전용 SO 만들기
-        var masteryFactory = new MasteryStatCollectionFactory(new MasteryMultiplier(15, 15, 1));
-
         int ai_id = MatchContext.CurrentMatch.GetOpponentId(playerId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
@@ -66,7 +62,7 @@ public class BattleScene : MonoBehaviour
 
         var phaseAdvancer = gamePhaseLoder.CreateAdvacer();
         var championCatalog = ChampionDataLoder.GetCatalog();
-        var core = new MatchCore(championCatalog, storage, phaseAdvancer, null);
+        var core = new MatchCore(championCatalog, storage, phaseAdvancer, masteryFactorySO.CreateRegistry(playerDatas));
 
         var masteryRegistry = core.MasteryRegistry;
 

@@ -8,11 +8,9 @@ public class MatchCore
 
     public PhaseFlowOrchestrator PhaseManager { get; private set; }
 
-    public MatchCore(ChampionCatalog catalog, BanPickStorage storage, PhaseAdvancer phaseAdvancer, MasteryStatCollection blueMastery, MasteryStatCollection redMastery)
+    public MatchCore(ChampionCatalog catalog, BanPickStorage storage, PhaseAdvancer phaseAdvancer, MasteryRegistry masteryRegistry)
     {
-        MasteryRegistry = new MasteryRegistry();
-        MasteryRegistry.InitTeamMastery(Team.Blue, blueMastery);
-        MasteryRegistry.InitTeamMastery(Team.Red, redMastery);
+        MasteryRegistry = masteryRegistry;
 
         PhaseEventDispatcher = new PhaseEventDispatcher();
         PhaseAdvancer = phaseAdvancer;

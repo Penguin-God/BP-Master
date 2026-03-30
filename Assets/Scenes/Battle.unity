@@ -2836,11 +2836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08c0b08665efa344881d3ec13785c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  champManager: {fileID: 1420292359}
   matchUI_Controller: {fileID: 1213870346}
   ai_main: {fileID: 758303701}
-  gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   championSelector: {fileID: 1640189475}
+  gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
+  masteryFactorySO: {fileID: 11400000, guid: 083dfcf386aeb5a40a89a1b662859841, type: 2}
   playerId: 1
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!1 &1434020710

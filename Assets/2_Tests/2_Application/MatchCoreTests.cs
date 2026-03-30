@@ -9,7 +9,7 @@ public class MatchCoreTests
         var blueMastery = new MasteryStatCollection(new ChampionMastery[0]);
         var redMastery = new MasteryStatCollection(new ChampionMastery[0]);
 
-        var matchCore = new MatchCore(CreateCaltalog(), CreateStorage(2), CreatePhaseAdvancer(), blueMastery, redMastery);
+        var matchCore = new MatchCore(CreateCaltalog(), CreateStorage(2), CreatePhaseAdvancer(), new MasteryRegistry(blueMastery, redMastery));
 
         var blueEntry = new DummyPhaseEntry(Team.Blue);
         var redEntry = new DummyPhaseEntry(Team.Red);
