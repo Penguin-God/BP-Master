@@ -19,4 +19,6 @@ public class GamePhaseLoderSO : ScriptableObject
         };
         return phase;
     }
+
+    public PhaseAdvancer CreateAdvacer() => new PhaseAdvancer(LoadPhase());
 }
