@@ -30,20 +30,16 @@ namespace Match
         public static BanPickStorage Storage { get; private set; }
         public static MatchWinCounter WinCounter { get; private set; }
 
-        public static PlayerMatchData PlayerMatchData { get; private set; }
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
         public static void MatchInit(PlayerMatchData playerMatchData, int targetWin, IEnumerable<int> allChampionIds)
         {
-            PlayerMatchData = playerMatchData;
             CurrentMatch = playerMatchData.ToMatchData();
 
             WinCounter = new MatchWinCounter(CurrentMatch, targetWin);
             _selectableIds = allChampionIds.ToList();
             Storage = new BanPickStorage(_selectableIds);
         }
-
-        public static PlayerData GetPlayerData(int id) => PlayerMatchData?.GetPlayer(id);
 
         public static bool EndMatch(int winner)
         {
@@ -65,7 +61,6 @@ namespace Match
             _selectableIds = Enumerable.Empty<int>();
             Storage = null;
             WinCounter = null;
-            PlayerMatchData = null;
         }
     }
 }

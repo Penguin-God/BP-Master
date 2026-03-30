@@ -11,13 +11,5 @@ public class PlayerDataProvider
         this.aiLoader = aiLoader;
     }
 
-    public PlayerData GetPlayer(int id)
-    {
-        if (id == mainPlayerId)
-        {
-            return localLoader.LoadPlayer(id);
-        }
-
-        return aiLoader.LoadPlayer(id);
-    }
+    public PlayerData GetPlayer(int id) => id == mainPlayerId ? localLoader.LoadPlayer(id) : aiLoader.LoadPlayer(id);
 }
