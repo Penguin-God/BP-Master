@@ -4,13 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class TestBattleScene : MonoBehaviour
 {
-    [SerializeField] PlayerDataInspector playerMastery;
-    [SerializeField] PlayerDataInspector aiMastery;
+    [SerializeField] int userId;
+    [SerializeField] int ai_id;
 
     void Start()
     {
-        var playerDatas = new PlayerMatchData(playerMastery.ToData(), aiMastery.ToData());
-        MatchContext.MatchInit(playerDatas, 2, ChampionDataLoder.AllId);
+        MatchContext.MatchInit(new MatchData(userId, ai_id), 2, ChampionDataLoder.AllId);
         SceneManager.LoadScene("Battle");
     }
 }

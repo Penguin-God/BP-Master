@@ -47,7 +47,7 @@ public class LobbyScene : MonoBehaviour
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO));
 
-        var playerDatas = new PlayerMatchData(new PlayerData(1, "@@", inventory.BoardCollection), new PlayerData(2, "AI", inventory.BoardCollection));
-        MatchContext.MatchInit(playerDatas, 2, ChampionDataLoder.AllId);
+        var matchDatas = new MatchData(1, 2);
+        MatchContext.MatchInit(matchDatas, 2, ChampionDataLoder.AllId);
     }
 }

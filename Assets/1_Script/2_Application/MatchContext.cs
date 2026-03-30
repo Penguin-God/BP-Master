@@ -32,15 +32,6 @@ namespace Match
 
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
-        public static void MatchInit(PlayerMatchData playerMatchData, int targetWin, IEnumerable<int> allChampionIds)
-        {
-            CurrentMatch = playerMatchData.ToMatchData();
-
-            WinCounter = new MatchWinCounter(CurrentMatch, targetWin);
-            _selectableIds = allChampionIds.ToList();
-            Storage = new BanPickStorage(_selectableIds);
-        }
-
         public static void MatchInit(MatchData matchData, int targetWin, IEnumerable<int> allChampionIds)
         {
             CurrentMatch = matchData;

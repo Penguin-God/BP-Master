@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using Match;
-using System.Collections.Generic;
 
 public class MatchContextTests
 {
@@ -10,18 +9,13 @@ public class MatchContextTests
         MatchContext.Clear();
     }
 
-    PlayerMatchData CreatePlayerMatchData(int id1, int id2)
-    {
-        var p1 = new PlayerData(id1, "Player", new MasteryBoardCollection(new Dictionary<int, MasteryBoard>()));
-        var p2 = new PlayerData(id2, "AI", new MasteryBoardCollection(new Dictionary<int, MasteryBoard>()));
-        return new PlayerMatchData(p1, p2);
-    }
+    MatchData CreateMatchData(int id1, int id2) => new MatchData(id1, id2);
 
     [Test]
     public void Init시_매치데이터_저장소_세팅()
     {
         var allIds = new[] { 10, 20, 30 };
-        var playerMatchData = CreatePlayerMatchData(1, 100);
+        var playerMatchData = CreateMatchData(1, 100);
 
         MatchContext.MatchInit(playerMatchData, targetWin: 2, allIds);
 
@@ -34,7 +28,7 @@ public class MatchContextTests
     public void 게임이_끝나면_승리_기록_후_픽된_ID는_선택_풀에서_제외한다()
     {
         var allIds = new[] { 10, 20, 30 };
-        var playerMatchData = CreatePlayerMatchData(1, 100);
+        var playerMatchData = CreateMatchData(1, 100);
 
         MatchContext.MatchInit(playerMatchData, 2, allIds);
 
@@ -48,7 +42,7 @@ public class MatchContextTests
     [Test]
     public void 승수를_채워서_매치가_끝나면_모든_상태를_비운다()
     {
-        var playerMatchData = CreatePlayerMatchData(1, 100);
+        var playerMatchData = CreateMatchData(1, 100);
 
         MatchContext.MatchInit(playerMatchData, 2, new[] { 10 });
 
