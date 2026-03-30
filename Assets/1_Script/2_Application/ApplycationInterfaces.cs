@@ -19,3 +19,8 @@ public interface IPhaseEntry
     void EnterBan();
     void EnterPick();
 }
+
+public interface IPlayerDataLoader
+{
+    PlayerData LoadPlayer(int id);
+}
