@@ -81,6 +81,7 @@ public static class TestHelper
     public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
 
     public static BonusCalculator CreateBonus(int needScore, int bonus) => new BonusCalculator(new SortedDictionary<int, int>() { { needScore, bonus } });
+    public static TeamBonusCalculator CreateTeamBonus() => new TeamBonusCalculator(CreateBonus(0, 0), CreateBonus(0, 0), CreateBonus(0, 0));
 
     public static ChampionMastery CreateMasteryData(int id, int att = 0, int def = 0, int speed = 0) => new ChampionMastery(id, CreateStat(att, def, speed));
     public static MasteryApplier CreateMasteryApplier(params ChampionMastery[] masteries) => new MasteryApplier(new MasteryStatCollection(masteries));

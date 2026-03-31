@@ -13,4 +13,6 @@ public class BonusDataFactory : ScriptableObject
     public BonusDataSO SpeedBonus => speedBonus;
 
     public TeamBonusCalculator TeamBonus => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, speedBonus.Bonus);
+
+    public TeamBonusCalculator CreateTeamBonusCalculator() => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, speedBonus.Bonus);
 }

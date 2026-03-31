@@ -1,3 +1,5 @@
+using System;
+
 public class MatchCore
 {
     public readonly MasteryRegistry MasteryRegistry;
@@ -5,10 +7,11 @@ public class MatchCore
     public readonly PhaseAdvancer PhaseAdvancer;
     public readonly BanPickHandler BanPickHandler;
     public readonly SkillUsecase SkillController;
-
+    readonly TeamBonusCalculator TeamBonusCalculator;
     public PhaseFlowOrchestrator PhaseManager { get; private set; }
 
-    public MatchCore(ChampionCatalog catalog, BanPickStorage storage, PhaseAdvancer phaseAdvancer, MasteryRegistry masteryRegistry)
+    public event Action<MatchResult> OnMatchFinished;
+    public MatchCore(ChampionCatalog catalog, BanPickStorage storage, PhaseAdvancer phaseAdvancer, MasteryRegistry masteryRegistry, TeamBonusCalculator teamBonusCalculator)
     {
         MasteryRegistry = masteryRegistry;
 
@@ -24,6 +27,7 @@ public class MatchCore
             BanPickHandler.PickSlotFacade.ChampionSlots,
             new SkillRunner(new SkillActionFactory(actionEventDispatcher, PhaseEventDispatcher), new SkillCondtionFactory())
         );
+        TeamBonusCalculator = teamBonusCalculator;
     }
 
     public void SetupPhaseManager(IPhaseEntry blueEntry, IPhaseEntry redEntry)
@@ -32,7 +36,17 @@ public class MatchCore
 
         SkillController.OnUseSkill += slot => PhaseManager.SubmitAction(slot.Team);
         BanPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => PhaseManager.SubmitAction(team);
+
+        PhaseManager.OnGameEnd += HandleGameEnd;
     }
 
     void ApplyMastery(Champion champion, Team team) => new MasteryApplier(MasteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);
+
+    void HandleGameEnd()
+    {
+        var builder = new MatchResultBuilder(TeamBonusCalculator);
+        MatchResult result = new MatchResultConverter(builder).ToResult(BanPickHandler.PickSlotFacade.StatusSlots);
+
+        OnMatchFinished?.Invoke(result);
+    }
 }
