@@ -5,16 +5,23 @@ public class ValueSelectSO : AI_SelectorFactory
 {
     [SerializeField] int speedValue;
     [SerializeField] BonusDataFactory bonusDataFactory;
+    [SerializeField] bool enableLogging;
+
     public override IChampionSelector CreateBanSelector()
     {
-        var selector = new ValueSelector(CreateRanker(EnumCaster.GetOppoentTeam(team)));
-        return new ValueSelectorLog(selector, CreateValueLogger(EnumCaster.GetOppoentTeam(team)));
+        Team opponentTeam = EnumCaster.GetOppoentTeam(team);
+        var selector = new ValueSelector(CreateRanker(opponentTeam));
+
+        if (enableLogging) return new ValueSelectorLog(selector, CreateValueLogger(opponentTeam));
+        else return selector;
     }
 
     public override IChampionSelector CreatePickSelector()
     {
         var selector = new ValueSelector(CreateRanker(team));
-        return new ValueSelectorLog(selector, CreateValueLogger(team));
+
+        if (enableLogging) return new ValueSelectorLog(selector, CreateValueLogger(team));
+        else return selector;
     }
 
     public PickValueEvaluator CreateEvaluator(Team team)
