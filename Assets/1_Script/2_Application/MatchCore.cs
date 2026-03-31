@@ -37,7 +37,7 @@ public class MatchCore
         SkillController.OnUseSkill += slot => PhaseManager.SubmitAction(slot.Team);
         BanPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => PhaseManager.SubmitAction(team);
 
-        PhaseManager.OnGameEnd += HandleGameEnd;
+        PhaseEventDispatcher.OnPhaseDone += HandleGameEnd;
     }
 
     void ApplyMastery(Champion champion, Team team) => new MasteryApplier(MasteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);

@@ -9,10 +9,7 @@ public class AI_Scene : MonoBehaviour
     [SerializeField] int ai_id2;
     [SerializeField] AIFactorySO aiFactory;
     [SerializeField] int matchCount;
-    [SerializeField] BonusDataFactory bonusDataSO;
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
-
-    PickSlotFacade PickSlotFacade;
     Dictionary<Team, int> idByTeam = new();
 
     void Awake()
@@ -37,8 +34,7 @@ public class AI_Scene : MonoBehaviour
         var redEntry = CreateEntry(Team.Red, ai_id2);
         core.SetupPhaseManager(blueEntry, redEntry);
 
-        PickSlotFacade = core.BanPickHandler.PickSlotFacade;
-        core.PhaseManager.OnGameEnd += OnDone;
+        core.OnMatchFinished += OnDone;
         core.PhaseManager.Start();
 
         AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, core.SkillController, catalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
@@ -46,11 +42,8 @@ public class AI_Scene : MonoBehaviour
 
     int blueWin;
     int redWin;
-    void OnDone()
+    void OnDone(MatchResult result)
     {
-        var builder = new MatchResultBuilder(bonusDataSO.TeamBonus);
-        MatchResult result = new MatchResultConverter(builder).ToResult(PickSlotFacade.StatusSlots);
-
         if (result.Winner == Team.All)
         {
             print("이게 무승부네 ㅋㅋ");
