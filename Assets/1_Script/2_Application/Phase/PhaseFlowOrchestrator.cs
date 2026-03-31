@@ -6,7 +6,6 @@ public class PhaseFlowOrchestrator
     readonly TeamPhaseEntryDispatcher entryDispatcher;
 
     public GameFlowData CurrentFlow => phaseAdvancer.CurrentFlow;
-    public System.Action OnGameEnd;
 
     public PhaseFlowOrchestrator(PhaseAdvancer phaseAdvancer, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
     {
@@ -31,6 +30,5 @@ public class PhaseFlowOrchestrator
     {
         entryDispatcher.EnterPhase(flow);
         dispatcher.Dispatch(flow.Phase, flow.Turn);
-        if (flow.Phase == GamePhase.Done) OnGameEnd?.Invoke();
     }
 }

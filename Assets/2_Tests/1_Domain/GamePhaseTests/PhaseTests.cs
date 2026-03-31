@@ -72,16 +72,4 @@ public class PhaseTests
 
         Assert.AreEqual(2, blue.Count);
     }
-
-    [Test]
-    public void Done에_진입하면_마지막_이밴트_실행()
-    {
-        bool isEnd = false;
-        var sut = new PhaseFlowOrchestrator(CreatePhaseAdvancer(CreatePhaseData(GamePhase.Done, Team.Blue)), new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(new TestEntry(), new TestEntry()));
-        sut.OnGameEnd += () => isEnd = true;
-        
-        sut.Start();
-
-        Assert.IsTrue(isEnd);
-    }
 }
