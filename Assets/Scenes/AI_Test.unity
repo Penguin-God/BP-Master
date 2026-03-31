@@ -165,10 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::AI_Scene
   ai_id1: 2
   ai_id2: 4
-  aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
   matchCount: 3
-  bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
-  matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
+  simulator: {fileID: 11400000, guid: 64580fc5b360b5f4cb0cb58bf414a473, type: 2}
 --- !u!1 &1098848048
 GameObject:
   m_ObjectHideFlags: 0

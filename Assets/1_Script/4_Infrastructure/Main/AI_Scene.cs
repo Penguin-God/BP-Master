@@ -1,84 +1,46 @@
-using Match;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_Scene : MonoBehaviour
 {
     [SerializeField] int ai_id1;
     [SerializeField] int ai_id2;
-    [SerializeField] AIFactorySO aiFactory;
     [SerializeField] int matchCount;
-    [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
-    Dictionary<Team, int> idByTeam = new();
-
-    void Awake()
-    {
-        idByTeam.Add(Team.Blue, ai_id1);
-        idByTeam.Add(Team.Red, ai_id2);
-        StartMatch();
-    }
-
-    void StartMatch()
-    {
-        MatchContext.MatchInit(new MatchData(ai_id1, ai_id2), 2, ChampionDataLoder.AllId);
-        StartBattle(MatchContext.Storage);
-    }
-
-    void StartBattle(BanPickStorage storage)
-    {
-        var catalog = ChampionDataLoder.GetCatalog();
-        var core = matchCoreFactorySO.CreateMatchCore(storage, catalog, idByTeam);
-
-        var blueEntry = CreateEntry(Team.Blue, ai_id1);
-        var redEntry = CreateEntry(Team.Red, ai_id2);
-        core.SetupPhaseManager(blueEntry, redEntry);
-
-        core.OnMatchFinished += OnDone;
-        core.PhaseManager.Start();
-
-        AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, core.SkillController, catalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
-    }
+    [SerializeField] AIBattleSimulatorSO simulator;
 
     int blueWin;
     int redWin;
-    void OnDone(MatchResult result)
-    {
-        if (result.Winner == Team.All)
-        {
-            print("이게 무승부네 ㅋㅋ");
-            StartBattle(MatchContext.Storage);
-        }
-
-        if (result.Winner == Team.Blue) blueWin++;
-        else redWin++;
-
-        StartCoroutine(Co_EndMatch(idByTeam[result.Winner], result.Winner));
-    }
-
     int blueMatchWin;
     int redMatchWin;
-    IEnumerator Co_EndMatch(int winnerId, Team winTeam)
-    {
-        yield return null;
 
-        if (MatchContext.EndMatch(winnerId))
+    void Start() => StartCoroutine(Co_RunMatches());
+
+    IEnumerator Co_RunMatches()
+    {
+        for (int i = 0; i < matchCount; i++)
         {
-            if (winTeam == Team.Blue) blueMatchWin++;
+            var match = new MatchData(ai_id1, ai_id2);
+            int finalWinnerId = simulator.SimulateMatch(match, winGoal: 2, onSingleGameEnd: PrintGame);
+
+            // 매치(BO3) 최종 승자 기록
+            if (finalWinnerId == ai_id1) blueMatchWin++;
             else redMatchWin++;
 
-            matchCount--;
-            if (matchCount > 0) StartMatch();
-            else
-            {
-                print($"blue win : {blueWin}");
-                print($"red win : {redWin}");
-
-                print($"블루 매치 승 : {blueMatchWin}");
-                print($"레드 매치 승 : {redMatchWin}");
-            }
+            yield return null; // 연산 터지는거 방지
         }
-        else StartBattle(MatchContext.Storage);
+
+        print($"blue win (단일 라운드) : {blueWin}");
+        print($"red win (단일 라운드) : {redWin}");
+
+        print($"블루 매치 승 (최종 승리) : {blueMatchWin}");
+        print($"레드 매치 승 (최종 승리) : {redMatchWin}");
+    }
+
+    void PrintGame(MatchResult result)
+    {
+        if (result.Winner == Team.Blue) blueWin++;
+        else if (result.Winner == Team.Red) redWin++;
+        else print("이게 무승부네 ㅋㅋ");
     }
 }
 
