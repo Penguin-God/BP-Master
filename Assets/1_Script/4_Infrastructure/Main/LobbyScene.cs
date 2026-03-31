@@ -33,10 +33,11 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] MoveGame moveGame;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
+    [SerializeField] AIBattleSimulatorSO aIBattleSimulatorSO;
 
     void Awake()
     {
-        var leagueScheduleUsecase = new LeagueScheduleUsecase(scheduleSO.CreateFlow(), 1, new PlayerPrefsScheduleStorage(), new BattleInintialzer(), null);
+        var leagueScheduleUsecase = new LeagueScheduleUsecase(scheduleSO.CreateFlow(), 1, new PlayerPrefsScheduleStorage(), new BattleInintialzer(), new AI_BattleResolver(aIBattleSimulatorSO));
         moveGame.Inject(leagueScheduleUsecase);
 
         var dataIO = new JsonMasterySaver();
