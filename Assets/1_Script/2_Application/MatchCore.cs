@@ -2,7 +2,7 @@ public class MatchCore
 {
     public readonly MasteryRegistry MasteryRegistry;
     public readonly PhaseEventDispatcher PhaseEventDispatcher;
-    readonly PhaseAdvancer PhaseAdvancer;
+    public readonly PhaseAdvancer PhaseAdvancer;
     public readonly BanPickHandler BanPickHandler;
     public readonly SkillUsecase SkillController;
 

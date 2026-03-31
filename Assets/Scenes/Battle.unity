@@ -2841,10 +2841,10 @@ MonoBehaviour:
   championSelector: {fileID: 1640189475}
   gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   masteryFactorySO: {fileID: 11400000, guid: 083dfcf386aeb5a40a89a1b662859841, type: 2}
-  playerId: 1
   aiPlayerDataCatalog: {fileID: 11400000, guid: dea8e0ef6e90e934390207bdbbeb511c, type: 2}
-  mainPlayerId: 1
+  userId: 1
   mainPlayerName: '@@'
+  matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
 --- !u!1 &1434020710
 GameObject:

@@ -8,11 +8,9 @@ public class AI_Scene : MonoBehaviour
     [SerializeField] int ai_id1;
     [SerializeField] int ai_id2;
     [SerializeField] AIFactorySO aiFactory;
-    [SerializeField] GamePhaseLoderSO gamePhaseLoderSO;
     [SerializeField] int matchCount;
     [SerializeField] BonusDataFactory bonusDataSO;
-    [SerializeField] AIPlayerDataCatalogSO aiDataCatalog;
-    [SerializeField] MasteryRegistryFactorySO masteryFactorySO;
+    [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
 
     PickSlotFacade PickSlotFacade;
     Dictionary<Team, int> idByTeam = new();
@@ -32,10 +30,8 @@ public class AI_Scene : MonoBehaviour
 
     void StartBattle(BanPickStorage storage)
     {
-        var phaseAdvancer = new PhaseAdvancer(gamePhaseLoderSO.LoadPhase());
         var catalog = ChampionDataLoder.GetCatalog();
-        var registry = masteryFactorySO.CreateRegistry(aiDataCatalog.LoadPlayer(ai_id1).MasteryBoardCollection, aiDataCatalog.LoadPlayer(ai_id2).MasteryBoardCollection);
-        var core = new MatchCore(catalog, storage, phaseAdvancer, registry);
+        var core = matchCoreFactorySO.CreateMatchCore(storage, catalog, idByTeam);
 
         var blueEntry = CreateEntry(Team.Blue, ai_id1);
         var redEntry = CreateEntry(Team.Red, ai_id2);
@@ -45,7 +41,7 @@ public class AI_Scene : MonoBehaviour
         core.PhaseManager.OnGameEnd += OnDone;
         core.PhaseManager.Start();
 
-        AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, core.SkillController, catalog, core.MasteryRegistry, core.BanPickHandler, phaseAdvancer);
+        AI_Entry CreateEntry(Team team, int id) => new AI_Entry(team, id, aiFactory, storage, core.SkillController, catalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
     }
 
     int blueWin;

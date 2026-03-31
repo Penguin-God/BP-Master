@@ -166,11 +166,9 @@ MonoBehaviour:
   ai_id1: 2
   ai_id2: 4
   aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
-  gamePhaseLoderSO: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   matchCount: 3
   bonusDataSO: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
-  aiDataCatalog: {fileID: 11400000, guid: dea8e0ef6e90e934390207bdbbeb511c, type: 2}
-  masteryFactorySO: {fileID: 11400000, guid: 083dfcf386aeb5a40a89a1b662859841, type: 2}
+  matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
 --- !u!1 &1098848048
 GameObject:
   m_ObjectHideFlags: 0
