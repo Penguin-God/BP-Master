@@ -10,7 +10,7 @@ public class LeagueRecordData
     public int Lose;
     public int Score;
 
-    public LeagueRecordData() { }
+    public LeagueRecordData() { } // 리플랙션용
 
     public LeagueRecordData(int win, int lose, int score)
     {
