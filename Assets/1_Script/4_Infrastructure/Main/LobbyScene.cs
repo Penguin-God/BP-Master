@@ -37,6 +37,7 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
     [SerializeField] AIBattleSimulatorSO aIBattleSimulatorSO;
+    [SerializeField] UI_LeagueSchedule uI_LeagueSchedule;
 
     LeagueRecordUseCase recordUsecase;
     void Awake()
@@ -44,7 +45,8 @@ public class LobbyScene : MonoBehaviour
         recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
 
         var scheduleStorage = new PlayerPrefsScheduleStorage();
-        var leagueScheduleUsecase = new LeagueScheduleUsecase(scheduleSO.CreateFlow(scheduleStorage.LoadIndex()), playerId: 1, scheduleStorage, new BattleInitializer(), new AI_BattleResolver(aIBattleSimulatorSO));
+        var matchFlow = scheduleSO.CreateFlow(scheduleStorage.LoadIndex());
+        var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, playerId: 1, scheduleStorage, new BattleInitializer(), new AI_BattleResolver(aIBattleSimulatorSO));
         moveGame.Inject(leagueScheduleUsecase);
 
         MatchContext.OnSeriesFinished -= HandleSeriesFinished;
@@ -56,6 +58,8 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO));
+
+        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, playerId: 1));
     }
 
     void HandleSeriesFinished(MatchData matchData, MatchWinCounter winCounter)
