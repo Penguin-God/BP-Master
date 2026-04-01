@@ -33,7 +33,7 @@ public class LeagueScheduleUsecaseTest
 
     TestContext CreateUsecase(MatchData[] matches, int playerId, int startIndex = 0)
     {
-        var flow = new ScheduleFlow(matches);
+        var flow = new ScheduleFlow(matches, startIndex);
         var storage = new FakeStorage { InitialIndex = startIndex };
         var sceneLoader = new FakeResolver();
         var aiResolver = new FakeResolver();
@@ -52,12 +52,12 @@ public class LeagueScheduleUsecaseTest
     [Test]
     public void 플레이어_매치는_씬을_이동하고_인덱스를_저장한다()
     {
-        var matches = new[] { new MatchData(1, 100) };
-        var context = CreateUsecase(matches, playerId: 1);
+        var matches = new[] { new MatchData(1, 100), new MatchData(1, 200) };
+        var context = CreateUsecase(matches, playerId: 1, startIndex: 1);
 
         context.Usecase.ProcessNextMatch();
 
-        Assert.AreEqual(1, context.Storage.SavedIndex);
+        Assert.AreEqual(2, context.Storage.SavedIndex);
         Assert.IsTrue(context.UserResolver.IsResolved);
         Assert.IsFalse(context.AiResolver.IsResolved);
     }
@@ -73,18 +73,5 @@ public class LeagueScheduleUsecaseTest
         Assert.AreEqual(1, context.Storage.SavedIndex);
         Assert.IsFalse(context.UserResolver.IsResolved);
         Assert.IsTrue(context.AiResolver.IsResolved);
-    }
-
-    [Test]
-    public void 시작_인덱스는_매치를_진행할때마다_증가한다()
-    {
-        var matches = new[] { new MatchData(1, 100), new MatchData(100, 200) };
-        var context = CreateUsecase(matches, playerId: 1, startIndex: 2);
-
-        context.Usecase.ProcessNextMatch();
-        Assert.AreEqual(3, context.Storage.SavedIndex);
-
-        context.Usecase.ProcessNextMatch();
-        Assert.AreEqual(4, context.Storage.SavedIndex);
     }
 }

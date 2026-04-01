@@ -7,13 +7,10 @@ public class LeagueScheduleUsecase
     readonly IBattleResolver _userBattleResolver;
     readonly IBattleResolver _aiResolver;
 
-    int _currentIndex;
-
     public LeagueScheduleUsecase(ScheduleFlow flow, int playerId, IScheduleStorage storage, IBattleResolver sceneLoader, IBattleResolver aiResolver)
     {
         _flow = flow;
         _playerId = playerId;
-        _currentIndex = storage.LoadIndex();
         _storage = storage;
         _userBattleResolver = sceneLoader;
         _aiResolver = aiResolver;
@@ -24,9 +21,8 @@ public class LeagueScheduleUsecase
         if (_flow.IsFinished) return;
 
         var currentMatch = _flow.Advance();
-
-        _currentIndex++;
-        _storage.SaveIndex(_currentIndex);
+        UnityEngine.Debug.Log(_flow.CurrentIndex);
+        _storage.SaveIndex(_flow.CurrentIndex);
 
         if (IsPlayerMatch(currentMatch))
             _userBattleResolver.Resolve(currentMatch);
