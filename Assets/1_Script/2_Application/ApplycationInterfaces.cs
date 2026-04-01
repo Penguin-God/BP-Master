@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public interface IScheduleStorage
 {
     void SaveIndex(int index);
@@ -18,4 +20,10 @@ public interface IPhaseEntry
 public interface IPlayerDataLoader
 {
     PlayerData LoadPlayer(int id);
+}
+
+public interface ILeagueRecordStorage
+{
+    Dictionary<int, LeagueRecord> LoadAll();
+    void SaveAll(Dictionary<int, LeagueRecord> records);
 }
