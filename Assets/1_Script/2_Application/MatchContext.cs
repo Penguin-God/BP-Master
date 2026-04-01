@@ -8,6 +8,7 @@ namespace Match
         public static MatchData CurrentMatch { get; private set; } = new MatchData(0, 0);
         public static BanPickStorage Storage { get; private set; }
         public static MatchWinCounter WinCounter { get; private set; }
+        public static event System.Action<MatchData, MatchWinCounter> OnSeriesFinished;
 
         static IEnumerable<int> _selectableIds = Enumerable.Empty<int>();
 
@@ -25,6 +26,7 @@ namespace Match
             WinCounter.AddWin(winner);
             if (WinCounter.IsMatchFinished)
             {
+                OnSeriesFinished?.Invoke(CurrentMatch, WinCounter);
                 Clear();
                 return true;
             }

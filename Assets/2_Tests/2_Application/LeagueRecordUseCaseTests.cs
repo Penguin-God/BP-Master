@@ -13,9 +13,8 @@ public class LeagueRecordUseCaseTests
         });
         var usecase = CreateSut(storage);
 
-        usecase.RecordMatch(player1Id: 1, 2, player2Id: 2, 0);
+        var result = usecase.RecordMatch(player1Id: 1, 2, player2Id: 2, 0);
 
-        var result = storage.LoadAll();
         Assert.AreEqual(2, result[1].Win);
         Assert.AreEqual(4, result[1].Score);
 
