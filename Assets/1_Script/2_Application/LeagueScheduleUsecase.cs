@@ -21,7 +21,6 @@ public class LeagueScheduleUsecase
         if (_flow.IsFinished) return;
 
         var currentMatch = _flow.Advance();
-        UnityEngine.Debug.Log(_flow.CurrentIndex);
         _storage.SaveIndex(_flow.CurrentIndex);
 
         if (IsPlayerMatch(currentMatch))

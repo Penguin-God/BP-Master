@@ -20,5 +20,5 @@ public class LeagueScheduleSO : ScriptableObject
 {
     [SerializeField] MatchDataConfig[] matches;
 
-    public ScheduleFlow CreateFlow() => new ScheduleFlow(matches.Select(x => x.CreateData()));
+    public ScheduleFlow CreateFlow(int startIndex) => new ScheduleFlow(matches.Select(x => x.CreateData()), startIndex);
 }

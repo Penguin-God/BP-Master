@@ -43,7 +43,8 @@ public class LobbyScene : MonoBehaviour
     {
         recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
 
-        var leagueScheduleUsecase = new LeagueScheduleUsecase(scheduleSO.CreateFlow(), 1, new PlayerPrefsScheduleStorage(), new BattleInitializer(), new AI_BattleResolver(aIBattleSimulatorSO));
+        var scheduleStorage = new PlayerPrefsScheduleStorage();
+        var leagueScheduleUsecase = new LeagueScheduleUsecase(scheduleSO.CreateFlow(scheduleStorage.LoadIndex()), playerId: 1, scheduleStorage, new BattleInitializer(), new AI_BattleResolver(aIBattleSimulatorSO));
         moveGame.Inject(leagueScheduleUsecase);
 
         MatchContext.OnSeriesFinished -= HandleSeriesFinished;
