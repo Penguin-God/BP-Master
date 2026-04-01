@@ -11,6 +11,7 @@ public record MatchData(int Id1, int Id2)
 public class ScheduleFlow
 {
     readonly MatchData[] _matches;
+    public IReadOnlyList<MatchData> Matches => _matches;
     public int CurrentIndex { get; private set; }
 
     public ScheduleFlow(IEnumerable<MatchData> matchDatas, int startIndex = 0)
