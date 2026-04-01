@@ -40,19 +40,18 @@ public class SchedulePaginationPresenter
         ResetToCurrentPage();
     }
 
-    public void ResetToCurrentPage()
-    {
-        CurrentPage = _flow.CurrentIndex / ItemsPerPage;
-    }
+    public void ResetToCurrentPage() => CurrentPage = _flow.CurrentIndex / ItemsPerPage;
 
     public void NextPage()
     {
-        if (CurrentPage < MaxPage) CurrentPage++;
+        if (CurrentPage < MaxPage) 
+            CurrentPage++;
     }
 
     public void PrevPage()
     {
-        if (CurrentPage > 0) CurrentPage--;
+        if (CurrentPage > 0) 
+            CurrentPage--;
     }
 
     public IReadOnlyList<MatchDisplayModel> GetCurrentPageData()
@@ -65,7 +64,7 @@ public class SchedulePaginationPresenter
         for (int i = start; i < end; i++)
         {
             MatchState state = DetermineState(i, _flow.Matches[i]);
-            result.Add(new MatchDisplayModel(i, _flow.Matches[i], state));
+            result.Add(new MatchDisplayModel(matchIndex: i, match: _flow.Matches[i], state));
         }
 
         return result;
