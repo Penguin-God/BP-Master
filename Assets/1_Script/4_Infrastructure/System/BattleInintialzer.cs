@@ -1,6 +1,4 @@
 using Match;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class BattleInitializer : IBattleResolver
@@ -16,12 +14,17 @@ public class BattleInitializer : IBattleResolver
 public class AI_BattleResolver : IBattleResolver
 {
     readonly AIBattleSimulatorSO _simulator;
+    readonly UI_LeagueSchedule uI_LeagueSchedule;
 
-    public AI_BattleResolver(AIBattleSimulatorSO simulator) => _simulator = simulator;
+    public AI_BattleResolver(AIBattleSimulatorSO simulator, UI_LeagueSchedule uI_LeagueSchedule)
+    {
+        _simulator = simulator;
+        this.uI_LeagueSchedule = uI_LeagueSchedule;
+    }
     public void Resolve(MatchData match) => _simulator.SimulateMatch(match, 2, OnGameDone);
 
     void OnGameDone(MatchResult result)
     {
-        UnityEngine.Debug.Log($"승자 : {result.Winner}");
+        uI_LeagueSchedule.RefreshUI();
     }
 }
