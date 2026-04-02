@@ -38,4 +38,13 @@ public class LeagueRecordCollection
     public void Update(LeagueRecord record) => _records[record.Id] = record;
 
     public IEnumerable<LeagueRecord> GetAll() => _records.Values;
+
+    public IReadOnlyList<LeagueRecord> GetSortedLeaderboard()
+    {
+        return _records.Values
+            .OrderByDescending(r => r.Win)
+            .ThenByDescending(r => r.Score)
+            .ThenBy(r => r.Id)
+            .ToList();
+    }
 }
