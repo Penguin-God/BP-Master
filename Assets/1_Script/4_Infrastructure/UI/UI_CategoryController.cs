@@ -8,7 +8,7 @@ public class UI_CategoryController : MonoBehaviour
     [SerializeField] Button masteryBtn;
 
     [Header("패널")]
-    [SerializeField] GameObject schedulePanel;
+    [SerializeField] GameObject leaguePanel;
     [SerializeField] GameObject masteryPanel;
 
     void Awake()
@@ -25,13 +25,13 @@ public class UI_CategoryController : MonoBehaviour
 
     void ShowSchedule()
     {
-        schedulePanel.SetActive(true);
+        leaguePanel.SetActive(true);
         masteryPanel.SetActive(false);
     }
 
     void ShowMastery()
     {
-        schedulePanel.SetActive(false);
+        leaguePanel.SetActive(false);
         masteryPanel.SetActive(true);
     }
 }

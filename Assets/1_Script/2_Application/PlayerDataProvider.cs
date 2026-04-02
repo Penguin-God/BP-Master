@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class PlayerDataProvider
+public class PlayerDataProvider : IPlayerDataLoader
 {
     readonly int mainPlayerId;
     readonly IPlayerDataLoader localLoader;
@@ -21,4 +21,6 @@ public class PlayerDataProvider
                 { Team.Blue, GetPlayer(blueId) },
                 { Team.Red, GetPlayer(redId) }
             };
+
+    public PlayerData LoadPlayer(int id) => GetPlayer(id);
 }
