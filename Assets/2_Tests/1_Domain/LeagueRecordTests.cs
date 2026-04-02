@@ -19,7 +19,7 @@ public class LeagueRecordTests
     [Test]
     public void 기존_상태는_변경되지_않는다()
     {
-        var record = CreateSut(1, 1, 1);
+        var record = CreateSut(id: 1, 1, 1, 1);
 
         record.ApplyMatchResult(2, 0);
 
@@ -28,5 +28,5 @@ public class LeagueRecordTests
         Assert.AreEqual(1, record.Score);
     }
 
-    LeagueRecord CreateSut(int win = 0, int loss = 0, int soore = 0) => new LeagueRecord(win, loss, soore);
+    LeagueRecord CreateSut(int id = 0, int win = 0, int loss = 0, int soore = 0) => new LeagueRecord(id, win, loss, soore);
 }

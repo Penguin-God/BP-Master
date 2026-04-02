@@ -6,20 +6,22 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class LeagueRecordData
 {
+    public int Id;
     public int Win;
     public int Lose;
     public int Score;
 
-    public LeagueRecordData() { } // 리플랙션용
+    public LeagueRecordData() { }
 
-    public LeagueRecordData(int win, int lose, int score)
+    public LeagueRecordData(int id, int win, int lose, int score)
     {
+        Id = id;
         Win = win;
         Lose = lose;
         Score = score;
     }
 
-    public LeagueRecord ToDomain() => new LeagueRecord(Win, Lose, Score);
+    public LeagueRecord ToDomain() => new LeagueRecord(Id, Win, Lose, Score);
 }
 
 public class PlayerPrefsLeagueRecordStorage : ILeagueRecordStorage
@@ -31,25 +33,24 @@ public class PlayerPrefsLeagueRecordStorage : ILeagueRecordStorage
         this.saveKey = saveKey;
     }
 
-    public Dictionary<int, LeagueRecord> LoadAll()
+    public LeagueRecordCollection LoadAll()
     {
         string json = PlayerPrefs.GetString(saveKey, string.Empty);
 
         if (string.IsNullOrEmpty(json))
-            return new Dictionary<int, LeagueRecord>();
+            return new LeagueRecordCollection(Enumerable.Empty<LeagueRecord>());
 
-        var dataDict = JsonConvert.DeserializeObject<Dictionary<int, LeagueRecordData>>(json);
-        return dataDict.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToDomain());
+        var dataList = JsonConvert.DeserializeObject<List<LeagueRecordData>>(json);
+        var domainRecords = dataList.Select(data => data.ToDomain());
+
+        return new LeagueRecordCollection(domainRecords);
     }
 
-    public void SaveAll(Dictionary<int, LeagueRecord> records)
+    public void SaveAll(LeagueRecordCollection collection)
     {
-        var dataDict = records.ToDictionary(
-            kvp => kvp.Key,
-            kvp => new LeagueRecordData(kvp.Value.Win, kvp.Value.Lose, kvp.Value.Score)
-        );
+        var dataList = collection.GetAll().Select(r => new LeagueRecordData(r.Id, r.Win, r.Lose, r.Score)).ToList();
 
-        string json = JsonConvert.SerializeObject(dataDict);
+        string json = JsonConvert.SerializeObject(dataList);
         PlayerPrefs.SetString(saveKey, json);
         PlayerPrefs.Save();
     }

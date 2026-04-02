@@ -67,14 +67,14 @@ public class LobbyScene : MonoBehaviour
         int p2Wins = winCounter.GetWin(matchData.Id2);
 
         var records = recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
-        PrintLeagueStandings(records);
+        PrintLeagueStandings(records.GetAll());
     }
 
-    void PrintLeagueStandings(Dictionary<int, LeagueRecord> records)
+    void PrintLeagueStandings(IEnumerable<LeagueRecord> records)
     {
         var logLines = records
-            .OrderByDescending(x => x.Value.Score)
-            .Select(kvp => $"ID {kvp.Key} : {kvp.Value.Win}승 {kvp.Value.Lose}패 (승점: {kvp.Value.Score})");
+            .OrderByDescending(x => x.Win)
+            .Select(kvp => $"ID {kvp.Id} : {kvp.Win}승 {kvp.Lose}패 (승점: {kvp.Score})");
 
         Debug.Log("=== 현재 리그 순위 ===\n" + string.Join("\n", logLines));
     }

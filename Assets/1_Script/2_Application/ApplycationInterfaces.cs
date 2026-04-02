@@ -24,6 +24,6 @@ public interface IPlayerDataLoader
 
 public interface ILeagueRecordStorage
 {
-    Dictionary<int, LeagueRecord> LoadAll();
-    void SaveAll(Dictionary<int, LeagueRecord> records);
+    LeagueRecordCollection LoadAll();
+    void SaveAll(LeagueRecordCollection collection);
 }
