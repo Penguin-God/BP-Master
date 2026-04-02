@@ -6520,6 +6520,7 @@ GameObject:
   - component: {fileID: 1933645736}
   - component: {fileID: 1933645738}
   - component: {fileID: 1933645737}
+  - component: {fileID: 1933645739}
   m_Layer: 5
   m_Name: CategoryPanel
   m_TagString: Untagged
@@ -6586,6 +6587,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933645735}
   m_CullTransparentMesh: 1
+--- !u!114 &1933645739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933645735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f8c8aae3330c742a88428cf51ae8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::UI_CategoryController
+  leagueBtn: {fileID: 462484600}
+  masteryBtn: {fileID: 2044044424}
+  schedulePanel: {fileID: 193032061}
+  masteryPanel: {fileID: 1821025614}
 --- !u!1 &1950163903
 GameObject:
   m_ObjectHideFlags: 0
