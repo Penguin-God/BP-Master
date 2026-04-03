@@ -21,7 +21,7 @@ MonoBehaviour:
       DefenseLevel: 1
       SpeedLevel: 0
   - Id: 2
-    Name: 
+    Name: "\uC774\uC775!"
     _masteryBoardDatas:
     - Id: 15
       AttackLevel: 1
