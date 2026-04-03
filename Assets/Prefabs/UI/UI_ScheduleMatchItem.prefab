@@ -64,7 +64,7 @@ MonoBehaviour:
   pastColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   currentColor: {r: 0, g: 1, b: 0, a: 1}
   playerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
 --- !u!1 &3590476303981927331
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4cceb2c47bb2d45389f0dcdbd03ff03f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8618db974c2d8471f8d4fbeec0f3697a, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
