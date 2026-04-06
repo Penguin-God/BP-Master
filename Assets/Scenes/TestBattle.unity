@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::TestBattleScene
   userId: 1
-  ai_id: 3
+  ai_id: 5
 --- !u!1 &1775200245
 GameObject:
   m_ObjectHideFlags: 0

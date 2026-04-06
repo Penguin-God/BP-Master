@@ -34,3 +34,6 @@ MonoBehaviour:
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 1
+  - Id: 5
+    Name: Random
+    _masteryBoardDatas: []
