@@ -36,6 +36,8 @@ namespace Match
             return false;
         }
 
+        public static void Draw() => Storage = new BanPickStorage(_selectableIds);
+
         public static void Clear()
         {
             CurrentMatch = new MatchData(0, 0);

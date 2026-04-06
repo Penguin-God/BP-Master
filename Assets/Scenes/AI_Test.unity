@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::AI_Scene
   ai_id1: 2
-  ai_id2: 4
+  ai_id2: 3
   matchCount: 3
   simulator: {fileID: 11400000, guid: 64580fc5b360b5f4cb0cb58bf414a473, type: 2}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}

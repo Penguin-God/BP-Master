@@ -45,7 +45,11 @@ public class BattleScene : MonoBehaviour
 
     void OnDone(MatchResult result)
     {
-        var matchEnd = MatchContext.EndMatch(playerDatas[result.Winner]);
+        bool matchEnd = false;
+        if (result.Winner == Team.All)
+            MatchContext.Draw();
+        else
+            matchEnd = MatchContext.EndMatch(playerDatas[result.Winner]);
         matchUI_Controller.Done(result, matchEnd);
     }
 }
