@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5d0b7418aa6114f860d6e3adefac52, type: 3}
   m_Name: MatchConfigSO
   m_EditorClassIdentifier: 
-  teamSize: 5
-  chargeAttackBonus: 10
-  guardBonusRate: 0.1
-  amplifyBonusRate: 0.1
-  breakRate: 0.1
+  UserId: 1
+  TargetWinCount: 2

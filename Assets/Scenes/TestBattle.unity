@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9760a48cf13ce13449171104bf40c4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::TestBattleScene
-  userId: 1
+  configSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   ai_id: 5
 --- !u!1 &1775200245
 GameObject:

@@ -4068,6 +4068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9700ac4f5971b2e40b530a9672714ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::LobbyScene
+  matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   scheduleSO: {fileID: 11400000, guid: ab1f24560077a3f4da024730442fd27a, type: 2}
   moveGame: {fileID: 1074352095}
   uI_MasteryPoint: {fileID: 1821025619}

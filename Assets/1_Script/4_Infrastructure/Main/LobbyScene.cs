@@ -32,6 +32,7 @@ public class LocalPlayerDataLoader : IPlayerDataLoader
 
 public class LobbyScene : MonoBehaviour
 {
+    [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] LeagueScheduleSO scheduleSO;
     [SerializeField] MoveGame moveGame;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
@@ -48,7 +49,7 @@ public class LobbyScene : MonoBehaviour
 
         var scheduleStorage = new PlayerPrefsScheduleStorage();
         var matchFlow = scheduleSO.CreateFlow(scheduleStorage.LoadIndex());
-        var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, playerId: 1, scheduleStorage, new BattleInitializer(), new AI_BattleResolver(aIBattleSimulatorSO, uI_LeagueSchedule));
+        var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, matchConfigSO.UserId, scheduleStorage, new BattleInitializer(matchConfigSO.TargetWinCount), new AI_BattleResolver(aIBattleSimulatorSO, uI_LeagueSchedule));
         moveGame.Inject(leagueScheduleUsecase);
 
         MatchContext.OnSeriesFinished -= HandleSeriesFinished;
@@ -60,7 +61,7 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO));
-        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, playerId: 1));
+        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, matchConfigSO.UserId));
 
         IPlayerDataLoader localLoader = new LocalPlayerDataLoader("펭귄갓", new JsonMasterySaver());
         var dataProvider = new PlayerDataProvider(1, localLoader, aiPlayerDataCatalog);

@@ -167,6 +167,7 @@ MonoBehaviour:
   ai_id2: 4
   matchCount: 3
   simulator: {fileID: 11400000, guid: 64580fc5b360b5f4cb0cb58bf414a473, type: 2}
+  matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
 --- !u!1 &1098848048
 GameObject:
   m_ObjectHideFlags: 0

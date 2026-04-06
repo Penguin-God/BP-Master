@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class TestBattleScene : MonoBehaviour
 {
-    [SerializeField] int userId;
+    [SerializeField] MatchConfigSO configSO;
     [SerializeField] int ai_id;
 
     void Start()
     {
-        MatchContext.MatchInit(new MatchData(userId, ai_id), 2, ChampionDataLoder.AllId);
+        MatchContext.MatchInit(new MatchData(configSO.UserId, ai_id), configSO.TargetWinCount, ChampionDataLoder.AllId);
         SceneManager.LoadScene("Battle");
     }
 }

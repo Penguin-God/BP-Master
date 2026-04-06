@@ -7,6 +7,7 @@ public class AI_Scene : MonoBehaviour
     [SerializeField] int ai_id2;
     [SerializeField] int matchCount;
     [SerializeField] AIBattleSimulatorSO simulator;
+    [SerializeField] MatchConfigSO matchConfigSO;
 
     int blueWin;
     int redWin;
@@ -20,7 +21,7 @@ public class AI_Scene : MonoBehaviour
         for (int i = 0; i < matchCount; i++)
         {
             var match = new MatchData(ai_id1, ai_id2);
-            int finalWinnerId = simulator.SimulateMatch(match, winGoal: 2, onSingleGameEnd: PrintGame);
+            int finalWinnerId = simulator.SimulateMatch(match, matchConfigSO.TargetWinCount, onSingleGameEnd: PrintGame);
 
             // 매치(BO3) 최종 승자 기록
             if (finalWinnerId == ai_id1) blueMatchWin++;
