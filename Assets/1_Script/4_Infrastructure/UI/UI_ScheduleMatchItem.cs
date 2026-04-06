@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UI_ScheduleMatchItem : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI matchNumberText;
     [SerializeField] TextMeshProUGUI matchText;
     [SerializeField] Image backgroundImage;
 
@@ -15,7 +16,8 @@ public class UI_ScheduleMatchItem : MonoBehaviour
 
     public void Bind(MatchDisplayModel model)
     {
-        matchText.text = $"No.{model.MatchIndex + 1} - Player {model.Match.Id1} vs Player {model.Match.Id2}";
+        matchNumberText.text = $"No.{model.MatchIndex + 1}";
+        matchText.text = $"{model.Match.Id1} vs {model.Match.Id2}";
         backgroundImage.color = GetColor(model.State);
     }
 
