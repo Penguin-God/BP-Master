@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0656e101a5f827e4b9a91ce33f2577b5, type: 3}
   m_Name: TestBuild
   m_EditorClassIdentifier: 
-  bans: []
+  bans:
+  - {fileID: 11400000, guid: 5d38329471112af438d2c472494c7427, type: 2}
+  - {fileID: 11400000, guid: fce1ffe1b7061b8408ae3702d3a5bc3c, type: 2}
+  - {fileID: 11400000, guid: 686de373f55d3af47be95b7fd6d47937, type: 2}
   picks:
-  - {fileID: 11400000, guid: 5f5c7591caea4e04b816869d96af3a1f, type: 2}
+  - {fileID: 11400000, guid: fb992e3516fe1cb4abc73e44bf105be7, type: 2}
+  - {fileID: 11400000, guid: 7ce020f57f367594380e9010092c1b2e, type: 2}

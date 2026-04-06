@@ -5,10 +5,7 @@ using System.Linq;
 
 public class RandomSkillTargetSelector : ISkillTargetSelector
 {
-    public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill)
-    {
-        return candidates.OrderBy(x => Guid.NewGuid()).Take(count);
-    }
+    public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill) => candidates.OrderBy(x => Guid.NewGuid()).Take(count);
 }
 
 public class HighStatTargetSelector : ISkillTargetSelector
@@ -22,10 +19,10 @@ public class HighStatTargetSelector : ISkillTargetSelector
 
     public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill)
     {
-        var percentData = skill.SkillDatas.First();
+        if (skill.SkillDatas.Count() == 0) return new SlotData[0];
 
         return candidates
-            .OrderByDescending(slot => statusStorage.GetSlot(slot).Stat.GetStatValue(percentData.AmountData.StatType))
+            .OrderByDescending(slot => statusStorage.GetSlot(slot).Stat.GetStatValue(skill.SkillDatas.First().AmountData.StatType))
             .Take(count);
     }
 }

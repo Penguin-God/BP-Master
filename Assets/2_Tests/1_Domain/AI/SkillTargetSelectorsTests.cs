@@ -31,4 +31,18 @@ public class SkillTargetSelectorsTests
 
         CollectionAssert.AreEqual(new SlotData[] { CreateBlueSlot(2), CreateBlueSlot(3) }, result);
     }
+
+    [Test]
+    public void 스킬이_없으면_타겟도_비어있는거_반환()
+    {
+        var targetSlots = CreateBlueSlots(0, 1, 2, 3, 4);
+        var statusSlots = new SlotStorage<ChampionStatus>();
+        statusSlots.AddSlots(Team.Blue, new ChampionStatus[] { CreateStatus(100), CreateStatus(200), CreateStatus(500), CreateStatus(400), CreateStatus(300) });
+        int targetCount = 2;
+        var sut = new HighStatTargetSelector(statusSlots);
+
+        var result = sut.SelectTargets(targetSlots, targetCount, CreateSkill()).ToList();
+
+        CollectionAssert.AreEqual(new SlotData[] {}, result);
+    }
 }
