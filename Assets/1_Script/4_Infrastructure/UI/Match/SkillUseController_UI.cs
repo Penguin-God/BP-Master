@@ -60,7 +60,6 @@ public class SkillUseController_UI : MonoBehaviour
         if (targetSelector.IsFull)
         {
             skillUseController.UseSkill(useSlot, new SlotData[] { });
-
         }
     }
 

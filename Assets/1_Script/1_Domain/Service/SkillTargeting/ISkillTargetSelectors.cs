@@ -19,7 +19,7 @@ public class HighStatTargetSelector : ISkillTargetSelector
 
     public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill)
     {
-        if (skill.SkillDatas.Count() == 0) return new SlotData[0];
+        if (skill.IsEmpty) return new SlotData[0];
 
         return candidates
             .OrderByDescending(slot => statusStorage.GetSlot(slot).Stat.GetStatValue(skill.SkillDatas.First().AmountData.StatType))
