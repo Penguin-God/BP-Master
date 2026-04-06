@@ -3,10 +3,10 @@ using Match;
 using System;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "AIBattleSimulator", menuName = "SO/Match/AIBattleSimulator")]
+[CreateAssetMenu(fileName = "AIBattleSimulator", menuName = "AI/BattleSimulator")]
 public class AIBattleSimulatorSO : ScriptableObject
 {
-    [SerializeField] AIFactorySO aiFactory;
+    [SerializeField] AISelectorFactory aiFactory;
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
 
     public int SimulateMatch(MatchData match, int winGoal = 2, Action<MatchResult> onSingleGameEnd = null)

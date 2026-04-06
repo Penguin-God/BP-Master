@@ -15,7 +15,7 @@ public struct MatchDataConfig
     public MatchData CreateData() => new MatchData(Id1, Id2);
 }
 
-[CreateAssetMenu(fileName = "LeagueScheduleSO", menuName = "BP Master/LeagueScheduleSO")]
+[CreateAssetMenu(fileName = "LeagueScheduleSO", menuName = "Data/LeagueSchedule")]
 public class LeagueScheduleSO : ScriptableObject
 {
     [SerializeField] MatchDataConfig[] matches;

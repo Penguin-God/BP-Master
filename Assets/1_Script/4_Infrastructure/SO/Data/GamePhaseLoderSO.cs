@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GamePhaseLoderSO", menuName = "BP Master/GamePhaseLoder")]
+[CreateAssetMenu(fileName = "GamePhaseLoderSO", menuName = "Data/GamePhaseLoder")]
 public class GamePhaseLoderSO : ScriptableObject
 {
     [SerializeField] DraftTurnSO ban;

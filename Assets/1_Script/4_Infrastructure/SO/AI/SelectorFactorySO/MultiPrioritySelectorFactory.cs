@@ -1,8 +1,8 @@
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MultiPrioritySelector", menuName = "BP Master/MultiPrioritySelector")]
-public class MultiPrioritySelector_SO : AI_SelectorFactory
+[CreateAssetMenu(fileName = "MultiPrioritySelector", menuName = "AI/Selector/MultiPriority")]
+public class MultiPrioritySelector_SO : AI_SelectorSO
 {
     [SerializeField] BuildPrioritySO[] buildDatas;
 

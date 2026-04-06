@@ -10,16 +10,16 @@ public struct AIConfig
     public int Id;
 
     [HorizontalGroup("AI")]
-    public AI_SelectorFactory SelectorFactory;
+    public AI_SelectorSO SelectorFactory;
 }
 
-[CreateAssetMenu(fileName = "AIFactorySO", menuName = "BP Master/AIFactorySO")]
-public class AIFactorySO : ScriptableObject
+[CreateAssetMenu(fileName = "AISelectorFactory", menuName = "AI/Factory")]
+public class AISelectorFactory : ScriptableObject
 {
     [TableList(AlwaysExpanded = true)]
     [SerializeField] AIConfig[] aiConfigs;
 
-    public AI_SelectorFactory CreateAI(int id, Team team, BanPickStorage storage, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
+    public AI_SelectorSO CreateAI(int id, Team team, BanPickStorage storage, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
     {
         var config = aiConfigs.FirstOrDefault(x => x.Id == id);
         if (config.SelectorFactory == null) 

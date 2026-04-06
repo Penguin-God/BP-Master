@@ -4,7 +4,7 @@ using UnityEngine;
 public class AI_Main : MonoBehaviour, IPhaseEntry
 {
     Team Team;
-    [SerializeField] AIFactorySO aiFactory;
+    [SerializeField] AISelectorFactory aiFactory;
 
     AI_BanPickAgent banPickAgent;
     AI_SkillExecutionUseCase skillUseCase;
@@ -16,7 +16,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     {
         Team = team;
 
-        AI_SelectorFactory selectorFactory = aiFactory.CreateAI(ai_id, Team, storage, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
+        AI_SelectorSO selectorFactory = aiFactory.CreateAI(ai_id, Team, storage, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
 
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorFactory.CreateBanSelector(), selectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += UseSkill;

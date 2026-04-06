@@ -1,8 +1,8 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "BuildPrioritySO", menuName = "BP Master/RandomSO")]
-public class RandomSelectorFactory : AI_SelectorFactory
+[CreateAssetMenu(fileName = "BuildPrioritySO", menuName = "AI/Selector/Random")]
+public class RandomSelectorFactory : AI_SelectorSO
 {
     public override IChampionSelector CreateBanSelector() => new RandomSelector();
     public override IChampionSelector CreatePickSelector() => new RandomSelector();

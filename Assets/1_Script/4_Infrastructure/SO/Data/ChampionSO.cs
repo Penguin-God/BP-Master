@@ -25,7 +25,7 @@ public class TraitDataConfig
     public SkillData CreateSkillData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
 }
 
-[CreateAssetMenu(fileName = "ChampionSO", menuName = "BP Master/ChampionSO")]
+[CreateAssetMenu(fileName = "ChampionSO", menuName = "Data/Champion")]
 public class ChampionSO : SerializedScriptableObject
 {
     [SerializeField] int id;

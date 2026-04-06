@@ -9,7 +9,7 @@ public struct BonusData
     public int Bonus;
 }
 
-[CreateAssetMenu(fileName = "BonusDataSO", menuName = "BP Master/BonusDataSO")]
+[CreateAssetMenu(fileName = "BonusDataSO", menuName = "Data/Bonus")]
 public class BonusDataSO : ScriptableObject
 {
     [SerializeField] BonusData[] bonusDatas;

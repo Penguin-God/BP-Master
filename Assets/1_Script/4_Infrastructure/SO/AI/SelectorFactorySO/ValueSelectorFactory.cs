@@ -1,10 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ValueSelectSO", menuName = "BP Master/ValueSelectSO")]
-public class ValueSelectSO : AI_SelectorFactory
+[CreateAssetMenu(fileName = "ValueSelectSO", menuName = "AI/Selector//Value")]
+public class ValueSelectSO : AI_SelectorSO
 {
     [SerializeField] int speedValue;
-    [SerializeField] BonusDataFactory bonusDataFactory;
+    [SerializeField] TeamBonusDataSO bonusDataFactory;
     [SerializeField] bool enableLogging;
 
     public override IChampionSelector CreateBanSelector()

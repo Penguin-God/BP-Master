@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PerdictValueSelectSO", menuName = "BP Master/PerdictValueSelectSO")]
-public class PredictValueSelectorFactory : AI_SelectorFactory
+[CreateAssetMenu(fileName = "PerdictValueSelectSO", menuName = "AI/Selector/PerdictValue")]
+public class PredictValueSelectorFactory : AI_SelectorSO
 {
     [SerializeField] ValueSelectSO valueSelectSO;
 

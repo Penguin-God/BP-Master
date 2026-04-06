@@ -1,14 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MasteryRegistryFactory", menuName = "SO/Match/MasteryRegistryFactory")]
+[CreateAssetMenu(fileName = "MasteryRegistryFactory", menuName = "Data/MasteryRegistry")]
 public class MasteryRegistryFactorySO : ScriptableObject
 {
     [SerializeField] int atkMultiplier;
     [SerializeField] int hpMultiplier;
     [SerializeField] int speedMultiplier;
-
-    public MasteryRegistry CreateRegistry(Dictionary<Team, PlayerData> playerDatas) => CreateRegistry(playerDatas[Team.Blue].MasteryBoardCollection, playerDatas[Team.Red].MasteryBoardCollection);
 
     public MasteryRegistry CreateRegistry(MasteryBoardCollection blueBoard, MasteryBoardCollection redBoard)
     {

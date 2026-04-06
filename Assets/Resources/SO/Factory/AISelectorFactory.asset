@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e4cd5ff84c3aee438f4d4415e57e54b, type: 3}
-  m_Name: AIFactorySO
-  m_EditorClassIdentifier: App::AIFactorySO
+  m_Script: {fileID: 11500000, guid: f8a1ca1d6a11c124e8e49a62ac5e35db, type: 3}
+  m_Name: AISelectorFactory
+  m_EditorClassIdentifier: App::AISelectorFactory
   aiConfigs:
   - Id: 2
     SelectorFactory: {fileID: 11400000, guid: 73f82a34c66ef4942a773c53924ef8d8, type: 2}

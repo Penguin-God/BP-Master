@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SelectorCreatetorSO", menuName = "Scriptable Objects/SelectorCreatetorSO")]
-public abstract class AI_SelectorFactory : ScriptableObject
+public abstract class AI_SelectorSO : ScriptableObject
 {
     protected MasteryStatCollection masteryManager;
     protected Team team;

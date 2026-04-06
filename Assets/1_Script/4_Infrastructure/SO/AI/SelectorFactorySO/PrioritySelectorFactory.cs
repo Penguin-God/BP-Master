@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuildPrioritySO", menuName = "BP Master/BuildPrioritySO")]
-public class BuildPrioritySO : AI_SelectorFactory
+[CreateAssetMenu(fileName = "BuildPrioritySO", menuName = "AI/Selector/BuildPriority")]
+public class BuildPrioritySO : AI_SelectorSO
 {
     [SerializeField] ChampionSO[] bans;
     [SerializeField] ChampionSO[] picks;

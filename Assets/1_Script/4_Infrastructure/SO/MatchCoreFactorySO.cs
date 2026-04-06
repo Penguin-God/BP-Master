@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "MatchCoreFactory", menuName = "SO/Match/MatchCoreFactory")]
+[CreateAssetMenu(fileName = "MatchCoreFactory", menuName = "BP Master/MatchCoreFactory")]
 public class MatchCoreFactorySO : ScriptableObject
 {
     public int UserId = 1;
@@ -10,7 +10,7 @@ public class MatchCoreFactorySO : ScriptableObject
     [SerializeField] GamePhaseLoderSO gamePhaseLoder;
     [SerializeField] MasteryRegistryFactorySO masteryFactorySO;
     [SerializeField] AIPlayerDataCatalogSO aiPlayerDataCatalog;
-    [SerializeField] BonusDataFactory bonusDataFactory;
+    [SerializeField] TeamBonusDataSO bonusDataFactory;
 
     public MatchCore CreateMatchCore(BanPickStorage storage, ChampionCatalog championCatalog, Dictionary<Team, int> playerDatas)
     {

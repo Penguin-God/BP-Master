@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AIPlayerDataCatalog", menuName = "SO/Match/AIPlayerDataCatalog")]
+[CreateAssetMenu(fileName = "AIDataCatalog", menuName = "AI/Catalog")]
 public class AIPlayerDataCatalogSO : ScriptableObject, IPlayerDataLoader
 {
     [SerializeField] PlayerDataInspector[] aiPlayers;
