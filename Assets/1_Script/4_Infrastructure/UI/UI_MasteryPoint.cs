@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,10 +27,12 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     [SerializeField] Button _upSpdBtn;
 
     MasteryPointPresenter _presenter;
-
-    public void Init(MasteryPointPresenter presenter)
+    MasteryProfile _masteryProfile;
+    IEnumerable<Button> buttons;
+    public void Init(MasteryPointPresenter presenter, MasteryProfile masteryProfile)
     {
         _presenter = presenter;
+        _masteryProfile = masteryProfile;
 
         BindUpgradeButtons();
         CreateAndBindChampionButtons();
@@ -49,18 +52,30 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     {
         foreach (Transform child in parent) Destroy(child.gameObject);
 
-        var buttons = new ChampionButtonCreator().DrawChampionButtons(parent, ChampionDataLoder.AllChampions, btnPrefab);
+        buttons = new ChampionButtonCreator().DrawChampionButtons(parent, ChampionDataLoder.AllChampions, btnPrefab);
 
         foreach (var btn in buttons)
         {
             int id = btn.GetComponent<ChampionIdentify>().Id;
             btn.onClick.AddListener(() => _presenter.SelectChampion(id));
+            RefreshBtnColor();
         }
     }
 
     public void UpdatePoints(int points)
     {
         _pointText.text = $"보유 Point : {points}";
+        RefreshBtnColor();
+    }
+
+    void RefreshBtnColor()
+    {
+        foreach (var btn in buttons)
+        {
+            int id = btn.GetComponent<ChampionIdentify>().Id;
+            if (_masteryProfile.TryGetBoard(id, out var board))
+                ButtonUtil.ChangeButtonColor(btn, Color.green);
+        }
     }
 
     public void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel)

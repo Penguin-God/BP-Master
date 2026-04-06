@@ -24,4 +24,10 @@ public class MasteryProfile
     }
 
     public MasteryBoard GetBoard(int championId) => BoardCollection.TryGetBoard(championId, out var result) ? result : new MasteryBoard();
+
+    public bool TryGetBoard(int championId, out MasteryBoard board)
+    {
+        if (BoardCollection.TryGetBoard(championId, out board)) return true;
+        else return false;
+    }
 }

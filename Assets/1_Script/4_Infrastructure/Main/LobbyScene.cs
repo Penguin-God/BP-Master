@@ -62,7 +62,7 @@ public class LobbyScene : MonoBehaviour
         if (inventory == null)
             inventory = new MasteryProfile(startPoints: 15);
 
-        uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO));
+        uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
         uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, matchConfigSO.UserId));
 
         IPlayerDataLoader localLoader = new LocalPlayerDataLoader("펭귄갓", new JsonMasterySaver());
