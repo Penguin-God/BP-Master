@@ -35,7 +35,7 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     {
         ButtonUtil.InActiveButton(selectBtn);
         // 시간 커플링. 빈 스킬일 경우 SetupSelectButton이 실행되서 버튼 비활성화가 늦으면 평생 그 상태임
-        banpickHandler.SaveSelect(phaseManager.CurrentFlow, selectId);
+        banpickHandler.SaveSelect(phaseManager.CurrentFlow, selectId); // 근데 이게 먼저 돼야 픽 에라 방지 가능
         championFocusView.ClearDisplay();
     }
 

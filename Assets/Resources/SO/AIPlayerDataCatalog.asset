@@ -37,3 +37,6 @@ MonoBehaviour:
   - Id: 5
     Name: Random
     _masteryBoardDatas: []
+  - Id: 999
+    Name: test
+    _masteryBoardDatas: []
