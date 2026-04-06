@@ -64,7 +64,7 @@ MonoBehaviour:
   pastColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   currentColor: {r: 0, g: 1, b: 0, a: 1}
   playerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  normalColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &3590476303981927331
 GameObject:
   m_ObjectHideFlags: 0

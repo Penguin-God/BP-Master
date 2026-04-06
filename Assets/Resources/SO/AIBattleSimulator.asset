@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3cd705ff2c8dd46aa4059dfdd8c52e, type: 3}
   m_Name: AIBattleSimulator
   m_EditorClassIdentifier: App::AIBattleSimulatorSO
-  aiFactory: {fileID: 11400000, guid: 850e0e28f4945fb45908c2f402952836, type: 2}
+  aiFactory: {fileID: 11400000, guid: 42c5bb79463963043a56da619f51e42d, type: 2}
   matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}

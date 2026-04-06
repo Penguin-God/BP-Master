@@ -26,6 +26,8 @@ public class LocalPlayerDataLoader : IPlayerDataLoader
     public PlayerData LoadPlayer(int id)
     {
         var inventory = saver.Load();
+        if(inventory == null)
+            inventory = new MasteryProfile(0);
         return new PlayerData(id, playerName, inventory.BoardCollection);
     }
 }

@@ -13,9 +13,23 @@ MonoBehaviour:
   m_Name: LeagueScheduleSO
   m_EditorClassIdentifier: App::LeagueScheduleSO
   matches:
-  - Id1: 1
-    Id2: 2
   - Id1: 2
     Id2: 3
+  - Id1: 4
+    Id2: 5
+  - Id1: 2
+    Id2: 5
   - Id1: 3
     Id2: 4
+  - Id1: 5
+    Id2: 3
+  - Id1: 2
+    Id2: 4
+  - Id1: 2
+    Id2: 3
+  - Id1: 4
+    Id2: 5
+  - Id1: 1
+    Id2: 2
+  - Id1: 1
+    Id2: 3

@@ -941,6 +941,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_ScheduleMatchItem
       objectReference: {fileID: 0}
+    - target: {fileID: 3822868276855224482, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
+      propertyPath: normalColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822868276855224482, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
+      propertyPath: normalColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822868276855224482, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
+      propertyPath: normalColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6253037960500007291, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8097,6 +8109,18 @@ PrefabInstance:
     - target: {fileID: 2095873460804155586, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
       propertyPath: m_Name
       value: UI_ScheduleMatchItem (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822868276855224482, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
+      propertyPath: normalColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822868276855224482, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
+      propertyPath: normalColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822868276855224482, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
+      propertyPath: normalColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6253037960500007291, guid: 1aa7eb370d7acf843a29273c5bab3e27, type: 3}
       propertyPath: m_Pivot.x
