@@ -16,5 +16,5 @@ MonoBehaviour:
   mainPlayerName: '@@'
   gamePhaseLoder: {fileID: 11400000, guid: a24c291c331a8e74ea36cc1315332261, type: 2}
   masteryFactorySO: {fileID: 11400000, guid: 083dfcf386aeb5a40a89a1b662859841, type: 2}
-  aiPlayerDataCatalog: {fileID: 11400000, guid: dea8e0ef6e90e934390207bdbbeb511c, type: 2}
+  playerDataProviderFactorySO: {fileID: 11400000, guid: d209fc15e379e1d41ad0b456a26b61fd, type: 2}
   bonusDataFactory: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}

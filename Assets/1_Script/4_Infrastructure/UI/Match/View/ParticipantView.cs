@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -6,10 +7,10 @@ public class ParticipantView : MonoBehaviour
     [SerializeField] TextMeshProUGUI blueText;
     [SerializeField] TextMeshProUGUI redText;
 
-    public void ViewParticipant(MatchRecord matchRecord, Team playerTeam)
+    public void ViewParticipant(Dictionary<Team, int> playerIds)
     {
-        UpdateText(playerTeam, "Player", matchRecord.PlayerWinCount);
-        UpdateText(EnumCaster.GetOppoentTeam(playerTeam), "AI", matchRecord.AiWinCount);
+        //UpdateText(Team.Blue, playerIds[Team.Blue], matchRecord.PlayerWinCount);
+        //UpdateText(EnumCaster.GetOppoentTeam(playerTeam), "AI", matchRecord.AiWinCount);
     }
 
     void UpdateText(Team team, string name, int win) => GetText(team).text = $"{name} : {win}";

@@ -10,13 +10,14 @@ public class BattleScene : MonoBehaviour
 
     Dictionary<Team, int> playerIds = new();
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
+    [SerializeField] MatchConfigSO matchConfigSO;
 
     public void GameStart(Team playerTeam)
     {
-        int ai_id = MatchContext.CurrentMatch.GetOpponentId(matchCoreFactorySO.UserId);
+        int ai_id = MatchContext.CurrentMatch.GetOpponentId(matchConfigSO.UserId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
-        playerIds.Add(playerTeam, matchCoreFactorySO.UserId);
+        playerIds.Add(playerTeam, matchConfigSO.UserId);
         playerIds.Add(aiTeam, ai_id);
 
         var championCatalog = ChampionDataLoder.GetCatalog();
