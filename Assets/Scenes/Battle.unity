@@ -2790,6 +2790,7 @@ GameObject:
   - component: {fileID: 1420292360}
   - component: {fileID: 1420292359}
   - component: {fileID: 1420292363}
+  - component: {fileID: 1420292364}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -2842,6 +2843,20 @@ MonoBehaviour:
   championSelector: {fileID: 1640189475}
   matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
+--- !u!114 &1420292364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420292358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346490d5e532d1b4898fc37a95498c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::TutorialTrigger
+  tutorialDataSO: {fileID: 11400000, guid: a2907f371e8615d489dc32418c1b7652, type: 2}
+  uiTutorialPrefab: {fileID: 7909101954416998179, guid: 308f008ac867816449398520e64d8d84, type: 3}
 --- !u!1 &1434020710
 GameObject:
   m_ObjectHideFlags: 0

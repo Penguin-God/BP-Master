@@ -35,6 +35,8 @@ public class BattleScene : MonoBehaviour
 
         core.OnMatchFinished += OnDone;
         core.PhaseManager.Start();
+
+        GetComponent<TutorialTrigger>().PlayTutorial();
     }
 
     (IPhaseEntry blue, IPhaseEntry red) CreatePhaseOrchestrator(IPhaseEntry player, IPhaseEntry ai, Team playerTeam)
