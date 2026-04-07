@@ -4046,6 +4046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 996125039}
   - component: {fileID: 996125040}
+  - component: {fileID: 996125041}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -4089,6 +4090,21 @@ MonoBehaviour:
   uI_LeagueSchedule: {fileID: 945918}
   uI_Leaderboard: {fileID: 692458969}
   aiPlayerDataCatalog: {fileID: 11400000, guid: dea8e0ef6e90e934390207bdbbeb511c, type: 2}
+  tutorialTrigger: {fileID: 996125041}
+--- !u!114 &996125041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996125038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346490d5e532d1b4898fc37a95498c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::TutorialTrigger
+  tutorialDataSO: {fileID: 11400000, guid: 887db6835f8931c4aabcd0b8c47f6656, type: 2}
+  uiTutorialPrefab: {fileID: 7909101954416998179, guid: 308f008ac867816449398520e64d8d84, type: 3}
 --- !u!1 &1074352090
 GameObject:
   m_ObjectHideFlags: 0

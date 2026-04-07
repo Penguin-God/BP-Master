@@ -43,6 +43,7 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] UI_LeagueSchedule uI_LeagueSchedule;
     [SerializeField] UI_Leaderboard uI_Leaderboard;
     [SerializeField] AIPlayerDataCatalogSO aiPlayerDataCatalog;
+    [SerializeField] TutorialTrigger tutorialTrigger;
 
     LeagueRecordUseCase recordUsecase;
     void Awake()
@@ -71,6 +72,8 @@ public class LobbyScene : MonoBehaviour
         // 컬랙션이 아니라 PlayerPrefsLeagueRecordStorage자체를 줘야 함
         // PlayerDataProvider만드는 factory SO 필요
         // 게임 끝날때마다 UI갱신
+
+        tutorialTrigger.PlayTutorial();
     }
 
     void HandleSeriesFinished(MatchData matchData, MatchWinCounter winCounter)
