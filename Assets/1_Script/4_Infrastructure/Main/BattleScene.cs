@@ -8,7 +8,7 @@ public class BattleScene : MonoBehaviour
     [SerializeField] AI_Main ai_main;
     [SerializeField] ChampionSelector_UI championSelector;
 
-    Dictionary<Team, int> playerDatas = new();
+    Dictionary<Team, int> playerIds = new();
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
 
     public void GameStart(Team playerTeam)
@@ -16,19 +16,19 @@ public class BattleScene : MonoBehaviour
         int ai_id = MatchContext.CurrentMatch.GetOpponentId(matchCoreFactorySO.UserId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
-        playerDatas.Add(playerTeam, matchCoreFactorySO.UserId);
-        playerDatas.Add(aiTeam, ai_id);
+        playerIds.Add(playerTeam, matchCoreFactorySO.UserId);
+        playerIds.Add(aiTeam, ai_id);
 
         var championCatalog = ChampionDataLoder.GetCatalog();
         var storage = MatchContext.Storage;
-        var core = matchCoreFactorySO.CreateMatchCore(storage, championCatalog, playerDatas);
+        var core = matchCoreFactorySO.CreateMatchCore(storage, championCatalog, playerIds);
 
         var masteryRegistry = core.MasteryRegistry;
 
         var (blue, red) = CreatePhaseOrchestrator(championSelector, ai_main, playerTeam);
         core.SetupPhaseManager(blue, red);
         
-        matchUI_Controller.Init(playerTeam, storage, core.PhaseManager, core.PhaseEventDispatcher, core.SkillController, masteryRegistry, core.BanPickHandler); // start보다 먼저
+        matchUI_Controller.Init(playerTeam, core, playerIds); // start보다 먼저
 
         ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, masteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
 
@@ -49,7 +49,7 @@ public class BattleScene : MonoBehaviour
         if (result.Winner == Team.All)
             MatchContext.Draw();
         else
-            matchEnd = MatchContext.EndMatch(playerDatas[result.Winner]);
+            matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
         matchUI_Controller.Done(result, matchEnd);
     }
 }

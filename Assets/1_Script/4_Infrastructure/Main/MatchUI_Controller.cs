@@ -1,4 +1,5 @@
 using Match;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
@@ -19,20 +20,21 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ParticipantView participantView;
 
     Team team;
-    public void Init(Team playerTeam, BanPickStorage storage, PhaseFlowOrchestrator phaseManager, PhaseEventDispatcher eventDispatcher, SkillUsecase skillController, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler)
+    public void Init(Team playerTeam, MatchCore matchCore, Dictionary<Team, int> playerIds)
     {
         team = playerTeam;
+        var banPickHandler = matchCore.BanPickHandler;
         var pickSlotFacade = banPickHandler.PickSlotFacade;
 
-        championDrawer.Init(new ChampionButtonStatePresenter(masteryRegistry.GetTeamMasteryCollection(playerTeam).AllMasteryIds, masteryRegistry.GetTeamMasteryCollection(EnumCaster.GetOppoentTeam(playerTeam)).AllMasteryIds, storage.SelectableIds, ChampionDataLoder.NameCatalog));
+        championDrawer.Init(new ChampionButtonStatePresenter(GetMasteryIds(playerTeam), GetMasteryIds(EnumCaster.GetOppoentTeam(playerTeam)), MatchContext.Storage.SelectableIds, ChampionDataLoder.NameCatalog));
         championDrawer.CreateButtons();
 
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
-        championSelector.Init(banPickHandler, phaseManager);
+        championSelector.Init(banPickHandler, matchCore.PhaseManager);
 
         // participantView.ViewParticipant(MatchContext., playerTeam);
-        redMasteryTooltipTrigger.Inject(masteryRegistry);
-        blueMasteryTooltipTrigger.Inject(masteryRegistry);
+        redMasteryTooltipTrigger.Inject(matchCore.MasteryRegistry);
+        blueMasteryTooltipTrigger.Inject(matchCore.MasteryRegistry);
 
         banPickHandler.BanPickEventDispatcher.OnTeamBan += banView.UpdateBanList;
         banPickHandler.BanPickEventDispatcher.OnPick += slotViews.PickChampion;
@@ -44,13 +46,15 @@ public class MatchUI_Controller : MonoBehaviour
 
         skillUseView.gameObject.SetActive(false);
         skillButtonView.Init(playerTeam);
-        skillUseView.Init(pickSlotFacade.SkillSlots, skillController);
+        skillUseView.Init(pickSlotFacade.SkillSlots, matchCore.SkillController);
 
         gameFlowView.Init(pickSlotFacade.IdSlots);
-        skillController.OnUseSkill += gameFlowView.UpdateUseSkill;
+        matchCore.SkillController.OnUseSkill += gameFlowView.UpdateUseSkill;
         scoreView.Init(pickSlotFacade.StatusSlots);
 
-        eventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
+        matchCore.PhaseEventDispatcher.OnGameProgress += gameFlowView.ViewGameFlow;
+
+        IEnumerable<int> GetMasteryIds(Team team) => matchCore.MasteryRegistry.GetTeamMasteryCollection(team).AllMasteryIds;
     }
 
     void OnPick(SlotData slotData, int id)
