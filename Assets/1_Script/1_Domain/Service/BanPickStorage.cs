@@ -12,9 +12,11 @@ public class BanPickStorage
 
     void RemoveSelectableId(int id)
     {
-        if (SelectableIds.Contains(id)) SelectableIds.Remove(id);
+        if (CanSelected(id)) SelectableIds.Remove(id);
         else throw new ArgumentException($"선택 불가능한 ID : {id}");
     }
+
+    public bool CanSelected(int id) => SelectableIds.Contains(id);
 
     public void Ban(Team team, int id) => RemoveSelectableId(id);
 

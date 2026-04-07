@@ -30,7 +30,6 @@ public class BanPickHandler
         BanPickEventDispatcher.RasieBan(team, id);
     }
 
-
     public void SaveSelect(GameFlowData flow, int selectedId)
     {
         if (VaildPhases.Contains(flow.Phase) == false) throw new ArgumentException($"선택 불가능한 페이즈 : {flow.Phase}");
@@ -38,4 +37,6 @@ public class BanPickHandler
         if (flow.Phase == GamePhase.Ban) Ban(flow.Turn, selectedId);
         else Pick(flow.Turn, selectedId);
     }
+
+    public bool CanSelected(GameFlowData flow, int id) => VaildPhases.Contains(flow.Phase) && storage.CanSelected(id);
 }
