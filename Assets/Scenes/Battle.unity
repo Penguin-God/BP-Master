@@ -1772,6 +1772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf63fd00bdbc3a4fadfbdf15d5512eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::ParticipantView
+  playerDataProviderFactorySO: {fileID: 11400000, guid: d209fc15e379e1d41ad0b456a26b61fd, type: 2}
   blueText: {fileID: 3678684029784300721}
   redText: {fileID: 1411461665}
 --- !u!114 &1164166378

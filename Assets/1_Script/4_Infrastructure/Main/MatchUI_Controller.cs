@@ -32,7 +32,7 @@ public class MatchUI_Controller : MonoBehaviour
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, matchCore.PhaseManager);
 
-        // participantView.ViewParticipant(MatchContext., playerTeam);
+        participantView.ViewParticipant(playerIds);
         redMasteryTooltipTrigger.Inject(matchCore.MasteryRegistry);
         blueMasteryTooltipTrigger.Inject(matchCore.MasteryRegistry);
 

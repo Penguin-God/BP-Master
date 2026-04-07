@@ -10,7 +10,6 @@ public class MasteryProfile
     {
         AvailablePoints = point;
         BoardCollection = boards;
-        UnityEngine.Debug.Log(BoardCollection.AllBoards);
     }
 
     public void Upgrade(int championId, StatType statType)
