@@ -8,7 +8,7 @@ public class SkillActionTextField
     public string Text;
 }
 
-[CreateAssetMenu(fileName = "SkillTextSO", menuName = "BP Master/SkillTextSO")]
+[CreateAssetMenu(fileName = "SkillTextSO", menuName = "Data/SkillTextSO")]
 public class SkillTextSO : ScriptableObject
 {
     [SerializeField] string increaseText;
