@@ -13,20 +13,24 @@ public class BattleInitializer : IBattleResolver
         SceneManager.LoadScene(BattleSceneName);
     }
 }
+
 public class AI_BattleResolver : IBattleResolver
 {
     readonly AIBattleSimulatorSO _simulator;
     readonly UI_LeagueSchedule uI_LeagueSchedule;
+    readonly UI_Leaderboard uI_Leaderboard;
 
-    public AI_BattleResolver(AIBattleSimulatorSO simulator, UI_LeagueSchedule uI_LeagueSchedule)
+    public AI_BattleResolver(AIBattleSimulatorSO simulator, UI_LeagueSchedule uI_LeagueSchedule, UI_Leaderboard uI_Leaderboard)
     {
         _simulator = simulator;
         this.uI_LeagueSchedule = uI_LeagueSchedule;
+        this.uI_Leaderboard = uI_Leaderboard;
     }
-    public void Resolve(MatchData match) => _simulator.SimulateMatch(match, 2, OnGameDone);
+    public void Resolve(MatchData match) => _simulator.SimulateMatch(match, 2, null, OnGameDone);
 
-    void OnGameDone(MatchResult result)
+    void OnGameDone()
     {
         uI_LeagueSchedule.RefreshUI();
+        uI_Leaderboard.RefreshUI();
     }
 }

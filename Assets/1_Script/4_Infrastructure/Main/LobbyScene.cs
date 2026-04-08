@@ -1,6 +1,4 @@
 using Match;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AAAA : IChampionProvider // 데이터 매니저 만들기?
@@ -52,7 +50,7 @@ public class LobbyScene : MonoBehaviour
 
         var scheduleStorage = new PlayerPrefsScheduleStorage();
         var matchFlow = scheduleSO.CreateFlow(scheduleStorage.LoadIndex());
-        var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, matchConfigSO.UserId, scheduleStorage, new BattleInitializer(matchConfigSO.TargetWinCount), new AI_BattleResolver(aIBattleSimulatorSO, uI_LeagueSchedule));
+        var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, matchConfigSO.UserId, scheduleStorage, new BattleInitializer(matchConfigSO.TargetWinCount), new AI_BattleResolver(aIBattleSimulatorSO, uI_LeagueSchedule, uI_Leaderboard));
         moveGame.Inject(leagueScheduleUsecase);
 
         MatchContext.OnSeriesFinished -= HandleSeriesFinished;
@@ -74,18 +72,6 @@ public class LobbyScene : MonoBehaviour
     {
         int p1Wins = winCounter.GetWin(matchData.Id1);
         int p2Wins = winCounter.GetWin(matchData.Id2);
-
-        var records = recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
-        uI_Leaderboard.RefreshUI();
-        PrintLeagueStandings(records.GetAll());
-    }
-
-    void PrintLeagueStandings(IEnumerable<LeagueRecord> records)
-    {
-        var logLines = records
-            .OrderByDescending(x => x.Win)
-            .Select(kvp => $"ID {kvp.Id} : {kvp.Win}승 {kvp.Lose}패 (승점: {kvp.Score})");
-
-        Debug.Log("=== 현재 리그 순위 ===\n" + string.Join("\n", logLines));
+        recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
     }
 }

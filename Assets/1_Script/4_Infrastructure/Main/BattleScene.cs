@@ -33,7 +33,7 @@ public class BattleScene : MonoBehaviour
 
         ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, masteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
 
-        core.OnMatchFinished += OnDone;
+        core.OnGameFinished += OnDone;
         core.PhaseManager.Start();
 
         GetComponent<TutorialTrigger>().PlayTutorial();

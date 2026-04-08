@@ -20,7 +20,7 @@ public class MatchCoreTests
     {
         MatchCore core = CreateSut();
         bool isCall = false;
-        core.OnMatchFinished += result => isCall = true;
+        core.OnGameFinished += result => isCall = true;
 
         core.PhaseEventDispatcher.Dispatch(GamePhase.Done, Team.All);
 

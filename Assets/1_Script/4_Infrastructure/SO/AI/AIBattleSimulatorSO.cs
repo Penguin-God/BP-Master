@@ -9,13 +9,13 @@ public class AIBattleSimulatorSO : ScriptableObject
     [SerializeField] AISelectorFactory aiFactory;
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
 
-    public int SimulateMatch(MatchData match, int winGoal = 2, Action<MatchResult> onSingleGameEnd = null)
+    public int SimulateMatch(MatchData match, int winGoal = 2, Action<MatchResult> onSingleGameEnd = null, Action onMatchEnd = null)
     {
         MatchContext.MatchInit(match, winGoal, ChampionDataLoder.AllId);
-        return RunBattle(match, onSingleGameEnd);
+        return RunBattle(match, onSingleGameEnd, onMatchEnd);
     }
 
-    int RunBattle(MatchData match, Action<MatchResult> onSingleGameEnd)
+    int RunBattle(MatchData match, Action<MatchResult> onSingleGameEnd, Action onMatchEnd)
     {
         var storage = MatchContext.Storage;
         var catalog = ChampionDataLoder.GetCatalog();
@@ -35,7 +35,7 @@ public class AIBattleSimulatorSO : ScriptableObject
 
         int finalWinnerId = -1;
 
-        core.OnMatchFinished += OnDone;
+        core.OnGameFinished += OnDone;
         core.PhaseManager.Start();
 
         return finalWinnerId;
@@ -43,19 +43,23 @@ public class AIBattleSimulatorSO : ScriptableObject
 
         void OnDone(MatchResult result) // 조건에 따라 RunBattle을 호출하는 재귀용 함수
         {
-            core.OnMatchFinished -= OnDone;
+            core.OnGameFinished -= OnDone;
             onSingleGameEnd?.Invoke(result);
 
             if (result.Winner == Team.All)
             {
-                finalWinnerId = RunBattle(match, onSingleGameEnd);
+                finalWinnerId = RunBattle(match, onSingleGameEnd, onMatchEnd);
                 return;
             }
 
             int winnerId = result.Winner == Team.Blue ? match.Id1 : match.Id2;
 
-            if (MatchContext.EndMatch(winnerId) == false) finalWinnerId = RunBattle(match, onSingleGameEnd);
-            else finalWinnerId = winnerId;
+            if (MatchContext.EndMatch(winnerId))
+            {
+                finalWinnerId = winnerId;
+                onMatchEnd?.Invoke();
+            }
+            else finalWinnerId = RunBattle(match, onSingleGameEnd, onMatchEnd);
         }
     }
 

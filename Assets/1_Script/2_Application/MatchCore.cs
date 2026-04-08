@@ -10,7 +10,7 @@ public class MatchCore
     readonly TeamBonusCalculator TeamBonusCalculator;
     public PhaseFlowOrchestrator PhaseManager { get; private set; }
 
-    public event Action<MatchResult> OnMatchFinished;
+    public event Action<MatchResult> OnGameFinished;
     public MatchCore(ChampionCatalog catalog, BanPickStorage storage, PhaseAdvancer phaseAdvancer, MasteryRegistry masteryRegistry, TeamBonusCalculator teamBonusCalculator)
     {
         MasteryRegistry = masteryRegistry;
@@ -47,6 +47,6 @@ public class MatchCore
         var builder = new MatchResultBuilder(TeamBonusCalculator);
         MatchResult result = new MatchResultConverter(builder).ToResult(BanPickHandler.PickSlotFacade.StatusSlots);
 
-        OnMatchFinished?.Invoke(result);
+        OnGameFinished?.Invoke(result);
     }
 }
