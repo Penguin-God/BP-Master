@@ -67,8 +67,6 @@ public class LobbyScene : MonoBehaviour
         uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, matchConfigSO.UserId));
 
         uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), playerDataProviderFactory.CreatePlayerDataProvider()));
-        // 게임 끝날때마다 UI갱신
-
         tutorialTrigger.PlayTutorial();
     }
 
@@ -78,6 +76,7 @@ public class LobbyScene : MonoBehaviour
         int p2Wins = winCounter.GetWin(matchData.Id2);
 
         var records = recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
+        uI_Leaderboard.RefreshUI();
         PrintLeagueStandings(records.GetAll());
     }
 
