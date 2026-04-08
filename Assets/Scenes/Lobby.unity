@@ -4089,8 +4089,8 @@ MonoBehaviour:
   aIBattleSimulatorSO: {fileID: 11400000, guid: 64580fc5b360b5f4cb0cb58bf414a473, type: 2}
   uI_LeagueSchedule: {fileID: 945918}
   uI_Leaderboard: {fileID: 692458969}
-  aiPlayerDataCatalog: {fileID: 11400000, guid: dea8e0ef6e90e934390207bdbbeb511c, type: 2}
   tutorialTrigger: {fileID: 996125041}
+  playerDataProviderFactory: {fileID: 11400000, guid: d209fc15e379e1d41ad0b456a26b61fd, type: 2}
 --- !u!114 &996125041
 MonoBehaviour:
   m_ObjectHideFlags: 0

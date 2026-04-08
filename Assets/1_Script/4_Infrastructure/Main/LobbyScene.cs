@@ -42,8 +42,8 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] AIBattleSimulatorSO aIBattleSimulatorSO;
     [SerializeField] UI_LeagueSchedule uI_LeagueSchedule;
     [SerializeField] UI_Leaderboard uI_Leaderboard;
-    [SerializeField] AIPlayerDataCatalogSO aiPlayerDataCatalog;
     [SerializeField] TutorialTrigger tutorialTrigger;
+    [SerializeField] PlayerDataProviderFactorySO playerDataProviderFactory;
 
     LeagueRecordUseCase recordUsecase;
     void Awake()
@@ -66,11 +66,7 @@ public class LobbyScene : MonoBehaviour
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
         uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, matchConfigSO.UserId));
 
-        IPlayerDataLoader localLoader = new LocalPlayerDataLoader("펭귄갓", new JsonMasterySaver());
-        var dataProvider = new PlayerDataProvider(1, localLoader, aiPlayerDataCatalog);
-        uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), dataProvider));
-        // 컬랙션이 아니라 PlayerPrefsLeagueRecordStorage자체를 줘야 함
-        // PlayerDataProvider만드는 factory SO 필요
+        uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), playerDataProviderFactory.CreatePlayerDataProvider()));
         // 게임 끝날때마다 UI갱신
 
         tutorialTrigger.PlayTutorial();
