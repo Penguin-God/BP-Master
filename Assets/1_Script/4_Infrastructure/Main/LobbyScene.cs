@@ -68,7 +68,7 @@ public class LobbyScene : MonoBehaviour
 
         IPlayerDataLoader localLoader = new LocalPlayerDataLoader("펭귄갓", new JsonMasterySaver());
         var dataProvider = new PlayerDataProvider(1, localLoader, aiPlayerDataCatalog);
-        uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage().LoadAll(), dataProvider));
+        uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), dataProvider));
         // 컬랙션이 아니라 PlayerPrefsLeagueRecordStorage자체를 줘야 함
         // PlayerDataProvider만드는 factory SO 필요
         // 게임 끝날때마다 UI갱신
