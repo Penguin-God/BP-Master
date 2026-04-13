@@ -8,7 +8,7 @@ public class TutorialTrigger : MonoBehaviour
 
     public void PlayTutorial()
     {
-        IScheduleStorage storage = new PlayerPrefsScheduleStorage();
+        IScheduleStorage storage = new PlayerPrefsScheduleStorage(StorageKey.LeagueKey);
         int currentIndex = storage.LoadIndex();
         TutorialPresenter presenter = tutorialDataSO.CreatePresenter();
         var ui = Instantiate(uiTutorialPrefab);
