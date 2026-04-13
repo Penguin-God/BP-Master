@@ -35,7 +35,7 @@ public class TournamentGeneratorTests
         var records = new[] { new LeagueRecord(id: 1, win: 5) };
         var generator = new TournamentGenerator();
 
-        // IEnumerable은 순회할 때 코드가 실행되므로 .ToArray() 등을 호출해야 예외가 터집니다.
+        // IEnumerable 지연 평가 때문에 ToArray() 호출해야 예외가 터짐
         Assert.Throws<ArgumentException>(() => generator.GenerateSemiFinals(records).ToArray());
     }
 }
