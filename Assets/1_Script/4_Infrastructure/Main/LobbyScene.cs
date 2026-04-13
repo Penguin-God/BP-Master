@@ -42,16 +42,22 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] UI_Leaderboard uI_Leaderboard;
     [SerializeField] TutorialTrigger tutorialTrigger;
     [SerializeField] PlayerDataProviderFactorySO playerDataProviderFactory;
+    [SerializeField] ScheduleFactorySO scheduleFactorySO;
 
     LeagueRecordUseCase recordUsecase;
+    MatchType matchType;
     void Awake()
     {
         recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
 
         var scheduleStorage = new PlayerPrefsScheduleStorage(StorageKey.LeagueKey);
         var matchFlow = scheduleSO.CreateFlow(scheduleStorage.LoadIndex());
-        var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, matchConfigSO.UserId, scheduleStorage, new BattleInitializer(matchConfigSO.TargetWinCount), new AI_BattleResolver(aIBattleSimulatorSO, uI_LeagueSchedule, uI_Leaderboard));
-        moveGame.Inject(leagueScheduleUsecase);
+
+        matchType = matchFlow.IsFinished ? MatchType.Tournament : MatchType.League;
+
+        // var leagueScheduleUsecase = new LeagueScheduleUsecase(matchFlow, matchConfigSO.UserId, scheduleStorage, new BattleInitializer(matchConfigSO.TargetWinCount), new AI_BattleResolver(aIBattleSimulatorSO, uI_LeagueSchedule, uI_Leaderboard));
+        scheduleFactorySO.Init(uI_LeagueSchedule, uI_Leaderboard);
+        moveGame.Inject(scheduleFactorySO.CreateSchedule(matchType));
 
         MatchContext.OnSeriesFinished -= HandleSeriesFinished;
         MatchContext.OnSeriesFinished += HandleSeriesFinished;
