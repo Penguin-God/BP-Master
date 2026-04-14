@@ -11,20 +11,22 @@ public class ScheduleFactorySO : ScriptableObject
 
     UI_LeagueSchedule _uiSchedule;
     UI_Leaderboard _uiLeaderboard;
+    public ScheduleFlow scheduleFlow;
     public void Init(UI_LeagueSchedule uiSchedule, UI_Leaderboard uiLeaderboard)
     {
         _uiSchedule = uiSchedule;
         _uiLeaderboard = uiLeaderboard;
     }
 
-    LeagueScheduleUsecase CreateLeagueUsecase()
+    LeagueScheduleUsecase CreateLeague()
     {
         var storage = new PlayerPrefsScheduleStorage(StorageKey.LeagueKey);
-        return CreateUsecase(leagueScheduleSO.CreateFlow(storage.LoadIndex()), StorageKey.LeagueKey);
+        scheduleFlow = leagueScheduleSO.CreateFlow(storage.LoadIndex());
+        return CreateUsecase(scheduleFlow, StorageKey.LeagueKey);
     }
 
     // 토너먼트 경기목록 로드하든 가져오든하기
-    LeagueScheduleUsecase CreateTournamentUsecase(ScheduleFlow flow)
+    LeagueScheduleUsecase CreateTournament(ScheduleFlow flow)
     {
         return CreateUsecase(flow, TournamentKey);
     }
@@ -38,10 +40,14 @@ public class ScheduleFactorySO : ScriptableObject
         return new LeagueScheduleUsecase(flow, matchConfigSO.UserId, storage, userResolver, aiResolver);
     }
 
-    // 스위치 문
     public LeagueScheduleUsecase CreateSchedule(MatchType matchType)
     {
-        return null;
+        switch (matchType)
+        {
+            case MatchType.League: return CreateLeague();
+            case MatchType.Tournament: return CreateTournament(null);
+            default: throw new System.Exception($"맞는 매치 타입이 없음 : {matchType}");
+        }
     }
 }
 

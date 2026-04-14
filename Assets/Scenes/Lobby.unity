@@ -4091,6 +4091,7 @@ MonoBehaviour:
   uI_Leaderboard: {fileID: 692458969}
   tutorialTrigger: {fileID: 996125041}
   playerDataProviderFactory: {fileID: 11400000, guid: d209fc15e379e1d41ad0b456a26b61fd, type: 2}
+  scheduleFactorySO: {fileID: 11400000, guid: 01db3716064e8c44e9b7ffc3ad6e3d6e, type: 2}
 --- !u!114 &996125041
 MonoBehaviour:
   m_ObjectHideFlags: 0

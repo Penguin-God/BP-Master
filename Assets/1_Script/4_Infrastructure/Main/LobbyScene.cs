@@ -37,7 +37,6 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] MoveGame moveGame;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
-    [SerializeField] AIBattleSimulatorSO aIBattleSimulatorSO;
     [SerializeField] UI_LeagueSchedule uI_LeagueSchedule;
     [SerializeField] UI_Leaderboard uI_Leaderboard;
     [SerializeField] TutorialTrigger tutorialTrigger;
@@ -68,7 +67,7 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
-        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(matchFlow, matchConfigSO.UserId));
+        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(scheduleFactorySO.scheduleFlow, matchConfigSO.UserId));
 
         uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), playerDataProviderFactory.CreatePlayerDataProvider()));
         tutorialTrigger.PlayTutorial();

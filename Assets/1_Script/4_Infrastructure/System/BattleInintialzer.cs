@@ -26,7 +26,7 @@ public class AI_BattleResolver : IBattleResolver
         this.uI_LeagueSchedule = uI_LeagueSchedule;
         this.uI_Leaderboard = uI_Leaderboard;
     }
-    public void Resolve(MatchData match) => _simulator.SimulateMatch(match, 2, null, OnGameDone);
+    public void Resolve(MatchData match) => _simulator.SimulateMatch(match, 2, onMatchEnd: OnGameDone);
 
     void OnGameDone()
     {
