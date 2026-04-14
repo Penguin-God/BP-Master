@@ -4082,16 +4082,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::LobbyScene
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
-  scheduleSO: {fileID: 11400000, guid: ab1f24560077a3f4da024730442fd27a, type: 2}
   moveGame: {fileID: 1074352095}
   uI_MasteryPoint: {fileID: 1821025619}
   skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
-  aIBattleSimulatorSO: {fileID: 11400000, guid: 64580fc5b360b5f4cb0cb58bf414a473, type: 2}
   uI_LeagueSchedule: {fileID: 945918}
   uI_Leaderboard: {fileID: 692458969}
   tutorialTrigger: {fileID: 996125041}
   playerDataProviderFactory: {fileID: 11400000, guid: d209fc15e379e1d41ad0b456a26b61fd, type: 2}
   scheduleFactorySO: {fileID: 11400000, guid: 01db3716064e8c44e9b7ffc3ad6e3d6e, type: 2}
+  scheduleFlowFactorySO: {fileID: 11400000, guid: d0f86adc4c6b10645bfcb7294ccac169, type: 2}
 --- !u!114 &996125041
 MonoBehaviour:
   m_ObjectHideFlags: 0

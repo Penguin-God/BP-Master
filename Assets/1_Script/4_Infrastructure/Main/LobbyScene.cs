@@ -33,7 +33,6 @@ public class LocalPlayerDataLoader : IPlayerDataLoader
 public class LobbyScene : MonoBehaviour
 {
     [SerializeField] MatchConfigSO matchConfigSO;
-    [SerializeField] LeagueScheduleSO scheduleSO;
     [SerializeField] MoveGame moveGame;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
@@ -48,7 +47,8 @@ public class LobbyScene : MonoBehaviour
     {
         recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
         scheduleFactorySO.Init(uI_LeagueSchedule, uI_Leaderboard);
-        moveGame.Inject(scheduleFactorySO.CreateSchedule());
+        var flow = scheduleFlowFactorySO.Create();
+        moveGame.Inject(scheduleFactorySO.CreateSchedule(flow));
 
         MatchContext.OnSeriesFinished -= HandleSeriesFinished;
         MatchContext.OnSeriesFinished += HandleSeriesFinished;
@@ -59,14 +59,17 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
-        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(scheduleFactorySO.scheduleFlow, matchConfigSO.UserId));
+        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(flow, matchConfigSO.UserId));
 
         uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), playerDataProviderFactory.CreatePlayerDataProvider()));
         tutorialTrigger.PlayTutorial();
     }
 
+    [SerializeField] ScheduleFlowFactorySO scheduleFlowFactorySO;
     void HandleSeriesFinished(MatchData matchData, MatchWinCounter winCounter)
     {
+        int index = scheduleFlowFactorySO.CreateStorage().LoadIndex() + 1;
+        scheduleFlowFactorySO.CreateStorage().SaveIndex(index);
         int p1Wins = winCounter.GetWin(matchData.Id1);
         int p2Wins = winCounter.GetWin(matchData.Id2);
         recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);

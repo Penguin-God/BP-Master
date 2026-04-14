@@ -15,3 +15,4 @@ MonoBehaviour:
   aIBattleSimulatorSO: {fileID: 11400000, guid: 64580fc5b360b5f4cb0cb58bf414a473, type: 2}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   leagueScheduleSO: {fileID: 11400000, guid: ab1f24560077a3f4da024730442fd27a, type: 2}
+  scheduleFlowFactorySO: {fileID: 11400000, guid: d0f86adc4c6b10645bfcb7294ccac169, type: 2}
