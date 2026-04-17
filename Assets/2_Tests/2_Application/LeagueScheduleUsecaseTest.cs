@@ -2,16 +2,6 @@ using NUnit.Framework;
 
 public class LeagueScheduleUsecaseTest
 {
-    class FakeStorage : IScheduleStorage
-    {
-        public int SavedIndex;
-        public int InitialIndex;
-
-        public void SaveIndex(int index) => SavedIndex = index;
-        public int LoadIndex() => InitialIndex;
-    }
-
-
     class FakeResolver : IBattleResolver
     {
         public bool IsResolved;
@@ -26,7 +16,6 @@ public class LeagueScheduleUsecaseTest
     class TestContext
     {
         public LeagueScheduleUsecase Usecase;
-        public FakeStorage Storage;
         public FakeResolver UserResolver;
         public FakeResolver AiResolver;
     }
@@ -34,16 +23,14 @@ public class LeagueScheduleUsecaseTest
     TestContext CreateUsecase(MatchData[] matches, int playerId, int startIndex = 0)
     {
         var flow = new ScheduleFlow(matches, startIndex);
-        var storage = new FakeStorage { InitialIndex = startIndex };
         var sceneLoader = new FakeResolver();
         var aiResolver = new FakeResolver();
 
-        var usecase = new LeagueScheduleUsecase(flow, playerId, storage, sceneLoader, aiResolver);
+        var usecase = new LeagueScheduleUsecase(flow, playerId, sceneLoader, aiResolver);
 
         return new TestContext
         {
             Usecase = usecase,
-            Storage = storage,
             UserResolver = sceneLoader,
             AiResolver = aiResolver
         };
@@ -57,7 +44,6 @@ public class LeagueScheduleUsecaseTest
 
         context.Usecase.ProcessNextMatch();
 
-        Assert.AreEqual(2, context.Storage.SavedIndex);
         Assert.IsTrue(context.UserResolver.IsResolved);
         Assert.IsFalse(context.AiResolver.IsResolved);
     }
@@ -70,7 +56,6 @@ public class LeagueScheduleUsecaseTest
 
         context.Usecase.ProcessNextMatch();
 
-        Assert.AreEqual(1, context.Storage.SavedIndex);
         Assert.IsFalse(context.UserResolver.IsResolved);
         Assert.IsTrue(context.AiResolver.IsResolved);
     }

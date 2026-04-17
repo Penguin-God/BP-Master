@@ -16,11 +16,10 @@ public class ScheduleFactorySO : ScriptableObject
 
     LeagueScheduleUsecase CreateUsecase(ScheduleFlow flow, string key)
     {
-        var storage = new PlayerPrefsScheduleStorage(key);
         var aiResolver = new AI_BattleResolver(aIBattleSimulatorSO, _uiSchedule, _uiLeaderboard);
         var userResolver = new BattleInitializer(matchConfigSO.TargetWinCount);
 
-        return new LeagueScheduleUsecase(flow, matchConfigSO.UserId, storage, userResolver, aiResolver);
+        return new LeagueScheduleUsecase(flow, matchConfigSO.UserId, userResolver, aiResolver);
     }
 
     public LeagueScheduleUsecase CreateSchedule(ScheduleFlow scheduleFlow)
