@@ -42,16 +42,15 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] PlayerDataProviderFactorySO playerDataProviderFactory;
     [SerializeField] ScheduleFactorySO scheduleFactorySO;
 
-    LeagueRecordUseCase recordUsecase;
     void Awake()
     {
-        recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
+        
         scheduleFactorySO.Init(uI_LeagueSchedule, uI_Leaderboard);
         var flow = scheduleFlowFactorySO.Create();
         moveGame.Inject(scheduleFactorySO.CreateSchedule(flow));
 
-        MatchContext.OnSeriesFinished -= HandleSeriesFinished;
-        MatchContext.OnSeriesFinished += HandleSeriesFinished;
+        MatchContext.OnSeriesFinished -= SaveGameProgress;
+        MatchContext.OnSeriesFinished += SaveGameProgress;
 
         var dataIO = new JsonMasterySaver();
         var inventory = dataIO.Load();
@@ -66,12 +65,14 @@ public class LobbyScene : MonoBehaviour
     }
 
     [SerializeField] ScheduleFlowFactorySO scheduleFlowFactorySO;
-    void HandleSeriesFinished(MatchData matchData, MatchWinCounter winCounter)
+    void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter)
     {
         int index = scheduleFlowFactorySO.CreateStorage().LoadIndex() + 1;
         scheduleFlowFactorySO.CreateStorage().SaveIndex(index);
+
         int p1Wins = winCounter.GetWin(matchData.Id1);
         int p2Wins = winCounter.GetWin(matchData.Id2);
+        var recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
         recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
     }
 }
