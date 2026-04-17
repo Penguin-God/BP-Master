@@ -65,10 +65,19 @@ public class LobbyScene : MonoBehaviour
     }
 
     [SerializeField] ScheduleFlowFactorySO scheduleFlowFactorySO;
-    void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter)
+    void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new LeagueProgressSaver(scheduleFlowFactorySO.CreateStorage()).SaveProgress(matchData, winCounter);
+}
+
+
+public class LeagueProgressSaver
+{
+    IScheduleStorage _scheduleStorage;
+    public LeagueProgressSaver(IScheduleStorage scheduleStorage) => _scheduleStorage = scheduleStorage;
+
+    public void SaveProgress(MatchData matchData, MatchWinCounter winCounter)
     {
-        int index = scheduleFlowFactorySO.CreateStorage().LoadIndex() + 1;
-        scheduleFlowFactorySO.CreateStorage().SaveIndex(index);
+        int index = _scheduleStorage.LoadIndex() + 1;
+        _scheduleStorage.SaveIndex(index);
 
         int p1Wins = winCounter.GetWin(matchData.Id1);
         int p2Wins = winCounter.GetWin(matchData.Id2);
