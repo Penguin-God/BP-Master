@@ -33,7 +33,6 @@ public class LocalPlayerDataLoader : IPlayerDataLoader
 public class LobbyScene : MonoBehaviour
 {
     [SerializeField] MatchConfigSO matchConfigSO;
-    [SerializeField] MoveGame moveGame;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
     [SerializeField] UI_LeagueSchedule uI_LeagueSchedule;
@@ -43,12 +42,9 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] ScheduleFactorySO scheduleFactorySO;
 
     void Awake()
-    {
-        
+    {   
         scheduleFactorySO.Init(uI_LeagueSchedule, uI_Leaderboard);
         var flow = scheduleFlowFactorySO.Create();
-        moveGame.Inject(scheduleFactorySO.CreateSchedule(flow));
-
         MatchContext.OnSeriesFinished -= SaveGameProgress;
         MatchContext.OnSeriesFinished += SaveGameProgress;
 
