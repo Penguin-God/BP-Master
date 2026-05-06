@@ -35,18 +35,13 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
-    [SerializeField] UI_LeagueSchedule uI_LeagueSchedule;
-    [SerializeField] UI_Leaderboard uI_Leaderboard;
     [SerializeField] TutorialTrigger tutorialTrigger;
     [SerializeField] PlayerDataProviderFactorySO playerDataProviderFactory;
-    [SerializeField] ScheduleFactorySO scheduleFactorySO;
-
+    
     void Awake()
     {   
-        scheduleFactorySO.Init(uI_LeagueSchedule, uI_Leaderboard);
-        var flow = scheduleFlowFactorySO.Create();
-        MatchContext.OnSeriesFinished -= SaveGameProgress;
-        MatchContext.OnSeriesFinished += SaveGameProgress;
+        //MatchContext.OnSeriesFinished -= SaveGameProgress;
+        //MatchContext.OnSeriesFinished += SaveGameProgress;
 
         var dataIO = new JsonMasterySaver();
         var inventory = dataIO.Load();
@@ -54,14 +49,11 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
-        uI_LeagueSchedule.Init(new SchedulePaginationPresenter(flow, matchConfigSO.UserId));
 
-        uI_Leaderboard.Init(new LeaderboardPresenter(new PlayerPrefsLeagueRecordStorage(), playerDataProviderFactory.CreatePlayerDataProvider()));
         tutorialTrigger.PlayTutorial();
     }
 
-    [SerializeField] ScheduleFlowFactorySO scheduleFlowFactorySO;
-    void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new LeagueProgressSaver(scheduleFlowFactorySO.CreateStorage()).SaveProgress(matchData, winCounter);
+    // void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new LeagueProgressSaver(scheduleFlowFactorySO.CreateStorage()).SaveProgress(matchData, winCounter);
 }
 
 
@@ -77,7 +69,7 @@ public class LeagueProgressSaver
 
         int p1Wins = winCounter.GetWin(matchData.Id1);
         int p2Wins = winCounter.GetWin(matchData.Id2);
-        var recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
-        recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
+        // var recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
+        // recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
     }
 }

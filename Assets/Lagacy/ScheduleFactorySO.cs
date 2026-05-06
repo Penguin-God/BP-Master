@@ -14,17 +14,9 @@ public class ScheduleFactorySO : ScriptableObject
         _uiLeaderboard = uiLeaderboard;
     }
 
-    LeagueScheduleUsecase CreateUsecase(ScheduleFlow flow, string key)
-    {
-        var aiResolver = new AI_BattleResolver(aIBattleSimulatorSO, _uiSchedule, _uiLeaderboard);
-        var userResolver = new BattleInitializer(matchConfigSO.TargetWinCount);
-
-        return new LeagueScheduleUsecase(flow, matchConfigSO.UserId, userResolver, aiResolver);
-    }
-
     public LeagueScheduleUsecase CreateSchedule(ScheduleFlow scheduleFlow)
     {
-        return CreateUsecase(scheduleFlow, StorageKey.LeagueKey);
+        return null;
     }
 }
 
