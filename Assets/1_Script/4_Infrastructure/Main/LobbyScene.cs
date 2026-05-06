@@ -61,5 +61,5 @@ public class LobbyScene : MonoBehaviour
         print(stage);
     }
 
-    // void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new LeagueProgressSaver(scheduleFlowFactorySO.CreateStorage()).SaveProgress(matchData, winCounter);
+    // void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new PlayerPrefsStageStorage().SaveUnlockedStage();
 }
