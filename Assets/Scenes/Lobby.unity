@@ -2446,15 +2446,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9700ac4f5971b2e40b530a9672714ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::LobbyScene
+  uI_StageSelection: {fileID: 1877720420}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   uI_MasteryPoint: {fileID: 1821025619}
   skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
-  uI_LeagueSchedule: {fileID: 0}
-  uI_Leaderboard: {fileID: 0}
   tutorialTrigger: {fileID: 996125041}
   playerDataProviderFactory: {fileID: 11400000, guid: d209fc15e379e1d41ad0b456a26b61fd, type: 2}
-  scheduleFactorySO: {fileID: 11400000, guid: 01db3716064e8c44e9b7ffc3ad6e3d6e, type: 2}
-  scheduleFlowFactorySO: {fileID: 11400000, guid: d0f86adc4c6b10645bfcb7294ccac169, type: 2}
 --- !u!114 &996125041
 MonoBehaviour:
   m_ObjectHideFlags: 0

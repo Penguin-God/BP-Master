@@ -32,6 +32,7 @@ public class LocalPlayerDataLoader : IPlayerDataLoader
 
 public class LobbyScene : MonoBehaviour
 {
+    [SerializeField] UI_StageSelection uI_StageSelection;
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
@@ -48,28 +49,17 @@ public class LobbyScene : MonoBehaviour
         if (inventory == null)
             inventory = new MasteryProfile(startPoints: 15);
 
+        uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), OnStageSelect);
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
 
         tutorialTrigger.PlayTutorial();
+
+    }
+
+    void OnStageSelect(int stage)
+    {
+        print(stage);
     }
 
     // void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new LeagueProgressSaver(scheduleFlowFactorySO.CreateStorage()).SaveProgress(matchData, winCounter);
-}
-
-
-public class LeagueProgressSaver
-{
-    IScheduleStorage _scheduleStorage;
-    public LeagueProgressSaver(IScheduleStorage scheduleStorage) => _scheduleStorage = scheduleStorage;
-
-    public void SaveProgress(MatchData matchData, MatchWinCounter winCounter)
-    {
-        int index = _scheduleStorage.LoadIndex() + 1;
-        _scheduleStorage.SaveIndex(index);
-
-        int p1Wins = winCounter.GetWin(matchData.Id1);
-        int p2Wins = winCounter.GetWin(matchData.Id2);
-        // var recordUsecase = new LeagueRecordUseCase(new PlayerPrefsLeagueRecordStorage());
-        // recordUsecase.RecordMatch(matchData.Id1, p1Wins, matchData.Id2, p2Wins);
-    }
 }
