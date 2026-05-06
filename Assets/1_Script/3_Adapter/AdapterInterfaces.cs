@@ -13,3 +13,9 @@ public interface IChampionProvider
 {
     ChampionProfile GetProfile(int id);
 }
+
+public interface IStageStorage
+{
+    int LoadUnlockedStage();
+    void SaveUnlockedStage(int stageIndex);
+}
