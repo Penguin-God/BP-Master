@@ -1,4 +1,3 @@
-using Match;
 using UnityEngine;
 
 public class AAAA : IChampionProvider // 데이터 매니저 만들기?
@@ -40,10 +39,6 @@ public class LobbyScene : MonoBehaviour
 
     void Awake()
     {
-        new PlayerPrefsStageStorage().SaveUnlockedStage(2);
-        //MatchContext.OnSeriesFinished -= SaveGameProgress;
-        //MatchContext.OnSeriesFinished += SaveGameProgress;
-
         var dataIO = new JsonMasterySaver();
         var inventory = dataIO.Load();
         if (inventory == null)
@@ -52,15 +47,11 @@ public class LobbyScene : MonoBehaviour
         uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
 
-        tutorialTrigger.PlayTutorial();
-
+        // tutorialTrigger.PlayTutorial();
     }
 
     void EnterBattle(int stage)
     {
-        new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, 3));
-        // print(stage);
+        new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
     }
-
-    // void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new PlayerPrefsStageStorage().SaveUnlockedStage();
 }

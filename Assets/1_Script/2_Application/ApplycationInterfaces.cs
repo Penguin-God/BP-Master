@@ -27,3 +27,9 @@ public interface ILeagueRecordStorage
     LeagueRecordCollection LoadAll();
     void SaveAll(LeagueRecordCollection collection);
 }
+
+public interface IStageStorage
+{
+    int LoadUnlockedStage();
+    void SaveUnlockedStage(int stageIndex);
+}

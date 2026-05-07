@@ -13,30 +13,30 @@ MonoBehaviour:
   m_Name: AIPlayerDataCatalog
   m_EditorClassIdentifier: App::AIPlayerDataCatalogSO
   aiPlayers:
-  - Id: 3
-    Name: "\uD074~\uB808~\uB974~ \uC635~\uC2A4~\uD034~\uB974~"
+  - Id: 0
+    Name: "\uBB34\uC791\uC704"
     _masteryBoardDatas:
     - Id: 1
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 0
-  - Id: 2
-    Name: "\uC774\uC775!"
+  - Id: 1
+    Name: "\uBE4C\uB4DC"
     _masteryBoardDatas:
     - Id: 15
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 1
-  - Id: 4
-    Name: 444
+  - Id: 2
+    Name: "\uACC4\uC0B0"
     _masteryBoardDatas:
     - Id: 4
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 1
-  - Id: 5
-    Name: Random
+  - Id: 3
+    Name: "\uC608\uCE21"
     _masteryBoardDatas: []
-  - Id: 999
+  - Id: 100
     Name: test
     _masteryBoardDatas: []

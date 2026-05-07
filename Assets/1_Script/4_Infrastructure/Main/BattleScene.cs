@@ -12,9 +12,10 @@ public class BattleScene : MonoBehaviour
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
     [SerializeField] MatchConfigSO matchConfigSO;
 
+    int ai_id;
     public void GameStart(Team playerTeam)
     {
-        int ai_id = MatchContext.CurrentMatch.GetOpponentId(matchConfigSO.UserId);
+        ai_id = MatchContext.CurrentMatch.GetOpponentId(matchConfigSO.UserId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
         playerIds.Add(playerTeam, matchConfigSO.UserId);
@@ -54,5 +55,8 @@ public class BattleScene : MonoBehaviour
         else
             matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
         matchUI_Controller.Done(result, matchEnd);
+
+        if (matchEnd && playerIds[result.Winner] == matchConfigSO.UserId)
+            new StageProgressUseCase(new PlayerPrefsStageStorage()).ClearStage(ai_id);
     }
 }
