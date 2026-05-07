@@ -39,7 +39,8 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] TutorialTrigger tutorialTrigger;
 
     void Awake()
-    {   
+    {
+        new PlayerPrefsStageStorage().SaveUnlockedStage(2);
         //MatchContext.OnSeriesFinished -= SaveGameProgress;
         //MatchContext.OnSeriesFinished += SaveGameProgress;
 
