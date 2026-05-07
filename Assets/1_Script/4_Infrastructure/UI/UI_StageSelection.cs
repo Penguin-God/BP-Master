@@ -26,8 +26,6 @@ public class UI_StageSelection : MonoBehaviour
         var states = _presenter.GetButtonStates(stageButtons.Length);
 
         for (int i = 0; i < stageButtons.Length; i++)
-        {
             stageButtons[i].interactable = states[i];
-        }
     }
 }

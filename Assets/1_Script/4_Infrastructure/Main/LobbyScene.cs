@@ -37,8 +37,7 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
     [SerializeField] TutorialTrigger tutorialTrigger;
-    [SerializeField] PlayerDataProviderFactorySO playerDataProviderFactory;
-    
+
     void Awake()
     {   
         //MatchContext.OnSeriesFinished -= SaveGameProgress;
@@ -49,16 +48,17 @@ public class LobbyScene : MonoBehaviour
         if (inventory == null)
             inventory = new MasteryProfile(startPoints: 15);
 
-        uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), OnStageSelect);
+        uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
 
         tutorialTrigger.PlayTutorial();
 
     }
 
-    void OnStageSelect(int stage)
+    void EnterBattle(int stage)
     {
-        print(stage);
+        new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, 3));
+        // print(stage);
     }
 
     // void SaveGameProgress(MatchData matchData, MatchWinCounter winCounter) => new PlayerPrefsStageStorage().SaveUnlockedStage();

@@ -715,7 +715,6 @@ GameObject:
   - component: {fileID: 458651945828501420}
   - component: {fileID: 4002786833176314251}
   - component: {fileID: 3029028674170190925}
-  - component: {fileID: 807536290898931854}
   - component: {fileID: 144436506647081125}
   m_Layer: 5
   m_Name: AllChampions
@@ -802,19 +801,6 @@ MonoBehaviour:
   attackTabBtn: {fileID: 9210283361659313826}
   defenseTabBtn: {fileID: 2661646815325688273}
   speedTabBtn: {fileID: 4315137255205529185}
---- !u!114 &807536290898931854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6490543948846613993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362420e07c8344b43aa956d700eafbfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  championButtonView: {fileID: 3029028674170190925}
 --- !u!114 &144436506647081125
 MonoBehaviour:
   m_ObjectHideFlags: 0
