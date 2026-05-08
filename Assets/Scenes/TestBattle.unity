@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::TestBattleScene
   configSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
-  ai_id: 999
+  ai_id: 2
 --- !u!1 &1775200245
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::ValueSelectSO
   speedValue: 5
   bonusDataFactory: {fileID: 11400000, guid: ba329e223024b044f9ada89eb4b48766, type: 2}
-  enableLogging: 0
+  enableLogging: 1
