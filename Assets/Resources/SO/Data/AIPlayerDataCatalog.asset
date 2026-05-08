@@ -19,46 +19,46 @@ MonoBehaviour:
   - Id: 1
     Name: "\uBE4C\uB4DC"
     _masteryBoardDatas:
-    - Id: 2
+    - Champion: {fileID: 11400000, guid: 6bfc90ab66bb4ba45b706202167930bd, type: 2}
       AttackLevel: 1
       DefenseLevel: 0
       SpeedLevel: 0
-    - Id: 6
+    - Champion: {fileID: 11400000, guid: fce1ffe1b7061b8408ae3702d3a5bc3c, type: 2}
       AttackLevel: 1
       DefenseLevel: 0
       SpeedLevel: 0
-    - Id: 8
+    - Champion: {fileID: 11400000, guid: 7ce020f57f367594380e9010092c1b2e, type: 2}
       AttackLevel: 1
       DefenseLevel: 0
       SpeedLevel: 0
-    - Id: 7
+    - Champion: {fileID: 11400000, guid: de981b4337927514d81fd75ae700058e, type: 2}
       AttackLevel: 0
       DefenseLevel: 1
       SpeedLevel: 0
-    - Id: 23
+    - Champion: {fileID: 11400000, guid: f8affce91ca1c634c8f1c9b128bea301, type: 2}
       AttackLevel: 0
       DefenseLevel: 1
       SpeedLevel: 0
-    - Id: 36
+    - Champion: {fileID: 11400000, guid: e1a3b2221509f4f41a0ba6f414d92291, type: 2}
       AttackLevel: 0
       DefenseLevel: 1
       SpeedLevel: 0
-    - Id: 30
+    - Champion: {fileID: 11400000, guid: 0c4abe03433751347b882db35b368f90, type: 2}
       AttackLevel: 0
       DefenseLevel: 0
       SpeedLevel: 1
-    - Id: 9
+    - Champion: {fileID: 11400000, guid: a497d423f384741408ba842e548208a9, type: 2}
       AttackLevel: 0
       DefenseLevel: 0
       SpeedLevel: 1
-    - Id: 21
+    - Champion: {fileID: 11400000, guid: 68db2d501243ac24a8432076374f5535, type: 2}
       AttackLevel: 0
       DefenseLevel: 0
       SpeedLevel: 1
   - Id: 2
     Name: "\uACC4\uC0B0"
     _masteryBoardDatas:
-    - Id: 4
+    - Champion: {fileID: 0}
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 1

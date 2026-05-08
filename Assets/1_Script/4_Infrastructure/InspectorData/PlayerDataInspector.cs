@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct MasteryBoardData
 {
-    [MinValue(0)] public int Id;
+    public ChampionSO Champion;
     [MinValue(0)] [SerializeField] int AttackLevel;
     [MinValue(0)] [SerializeField] int DefenseLevel;
     [MinValue(0)] [SerializeField] int SpeedLevel;
@@ -21,7 +21,7 @@ public class PlayerDataInspector
     public string Name;
     [TableList(ShowIndexLabels = true, AlwaysExpanded = true)] [SerializeField] MasteryBoardData[] _masteryBoardDatas;
 
-    public MasteryBoardCollection CreateBoardCollection() => new MasteryBoardCollection(_masteryBoardDatas.ToDictionary(x => x.Id, x => x.CreateBoard()));
+    public MasteryBoardCollection CreateBoardCollection() => new MasteryBoardCollection(_masteryBoardDatas.ToDictionary(x => x.Champion.Id, x => x.CreateBoard()));
 
     public PlayerData ToData() => new PlayerData(Id, Name, CreateBoardCollection());
 }
