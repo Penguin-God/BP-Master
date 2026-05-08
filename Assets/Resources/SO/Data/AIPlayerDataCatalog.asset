@@ -89,27 +89,11 @@ MonoBehaviour:
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 0
-    - Champion: {fileID: 11400000, guid: a497d423f384741408ba842e548208a9, type: 2}
-      AttackLevel: 1
-      DefenseLevel: 0
-      SpeedLevel: 0
     - Champion: {fileID: 11400000, guid: d7000890dfa10bf4f9ede95f43d04424, type: 2}
       AttackLevel: 0
       DefenseLevel: 1
-      SpeedLevel: 0
-    - Champion: {fileID: 11400000, guid: ae21cba61378eaf46bfcab2d01e2b721, type: 2}
-      AttackLevel: 0
-      DefenseLevel: 0
       SpeedLevel: 1
-    - Champion: {fileID: 11400000, guid: b1f469ab928f4d845822d4111588ca2f, type: 2}
-      AttackLevel: 0
-      DefenseLevel: 1
-      SpeedLevel: 0
     - Champion: {fileID: 11400000, guid: eca6152df43791743af3aeb3eae86012, type: 2}
-      AttackLevel: 1
-      DefenseLevel: 0
-      SpeedLevel: 0
-    - Champion: {fileID: 11400000, guid: 5153718c29d3dba4ea538c4952b5949e, type: 2}
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 0
@@ -124,7 +108,7 @@ MonoBehaviour:
     - Champion: {fileID: 11400000, guid: 686de373f55d3af47be95b7fd6d47937, type: 2}
       AttackLevel: 1
       DefenseLevel: 1
-      SpeedLevel: 1
+      SpeedLevel: 0
     - Champion: {fileID: 11400000, guid: df641881a5eedeb40849768c49193a08, type: 2}
       AttackLevel: 1
       DefenseLevel: 1
@@ -133,18 +117,10 @@ MonoBehaviour:
       AttackLevel: 1
       DefenseLevel: 1
       SpeedLevel: 1
-    - Champion: {fileID: 11400000, guid: e492800f37830f841900e48b1185b3a9, type: 2}
-      AttackLevel: 0
-      DefenseLevel: 0
-      SpeedLevel: 1
     - Champion: {fileID: 11400000, guid: 6bfc90ab66bb4ba45b706202167930bd, type: 2}
       AttackLevel: 1
       DefenseLevel: 0
       SpeedLevel: 1
-    - Champion: {fileID: 11400000, guid: 48f3b9de02336554d9a03a30d49140fb, type: 2}
-      AttackLevel: 0
-      DefenseLevel: 1
-      SpeedLevel: 0
     - Champion: {fileID: 11400000, guid: 8710fb3935eb85045ab9b7b056eaf0b5, type: 2}
       AttackLevel: 0
       DefenseLevel: 0
