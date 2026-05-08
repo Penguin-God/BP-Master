@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0656e101a5f827e4b9a91ce33f2577b5, type: 3}
+  m_Name: SpeedBuild
+  m_EditorClassIdentifier: App::BuildPrioritySO
+  bans:
+  - {fileID: 11400000, guid: ae21cba61378eaf46bfcab2d01e2b721, type: 2}
+  - {fileID: 11400000, guid: e492800f37830f841900e48b1185b3a9, type: 2}
+  - {fileID: 11400000, guid: 8784443d42fd77440b0c4cc92e203e8f, type: 2}
+  - {fileID: 11400000, guid: 8f9e41ca17de2ba4e9abdd109a3fdd28, type: 2}
+  picks:
+  - {fileID: 11400000, guid: 5f5c7591caea4e04b816869d96af3a1f, type: 2}
+  - {fileID: 11400000, guid: 0c4abe03433751347b882db35b368f90, type: 2}
+  - {fileID: 11400000, guid: a497d423f384741408ba842e548208a9, type: 2}
+  - {fileID: 11400000, guid: 68db2d501243ac24a8432076374f5535, type: 2}
+  - {fileID: 11400000, guid: efc97c7ed14228b44b5409f4547a3892, type: 2}
+  - {fileID: 11400000, guid: 501399a5d79b3944d8ff9848526fa637, type: 2}
+  - {fileID: 11400000, guid: 0dc80b517b75a554fb14e80936d977e0, type: 2}
+  - {fileID: 11400000, guid: 49809e8e360b92940a2612303a17878e, type: 2}
+  - {fileID: 11400000, guid: 359a53795c7d03f48a42ad9537c89c34, type: 2}

@@ -15,17 +15,45 @@ MonoBehaviour:
   aiPlayers:
   - Id: 0
     Name: "\uBB34\uC791\uC704"
-    _masteryBoardDatas:
-    - Id: 1
-      AttackLevel: 1
-      DefenseLevel: 1
-      SpeedLevel: 0
+    _masteryBoardDatas: []
   - Id: 1
     Name: "\uBE4C\uB4DC"
     _masteryBoardDatas:
-    - Id: 15
+    - Id: 2
       AttackLevel: 1
+      DefenseLevel: 0
+      SpeedLevel: 0
+    - Id: 6
+      AttackLevel: 1
+      DefenseLevel: 0
+      SpeedLevel: 0
+    - Id: 8
+      AttackLevel: 1
+      DefenseLevel: 0
+      SpeedLevel: 0
+    - Id: 7
+      AttackLevel: 0
       DefenseLevel: 1
+      SpeedLevel: 0
+    - Id: 23
+      AttackLevel: 0
+      DefenseLevel: 1
+      SpeedLevel: 0
+    - Id: 36
+      AttackLevel: 0
+      DefenseLevel: 1
+      SpeedLevel: 0
+    - Id: 30
+      AttackLevel: 0
+      DefenseLevel: 0
+      SpeedLevel: 1
+    - Id: 9
+      AttackLevel: 0
+      DefenseLevel: 0
+      SpeedLevel: 1
+    - Id: 21
+      AttackLevel: 0
+      DefenseLevel: 0
       SpeedLevel: 1
   - Id: 2
     Name: "\uACC4\uC0B0"

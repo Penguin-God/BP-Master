@@ -25,7 +25,7 @@ MonoBehaviour:
   championName: "\uBC14\uB78C\uC220\uC0AC"
   attack: 140
   defense: 90
-  speed: 7
+  speed: 8
   skillDatas:
   - targetSide: 0
     range: 4
