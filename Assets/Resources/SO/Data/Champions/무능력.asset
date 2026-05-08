@@ -25,5 +25,5 @@ MonoBehaviour:
   championName: "\uBB34\uB2A5\uB825"
   attack: 140
   defense: 140
-  speed: 7
+  speed: 6
   skillDatas: []
