@@ -17,4 +17,6 @@ public class MasteryBoardCollection
         }
         return board;
     }
+
+    public void Clear() => _boards.Clear();
 }

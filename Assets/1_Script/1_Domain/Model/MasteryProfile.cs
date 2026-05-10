@@ -2,13 +2,15 @@ using System;
 
 public class MasteryProfile
 {
-    public int AvailablePoints { get; protected set; }
+    public int TotalPoints { get; private set; }
+    public int AvailablePoints { get; private set; }
     public MasteryBoardCollection BoardCollection { get; }
 
-    public MasteryProfile(int startPoints = 0) : this(startPoints, new MasteryBoardCollection(new())) { }
-    public MasteryProfile(int point, MasteryBoardCollection boards)
+    public MasteryProfile(int startPoints = 0) : this(startPoints, startPoints, new MasteryBoardCollection(new())) { }
+    public MasteryProfile(int totalPoints, int availablePoints, MasteryBoardCollection boards)
     {
-        AvailablePoints = point;
+        TotalPoints = totalPoints;
+        AvailablePoints = availablePoints;
         BoardCollection = boards;
     }
 
@@ -23,10 +25,18 @@ public class MasteryProfile
     }
 
     public MasteryBoard GetBoard(int championId) => BoardCollection.TryGetBoard(championId, out var result) ? result : new MasteryBoard();
+    public bool TryGetBoard(int championId, out MasteryBoard board) => BoardCollection.TryGetBoard(championId, out board);
 
-    public bool TryGetBoard(int championId, out MasteryBoard board)
+    public void EarnPoints(int amount)
     {
-        if (BoardCollection.TryGetBoard(championId, out board)) return true;
-        else return false;
+        if (amount < 0) throw new ArgumentException("획득 포인트는 음수일 수 없습니다.");
+        TotalPoints += amount;
+        AvailablePoints += amount;
+    }
+
+    public void ResetAll()
+    {
+        BoardCollection.Clear();
+        AvailablePoints = TotalPoints;
     }
 }

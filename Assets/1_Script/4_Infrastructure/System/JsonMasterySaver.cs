@@ -17,6 +17,7 @@ public struct MasteryBoardSaveData
 [Serializable]
 public struct MasteryInventorySaveData
 {
+    public int TotalPoints;
     public int AvailablePoints;
     public List<MasteryBoardSaveData> Boards;
 }
@@ -31,6 +32,7 @@ public class JsonMasterySaver : IMasterySaver
     {
         var saveData = new MasteryInventorySaveData
         {
+            TotalPoints = inventory.TotalPoints, // 도메인의 총 포인트를 DTO에 담습니다.
             AvailablePoints = inventory.AvailablePoints,
             Boards = new List<MasteryBoardSaveData>()
         };
@@ -59,6 +61,6 @@ public class JsonMasterySaver : IMasterySaver
         var saveData = JsonUtility.FromJson<MasteryInventorySaveData>(json);
         var loadedBoards = saveData.Boards.ToDictionary(x => x.Id, x => x.CreateBoard());
 
-        return new MasteryProfile(saveData.AvailablePoints, new MasteryBoardCollection(loadedBoards));
+        return new MasteryProfile(saveData.TotalPoints, saveData.AvailablePoints, new MasteryBoardCollection(loadedBoards));
     }
 }

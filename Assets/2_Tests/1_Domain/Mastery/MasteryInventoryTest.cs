@@ -34,4 +34,31 @@ public class MasteryInventoryTest
         Assert.Throws<InvalidOperationException>(() => inventory.Upgrade(101, StatType.Speed));
         Assert.AreEqual(9, inventory.AvailablePoints);
     }
+
+    [Test]
+    public void 포인트를_획득하면_총량과_가용포인트가_모두_증가한다()
+    {
+        var inventory = CreateMasteryInventory(10);
+
+        inventory.EarnPoints(5);
+
+        Assert.AreEqual(15, inventory.TotalPoints);
+        Assert.AreEqual(15, inventory.AvailablePoints);
+    }
+
+    [Test]
+    public void 초기화를_요청하면_보드가_비워지고_포인트가_총량만큼_복구된다()
+    {
+        var inventory = CreateMasteryInventory(10);
+        inventory.Upgrade(101, StatType.Attack);
+        inventory.Upgrade(102, StatType.Defense);
+
+        Assert.AreEqual(8, inventory.AvailablePoints);
+
+        inventory.ResetAll();
+
+        Assert.AreEqual(10, inventory.TotalPoints);
+        Assert.AreEqual(10, inventory.AvailablePoints);
+        Assert.AreEqual(0, inventory.GetBoard(101).AttackLevel); // 보드 초기화 확인
+    }
 }
