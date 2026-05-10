@@ -60,4 +60,15 @@ public class MasteryPointPresenter
 
         _view.UpdateChampionDetail(champModel, masteryModel);
     }
+
+    public void ResetMastery()
+    {
+        _inventory.ResetAll();
+        _view.UpdatePoints(_inventory.AvailablePoints);
+
+        if (_currentSelectedId != -1)
+            RefreshDetail();
+
+        _saver.Save(_inventory);
+    }
 }

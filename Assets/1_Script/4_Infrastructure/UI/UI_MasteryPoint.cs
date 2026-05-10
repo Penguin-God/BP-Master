@@ -11,6 +11,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     [SerializeField] Transform parent;
 
     [Header("포인트 및 챔피언 정보")]
+    [SerializeField] Button _resetButton;
     [SerializeField] TextMeshProUGUI _pointText;
     [SerializeField] TextMeshProUGUI _nameText;
     [SerializeField] TextMeshProUGUI _skillText;
@@ -36,6 +37,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
 
         BindUpgradeButtons();
         CreateAndBindChampionButtons();
+        _resetButton.onClick.AddListener(ResetView);
 
         _presenter.Initialize();
         ClearDetailView();
@@ -75,6 +77,8 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
             int id = btn.GetComponent<ChampionIdentify>().Id;
             if (_masteryProfile.TryGetBoard(id, out var board))
                 ButtonUtil.ChangeButtonColor(btn, Color.green);
+            else
+                ButtonUtil.ChangeButtonColor(btn, Color.white);
         }
     }
 
@@ -102,5 +106,11 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         _masteryAttText.text = "공 : -";
         _masteryDefText.text = "방 : -";
         _masterySpdText.text = "속 : -";
+    }
+
+    void ResetView()
+    {
+        _presenter.ResetMastery();
+        RefreshBtnColor();
     }
 }
