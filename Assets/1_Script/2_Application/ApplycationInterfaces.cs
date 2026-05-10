@@ -33,3 +33,8 @@ public interface IStageStorage
     int LoadUnlockedStage();
     void SaveUnlockedStage(int stageIndex);
 }
+
+public interface IMasterySaver
+{
+    void Save(MasteryProfile inventory);
+}

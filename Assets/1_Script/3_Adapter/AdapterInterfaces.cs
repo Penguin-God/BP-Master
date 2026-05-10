@@ -4,11 +4,6 @@ public interface IMasteryPointView
     void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel);
 }
 
-public interface IMasterySaver
-{
-    void Save(MasteryProfile inventory);
-}
-
 public interface IChampionProvider
 {
     ChampionProfile GetProfile(int id);

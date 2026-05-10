@@ -57,6 +57,9 @@ public class BattleScene : MonoBehaviour
         matchUI_Controller.Done(result, matchEnd);
 
         if (matchEnd && playerIds[result.Winner] == matchConfigSO.UserId)
-            new StageProgressUseCase(new PlayerPrefsStageStorage()).ClearStage(ai_id);
+        {
+            var saver = new JsonMasterySaver();
+            new StageProgressUseCase(new PlayerPrefsStageStorage(), saver.Load(), saver , matchConfigSO.EarnPointByStage).ClearStage(ai_id);
+        }
     }
 }
