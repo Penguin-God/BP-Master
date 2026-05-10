@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 119
+  controlID: 132
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 13}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -273,14 +273,14 @@ MonoBehaviour:
     y: 606
     width: 598
     height: 687
-  m_MinSize: {x: 232, y: 276}
-  m_MaxSize: {x: 10002, y: 10026}
-  m_ActualView: {fileID: 20}
+  m_MinSize: {x: 52, y: 76}
+  m_MaxSize: {x: 4002, y: 4026}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 20}
   - {fileID: 15}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -632,8 +632,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Console\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1282
-    y: 685
+    x: 1
+    y: 630
     width: 596
     height: 661
   m_SerializedDataModeController:
@@ -1258,9 +1258,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 393.80222, y: 694.9853, z: -12.141265}
+    m_Target: {x: 719.7525, y: 539.4659, z: -2.8971417}
     speed: 2
-    m_Value: {x: 393.80222, y: 694.9853, z: -12.141265}
+    m_Value: {x: 719.7525, y: 539.4659, z: -2.8971417}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1310,9 +1310,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1224.1262
+    m_Target: 683.0103
     speed: 2
-    m_Value: 1224.1262
+    m_Value: 683.0103
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1386,7 +1386,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
     m_DynamicPanelBehavior: 0
   m_Spl:
-    ID: 135
+    ID: 17279
     splitterInitialOffset: 434
     currentActiveSplitter: -1
     realSizes:
@@ -1413,7 +1413,7 @@ MonoBehaviour:
   m_TestListGUIs:
   - m_Window: {fileID: 17}
     runProgress:
-      RunGuid: 495c5ca3-77f4-4d4e-8e4b-a5d9bb3b566d
+      RunGuid: a6286ffc-a3fd-4768-a690-60486abd58af
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -1440,7 +1440,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1.0000013
+      Progress: 0.9999979
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -1449,7 +1449,7 @@ MonoBehaviour:
       name: BP master
       fullName: BP master
       resultStatus: 1
-      duration: 0.1587559
+      duration: 0.1382219
       messages: 
       output: 
       stacktrace: 
@@ -1465,7 +1465,7 @@ MonoBehaviour:
       name: 2_Tests.dll
       fullName: C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/2_Tests.dll
       resultStatus: 1
-      duration: 0.042757
+      duration: 0.0378008
       messages: 
       output: 
       stacktrace: 
@@ -1474,14 +1474,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1331
+      parentId: 1000
       parentUniqueId: '[BP master][suite]'
     - id: 1019
       uniqueId: '2_Tests.dll/[2_Tests][BanPickHandlerTests][suite]'
       name: BanPickHandlerTests
       fullName: BanPickHandlerTests
       resultStatus: 1
-      duration: 0.0207456
+      duration: 0.0187539
       messages: 
       output: 
       stacktrace: 
@@ -1497,7 +1497,7 @@ MonoBehaviour:
       name: "\uBC34\uD558\uBA74_\uC800\uC7A5\uC18C\uC5D0_\uB4F1\uB85D_\uD6C4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD"
       fullName: "BanPickHandlerTests.\uBC34\uD558\uBA74_\uC800\uC7A5\uC18C\uC5D0_\uB4F1\uB85D_\uD6C4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD"
       resultStatus: 1
-      duration: 0.0111415
+      duration: 0.010554
       messages: 
       output: 
       stacktrace: 
@@ -1514,7 +1514,7 @@ MonoBehaviour:
       name: "\uD53D\uD558\uBA74_\uC800\uC7A5\uC18C\uC640_\uD37C\uC0AC\uB4DC\uC5D0_\uB370\uC774\uD130_\uB4F1\uB85D_\uD6C4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD"
       fullName: "BanPickHandlerTests.\uD53D\uD558\uBA74_\uC800\uC7A5\uC18C\uC640_\uD37C\uC0AC\uB4DC\uC5D0_\uB370\uC774\uD130_\uB4F1\uB85D_\uD6C4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD"
       resultStatus: 1
-      duration: 0.0078925
+      duration: 0.0066639
       messages: 
       output: 
       stacktrace: 
@@ -1531,7 +1531,7 @@ MonoBehaviour:
       name: "\uD5C8\uC6A9\uB418\uC9C0_\uC54A\uC740_\uD398\uC774\uC988\uC77C_\uACBD\uC6B0_\uC608\uC678"
       fullName: "BanPickHandlerTests.\uD5C8\uC6A9\uB418\uC9C0_\uC54A\uC740_\uD398\uC774\uC988\uC77C_\uACBD\uC6B0_\uC608\uC678"
       resultStatus: 1
-      duration: 0.0017116
+      duration: 0.001536
       messages: 
       output: 
       stacktrace: 
@@ -1548,7 +1548,7 @@ MonoBehaviour:
       name: LeagueRecordUseCaseTests
       fullName: LeagueRecordUseCaseTests
       resultStatus: 1
-      duration: 0.0030545
+      duration: 0.0025706
       messages: 
       output: 
       stacktrace: 
@@ -1564,7 +1564,7 @@ MonoBehaviour:
       name: "\uAE30\uC874_\uAE30\uB85D\uC774_\uC788\uB2E4\uBA74_\uB204\uC801\uD558\uACE0_\uC5C6\uB2E4\uBA74_\uC0C8\uB85C_\uC800\uC7A5\uD55C\uB2E4"
       fullName: "LeagueRecordUseCaseTests.\uAE30\uC874_\uAE30\uB85D\uC774_\uC788\uB2E4\uBA74_\uB204\uC801\uD558\uACE0_\uC5C6\uB2E4\uBA74_\uC0C8\uB85C_\uC800\uC7A5\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0030545
+      duration: 0.0025706
       messages: 
       output: 
       stacktrace: 
@@ -1581,7 +1581,7 @@ MonoBehaviour:
       name: LeagueScheduleUsecaseTest
       fullName: LeagueScheduleUsecaseTest
       resultStatus: 1
-      duration: 0.0013891
+      duration: 0.0010609999
       messages: 
       output: 
       stacktrace: 
@@ -1597,7 +1597,7 @@ MonoBehaviour:
       name: "AI\uB9E4\uCE58\uB294_AI\uBC30\uD2C0\uC744_\uC9C4\uD589\uD558\uACE0_\uC778\uB371\uC2A4\uB97C_\uC800\uC7A5\uD55C\uB2E4"
       fullName: "LeagueScheduleUsecaseTest.AI\uB9E4\uCE58\uB294_AI\uBC30\uD2C0\uC744_\uC9C4\uD589\uD558\uACE0_\uC778\uB371\uC2A4\uB97C_\uC800\uC7A5\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0011884
+      duration: 0.0009456
       messages: 
       output: 
       stacktrace: 
@@ -1614,7 +1614,7 @@ MonoBehaviour:
       name: "\uD50C\uB808\uC774\uC5B4_\uB9E4\uCE58\uB294_\uC52C\uC744_\uC774\uB3D9\uD558\uACE0_\uC778\uB371\uC2A4\uB97C_\uC800\uC7A5\uD55C\uB2E4"
       fullName: "LeagueScheduleUsecaseTest.\uD50C\uB808\uC774\uC5B4_\uB9E4\uCE58\uB294_\uC52C\uC744_\uC774\uB3D9\uD558\uACE0_\uC778\uB371\uC2A4\uB97C_\uC800\uC7A5\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0002007
+      duration: 0.0001154
       messages: 
       output: 
       stacktrace: 
@@ -1631,7 +1631,7 @@ MonoBehaviour:
       name: MatchContextTests
       fullName: MatchContextTests
       resultStatus: 1
-      duration: 0.0051145
+      duration: 0.004486
       messages: 
       output: 
       stacktrace: 
@@ -1647,7 +1647,7 @@ MonoBehaviour:
       name: "Init\uC2DC_\uB9E4\uCE58\uB370\uC774\uD130_\uC800\uC7A5\uC18C_\uC138\uD305"
       fullName: "MatchContextTests.Init\uC2DC_\uB9E4\uCE58\uB370\uC774\uD130_\uC800\uC7A5\uC18C_\uC138\uD305"
       resultStatus: 1
-      duration: 0.0027498
+      duration: 0.0021771
       messages: 
       output: 
       stacktrace: 
@@ -1664,7 +1664,7 @@ MonoBehaviour:
       name: "\uAC8C\uC784\uC774_\uB05D\uB098\uBA74_\uC2B9\uB9AC_\uAE30\uB85D_\uD6C4_\uD53D\uB41C_ID\uB294_\uC120\uD0DD_\uD480\uC5D0\uC11C_\uC81C\uC678\uD55C\uB2E4"
       fullName: "MatchContextTests.\uAC8C\uC784\uC774_\uB05D\uB098\uBA74_\uC2B9\uB9AC_\uAE30\uB85D_\uD6C4_\uD53D\uB41C_ID\uB294_\uC120\uD0DD_\uD480\uC5D0\uC11C_\uC81C\uC678\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0020335
+      duration: 0.0020433
       messages: 
       output: 
       stacktrace: 
@@ -1681,7 +1681,7 @@ MonoBehaviour:
       name: "\uC2B9\uC218\uB97C_\uCC44\uC6CC\uC11C_\uB9E4\uCE58\uAC00_\uB05D\uB098\uBA74_\uBAA8\uB4E0_\uC0C1\uD0DC\uB97C_\uBE44\uC6B4\uB2E4"
       fullName: "MatchContextTests.\uC2B9\uC218\uB97C_\uCC44\uC6CC\uC11C_\uB9E4\uCE58\uAC00_\uB05D\uB098\uBA74_\uBAA8\uB4E0_\uC0C1\uD0DC\uB97C_\uBE44\uC6B4\uB2E4"
       resultStatus: 1
-      duration: 0.0003312
+      duration: 0.0002656
       messages: 
       output: 
       stacktrace: 
@@ -1698,7 +1698,7 @@ MonoBehaviour:
       name: MatchCoreTests
       fullName: MatchCoreTests
       resultStatus: 1
-      duration: 0.0096447
+      duration: 0.008846
       messages: 
       output: 
       stacktrace: 
@@ -1714,7 +1714,7 @@ MonoBehaviour:
       name: "\uAC8C\uC784\uC774_\uB05D\uB098\uBA74_\uACB0\uACFC\uB97C_\uACC4\uC0B0\uD558\uC5EC_\uC774\uBCA4\uD2B8\uB97C_\uBC1C\uC0DD\uC2DC\uD0A8\uB2E4"
       fullName: "MatchCoreTests.\uAC8C\uC784\uC774_\uB05D\uB098\uBA74_\uACB0\uACFC\uB97C_\uACC4\uC0B0\uD558\uC5EC_\uC774\uBCA4\uD2B8\uB97C_\uBC1C\uC0DD\uC2DC\uD0A8\uB2E4"
       resultStatus: 1
-      duration: 0.0084464
+      duration: 0.0077573
       messages: 
       output: 
       stacktrace: 
@@ -1731,7 +1731,7 @@ MonoBehaviour:
       name: "\uB9E4\uCE58\uCF54\uC5B4_\uC0DD\uC131\uC2DC_\uD37C\uBE14\uB9AD_\uC758\uC874\uC131_\uAC1D\uCCB4\uB4E4\uC774_\uCD08\uAE30\uD654\uB41C\uB2E4"
       fullName: "MatchCoreTests.\uB9E4\uCE58\uCF54\uC5B4_\uC0DD\uC131\uC2DC_\uD37C\uBE14\uB9AD_\uC758\uC874\uC131_\uAC1D\uCCB4\uB4E4\uC774_\uCD08\uAE30\uD654\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0011983
+      duration: 0.0010887
       messages: 
       output: 
       stacktrace: 
@@ -1748,7 +1748,7 @@ MonoBehaviour:
       name: MatchFlowUsecaseTests
       fullName: MatchFlowUsecaseTests
       resultStatus: 1
-      duration: 0.0012596
+      duration: 0.00072859996
       messages: 
       output: 
       stacktrace: 
@@ -1764,7 +1764,7 @@ MonoBehaviour:
       name: "\uB9E4\uCE58_\uC885\uB8CC_\uC870\uAC74_\uB2EC\uC131_\uC2DC_\uAE30\uB85D\uAE30_\uC0C1\uD0DC\uAC00_\uBCC0\uACBD\uB418\uC5B4\uC57C_\uD568"
       fullName: "MatchFlowUsecaseTests.\uB9E4\uCE58_\uC885\uB8CC_\uC870\uAC74_\uB2EC\uC131_\uC2DC_\uAE30\uB85D\uAE30_\uC0C1\uD0DC\uAC00_\uBCC0\uACBD\uB418\uC5B4\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0004638
+      duration: 0.0003352
       messages: 
       output: 
       stacktrace: 
@@ -1781,7 +1781,7 @@ MonoBehaviour:
       name: "\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568"
       fullName: "MatchFlowUsecaseTests.\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0007958
+      duration: 0.0003934
       messages: 
       output: 
       stacktrace: 
@@ -1797,7 +1797,7 @@ MonoBehaviour:
       name: "\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568(Blue,Blue,1,0)"
       fullName: "MatchFlowUsecaseTests.\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568(Blue,Blue,1,0)"
       resultStatus: 1
-      duration: 0.0005933
+      duration: 0.0002693
       messages: 
       output: 
       stacktrace: 
@@ -1814,7 +1814,7 @@ MonoBehaviour:
       name: "\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568(Blue,Red,0,1)"
       fullName: "MatchFlowUsecaseTests.\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568(Blue,Red,0,1)"
       resultStatus: 1
-      duration: 0.0001206
+      duration: 0.0000645
       messages: 
       output: 
       stacktrace: 
@@ -1831,7 +1831,7 @@ MonoBehaviour:
       name: "\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568(Red,Red,1,0)"
       fullName: "MatchFlowUsecaseTests.\uC11C\uBE44\uC2A4\uB294_\uACB0\uACFC\uB97C_\uBC1B\uC544_\uAE30\uB85D\uAE30\uC758_\uC810\uC218\uB97C_\uC815\uD655\uD788_\uC62C\uB824\uC57C_\uD568(Red,Red,1,0)"
       resultStatus: 1
-      duration: 0.0000819
+      duration: 0.0000596
       messages: 
       output: 
       stacktrace: 
@@ -1848,7 +1848,7 @@ MonoBehaviour:
       name: PlayerDataProviderTests
       fullName: PlayerDataProviderTests
       resultStatus: 1
-      duration: 0.001549
+      duration: 0.0013547001
       messages: 
       output: 
       stacktrace: 
@@ -1864,7 +1864,7 @@ MonoBehaviour:
       name: "\uBE14\uB8E8_\uB808\uB4DC_ID\uB97C_\uC804\uB2EC\uD558\uBA74_\uD300\uBCC4_\uD50C\uB808\uC774\uC5B4_\uB370\uC774\uD130_\uB515\uC154\uB108\uB9AC\uB97C_\uBC18\uD658\uD55C\uB2E4"
       fullName: "PlayerDataProviderTests.\uBE14\uB8E8_\uB808\uB4DC_ID\uB97C_\uC804\uB2EC\uD558\uBA74_\uD300\uBCC4_\uD50C\uB808\uC774\uC5B4_\uB370\uC774\uD130_\uB515\uC154\uB108\uB9AC\uB97C_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0013316
+      duration: 0.0012307
       messages: 
       output: 
       stacktrace: 
@@ -1881,7 +1881,7 @@ MonoBehaviour:
       name: "\uD50C\uB808\uC774\uC5B4_ID\uC640_\uAC19\uC73C\uBA74_\uB85C\uCEEC\uB85C\uB354_\uC544\uB2C8\uBA74_ai\uB85C\uB354\uB97C_\uC0AC\uC6A9\uD55C\uB2E4"
       fullName: "PlayerDataProviderTests.\uD50C\uB808\uC774\uC5B4_ID\uC640_\uAC19\uC73C\uBA74_\uB85C\uCEEC\uB85C\uB354_\uC544\uB2C8\uBA74_ai\uB85C\uB354\uB97C_\uC0AC\uC6A9\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0002174
+      duration: 0.000124
       messages: 
       output: 
       stacktrace: 
@@ -1898,7 +1898,7 @@ MonoBehaviour:
       name: AdapterTests.dll
       fullName: C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/AdapterTests.dll
       resultStatus: 1
-      duration: 0.0484794
+      duration: 0.0418862
       messages: 
       output: 
       stacktrace: 
@@ -1907,14 +1907,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1331
+      parentId: 1000
       parentUniqueId: '[BP master][suite]'
     - id: 1027
       uniqueId: 'AdapterTests.dll/[AdapterTests][AI_AgentTests][suite]'
       name: AI_AgentTests
       fullName: AI_AgentTests
       resultStatus: 1
-      duration: 0.0015462
+      duration: 0.0012096
       messages: 
       output: 
       stacktrace: 
@@ -1930,7 +1930,7 @@ MonoBehaviour:
       name: "\uADDC\uCE59\uC5D0_\uB9DE\uAC8C_\uBC34_\uC120\uD0DD_\uD6C4_\uC800\uC7A5"
       fullName: "AI_AgentTests.\uADDC\uCE59\uC5D0_\uB9DE\uAC8C_\uBC34_\uC120\uD0DD_\uD6C4_\uC800\uC7A5"
       resultStatus: 1
-      duration: 0.0008308
+      duration: 0.0005639
       messages: 
       output: 
       stacktrace: 
@@ -1947,7 +1947,7 @@ MonoBehaviour:
       name: "\uADDC\uCE59\uC5D0_\uB9DE\uAC8C_\uD53D_\uC120\uD0DD_\uD6C4_\uC800\uC7A5"
       fullName: "AI_AgentTests.\uADDC\uCE59\uC5D0_\uB9DE\uAC8C_\uD53D_\uC120\uD0DD_\uD6C4_\uC800\uC7A5"
       resultStatus: 1
-      duration: 0.0002596
+      duration: 0.0002262
       messages: 
       output: 
       stacktrace: 
@@ -1964,7 +1964,7 @@ MonoBehaviour:
       name: "\uC790\uAE30_\uD300_\uCC28\uB840\uAC00_\uC544\uB2C8\uBA74_\uC544\uBB34_\uC77C\uB3C4_\uC77C\uC5B4\uB098\uC9C0_\uC54A\uC74C"
       fullName: "AI_AgentTests.\uC790\uAE30_\uD300_\uCC28\uB840\uAC00_\uC544\uB2C8\uBA74_\uC544\uBB34_\uC77C\uB3C4_\uC77C\uC5B4\uB098\uC9C0_\uC54A\uC74C"
       resultStatus: 1
-      duration: 0.0004558
+      duration: 0.0004195
       messages: 
       output: 
       stacktrace: 
@@ -1981,7 +1981,7 @@ MonoBehaviour:
       name: AI_SkillUseTests
       fullName: AI_SkillUseTests
       resultStatus: 1
-      duration: 0.0104487
+      duration: 0.009472
       messages: 
       output: 
       stacktrace: 
@@ -1997,7 +1997,7 @@ MonoBehaviour:
       name: "UseSkill_\uD638\uCD9C\uD558\uBA74_\uC8FC\uC785\uB41C_\uD0C0\uAC9F\uC5D0\uAC8C_\uC2A4\uD0AC\uC774_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568"
       fullName: "AI_SkillUseTests.UseSkill_\uD638\uCD9C\uD558\uBA74_\uC8FC\uC785\uB41C_\uD0C0\uAC9F\uC5D0\uAC8C_\uC2A4\uD0AC\uC774_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0104487
+      duration: 0.009472
       messages: 
       output: 
       stacktrace: 
@@ -2014,7 +2014,7 @@ MonoBehaviour:
       name: BonusThresholdPresenterTests
       fullName: BonusThresholdPresenterTests
       resultStatus: 1
-      duration: 0.0022668
+      duration: 0.0018352
       messages: 
       output: 
       stacktrace: 
@@ -2030,7 +2030,7 @@ MonoBehaviour:
       name: "\uC804\uCCB4_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       fullName: "BonusThresholdPresenterTests.\uC804\uCCB4_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0020621
+      duration: 0.0016775
       messages: 
       output: 
       stacktrace: 
@@ -2047,7 +2047,7 @@ MonoBehaviour:
       name: "\uD55C\uC904_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       fullName: "BonusThresholdPresenterTests.\uD55C\uC904_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0002047
+      duration: 0.0001577
       messages: 
       output: 
       stacktrace: 
@@ -2064,7 +2064,7 @@ MonoBehaviour:
       name: ChampionButtonStatePresenterTests
       fullName: ChampionButtonStatePresenterTests
       resultStatus: 1
-      duration: 0.0020627
+      duration: 0.0017876
       messages: 
       output: 
       stacktrace: 
@@ -2080,7 +2080,7 @@ MonoBehaviour:
       name: "\uB098\uB9CC_\uC219\uB828\uB3C4\uB97C_\uB2EC\uC131\uD558\uBA74_\uCD08\uB85D\uC0C9_\uBC84\uD2BC\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "ChampionButtonStatePresenterTests.\uB098\uB9CC_\uC219\uB828\uB3C4\uB97C_\uB2EC\uC131\uD558\uBA74_\uCD08\uB85D\uC0C9_\uBC84\uD2BC\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0014411
+      duration: 0.0012004
       messages: 
       output: 
       stacktrace: 
@@ -2097,7 +2097,7 @@ MonoBehaviour:
       name: "\uC0C1\uB300\uBC29\uB9CC_\uC219\uB828\uB3C4\uB97C_\uB2EC\uC131\uD558\uBA74_\uBD89\uC740\uC0C9_\uBC84\uD2BC\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "ChampionButtonStatePresenterTests.\uC0C1\uB300\uBC29\uB9CC_\uC219\uB828\uB3C4\uB97C_\uB2EC\uC131\uD558\uBA74_\uBD89\uC740\uC0C9_\uBC84\uD2BC\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001934
+      duration: 0.0001631
       messages: 
       output: 
       stacktrace: 
@@ -2114,7 +2114,7 @@ MonoBehaviour:
       name: "\uC120\uD0DD_\uBD88\uAC00\uB2A5\uD55C_\uCC54\uD53C\uC5B8\uC740_\uBE44\uD65C\uC131\uD654_\uC0C1\uD0DC\uC640_\uD14D\uC2A4\uD2B8_\uC0C9\uC0C1\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "ChampionButtonStatePresenterTests.\uC120\uD0DD_\uBD88\uAC00\uB2A5\uD55C_\uCC54\uD53C\uC5B8\uC740_\uBE44\uD65C\uC131\uD654_\uC0C1\uD0DC\uC640_\uD14D\uC2A4\uD2B8_\uC0C9\uC0C1\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001658
+      duration: 0.0001695
       messages: 
       output: 
       stacktrace: 
@@ -2131,7 +2131,7 @@ MonoBehaviour:
       name: "\uC591\uCABD_\uBAA8\uB450_\uC219\uB828\uB3C4\uB97C_\uB2EC\uC131\uD558\uBA74_\uB178\uB780\uC0C9_\uBC84\uD2BC\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "ChampionButtonStatePresenterTests.\uC591\uCABD_\uBAA8\uB450_\uC219\uB828\uB3C4\uB97C_\uB2EC\uC131\uD558\uBA74_\uB178\uB780\uC0C9_\uBC84\uD2BC\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001463
+      duration: 0.0001483
       messages: 
       output: 
       stacktrace: 
@@ -2148,7 +2148,7 @@ MonoBehaviour:
       name: "\uCE74\uD0C8\uB85C\uADF8\uC5D0_\uC788\uB294_\uCC54\uD53C\uC5B8_\uC774\uB984\uC744_\uC815\uD655\uD788_\uB9E4\uD551\uD558\uC5EC_\uBC18\uD658\uD55C\uB2E4"
       fullName: "ChampionButtonStatePresenterTests.\uCE74\uD0C8\uB85C\uADF8\uC5D0_\uC788\uB294_\uCC54\uD53C\uC5B8_\uC774\uB984\uC744_\uC815\uD655\uD788_\uB9E4\uD551\uD558\uC5EC_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001161
+      duration: 0.0001063
       messages: 
       output: 
       stacktrace: 
@@ -2165,7 +2165,7 @@ MonoBehaviour:
       name: ChampionStatusTextBuildTests
       fullName: ChampionStatusTextBuildTests
       resultStatus: 1
-      duration: 0.0003675
+      duration: 0.0002999
       messages: 
       output: 
       stacktrace: 
@@ -2181,7 +2181,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8_\uC2A4\uD0EF\uC815\uBCF4\uAC00_\uD14D\uC2A4\uD2B8\uB85C_\uC0DD\uC131"
       fullName: "ChampionStatusTextBuildTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF\uC815\uBCF4\uAC00_\uD14D\uC2A4\uD2B8\uB85C_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0003675
+      duration: 0.0002999
       messages: 
       output: 
       stacktrace: 
@@ -2198,7 +2198,7 @@ MonoBehaviour:
       name: ChampionTextBuildTests
       fullName: ChampionTextBuildTests
       resultStatus: 1
-      duration: 0.0015114
+      duration: 0.0012668
       messages: 
       output: 
       stacktrace: 
@@ -2214,7 +2214,7 @@ MonoBehaviour:
       name: "Id\uB97C_\uBC1B\uC73C\uBA74_\uB370\uC774\uD130_\uC870\uD68C_\uD6C4_\uD14D\uC2A4\uD2B8\uB97C_\uC0DD\uC131\uD55C\uB2E4"
       fullName: "ChampionTextBuildTests.Id\uB97C_\uBC1B\uC73C\uBA74_\uB370\uC774\uD130_\uC870\uD68C_\uD6C4_\uD14D\uC2A4\uD2B8\uB97C_\uC0DD\uC131\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0015114
+      duration: 0.0012668
       messages: 
       output: 
       stacktrace: 
@@ -2231,7 +2231,7 @@ MonoBehaviour:
       name: GameFlowTextBuilderTests
       fullName: GameFlowTextBuilderTests
       resultStatus: 1
-      duration: 0.0006501
+      duration: 0.0004977
       messages: 
       output: 
       stacktrace: 
@@ -2247,7 +2247,7 @@ MonoBehaviour:
       name: "\uAC01_\uB2E8\uACC4\uC640_\uD300_\uC870\uD569\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       fullName: "GameFlowTextBuilderTests.\uAC01_\uB2E8\uACC4\uC640_\uD300_\uC870\uD569\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0006501
+      duration: 0.0004977
       messages: 
       output: 
       stacktrace: 
@@ -2266,7 +2266,7 @@ MonoBehaviour:
       fullName: "GameFlowTextBuilderTests.\uAC01_\uB2E8\uACC4\uC640_\uD300_\uC870\uD569\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131(Ban,Blue,\"\uD30C\uB791
         \uD300 \uBC34 \uB2E8\uACC4\")"
       resultStatus: 1
-      duration: 0.0004263
+      duration: 0.0003227
       messages: 
       output: 
       stacktrace: 
@@ -2286,7 +2286,7 @@ MonoBehaviour:
       fullName: "GameFlowTextBuilderTests.\uAC01_\uB2E8\uACC4\uC640_\uD300_\uC870\uD569\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131(Pick,Red,\"\uBE68\uAC15
         \uD300 \uD53D \uB2E8\uACC4\")"
       resultStatus: 1
-      duration: 0.0000988
+      duration: 0.000057
       messages: 
       output: 
       stacktrace: 
@@ -2306,7 +2306,7 @@ MonoBehaviour:
       fullName: "GameFlowTextBuilderTests.\uAC01_\uB2E8\uACC4\uC640_\uD300_\uC870\uD569\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131(Skill,Blue,\"\uD30C\uB791
         \uD300 \uD2B9\uC131 \uB2E8\uACC4\")"
       resultStatus: 1
-      duration: 0.0000662
+      duration: 0.0000449
       messages: 
       output: 
       stacktrace: 
@@ -2326,7 +2326,7 @@ MonoBehaviour:
       fullName: "GameFlowTextBuilderTests.\uAC01_\uB2E8\uACC4\uC640_\uD300_\uC870\uD569\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131(Done,Red,\"\uBE68\uAC15
         \uD300 \uB05D \uB2E8\uACC4\")"
       resultStatus: 1
-      duration: 0.0000588
+      duration: 0.0000731
       messages: 
       output: 
       stacktrace: 
@@ -2343,7 +2343,7 @@ MonoBehaviour:
       name: LeaderboardPresenterTests
       fullName: LeaderboardPresenterTests
       resultStatus: 1
-      duration: 0.0039107
+      duration: 0.0033771
       messages: 
       output: 
       stacktrace: 
@@ -2359,7 +2359,7 @@ MonoBehaviour:
       name: "\uC21C\uC704\uB300\uB85C_\uC815\uB82C_\uD6C4_\uBAA8\uB378\uB85C_\uBCC0\uD658\uD574_\uBC18\uD658\uB41C\uB2E4"
       fullName: "LeaderboardPresenterTests.\uC21C\uC704\uB300\uB85C_\uC815\uB82C_\uD6C4_\uBAA8\uB378\uB85C_\uBCC0\uD658\uD574_\uBC18\uD658\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0039107
+      duration: 0.0033771
       messages: 
       output: 
       stacktrace: 
@@ -2376,7 +2376,7 @@ MonoBehaviour:
       name: MasteryPointPersenterTests
       fullName: MasteryPointPersenterTests
       resultStatus: 1
-      duration: 0.0026413999
+      duration: 0.002597
       messages: 
       output: 
       stacktrace: 
@@ -2392,7 +2392,7 @@ MonoBehaviour:
       name: "\uC219\uB828\uB3C4_\uC5C5\uADF8\uB808\uC774\uB4DC_\uC131\uACF5_\uC2DC_\uC778\uBCA4\uD1A0\uB9AC\uAC00_\uC800\uC7A5\uB418\uACE0_\uBDF0\uAC00_\uAC31\uC2E0\uB41C\uB2E4"
       fullName: "MasteryPointPersenterTests.\uC219\uB828\uB3C4_\uC5C5\uADF8\uB808\uC774\uB4DC_\uC131\uACF5_\uC2DC_\uC778\uBCA4\uD1A0\uB9AC\uAC00_\uC800\uC7A5\uB418\uACE0_\uBDF0\uAC00_\uAC31\uC2E0\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0020112
+      duration: 0.0019809
       messages: 
       output: 
       stacktrace: 
@@ -2409,7 +2409,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8_\uC120\uD0DD_\uC2DC_\uC0C1\uC138_\uC815\uBCF4\uB97C_\uAC31\uC2E0\uD55C\uB2E4"
       fullName: "MasteryPointPersenterTests.\uCC54\uD53C\uC5B8_\uC120\uD0DD_\uC2DC_\uC0C1\uC138_\uC815\uBCF4\uB97C_\uAC31\uC2E0\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001965
+      duration: 0.0001967
       messages: 
       output: 
       stacktrace: 
@@ -2426,7 +2426,7 @@ MonoBehaviour:
       name: "\uCD08\uAE30\uD654_\uC2DC_\uBCF4\uC720_\uD3EC\uC778\uD2B8\uB97C_\uBDF0\uC5D0_\uC804\uB2EC\uD55C\uB2E4"
       fullName: "MasteryPointPersenterTests.\uCD08\uAE30\uD654_\uC2DC_\uBCF4\uC720_\uD3EC\uC778\uD2B8\uB97C_\uBDF0\uC5D0_\uC804\uB2EC\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001952
+      duration: 0.0001573
       messages: 
       output: 
       stacktrace: 
@@ -2443,7 +2443,7 @@ MonoBehaviour:
       name: "\uD3EC\uC778\uD2B8_\uC5C6\uC774_\uC5C5\uADF8\uB808\uC774\uB4DC_\uC2DC\uB3C4\uD560_\uACBD\uC6B0_\uC608\uC678"
       fullName: "MasteryPointPersenterTests.\uD3EC\uC778\uD2B8_\uC5C6\uC774_\uC5C5\uADF8\uB808\uC774\uB4DC_\uC2DC\uB3C4\uD560_\uACBD\uC6B0_\uC608\uC678"
       resultStatus: 1
-      duration: 0.0002385
+      duration: 0.0002621
       messages: 
       output: 
       stacktrace: 
@@ -2460,7 +2460,7 @@ MonoBehaviour:
       name: MasteryTextBuilderTests
       fullName: MasteryTextBuilderTests
       resultStatus: 1
-      duration: 0.0016375
+      duration: 0.0015164
       messages: 
       output: 
       stacktrace: 
@@ -2476,7 +2476,7 @@ MonoBehaviour:
       name: "\uC219\uB828\uB3C4_\uC2A4\uD0EF\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBCC0\uD658"
       fullName: "MasteryTextBuilderTests.\uC219\uB828\uB3C4_\uC2A4\uD0EF\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBCC0\uD658"
       resultStatus: 1
-      duration: 0.0016375
+      duration: 0.0015164
       messages: 
       output: 
       stacktrace: 
@@ -2493,7 +2493,7 @@ MonoBehaviour:
       name: SchedulePaginationPresenterTest
       fullName: SchedulePaginationPresenterTest
       resultStatus: 1
-      duration: 0.0016384
+      duration: 0.0015424001
       messages: 
       output: 
       stacktrace: 
@@ -2509,7 +2509,7 @@ MonoBehaviour:
       name: "\uB2E4\uC74C_\uD398\uC774\uC9C0\uB85C_\uC774\uB3D9\uD558\uBA74_\uB2E4\uC74C_10\uAC1C\uC758_\uB370\uC774\uD130\uB97C_\uBC18\uD658\uD55C\uB2E4"
       fullName: "SchedulePaginationPresenterTest.\uB2E4\uC74C_\uD398\uC774\uC9C0\uB85C_\uC774\uB3D9\uD558\uBA74_\uB2E4\uC74C_10\uAC1C\uC758_\uB370\uC774\uD130\uB97C_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0010233
+      duration: 0.0009843
       messages: 
       output: 
       stacktrace: 
@@ -2526,7 +2526,7 @@ MonoBehaviour:
       name: "\uB9C8\uC9C0\uB9C9_\uD398\uC774\uC9C0\uC5D0\uC11C\uB294_\uB0A8\uC740_\uAC1C\uC218\uB9CC\uD07C\uB9CC_\uBC18\uD658\uD558\uBA70_\uB354_\uC774\uC0C1_\uB118\uC5B4\uAC00\uC9C0_\uC54A\uB294\uB2E4"
       fullName: "SchedulePaginationPresenterTest.\uB9C8\uC9C0\uB9C9_\uD398\uC774\uC9C0\uC5D0\uC11C\uB294_\uB0A8\uC740_\uAC1C\uC218\uB9CC\uD07C\uB9CC_\uBC18\uD658\uD558\uBA70_\uB354_\uC774\uC0C1_\uB118\uC5B4\uAC00\uC9C0_\uC54A\uB294\uB2E4"
       resultStatus: 1
-      duration: 0.0001901
+      duration: 0.0001722
       messages: 
       output: 
       stacktrace: 
@@ -2543,7 +2543,7 @@ MonoBehaviour:
       name: "\uC0DD\uC131\uC2DC_\uD604\uC7AC_\uC9C4\uD589\uC911\uC778_\uB9E4\uCE58\uAC00_\uD3EC\uD568\uB41C_\uD398\uC774\uC9C0\uB85C_\uC790\uB3D9_\uCD08\uAE30\uD654\uB41C\uB2E4"
       fullName: "SchedulePaginationPresenterTest.\uC0DD\uC131\uC2DC_\uD604\uC7AC_\uC9C4\uD589\uC911\uC778_\uB9E4\uCE58\uAC00_\uD3EC\uD568\uB41C_\uD398\uC774\uC9C0\uB85C_\uC790\uB3D9_\uCD08\uAE30\uD654\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0001231
+      duration: 0.0000895
       messages: 
       output: 
       stacktrace: 
@@ -2560,7 +2560,7 @@ MonoBehaviour:
       name: "\uCCAB_\uD398\uC774\uC9C0\uC5D0\uC11C\uB294_\uC774\uC804\uC73C\uB85C_\uB118\uC5B4\uAC00\uC9C0_\uC54A\uB294\uB2E4"
       fullName: "SchedulePaginationPresenterTest.\uCCAB_\uD398\uC774\uC9C0\uC5D0\uC11C\uB294_\uC774\uC804\uC73C\uB85C_\uB118\uC5B4\uAC00\uC9C0_\uC54A\uB294\uB2E4"
       resultStatus: 1
-      duration: 0.0001267
+      duration: 0.0001179
       messages: 
       output: 
       stacktrace: 
@@ -2577,7 +2577,7 @@ MonoBehaviour:
       name: "\uD398\uC774\uC9C0\uC758_\uB370\uC774\uD130\uB97C_\uAC00\uC838\uC624\uBA74_\uC0C1\uD0DC\uAC00_\uC62C\uBC14\uB974\uAC8C_\uB9E4\uD551\uB41C\uB2E4"
       fullName: "SchedulePaginationPresenterTest.\uD398\uC774\uC9C0\uC758_\uB370\uC774\uD130\uB97C_\uAC00\uC838\uC624\uBA74_\uC0C1\uD0DC\uAC00_\uC62C\uBC14\uB974\uAC8C_\uB9E4\uD551\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0001752
+      duration: 0.0001785
       messages: 
       output: 
       stacktrace: 
@@ -2594,7 +2594,7 @@ MonoBehaviour:
       name: ScorePresentTests
       fullName: ScorePresentTests
       resultStatus: 1
-      duration: 0.0005505
+      duration: 0.0003815
       messages: 
       output: 
       stacktrace: 
@@ -2610,7 +2610,7 @@ MonoBehaviour:
       name: "\uC810\uC218_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       fullName: "ScorePresentTests.\uC810\uC218_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0005505
+      duration: 0.0003815
       messages: 
       output: 
       stacktrace: 
@@ -2627,7 +2627,7 @@ MonoBehaviour:
       name: SkillAmountCalculateTests
       fullName: SkillAmountCalculateTests
       resultStatus: 1
-      duration: 0.0005139
+      duration: 0.0004008
       messages: 
       output: 
       stacktrace: 
@@ -2643,7 +2643,7 @@ MonoBehaviour:
       name: "\uD604\uC7AC\uAC12\uACFC_\uBB34\uAD00\uD558\uAC8C_\uD56D\uC0C1_\uACE0\uC815\uAC12\uC744_\uBC18\uD658"
       fullName: "SkillAmountCalculateTests.\uD604\uC7AC\uAC12\uACFC_\uBB34\uAD00\uD558\uAC8C_\uD56D\uC0C1_\uACE0\uC815\uAC12\uC744_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001602
+      duration: 0.0001142
       messages: 
       output: 
       stacktrace: 
@@ -2660,7 +2660,7 @@ MonoBehaviour:
       name: "\uD604\uC7AC\uAC12\uC5D0_\uD37C\uC13C\uD2B8\uB97C_\uACF1\uD574_\uBC18\uC62C\uB9BC\uD574_\uBC18\uD658"
       fullName: "SkillAmountCalculateTests.\uD604\uC7AC\uAC12\uC5D0_\uD37C\uC13C\uD2B8\uB97C_\uACF1\uD574_\uBC18\uC62C\uB9BC\uD574_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0002257
+      duration: 0.0001744
       messages: 
       output: 
       stacktrace: 
@@ -2677,7 +2677,7 @@ MonoBehaviour:
       name: "\uD604\uC7AC\uAC12\uC774_\uACE0\uC815\uAC12\uC5D0_\uAC00\uAE30\uC704\uD574_\uD544\uC694\uD55C_\uAC12_\uBC18\uD658"
       fullName: "SkillAmountCalculateTests.\uD604\uC7AC\uAC12\uC774_\uACE0\uC815\uAC12\uC5D0_\uAC00\uAE30\uC704\uD574_\uD544\uC694\uD55C_\uAC12_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.000128
+      duration: 0.0001122
       messages: 
       output: 
       stacktrace: 
@@ -2694,7 +2694,7 @@ MonoBehaviour:
       name: SkillAmountTextBuilderTests
       fullName: SkillAmountTextBuilderTests
       resultStatus: 1
-      duration: 0.0020152
+      duration: 0.0014155001
       messages: 
       output: 
       stacktrace: 
@@ -2710,7 +2710,7 @@ MonoBehaviour:
       name: "\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658"
       fullName: "SkillAmountTextBuilderTests.\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.00083539996
+      duration: 0.0004559
       messages: 
       output: 
       stacktrace: 
@@ -2726,7 +2726,7 @@ MonoBehaviour:
       name: "\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658(Value,\"\uAC10\uC18C\")"
       fullName: "SkillAmountTextBuilderTests.\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658(Value,\"\uAC10\uC18C\")"
       resultStatus: 1
-      duration: 0.0006174
+      duration: 0.0003704
       messages: 
       output: 
       stacktrace: 
@@ -2743,7 +2743,7 @@ MonoBehaviour:
       name: "\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658(Percent,\"\uC99D\uAC00\")"
       fullName: "SkillAmountTextBuilderTests.\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658(Percent,\"\uC99D\uAC00\")"
       resultStatus: 1
-      duration: 0.0001122
+      duration: 0.0000476
       messages: 
       output: 
       stacktrace: 
@@ -2760,7 +2760,7 @@ MonoBehaviour:
       name: "\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658(Fix,\"\uACE0\uC815\")"
       fullName: "SkillAmountTextBuilderTests.\uAC12\uC5D0_\uB530\uB77C_\uBCC0\uACBD_\uD14D\uC2A4\uD2B8_\uBC18\uD658(Fix,\"\uACE0\uC815\")"
       resultStatus: 1
-      duration: 0.0001058
+      duration: 0.0000379
       messages: 
       output: 
       stacktrace: 
@@ -2777,7 +2777,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778"
       fullName: "SkillAmountTextBuilderTests.\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778"
       resultStatus: 1
-      duration: 0.00043749998
+      duration: 0.0002365
       messages: 
       output: 
       stacktrace: 
@@ -2793,7 +2793,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778(Attack,\"\uACF5\uACA9\uB825\")"
       fullName: "SkillAmountTextBuilderTests.\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778(Attack,\"\uACF5\uACA9\uB825\")"
       resultStatus: 1
-      duration: 0.000286
+      duration: 0.0001554
       messages: 
       output: 
       stacktrace: 
@@ -2810,7 +2810,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778(Defense,\"\uBC29\uC5B4\uB825\")"
       fullName: "SkillAmountTextBuilderTests.\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778(Defense,\"\uBC29\uC5B4\uB825\")"
       resultStatus: 1
-      duration: 0.0000935
+      duration: 0.0000447
       messages: 
       output: 
       stacktrace: 
@@ -2827,7 +2827,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778(Speed,\"\uC18D\uB3C4\")"
       fullName: "SkillAmountTextBuilderTests.\uC2A4\uD0EF_\uC885\uB958\uC5D0_\uB530\uB978_\uD14D\uC2A4\uD2B8_\uBC18\uD658_\uD655\uC778(Speed,\"\uC18D\uB3C4\")"
       resultStatus: 1
-      duration: 0.000058
+      duration: 0.0000364
       messages: 
       output: 
       stacktrace: 
@@ -2844,7 +2844,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658"
       fullName: "SkillAmountTextBuilderTests.\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0007423
+      duration: 0.00072310003
       messages: 
       output: 
       stacktrace: 
@@ -2860,7 +2860,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658(Value,\"100\")"
       fullName: "SkillAmountTextBuilderTests.\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658(Value,\"100\")"
       resultStatus: 1
-      duration: 0.0004255
+      duration: 0.00028
       messages: 
       output: 
       stacktrace: 
@@ -2877,7 +2877,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658(Percent,\"50%\")"
       fullName: "SkillAmountTextBuilderTests.\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658(Percent,\"50%\")"
       resultStatus: 1
-      duration: 0.0002473
+      duration: 0.0003871
       messages: 
       output: 
       stacktrace: 
@@ -2894,7 +2894,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658(Fix,\"120\")"
       fullName: "SkillAmountTextBuilderTests.\uD0C0\uC785\uC5D0_\uB530\uB978_\uAC12\uC744_\uD14D\uC2A4\uD2B8\uB85C_\uBC18\uD658(Fix,\"120\")"
       resultStatus: 1
-      duration: 0.0000695
+      duration: 0.000056
       messages: 
       output: 
       stacktrace: 
@@ -2911,7 +2911,7 @@ MonoBehaviour:
       name: SkillFactoryTests
       fullName: SkillFactoryTests
       resultStatus: 1
-      duration: 0.0026858002
+      duration: 0.0022432
       messages: 
       output: 
       stacktrace: 
@@ -2927,7 +2927,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0015671001
+      duration: 0.0013607
       messages: 
       output: 
       stacktrace: 
@@ -2943,7 +2943,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(TraitExcluder,SkillExcluder)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(TraitExcluder,SkillExcluder)"
       resultStatus: 1
-      duration: 0.0004701
+      duration: 0.0003734
       messages: 
       output: 
       stacktrace: 
@@ -2960,7 +2960,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(StatAbsorber,DefenseAbsorber)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(StatAbsorber,DefenseAbsorber)"
       resultStatus: 1
-      duration: 0.0001915
+      duration: 0.0001451
       messages: 
       output: 
       stacktrace: 
@@ -2977,7 +2977,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(Resonance,Resonance)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(Resonance,Resonance)"
       resultStatus: 1
-      duration: 0.0003876
+      duration: 0.0003688
       messages: 
       output: 
       stacktrace: 
@@ -2994,7 +2994,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(AmplifyChanger,AmplifyChanger)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(AmplifyChanger,AmplifyChanger)"
       resultStatus: 1
-      duration: 0.000122
+      duration: 0.0001005
       messages: 
       output: 
       stacktrace: 
@@ -3011,7 +3011,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(PickBuffer,PickChampStatChanger)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(PickBuffer,PickChampStatChanger)"
       resultStatus: 1
-      duration: 0.0001501
+      duration: 0.0001489
       messages: 
       output: 
       stacktrace: 
@@ -3028,7 +3028,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(Doppelganger,Doppelganger)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(Doppelganger,Doppelganger)"
       resultStatus: 1
-      duration: 0.0001112
+      duration: 0.000098
       messages: 
       output: 
       stacktrace: 
@@ -3045,7 +3045,7 @@ MonoBehaviour:
       name: "Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(FinalStatChanger,FinalStatChanger)"
       fullName: "SkillFactoryTests.Type\uC5D0_\uB9DE\uB294_Action_\uAC1D\uCCB4_\uC0DD\uC131(FinalStatChanger,FinalStatChanger)"
       resultStatus: 1
-      duration: 0.0001346
+      duration: 0.000126
       messages: 
       output: 
       stacktrace: 
@@ -3062,7 +3062,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.00033880002
+      duration: 0.0002336
       messages: 
       output: 
       stacktrace: 
@@ -3078,7 +3078,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131(Value,ValueCalculator)"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131(Value,ValueCalculator)"
       resultStatus: 1
-      duration: 0.0002014
+      duration: 0.0001427
       messages: 
       output: 
       stacktrace: 
@@ -3095,7 +3095,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131(Percent,PercentCalculator)"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131(Percent,PercentCalculator)"
       resultStatus: 1
-      duration: 0.0000803
+      duration: 0.0000502
       messages: 
       output: 
       stacktrace: 
@@ -3112,7 +3112,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131(Fix,FixCalculator)"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uACC4\uC0B0\uAE30_\uAC1D\uCCB4_\uC0DD\uC131(Fix,FixCalculator)"
       resultStatus: 1
-      duration: 0.0000571
+      duration: 0.0000407
       messages: 
       output: 
       stacktrace: 
@@ -3129,7 +3129,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0007799
+      duration: 0.0006489
       messages: 
       output: 
       stacktrace: 
@@ -3145,7 +3145,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131(None,NullChecker)"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131(None,NullChecker)"
       resultStatus: 1
-      duration: 0.0003272
+      duration: 0.000231
       messages: 
       output: 
       stacktrace: 
@@ -3162,7 +3162,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131(Threshold,StatThresholdChecker)"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131(Threshold,StatThresholdChecker)"
       resultStatus: 1
-      duration: 0.0002323
+      duration: 0.0002151
       messages: 
       output: 
       stacktrace: 
@@ -3179,7 +3179,7 @@ MonoBehaviour:
       name: "\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131(Compare,StatComparisonChecker)"
       fullName: "SkillFactoryTests.\uD0C0\uC785\uC5D0_\uB9DE\uB294_\uC870\uAC74_\uAC1D\uCCB4_\uC0DD\uC131(Compare,StatComparisonChecker)"
       resultStatus: 1
-      duration: 0.0002204
+      duration: 0.0002028
       messages: 
       output: 
       stacktrace: 
@@ -3196,7 +3196,7 @@ MonoBehaviour:
       name: SkillTextBuildTests
       fullName: SkillTextBuildTests
       resultStatus: 1
-      duration: 0.0005827
+      duration: 0.0005628
       messages: 
       output: 
       stacktrace: 
@@ -3212,7 +3212,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0AC_\uD14D\uC2A4\uD2B8_\uC804\uCCB4_\uC0DD\uC131"
       fullName: "SkillTextBuildTests.\uC2A4\uD0AC_\uD14D\uC2A4\uD2B8_\uC804\uCCB4_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0002198
+      duration: 0.0001963
       messages: 
       output: 
       stacktrace: 
@@ -3229,7 +3229,7 @@ MonoBehaviour:
       name: "\uC870\uAC74_\uD0C0\uC785\uACFC_\uC778\uC790\uAC12\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       fullName: "SkillTextBuildTests.\uC870\uAC74_\uD0C0\uC785\uACFC_\uC778\uC790\uAC12\uC5D0_\uB9DE\uB294_\uD14D\uC2A4\uD2B8_\uC0DD\uC131"
       resultStatus: 1
-      duration: 0.0003629
+      duration: 0.0003665
       messages: 
       output: 
       stacktrace: 
@@ -3246,7 +3246,7 @@ MonoBehaviour:
       name: SkillTextConverterTests
       fullName: SkillTextConverterTests
       resultStatus: 1
-      duration: 0.0017454
+      duration: 0.00175
       messages: 
       output: 
       stacktrace: 
@@ -3262,7 +3262,7 @@ MonoBehaviour:
       name: "\uB515\uC154\uB108\uB9AC\uB85C_\uBC1B\uC740_\uD15C\uD50C\uB9BF\uC744_\uC2E4\uC81C_\uD14D\uC2A4\uD2B8\uB85C_\uBCC0\uD658"
       fullName: "SkillTextConverterTests.\uB515\uC154\uB108\uB9AC\uB85C_\uBC1B\uC740_\uD15C\uD50C\uB9BF\uC744_\uC2E4\uC81C_\uD14D\uC2A4\uD2B8\uB85C_\uBCC0\uD658"
       resultStatus: 1
-      duration: 0.0017454
+      duration: 0.00175
       messages: 
       output: 
       stacktrace: 
@@ -3279,7 +3279,7 @@ MonoBehaviour:
       name: SkillUseTests
       fullName: SkillUseTests
       resultStatus: 1
-      duration: 0.00078
+      duration: 0.000514
       messages: 
       output: 
       stacktrace: 
@@ -3295,7 +3295,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0AC_\uC0AC\uC6A9"
       fullName: "SkillUseTests.\uC2A4\uD0AC_\uC0AC\uC6A9"
       resultStatus: 1
-      duration: 0.00078
+      duration: 0.000514
       messages: 
       output: 
       stacktrace: 
@@ -3312,7 +3312,7 @@ MonoBehaviour:
       name: StatChangeTextBuildTests
       fullName: StatChangeTextBuildTests
       resultStatus: 1
-      duration: 0.0011875
+      duration: 0.0007232
       messages: 
       output: 
       stacktrace: 
@@ -3328,7 +3328,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uBCC0\uACBD_\uB370\uC774\uD130_\uBDF0\uBAA8\uB378\uB85C_\uBCC0\uD658"
       fullName: "StatChangeTextBuildTests.\uC2A4\uD0EF_\uBCC0\uACBD_\uB370\uC774\uD130_\uBDF0\uBAA8\uB378\uB85C_\uBCC0\uD658"
       resultStatus: 1
-      duration: 0.0011875
+      duration: 0.0007232
       messages: 
       output: 
       stacktrace: 
@@ -3345,7 +3345,7 @@ MonoBehaviour:
       name: StorageFactoryTests
       fullName: StorageFactoryTests
       resultStatus: 1
-      duration: 0.004888
+      duration: 0.0046956
       messages: 
       output: 
       stacktrace: 
@@ -3361,7 +3361,7 @@ MonoBehaviour:
       name: "\uC2AC\uB86F\uC744_\uD568\uC218\uB97C_\uD1B5\uD574_\uBCC0\uD658"
       fullName: "StorageFactoryTests.\uC2AC\uB86F\uC744_\uD568\uC218\uB97C_\uD1B5\uD574_\uBCC0\uD658"
       resultStatus: 1
-      duration: 0.004888
+      duration: 0.0046956
       messages: 
       output: 
       stacktrace: 
@@ -3378,7 +3378,7 @@ MonoBehaviour:
       name: TraitTargetFilteringTests
       fullName: TraitTargetFilteringTests
       resultStatus: 1
-      duration: 0.0027278
+      duration: 0.0023655
       messages: 
       output: 
       stacktrace: 
@@ -3394,7 +3394,7 @@ MonoBehaviour:
       name: "Opponent_\uC0AC\uC774\uB4DC\uBA74_\uC0C1\uB300\uD300_\uC2AC\uB86F\uB9CC_\uBC18\uD658"
       fullName: "TraitTargetFilteringTests.Opponent_\uC0AC\uC774\uB4DC\uBA74_\uC0C1\uB300\uD300_\uC2AC\uB86F\uB9CC_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.001384
+      duration: 0.0011726
       messages: 
       output: 
       stacktrace: 
@@ -3411,7 +3411,7 @@ MonoBehaviour:
       name: "Self_\uC0AC\uC774\uB4DC\uBA74_\uC790\uAE30\uD300_\uC2AC\uB86F\uB9CC_\uBC18\uD658"
       fullName: "TraitTargetFilteringTests.Self_\uC0AC\uC774\uB4DC\uBA74_\uC790\uAE30\uD300_\uC2AC\uB86F\uB9CC_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001994
+      duration: 0.0001417
       messages: 
       output: 
       stacktrace: 
@@ -3428,7 +3428,7 @@ MonoBehaviour:
       name: "Self\uC640_Opponent\uAC00_\uC11E\uC774\uBA74_All\uB85C_\uBA38\uC9C0\uB418\uC5B4_\uC591\uD300_\uC2AC\uB86F_\uBAA8\uB450_\uBC18\uD658"
       fullName: "TraitTargetFilteringTests.Self\uC640_Opponent\uAC00_\uC11E\uC774\uBA74_All\uB85C_\uBA38\uC9C0\uB418\uC5B4_\uC591\uD300_\uC2AC\uB86F_\uBAA8\uB450_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0011444
+      duration: 0.0010512
       messages: 
       output: 
       stacktrace: 
@@ -3445,7 +3445,7 @@ MonoBehaviour:
       name: TutorialPresenterTests
       fullName: TutorialPresenterTests
       resultStatus: 1
-      duration: 0.0021212
+      duration: 0.0014324
       messages: 
       output: 
       stacktrace: 
@@ -3461,7 +3461,7 @@ MonoBehaviour:
       name: "\uBAA8\uB4E0_\uB300\uC0AC\uAC00_\uB05D\uB098\uBA74_\uC9C4\uD589\uC744_\uBABB\uD558\uB294_false\uBC18\uD658"
       fullName: "TutorialPresenterTests.\uBAA8\uB4E0_\uB300\uC0AC\uAC00_\uB05D\uB098\uBA74_\uC9C4\uD589\uC744_\uBABB\uD558\uB294_false\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0018616
+      duration: 0.0012226
       messages: 
       output: 
       stacktrace: 
@@ -3478,7 +3478,7 @@ MonoBehaviour:
       name: "\uC2DC\uC791\uB418\uC9C0_\uC54A\uC740_\uC0C1\uD0DC\uC5D0\uC11C_Advance\uB97C_\uD638\uCD9C\uD558\uBA74_\uC548\uC804\uD558\uAC8C_false\uB97C_\uBC18\uD658\uD55C\uB2E4"
       fullName: "TutorialPresenterTests.\uC2DC\uC791\uB418\uC9C0_\uC54A\uC740_\uC0C1\uD0DC\uC5D0\uC11C_Advance\uB97C_\uD638\uCD9C\uD558\uBA74_\uC548\uC804\uD558\uAC8C_false\uB97C_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001496
+      duration: 0.0001161
       messages: 
       output: 
       stacktrace: 
@@ -3495,7 +3495,7 @@ MonoBehaviour:
       name: "\uD29C\uD1A0\uB9AC\uC5BC\uC744_\uC2DC\uC791\uD558\uACE0_Advance\uB97C_\uD638\uCD9C\uD558\uBA74_\uCCAB_\uB300\uC0AC\uB97C_\uBC18\uD658\uD55C\uB2E4"
       fullName: "TutorialPresenterTests.\uD29C\uD1A0\uB9AC\uC5BC\uC744_\uC2DC\uC791\uD558\uACE0_Advance\uB97C_\uD638\uCD9C\uD558\uBA74_\uCCAB_\uB300\uC0AC\uB97C_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.00011
+      duration: 0.0000937
       messages: 
       output: 
       stacktrace: 
@@ -3507,12 +3507,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1093
       parentUniqueId: 'AdapterTests.dll/[AdapterTests][TutorialPresenterTests][suite]'
-    - id: 1322
+    - id: 1324
       uniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
       name: DomainTests.dll
       fullName: C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll
       resultStatus: 1
-      duration: 0.0675195
+      duration: 0.0585349
       messages: 
       output: 
       stacktrace: 
@@ -3521,14 +3521,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1331
+      parentId: 1000
       parentUniqueId: '[BP master][suite]'
     - id: 1123
       uniqueId: 'DomainTests.dll/[DomainTests][AI_SkillTargetSelectorTests][suite]'
       name: AI_SkillTargetSelectorTests
       fullName: AI_SkillTargetSelectorTests
       resultStatus: 1
-      duration: 0.0030863
+      duration: 0.0026377
       messages: 
       output: 
       stacktrace: 
@@ -3537,14 +3537,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1089
       uniqueId: "DomainTests.dll/AI_SkillTargetSelectorTests/[DomainTests][AI_SkillTargetSelectorTests.All\uC740_\uC804\uBD80_\uBC18\uD658]"
       name: "All\uC740_\uC804\uBD80_\uBC18\uD658"
       fullName: "AI_SkillTargetSelectorTests.All\uC740_\uC804\uBD80_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0015075
+      duration: 0.0014166
       messages: 
       output: 
       stacktrace: 
@@ -3561,7 +3561,7 @@ MonoBehaviour:
       name: "\uBC94\uC704_\uB0B4\uC5D0\uC11C_\uAC1C\uC218\uB9CC\uD07C_\uD0C0\uAC9F_\uC120\uD0DD\uD574\uC57C_\uD568"
       fullName: "AI_SkillTargetSelectorTests.\uBC94\uC704_\uB0B4\uC5D0\uC11C_\uAC1C\uC218\uB9CC\uD07C_\uD0C0\uAC9F_\uC120\uD0DD\uD574\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0011127001
+      duration: 0.0008757
       messages: 
       output: 
       stacktrace: 
@@ -3577,7 +3577,7 @@ MonoBehaviour:
       name: "\uBC94\uC704_\uB0B4\uC5D0\uC11C_\uAC1C\uC218\uB9CC\uD07C_\uD0C0\uAC9F_\uC120\uD0DD\uD574\uC57C_\uD568(Double,2)"
       fullName: "AI_SkillTargetSelectorTests.\uBC94\uC704_\uB0B4\uC5D0\uC11C_\uAC1C\uC218\uB9CC\uD07C_\uD0C0\uAC9F_\uC120\uD0DD\uD574\uC57C_\uD568(Double,2)"
       resultStatus: 1
-      duration: 0.0009857
+      duration: 0.000802
       messages: 
       output: 
       stacktrace: 
@@ -3594,7 +3594,7 @@ MonoBehaviour:
       name: "\uBC94\uC704_\uB0B4\uC5D0\uC11C_\uAC1C\uC218\uB9CC\uD07C_\uD0C0\uAC9F_\uC120\uD0DD\uD574\uC57C_\uD568(All,4)"
       fullName: "AI_SkillTargetSelectorTests.\uBC94\uC704_\uB0B4\uC5D0\uC11C_\uAC1C\uC218\uB9CC\uD07C_\uD0C0\uAC9F_\uC120\uD0DD\uD574\uC57C_\uD568(All,4)"
       resultStatus: 1
-      duration: 0.000127
+      duration: 0.0000737
       messages: 
       output: 
       stacktrace: 
@@ -3611,7 +3611,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0AC_2\uAC1C\uB294_\uBC94\uC704_\uD569\uCE58\uAE30"
       fullName: "AI_SkillTargetSelectorTests.\uC2A4\uD0AC_2\uAC1C\uB294_\uBC94\uC704_\uD569\uCE58\uAE30"
       resultStatus: 1
-      duration: 0.0004661
+      duration: 0.0003454
       messages: 
       output: 
       stacktrace: 
@@ -3628,7 +3628,7 @@ MonoBehaviour:
       name: BonusDeltaCalculateTests
       fullName: BonusDeltaCalculateTests
       resultStatus: 1
-      duration: 0.0004814
+      duration: 0.0004107
       messages: 
       output: 
       stacktrace: 
@@ -3637,14 +3637,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1109
       uniqueId: "DomainTests.dll/BonusDeltaCalculateTests/[DomainTests][BonusDeltaCalculateTests.\uBCF4\uB108\uC2A4_\uC624\uB974\uB294\uAC70_\uACC4\uC0B0\uD558\uAE30]"
       name: "\uBCF4\uB108\uC2A4_\uC624\uB974\uB294\uAC70_\uACC4\uC0B0\uD558\uAE30"
       fullName: "BonusDeltaCalculateTests.\uBCF4\uB108\uC2A4_\uC624\uB974\uB294\uAC70_\uACC4\uC0B0\uD558\uAE30"
       resultStatus: 1
-      duration: 0.0004814
+      duration: 0.0004107
       messages: 
       output: 
       stacktrace: 
@@ -3656,12 +3656,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1108
       parentUniqueId: 'DomainTests.dll/[DomainTests][BonusDeltaCalculateTests][suite]'
-    - id: 1231
+    - id: 1233
       uniqueId: 'DomainTests.dll/[DomainTests][CalculateScoreTests][suite]'
       name: CalculateScoreTests
       fullName: CalculateScoreTests
       resultStatus: 1
-      duration: 0.0016913
+      duration: 0.0016561
       messages: 
       output: 
       stacktrace: 
@@ -3670,14 +3670,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1173
       uniqueId: "DomainTests.dll/CalculateScoreTests/[DomainTests][CalculateScoreTests.\uAE30\uBCF8_\uC810\uC218\uB294_\uACF5\uBC29\uC758_\uD569]"
       name: "\uAE30\uBCF8_\uC810\uC218\uB294_\uACF5\uBC29\uC758_\uD569"
       fullName: "CalculateScoreTests.\uAE30\uBCF8_\uC810\uC218\uB294_\uACF5\uBC29\uC758_\uD569"
       resultStatus: 1
-      duration: 0.0007393
+      duration: 0.0005707
       messages: 
       output: 
       stacktrace: 
@@ -3694,7 +3694,7 @@ MonoBehaviour:
       name: "\uBAA8\uB4E0_\uC2A4\uD0EF_\uD569\uCE58\uAE30"
       fullName: "CalculateScoreTests.\uBAA8\uB4E0_\uC2A4\uD0EF_\uD569\uCE58\uAE30"
       resultStatus: 1
-      duration: 0.0005285
+      duration: 0.0005527
       messages: 
       output: 
       stacktrace: 
@@ -3711,7 +3711,7 @@ MonoBehaviour:
       name: "\uBCF4\uB108\uC2A4\uB294_\uAD6C\uAC04\uBCC4\uB85C"
       fullName: "CalculateScoreTests.\uBCF4\uB108\uC2A4\uB294_\uAD6C\uAC04\uBCC4\uB85C"
       resultStatus: 1
-      duration: 0.0002001
+      duration: 0.000185
       messages: 
       output: 
       stacktrace: 
@@ -3728,7 +3728,7 @@ MonoBehaviour:
       name: "\uD300_\uBCF4\uB108\uC2A4\uB294_\uC2A4\uD0EF_\uAD6C\uAC04_\uBCF4\uB108\uC2A4_\uCD1D\uD569"
       fullName: "CalculateScoreTests.\uD300_\uBCF4\uB108\uC2A4\uB294_\uC2A4\uD0EF_\uAD6C\uAC04_\uBCF4\uB108\uC2A4_\uCD1D\uD569"
       resultStatus: 1
-      duration: 0.0002234
+      duration: 0.0003477
       messages: 
       output: 
       stacktrace: 
@@ -3745,7 +3745,7 @@ MonoBehaviour:
       name: ChampionStatusTests
       fullName: ChampionStatusTests
       resultStatus: 1
-      duration: 0.0024615
+      duration: 0.0021065
       messages: 
       output: 
       stacktrace: 
@@ -3754,14 +3754,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1093
       uniqueId: "DomainTests.dll/ChampionStatusTests/[DomainTests][ChampionStatusTests.ChangeStat_\uD638\uCD9C\uC2DC_\uC2A4\uD0EF\uC774_\uBCC0\uACBD_\uD6C4_\uC774\uBCA4\uD2B8]"
       name: "ChangeStat_\uD638\uCD9C\uC2DC_\uC2A4\uD0EF\uC774_\uBCC0\uACBD_\uD6C4_\uC774\uBCA4\uD2B8"
       fullName: "ChampionStatusTests.ChangeStat_\uD638\uCD9C\uC2DC_\uC2A4\uD0EF\uC774_\uBCC0\uACBD_\uD6C4_\uC774\uBCA4\uD2B8"
       resultStatus: 1
-      duration: 0.0004319
+      duration: 0.0003554
       messages: 
       output: 
       stacktrace: 
@@ -3778,7 +3778,7 @@ MonoBehaviour:
       name: "\uAC10\uC18C\uBD84\uC5D0\uB294_DownRate\uB97C_\uC801\uC6A9\uD55C\uB2E4"
       fullName: "ChampionStatusTests.\uAC10\uC18C\uBD84\uC5D0\uB294_DownRate\uB97C_\uC801\uC6A9\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001964
+      duration: 0.0001571
       messages: 
       output: 
       stacktrace: 
@@ -3795,7 +3795,7 @@ MonoBehaviour:
       name: "\uAC1C\uBCC4_\uC2A4\uD0EF_\uBCC0\uACBD"
       fullName: "ChampionStatusTests.\uAC1C\uBCC4_\uC2A4\uD0EF_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0002094
+      duration: 0.0002037
       messages: 
       output: 
       stacktrace: 
@@ -3812,7 +3812,7 @@ MonoBehaviour:
       name: "\uC0C1\uD0DC_\uAE4A\uC740\uBCF5\uC0AC_\uC2DC_\uAC12\uC740_\uB3D9\uC77C\uD558\uC9C0\uB9CC_\uC774\uBCA4\uD2B8_\uAD6C\uB3C5\uC790\uB294_\uCD08\uAE30\uD654"
       fullName: "ChampionStatusTests.\uC0C1\uD0DC_\uAE4A\uC740\uBCF5\uC0AC_\uC2DC_\uAC12\uC740_\uB3D9\uC77C\uD558\uC9C0\uB9CC_\uC774\uBCA4\uD2B8_\uAD6C\uB3C5\uC790\uB294_\uCD08\uAE30\uD654"
       resultStatus: 1
-      duration: 0.001203
+      duration: 0.0009743
       messages: 
       output: 
       stacktrace: 
@@ -3829,7 +3829,7 @@ MonoBehaviour:
       name: "\uC0DD\uC131\uC2DC_\uC2A4\uD0EF\uC774_\uC815\uC0C1\uC801\uC73C\uB85C_\uC800\uC7A5\uB41C\uB2E4"
       fullName: "ChampionStatusTests.\uC0DD\uC131\uC2DC_\uC2A4\uD0EF\uC774_\uC815\uC0C1\uC801\uC73C\uB85C_\uC800\uC7A5\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0001347
+      duration: 0.0001429
       messages: 
       output: 
       stacktrace: 
@@ -3846,7 +3846,7 @@ MonoBehaviour:
       name: "\uC77C\uBC18_\uBCC0\uACBD_\uD568\uC218\uB294_Rate_\uBB34\uC2DC"
       fullName: "ChampionStatusTests.\uC77C\uBC18_\uBCC0\uACBD_\uD568\uC218\uB294_Rate_\uBB34\uC2DC"
       resultStatus: 1
-      duration: 0.0001565
+      duration: 0.0001497
       messages: 
       output: 
       stacktrace: 
@@ -3863,7 +3863,7 @@ MonoBehaviour:
       name: "\uC99D\uAC00\uBD84\uC5D0\uB294_UpRate\uB97C_\uC801\uC6A9\uD55C\uB2E4"
       fullName: "ChampionStatusTests.\uC99D\uAC00\uBD84\uC5D0\uB294_UpRate\uB97C_\uC801\uC6A9\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001296
+      duration: 0.0001234
       messages: 
       output: 
       stacktrace: 
@@ -3880,7 +3880,7 @@ MonoBehaviour:
       name: ChampionValueSelectTests
       fullName: ChampionValueSelectTests
       resultStatus: 1
-      duration: 0.0010328
+      duration: 0.0007991
       messages: 
       output: 
       stacktrace: 
@@ -3889,14 +3889,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1108
       uniqueId: "DomainTests.dll/ChampionValueSelectTests/[DomainTests][ChampionValueSelectTests.\uAC00\uC7A5_\uAC00\uCE58\uAC00_\uB192\uC740_\uCC54\uD53C\uC5B8_\uD53D]"
       name: "\uAC00\uC7A5_\uAC00\uCE58\uAC00_\uB192\uC740_\uCC54\uD53C\uC5B8_\uD53D"
       fullName: "ChampionValueSelectTests.\uAC00\uC7A5_\uAC00\uCE58\uAC00_\uB192\uC740_\uCC54\uD53C\uC5B8_\uD53D"
       resultStatus: 1
-      duration: 0.0010328
+      duration: 0.0007991
       messages: 
       output: 
       stacktrace: 
@@ -3908,12 +3908,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1107
       parentUniqueId: 'DomainTests.dll/[DomainTests][ChampionValueSelectTests][suite]'
-    - id: 1315
+    - id: 1317
       uniqueId: 'DomainTests.dll/[DomainTests][EnumCastingTests][suite]'
       name: EnumCastingTests
       fullName: EnumCastingTests
       resultStatus: 1
-      duration: 0.0017941999
+      duration: 0.0017226001
       messages: 
       output: 
       stacktrace: 
@@ -3922,14 +3922,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1256
       uniqueId: "DomainTests.dll/EnumCastingTests/[DomainTests][EnumCastingTests.Range\uAC00_\uB2E4\uB974\uBA74_\uC608\uC678_\uBC1C\uC0DD]"
       name: "Range\uAC00_\uB2E4\uB974\uBA74_\uC608\uC678_\uBC1C\uC0DD"
       fullName: "EnumCastingTests.Range\uAC00_\uB2E4\uB974\uBA74_\uC608\uC678_\uBC1C\uC0DD"
       resultStatus: 1
-      duration: 0.0009136
+      duration: 0.0007982
       messages: 
       output: 
       stacktrace: 
@@ -3946,7 +3946,7 @@ MonoBehaviour:
       name: "Side_\uCEEC\uB809\uC158_\uD569\uCE58\uAE30"
       fullName: "EnumCastingTests.Side_\uCEEC\uB809\uC158_\uD569\uCE58\uAE30"
       resultStatus: 1
-      duration: 0.0002486
+      duration: 0.0002226
       messages: 
       output: 
       stacktrace: 
@@ -3963,7 +3963,7 @@ MonoBehaviour:
       name: "\uB3D9\uC77C\uD55C_Range\uBA74_\uC815\uC0C1\uC801\uC73C\uB85C_\uBCD1\uD569"
       fullName: "EnumCastingTests.\uB3D9\uC77C\uD55C_Range\uBA74_\uC815\uC0C1\uC801\uC73C\uB85C_\uBCD1\uD569"
       resultStatus: 1
-      duration: 0.0005128
+      duration: 0.000587
       messages: 
       output: 
       stacktrace: 
@@ -3980,7 +3980,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F_\uD300_\uBC18\uD658"
       fullName: "EnumCastingTests.\uD0C0\uAC9F_\uD300_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001192
+      duration: 0.0001148
       messages: 
       output: 
       stacktrace: 
@@ -3997,7 +3997,7 @@ MonoBehaviour:
       name: LeagueRecordCollectionTests
       fullName: LeagueRecordCollectionTests
       resultStatus: 1
-      duration: 0.0008925
+      duration: 0.0006455
       messages: 
       output: 
       stacktrace: 
@@ -4006,14 +4006,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1184
       uniqueId: "DomainTests.dll/LeagueRecordCollectionTests/[DomainTests][LeagueRecordCollectionTests.Get\uC740_\uC874\uC7AC\uD558\uB294_ID\uC758_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4]"
       name: "Get\uC740_\uC874\uC7AC\uD558\uB294_ID\uC758_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "LeagueRecordCollectionTests.Get\uC740_\uC874\uC7AC\uD558\uB294_ID\uC758_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0002549
+      duration: 0.0002172
       messages: 
       output: 
       stacktrace: 
@@ -4030,7 +4030,7 @@ MonoBehaviour:
       name: "Update\uB294_\uAE30\uC874_ID\uC758_\uAE30\uB85D\uC744_\uC0C8\uB85C\uC6B4_\uAE30\uB85D\uC73C\uB85C_\uB36E\uC5B4\uC50C\uC6B4\uB2E4"
       fullName: "LeagueRecordCollectionTests.Update\uB294_\uAE30\uC874_ID\uC758_\uAE30\uB85D\uC744_\uC0C8\uB85C\uC6B4_\uAE30\uB85D\uC73C\uB85C_\uB36E\uC5B4\uC50C\uC6B4\uB2E4"
       resultStatus: 1
-      duration: 0.0003276
+      duration: 0.0001686
       messages: 
       output: 
       stacktrace: 
@@ -4047,7 +4047,7 @@ MonoBehaviour:
       name: "\uC21C\uC704\uD45C\uB294_\uC2B9\uC218_\uC2B9\uC810_ID\uC624\uB984_\uC21C\uC73C\uB85C_\uC815\uB82C\uB41C\uB2E4"
       fullName: "LeagueRecordCollectionTests.\uC21C\uC704\uD45C\uB294_\uC2B9\uC218_\uC2B9\uC810_ID\uC624\uB984_\uC21C\uC73C\uB85C_\uC815\uB82C\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.00031
+      duration: 0.0002597
       messages: 
       output: 
       stacktrace: 
@@ -4064,7 +4064,7 @@ MonoBehaviour:
       name: LeagueRecordTests
       fullName: LeagueRecordTests
       resultStatus: 1
-      duration: 0.000689
+      duration: 0.0004812
       messages: 
       output: 
       stacktrace: 
@@ -4073,14 +4073,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1180
       uniqueId: "DomainTests.dll/LeagueRecordTests/[DomainTests][LeagueRecordTests.\uAE30\uC874_\uC0C1\uD0DC\uB294_\uBCC0\uACBD\uB418\uC9C0_\uC54A\uB294\uB2E4]"
       name: "\uAE30\uC874_\uC0C1\uD0DC\uB294_\uBCC0\uACBD\uB418\uC9C0_\uC54A\uB294\uB2E4"
       fullName: "LeagueRecordTests.\uAE30\uC874_\uC0C1\uD0DC\uB294_\uBCC0\uACBD\uB418\uC9C0_\uC54A\uB294\uB2E4"
       resultStatus: 1
-      duration: 0.0002558
+      duration: 0.0001637
       messages: 
       output: 
       stacktrace: 
@@ -4097,7 +4097,7 @@ MonoBehaviour:
       name: "\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "LeagueRecordTests.\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.00043319998
+      duration: 0.0003175
       messages: 
       output: 
       stacktrace: 
@@ -4113,7 +4113,7 @@ MonoBehaviour:
       name: "\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4(2,0,1,0,2)"
       fullName: "LeagueRecordTests.\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4(2,0,1,0,2)"
       resultStatus: 1
-      duration: 0.0002968
+      duration: 0.0002535
       messages: 
       output: 
       stacktrace: 
@@ -4130,7 +4130,7 @@ MonoBehaviour:
       name: "\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4(2,1,1,0,1)"
       fullName: "LeagueRecordTests.\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4(2,1,1,0,1)"
       resultStatus: 1
-      duration: 0.0000787
+      duration: 0.0000372
       messages: 
       output: 
       stacktrace: 
@@ -4147,7 +4147,7 @@ MonoBehaviour:
       name: "\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4(1,2,0,1,-1)"
       fullName: "LeagueRecordTests.\uB9E4\uCE58_\uACB0\uACFC\uC5D0_\uB530\uB77C_\uC2B9\uD328\uC640_\uC2B9\uC810\uC774_\uCD94\uAC00\uB41C_\uC0C8_\uAE30\uB85D\uC744_\uBC18\uD658\uD55C\uB2E4(1,2,0,1,-1)"
       resultStatus: 1
-      duration: 0.0000577
+      duration: 0.0000268
       messages: 
       output: 
       stacktrace: 
@@ -4164,7 +4164,7 @@ MonoBehaviour:
       name: MasteryBoardTest
       fullName: MasteryBoardTest
       resultStatus: 1
-      duration: 0.0008013
+      duration: 0.0005948
       messages: 
       output: 
       stacktrace: 
@@ -4173,14 +4173,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1164
       uniqueId: "DomainTests.dll/MasteryBoardTest/[DomainTests][MasteryBoardTest.\uB9CC\uB819\uC778_1\uB808\uBCA8\uC744_\uCD08\uACFC\uD558\uC5EC_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uB824\uACE0_\uD558\uBA74_\uC608\uC678\uB97C_\uB358\uC9C4\uB2E4]"
       name: "\uB9CC\uB819\uC778_1\uB808\uBCA8\uC744_\uCD08\uACFC\uD558\uC5EC_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uB824\uACE0_\uD558\uBA74_\uC608\uC678\uB97C_\uB358\uC9C4\uB2E4"
       fullName: "MasteryBoardTest.\uB9CC\uB819\uC778_1\uB808\uBCA8\uC744_\uCD08\uACFC\uD558\uC5EC_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uB824\uACE0_\uD558\uBA74_\uC608\uC678\uB97C_\uB358\uC9C4\uB2E4"
       resultStatus: 1
-      duration: 0.0003321
+      duration: 0.0002146
       messages: 
       output: 
       stacktrace: 
@@ -4197,7 +4197,7 @@ MonoBehaviour:
       name: "\uBCF4\uB4DC\uB97C_\uC0DD\uC131\uC790\uC5D0_\uB123\uC73C\uBA74_\uC0C1\uD0DC\uAC00_\uBC18\uC601\uB41C\uB2E4"
       fullName: "MasteryBoardTest.\uBCF4\uB4DC\uB97C_\uC0DD\uC131\uC790\uC5D0_\uB123\uC73C\uBA74_\uC0C1\uD0DC\uAC00_\uBC18\uC601\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0002442
+      duration: 0.0001962
       messages: 
       output: 
       stacktrace: 
@@ -4214,7 +4214,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF\uBCC4_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uBA74_\uB808\uBCA8\uC774_\uC624\uB978\uB2E4"
       fullName: "MasteryBoardTest.\uC2A4\uD0EF\uBCC4_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uBA74_\uB808\uBCA8\uC774_\uC624\uB978\uB2E4"
       resultStatus: 1
-      duration: 0.000225
+      duration: 0.000184
       messages: 
       output: 
       stacktrace: 
@@ -4231,7 +4231,7 @@ MonoBehaviour:
       name: MasteryInventoryTest
       fullName: MasteryInventoryTest
       resultStatus: 1
-      duration: 0.0007281
+      duration: 0.0009886
       messages: 
       output: 
       stacktrace: 
@@ -4240,14 +4240,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1165
       uniqueId: "DomainTests.dll/MasteryInventoryTest/[DomainTests][MasteryInventoryTest.\uBCF4\uB4DC\uC758_\uCD5C\uB300_\uB808\uBCA8\uC5D0_\uB3C4\uB2EC\uD558\uC5EC_\uC2E4\uD328\uD558\uBA74_\uD3EC\uC778\uD2B8\uB294_\uAC10\uC18C\uD558\uC9C0_\uC54A\uB294\uB2E4]"
       name: "\uBCF4\uB4DC\uC758_\uCD5C\uB300_\uB808\uBCA8\uC5D0_\uB3C4\uB2EC\uD558\uC5EC_\uC2E4\uD328\uD558\uBA74_\uD3EC\uC778\uD2B8\uB294_\uAC10\uC18C\uD558\uC9C0_\uC54A\uB294\uB2E4"
       fullName: "MasteryInventoryTest.\uBCF4\uB4DC\uC758_\uCD5C\uB300_\uB808\uBCA8\uC5D0_\uB3C4\uB2EC\uD558\uC5EC_\uC2E4\uD328\uD558\uBA74_\uD3EC\uC778\uD2B8\uB294_\uAC10\uC18C\uD558\uC9C0_\uC54A\uB294\uB2E4"
       resultStatus: 1
-      duration: 0.0003069
+      duration: 0.0002482
       messages: 
       output: 
       stacktrace: 
@@ -4264,7 +4264,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8\uC758_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uBA74_\uD3EC\uC778\uD2B8\uAC00_\uAC10\uC18C\uD558\uACE0_\uC0C8\uB85C\uC6B4_\uBCF4\uB4DC\uAC00_\uC0DD\uC131\uB418\uC5B4_\uC2A4\uD0EF\uC774_\uC99D\uAC00\uD55C\uB2E4"
       fullName: "MasteryInventoryTest.\uCC54\uD53C\uC5B8\uC758_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uBA74_\uD3EC\uC778\uD2B8\uAC00_\uAC10\uC18C\uD558\uACE0_\uC0C8\uB85C\uC6B4_\uBCF4\uB4DC\uAC00_\uC0DD\uC131\uB418\uC5B4_\uC2A4\uD0EF\uC774_\uC99D\uAC00\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001639
+      duration: 0.0001394
       messages: 
       output: 
       stacktrace: 
@@ -4276,12 +4276,29 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1175
       parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryInventoryTest][suite]'
+    - id: 1209
+      uniqueId: "DomainTests.dll/MasteryInventoryTest/[DomainTests][MasteryInventoryTest.\uCD08\uAE30\uD654\uB97C_\uC694\uCCAD\uD558\uBA74_\uBCF4\uB4DC\uAC00_\uBE44\uC6CC\uC9C0\uACE0_\uD3EC\uC778\uD2B8\uAC00_\uCD1D\uB7C9\uB9CC\uD07C_\uBCF5\uAD6C\uB41C\uB2E4]"
+      name: "\uCD08\uAE30\uD654\uB97C_\uC694\uCCAD\uD558\uBA74_\uBCF4\uB4DC\uAC00_\uBE44\uC6CC\uC9C0\uACE0_\uD3EC\uC778\uD2B8\uAC00_\uCD1D\uB7C9\uB9CC\uD07C_\uBCF5\uAD6C\uB41C\uB2E4"
+      fullName: "MasteryInventoryTest.\uCD08\uAE30\uD654\uB97C_\uC694\uCCAD\uD558\uBA74_\uBCF4\uB4DC\uAC00_\uBE44\uC6CC\uC9C0\uACE0_\uD3EC\uC778\uD2B8\uAC00_\uCD1D\uB7C9\uB9CC\uD07C_\uBCF5\uAD6C\uB41C\uB2E4"
+      resultStatus: 1
+      duration: 0.0002288
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1204
+      parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryInventoryTest][suite]'
     - id: 1164
       uniqueId: "DomainTests.dll/MasteryInventoryTest/[DomainTests][MasteryInventoryTest.\uD3EC\uC778\uD2B8\uAC00_\uBD80\uC871\uD560_\uB54C_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uB824_\uD558\uBA74_\uC608\uC678\uB97C_\uB358\uC9C4\uB2E4]"
       name: "\uD3EC\uC778\uD2B8\uAC00_\uBD80\uC871\uD560_\uB54C_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uB824_\uD558\uBA74_\uC608\uC678\uB97C_\uB358\uC9C4\uB2E4"
       fullName: "MasteryInventoryTest.\uD3EC\uC778\uD2B8\uAC00_\uBD80\uC871\uD560_\uB54C_\uC219\uB828\uB3C4\uB97C_\uC62C\uB9AC\uB824_\uD558\uBA74_\uC608\uC678\uB97C_\uB358\uC9C4\uB2E4"
       resultStatus: 1
-      duration: 0.0002573
+      duration: 0.0002133
       messages: 
       output: 
       stacktrace: 
@@ -4294,11 +4311,28 @@ MonoBehaviour:
       parentId: 1162
       parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryInventoryTest][suite]'
     - id: 1208
+      uniqueId: "DomainTests.dll/MasteryInventoryTest/[DomainTests][MasteryInventoryTest.\uD3EC\uC778\uD2B8\uB97C_\uD68D\uB4DD\uD558\uBA74_\uCD1D\uB7C9\uACFC_\uAC00\uC6A9\uD3EC\uC778\uD2B8\uAC00_\uBAA8\uB450_\uC99D\uAC00\uD55C\uB2E4]"
+      name: "\uD3EC\uC778\uD2B8\uB97C_\uD68D\uB4DD\uD558\uBA74_\uCD1D\uB7C9\uACFC_\uAC00\uC6A9\uD3EC\uC778\uD2B8\uAC00_\uBAA8\uB450_\uC99D\uAC00\uD55C\uB2E4"
+      fullName: "MasteryInventoryTest.\uD3EC\uC778\uD2B8\uB97C_\uD68D\uB4DD\uD558\uBA74_\uCD1D\uB7C9\uACFC_\uAC00\uC6A9\uD3EC\uC778\uD2B8\uAC00_\uBAA8\uB450_\uC99D\uAC00\uD55C\uB2E4"
+      resultStatus: 1
+      duration: 0.0001589
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1204
+      parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryInventoryTest][suite]'
+    - id: 1210
       uniqueId: 'DomainTests.dll/[DomainTests][MasteryRegistryTests][suite]'
       name: MasteryRegistryTests
       fullName: MasteryRegistryTests
       resultStatus: 1
-      duration: 0.0013876
+      duration: 0.0009626
       messages: 
       output: 
       stacktrace: 
@@ -4307,14 +4341,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1154
       uniqueId: "DomainTests.dll/MasteryRegistryTests/[DomainTests][MasteryRegistryTests.\uB370\uC774\uD130\uAC00_\uC5C6\uB294_\uC9C4\uC601_\uC870\uD68C_\uC2DC_null\uC744_\uBC18\uD658\uD574\uC57C_\uD568]"
       name: "\uB370\uC774\uD130\uAC00_\uC5C6\uB294_\uC9C4\uC601_\uC870\uD68C_\uC2DC_null\uC744_\uBC18\uD658\uD574\uC57C_\uD568"
       fullName: "MasteryRegistryTests.\uB370\uC774\uD130\uAC00_\uC5C6\uB294_\uC9C4\uC601_\uC870\uD68C_\uC2DC_null\uC744_\uBC18\uD658\uD574\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0006642
+      duration: 0.0004251
       messages: 
       output: 
       stacktrace: 
@@ -4331,7 +4365,7 @@ MonoBehaviour:
       name: "\uC0DD\uC131\uC790\uB294_\uD300\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815"
       fullName: "MasteryRegistryTests.\uC0DD\uC131\uC790\uB294_\uD300\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815"
       resultStatus: 1
-      duration: 0.0002478
+      duration: 0.0001768
       messages: 
       output: 
       stacktrace: 
@@ -4343,12 +4377,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1181
       parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryRegistryTests][suite]'
-    - id: 1212
+    - id: 1214
       uniqueId: "DomainTests.dll/MasteryRegistryTests/[DomainTests][MasteryRegistryTests.\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568][suite]"
       name: "\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568"
       fullName: "MasteryRegistryTests.\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.00047559998
+      duration: 0.0003607
       messages: 
       output: 
       stacktrace: 
@@ -4357,14 +4391,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1208
+      parentId: 1210
       parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryRegistryTests][suite]'
     - id: 1151
       uniqueId: "DomainTests.dll/MasteryRegistryTests/\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568/[DomainTests][MasteryRegistryTests.\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568(Blue)]"
       name: "\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568(Blue)"
       fullName: "MasteryRegistryTests.\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568(Blue)"
       resultStatus: 1
-      duration: 0.0003889
+      duration: 0.0003089
       messages: 
       output: 
       stacktrace: 
@@ -4381,7 +4415,7 @@ MonoBehaviour:
       name: "\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568(Red)"
       fullName: "MasteryRegistryTests.\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568(Red)"
       resultStatus: 1
-      duration: 0.0000867
+      duration: 0.0000518
       messages: 
       output: 
       stacktrace: 
@@ -4393,12 +4427,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1153
       parentUniqueId: "DomainTests.dll/MasteryRegistryTests/[DomainTests][MasteryRegistryTests.\uC9C4\uC601\uBCC4_\uB9C8\uC2A4\uD130\uB9AC_\uC124\uC815_\uBC0F_\uC870\uD68C\uAC00_\uC815\uD655\uD788_\uB3D9\uC791\uD574\uC57C_\uD568][suite]"
-    - id: 1214
+    - id: 1216
       uniqueId: 'DomainTests.dll/[DomainTests][MasteryStatCollectionFactoryTests][suite]'
       name: MasteryStatCollectionFactoryTests
       fullName: MasteryStatCollectionFactoryTests
       resultStatus: 1
-      duration: 0.0029434
+      duration: 0.0023114
       messages: 
       output: 
       stacktrace: 
@@ -4407,14 +4441,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1181
       uniqueId: "DomainTests.dll/MasteryStatCollectionFactoryTests/[DomainTests][MasteryStatCollectionFactoryTests.\uC219\uB828\uB3C4_\uBCF4\uB4DC_\uCEEC\uB799\uC158\uC744_\uC2A4\uD0EF_\uCEEC\uB799\uC158\uC73C\uB85C_\uBCC0\uD658]"
       name: "\uC219\uB828\uB3C4_\uBCF4\uB4DC_\uCEEC\uB799\uC158\uC744_\uC2A4\uD0EF_\uCEEC\uB799\uC158\uC73C\uB85C_\uBCC0\uD658"
       fullName: "MasteryStatCollectionFactoryTests.\uC219\uB828\uB3C4_\uBCF4\uB4DC_\uCEEC\uB799\uC158\uC744_\uC2A4\uD0EF_\uCEEC\uB799\uC158\uC73C\uB85C_\uBCC0\uD658"
       resultStatus: 1
-      duration: 0.0029434
+      duration: 0.0023114
       messages: 
       output: 
       stacktrace: 
@@ -4426,12 +4460,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1180
       parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryStatCollectionFactoryTests][suite]'
-    - id: 1216
+    - id: 1218
       uniqueId: 'DomainTests.dll/[DomainTests][MasteryTests][suite]'
       name: MasteryTests
       fullName: MasteryTests
       resultStatus: 1
-      duration: 0.0016826
+      duration: 0.001329
       messages: 
       output: 
       stacktrace: 
@@ -4440,14 +4474,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1156
       uniqueId: "DomainTests.dll/MasteryTests/[DomainTests][MasteryTests.\uC219\uB828\uB3C4_\uAC00\uC838\uC624\uAE30]"
       name: "\uC219\uB828\uB3C4_\uAC00\uC838\uC624\uAE30"
       fullName: "MasteryTests.\uC219\uB828\uB3C4_\uAC00\uC838\uC624\uAE30"
       resultStatus: 1
-      duration: 0.0016826
+      duration: 0.001329
       messages: 
       output: 
       stacktrace: 
@@ -4459,12 +4493,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1155
       parentUniqueId: 'DomainTests.dll/[DomainTests][MasteryTests][suite]'
-    - id: 1218
+    - id: 1220
       uniqueId: 'DomainTests.dll/[DomainTests][MatchRecordTests][suite]'
       name: MatchRecordTests
       fullName: MatchRecordTests
       resultStatus: 1
-      duration: 0.0007223
+      duration: 0.0004492
       messages: 
       output: 
       stacktrace: 
@@ -4473,14 +4507,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1163
       uniqueId: "DomainTests.dll/MatchRecordTests/[DomainTests][MatchRecordTests.AI_\uCD5C\uC885_\uC6B0\uC2B9_\uD310\uC815]"
       name: "AI_\uCD5C\uC885_\uC6B0\uC2B9_\uD310\uC815"
       fullName: "MatchRecordTests.AI_\uCD5C\uC885_\uC6B0\uC2B9_\uD310\uC815"
       resultStatus: 1
-      duration: 0.0002177
+      duration: 0.0001578
       messages: 
       output: 
       stacktrace: 
@@ -4492,12 +4526,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1159
       parentUniqueId: 'DomainTests.dll/[DomainTests][MatchRecordTests][suite]'
-    - id: 1221
+    - id: 1223
       uniqueId: "DomainTests.dll/MatchRecordTests/[DomainTests][MatchRecordTests.\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8][suite]"
       name: "\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8"
       fullName: "MatchRecordTests.\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8"
       resultStatus: 1
-      duration: 0.0005046
+      duration: 0.0002914
       messages: 
       output: 
       stacktrace: 
@@ -4506,14 +4540,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1218
+      parentId: 1220
       parentUniqueId: 'DomainTests.dll/[DomainTests][MatchRecordTests][suite]'
     - id: 1160
       uniqueId: "DomainTests.dll/MatchRecordTests/\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8/[DomainTests][MatchRecordTests.\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8(Player,1,0)]"
       name: "\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8(Player,1,0)"
       fullName: "MatchRecordTests.\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8(Player,1,0)"
       resultStatus: 1
-      duration: 0.0004125
+      duration: 0.0002366
       messages: 
       output: 
       stacktrace: 
@@ -4530,7 +4564,7 @@ MonoBehaviour:
       name: "\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8(AI,0,1)"
       fullName: "MatchRecordTests.\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8(AI,0,1)"
       resultStatus: 1
-      duration: 0.0000921
+      duration: 0.0000548
       messages: 
       output: 
       stacktrace: 
@@ -4542,12 +4576,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1162
       parentUniqueId: "DomainTests.dll/MatchRecordTests/[DomainTests][MatchRecordTests.\uC8FC\uCCB4\uBCC4_\uC2B9\uB9AC_\uAE30\uB85D_\uD14C\uC2A4\uD2B8][suite]"
-    - id: 1236
+    - id: 1238
       uniqueId: 'DomainTests.dll/[DomainTests][MatchResultCalculateTests][suite]'
       name: MatchResultCalculateTests
       fullName: MatchResultCalculateTests
       resultStatus: 1
-      duration: 0.0021737001
+      duration: 0.002066
       messages: 
       output: 
       stacktrace: 
@@ -4556,14 +4590,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1178
       uniqueId: "DomainTests.dll/MatchResultCalculateTests/[DomainTests][MatchResultCalculateTests.\uB2E4\uC218_\uCC54\uD53C\uC5B8_\uC2A4\uCFFC\uB4DC_\uACB0\uACFC]"
       name: "\uB2E4\uC218_\uCC54\uD53C\uC5B8_\uC2A4\uCFFC\uB4DC_\uACB0\uACFC"
       fullName: "MatchResultCalculateTests.\uB2E4\uC218_\uCC54\uD53C\uC5B8_\uC2A4\uCFFC\uB4DC_\uACB0\uACFC"
       resultStatus: 1
-      duration: 0.0004567
+      duration: 0.0003764
       messages: 
       output: 
       stacktrace: 
@@ -4580,7 +4614,7 @@ MonoBehaviour:
       name: "\uB3D9\uB960\uC774\uBA74_\uBB34\uC2B9\uBD80"
       fullName: "MatchResultCalculateTests.\uB3D9\uB960\uC774\uBA74_\uBB34\uC2B9\uBD80"
       resultStatus: 1
-      duration: 0.0002165
+      duration: 0.0001804
       messages: 
       output: 
       stacktrace: 
@@ -4597,7 +4631,7 @@ MonoBehaviour:
       name: "\uC2A4\uCF54\uC5B4_\uD569_\uACC4\uC0B0"
       fullName: "MatchResultCalculateTests.\uC2A4\uCF54\uC5B4_\uD569_\uACC4\uC0B0"
       resultStatus: 1
-      duration: 0.0001383
+      duration: 0.0001246
       messages: 
       output: 
       stacktrace: 
@@ -4614,7 +4648,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8_\uC0C1\uD0DC_\uC2AC\uB86F\uC744_\uACB0\uACFC\uB85C_\uBCC0\uD658"
       fullName: "MatchResultCalculateTests.\uCC54\uD53C\uC5B8_\uC0C1\uD0DC_\uC2AC\uB86F\uC744_\uACB0\uACFC\uB85C_\uBCC0\uD658"
       resultStatus: 1
-      duration: 0.0013622
+      duration: 0.0013846
       messages: 
       output: 
       stacktrace: 
@@ -4631,7 +4665,7 @@ MonoBehaviour:
       name: PhaseEventRaiseTests
       fullName: PhaseEventRaiseTests
       resultStatus: 1
-      duration: 0.0015507
+      duration: 0.001379
       messages: 
       output: 
       stacktrace: 
@@ -4640,14 +4674,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1134
       uniqueId: "DomainTests.dll/PhaseEventRaiseTests/[DomainTests][PhaseEventRaiseTests.\uD398\uC774\uC988\uBCC4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD_\uD655\uC778]"
       name: "\uD398\uC774\uC988\uBCC4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD_\uD655\uC778"
       fullName: "PhaseEventRaiseTests.\uD398\uC774\uC988\uBCC4_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD_\uD655\uC778"
       resultStatus: 1
-      duration: 0.0015507
+      duration: 0.001379
       messages: 
       output: 
       stacktrace: 
@@ -4664,7 +4698,7 @@ MonoBehaviour:
       name: PhaseFlowTests
       fullName: PhaseFlowTests
       resultStatus: 1
-      duration: 0.001264
+      duration: 0.0011909
       messages: 
       output: 
       stacktrace: 
@@ -4673,14 +4707,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1136
       uniqueId: "DomainTests.dll/PhaseFlowTests/[DomainTests][PhaseFlowTests.Start_\uCCAB_\uD398\uC774\uC988_\uCCAB_\uD134\uC73C\uB85C_\uC9C4\uD589]"
       name: "Start_\uCCAB_\uD398\uC774\uC988_\uCCAB_\uD134\uC73C\uB85C_\uC9C4\uD589"
       fullName: "PhaseFlowTests.Start_\uCCAB_\uD398\uC774\uC988_\uCCAB_\uD134\uC73C\uB85C_\uC9C4\uD589"
       resultStatus: 1
-      duration: 0.0005543
+      duration: 0.0005177
       messages: 
       output: 
       stacktrace: 
@@ -4697,7 +4731,7 @@ MonoBehaviour:
       name: "SubmitAction_\uC62C\uBC14\uB978_\uD300\uC774\uBA74_\uB2E4\uC74C_\uD134\uC73C\uB85C_\uC9C4\uD589"
       fullName: "PhaseFlowTests.SubmitAction_\uC62C\uBC14\uB978_\uD300\uC774\uBA74_\uB2E4\uC74C_\uD134\uC73C\uB85C_\uC9C4\uD589"
       resultStatus: 1
-      duration: 0.0002513
+      duration: 0.0002289
       messages: 
       output: 
       stacktrace: 
@@ -4714,7 +4748,7 @@ MonoBehaviour:
       name: "\uC798\uBABB\uB41C_\uD300\uC774_SubmitAction\uD558\uBA74_\uC608\uC678"
       fullName: "PhaseFlowTests.\uC798\uBABB\uB41C_\uD300\uC774_SubmitAction\uD558\uBA74_\uC608\uC678"
       resultStatus: 1
-      duration: 0.0002452
+      duration: 0.0002189
       messages: 
       output: 
       stacktrace: 
@@ -4731,7 +4765,7 @@ MonoBehaviour:
       name: "\uD134\uC774_\uB05D\uB098\uBA74_\uB2E4\uC74C_\uD398\uC774\uC988\uB85C_\uC9C4\uD589"
       fullName: "PhaseFlowTests.\uD134\uC774_\uB05D\uB098\uBA74_\uB2E4\uC74C_\uD398\uC774\uC988\uB85C_\uC9C4\uD589"
       resultStatus: 1
-      duration: 0.0002132
+      duration: 0.0002254
       messages: 
       output: 
       stacktrace: 
@@ -4748,7 +4782,7 @@ MonoBehaviour:
       name: PhaseTests
       fullName: PhaseTests
       resultStatus: 1
-      duration: 0.0014467
+      duration: 0.0014096
       messages: 
       output: 
       stacktrace: 
@@ -4757,14 +4791,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1143
       uniqueId: "DomainTests.dll/PhaseTests/[DomainTests][PhaseTests.Start_\uD638\uCD9C\uC2DC_\uCCAB_\uD750\uB984\uC774_\uC9C4\uD589]"
       name: "Start_\uD638\uCD9C\uC2DC_\uCCAB_\uD750\uB984\uC774_\uC9C4\uD589"
       fullName: "PhaseTests.Start_\uD638\uCD9C\uC2DC_\uCCAB_\uD750\uB984\uC774_\uC9C4\uD589"
       resultStatus: 1
-      duration: 0.000448
+      duration: 0.0003919
       messages: 
       output: 
       stacktrace: 
@@ -4781,7 +4815,7 @@ MonoBehaviour:
       name: "\uB2E4\uC74C\uD134_\uBC18\uD658"
       fullName: "PhaseTests.\uB2E4\uC74C\uD134_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001913
+      duration: 0.0001606
       messages: 
       output: 
       stacktrace: 
@@ -4798,7 +4832,7 @@ MonoBehaviour:
       name: "\uB514\uC2A4\uD328\uCC98\uC5D0\uC11C_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD"
       fullName: "PhaseTests.\uB514\uC2A4\uD328\uCC98\uC5D0\uC11C_\uC774\uBCA4\uD2B8_\uBC1C\uC0DD"
       resultStatus: 1
-      duration: 0.0001716
+      duration: 0.0002203
       messages: 
       output: 
       stacktrace: 
@@ -4815,7 +4849,7 @@ MonoBehaviour:
       name: "\uC62C\uBC14\uB978_\uD300_\uC81C\uCD9C\uC2DC_\uB2E4\uC74C_\uD750\uB984_\uC9C4\uD589"
       fullName: "PhaseTests.\uC62C\uBC14\uB978_\uD300_\uC81C\uCD9C\uC2DC_\uB2E4\uC74C_\uD750\uB984_\uC9C4\uD589"
       resultStatus: 1
-      duration: 0.0002998
+      duration: 0.0003179
       messages: 
       output: 
       stacktrace: 
@@ -4832,7 +4866,7 @@ MonoBehaviour:
       name: "\uD134_\uC5C6\uB294\uB370_\uB2EC\uB77C_\uD558\uBA74_\uC5D0\uB7EC"
       fullName: "PhaseTests.\uD134_\uC5C6\uB294\uB370_\uB2EC\uB77C_\uD558\uBA74_\uC5D0\uB7EC"
       resultStatus: 1
-      duration: 0.0001979
+      duration: 0.0001819
       messages: 
       output: 
       stacktrace: 
@@ -4849,7 +4883,7 @@ MonoBehaviour:
       name: "\uD398\uC774\uC988_\uC9C4\uC785_\uC5D0\uC774\uC804\uD2B8_\uD638\uCD9C"
       fullName: "PhaseTests.\uD398\uC774\uC988_\uC9C4\uC785_\uC5D0\uC774\uC804\uD2B8_\uD638\uCD9C"
       resultStatus: 1
-      duration: 0.0001381
+      duration: 0.000137
       messages: 
       output: 
       stacktrace: 
@@ -4861,12 +4895,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1140
       parentUniqueId: 'DomainTests.dll/[DomainTests][PhaseTests][suite]'
-    - id: 1280
+    - id: 1282
       uniqueId: 'DomainTests.dll/[DomainTests][PickSlotFacadeTests][suite]'
       name: PickSlotFacadeTests
       fullName: PickSlotFacadeTests
       resultStatus: 1
-      duration: 0.0008216
+      duration: 0.00077509996
       messages: 
       output: 
       stacktrace: 
@@ -4875,14 +4909,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
-    - id: 1283
+    - id: 1285
       uniqueId: "DomainTests.dll/PickSlotFacadeTests/[DomainTests][PickSlotFacadeTests.\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4][suite]"
       name: "\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4"
       fullName: "PickSlotFacadeTests.\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0008216
+      duration: 0.00077509996
       messages: 
       output: 
       stacktrace: 
@@ -4891,14 +4925,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1280
+      parentId: 1282
       parentUniqueId: 'DomainTests.dll/[DomainTests][PickSlotFacadeTests][suite]'
     - id: 1221
       uniqueId: "DomainTests.dll/PickSlotFacadeTests/\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4/[DomainTests][PickSlotFacadeTests.\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4(Blue)]"
       name: "\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4(Blue)"
       fullName: "PickSlotFacadeTests.\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4(Blue)"
       resultStatus: 1
-      duration: 0.0007193
+      duration: 0.0007088
       messages: 
       output: 
       stacktrace: 
@@ -4915,7 +4949,7 @@ MonoBehaviour:
       name: "\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4(Red)"
       fullName: "PickSlotFacadeTests.\uD53D_\uB370\uC774\uD130\uB97C_\uD574\uB2F9_\uD300_\uC2AC\uB86F_\uC2A4\uD1A0\uB9AC\uC9C0\uC5D0_\uCD94\uAC00\uD55C\uB2E4(Red)"
       resultStatus: 1
-      duration: 0.0001023
+      duration: 0.0000663
       messages: 
       output: 
       stacktrace: 
@@ -4932,7 +4966,7 @@ MonoBehaviour:
       name: PredictivePickEvaluatorTests
       fullName: PredictivePickEvaluatorTests
       resultStatus: 1
-      duration: 0.0035966
+      duration: 0.0036239
       messages: 
       output: 
       stacktrace: 
@@ -4941,14 +4975,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1114
       uniqueId: "DomainTests.dll/PredictivePickEvaluatorTests/[DomainTests][PredictivePickEvaluatorTests.\uC790\uC2E0\uC774_\uD53D\uC744_2\uBC88\uD558\uB294_\uACBD\uC6B0\uB97C_\uACC4\uC0B0]"
       name: "\uC790\uC2E0\uC774_\uD53D\uC744_2\uBC88\uD558\uB294_\uACBD\uC6B0\uB97C_\uACC4\uC0B0"
       fullName: "PredictivePickEvaluatorTests.\uC790\uC2E0\uC774_\uD53D\uC744_2\uBC88\uD558\uB294_\uACBD\uC6B0\uB97C_\uACC4\uC0B0"
       resultStatus: 1
-      duration: 0.0031339
+      duration: 0.0031686
       messages: 
       output: 
       stacktrace: 
@@ -4965,7 +4999,7 @@ MonoBehaviour:
       name: "\uD53D\uC744_2\uBC88\uD558\uB294_\uACBD\uC6B0\uB97C_\uACC4\uC0B0"
       fullName: "PredictivePickEvaluatorTests.\uD53D\uC744_2\uBC88\uD558\uB294_\uACBD\uC6B0\uB97C_\uACC4\uC0B0"
       resultStatus: 1
-      duration: 0.0004627
+      duration: 0.0004553
       messages: 
       output: 
       stacktrace: 
@@ -4977,12 +5011,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1112
       parentUniqueId: 'DomainTests.dll/[DomainTests][PredictivePickEvaluatorTests][suite]'
-    - id: 1223
+    - id: 1225
       uniqueId: 'DomainTests.dll/[DomainTests][PriorityBanPickTests][suite]'
       name: PriorityBanPickTests
       fullName: PriorityBanPickTests
       resultStatus: 1
-      duration: 0.0027679
+      duration: 0.0022425
       messages: 
       output: 
       stacktrace: 
@@ -4991,14 +5025,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1167
       uniqueId: "DomainTests.dll/PriorityBanPickTests/[DomainTests][PriorityBanPickTests.\uC6B0\uC120\uC21C\uC704\uB300\uB85C_\uC120\uD0DD]"
       name: "\uC6B0\uC120\uC21C\uC704\uB300\uB85C_\uC120\uD0DD"
       fullName: "PriorityBanPickTests.\uC6B0\uC120\uC21C\uC704\uB300\uB85C_\uC120\uD0DD"
       resultStatus: 1
-      duration: 0.000395
+      duration: 0.0003657
       messages: 
       output: 
       stacktrace: 
@@ -5015,7 +5049,7 @@ MonoBehaviour:
       name: "\uC6B0\uC120\uC21C\uC704\uC5D0_\uC788\uB294_\uBAA8\uB4E0_id\uAC00_\uBC34_\uBD88\uAC00\uD558\uBA74_\uD53D_\uC608\uC815_id\uB97C_\uC81C\uC678\uD558\uACE0_\uB79C\uB364_\uC120\uD0DD\uD55C\uB2E4"
       fullName: "PriorityBanPickTests.\uC6B0\uC120\uC21C\uC704\uC5D0_\uC788\uB294_\uBAA8\uB4E0_id\uAC00_\uBC34_\uBD88\uAC00\uD558\uBA74_\uD53D_\uC608\uC815_id\uB97C_\uC81C\uC678\uD558\uACE0_\uB79C\uB364_\uC120\uD0DD\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0006544
+      duration: 0.0005615
       messages: 
       output: 
       stacktrace: 
@@ -5032,7 +5066,7 @@ MonoBehaviour:
       name: "\uD53D_\uBAA8\uB4E0\uD6C4\uBCF4\uAC00_\uBD88\uAC00\uD558\uBA74_\uB79C\uB364\uC73C\uB85C_\uC120\uD0DD\uD55C\uB2E4"
       fullName: "PriorityBanPickTests.\uD53D_\uBAA8\uB4E0\uD6C4\uBCF4\uAC00_\uBD88\uAC00\uD558\uBA74_\uB79C\uB364\uC73C\uB85C_\uC120\uD0DD\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0002155
+      duration: 0.0001394
       messages: 
       output: 
       stacktrace: 
@@ -5049,7 +5083,7 @@ MonoBehaviour:
       name: "\uD53D_\uC219\uB828\uB3C4_\uCD1D\uD569\uC774_\uAC00\uC7A5_\uB192\uC740_\uBE4C\uB4DC_\uC120\uD0DD"
       fullName: "PriorityBanPickTests.\uD53D_\uC219\uB828\uB3C4_\uCD1D\uD569\uC774_\uAC00\uC7A5_\uB192\uC740_\uBE4C\uB4DC_\uC120\uD0DD"
       resultStatus: 1
-      duration: 0.001503
+      duration: 0.0011759
       messages: 
       output: 
       stacktrace: 
@@ -5061,12 +5095,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1166
       parentUniqueId: 'DomainTests.dll/[DomainTests][PriorityBanPickTests][suite]'
-    - id: 1320
+    - id: 1322
       uniqueId: 'DomainTests.dll/[DomainTests][RandomTests][suite]'
       name: RandomTests
       fullName: RandomTests
       resultStatus: 1
-      duration: 0.0012481
+      duration: 0.0011254
       messages: 
       output: 
       stacktrace: 
@@ -5075,14 +5109,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1258
       uniqueId: "DomainTests.dll/RandomTests/[DomainTests][RandomTests.\uCEEC\uB799\uC158_\uC548\uC5D0_\uC788\uB294_\uC694\uC18C\uB97C_\uBC18\uD658]"
       name: "\uCEEC\uB799\uC158_\uC548\uC5D0_\uC788\uB294_\uC694\uC18C\uB97C_\uBC18\uD658"
       fullName: "RandomTests.\uCEEC\uB799\uC158_\uC548\uC5D0_\uC788\uB294_\uC694\uC18C\uB97C_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0012481
+      duration: 0.0011254
       messages: 
       output: 
       stacktrace: 
@@ -5094,12 +5128,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1257
       parentUniqueId: 'DomainTests.dll/[DomainTests][RandomTests][suite]'
-    - id: 1228
+    - id: 1230
       uniqueId: 'DomainTests.dll/[DomainTests][ScheduleFlowTest][suite]'
       name: ScheduleFlowTest
       fullName: ScheduleFlowTest
       resultStatus: 1
-      duration: 0.00040760002
+      duration: 0.00028829998
       messages: 
       output: 
       stacktrace: 
@@ -5108,14 +5142,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1175
       uniqueId: "DomainTests.dll/ScheduleFlowTest/[DomainTests][ScheduleFlowTest.\uB9C8\uC9C0\uB9C9_\uC77C\uC815\uC744_\uC9C4\uD589\uD558\uBA74_\uC885\uB8CC_\uC0C1\uD0DC\uAC00_\uB41C\uB2E4]"
       name: "\uB9C8\uC9C0\uB9C9_\uC77C\uC815\uC744_\uC9C4\uD589\uD558\uBA74_\uC885\uB8CC_\uC0C1\uD0DC\uAC00_\uB41C\uB2E4"
       fullName: "ScheduleFlowTest.\uB9C8\uC9C0\uB9C9_\uC77C\uC815\uC744_\uC9C4\uD589\uD558\uBA74_\uC885\uB8CC_\uC0C1\uD0DC\uAC00_\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0002519
+      duration: 0.0001721
       messages: 
       output: 
       stacktrace: 
@@ -5132,7 +5166,7 @@ MonoBehaviour:
       name: "\uC0DD\uC131\uC790\uB85C_\uB118\uAE34_\uC778\uB371\uC2A4\uC5D0\uC11C_\uC2DC\uC791\uD574_\uC77C\uC815\uC744_\uC9C4\uD589\uD55C\uB2E4"
       fullName: "ScheduleFlowTest.\uC0DD\uC131\uC790\uB85C_\uB118\uAE34_\uC778\uB371\uC2A4\uC5D0\uC11C_\uC2DC\uC791\uD574_\uC77C\uC815\uC744_\uC9C4\uD589\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0001557
+      duration: 0.0001162
       messages: 
       output: 
       stacktrace: 
@@ -5144,12 +5178,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1212
       parentUniqueId: 'DomainTests.dll/[DomainTests][ScheduleFlowTest][suite]'
-    - id: 1284
+    - id: 1286
       uniqueId: 'DomainTests.dll/[DomainTests][SelectSaveTests][suite]'
       name: SelectSaveTests
       fullName: SelectSaveTests
       resultStatus: 1
-      duration: 0.0009135
+      duration: 0.00071179995
       messages: 
       output: 
       stacktrace: 
@@ -5158,14 +5192,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1226
       uniqueId: "DomainTests.dll/SelectSaveTests/[DomainTests][SelectSaveTests.Id_\uC800\uC7A5_\uD6C4_\uC800\uC7A5\uD55C_\uC2AC\uB86F_\uC704\uCE58_\uBC18\uD658]"
       name: "Id_\uC800\uC7A5_\uD6C4_\uC800\uC7A5\uD55C_\uC2AC\uB86F_\uC704\uCE58_\uBC18\uD658"
       fullName: "SelectSaveTests.Id_\uC800\uC7A5_\uD6C4_\uC800\uC7A5\uD55C_\uC2AC\uB86F_\uC704\uCE58_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0005883
+      duration: 0.0004535
       messages: 
       output: 
       stacktrace: 
@@ -5182,7 +5216,7 @@ MonoBehaviour:
       name: "\uC120\uD0DD_\uBD88\uAC00\uB2A5\uD55C_ID\uBA74_\uC608\uC678"
       fullName: "SelectSaveTests.\uC120\uD0DD_\uBD88\uAC00\uB2A5\uD55C_ID\uBA74_\uC608\uC678"
       resultStatus: 1
-      duration: 0.0003252
+      duration: 0.0002583
       messages: 
       output: 
       stacktrace: 
@@ -5194,12 +5228,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1225
       parentUniqueId: 'DomainTests.dll/[DomainTests][SelectSaveTests][suite]'
-    - id: 1241
+    - id: 1243
       uniqueId: 'DomainTests.dll/[DomainTests][SkillActionTests][suite]'
       name: SkillActionTests
       fullName: SkillActionTests
       resultStatus: 1
-      duration: 0.0022924999
+      duration: 0.0022011
       messages: 
       output: 
       stacktrace: 
@@ -5208,14 +5242,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1192
       uniqueId: "DomainTests.dll/SkillActionTests/[DomainTests][SkillActionTests.\uAC8C\uC784_\uC885\uB8CC_\uC2DC_\uC790\uC2E0\uC758_\uC2A4\uD0EF_\uB450\uBC30_\uC0C1\uC2B9]"
       name: "\uAC8C\uC784_\uC885\uB8CC_\uC2DC_\uC790\uC2E0\uC758_\uC2A4\uD0EF_\uB450\uBC30_\uC0C1\uC2B9"
       fullName: "SkillActionTests.\uAC8C\uC784_\uC885\uB8CC_\uC2DC_\uC790\uC2E0\uC758_\uC2A4\uD0EF_\uB450\uBC30_\uC0C1\uC2B9"
       resultStatus: 1
-      duration: 0.0004182
+      duration: 0.0003645
       messages: 
       output: 
       stacktrace: 
@@ -5232,7 +5266,7 @@ MonoBehaviour:
       name: "\uC0C1\uB300_\uC2A4\uD0EF_\uBCF5\uC0AC"
       fullName: "SkillActionTests.\uC0C1\uB300_\uC2A4\uD0EF_\uBCF5\uC0AC"
       resultStatus: 1
-      duration: 0.0001795
+      duration: 0.000146
       messages: 
       output: 
       stacktrace: 
@@ -5249,7 +5283,7 @@ MonoBehaviour:
       name: "\uC790\uC2E0\uC758_\uC2A4\uD0EF_\uBE44\uC728\uB9CC\uD07C_\uC99D\uAC00"
       fullName: "SkillActionTests.\uC790\uC2E0\uC758_\uC2A4\uD0EF_\uBE44\uC728\uB9CC\uD07C_\uC99D\uAC00"
       resultStatus: 1
-      duration: 0.0001349
+      duration: 0.0001158
       messages: 
       output: 
       stacktrace: 
@@ -5266,7 +5300,7 @@ MonoBehaviour:
       name: "\uC99D\uD3ED\uC728_\uBCC0\uACBD"
       fullName: "SkillActionTests.\uC99D\uD3ED\uC728_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0005635
+      duration: 0.0006491
       messages: 
       output: 
       stacktrace: 
@@ -5278,12 +5312,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1181
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillActionTests][suite]'
-    - id: 1245
+    - id: 1247
       uniqueId: "DomainTests.dll/SkillActionTests/[DomainTests][SkillActionTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD][suite]"
       name: "\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD"
       fullName: "SkillActionTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0004986
+      duration: 0.00037609998
       messages: 
       output: 
       stacktrace: 
@@ -5292,14 +5326,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1241
+      parentId: 1243
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillActionTests][suite]'
     - id: 1182
       uniqueId: "DomainTests.dll/SkillActionTests/\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD/[DomainTests][SkillActionTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Attack,110,100,100)]"
       name: "\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Attack,110,100,100)"
       fullName: "SkillActionTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Attack,110,100,100)"
       resultStatus: 1
-      duration: 0.0003406
+      duration: 0.00027
       messages: 
       output: 
       stacktrace: 
@@ -5316,7 +5350,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Defense,100,110,100)"
       fullName: "SkillActionTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Defense,100,110,100)"
       resultStatus: 1
-      duration: 0.0000966
+      duration: 0.0000605
       messages: 
       output: 
       stacktrace: 
@@ -5333,7 +5367,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Speed,100,100,110)"
       fullName: "SkillActionTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uBCC0\uACBD(Speed,100,100,110)"
       resultStatus: 1
-      duration: 0.0000614
+      duration: 0.0000456
       messages: 
       output: 
       stacktrace: 
@@ -5350,7 +5384,7 @@ MonoBehaviour:
       name: "\uD2B9\uC131_\uC81C\uC678\uC2DC\uD0A4\uAE30"
       fullName: "SkillActionTests.\uD2B9\uC131_\uC81C\uC678\uC2DC\uD0A4\uAE30"
       resultStatus: 1
-      duration: 0.0001183
+      duration: 0.0001363
       messages: 
       output: 
       stacktrace: 
@@ -5367,7 +5401,7 @@ MonoBehaviour:
       name: "\uD37C\uC13C\uD2B8_\uC2A4\uD0EF_\uD761\uC218"
       fullName: "SkillActionTests.\uD37C\uC13C\uD2B8_\uC2A4\uD0EF_\uD761\uC218"
       resultStatus: 1
-      duration: 0.0001358
+      duration: 0.0001347
       messages: 
       output: 
       stacktrace: 
@@ -5384,7 +5418,7 @@ MonoBehaviour:
       name: "\uD53D\uD55C_\uC544\uAD70_\uC2A4\uD0EF_\uBCC0\uACBD"
       fullName: "SkillActionTests.\uD53D\uD55C_\uC544\uAD70_\uC2A4\uD0EF_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0002437
+      duration: 0.0002786
       messages: 
       output: 
       stacktrace: 
@@ -5396,12 +5430,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1181
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillActionTests][suite]'
-    - id: 1253
+    - id: 1255
       uniqueId: 'DomainTests.dll/[DomainTests][SkillConditionTests][suite]'
       name: SkillConditionTests
       fullName: SkillConditionTests
       resultStatus: 1
-      duration: 0.0021212
+      duration: 0.0014174
       messages: 
       output: 
       stacktrace: 
@@ -5410,14 +5444,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1194
       uniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.None\uC740_\uBB34\uC870\uAC74_\uCC38]"
       name: "None\uC740_\uBB34\uC870\uAC74_\uCC38"
       fullName: "SkillConditionTests.None\uC740_\uBB34\uC870\uAC74_\uCC38"
       resultStatus: 1
-      duration: 0.0002482
+      duration: 0.000155
       messages: 
       output: 
       stacktrace: 
@@ -5434,7 +5468,7 @@ MonoBehaviour:
       name: "NullChecker\uC740_\uBB34\uC870\uAC74_\uCC38"
       fullName: "SkillConditionTests.NullChecker\uC740_\uBB34\uC870\uAC74_\uCC38"
       resultStatus: 1
-      duration: 0.0001594
+      duration: 0.0000871
       messages: 
       output: 
       stacktrace: 
@@ -5446,12 +5480,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1193
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillConditionTests][suite]'
-    - id: 1263
+    - id: 1265
       uniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38][suite]"
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38"
       resultStatus: 1
-      duration: 0.0003527
+      duration: 0.0002891
       messages: 
       output: 
       stacktrace: 
@@ -5460,14 +5494,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1253
+      parentId: 1255
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillConditionTests][suite]'
     - id: 1200
       uniqueId: "DomainTests.dll/SkillConditionTests/\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38/[DomainTests][SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(AttackAtLeast)]"
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(AttackAtLeast)"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(AttackAtLeast)"
       resultStatus: 1
-      duration: 0.0002222
+      duration: 0.0002004
       messages: 
       output: 
       stacktrace: 
@@ -5484,7 +5518,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(DefenseAtLeast)"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(DefenseAtLeast)"
       resultStatus: 1
-      duration: 0.0000753
+      duration: 0.0000499
       messages: 
       output: 
       stacktrace: 
@@ -5501,7 +5535,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(SpeedAtLeast)"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38(SpeedAtLeast)"
       resultStatus: 1
-      duration: 0.0000552
+      duration: 0.0000388
       messages: 
       output: 
       stacktrace: 
@@ -5513,12 +5547,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1203
       parentUniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uC0C1\uC774\uBA74_\uCC38][suite]"
-    - id: 1259
+    - id: 1261
       uniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38][suite]"
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38"
       resultStatus: 1
-      duration: 0.0005051
+      duration: 0.0002899
       messages: 
       output: 
       stacktrace: 
@@ -5527,14 +5561,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1253
+      parentId: 1255
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillConditionTests][suite]'
     - id: 1196
       uniqueId: "DomainTests.dll/SkillConditionTests/\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38/[DomainTests][SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(AttackBelow)]"
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(AttackBelow)"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(AttackBelow)"
       resultStatus: 1
-      duration: 0.0003528
+      duration: 0.0002053
       messages: 
       output: 
       stacktrace: 
@@ -5551,7 +5585,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(DefenseBelow)"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(DefenseBelow)"
       resultStatus: 1
-      duration: 0.0000968
+      duration: 0.0000541
       messages: 
       output: 
       stacktrace: 
@@ -5568,7 +5602,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(SpeedBelow)"
       fullName: "SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38(SpeedBelow)"
       resultStatus: 1
-      duration: 0.0000555
+      duration: 0.0000305
       messages: 
       output: 
       stacktrace: 
@@ -5580,12 +5614,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1199
       parentUniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uC2A4\uD0EF\uC774_\uAE30\uC900_\uC774\uD558\uBA74_\uCC38][suite]"
-    - id: 1271
+    - id: 1273
       uniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38][suite]"
       name: "\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38"
       resultStatus: 1
-      duration: 0.0005411
+      duration: 0.000346
       messages: 
       output: 
       stacktrace: 
@@ -5594,14 +5628,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1253
+      parentId: 1255
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillConditionTests][suite]'
     - id: 1208
       uniqueId: "DomainTests.dll/SkillConditionTests/\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38/[DomainTests][SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(AttackBelow)]"
       name: "\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(AttackBelow)"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(AttackBelow)"
       resultStatus: 1
-      duration: 0.0003992
+      duration: 0.0002548
       messages: 
       output: 
       stacktrace: 
@@ -5618,7 +5652,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(DefenseBelow)"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(DefenseBelow)"
       resultStatus: 1
-      duration: 0.0000849
+      duration: 0.0000508
       messages: 
       output: 
       stacktrace: 
@@ -5635,7 +5669,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(SpeedBelow)"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38(SpeedBelow)"
       resultStatus: 1
-      duration: 0.000057
+      duration: 0.0000404
       messages: 
       output: 
       stacktrace: 
@@ -5647,12 +5681,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1211
       parentUniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uC791\uC73C\uBA74_\uCC38][suite]"
-    - id: 1267
+    - id: 1269
       uniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38][suite]"
       name: "\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38"
       resultStatus: 1
-      duration: 0.0003147
+      duration: 0.0002503
       messages: 
       output: 
       stacktrace: 
@@ -5661,14 +5695,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1253
+      parentId: 1255
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillConditionTests][suite]'
     - id: 1204
       uniqueId: "DomainTests.dll/SkillConditionTests/\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38/[DomainTests][SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(AttackAtLeast)]"
       name: "\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(AttackAtLeast)"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(AttackAtLeast)"
       resultStatus: 1
-      duration: 0.0001874
+      duration: 0.0001671
       messages: 
       output: 
       stacktrace: 
@@ -5685,7 +5719,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(DefenseAtLeast)"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(DefenseAtLeast)"
       resultStatus: 1
-      duration: 0.0000659
+      duration: 0.0000462
       messages: 
       output: 
       stacktrace: 
@@ -5702,7 +5736,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(SpeedAtLeast)"
       fullName: "SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38(SpeedAtLeast)"
       resultStatus: 1
-      duration: 0.0000614
+      duration: 0.000037
       messages: 
       output: 
       stacktrace: 
@@ -5714,12 +5748,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1207
       parentUniqueId: "DomainTests.dll/SkillConditionTests/[DomainTests][SkillConditionTests.\uD0C0\uAC9F\uC774_\uB354_\uD06C\uBA74_\uCC38][suite]"
-    - id: 1272
+    - id: 1274
       uniqueId: 'DomainTests.dll/[DomainTests][SkillExecuteTests][suite]'
       name: SkillExecuteTests
       fullName: SkillExecuteTests
       resultStatus: 1
-      duration: 0.0007875
+      duration: 0.0005818
       messages: 
       output: 
       stacktrace: 
@@ -5728,14 +5762,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1214
       uniqueId: "DomainTests.dll/SkillExecuteTests/[DomainTests][SkillExecuteTests.\uC870\uAC74_\uB9CC\uC871\uD55C_\uCC54\uD504\uB9CC_\uC2E4\uD589]"
       name: "\uC870\uAC74_\uB9CC\uC871\uD55C_\uCC54\uD504\uB9CC_\uC2E4\uD589"
       fullName: "SkillExecuteTests.\uC870\uAC74_\uB9CC\uC871\uD55C_\uCC54\uD504\uB9CC_\uC2E4\uD589"
       resultStatus: 1
-      duration: 0.0005727
+      duration: 0.0004117
       messages: 
       output: 
       stacktrace: 
@@ -5752,7 +5786,7 @@ MonoBehaviour:
       name: "\uD2B9\uC131_\uC801\uC6A9_\uC81C\uC678\uB41C_\uACBD\uC6B0_\uBB34\uC2DC"
       fullName: "SkillExecuteTests.\uD2B9\uC131_\uC801\uC6A9_\uC81C\uC678\uB41C_\uACBD\uC6B0_\uBB34\uC2DC"
       resultStatus: 1
-      duration: 0.0002148
+      duration: 0.0001701
       messages: 
       output: 
       stacktrace: 
@@ -5769,7 +5803,7 @@ MonoBehaviour:
       name: SkillPreviewTests
       fullName: SkillPreviewTests
       resultStatus: 1
-      duration: 0.0030498998
+      duration: 0.0027986001
       messages: 
       output: 
       stacktrace: 
@@ -5778,14 +5812,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1111
       uniqueId: "DomainTests.dll/SkillPreviewTests/[DomainTests][SkillPreviewTests.\uC2A4\uD0EF_\uC2AC\uB86F_\uC804\uD6C4_\uC810\uC218\uCC28_\uACC4\uC0B0]"
       name: "\uC2A4\uD0EF_\uC2AC\uB86F_\uC804\uD6C4_\uC810\uC218\uCC28_\uACC4\uC0B0"
       fullName: "SkillPreviewTests.\uC2A4\uD0EF_\uC2AC\uB86F_\uC804\uD6C4_\uC810\uC218\uCC28_\uACC4\uC0B0"
       resultStatus: 1
-      duration: 0.0004935
+      duration: 0.0003436
       messages: 
       output: 
       stacktrace: 
@@ -5802,7 +5836,7 @@ MonoBehaviour:
       name: "\uD604\uC7AC_\uBC34\uD53D_\uC0C1\uD669\uACFC_\uC2A4\uD0AC_\uC8FC\uBA74_\uC0C8\uB85C\uC6B4_\uAE4A\uC740\uBCF5\uC0AC\uD55C_\uAC1D\uCCB4\uC5D0_\uC801\uC6A9\uD6C4_\uBC18\uD658"
       fullName: "SkillPreviewTests.\uD604\uC7AC_\uBC34\uD53D_\uC0C1\uD669\uACFC_\uC2A4\uD0AC_\uC8FC\uBA74_\uC0C8\uB85C\uC6B4_\uAE4A\uC740\uBCF5\uC0AC\uD55C_\uAC1D\uCCB4\uC5D0_\uC801\uC6A9\uD6C4_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0025564
+      duration: 0.002455
       messages: 
       output: 
       stacktrace: 
@@ -5814,12 +5848,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1109
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillPreviewTests][suite]'
-    - id: 1275
+    - id: 1277
       uniqueId: 'DomainTests.dll/[DomainTests][SkillRunnerTest][suite]'
       name: SkillRunnerTest
       fullName: SkillRunnerTest
       resultStatus: 1
-      duration: 0.0013822
+      duration: 0.0011154
       messages: 
       output: 
       stacktrace: 
@@ -5828,14 +5862,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1219
       uniqueId: "DomainTests.dll/SkillRunnerTest/[DomainTests][SkillRunnerTest.\uBE48_\uC2A4\uD0AC\uC740_\uC544\uBB34\uB7F0_\uB3D9\uC791\uB3C4_\uD558\uC9C0_\uC54A\uC544\uC57C_\uD568]"
       name: "\uBE48_\uC2A4\uD0AC\uC740_\uC544\uBB34\uB7F0_\uB3D9\uC791\uB3C4_\uD558\uC9C0_\uC54A\uC544\uC57C_\uD568"
       fullName: "SkillRunnerTest.\uBE48_\uC2A4\uD0AC\uC740_\uC544\uBB34\uB7F0_\uB3D9\uC791\uB3C4_\uD558\uC9C0_\uC54A\uC544\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0003836
+      duration: 0.0002068
       messages: 
       output: 
       stacktrace: 
@@ -5847,12 +5881,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1215
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillRunnerTest][suite]'
-    - id: 1278
+    - id: 1280
       uniqueId: "DomainTests.dll/SkillRunnerTest/[DomainTests][SkillRunnerTest.\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568][suite]"
       name: "\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568"
       fullName: "SkillRunnerTest.\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568"
       resultStatus: 1
-      duration: 0.0009986
+      duration: 0.0009086
       messages: 
       output: 
       stacktrace: 
@@ -5861,14 +5895,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1275
+      parentId: 1277
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillRunnerTest][suite]'
     - id: 1216
       uniqueId: "DomainTests.dll/SkillRunnerTest/\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568/[DomainTests][SkillRunnerTest.\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568(10,20,130)]"
       name: "\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568(10,20,130)"
       fullName: "SkillRunnerTest.\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568(10,20,130)"
       resultStatus: 1
-      duration: 0.0009091
+      duration: 0.0008584
       messages: 
       output: 
       stacktrace: 
@@ -5885,7 +5919,7 @@ MonoBehaviour:
       name: "\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568(5,5,110)"
       fullName: "SkillRunnerTest.\uC5EC\uB7EC_\uAC1C\uC758_\uC2A4\uD0AC_\uB370\uC774\uD130\uAC00_\uBAA8\uB450_\uC801\uC6A9\uB418\uC5B4\uC57C_\uD568(5,5,110)"
       resultStatus: 1
-      duration: 0.0000895
+      duration: 0.0000502
       messages: 
       output: 
       stacktrace: 
@@ -5902,7 +5936,7 @@ MonoBehaviour:
       name: SkillTargetSelectorsTests
       fullName: SkillTargetSelectorsTests
       resultStatus: 1
-      duration: 0.0039738
+      duration: 0.0034689
       messages: 
       output: 
       stacktrace: 
@@ -5911,14 +5945,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1128
       uniqueId: "DomainTests.dll/SkillTargetSelectorsTests/[DomainTests][SkillTargetSelectorsTests.\uC2A4\uD0AC\uC774_\uC5C6\uC73C\uBA74_\uD0C0\uAC9F\uB3C4_\uBE44\uC5B4\uC788\uB294\uAC70_\uBC18\uD658]"
       name: "\uC2A4\uD0AC\uC774_\uC5C6\uC73C\uBA74_\uD0C0\uAC9F\uB3C4_\uBE44\uC5B4\uC788\uB294\uAC70_\uBC18\uD658"
       fullName: "SkillTargetSelectorsTests.\uC2A4\uD0AC\uC774_\uC5C6\uC73C\uBA74_\uD0C0\uAC9F\uB3C4_\uBE44\uC5B4\uC788\uB294\uAC70_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0014559
+      duration: 0.0011842
       messages: 
       output: 
       stacktrace: 
@@ -5935,7 +5969,7 @@ MonoBehaviour:
       name: "\uC694\uCCAD\uD55C_\uAC1C\uC218\uB9CC\uD07C_\uB79C\uB364_\uC120\uD0DD"
       fullName: "SkillTargetSelectorsTests.\uC694\uCCAD\uD55C_\uAC1C\uC218\uB9CC\uD07C_\uB79C\uB364_\uC120\uD0DD"
       resultStatus: 1
-      duration: 0.0021655
+      duration: 0.0019657
       messages: 
       output: 
       stacktrace: 
@@ -5952,7 +5986,7 @@ MonoBehaviour:
       name: "\uC9C0\uC815\uB41C_\uC2A4\uD0EF_\uC21C\uC73C\uB85C_\uC815\uB82C\uD6C4_\uBF51\uC74C"
       fullName: "SkillTargetSelectorsTests.\uC9C0\uC815\uB41C_\uC2A4\uD0EF_\uC21C\uC73C\uB85C_\uC815\uB82C\uD6C4_\uBF51\uC74C"
       resultStatus: 1
-      duration: 0.0003524
+      duration: 0.000319
       messages: 
       output: 
       stacktrace: 
@@ -5964,12 +5998,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1091
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillTargetSelectorsTests][suite]'
-    - id: 1302
+    - id: 1304
       uniqueId: 'DomainTests.dll/[DomainTests][SkillTargetSelectTests][suite]'
       name: SkillTargetSelectTests
       fullName: SkillTargetSelectTests
       resultStatus: 1
-      duration: 0.003199
+      duration: 0.0028535
       messages: 
       output: 
       stacktrace: 
@@ -5978,14 +6012,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1243
       uniqueId: "DomainTests.dll/SkillTargetSelectTests/[DomainTests][SkillTargetSelectTests.\uC804\uCCB4_All\uC740_\uC804\uBD80_\uB123\uC74C]"
       name: "\uC804\uCCB4_All\uC740_\uC804\uBD80_\uB123\uC74C"
       fullName: "SkillTargetSelectTests.\uC804\uCCB4_All\uC740_\uC804\uBD80_\uB123\uC74C"
       resultStatus: 1
-      duration: 0.002161
+      duration: 0.0019343
       messages: 
       output: 
       stacktrace: 
@@ -6002,7 +6036,7 @@ MonoBehaviour:
       name: "\uC911\uBCF5_\uC800\uC7A5_\uC548\uB428"
       fullName: "SkillTargetSelectTests.\uC911\uBCF5_\uC800\uC7A5_\uC548\uB428"
       resultStatus: 1
-      duration: 0.0002352
+      duration: 0.0002072
       messages: 
       output: 
       stacktrace: 
@@ -6019,7 +6053,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F_\uBC94\uC704\uAC00_\uC5C6\uC744_\uACBD\uC6B0_\uBE48_\uC2AC\uB86F_\uBC18\uD658"
       fullName: "SkillTargetSelectTests.\uD0C0\uAC9F_\uBC94\uC704\uAC00_\uC5C6\uC744_\uACBD\uC6B0_\uBE48_\uC2AC\uB86F_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0000729
+      duration: 0.000053
       messages: 
       output: 
       stacktrace: 
@@ -6036,7 +6070,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F_\uBC94\uC704\uAC00_\uC804\uCCB4\uC778_\uACBD\uC6B0_\uC790\uB3D9_\uC120\uD0DD"
       fullName: "SkillTargetSelectTests.\uD0C0\uAC9F_\uBC94\uC704\uAC00_\uC804\uCCB4\uC778_\uACBD\uC6B0_\uC790\uB3D9_\uC120\uD0DD"
       resultStatus: 1
-      duration: 0.0000646
+      duration: 0.000046
       messages: 
       output: 
       stacktrace: 
@@ -6053,7 +6087,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F_\uC120\uD0DD_\uC2DC_\uC800\uC7A5"
       fullName: "SkillTargetSelectTests.\uD0C0\uAC9F_\uC120\uD0DD_\uC2DC_\uC800\uC7A5"
       resultStatus: 1
-      duration: 0.0000623
+      duration: 0.0000378
       messages: 
       output: 
       stacktrace: 
@@ -6070,7 +6104,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F_\uC218_\uCD08\uACFC\uB418\uBA74_\uBB34\uC2DC"
       fullName: "SkillTargetSelectTests.\uD0C0\uAC9F_\uC218_\uCD08\uACFC\uB418\uBA74_\uBB34\uC2DC"
       resultStatus: 1
-      duration: 0.0001698
+      duration: 0.0001574
       messages: 
       output: 
       stacktrace: 
@@ -6087,7 +6121,7 @@ MonoBehaviour:
       name: "\uD0C0\uAC9F_\uC218\uAC00_\uD300\uBCF4\uB2E4_\uD06C\uBA74_\uD300\uC744_\uB2E4_\uACE0\uB974\uBA74_Full"
       fullName: "SkillTargetSelectTests.\uD0C0\uAC9F_\uC218\uAC00_\uD300\uBCF4\uB2E4_\uD06C\uBA74_\uD300\uC744_\uB2E4_\uACE0\uB974\uBA74_Full"
       resultStatus: 1
-      duration: 0.0001262
+      duration: 0.0001357
       messages: 
       output: 
       stacktrace: 
@@ -6104,7 +6138,7 @@ MonoBehaviour:
       name: "\uD2B9\uC815_\uC0AC\uC774\uB4DC_All\uC740_\uC120\uD0DD\uD55C_\uD300_\uC804\uCCB4_\uC138\uD305"
       fullName: "SkillTargetSelectTests.\uD2B9\uC815_\uC0AC\uC774\uB4DC_All\uC740_\uC120\uD0DD\uD55C_\uD300_\uC804\uCCB4_\uC138\uD305"
       resultStatus: 1
-      duration: 0.0001886
+      duration: 0.0001873
       messages: 
       output: 
       stacktrace: 
@@ -6121,7 +6155,7 @@ MonoBehaviour:
       name: "\uD300_\uC218\uAC00_0\uC774\uBA74_Full"
       fullName: "SkillTargetSelectTests.\uD300_\uC218\uAC00_0\uC774\uBA74_Full"
       resultStatus: 1
-      duration: 0.0001184
+      duration: 0.0000948
       messages: 
       output: 
       stacktrace: 
@@ -6138,7 +6172,7 @@ MonoBehaviour:
       name: SkillValueCaculatorTests
       fullName: SkillValueCaculatorTests
       resultStatus: 1
-      duration: 0.0009041
+      duration: 0.00078520004
       messages: 
       output: 
       stacktrace: 
@@ -6147,14 +6181,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1117
       uniqueId: "DomainTests.dll/SkillValueCaculatorTests/[DomainTests][SkillValueCaculatorTests.\uC0C1\uB300_\uD300\uC5D0_\uC801\uC6A9\uB418\uB294_\uC2A4\uD0AC\uB3C4_\uACC4\uC0B0]"
       name: "\uC0C1\uB300_\uD300\uC5D0_\uC801\uC6A9\uB418\uB294_\uC2A4\uD0AC\uB3C4_\uACC4\uC0B0"
       fullName: "SkillValueCaculatorTests.\uC0C1\uB300_\uD300\uC5D0_\uC801\uC6A9\uB418\uB294_\uC2A4\uD0AC\uB3C4_\uACC4\uC0B0"
       resultStatus: 1
-      duration: 0.0004275
+      duration: 0.0003477
       messages: 
       output: 
       stacktrace: 
@@ -6171,7 +6205,7 @@ MonoBehaviour:
       name: "\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uC2A4\uD0AC_\uC219\uB828\uB3C4_\uC801\uC6A9\uD55C_\uC810\uC218_\uBC18\uD658"
       fullName: "SkillValueCaculatorTests.\uCC54\uD53C\uC5B8_\uC2A4\uD0EF_\uC2A4\uD0AC_\uC219\uB828\uB3C4_\uC801\uC6A9\uD55C_\uC810\uC218_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0004766
+      duration: 0.0004375
       messages: 
       output: 
       stacktrace: 
@@ -6183,12 +6217,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1115
       parentUniqueId: 'DomainTests.dll/[DomainTests][SkillValueCaculatorTests][suite]'
-    - id: 1287
+    - id: 1289
       uniqueId: 'DomainTests.dll/[DomainTests][SlotStorageTests][suite]'
       name: SlotStorageTests
       fullName: SlotStorageTests
       resultStatus: 1
-      duration: 0.006859
+      duration: 0.0061158
       messages: 
       output: 
       stacktrace: 
@@ -6197,14 +6231,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1234
       uniqueId: "DomainTests.dll/SlotStorageTests/[DomainTests][SlotStorageTests.\uC2AC\uB86F_\uB370\uC774\uD130_\uAC00\uC838\uC624\uAE30]"
       name: "\uC2AC\uB86F_\uB370\uC774\uD130_\uAC00\uC838\uC624\uAE30"
       fullName: "SlotStorageTests.\uC2AC\uB86F_\uB370\uC774\uD130_\uAC00\uC838\uC624\uAE30"
       resultStatus: 1
-      duration: 0.0023569
+      duration: 0.0019731
       messages: 
       output: 
       stacktrace: 
@@ -6221,7 +6255,7 @@ MonoBehaviour:
       name: "\uC2AC\uB86F\uAC11_\uBCC0\uACBD"
       fullName: "SlotStorageTests.\uC2AC\uB86F\uAC11_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0005838
+      duration: 0.0005513
       messages: 
       output: 
       stacktrace: 
@@ -6238,7 +6272,7 @@ MonoBehaviour:
       name: "\uC2AC\uB86F\uC5D0_\uCD94\uAC00\uD55C_\uC21C\uC11C\uB85C_\uC800\uC7A5_\uBC0F_\uC870\uD68C"
       fullName: "SlotStorageTests.\uC2AC\uB86F\uC5D0_\uCD94\uAC00\uD55C_\uC21C\uC11C\uB85C_\uC800\uC7A5_\uBC0F_\uC870\uD68C"
       resultStatus: 1
-      duration: 0.0001692
+      duration: 0.0001487
       messages: 
       output: 
       stacktrace: 
@@ -6255,7 +6289,7 @@ MonoBehaviour:
       name: "\uC804\uBD80_\uAC00\uC838\uC624\uAE30"
       fullName: "SlotStorageTests.\uC804\uBD80_\uAC00\uC838\uC624\uAE30"
       resultStatus: 1
-      duration: 0.0031643
+      duration: 0.0028887
       messages: 
       output: 
       stacktrace: 
@@ -6272,7 +6306,7 @@ MonoBehaviour:
       name: "\uCEEC\uB799\uC158_\uCD94\uAC00"
       fullName: "SlotStorageTests.\uCEEC\uB799\uC158_\uCD94\uAC00"
       resultStatus: 1
-      duration: 0.0002797
+      duration: 0.0002905
       messages: 
       output: 
       stacktrace: 
@@ -6289,7 +6323,7 @@ MonoBehaviour:
       name: "\uD300\uBCC4_\uC870\uD68C"
       fullName: "SlotStorageTests.\uD300\uBCC4_\uC870\uD68C"
       resultStatus: 1
-      duration: 0.0001471
+      duration: 0.0001393
       messages: 
       output: 
       stacktrace: 
@@ -6306,7 +6340,7 @@ MonoBehaviour:
       name: "\uD604\uC7AC_\uC21C\uC11C\uC5D0_\uB9DE\uB294_\uC2AC\uB86F_\uBC18\uD658"
       fullName: "SlotStorageTests.\uD604\uC7AC_\uC21C\uC11C\uC5D0_\uB9DE\uB294_\uC2AC\uB86F_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.000158
+      duration: 0.0001242
       messages: 
       output: 
       stacktrace: 
@@ -6323,7 +6357,7 @@ MonoBehaviour:
       name: StatChangeTests
       fullName: StatChangeTests
       resultStatus: 1
-      duration: 0.0008431
+      duration: 0.0007261
       messages: 
       output: 
       stacktrace: 
@@ -6332,14 +6366,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1101
       uniqueId: "DomainTests.dll/StatChangeTests/[DomainTests][StatChangeTests.\uACF5\uACA9\uB825\uB9CC_\uBCC0\uACBD]"
       name: "\uACF5\uACA9\uB825\uB9CC_\uBCC0\uACBD"
       fullName: "StatChangeTests.\uACF5\uACA9\uB825\uB9CC_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0001937
+      duration: 0.0001533
       messages: 
       output: 
       stacktrace: 
@@ -6356,7 +6390,7 @@ MonoBehaviour:
       name: "\uBC29\uC5B4\uB825\uB9CC_\uBCC0\uACBD"
       fullName: "StatChangeTests.\uBC29\uC5B4\uB825\uB9CC_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0001396
+      duration: 0.0001177
       messages: 
       output: 
       stacktrace: 
@@ -6373,7 +6407,7 @@ MonoBehaviour:
       name: "\uBCC0\uACBD_\uC2DC_\uC74C\uC218\uAC12\uC740_0\uC73C\uB85C_\uBCF4\uC815\uD55C\uB2E4"
       fullName: "StatChangeTests.\uBCC0\uACBD_\uC2DC_\uC74C\uC218\uAC12\uC740_0\uC73C\uB85C_\uBCF4\uC815\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.000138
+      duration: 0.0001311
       messages: 
       output: 
       stacktrace: 
@@ -6390,7 +6424,7 @@ MonoBehaviour:
       name: "\uC0DD\uC131\uC790\uC5D0\uC11C_\uC74C\uC218\uAC12\uC740_0\uC73C\uB85C_\uBCF4\uC815\uB41C\uB2E4"
       fullName: "StatChangeTests.\uC0DD\uC131\uC790\uC5D0\uC11C_\uC74C\uC218\uAC12\uC740_0\uC73C\uB85C_\uBCF4\uC815\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0001216
+      duration: 0.0000925
       messages: 
       output: 
       stacktrace: 
@@ -6407,7 +6441,7 @@ MonoBehaviour:
       name: "\uC18D\uB3C4\uB9CC_\uBCC0\uACBD"
       fullName: "StatChangeTests.\uC18D\uB3C4\uB9CC_\uBCC0\uACBD"
       resultStatus: 1
-      duration: 0.0001238
+      duration: 0.0000974
       messages: 
       output: 
       stacktrace: 
@@ -6424,7 +6458,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF\uB07C\uB9AC_\uB354\uD558\uBA74_\uAC01_\uD56D\uBAA9\uC774_\uD569\uC0B0\uB41C\uB2E4"
       fullName: "StatChangeTests.\uC2A4\uD0EF\uB07C\uB9AC_\uB354\uD558\uBA74_\uAC01_\uD56D\uBAA9\uC774_\uD569\uC0B0\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0001264
+      duration: 0.0001341
       messages: 
       output: 
       stacktrace: 
@@ -6441,7 +6475,7 @@ MonoBehaviour:
       name: StaticEvalueatorTests
       fullName: StaticEvalueatorTests
       resultStatus: 1
-      duration: 0.0001917
+      duration: 0.0001465
       messages: 
       output: 
       stacktrace: 
@@ -6450,14 +6484,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1115
       uniqueId: "DomainTests.dll/StaticEvalueatorTests/[DomainTests][StaticEvalueatorTests.\uD300\uC5D0_\uB530\uB77C_\uC544\uAD70_\uC801\uAD70_\uD569\uD574\uC11C_\uBC38\uB958_\uACC4\uC0B0]"
       name: "\uD300\uC5D0_\uB530\uB77C_\uC544\uAD70_\uC801\uAD70_\uD569\uD574\uC11C_\uBC38\uB958_\uACC4\uC0B0"
       fullName: "StaticEvalueatorTests.\uD300\uC5D0_\uB530\uB77C_\uC544\uAD70_\uC801\uAD70_\uD569\uD574\uC11C_\uBC38\uB958_\uACC4\uC0B0"
       resultStatus: 1
-      duration: 0.0001917
+      duration: 0.0001465
       messages: 
       output: 
       stacktrace: 
@@ -6474,7 +6508,7 @@ MonoBehaviour:
       name: StatusSlotConvertTests
       fullName: StatusSlotConvertTests
       resultStatus: 1
-      duration: 0.0003819
+      duration: 0.0001876
       messages: 
       output: 
       stacktrace: 
@@ -6483,14 +6517,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1125
       uniqueId: "DomainTests.dll/StatusSlotConvertTests/[DomainTests][StatusSlotConvertTests.\uD604\uC7AC_\uC0C1\uD0DC\uB97C_\uC810\uC218\uB85C_\uBC18\uD658]"
       name: "\uD604\uC7AC_\uC0C1\uD0DC\uB97C_\uC810\uC218\uB85C_\uBC18\uD658"
       fullName: "StatusSlotConvertTests.\uD604\uC7AC_\uC0C1\uD0DC\uB97C_\uC810\uC218\uB85C_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0003819
+      duration: 0.0001876
       messages: 
       output: 
       stacktrace: 
@@ -6502,12 +6536,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1124
       parentUniqueId: 'DomainTests.dll/[DomainTests][StatusSlotConvertTests][suite]'
-    - id: 1295
+    - id: 1297
       uniqueId: 'DomainTests.dll/[DomainTests][TargetCountCalculateTests][suite]'
       name: TargetCountCalculateTests
       fullName: TargetCountCalculateTests
       resultStatus: 1
-      duration: 0.0010592
+      duration: 0.00089809997
       messages: 
       output: 
       stacktrace: 
@@ -6516,14 +6550,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1237
       uniqueId: "DomainTests.dll/TargetCountCalculateTests/[DomainTests][TargetCountCalculateTests.All\uBC94\uC704_All\uC0AC\uC774\uB4DC\uBA74_\uC591\uD300_\uC804\uCCB4\uD569\uC744_\uBC18\uD658]"
       name: "All\uBC94\uC704_All\uC0AC\uC774\uB4DC\uBA74_\uC591\uD300_\uC804\uCCB4\uD569\uC744_\uBC18\uD658"
       fullName: "TargetCountCalculateTests.All\uBC94\uC704_All\uC0AC\uC774\uB4DC\uBA74_\uC591\uD300_\uC804\uCCB4\uD569\uC744_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0002274
+      duration: 0.0001941
       messages: 
       output: 
       stacktrace: 
@@ -6540,7 +6574,7 @@ MonoBehaviour:
       name: "All\uBC94\uC704_Opponent\uC0AC\uC774\uB4DC\uBA74_\uC0C1\uB300\uD300_\uCE74\uC6B4\uD2B8_\uBC18\uD658"
       fullName: "TargetCountCalculateTests.All\uBC94\uC704_Opponent\uC0AC\uC774\uB4DC\uBA74_\uC0C1\uB300\uD300_\uCE74\uC6B4\uD2B8_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.000187
+      duration: 0.0001318
       messages: 
       output: 
       stacktrace: 
@@ -6557,7 +6591,7 @@ MonoBehaviour:
       name: "All\uBC94\uC704_Self\uC0AC\uC774\uB4DC\uBA74_\uC790\uAE30\uD300_\uCE74\uC6B4\uD2B8_\uBC18\uD658"
       fullName: "TargetCountCalculateTests.All\uBC94\uC704_Self\uC0AC\uC774\uB4DC\uBA74_\uC790\uAE30\uD300_\uCE74\uC6B4\uD2B8_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001399
+      duration: 0.0001213
       messages: 
       output: 
       stacktrace: 
@@ -6574,7 +6608,7 @@ MonoBehaviour:
       name: "GetTeamCount_\uD300\uBCC4_\uCE74\uC6B4\uD2B8_\uC815\uC0C1\uBC18\uD658"
       fullName: "TargetCountCalculateTests.GetTeamCount_\uD300\uBCC4_\uCE74\uC6B4\uD2B8_\uC815\uC0C1\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001391
+      duration: 0.000121
       messages: 
       output: 
       stacktrace: 
@@ -6591,7 +6625,7 @@ MonoBehaviour:
       name: "Single_Double_Triple_\uBC94\uC704\uB294_\uACE0\uC815\uAC12\uC744_\uBC18\uD658"
       fullName: "TargetCountCalculateTests.Single_Double_Triple_\uBC94\uC704\uB294_\uACE0\uC815\uAC12\uC744_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001727
+      duration: 0.0001652
       messages: 
       output: 
       stacktrace: 
@@ -6608,7 +6642,7 @@ MonoBehaviour:
       name: "\uACE0\uC815\uAC12\uC774_\uD300_\uCE74\uC6B4\uD2B8\uB97C_\uB118\uAE30\uBA74_\uD300_\uC218\uB97C_\uBC18\uD658"
       fullName: "TargetCountCalculateTests.\uACE0\uC815\uAC12\uC774_\uD300_\uCE74\uC6B4\uD2B8\uB97C_\uB118\uAE30\uBA74_\uD300_\uC218\uB97C_\uBC18\uD658"
       resultStatus: 1
-      duration: 0.0001931
+      duration: 0.0001647
       messages: 
       output: 
       stacktrace: 
@@ -6625,7 +6659,7 @@ MonoBehaviour:
       name: TeamPhaseEntryDispatcherTests
       fullName: TeamPhaseEntryDispatcherTests
       resultStatus: 1
-      duration: 0.0002265
+      duration: 0.0001837
       messages: 
       output: 
       stacktrace: 
@@ -6634,14 +6668,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1149
       uniqueId: "DomainTests.dll/TeamPhaseEntryDispatcherTests/[DomainTests][TeamPhaseEntryDispatcherTests.\uAC8C\uC784_\uD750\uB984\uC5D0_\uB530\uB77C_\uC5D0\uC774\uC804\uD2B8\uC5D0\uAC8C_\uC9C4\uC785_\uBA85\uB839]"
       name: "\uAC8C\uC784_\uD750\uB984\uC5D0_\uB530\uB77C_\uC5D0\uC774\uC804\uD2B8\uC5D0\uAC8C_\uC9C4\uC785_\uBA85\uB839"
       fullName: "TeamPhaseEntryDispatcherTests.\uAC8C\uC784_\uD750\uB984\uC5D0_\uB530\uB77C_\uC5D0\uC774\uC804\uD2B8\uC5D0\uAC8C_\uC9C4\uC785_\uBA85\uB839"
       resultStatus: 1
-      duration: 0.0002265
+      duration: 0.0001837
       messages: 
       output: 
       stacktrace: 
@@ -6653,12 +6687,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1148
       parentUniqueId: 'DomainTests.dll/[DomainTests][TeamPhaseEntryDispatcherTests][suite]'
-    - id: 1312
+    - id: 1314
       uniqueId: 'DomainTests.dll/[DomainTests][TournamentGeneratorTests][suite]'
       name: TournamentGeneratorTests
       fullName: TournamentGeneratorTests
       resultStatus: 1
-      duration: 0.0012337
+      duration: 0.0010476001
       messages: 
       output: 
       stacktrace: 
@@ -6667,14 +6701,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1313
       uniqueId: "DomainTests.dll/TournamentGeneratorTests/[DomainTests][TournamentGeneratorTests.\uC21C\uC704\uD45C\uB97C_\uAE30\uBC18\uC73C\uB85C_1\uC704\uC640_4\uC704_2\uC704\uC640_3\uC704\uC758_4\uAC15_\uB300\uC9C4\uC744_\uBC18\uD658\uD55C\uB2E4]"
       name: "\uC21C\uC704\uD45C\uB97C_\uAE30\uBC18\uC73C\uB85C_1\uC704\uC640_4\uC704_2\uC704\uC640_3\uC704\uC758_4\uAC15_\uB300\uC9C4\uC744_\uBC18\uD658\uD55C\uB2E4"
       fullName: "TournamentGeneratorTests.\uC21C\uC704\uD45C\uB97C_\uAE30\uBC18\uC73C\uB85C_1\uC704\uC640_4\uC704_2\uC704\uC640_3\uC704\uC758_4\uAC15_\uB300\uC9C4\uC744_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0008836
+      duration: 0.0007951
       messages: 
       output: 
       stacktrace: 
@@ -6691,7 +6725,7 @@ MonoBehaviour:
       name: "\uD300\uC774_4\uAC1C_\uBBF8\uB9CC\uC77C_\uACBD\uC6B0_\uC608\uC678\uB97C_\uBC1C\uC0DD\uC2DC\uD0A8\uB2E4"
       fullName: "TournamentGeneratorTests.\uD300\uC774_4\uAC1C_\uBBF8\uB9CC\uC77C_\uACBD\uC6B0_\uC608\uC678\uB97C_\uBC1C\uC0DD\uC2DC\uD0A8\uB2E4"
       resultStatus: 1
-      duration: 0.0003501
+      duration: 0.0002525
       messages: 
       output: 
       stacktrace: 
@@ -6708,7 +6742,7 @@ MonoBehaviour:
       name: ValueCalcualateTests
       fullName: ValueCalcualateTests
       resultStatus: 1
-      duration: 0.0011062
+      duration: 0.0010621
       messages: 
       output: 
       stacktrace: 
@@ -6717,14 +6751,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1171
       uniqueId: "DomainTests.dll/ValueCalcualateTests/[DomainTests][ValueCalcualateTests.\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58][suite]"
       name: "\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58"
       fullName: "ValueCalcualateTests.\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58"
       resultStatus: 1
-      duration: 0.0005777
+      duration: 0.0005604
       messages: 
       output: 
       stacktrace: 
@@ -6740,7 +6774,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58(0,320)"
       fullName: "ValueCalcualateTests.\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58(0,320)"
       resultStatus: 1
-      duration: 0.0004426
+      duration: 0.0004108
       messages: 
       output: 
       stacktrace: 
@@ -6757,7 +6791,7 @@ MonoBehaviour:
       name: "\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58(300,420)"
       fullName: "ValueCalcualateTests.\uC2A4\uD0EF_\uC219\uB828\uB3C4_\uC2A4\uD0AC_\uBCF4\uB108\uC2A4_\uC801\uC6A9\uD55C_\uCC54\uD53C\uC5B8_\uAC00\uCE58(300,420)"
       resultStatus: 1
-      duration: 0.0001351
+      duration: 0.0001496
       messages: 
       output: 
       stacktrace: 
@@ -6774,7 +6808,7 @@ MonoBehaviour:
       name: "\uC801_\uBCF4\uB108\uC2A4_\uB5A8\uAD6C\uB294SEX\uB9CC\uD07C_\uAC00\uCE58_\uC99D\uAC00"
       fullName: "ValueCalcualateTests.\uC801_\uBCF4\uB108\uC2A4_\uB5A8\uAD6C\uB294SEX\uB9CC\uD07C_\uAC00\uCE58_\uC99D\uAC00"
       resultStatus: 1
-      duration: 0.0000628
+      duration: 0.0000571
       messages: 
       output: 
       stacktrace: 
@@ -6791,7 +6825,7 @@ MonoBehaviour:
       name: "\uC801_\uBCF4\uB108\uC2A4_\uB5A8\uAD6C\uB294\uB9CC\uD07C_\uAC00\uCE58_\uC99D\uAC00"
       fullName: "ValueCalcualateTests.\uC801_\uBCF4\uB108\uC2A4_\uB5A8\uAD6C\uB294\uB9CC\uD07C_\uAC00\uCE58_\uC99D\uAC00"
       resultStatus: 1
-      duration: 0.0002298
+      duration: 0.0002333
       messages: 
       output: 
       stacktrace: 
@@ -6808,7 +6842,7 @@ MonoBehaviour:
       name: "\uC801\uAD70\uC5D0\uAC8C_\uC774\uB4DD\uC744_\uC8FC\uB294_\uC2A4\uD0AC\uC740_\uC810\uC218\uAC00_\uCC28\uAC10\uB41C\uB2E4"
       fullName: "ValueCalcualateTests.\uC801\uAD70\uC5D0\uAC8C_\uC774\uB4DD\uC744_\uC8FC\uB294_\uC2A4\uD0AC\uC740_\uC810\uC218\uAC00_\uCC28\uAC10\uB41C\uB2E4"
       resultStatus: 1
-      duration: 0.0002359
+      duration: 0.0002113
       messages: 
       output: 
       stacktrace: 
@@ -6825,7 +6859,7 @@ MonoBehaviour:
       name: ValueRankingTests
       fullName: ValueRankingTests
       resultStatus: 1
-      duration: 0.0013233
+      duration: 0.001038
       messages: 
       output: 
       stacktrace: 
@@ -6834,14 +6868,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1322
+      parentId: 1324
       parentUniqueId: '[DomainTests][C:/Users/user/Desktop/Game Porject/BP-Master/Library/ScriptAssemblies/DomainTests.dll][suite]'
     - id: 1132
       uniqueId: "DomainTests.dll/ValueRankingTests/[DomainTests][ValueRankingTests.\uD3C9\uAC00\uAC12\uC774_\uB192\uC740_ID\uC21C\uC73C\uB85C_\uC815\uB82C\uD558\uC5EC_\uBC18\uD658\uD55C\uB2E4]"
       name: "\uD3C9\uAC00\uAC12\uC774_\uB192\uC740_ID\uC21C\uC73C\uB85C_\uC815\uB82C\uD558\uC5EC_\uBC18\uD658\uD55C\uB2E4"
       fullName: "ValueRankingTests.\uD3C9\uAC00\uAC12\uC774_\uB192\uC740_ID\uC21C\uC73C\uB85C_\uC815\uB82C\uD558\uC5EC_\uBC18\uD658\uD55C\uB2E4"
       resultStatus: 1
-      duration: 0.0013233
+      duration: 0.001038
       messages: 
       output: 
       stacktrace: 
@@ -6853,14 +6887,14 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1131
       parentUniqueId: 'DomainTests.dll/[DomainTests][ValueRankingTests][suite]'
-    m_ResultText: "\uD300\uC774_4\uAC1C_\uBBF8\uB9CC\uC77C_\uACBD\uC6B0_\uC608\uC678\uB97C_\uBC1C\uC0DD\uC2DC\uD0A8\uB2E4
+    m_ResultText: "\uBCF4\uB4DC\uB97C_\uC0DD\uC131\uC790\uC5D0_\uB123\uC73C\uBA74_\uC0C1\uD0DC\uAC00_\uBC18\uC601\uB41C\uB2E4
       (0.000s)"
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2bd01f00
-      m_LastClickedID: 2084907
-      m_ExpandedIDs: e3f2ba82edf1ee87819154898759c18d8d05638f69a2599c9f335ba60be938ab5ce89ab016e20fbb32f306c5baa54dccd36166d1058b71dc3f8a4be49b736be688dc6be92cec53fd415d40004cd26a166504231b54c9651b60f43d2929833c2fac6030320566ed321fe41037dabc693a0d76c03d467f6241ef2d3e4b0c993253060d7e5afb7b7d5d317d33624097fb6d511ab46ffb4ef46fa9dcef77e952307d3a8d007effffff7f
+      m_SelectedIDs: 03ba04ca
+      m_LastClickedID: -905659901
+      m_ExpandedIDs: e3f2ba82edf1ee87819154898759c18d8d05638f69a2599c9f335ba60be938ab5ce89ab016e20fbb32f306c5baa54dccd36166d1058b71dc3f8a4be49b736be688dc6be92cec53fd415d40004cd26a166504231b54c9651bc2d5752360f43d2929833c2fac6030320566ed321fe41037dabc693a0d76c03d467f6241ef2d3e4b0c99325314a18559060d7e5afb7b7d5d317d33624097fb6d511ab46ffb4ef46fa9dcef77e952307d3a8d007effffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -6890,7 +6924,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 17}
     runProgress:
-      RunGuid: 495c5ca3-77f4-4d4e-8e4b-a5d9bb3b566d
+      RunGuid: a6286ffc-a3fd-4768-a690-60486abd58af
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -6917,7 +6951,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1.0000013
+      Progress: 0.9999979
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -6973,7 +7007,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 17}
     runProgress:
-      RunGuid: 495c5ca3-77f4-4d4e-8e4b-a5d9bb3b566d
+      RunGuid: a6286ffc-a3fd-4768-a690-60486abd58af
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -7000,7 +7034,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1.0000013
+      Progress: 0.9999979
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -7202,9 +7236,26 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
+      - m_Data: -23220
+      - m_Data: -23094
+      - m_Data: -22172
+      - m_Data: -13424
       - m_Data: -12934
-      - m_Data: -11826
+      - m_Data: -12848
+      - m_Data: -12334
+      - m_Data: -10080
+      - m_Data: -6238
+      - m_Data: -2366
       - m_Data: -1318
+      - m_Data: 58182
+      - m_Data: 58228
+      - m_Data: 58260
+      - m_Data: 58396
+      - m_Data: 76312
+      - m_Data: 76366
+      - m_Data: 76376
+      - m_Data: 76546
+      - m_Data: 76628
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -7251,8 +7302,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1
-    y: 630
+    x: 1282
+    y: 685
     width: 596
     height: 661
   m_SerializedDataModeController:
@@ -7279,7 +7330,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/SO/Data
+    - Assets/1_Script/3_Adapter/Presenters
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -7289,7 +7340,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/SO/Data
+  - Assets/1_Script/3_Adapter/Presenters
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\user\Desktop\Game Porject\BP-Master
   m_LockTracker:
@@ -7298,34 +7349,33 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 58360
+    - m_Data: 76650
     m_LastClickedID:
-      m_Data: 58360
+      m_Data: 76650
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 57856
-    - m_Data: 57858
-    - m_Data: 57860
-    - m_Data: 57862
-    - m_Data: 57864
-    - m_Data: 57866
-    - m_Data: 57868
-    - m_Data: 57870
-    - m_Data: 57872
-    - m_Data: 57874
-    - m_Data: 57876
-    - m_Data: 57878
-    - m_Data: 57880
-    - m_Data: 57882
-    - m_Data: 57884
-    - m_Data: 57886
-    - m_Data: 57888
-    - m_Data: 57890
-    - m_Data: 57892
-    - m_Data: 57894
-    - m_Data: 57896
-    - m_Data: 57898
-    - m_Data: 57900
+    - m_Data: 58368
+    - m_Data: 58370
+    - m_Data: 58372
+    - m_Data: 58374
+    - m_Data: 58376
+    - m_Data: 58378
+    - m_Data: 58380
+    - m_Data: 58382
+    - m_Data: 58384
+    - m_Data: 58386
+    - m_Data: 58388
+    - m_Data: 58390
+    - m_Data: 58392
+    - m_Data: 58394
+    - m_Data: 58396
+    - m_Data: 58398
+    - m_Data: 58400
+    - m_Data: 58402
+    - m_Data: 58404
+    - m_Data: 58406
+    - m_Data: 58408
+    - m_Data: 58410
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -7358,29 +7408,28 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 57856
-    - m_Data: 57858
-    - m_Data: 57860
-    - m_Data: 57862
-    - m_Data: 57864
-    - m_Data: 57866
-    - m_Data: 57868
-    - m_Data: 57870
-    - m_Data: 57872
-    - m_Data: 57874
-    - m_Data: 57876
-    - m_Data: 57878
-    - m_Data: 57880
-    - m_Data: 57882
-    - m_Data: 57884
-    - m_Data: 57886
-    - m_Data: 57888
-    - m_Data: 57890
-    - m_Data: 57892
-    - m_Data: 57894
-    - m_Data: 57896
-    - m_Data: 57898
-    - m_Data: 57900
+    - m_Data: 58368
+    - m_Data: 58370
+    - m_Data: 58372
+    - m_Data: 58374
+    - m_Data: 58376
+    - m_Data: 58378
+    - m_Data: 58380
+    - m_Data: 58382
+    - m_Data: 58384
+    - m_Data: 58386
+    - m_Data: 58388
+    - m_Data: 58390
+    - m_Data: 58392
+    - m_Data: 58394
+    - m_Data: 58396
+    - m_Data: 58398
+    - m_Data: 58400
+    - m_Data: 58402
+    - m_Data: 58404
+    - m_Data: 58406
+    - m_Data: 58408
+    - m_Data: 58410
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -7407,8 +7456,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: 42788
+    m_LastClickedInstanceID: 42788
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 108284
