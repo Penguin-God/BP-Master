@@ -1,28 +1,12 @@
-using System.Collections.Generic;
-
 public class TutorialPresenter
 {
-    readonly Dictionary<int, string[]> _tutorialData;
-
     string[] _currentDialogues;
     int _dialogueIndex;
 
-    public TutorialPresenter(Dictionary<int, string[]> tutorialData)
+    public TutorialPresenter(string[] dialogues)
     {
-        _tutorialData = tutorialData;
-    }
-
-    public bool TryStart(int scheduleIndex)
-    {
-        if (_tutorialData.TryGetValue(scheduleIndex, out var dialogues))
-        {
-            _currentDialogues = dialogues;
-            _dialogueIndex = -1;
-            return true;
-        }
-
-        _currentDialogues = null;
-        return false;
+        _currentDialogues = dialogues;
+        _dialogueIndex = -1;
     }
 
     public bool Advance(out string text)

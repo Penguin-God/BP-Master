@@ -35,7 +35,6 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
-    [SerializeField] TutorialTrigger tutorialTrigger;
 
     void Awake()
     {
@@ -51,7 +50,7 @@ public class LobbyScene : MonoBehaviour
             new PlayerPrefsTutorialStorage(),
             new TutorialLogger()
         );
-
+        
         _tutorialTrigger.TriggerIfFirstTime(TutorialType.GameStart);
     }
 

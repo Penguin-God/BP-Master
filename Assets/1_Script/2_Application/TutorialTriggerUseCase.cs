@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public enum TutorialType
 {
     GameStart,
@@ -9,7 +11,7 @@ public enum TutorialType
 public class TutorialTriggerUseCase
 {
     readonly ITutorialStorage _storage;
-    readonly ITutorialViewer _viewer; // 출력 책임을 인터페이스로 위임
+    readonly ITutorialViewer _viewer;
 
     public TutorialTriggerUseCase(ITutorialStorage storage, ITutorialViewer viewer)
     {
