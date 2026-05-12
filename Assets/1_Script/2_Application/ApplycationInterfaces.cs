@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 
 public interface IScheduleStorage
 {
@@ -37,4 +36,15 @@ public interface IStageStorage
 public interface IMasterySaver
 {
     void Save(MasteryProfile inventory);
+}
+
+public interface ITutorialStorage
+{
+    bool HasSeen(TutorialType type);
+    void MarkAsSeen(TutorialType type);
+}
+
+public interface ITutorialViewer
+{
+    void Show(TutorialType type);
 }
