@@ -20,6 +20,8 @@ public class StageProgressUseCase
         if (stageIndex + 1 > current)
         {
             _storage.SaveUnlockedStage(stageIndex + 1);
+
+            if (_liveProfile == null) return;
             _liveProfile.EarnPoints(EARN_POINT);
             _masterySaver.Save(_liveProfile);
         }

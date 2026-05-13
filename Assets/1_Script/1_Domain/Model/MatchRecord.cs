@@ -36,4 +36,5 @@ public class MatchWinCounter
     public void AddWin(int id) => winCountById[id]++;
     public int GetWin(int id) => winCountById[id];
     public bool IsMatchFinished => winCountById.Values.Any(x => x >= TargetWins);
+    public int TotalWins => winCountById.Values.Sum();
 }

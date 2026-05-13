@@ -2842,6 +2842,7 @@ MonoBehaviour:
   championSelector: {fileID: 1640189475}
   matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
+  tutorialTriggerSO: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
 --- !u!1 &1434020710
 GameObject:
   m_ObjectHideFlags: 0
