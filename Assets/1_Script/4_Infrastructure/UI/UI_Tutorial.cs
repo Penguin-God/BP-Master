@@ -12,7 +12,6 @@ public class UI_Tutorial : MonoBehaviour
         if (dialogues == null || dialogues.Length == 0) return;
 
         _presenter = new TutorialPresenter(dialogues);
-
         gameObject.SetActive(true);
         ShowNextDialogue();
     }
@@ -37,6 +36,6 @@ public class UI_Tutorial : MonoBehaviour
     void EndTutorial()
     {
         _presenter = null;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

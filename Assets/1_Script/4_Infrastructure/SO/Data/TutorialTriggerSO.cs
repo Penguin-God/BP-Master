@@ -12,20 +12,18 @@ public class TutorialEntry
 public class TutorialTriggerSO : ScriptableObject, ITutorialViewer
 {
     [SerializeField] TutorialEntry[] entries;
+    [SerializeField] GameObject _uiTutorial;
 
-    UI_Tutorial _uiTutorial;
-
-    public void Inject(UI_Tutorial uiTutorial) => _uiTutorial = uiTutorial;
-
-    public void StartTutorial(TutorialType type) => new TutorialTriggerUseCase(new PlayerPrefsTutorialStorage(), this).TriggerIfFirstTime(type);
+    public void StartTutorialOneTime(TutorialType type) => new TutorialTriggerUseCase(new PlayerPrefsTutorialStorage(), this).TriggerIfFirstTime(type);
 
     public void Show(TutorialType type)
     {
         var dialogues = entries.FirstOrDefault(x => x.Type == type)?.Dialogues;
 
-        if (dialogues != null && dialogues.Length > 0 && _uiTutorial != null)
+        if (dialogues?.Length > 0)
         {
-            _uiTutorial.StartTutorial(dialogues);
+            var clone = Instantiate(_uiTutorial);
+            clone.GetComponent<UI_Tutorial>().StartTutorial(dialogues);
         }
     }
 }

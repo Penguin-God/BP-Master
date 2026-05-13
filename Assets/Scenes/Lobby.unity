@@ -2619,6 +2619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9700ac4f5971b2e40b530a9672714ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::LobbyScene
+  tutorialTrigger: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
   uI_StageSelection: {fileID: 1877720420}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   uI_MasteryPoint: {fileID: 1821025619}
@@ -5848,6 +5849,7 @@ MonoBehaviour:
   masteryBtn: {fileID: 2044044424}
   leaguePanel: {fileID: 1877720417}
   masteryPanel: {fileID: 1821025614}
+  tutorialTrigger: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
 --- !u!1 &1950163903
 GameObject:
   m_ObjectHideFlags: 0

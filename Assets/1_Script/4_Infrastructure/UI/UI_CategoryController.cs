@@ -11,6 +11,8 @@ public class UI_CategoryController : MonoBehaviour
     [SerializeField] GameObject leaguePanel;
     [SerializeField] GameObject masteryPanel;
 
+    [SerializeField] TutorialTriggerSO tutorialTrigger;
+
     void Awake()
     {
         leagueBtn.onClick.AddListener(ShowSchedule);
@@ -33,5 +35,6 @@ public class UI_CategoryController : MonoBehaviour
     {
         leaguePanel.SetActive(false);
         masteryPanel.SetActive(true);
+        tutorialTrigger.StartTutorialOneTime(TutorialType.MasteryUIEnter);
     }
 }

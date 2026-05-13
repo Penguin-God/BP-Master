@@ -31,6 +31,7 @@ public class LocalPlayerDataLoader : IPlayerDataLoader
 
 public class LobbyScene : MonoBehaviour
 {
+    [SerializeField] TutorialTriggerSO tutorialTrigger;
     [SerializeField] UI_StageSelection uI_StageSelection;
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
@@ -46,21 +47,11 @@ public class LobbyScene : MonoBehaviour
         uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
 
-        var _tutorialTrigger = new TutorialTriggerUseCase(
-            new PlayerPrefsTutorialStorage(),
-            new TutorialLogger()
-        );
-        
-        _tutorialTrigger.TriggerIfFirstTime(TutorialType.GameStart);
+        tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
     }
 
     void EnterBattle(int stage)
     {
         new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
     }
-}
-
-public class TutorialLogger : ITutorialViewer
-{
-    public void Show(TutorialType type) => Debug.Log($"<color=yellow>[Tutorial]</color> {type} 최초 감지됨!");
 }
