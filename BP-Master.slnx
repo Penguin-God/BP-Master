@@ -9,5 +9,4 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Application.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
-  <Project Path="InfraTest.csproj" />
 </Solution>
