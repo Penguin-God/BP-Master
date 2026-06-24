@@ -18,7 +18,7 @@ public class PredictValueSelectorFactory : AI_SelectorSO
         this.phaseAdvancer = phaseAdvancer;
     }
 
-    PredictivePickEvaluator CreateEvaluator(Team team) => new PredictivePickEvaluator(valueSelectSO.CreateEvaluator(team), storage, championCatalog, new SkillPreviewer(), phaseAdvancer, team, statusSlots);
+    PredictivePickEvaluator CreateEvaluator(Team team) => new PredictivePickEvaluator(valueSelectSO.CreateEvaluator(team), storage, championCatalog, phaseAdvancer, team, statusSlots);
 
     ChampionRanker CreateRanker(Team team) => new ChampionRanker(championCatalog, CreateEvaluator(team));
 }

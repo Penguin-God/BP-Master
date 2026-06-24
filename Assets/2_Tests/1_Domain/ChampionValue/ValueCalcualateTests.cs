@@ -9,9 +9,8 @@ public class ValueCalcualateTests
         var originSlots = CreateTwoSlotStatus(att);
 
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
-        var previewer = new SkillPreviewer();
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
+        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
     }
 
     [Test]
@@ -37,12 +36,6 @@ public class ValueCalcualateTests
         int score = sut.Evaluate(champion);
 
         Assert.AreEqual(30200, score);
-    }
-
-    [Test]
-    public void 적_보너스_떨구는SEX만큼_가치_증가()
-    {
-
     }
 
     [Test]

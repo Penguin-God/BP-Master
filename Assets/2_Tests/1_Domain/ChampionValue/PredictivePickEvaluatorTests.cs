@@ -17,13 +17,12 @@ public class PredictivePickEvaluatorTests
         var originSlots = new SlotStorage<ChampionStatus>();
         originSlots.AddSlot(Team.Blue, CreateStatus(500));
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
-        var previewer = new SkillPreviewer();
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(CreateBonus(100, 30000), CreateBonus(0, 0), CreateBonus(0, 0)));
-        var pickValueEvaluator = new PickValueEvaluator(statCalculator, new ChampionValueCalculator(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0))), bonus, Team.Blue, originSlots);
+        var pickValueEvaluator = new PickValueEvaluator(statCalculator, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0))), bonus, Team.Blue, originSlots);
 
         var phaseAdvancer = new PhaseAdvancer(new PhaseData[] { new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })) });
         phaseAdvancer.Start(); // 현재 턴 활성화를 위해 Start 호출 필요
-        var sut = new PredictivePickEvaluator(pickValueEvaluator, storage, catalog, previewer, phaseAdvancer, Team.Blue, originSlots);
+        var sut = new PredictivePickEvaluator(pickValueEvaluator, storage, catalog, phaseAdvancer, Team.Blue, originSlots);
 
         Assert.AreEqual(-4500, sut.Evaluate(champion));
         Assert.AreEqual(-30000, sut.Evaluate(champion2));
@@ -41,14 +40,13 @@ public class PredictivePickEvaluatorTests
 
         var originSlots = new SlotStorage<ChampionStatus>();
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
-        var previewer = new SkillPreviewer();
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(CreateBonus(1000, 10000), CreateBonus(0, 0), CreateBonus(0, 0)));
-        var pickValueEvaluator = new PickValueEvaluator(statCalculator, new ChampionValueCalculator(previewer, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0))), bonus, Team.Blue, originSlots);
+        var pickValueEvaluator = new PickValueEvaluator(statCalculator, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0))), bonus, Team.Blue, originSlots);
 
         var phaseAdvancer = new PhaseAdvancer(new PhaseData[] { new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Blue })) });
         phaseAdvancer.Start(); // 현재 턴 활성화를 위해 Start 호출 필요
 
-        var sut = new PredictivePickEvaluator(pickValueEvaluator, storage, catalog, previewer, phaseAdvancer, Team.Blue, originSlots);
+        var sut = new PredictivePickEvaluator(pickValueEvaluator, storage, catalog, phaseAdvancer, Team.Blue, originSlots);
 
         
         Assert.AreEqual(11200, sut.Evaluate(champion));

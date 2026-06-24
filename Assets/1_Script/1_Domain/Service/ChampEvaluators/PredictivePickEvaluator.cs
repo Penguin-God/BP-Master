@@ -5,18 +5,16 @@ public class PredictivePickEvaluator : IChampionEvaluator
     readonly PickValueEvaluator evaluator;
     readonly BanPickStorage storage;
     readonly ChampionCatalog catalog;
-    readonly SkillPreviewer previewer;
     readonly PhaseAdvancer phaseAdvancer;
 
     readonly Team myTeam;
     readonly SlotStorage<ChampionStatus> currentBoard;
 
-    public PredictivePickEvaluator(PickValueEvaluator evaluator,BanPickStorage storage, ChampionCatalog catalog, SkillPreviewer previewer, PhaseAdvancer phaseAdvancer, Team myTeam, SlotStorage<ChampionStatus> currentBoard)
+    public PredictivePickEvaluator(PickValueEvaluator evaluator,BanPickStorage storage, ChampionCatalog catalog, PhaseAdvancer phaseAdvancer, Team myTeam, SlotStorage<ChampionStatus> currentBoard)
     {
         this.evaluator = evaluator;
         this.storage = storage;
         this.catalog = catalog;
-        this.previewer = previewer;
         this.phaseAdvancer = phaseAdvancer;
         this.myTeam = myTeam;
         this.currentBoard = currentBoard;
@@ -31,7 +29,7 @@ public class PredictivePickEvaluator : IChampionEvaluator
         if (nextFlow.Phase != GamePhase.Pick) // 픽 페이즈가 끝나면 1번만
             return myPickValue;
 
-        var futureBoard = previewer.PreviewSkill(myTeam, myCandidate, currentBoard);
+        var futureBoard = SkillPreviewer.PreviewSkill(myTeam, myCandidate, currentBoard);
         futureBoard.AddSlot(myTeam, myCandidate.Status.DeepCopy());
         Team nextTurnTeam = nextFlow.Turn;
 

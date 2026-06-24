@@ -28,7 +28,7 @@ public class ValueSelectSO : AI_SelectorSO
     {
         var statCalculator = new ChampionStatValueCalculator(speedValue);
         var masteryAppiler = new MasteryApplier(masteryManager);
-        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(new SkillPreviewer(), masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus), team, statusSlots);
+        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus), team, statusSlots);
     }
 
     ChampionRanker CreateRanker(Team team) => new ChampionRanker(championCatalog, CreateEvaluator(team));

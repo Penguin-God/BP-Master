@@ -1,8 +1,8 @@
 using System.Linq;
 
-public class SkillPreviewer
+public static class SkillPreviewer
 {
-    public SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
+    public static SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
         if (champion.Skill.IsEmpty) return copiedSlots;
@@ -17,7 +17,7 @@ public class SkillPreviewer
         return copiedSlots;
     }
 
-    SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)
+    static SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)
     {
         var result = new SlotStorage<ChampionStatus>();
         foreach (var slot in origin.GetAllSlotDatas())
