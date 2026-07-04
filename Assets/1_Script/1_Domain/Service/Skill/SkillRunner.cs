@@ -18,7 +18,7 @@ public class SkillRunner
         {
             ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, caster, team);
             IChampionCondition condition = skillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-            new SkillExecutor(action, condition).ExecuteSkill(targets);
+            SkillExecutor.ExecuteSkill(action, condition, targets);
         }
     }
 }

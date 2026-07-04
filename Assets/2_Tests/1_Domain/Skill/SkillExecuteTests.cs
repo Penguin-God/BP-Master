@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using static TestHelper;
 
 public class SkillExecuteTests
 {
@@ -8,9 +7,8 @@ public class SkillExecuteTests
     {
         var target = TestHelper.CreateStatus(0, 0, 0);
         target.TraitExcluded();
-        var sut = CreateAttackChangeExecutor(5);
-
-        sut.ExecuteSkill(new ChampionStatus[] { target });
+        
+        SkillExecutor.ExecuteSkill(new TestAttackChangeAction(5), new NullChecker(), new ChampionStatus[] { target });
 
         Assert.AreEqual(0, target.Stat.Attack);
     }
@@ -19,9 +17,8 @@ public class SkillExecuteTests
     public void 조건_만족한_챔프만_실행()
     {
         var champions = new ChampionStatus[] { TestHelper.CreateStatus(att:100), TestHelper.CreateStatus(0) };
-        var sut = new SkillExecutor(new TestAttackChangeAction(100), new StatThresholdChecker(StatConditionType.AttackAtLeast, 50));
-
-        sut.ExecuteSkill(champions);
+        
+        SkillExecutor.ExecuteSkill(new TestAttackChangeAction(100), new StatThresholdChecker(StatConditionType.AttackAtLeast, 50), champions);
 
         Assert.AreEqual(200, champions[0].Stat.Attack);
         Assert.AreEqual(0, champions[1].Stat.Attack);
