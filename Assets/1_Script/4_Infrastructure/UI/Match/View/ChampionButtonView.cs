@@ -45,7 +45,7 @@ public class ChampionButtonView : MonoBehaviour
     {
         foreach (Transform child in content) Destroy(child.gameObject);
 
-        buttons = new ChampionButtonCreator().DrawChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
+        buttons = ChampionButtonCreator.DrawChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
 
         if (clickEvent != null)
             ApplyEvent(clickEvent);
@@ -112,9 +112,9 @@ public class ChampionButtonView : MonoBehaviour
     }
 }
 
-public class ChampionButtonCreator
+public static class ChampionButtonCreator
 {
-    public IEnumerable<Button> DrawChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject btnPrefab)
+    public static IEnumerable<Button> DrawChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject btnPrefab)
     {
         foreach (Transform child in parent)
             Object.Destroy(child.gameObject);

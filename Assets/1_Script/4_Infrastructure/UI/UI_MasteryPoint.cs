@@ -54,7 +54,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     {
         foreach (Transform child in parent) Destroy(child.gameObject);
 
-        buttons = new ChampionButtonCreator().DrawChampionButtons(parent, ChampionDataLoder.AllChampions, btnPrefab);
+        buttons = ChampionButtonCreator.DrawChampionButtons(parent, ChampionDataLoder.AllChampions, btnPrefab);
 
         foreach (var btn in buttons)
         {
