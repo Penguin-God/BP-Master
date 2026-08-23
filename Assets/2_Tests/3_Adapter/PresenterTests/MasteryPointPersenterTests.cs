@@ -25,18 +25,9 @@ public class MasteryPointPersenterTests
         public void Save(MasteryProfile inventory) => IsSaved = true;
     }
 
-    class FakeChampionProvider : IChampionProvider
-    {
-        public ChampionProfile GetProfile(int id) => new ChampionProfile(id, "펭귄", CreateStat(0, 0, 0), CreateSkill());
-    }
-
     MasteryPointPresenter CreateSut(MasteryProfile inventory, FakeMasteryPointView view, FakeMasterySaver saver)
     {
-        var textBuilder = new ChampionTextBuilder(
-            new FakeChampionProvider(),
-            new SkillTextBuilder(new FakeTextBuilder()),
-            new ChampionStatusTextBuilder()
-        );
+        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(0, 0, 0), CreateSkill()), new SkillTextBuilder(new FakeTextBuilder()), new ChampionStatusTextBuilder());
         return new MasteryPointPresenter(inventory, textBuilder, view, saver);
     }
 
@@ -90,7 +81,7 @@ public class MasteryPointPersenterTests
         var sut = CreateSut(inventory, view, saver);
 
         sut.SelectChampion(1);
-        
+
         Assert.Throws<InvalidOperationException>(() => sut.RequestUpgrade(StatType.Attack));
         Assert.IsFalse(saver.IsSaved);
     }

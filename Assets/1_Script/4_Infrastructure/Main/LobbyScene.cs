@@ -1,14 +1,5 @@
 using UnityEngine;
 
-public class AAAA : IChampionProvider // 데이터 매니저 만들기?
-{
-    public ChampionProfile GetProfile(int id)
-    {
-        var so = ChampionDataLoder.GetChampionData(id);
-        return new ChampionProfile(id, so.name, so.StatData, so.Skill);
-    }
-}
-
 public class LocalPlayerDataLoader : IPlayerDataLoader
 {
     readonly string playerName;
@@ -45,13 +36,15 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
-        uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(new AAAA(), skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
-
+        uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
         tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
+
+        ChampionProfile GetProfile(int id)
+        {
+            var so = ChampionDataLoder.GetChampionData(id);
+            return new ChampionProfile(id, so.ChampionName, so.StatData, so.Skill);
+        }
     }
 
-    void EnterBattle(int stage)
-    {
-        new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
-    }
+    void EnterBattle(int stage) => new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
 }

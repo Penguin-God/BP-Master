@@ -1,3 +1,5 @@
+using System;
+
 public record ChampionProfile(int Id, string Name, ChampionStatData Stat, Skill Skill);
 
 public readonly struct ChampionTextModel
@@ -26,20 +28,20 @@ public readonly struct ChampionTextModel
 
 public class ChampionTextBuilder
 {
-    readonly IChampionProvider _provider;
+    readonly Func<int, ChampionProfile> _profileProvider;
     readonly SkillTextBuilder _skillTextBuilder;
     readonly ChampionStatusTextBuilder _statTextBuilder;
 
-    public ChampionTextBuilder(IChampionProvider provider, SkillTextBuilder skillTextBuilder, ChampionStatusTextBuilder statTextBuilder)
+    public ChampionTextBuilder(Func<int, ChampionProfile> profileProvider, SkillTextBuilder skillTextBuilder, ChampionStatusTextBuilder statTextBuilder)
     {
-        _provider = provider;
+        _profileProvider = profileProvider;
         _skillTextBuilder = skillTextBuilder;
         _statTextBuilder = statTextBuilder;
     }
 
     public ChampionTextModel Build(int id)
     {
-        var profile = _provider.GetProfile(id);
+        var profile = _profileProvider(id); // 람다 실행
         var statModel = _statTextBuilder.CreateStatViewModel(profile.Stat);
         var skillText = _skillTextBuilder.BuildSkillText(profile.Skill.SkillDatas);
 
