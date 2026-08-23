@@ -4,36 +4,35 @@ using UnityEngine.UI;
 public class UI_CategoryController : MonoBehaviour
 {
     [Header("버튼")]
-    [SerializeField] Button leagueBtn;
+    [SerializeField] Button stageBtn;
     [SerializeField] Button masteryBtn;
 
     [Header("패널")]
-    [SerializeField] GameObject leaguePanel;
+    [SerializeField] GameObject stagePanel;
     [SerializeField] GameObject masteryPanel;
 
     [SerializeField] TutorialTriggerSO tutorialTrigger;
 
     void Awake()
     {
-        leagueBtn.onClick.AddListener(ShowSchedule);
+        stageBtn.onClick.AddListener(ShowStage);
         masteryBtn.onClick.AddListener(ShowMastery);
     }
 
     void Start()
     {
-        // 로비 진입 시 기본적으로 리그(스케줄) 화면을 보여줍니다.
-        ShowSchedule();
+        ShowStage();
     }
 
-    void ShowSchedule()
+    void ShowStage()
     {
-        leaguePanel.SetActive(true);
+        stagePanel.SetActive(true);
         masteryPanel.SetActive(false);
     }
 
     void ShowMastery()
     {
-        leaguePanel.SetActive(false);
+        stagePanel.SetActive(false);
         masteryPanel.SetActive(true);
         tutorialTrigger.StartTutorialOneTime(TutorialType.MasteryUIEnter);
     }

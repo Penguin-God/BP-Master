@@ -1,11 +1,4 @@
-using System.Collections.Generic;
-
-// UI의 현재 상호작용 상태를 담는 객체
-public record DeckBuildUIState(
-    DeckBuildState DomainState,
-    int FocusedAvailableCardId = -1, // 클릭한 사용 가능한 카드 (-1은 선택 안 됨)
-    int FocusedSelectedCardId = -1   // 클릭한 내 덱의 카드
-);
+public record DeckBuildUIState(DeckBuildState DomainState, int FocusedAvailableCardId = -1, int FocusedSelectedCardId = -1);
 
 // --- 화면에 그리기 위한 뷰 모델(View Model)들 ---
 public record CountTextViewModel(string Text, bool IsWarning);
