@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SlotViewOrchestrator : MonoBehaviour
 {
-    [SerializeField] ChampionRepository championManager;
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
     SlotStorage<SlotView> slotViews = new();
@@ -23,7 +22,7 @@ public class SlotViewOrchestrator : MonoBehaviour
     {
         statusSlots = statuses;
         foreach (var slot in slotViews.GetAllSlotDatas())
-            slotViews.GetSlot(slot).Init(mainView, championManager);
+            slotViews.GetSlot(slot).Init(mainView);
     }
 
     public void PickChampion(SlotData pickSlot, int id)

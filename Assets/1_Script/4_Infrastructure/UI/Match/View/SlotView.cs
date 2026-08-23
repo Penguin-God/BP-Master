@@ -6,7 +6,6 @@ public class SlotView : MonoBehaviour
     [SerializeField] ChampionView championView;
     [SerializeField] Button slotButton;
 
-    ChampionRepository championManager;
     int id;
     ChampionView championFocusView;
 
@@ -15,17 +14,13 @@ public class SlotView : MonoBehaviour
         slotButton.onClick.AddListener(DrawTarget);
     }
 
-    public void Init(ChampionView championFocusView, ChampionRepository championManager)
-    {
-        this.championFocusView = championFocusView;
-        this.championManager = championManager;
-    }
+    public void Init(ChampionView championFocusView) => this.championFocusView = championFocusView;
 
     public void UpdateChampion(ChampionStatus status, int id)
     {
         this.id = id;
-        championView.UpdateChampion(new ChampionTextModel(championManager.GetChampionName(id), status.Stat));
+        championView.UpdateChampion(new ChampionTextModel(ChampionDataLoder.NameCatalog[id], status.Stat));
     }
 
-    void DrawTarget() => championFocusView.UpdateDisplay(championManager.GetChampionData(id));
+    void DrawTarget() => championFocusView.UpdateDisplay(ChampionDataLoder.GetChampionData(id));
 }

@@ -6,7 +6,6 @@ public class BanView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI blueBan;
     [SerializeField] TextMeshProUGUI redBan;
-    [SerializeField] ChampionRepository championManager;
 
     readonly Dictionary<Team, TextMeshProUGUI> banTextDict = new();
 
@@ -20,7 +19,7 @@ public class BanView : MonoBehaviour
 
     public void UpdateBanList(Team team, int id)
     {
-        banTextDict[team].text += championManager.GetChampionData(id).ChampionName;
+        banTextDict[team].text += ChampionDataLoder.GetChampionData(id).ChampionName;
         banTextDict[team].text += ", ";
     }
 

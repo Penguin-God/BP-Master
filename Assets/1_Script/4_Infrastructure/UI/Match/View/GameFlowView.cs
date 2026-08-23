@@ -5,10 +5,10 @@ using UnityEngine;
 public class GameFlowView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI gameFlowText;
-    [SerializeField] ChampionRepository championRepository;
+
     public void ViewGameFlow(GameFlowData flow)
     {
-        if(flow.Phase == GamePhase.Done)
+        if (flow.Phase == GamePhase.Done)
         {
             gameFlowText.text = string.Empty;
             return;
@@ -17,14 +17,11 @@ public class GameFlowView : MonoBehaviour
     }
 
     SlotStorage<int> ids;
-    public void Init(SlotStorage<int> ids)
-    {
-        this.ids = ids;
-    }
+    public void Init(SlotStorage<int> ids) => this.ids = ids;
 
     public void UpdateUseSkill(SlotData useSlot)
     {
-        string skillChamp = championRepository.GetChampionName(ids.GetSlot(useSlot));
+        string skillChamp = ChampionDataLoder.NameCatalog[ids.GetSlot(useSlot)];
         StartCoroutine(Co_ViewTriatUseLog(skillChamp));
     }
 

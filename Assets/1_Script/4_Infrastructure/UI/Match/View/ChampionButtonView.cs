@@ -16,7 +16,6 @@ public enum ChampionSortType
 
 public class ChampionButtonView : MonoBehaviour
 {
-    [SerializeField] ChampionRepository championManager;
     [SerializeField] GameObject championBtnPrefab;
     [SerializeField] Transform content;
 
@@ -32,20 +31,20 @@ public class ChampionButtonView : MonoBehaviour
 
     void Start()
     {
-        var champions = championManager.AllChampion.Select(x => x.CreateChampion());
+        var champions = ChampionDataLoder.AllChampions.Select(x => x.CreateChampion());
         defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
         attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
         defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
         speedTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Speed)));
     }
 
-    public void CreateButtons() => CreateButtons(championManager.AllId);
+    public void CreateButtons() => CreateButtons(ChampionDataLoder.AllId);
 
     void CreateButtons(IEnumerable<int> Ids)
     {
         foreach (Transform child in content) Destroy(child.gameObject);
 
-        buttons = ChampionButtonCreator.CreateChampionButtons(content, Ids.Select(x => championManager.GetChampionData(x)), championBtnPrefab);
+        buttons = ChampionButtonCreator.CreateChampionButtons(content, Ids.Select(x => ChampionDataLoder.GetChampionData(x)), championBtnPrefab);
 
         if (clickEvent != null)
             ApplyEvent(clickEvent);
@@ -92,7 +91,7 @@ public class ChampionButtonView : MonoBehaviour
 
     IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
     {
-        ChampionSortType.Default => championManager.AllId,
+        ChampionSortType.Default => ChampionDataLoder.AllId,
         ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
         ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
         ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
@@ -105,6 +104,7 @@ public class ChampionButtonView : MonoBehaviour
             .Select(x => x.Id);
 
     public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
+
     public void InActiveButton(int id)
     {
         ButtonUtil.InActiveButton(GetButton(id));
