@@ -1,6 +1,5 @@
-using UnityEngine;
 using Match;
-using System.Linq;
+using UnityEngine;
 
 public class LobbyScene : MonoBehaviour
 {
@@ -37,7 +36,8 @@ public class LobbyScene : MonoBehaviour
     void EnterBattle(int stage)
     {
         MatchContext.CurrentDeck = store.State;
-        new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
+        MatchContext.MatchInit(new MatchData(matchConfigSO.UserId, stage), matchConfigSO.TargetWinCount, ChampionDataLoder.AllId);
+        SceneLoadHelper.LoadScene(SceneType.Battle);
     }
 
     void OnDestroy()

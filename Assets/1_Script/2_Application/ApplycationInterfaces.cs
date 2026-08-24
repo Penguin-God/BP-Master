@@ -1,9 +1,3 @@
-
-public interface IBattleResolver
-{
-    void Resolve(MatchData match);
-}
-
 public interface IPhaseEntry
 {
     void EnterBan();
