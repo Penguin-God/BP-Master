@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MatchUI_Controller : MonoBehaviour
 {
-    [SerializeField] MatchConfigSO matchConfig;
     [SerializeField] ChampionSelector_UI championSelector;
     [SerializeField] ChampionButtonView championDrawer;
     [SerializeField] SkillUseController_UI skillUseView;
@@ -61,12 +60,5 @@ public class MatchUI_Controller : MonoBehaviour
     {
         if (slotData.Team != team) return;
         skillUseView.UseSkill(slotData);
-    }
-
-    [SerializeField] GameObject scores;
-    public void Done(MatchResult result, bool isGameEnd)
-    {
-        championDrawer.gameObject.SetActive(false);
-        Instantiate(scores, transform).GetComponent<MatchResultView>().ShowResult(result, isGameEnd);
     }
 }

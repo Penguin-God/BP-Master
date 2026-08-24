@@ -1,6 +1,6 @@
-using UnityEngine;
 using Match;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BattleScene : MonoBehaviour
 {
@@ -56,16 +56,21 @@ public class BattleScene : MonoBehaviour
     void OnDone(MatchResult result)
     {
         bool matchEnd = false;
-        if (result.Winner == Team.All)
-            MatchContext.Draw();
-        else
-            matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
-        matchUI_Controller.Done(result, matchEnd);
+        if (result.Winner == Team.All) MatchContext.Draw();
+        else matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
+
+        FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
 
         if (matchEnd && playerIds[result.Winner] == matchConfigSO.UserId)
         {
             var saver = new JsonMasterySaver();
             new StageProgressUseCase(new PlayerPrefsStageStorage(), saver.Load(), saver , matchConfigSO.EarnPointByStage).ClearStage(ai_id);
+        }
+
+        GameEndButtonModel CreateGameEndButtonModel(bool isGameEnd)
+        {
+            if (isGameEnd) return new GameEndButtonModel("로비로", () => SceneLoadHelper.LoadScene(SceneType.Lobby));
+            else return new GameEndButtonModel("스왑", () => SceneLoadHelper.LoadScene(SceneType.Swap));
         }
     }
 }
