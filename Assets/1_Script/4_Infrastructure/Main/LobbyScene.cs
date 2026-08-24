@@ -2,26 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class LocalPlayerDataLoader : IPlayerDataLoader
-{
-    readonly string playerName;
-    readonly JsonMasterySaver saver;
-
-    public LocalPlayerDataLoader(string playerName, JsonMasterySaver saver)
-    {
-        this.playerName = playerName;
-        this.saver = saver;
-    }
-
-    public PlayerData LoadPlayer(int id)
-    {
-        var inventory = saver.Load();
-        if(inventory == null)
-            inventory = new MasteryProfile(0);
-        return new PlayerData(id, playerName, inventory.BoardCollection);
-    }
-}
-
 public class LobbyScene : MonoBehaviour
 {
     [SerializeField] TutorialTriggerSO tutorialTrigger;
