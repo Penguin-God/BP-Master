@@ -7,80 +7,50 @@ public class UI_DeckBuilder : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI countText;
-    [SerializeField] Button addButton;       // '>' 방향 버튼 (사용 가능 -> 내 덱)
-    [SerializeField] Button removeButton;    // '<' 방향 버튼 (내 덱 -> 사용 가능)
+    [SerializeField] Button addButton;
+    [SerializeField] Button removeButton;
     [SerializeField] Transform availablePanel;
     [SerializeField] Transform selectedPanel;
 
     [Header("Prefabs & Dependencies")]
     [SerializeField] UI_DeckCard cardPrefab;
 
-    // 유일한 '가변' 필드 (단방향 업데이트 됨)
-    DeckBuildUIState _state;
+    private DeckBuildStore _store; // 상태를 들고 있는 스토어를 참조만 함
 
-    void Awake()
+    public void Init(DeckBuildStore store)
     {
-        // 이동 버튼 이벤트 바인딩
-        addButton.onClick.AddListener(OnAddClicked);
-        removeButton.onClick.AddListener(OnRemoveClicked);
+        _store = store;
+        _store.OnStateChanged += UpdateView;
 
-        var domainState = new DeckBuildState(
-            RequiredCount: 25,
-            AvailableCards: new HashSet<int>(ChampionDataLoder.AllId),
-            SelectedCards: new HashSet<int>()
-        );
-
-        _state = new DeckBuildUIState(domainState);
-        UpdateView();
+        // 최초 1회 화면 그리기
+        UpdateView(_store.State);
     }
 
-    // 외부(예: 로비나 매니저)에서 덱 빌딩 화면을 열 때 호출
-    public void Init(int requiredCount, IEnumerable<int> initialAvailableCards)
+    private void OnDestroy()
     {
-        var domainState = new DeckBuildState(
-            RequiredCount: 25,
-            AvailableCards: new HashSet<int>(ChampionDataLoder.AllId),
-            SelectedCards: new HashSet<int>()
-        );
-
-        _state = new DeckBuildUIState(domainState);
-        UpdateView();
+        if (_store != null)
+            _store.OnStateChanged -= UpdateView;
     }
 
+    // --- Action Handlers: 직접 상태를 바꾸지 않고 스토어에 '요청(Dispatch)'만 함 --- //
+    void OnAvailableCardClicked(int id) => _store.Dispatch(state => DeckBuildUIService.FocusAvailableCard(state, id));
+    void OnAvailableCardDoubleClicked(int id) => _store.Dispatch(state => DeckBuildUIService.DoubleClickAvailableCard(state, id));
 
-    void SetState(DeckBuildUIState newState)
+    void OnSelectedCardClicked(int id) => _store.Dispatch(state => DeckBuildUIService.FocusSelectedCard(state, id));
+    void OnSelectedCardDoubleClicked(int id) => _store.Dispatch(state => DeckBuildUIService.DoubleClickSelectedCard(state, id));
+
+    void UpdateView(DeckBuildUIState state)
     {
-        _state = newState;
-        UpdateView();
-    }
+        var viewModel = DeckBuildUIService.CreateViewModel(state);
 
-    // --- Action Handlers --- //
-    void OnAvailableCardClicked(int id) => SetState(DeckBuildUIService.FocusAvailableCard(_state, id));
-    void OnAvailableCardDoubleClicked(int id) => SetState(DeckBuildUIService.DoubleClickAvailableCard(_state, id));
-
-    void OnSelectedCardClicked(int id) => SetState(DeckBuildUIService.FocusSelectedCard(_state, id));
-    void OnSelectedCardDoubleClicked(int id) => SetState(DeckBuildUIService.DoubleClickSelectedCard(_state, id));
-
-    void OnAddClicked() => SetState(DeckBuildUIService.MoveFocusedToSelected(_state));
-    void OnRemoveClicked() => SetState(DeckBuildUIService.MoveFocusedToAvailable(_state));
-
-    // --- View Render --- //
-
-    void UpdateView()
-    {
-        // 1. 뷰 모델 생성 (색상 및 텍스트 데이터 로직 처리)
-        var viewModel = DeckBuildUIService.CreateViewModel(_state);
-
-        // 2. 텍스트 및 버튼 상호작용 업데이트
         countText.text = viewModel.CountText.Text;
         countText.color = viewModel.CountText.IsWarning ? Color.red : Color.white;
 
         addButton.interactable = viewModel.AddButton.IsInteractable;
         removeButton.interactable = viewModel.RemoveButton.IsInteractable;
 
-        // 3. 패널에 카드 렌더링
-        DrawCards(availablePanel, _state.DomainState.AvailableCards, _state.FocusedAvailableCardId, OnAvailableCardClicked, OnAvailableCardDoubleClicked);
-        DrawCards(selectedPanel, _state.DomainState.SelectedCards, _state.FocusedSelectedCardId, OnSelectedCardClicked, OnSelectedCardDoubleClicked);
+        DrawCards(availablePanel, state.DomainState.AvailableCards, state.FocusedAvailableCardId, OnAvailableCardClicked, OnAvailableCardDoubleClicked);
+        DrawCards(selectedPanel, state.DomainState.SelectedCards, state.FocusedSelectedCardId, OnSelectedCardClicked, OnSelectedCardDoubleClicked);
     }
 
     void DrawCards(Transform panel, HashSet<int> cardIds, int focusedId, System.Action<int> onClick, System.Action<int> onDoubleClick)

@@ -64,13 +64,12 @@ public class DeckBuildServiceTests
     public void 요구치를채웠을때만_덱완성_반환()
     {
         // Arrange
-        var state = CreateInitialState(2, 1, 2, 3);
+        var state = CreateInitialState(requiredCount: 1, 1, 2, 3);
 
         // Act & Assert
-        var state1 = DeckBuildService.AddCard(state, 1);
-        Assert.IsFalse(DeckBuildService.IsComplete(state1), "요구치가 충족되지 않으면 false여야 합니다.");
+        Assert.IsFalse(DeckBuildService.IsDeckComplete(state), "요구치가 충족되지 않으면 false여야 합니다.");
 
-        var state2 = DeckBuildService.AddCard(state1, 2);
-        Assert.IsTrue(DeckBuildService.IsComplete(state2), "요구치가 충족되면 true여야 합니다.");
+        var state1 = DeckBuildService.AddCard(state, 2);
+        Assert.IsTrue(DeckBuildService.IsDeckComplete(state1), "요구치가 충족되면 true여야 합니다.");
     }
 }

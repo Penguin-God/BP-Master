@@ -45,9 +45,5 @@ public static class DeckBuildService
         };
     }
 
-    // 덱이 요구치를 충족했는지 확인
-    public static bool IsComplete(DeckBuildState state)
-    {
-        return state.SelectedCards.Count == state.RequiredCount;
-    }
+    public static bool IsDeckComplete(DeckBuildState state) => state.SelectedCards.Count == state.RequiredCount;
 }
