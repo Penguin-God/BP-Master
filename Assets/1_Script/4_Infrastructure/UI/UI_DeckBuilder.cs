@@ -106,9 +106,9 @@ public class UI_DeckBuilder : MonoBehaviour
         if (_store == null) return;
         var state = _store.State;
 
-        bool isFull = state.SelectedCards.Count >= state.RequiredCount;
+        bool isFull = state.SelectedCards.Count >= state.CardCount;
 
-        countText.text = $"{state.SelectedCards.Count} / {state.RequiredCount}";
+        countText.text = $"{state.SelectedCards.Count} / {state.CardCount}";
         countText.color = isFull ? Color.white : Color.red;
 
         addButton.interactable = (_focusedCard?.Pool == CardPoolType.Available) && !isFull;

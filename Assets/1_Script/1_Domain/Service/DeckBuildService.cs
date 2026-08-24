@@ -8,7 +8,7 @@ public static class DeckBuildService
         if (!state.AvailableCards.Contains(cardId))
             return state;
 
-        if (state.SelectedCards.Count >= state.RequiredCount)
+        if (state.SelectedCards.Count >= state.CardCount)
             return state;
 
         // 원본 훼손을 막기 위해 새로운 HashSet 복사본 생성
@@ -45,5 +45,5 @@ public static class DeckBuildService
         };
     }
 
-    public static bool IsDeckComplete(DeckBuildState state) => state.SelectedCards.Count == state.RequiredCount;
+    public static bool IsDeckComplete(DeckBuildState state) => state.SelectedCards.Count == state.CardCount;
 }

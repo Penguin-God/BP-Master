@@ -4,10 +4,10 @@ using System.Collections.Generic;
 public class DeckBuildServiceTests
 {
     // 테스트용 초기 상태 생성 도우미 함수
-    private DeckBuildState CreateInitialState(int requiredCount, params int[] availableCards)
+    private DeckBuildState CreateInitialState(int cardCount, params int[] availableCards)
     {
         return new DeckBuildState(
-            RequiredCount: requiredCount,
+            CardCount: cardCount,
             AvailableCards: new HashSet<int>(availableCards),
             SelectedCards: new HashSet<int>()
         );
@@ -64,7 +64,7 @@ public class DeckBuildServiceTests
     public void 요구치를채웠을때만_덱완성_반환()
     {
         // Arrange
-        var state = CreateInitialState(requiredCount: 1, 1, 2, 3);
+        var state = CreateInitialState(cardCount: 1, 1, 2, 3);
 
         // Act & Assert
         Assert.IsFalse(DeckBuildService.IsDeckComplete(state), "요구치가 충족되지 않으면 false여야 합니다.");
