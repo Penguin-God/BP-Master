@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerDataProviderFactorySO", menuName = "Data/PlayerDataProviderFactorySO")]
+[CreateAssetMenu(fileName = "PlayerDataProviderFactorySO", menuName = "Factory/PlayerDataProviderFactorySO")]
 public class PlayerDataProviderFactorySO : ScriptableObject
 {
     [SerializeField] string mainPlayerName = "@@";
