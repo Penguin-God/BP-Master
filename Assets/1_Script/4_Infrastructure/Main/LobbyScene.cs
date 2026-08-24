@@ -29,6 +29,7 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] UI_MasteryPoint uI_MasteryPoint;
     [SerializeField] SkillTextSO skillTextSO;
 
+    DeckBuildStore store;
     void Awake()
     {
         var dataIO = new JsonMasterySaver();
@@ -40,7 +41,9 @@ public class LobbyScene : MonoBehaviour
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
         tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
 
-        FindAnyObjectByType<UI_DeckBuilder>().Init(new DeckBuildStore(new DeckBuildState(20, new HashSet<int>{ 1,2,3}, new ())));
+        store = new DeckBuildStore(new DeckBuildState(20, new HashSet<int> { 1, 2, 3 }, new()));
+        store.OnStateChanged += Change;
+        FindAnyObjectByType<UI_DeckBuilder>().Init(store);
 
         ChampionProfile GetProfile(int id)
         {
@@ -50,4 +53,15 @@ public class LobbyScene : MonoBehaviour
     }
 
     void EnterBattle(int stage) => new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
+
+    void OnDestroy()
+    {
+        if(store != null)
+            store.OnStateChanged -= Change;
+    }
+
+    void Change(DeckBuildState state)
+    {
+        print("Change");
+    }
 }
