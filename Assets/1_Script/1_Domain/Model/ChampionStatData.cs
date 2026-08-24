@@ -1,10 +1,3 @@
-public enum StatType
-{
-    Attack,
-    Defense,
-    Speed,
-}
-
 public readonly struct ChampionStatData
 {
     public readonly int Attack;

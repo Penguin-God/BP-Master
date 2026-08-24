@@ -1,19 +1,5 @@
 using System;
 
-public enum StatConditionType
-{
-    None,
-
-    DefenseBelow,
-    DefenseAtLeast,
-
-    AttackBelow,
-    AttackAtLeast,
-
-    SpeedBelow,
-    SpeedAtLeast,
-}
-
 public class NullChecker : IChampionCondition
 {
     public bool Check(ChampionStatus status) => true;

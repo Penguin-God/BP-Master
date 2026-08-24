@@ -1,27 +1,3 @@
-
-public enum SkillType
-{
-    None = 0,
-    StatChanger = 2,
-    TraitExcluder = 7,
-    StatAbsorber = 8,
-    Resonance = 9,
-    AmplifyChanger = 10,
-    PickBuffer = 11,
-    Doppelganger = 12,
-    FinalStatChanger = 13,
-}
-
-public enum Side { Self, Opponent, All }
-public enum TargetRange
-{
-    None,
-    Single,
-    Double,
-    Triple,
-    All,
-}
-
 public readonly struct SkillTargetRule
 {
     public readonly Side TargetSide;
@@ -34,12 +10,6 @@ public readonly struct SkillTargetRule
     }
 }
 
-public enum ConditionType
-{
-    None,
-    Threshold,
-    Compare,
-}
 
 public readonly struct SkillConditionData
 {
@@ -54,8 +24,6 @@ public readonly struct SkillConditionData
         ConditionType = checkerType;
     }
 }
-
-public enum AmountType { None, Value, Percent, Fix }
 public record SkillAmountData(AmountType Type, StatType StatType, int ValueAmount, float PercentValue, int FixValue);
 
 public readonly struct SkillData
