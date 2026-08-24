@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MatchResultView : MonoBehaviour
 {
@@ -26,12 +25,12 @@ public class MatchResultView : MonoBehaviour
 
         if (isGameEnd)
         {
-            newGameButton.onClick.AddListener(() => SceneManager.LoadScene("Lobby"));
+            newGameButton.onClick.AddListener(() => SceneLoadHelper.LoadScene(SceneType.Lobby));
             newGameButton.GetComponentInChildren<TextMeshProUGUI>().text = "로비로";
         }
         else
         {
-            newGameButton.onClick.AddListener(() => SceneManager.LoadScene("Swap"));
+            newGameButton.onClick.AddListener(() => SceneLoadHelper.LoadScene(SceneType.Swap));
             newGameButton.GetComponentInChildren<TextMeshProUGUI>().text = "스왑";
         }
     }

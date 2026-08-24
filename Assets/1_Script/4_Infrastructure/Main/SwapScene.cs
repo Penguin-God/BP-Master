@@ -22,6 +22,6 @@ public class SwapScene : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) SceneManager.LoadScene("Battle");    
+        if (Input.GetKeyDown(KeyCode.Space)) SceneLoadHelper.LoadScene(SceneType.Battle);
     }
 }
