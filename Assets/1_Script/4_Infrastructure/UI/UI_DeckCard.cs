@@ -5,17 +5,17 @@ using TMPro;
 
 public class UI_DeckCard : MonoBehaviour, IPointerClickHandler
 {
-    public int CardId { get; private set; }
+    public CardIdentity Identity { get; private set; }
 
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] GameObject highlightObj; // 포커스 시 켜질 테두리나 배경 이미지
+    [SerializeField] GameObject highlightObj;
 
-    private Action<int> onClick;
-    private Action<int> onDoubleClick;
+    private Action<CardIdentity> onClick;
+    private Action<CardIdentity> onDoubleClick;
 
-    public void Init(int id, string name, Action<int> onClick, Action<int> onDoubleClick)
+    public void Init(CardIdentity identity, string name, Action<CardIdentity> onClick, Action<CardIdentity> onDoubleClick)
     {
-        CardId = id;
+        Identity = identity;
         nameText.text = name;
         this.onClick = onClick;
         this.onDoubleClick = onDoubleClick;
@@ -23,21 +23,11 @@ public class UI_DeckCard : MonoBehaviour, IPointerClickHandler
         SetFocus(false);
     }
 
-    public void SetFocus(bool isFocused)
-    {
-        if (highlightObj != null)
-            highlightObj.SetActive(isFocused);
-    }
+    public void SetFocus(bool isFocused) => highlightObj?.SetActive(isFocused);
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.clickCount == 2)
-        {
-            onDoubleClick?.Invoke(CardId);
-        }
-        else if (eventData.clickCount == 1)
-        {
-            onClick?.Invoke(CardId);
-        }
+        if (eventData.clickCount == 2) onDoubleClick?.Invoke(Identity);
+        else if (eventData.clickCount == 1) onClick?.Invoke(Identity);
     }
 }

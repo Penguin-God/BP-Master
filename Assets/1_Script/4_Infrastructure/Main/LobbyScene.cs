@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LocalPlayerDataLoader : IPlayerDataLoader
@@ -38,6 +39,8 @@ public class LobbyScene : MonoBehaviour
         uI_StageSelection.Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
         uI_MasteryPoint.Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
         tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
+
+        FindAnyObjectByType<UI_DeckBuilder>().Init(new DeckBuildStore(new DeckBuildState(20, new HashSet<int>{ 1,2,3}, new ())));
 
         ChampionProfile GetProfile(int id)
         {
