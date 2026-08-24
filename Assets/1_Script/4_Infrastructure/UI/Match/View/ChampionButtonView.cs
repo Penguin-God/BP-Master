@@ -104,12 +104,12 @@ public class ChampionButtonView : MonoBehaviour
             .OrderByDescending(c => c.Status.Stat.GetStatValue(statType))
             .Select(x => x.Id);
 
-    public Button GetButton(int id) => buttons.First(x => x.GetComponent<ChampionIdentify>().Id == id);
-
     public void InActiveButton(int id)
     {
-        ButtonUtil.InActiveButton(GetButton(id));
-        GetButton(id).GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
+        var btn = buttons.FirstOrDefault(x => x.GetComponent<ChampionIdentify>().Id == id);
+        if (btn == null) return;
+        ButtonUtil.InActiveButton(btn);
+        btn.GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
     }
 }
 
