@@ -1,14 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Match;
+using System.Linq;
 
 public class LobbyScene : MonoBehaviour
 {
     [SerializeField] TutorialTriggerSO tutorialTrigger;
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] SkillTextSO skillTextSO;
-    [SerializeField] CardListSO cardListSO;
+    [SerializeField] CardListSO start;
+    [SerializeField] CardListSO all;
     DeckBuildStore store;
     void Awake()
     {
@@ -21,7 +21,7 @@ public class LobbyScene : MonoBehaviour
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
         tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
 
-        store = new DeckBuildStore(new DeckBuildState(20, new (), new HashSet<int>(cardListSO.CardList.Select(x => x.Id))));
+        store = new DeckBuildStore(new DeckBuildState(20, new (all.CardIdSet.Except(start.CardIdSet)), start.CardIdSet));
         store.OnStateChanged += Change;
         FindMono<UI_DeckBuilder>().Init(store);
 
