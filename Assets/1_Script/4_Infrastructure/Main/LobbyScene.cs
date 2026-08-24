@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Match;
 
 public class LobbyScene : MonoBehaviour
 {
@@ -33,7 +34,11 @@ public class LobbyScene : MonoBehaviour
 
     T FindMono<T>() where T : MonoBehaviour => FindAnyObjectByType<T>(FindObjectsInactive.Include);
 
-    void EnterBattle(int stage) => new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
+    void EnterBattle(int stage)
+    {
+        MatchContext.CurrentDeck = store.State;
+        new BattleInitializer(matchConfigSO.TargetWinCount).Resolve(new MatchData(matchConfigSO.UserId, stage));
+    }
 
     void OnDestroy()
     {

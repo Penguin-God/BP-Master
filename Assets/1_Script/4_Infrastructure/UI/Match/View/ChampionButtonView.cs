@@ -1,3 +1,4 @@
+using Match;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -31,14 +32,14 @@ public class ChampionButtonView : MonoBehaviour
 
     void Start()
     {
-        var champions = ChampionDataLoder.AllChampions.Select(x => x.CreateChampion());
+        var champions = MatchContext.CurrentDeck.SelectedCards.Select(x => ChampionDataLoder.GetChampionData(x).CreateChampion());
         defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
         attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
         defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
         speedTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Speed)));
     }
 
-    public void CreateButtons() => CreateButtons(ChampionDataLoder.AllId);
+    public void CreateButtons() => CreateButtons(MatchContext.CurrentDeck.SelectedCards);
 
     void CreateButtons(IEnumerable<int> Ids)
     {
@@ -91,7 +92,7 @@ public class ChampionButtonView : MonoBehaviour
 
     IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
     {
-        ChampionSortType.Default => ChampionDataLoder.AllId,
+        ChampionSortType.Default => MatchContext.CurrentDeck.SelectedCards,
         ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
         ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
         ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
