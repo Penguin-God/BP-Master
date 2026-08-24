@@ -5,18 +5,18 @@ public class UI_CategoryController : MonoBehaviour
 {
     [Header("버튼")]
     [SerializeField] Button stageBtn;
-    [SerializeField] Button masteryBtn;
+    [SerializeField] Button deckBtn;
 
     [Header("패널")]
     [SerializeField] GameObject stagePanel;
-    [SerializeField] GameObject masteryPanel;
+    [SerializeField] GameObject deckPanel;
 
     [SerializeField] TutorialTriggerSO tutorialTrigger;
 
     void Awake()
     {
         stageBtn.onClick.AddListener(ShowStage);
-        masteryBtn.onClick.AddListener(ShowMastery);
+        deckBtn.onClick.AddListener(ShowMastery);
     }
 
     void Start()
@@ -27,13 +27,13 @@ public class UI_CategoryController : MonoBehaviour
     void ShowStage()
     {
         stagePanel.SetActive(true);
-        masteryPanel.SetActive(false);
+        deckPanel.SetActive(false);
     }
 
     void ShowMastery()
     {
         stagePanel.SetActive(false);
-        masteryPanel.SetActive(true);
+        deckPanel.SetActive(true);
         tutorialTrigger.StartTutorialOneTime(TutorialType.MasteryUIEnter);
     }
 }
