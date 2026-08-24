@@ -31,8 +31,8 @@ public class MatchResultView : MonoBehaviour
         }
         else
         {
-            newGameButton.onClick.AddListener(() => SceneManager.LoadScene("Battle"));
-            newGameButton.GetComponentInChildren<TextMeshProUGUI>().text = "다음 게임";
+            newGameButton.onClick.AddListener(() => SceneManager.LoadScene("Swap"));
+            newGameButton.GetComponentInChildren<TextMeshProUGUI>().text = "스왑";
         }
     }
 }
