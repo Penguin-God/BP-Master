@@ -21,7 +21,7 @@ public class LobbyScene : MonoBehaviour
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
         tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
 
-        store = new DeckBuildStore(new DeckBuildState(20, new (all.CardIdSet.Except(start.CardIdSet)), start.CardIdSet));
+        store = new DeckBuildStore(new DeckBuildState(20, all.CardIdSet, start.CardIdSet));
         store.OnStateChanged += Change;
         FindMono<UI_DeckBuilder>().Init(store);
 
