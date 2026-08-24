@@ -4219,10 +4219,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::LobbyScene
   tutorialTrigger: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
-  uI_StageSelection: {fileID: 1877720420}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
-  uI_MasteryPoint: {fileID: 1821025619}
   skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
+  cardListSO: {fileID: 11400000, guid: 808fdf0d1f6710f469c525568f81f2b5, type: 2}
 --- !u!1 &1017902839
 GameObject:
   m_ObjectHideFlags: 0

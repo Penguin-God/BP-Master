@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LocalPlayerDataLoader : IPlayerDataLoader
@@ -26,7 +27,7 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] TutorialTriggerSO tutorialTrigger;
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] SkillTextSO skillTextSO;
-
+    [SerializeField] CardListSO cardListSO;
     DeckBuildStore store;
     void Awake()
     {
@@ -36,10 +37,10 @@ public class LobbyScene : MonoBehaviour
             inventory = new MasteryProfile(startPoints: 15);
 
         FindMono<UI_StageSelection>().Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
-        FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), uI_MasteryPoint, dataIO), inventory);
+        FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
         tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
 
-        store = new DeckBuildStore(new DeckBuildState(20, new HashSet<int> { 1, 2, 3 }, new()));
+        store = new DeckBuildStore(new DeckBuildState(20, new (), new HashSet<int>(cardListSO.CardList.Select(x => x.Id))));
         store.OnStateChanged += Change;
         FindMono<UI_DeckBuilder>().Init(store);
 
