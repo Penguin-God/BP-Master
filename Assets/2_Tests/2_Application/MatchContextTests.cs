@@ -21,7 +21,6 @@ public class MatchContextTests
 
         Assert.AreEqual(1, MatchContext.CurrentMatch.Id1);
         Assert.AreEqual(100, MatchContext.CurrentMatch.Id2);
-        CollectionAssert.AreEqual(allIds, MatchContext.Storage.SelectableIds);
     }
 
     [Test]
@@ -49,7 +48,6 @@ public class MatchContextTests
         Assert.IsTrue(MatchContext.EndMatch(1));
 
         Assert.AreEqual(0, MatchContext.CurrentMatch.Id1);
-        Assert.IsNull(MatchContext.Storage);
         Assert.IsNull(MatchContext.WinCounter);
     }
 }

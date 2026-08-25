@@ -17,7 +17,7 @@ public class AIBattleSimulatorSO : ScriptableObject
 
     int RunBattle(MatchData match, Action<MatchResult> onSingleGameEnd, Action onMatchEnd)
     {
-        var storage = MatchContext.Storage;
+        var storage = MatchContext.CreateFearlessStorage();
         var catalog = ChampionDataLoder.GetCatalog();
 
         var idByTeam = new Dictionary<Team, int>
@@ -54,6 +54,7 @@ public class AIBattleSimulatorSO : ScriptableObject
 
             int winnerId = result.Winner == Team.Blue ? match.Id1 : match.Id2;
 
+            MatchContext.RecordMatchResult(storage.PickIds.GetAll());
             if (MatchContext.EndMatch(winnerId))
             {
                 finalWinnerId = winnerId;

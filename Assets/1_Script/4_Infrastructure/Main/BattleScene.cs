@@ -57,7 +57,7 @@ public class BattleScene : MonoBehaviour
     void OnDone(MatchResult result)
     {
         bool matchEnd = false;
-        if (result.Winner == Team.All) MatchContext.Draw();
+        if (result.Winner == Team.All) ; // 승자는 후픽으로 설정하기
         else
         {
             MatchContext.RecordMatchResult(storage.PickIds.GetAll());
