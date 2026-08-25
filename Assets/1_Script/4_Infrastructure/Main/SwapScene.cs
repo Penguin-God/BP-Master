@@ -10,7 +10,9 @@ public class SwapScene : MonoBehaviour
 
     void Awake()
     {
-        store = new DeckBuildStore(MatchContext.CurrentDeck);
+        var deckState = new DeckBuildState(MatchContext.CurrentDeck.CardCount, new (MatchContext.CurrentDeck.AvailableCards.Except(MatchContext.FearlessLockedCards)), new (MatchContext.CurrentDeck.SelectedCards.Except(MatchContext.FearlessLockedCards)));
+        store = new DeckBuildStore(deckState);
+        Change(deckState);
         store.OnStateChanged += Change;
 
         FindAnyObjectByType<UI_DeckBuilder>().Init(store, id => MatchContext.FearlessLockedCards.Contains(id) ? Color.gray : Color.white);
