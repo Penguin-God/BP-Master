@@ -13,6 +13,7 @@ public class BattleScene : MonoBehaviour
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] TutorialTriggerSO tutorialTriggerSO;
     int ai_id;
+    BanPickStorage storage;
     public void GameStart(Team playerTeam)
     {
         ai_id = MatchContext.CurrentMatch.GetOpponentId(matchConfigSO.UserId);
@@ -22,7 +23,7 @@ public class BattleScene : MonoBehaviour
         playerIds.Add(aiTeam, ai_id);
 
         var championCatalog = ChampionDataLoder.GetCatalog();
-        var storage = MatchContext.Storage;
+        storage = MatchContext.CreateFearlessStorage();
         var core = matchCoreFactorySO.CreateMatchCore(storage, championCatalog, playerIds);
 
         var masteryRegistry = core.MasteryRegistry;
@@ -57,7 +58,11 @@ public class BattleScene : MonoBehaviour
     {
         bool matchEnd = false;
         if (result.Winner == Team.All) MatchContext.Draw();
-        else matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
+        else
+        {
+            MatchContext.RecordMatchResult(storage.PickIds.GetAll());
+            matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
+        }
 
         FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
 

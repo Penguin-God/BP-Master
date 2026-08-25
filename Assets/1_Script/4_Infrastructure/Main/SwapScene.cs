@@ -7,11 +7,14 @@ public class SwapScene : MonoBehaviour
 {
     [SerializeField] Button nextBattleBtn;
     DeckBuildStore store;
+
     void Awake()
     {
         store = new DeckBuildStore(MatchContext.CurrentDeck);
         store.OnStateChanged += Change;
-        FindAnyObjectByType<UI_DeckBuilder>().Init(store, id => MatchContext.Storage.CanSelected(id) ? Color.white : Color.gray);
+
+        FindAnyObjectByType<UI_DeckBuilder>().Init(store, id => MatchContext.FearlessLockedCards.Contains(id) ? Color.gray : Color.white);
+
         nextBattleBtn.onClick.AddListener(() => SceneLoadHelper.LoadScene(SceneType.Battle));
         nextBattleBtn.interactable = CheckDeckPlayable(MatchContext.CurrentDeck);
     }
@@ -31,7 +34,7 @@ public class SwapScene : MonoBehaviour
     bool CheckDeckPlayable(DeckBuildState state)
     {
         bool isDeckFull = state.SelectedCards.Count == state.CardCount;
-        bool isAllCardsValid = state.SelectedCards.All(id => MatchContext.Storage.CanSelected(id));
+        bool isAllCardsValid = state.SelectedCards.All(id => MatchContext.FearlessLockedCards.Contains(id) == false);
         return isDeckFull && isAllCardsValid;
     }
 }
