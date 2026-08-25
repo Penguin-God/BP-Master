@@ -837,7 +837,7 @@ MonoBehaviour:
   countText: {fileID: 7841242940571897889}
   addButton: {fileID: 4758087459466853546}
   removeButton: {fileID: 8006851085547087346}
-  availablePanel: {fileID: 2501054153886038523}
+  changeablePanel: {fileID: 2501054153886038523}
   selectedPanel: {fileID: 1239950364726705854}
   cardPrefab: {fileID: 2108406897110898466, guid: e627ce331227b8149949433afbe3118e, type: 3}
 --- !u!1 &3426021181112436821

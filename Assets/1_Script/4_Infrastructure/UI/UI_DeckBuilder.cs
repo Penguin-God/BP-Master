@@ -10,7 +10,7 @@ public class UI_DeckBuilder : MonoBehaviour
     [SerializeField] TextMeshProUGUI countText;
     [SerializeField] Button addButton;
     [SerializeField] Button removeButton;
-    [SerializeField] Transform availablePanel;
+    [SerializeField] Transform changeablePanel;
     [SerializeField] Transform selectedPanel;
 
     [Header("Prefabs & Dependencies")]
@@ -81,7 +81,7 @@ public class UI_DeckBuilder : MonoBehaviour
     {
         _spawnedCards.Clear();
 
-        DrawCards(availablePanel, state.AvailableCards, CardPoolType.Available);
+        DrawCards(changeablePanel, state.ChangeableCards, CardPoolType.Available);
         DrawCards(selectedPanel, state.SelectedCards, CardPoolType.Selected);
 
         RefreshUIVisuals();
@@ -94,13 +94,10 @@ public class UI_DeckBuilder : MonoBehaviour
         foreach (var id in cardIds)
         {
             var cardObj = Instantiate(cardPrefab, panel);
-            string cardName = ChampionDataLoder.NameCatalog[id];
-
-            // 주입받은 함수로 해당 카드의 색상 결정
+            // 외부 함수로 색깔 결정
             Color cardColor = _cardColorProvider != null ? _cardColorProvider(id) : Color.white;
 
-            // 색상 데이터를 함께 전달
-            cardObj.Init(new CardIdentity(poolType, id), cardName, cardColor, OnCardClicked, OnCardDoubleClicked);
+            cardObj.Init(new CardIdentity(poolType, id), ChampionDataLoder.NameCatalog[id], cardColor, OnCardClicked, OnCardDoubleClicked);
             _spawnedCards.Add(cardObj);
         }
     }
