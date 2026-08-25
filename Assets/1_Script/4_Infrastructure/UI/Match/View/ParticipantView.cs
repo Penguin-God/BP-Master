@@ -15,6 +15,6 @@ public class ParticipantView : MonoBehaviour
         UpdateText(Team.Red, playerIds[Team.Red]);
     }
 
-    void UpdateText(Team team, int id) => GetText(team).text = $"{playerDataProviderFactorySO.CreatePlayerDataProvider().LoadPlayer(id).Name} : {MatchContext.WinCounter.GetWin(id)}";
+    void UpdateText(Team team, int id) => GetText(team).text = $"{playerDataProviderFactorySO.CreatePlayerDataProvider().LoadPlayer(id).Name} : {MatchContext.MatchState.GetWin(id)}";
     TextMeshProUGUI GetText(Team team) => team == Team.Blue ? blueText : redText;
 }

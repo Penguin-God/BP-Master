@@ -16,7 +16,7 @@ public class BattleScene : MonoBehaviour
     BanPickStorage storage;
     public void GameStart(Team playerTeam)
     {
-        ai_id = MatchContext.CurrentMatch.GetOpponentId(matchConfigSO.UserId);
+        ai_id = MatchContext.MatchState.GetOpponentId(matchConfigSO.UserId);
         Team aiTeam = EnumCaster.GetOppoentTeam(playerTeam);
 
         playerIds.Add(playerTeam, matchConfigSO.UserId);
@@ -43,7 +43,7 @@ public class BattleScene : MonoBehaviour
 
     void MatchTutorial()
     {
-        if (MatchContext.WinCounter.TotalWins == 0) tutorialTriggerSO.StartTutorialOneTime(TutorialType.MatchStart);
+        if (MatchContext.MatchState.TotalWins == 0) tutorialTriggerSO.StartTutorialOneTime(TutorialType.MatchStart);
         else tutorialTriggerSO.StartTutorialOneTime(TutorialType.SecondSetEnter);
     }
 
