@@ -1,6 +1,5 @@
 using UnityEngine;
 using Match;
-using UnityEngine.SceneManagement;
 
 public class SwapScene : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class SwapScene : MonoBehaviour
     {
         store = new DeckBuildStore(MatchContext.CurrentDeck);
         store.OnStateChanged += Change;
-        FindAnyObjectByType<UI_DeckBuilder>().Init(store);
+        FindAnyObjectByType<UI_DeckBuilder>().Init(store, id => MatchContext.Storage.CanSelected(id) ? Color.white : Color.gray);
     }
 
     void OnDestroy()

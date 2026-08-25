@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,15 +20,18 @@ public class UI_DeckBuilder : MonoBehaviour
     CardIdentity _focusedCard;
     List<UI_DeckCard> _spawnedCards = new List<UI_DeckCard>();
 
+    Func<int, Color> _cardColorProvider;
+
     void Awake()
     {
         addButton.onClick.AddListener(OnAddClicked);
         removeButton.onClick.AddListener(OnRemoveClicked);
     }
 
-    public void Init(DeckBuildStore store)
+    public void Init(DeckBuildStore store, Func<int, Color> cardColorProvider = null)
     {
         _store = store;
+        _cardColorProvider = cardColorProvider;
         _store.OnStateChanged += UpdateView;
         UpdateView(_store.State);
     }
@@ -39,11 +43,10 @@ public class UI_DeckBuilder : MonoBehaviour
     }
 
     // --- Action Handlers --- //
-
     void OnCardClicked(CardIdentity target)
     {
         _focusedCard = target;
-        RefreshUIVisuals(); // 스토어 갱신 없이(카드 재생성 없이) UI 포커스/버튼 상태만 즉시 갱신
+        RefreshUIVisuals();
     }
 
     void OnCardDoubleClicked(CardIdentity target)
@@ -58,7 +61,7 @@ public class UI_DeckBuilder : MonoBehaviour
         if (_focusedCard?.Pool == CardPoolType.Available)
         {
             _store.Dispatch(state => DeckBuildService.AddCard(state, _focusedCard.Id));
-            _focusedCard = null; // 이동 후 포커스 초기화
+            _focusedCard = null;
             RefreshUIVisuals();
         }
     }
@@ -74,8 +77,6 @@ public class UI_DeckBuilder : MonoBehaviour
     }
 
     // --- View Render --- //
-
-    // 스토어 상태가 변했을 때(카드가 넘어갔을 때)만 실행됨
     void UpdateView(DeckBuildState state)
     {
         _spawnedCards.Clear();
@@ -95,12 +96,15 @@ public class UI_DeckBuilder : MonoBehaviour
             var cardObj = Instantiate(cardPrefab, panel);
             string cardName = ChampionDataLoder.NameCatalog[id];
 
-            cardObj.Init(new CardIdentity(poolType, id), cardName, OnCardClicked, OnCardDoubleClicked);
+            // 주입받은 함수로 해당 카드의 색상 결정
+            Color cardColor = _cardColorProvider != null ? _cardColorProvider(id) : Color.white;
+
+            // 색상 데이터를 함께 전달
+            cardObj.Init(new CardIdentity(poolType, id), cardName, cardColor, OnCardClicked, OnCardDoubleClicked);
             _spawnedCards.Add(cardObj);
         }
     }
 
-    // 텍스트, 버튼, 하이라이트를 즉시 갱신 (전체 카드를 다시 그리지 않음)
     void RefreshUIVisuals()
     {
         if (_store == null) return;
