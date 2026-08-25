@@ -25,18 +25,17 @@ public class MatchContextTests
     }
 
     [Test]
-    public void 게임이_끝나면_승리_기록_후_픽된_ID는_선택_풀에서_제외한다()
+    public void 피어리스에_포함된_id는_저장소에서_제외된다()
     {
         var allIds = new[] { 10, 20, 30 };
         var playerMatchData = CreateMatchData(1, 100);
 
-        MatchContext.MatchInit(playerMatchData, 2, allIds);
+        MatchContext.MatchInit(playerMatchData, targetWin: 2, allIds);
+        MatchContext.RecordMatchResult(new int[] { 10 });
 
-        MatchContext.Storage.Pick(Team.Blue, 10);
-        MatchContext.EndMatch(1);
+        var result = MatchContext.CreateFearlessStorage().SelectableIds;
 
-        Assert.AreEqual(1, MatchContext.WinCounter.GetWin(1));
-        CollectionAssert.AreEqual(new int[] { 20, 30 }, MatchContext.Storage.SelectableIds);
+        CollectionAssert.DoesNotContain(result, 10);
     }
 
     [Test]
