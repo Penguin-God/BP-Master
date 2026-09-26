@@ -11,13 +11,13 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     PhaseFlowOrchestrator phaseManager;
     [SerializeField] ChampionButtonView champBtnView;
 
-    public void Init(BanPickHandler storage, PhaseFlowOrchestrator pm)
+    public void Init(BanPickHandler handler, PhaseFlowOrchestrator pm)
     {
         gameObject.SetActive(true);
 
         champBtnView.AddEvent(SelectChampion);
 
-        this.banpickHandler = storage;
+        this.banpickHandler = handler;
         phaseManager = pm;
 
         selectBtn.onClick.AddListener(NailDownChampion);
