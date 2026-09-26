@@ -12,6 +12,7 @@ public class UI_DeckBuilder : MonoBehaviour
     [SerializeField] Button removeButton;
     [SerializeField] Transform changeablePanel;
     [SerializeField] Transform selectedPanel;
+    [SerializeField] ChampionView championView;
 
     [Header("Prefabs & Dependencies")]
     [SerializeField] UI_DeckCard cardPrefab;
@@ -47,6 +48,7 @@ public class UI_DeckBuilder : MonoBehaviour
     {
         _focusedCard = target;
         RefreshUIVisuals();
+        championView.UpdateDisplay(target.Id);
     }
 
     void OnCardDoubleClicked(CardIdentity target)

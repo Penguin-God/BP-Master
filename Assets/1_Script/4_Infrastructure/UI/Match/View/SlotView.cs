@@ -12,6 +12,7 @@ public class SlotView : MonoBehaviour
     void Start()
     {
         slotButton.onClick.AddListener(DrawTarget);
+        void DrawTarget() => championFocusView.UpdateDisplay(ChampionDataLoder.GetChampionData(id));
     }
 
     public void Init(ChampionView championFocusView) => this.championFocusView = championFocusView;
@@ -21,6 +22,4 @@ public class SlotView : MonoBehaviour
         this.id = id;
         championView.UpdateChampion(new ChampionTextModel(ChampionDataLoder.NameCatalog[id], status.Stat));
     }
-
-    void DrawTarget() => championFocusView.UpdateDisplay(ChampionDataLoder.GetChampionData(id));
 }
