@@ -1436,7 +1436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb82cf15f2b8d7458be8eb73b00dc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championSelector: {fileID: 0}
+  championSelector: {fileID: 232828601}
   championDrawer: {fileID: 1027524856}
   skillUseView: {fileID: 1164166379}
   slotViews: {fileID: 1164166382}
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchUI_Controller: {fileID: 1213870346}
   ai_main: {fileID: 758303701}
-  championSelector: {fileID: 0}
+  championSelector: {fileID: 232828601}
   matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   tutorialTriggerSO: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
@@ -2374,7 +2374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cda04c6bea654449928f16e86347c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  banPickUI: {fileID: 0}
+  banPickUI: {fileID: 232828601}
   match: {fileID: 1420292363}
   blueButton: {fileID: 1366672694}
   redButton: {fileID: 1394800989}
