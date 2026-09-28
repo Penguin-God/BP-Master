@@ -75,17 +75,6 @@ public class UI_DeckBuilder : MonoBehaviour
         }
     }
 
-    // --- View Render --- //
-    //void UpdateView(DeckBuildState state)
-    //{
-    //    _spawnedCards.Clear();
-
-    //    DrawCards(changeablePanel, state.ChangeableCards, OnCardClicked, OnCardDoubleClicked);
-    //    DrawCards(selectedPanel, state.SelectedCards, OnCardClicked, OnCardDoubleClicked);
-
-    //    RefreshUIVisuals();
-    //}
-
     void UpdateView(DeckBuildState state)
     {
         _spawnedCards.Clear();
@@ -107,18 +96,6 @@ public class UI_DeckBuilder : MonoBehaviour
             OnCardDoubleClicked));
 
         RefreshUIVisuals();
-    }
-
-    void DrawCards(Transform panel, HashSet<int> cardIds, Action<CardIdentity> onCardClicked, Action<CardIdentity> onCardDoubleClicked)
-    {
-        foreach (Transform child in panel) Destroy(child.gameObject);
-
-        foreach (var id in cardIds)
-        {
-            var cardObj = Instantiate(cardPrefab, panel);
-            cardObj.Init(new CardIdentity(id), ChampionDataLoder.NameCatalog[id], Color.white, onCardClicked, onCardDoubleClicked);
-            _spawnedCards.Add(cardObj);
-        }
     }
 
     void RefreshUIVisuals()
