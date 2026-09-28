@@ -18,7 +18,7 @@ public class SwapScene : MonoBehaviour
         Change(deckState);
         store.OnStateChanged += Change;
 
-        FindAnyObjectByType<UI_DeckBuilder>().Init(store, id => MatchContext.FearlessLockedCards.Contains(id) ? Color.gray : Color.white);
+        FindAnyObjectByType<UI_DeckBuilder>().Init(store);
 
         nextBattleBtn.onClick.AddListener(() => SceneLoadHelper.LoadScene(SceneType.Battle));
         nextBattleBtn.interactable = CheckDeckPlayable(MatchContext.CurrentDeck);

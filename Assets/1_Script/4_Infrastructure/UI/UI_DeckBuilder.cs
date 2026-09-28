@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UI_DeckBuilder : MonoBehaviour
 {
@@ -20,19 +20,15 @@ public class UI_DeckBuilder : MonoBehaviour
     DeckBuildStore _store;
     CardIdentity _focusedCard;
     List<UI_DeckCard> _spawnedCards = new List<UI_DeckCard>();
-
-    Func<int, Color> _cardColorProvider;
-
     void Awake()
     {
         addButton.onClick.AddListener(OnAddClicked);
         removeButton.onClick.AddListener(OnRemoveClicked);
     }
 
-    public void Init(DeckBuildStore store, Func<int, Color> cardColorProvider = null)
+    public void Init(DeckBuildStore store)
     {
         _store = store;
-        _cardColorProvider = cardColorProvider;
         _store.OnStateChanged += UpdateView;
         UpdateView(_store.State);
     }
@@ -96,10 +92,7 @@ public class UI_DeckBuilder : MonoBehaviour
         foreach (var id in cardIds)
         {
             var cardObj = Instantiate(cardPrefab, panel);
-            // 외부 함수로 색깔 결정
-            Color cardColor = _cardColorProvider != null ? _cardColorProvider(id) : Color.white;
-
-            cardObj.Init(new CardIdentity(poolType, id), ChampionDataLoder.NameCatalog[id], cardColor, OnCardClicked, OnCardDoubleClicked);
+            cardObj.Init(new CardIdentity(poolType, id), ChampionDataLoder.NameCatalog[id], Color.white, OnCardClicked, OnCardDoubleClicked);
             _spawnedCards.Add(cardObj);
         }
     }
