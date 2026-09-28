@@ -11,6 +11,8 @@ public class SwapScene : MonoBehaviour
 
     void Awake()
     {
+        if (MatchContext.CurrentDeck == null)
+            MatchContext.CurrentDeck = new DeckBuildState(20, new (ChampionDataLoder.AllId), new());
         var deckState = new DeckBuildState(MatchContext.CurrentDeck.CardCount, ExpectFearLessSet(MatchContext.CurrentDeck.AvailableCards), ExpectFearLessSet(MatchContext.CurrentDeck.SelectedCards));
         store = new DeckBuildStore(deckState);
         Change(deckState);
