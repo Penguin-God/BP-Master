@@ -1,3 +1,4 @@
+using Match;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class UI_DeckBuilder : MonoBehaviour
         _store.OnStateChanged += UpdateView;
         UpdateView(_store.State);
         // Draw FearLess Cards
+        DrawCards(fearlessPanel, MatchContext.FearlessLockedCards);
     }
 
     void OnDestroy()
