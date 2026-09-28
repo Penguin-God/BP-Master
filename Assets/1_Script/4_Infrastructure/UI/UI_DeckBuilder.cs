@@ -8,8 +8,7 @@ public class UI_DeckBuilder : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI countText;
-    [SerializeField] Button addButton;
-    [SerializeField] Button removeButton;
+    [SerializeField] Button cardTranslateBtn;
     [SerializeField] Transform changeablePanel;
     [SerializeField] Transform selectedPanel;
     [SerializeField] Transform fearlessPanel;
@@ -23,8 +22,7 @@ public class UI_DeckBuilder : MonoBehaviour
     List<UI_DeckCard> _spawnedCards = new List<UI_DeckCard>();
     void Awake()
     {
-        addButton.onClick.AddListener(OnAddClicked);
-        removeButton.onClick.AddListener(OnRemoveClicked);
+        cardTranslateBtn.onClick.AddListener(TranslateFocusCard);
     }
 
     public void Init(DeckBuildStore store)
@@ -53,26 +51,30 @@ public class UI_DeckBuilder : MonoBehaviour
     void OnCardDoubleClicked(CardIdentity target)
     {
         _focusedCard = target;
-        if (ForcusCardContainDeck() == false) OnAddClicked();
-        else OnRemoveClicked();
+        if (ForcusCardContainDeck() == false) CardToUesd();
+        else CardToNotUesd();
     }
 
-    void OnAddClicked()
+    void TranslateFocusCard()
+    {
+        if (ForcusCardContainDeck()) CardToNotUesd();
+        else CardToUesd();
+    }
+
+    void CardToUesd()
     {
         if (ForcusCardContainDeck() == false)
         {
             _store.Dispatch(state => DeckBuildService.AddCard(state, _focusedCard.Id));
-            _focusedCard = null;
             RefreshUIVisuals();
         }
     }
 
-    void OnRemoveClicked()
+    void CardToNotUesd()
     {
         if (ForcusCardContainDeck())
         {
             _store.Dispatch(state => DeckBuildService.RemoveCard(state, _focusedCard.Id));
-            _focusedCard = null;
             RefreshUIVisuals();
         }
     }
@@ -109,9 +111,6 @@ public class UI_DeckBuilder : MonoBehaviour
 
         countText.text = $"{state.SelectedCards.Count} / {state.CardCount}";
         countText.color = isFull ? Color.white : Color.red;
-
-        addButton.interactable = (ForcusCardContainDeck() == false) && !isFull;
-        removeButton.interactable = (ForcusCardContainDeck());
 
         foreach (var card in _spawnedCards)
             card.SetFocus(_focusedCard != null && card.Identity == _focusedCard);
