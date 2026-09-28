@@ -80,20 +80,20 @@ public class UI_DeckBuilder : MonoBehaviour
     {
         _spawnedCards.Clear();
 
-        DrawCards(changeablePanel, state.ChangeableCards, CardPoolType.Available);
-        DrawCards(selectedPanel, state.SelectedCards, CardPoolType.Selected);
+        DrawCards(changeablePanel, state.ChangeableCards);
+        DrawCards(selectedPanel, state.SelectedCards);
 
         RefreshUIVisuals();
     }
 
-    void DrawCards(Transform panel, HashSet<int> cardIds, CardPoolType poolType)
+    void DrawCards(Transform panel, HashSet<int> cardIds)
     {
         foreach (Transform child in panel) Destroy(child.gameObject);
 
         foreach (var id in cardIds)
         {
             var cardObj = Instantiate(cardPrefab, panel);
-            cardObj.Init(new CardIdentity(poolType, id), ChampionDataLoder.NameCatalog[id], Color.white, OnCardClicked, OnCardDoubleClicked);
+            cardObj.Init(new CardIdentity(id), ChampionDataLoder.NameCatalog[id], Color.white, OnCardClicked, OnCardDoubleClicked);
             _spawnedCards.Add(cardObj);
         }
     }

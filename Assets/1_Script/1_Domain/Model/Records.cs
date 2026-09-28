@@ -7,7 +7,7 @@ public record DeckBuildState(int CardCount, HashSet<int> AvailableCards, HashSet
 {
     public HashSet<int> ChangeableCards => AvailableCards.Except(SelectedCards).ToHashSet();
 };
-public record CardIdentity(CardPoolType Pool, int Id);
+public record CardIdentity(int Id);
 
 public record MatchParticipant(int Id, int Wins = 0);
 public record MatchSeriesState(MatchParticipant Player1, MatchParticipant Player2, int TargetWins)

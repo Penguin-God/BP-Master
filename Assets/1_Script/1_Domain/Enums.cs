@@ -1,9 +1,3 @@
-public enum CardPoolType
-{
-    Available,
-    Selected
-}
-
 public enum StatType
 {
     Attack,
