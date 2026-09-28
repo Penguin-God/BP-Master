@@ -2,6 +2,7 @@ using UnityEngine;
 using Match;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections.Generic;
 
 public class SwapScene : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class SwapScene : MonoBehaviour
 
     void Awake()
     {
-        var deckState = new DeckBuildState(MatchContext.CurrentDeck.CardCount, new (MatchContext.CurrentDeck.AvailableCards.Except(MatchContext.FearlessLockedCards)), new (MatchContext.CurrentDeck.SelectedCards.Except(MatchContext.FearlessLockedCards)));
+        var deckState = new DeckBuildState(MatchContext.CurrentDeck.CardCount, ExpectFearLessSet(MatchContext.CurrentDeck.AvailableCards), ExpectFearLessSet(MatchContext.CurrentDeck.SelectedCards));
         store = new DeckBuildStore(deckState);
         Change(deckState);
         store.OnStateChanged += Change;
@@ -19,6 +20,8 @@ public class SwapScene : MonoBehaviour
 
         nextBattleBtn.onClick.AddListener(() => SceneLoadHelper.LoadScene(SceneType.Battle));
         nextBattleBtn.interactable = CheckDeckPlayable(MatchContext.CurrentDeck);
+
+        HashSet<int> ExpectFearLessSet(IEnumerable<int> cards) => new (cards.Except(MatchContext.FearlessLockedCards));
     }
 
     void OnDestroy()
