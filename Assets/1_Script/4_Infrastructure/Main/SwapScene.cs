@@ -7,6 +7,10 @@ using System.Collections.Generic;
 public class SwapScene : MonoBehaviour
 {
     [SerializeField] Button nextBattleBtn;
+    [SerializeField] Transform fearlessPanel;
+    [SerializeField] UI_DeckCard cardPrefab;
+    [SerializeField] ChampionView championView;
+
     DeckBuildStore store;
 
     void Awake()
@@ -24,12 +28,23 @@ public class SwapScene : MonoBehaviour
         nextBattleBtn.interactable = CheckDeckPlayable(MatchContext.CurrentDeck);
 
         HashSet<int> ExpectFearLessSet(IEnumerable<int> cards) => new (cards.Except(MatchContext.FearlessLockedCards));
+        DrawFearlessCards();
     }
 
     void OnDestroy()
     {
         if (store != null)
             store.OnStateChanged -= Change;
+    }
+
+    void DrawFearlessCards()
+    {
+        DeckCardDrawer.DrawCards(
+            fearlessPanel,
+            cardPrefab,
+            MatchContext.FearlessLockedCards,
+            id => ChampionDataLoder.NameCatalog[id],
+            target => championView.UpdateDisplay(target.Id));
     }
 
     void Change(DeckBuildState state)

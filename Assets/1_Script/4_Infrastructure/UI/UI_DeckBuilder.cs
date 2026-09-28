@@ -1,4 +1,4 @@
-using Match;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,7 +11,6 @@ public class UI_DeckBuilder : MonoBehaviour
     [SerializeField] Button cardTranslateBtn;
     [SerializeField] Transform changeablePanel;
     [SerializeField] Transform selectedPanel;
-    [SerializeField] Transform fearlessPanel;
     [SerializeField] ChampionView championView;
 
     [Header("Prefabs & Dependencies")]
@@ -30,8 +29,6 @@ public class UI_DeckBuilder : MonoBehaviour
         _store = store;
         _store.OnStateChanged += UpdateView;
         UpdateView(_store.State);
-        // Draw FearLess Cards
-        DrawCards(fearlessPanel, MatchContext.FearlessLockedCards);
     }
 
     void OnDestroy()
@@ -51,8 +48,7 @@ public class UI_DeckBuilder : MonoBehaviour
     void OnCardDoubleClicked(CardIdentity target)
     {
         _focusedCard = target;
-        if (ForcusCardContainDeck() == false) CardToUesd();
-        else CardToNotUesd();
+        TranslateFocusCard();
     }
 
     void TranslateFocusCard()
@@ -80,24 +76,47 @@ public class UI_DeckBuilder : MonoBehaviour
     }
 
     // --- View Render --- //
+    //void UpdateView(DeckBuildState state)
+    //{
+    //    _spawnedCards.Clear();
+
+    //    DrawCards(changeablePanel, state.ChangeableCards, OnCardClicked, OnCardDoubleClicked);
+    //    DrawCards(selectedPanel, state.SelectedCards, OnCardClicked, OnCardDoubleClicked);
+
+    //    RefreshUIVisuals();
+    //}
+
     void UpdateView(DeckBuildState state)
     {
         _spawnedCards.Clear();
 
-        DrawCards(changeablePanel, state.ChangeableCards);
-        DrawCards(selectedPanel, state.SelectedCards);
+        _spawnedCards.AddRange(DeckCardDrawer.DrawCards(
+            changeablePanel,
+            cardPrefab,
+            state.ChangeableCards,
+            id => ChampionDataLoder.NameCatalog[id],
+            OnCardClicked,
+            OnCardDoubleClicked));
+
+        _spawnedCards.AddRange(DeckCardDrawer.DrawCards(
+            selectedPanel,
+            cardPrefab,
+            state.SelectedCards,
+            id => ChampionDataLoder.NameCatalog[id],
+            OnCardClicked,
+            OnCardDoubleClicked));
 
         RefreshUIVisuals();
     }
 
-    void DrawCards(Transform panel, HashSet<int> cardIds)
+    void DrawCards(Transform panel, HashSet<int> cardIds, Action<CardIdentity> onCardClicked, Action<CardIdentity> onCardDoubleClicked)
     {
         foreach (Transform child in panel) Destroy(child.gameObject);
 
         foreach (var id in cardIds)
         {
             var cardObj = Instantiate(cardPrefab, panel);
-            cardObj.Init(new CardIdentity(id), ChampionDataLoder.NameCatalog[id], Color.white, OnCardClicked, OnCardDoubleClicked);
+            cardObj.Init(new CardIdentity(id), ChampionDataLoder.NameCatalog[id], Color.white, onCardClicked, onCardDoubleClicked);
             _spawnedCards.Add(cardObj);
         }
     }
@@ -120,5 +139,39 @@ public class UI_DeckBuilder : MonoBehaviour
     {
         if (_focusedCard == null) return false;
         return _store.State.SelectedCards.Contains(_focusedCard.Id);
+    }
+}
+
+
+public static class DeckCardDrawer
+{
+    public static List<UI_DeckCard> DrawCards(
+        Transform panel,
+        UI_DeckCard cardPrefab,
+        IEnumerable<int> cardIds,
+        Func<int, string> getCardName,
+        Action<CardIdentity> onCardClicked,
+        Action<CardIdentity> onCardDoubleClicked = null)
+    {
+        foreach (Transform child in panel)
+            GameObject.Destroy(child.gameObject);
+
+        var cards = new List<UI_DeckCard>();
+
+        foreach (var id in cardIds)
+        {
+            var card = GameObject.Instantiate(cardPrefab, panel);
+
+            card.Init(
+                new CardIdentity(id),
+                getCardName(id),
+                Color.white,
+                onCardClicked,
+                onCardDoubleClicked);
+
+            cards.Add(card);
+        }
+
+        return cards;
     }
 }
