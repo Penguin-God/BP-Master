@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,6 +11,7 @@ public class UI_DeckBuilder : MonoBehaviour
     [SerializeField] Button removeButton;
     [SerializeField] Transform changeablePanel;
     [SerializeField] Transform selectedPanel;
+    [SerializeField] Transform fearlessPanel;
     [SerializeField] ChampionView championView;
 
     [Header("Prefabs & Dependencies")]
@@ -31,6 +31,7 @@ public class UI_DeckBuilder : MonoBehaviour
         _store = store;
         _store.OnStateChanged += UpdateView;
         UpdateView(_store.State);
+        // Draw FearLess Cards
     }
 
     void OnDestroy()
@@ -50,13 +51,13 @@ public class UI_DeckBuilder : MonoBehaviour
     void OnCardDoubleClicked(CardIdentity target)
     {
         _focusedCard = target;
-        if (target.Pool == CardPoolType.Available) OnAddClicked();
+        if (ForcusCardContainDeck() == false) OnAddClicked();
         else OnRemoveClicked();
     }
 
     void OnAddClicked()
     {
-        if (_focusedCard?.Pool == CardPoolType.Available)
+        if (ForcusCardContainDeck() == false)
         {
             _store.Dispatch(state => DeckBuildService.AddCard(state, _focusedCard.Id));
             _focusedCard = null;
@@ -66,7 +67,7 @@ public class UI_DeckBuilder : MonoBehaviour
 
     void OnRemoveClicked()
     {
-        if (_focusedCard?.Pool == CardPoolType.Selected)
+        if (ForcusCardContainDeck())
         {
             _store.Dispatch(state => DeckBuildService.RemoveCard(state, _focusedCard.Id));
             _focusedCard = null;
@@ -107,10 +108,16 @@ public class UI_DeckBuilder : MonoBehaviour
         countText.text = $"{state.SelectedCards.Count} / {state.CardCount}";
         countText.color = isFull ? Color.white : Color.red;
 
-        addButton.interactable = (_focusedCard?.Pool == CardPoolType.Available) && !isFull;
-        removeButton.interactable = (_focusedCard?.Pool == CardPoolType.Selected);
+        addButton.interactable = (ForcusCardContainDeck() == false) && !isFull;
+        removeButton.interactable = (ForcusCardContainDeck());
 
         foreach (var card in _spawnedCards)
             card.SetFocus(_focusedCard != null && card.Identity == _focusedCard);
+    }
+
+    bool ForcusCardContainDeck()
+    {
+        if (_focusedCard == null) return false;
+        return _store.State.SelectedCards.Contains(_focusedCard.Id);
     }
 }
