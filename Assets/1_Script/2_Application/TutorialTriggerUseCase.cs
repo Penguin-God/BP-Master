@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 
 public enum TutorialType
 {
-    GameStart,
     MatchStart,
     SecondSetEnter,
     MasteryUIEnter

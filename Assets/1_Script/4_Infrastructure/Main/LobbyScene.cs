@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class LobbyScene : MonoBehaviour
 {
-    [SerializeField] TutorialTriggerSO tutorialTrigger;
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] SkillTextSO skillTextSO;
     [SerializeField] CardListSO start;
@@ -18,8 +17,7 @@ public class LobbyScene : MonoBehaviour
 
         FindMono<UI_StageSelection>().Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
-        tutorialTrigger.StartTutorialOneTime(TutorialType.GameStart);
-
+        
         store = new DeckBuildStore(new DeckBuildState(20, all.CardIdSet, start.CardIdSet));
         store.OnStateChanged += Change;
         FindMono<UI_DeckBuilder>().Init(store);
