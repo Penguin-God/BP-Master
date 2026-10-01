@@ -1,19 +1,14 @@
-using Match;
 using UnityEngine;
+using System;
 
-public class TutorialInitailzier : MonoBehaviour
+public static class TutorialEventBinder
 {
-    [SerializeField] TutorialTriggerSO tutorialTriggerSO;
-
-    void Start()
+    public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, int totalWins)
     {
-                
-    }
+        if (totalWins == 0) startTutorialOneTime(TutorialType.MatchStart);
+        else startTutorialOneTime(TutorialType.SecondSetEnter);
 
-    void MatchTutorial()
-    {
-        if (MatchContext.MatchState.TotalWins == 0) tutorialTriggerSO.StartTutorialOneTime(TutorialType.MatchStart);
-        else tutorialTriggerSO.StartTutorialOneTime(TutorialType.SecondSetEnter);
+
     }
 }
 
