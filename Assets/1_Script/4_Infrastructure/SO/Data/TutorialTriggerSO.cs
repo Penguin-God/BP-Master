@@ -9,14 +9,14 @@ public class TutorialEntry
 }
 
 [CreateAssetMenu(fileName = "TutorialTriggerSO", menuName = "Data/TutorialTriggerSO")]
-public class TutorialTriggerSO : ScriptableObject, ITutorialViewer
+public class TutorialTriggerSO : ScriptableObject
 {
     [SerializeField] TutorialEntry[] entries;
     [SerializeField] GameObject _uiTutorial;
 
-    public void StartTutorialOneTime(TutorialType type) => new TutorialTriggerUseCase(new PlayerPrefsTutorialStorage(), this).TriggerIfFirstTime(type);
+    public void StartTutorialOneTime(TutorialType type) => new TutorialTriggerUseCase(Show).TriggerIfFirstTime(type);
 
-    public void Show(TutorialType type)
+    void Show(TutorialType type)
     {
         var dialogues = entries.FirstOrDefault(x => x.Type == type)?.Dialogues;
 

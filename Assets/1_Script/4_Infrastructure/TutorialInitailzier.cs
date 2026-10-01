@@ -17,17 +17,6 @@ public class TutorialInitailzier : MonoBehaviour
     }
 }
 
-public class PlayerPrefsTutorialStorage : ITutorialStorage
-{
-    public bool HasSeen(TutorialType type) => PlayerPrefs.GetInt($"Tutorial_{type}", 0) == 1;
-
-    public void MarkAsSeen(TutorialType type)
-    {
-        PlayerPrefs.SetInt($"Tutorial_{type}", 1);
-        PlayerPrefs.Save();
-    }
-}
-
 public enum TutorialType
 {
     MatchStart,
@@ -37,31 +26,19 @@ public enum TutorialType
 
 public class TutorialTriggerUseCase
 {
-    readonly ITutorialStorage _storage;
-    readonly ITutorialViewer _viewer;
+    readonly System.Action<TutorialType> _showTutorialUI;
 
-    public TutorialTriggerUseCase(ITutorialStorage storage, ITutorialViewer viewer)
+    public TutorialTriggerUseCase(System.Action<TutorialType> showTutorialUI)
     {
-        _storage = storage;
-        _viewer = viewer;
+        _showTutorialUI = showTutorialUI;
     }
 
     public void TriggerIfFirstTime(TutorialType type)
     {
-        if (_storage.HasSeen(type)) return;
+        if (PlayerPrefs.GetInt($"Tutorial_{type}", 0) == 1) return;
 
-        _storage.MarkAsSeen(type);
-        _viewer.Show(type);
+        PlayerPrefs.SetInt($"Tutorial_{type}", 1);
+        PlayerPrefs.Save();
+        _showTutorialUI(type);
     }
-}
-
-public interface ITutorialStorage
-{
-    bool HasSeen(TutorialType type);
-    void MarkAsSeen(TutorialType type);
-}
-
-public interface ITutorialViewer
-{
-    void Show(TutorialType type);
 }
