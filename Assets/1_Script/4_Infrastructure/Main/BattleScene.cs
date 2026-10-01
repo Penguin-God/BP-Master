@@ -38,7 +38,7 @@ public class BattleScene : MonoBehaviour
 
         TutorialEventBinder.BindBattleTutorial(tutorialTriggerSO.StartTutorialOneTime, MatchContext.MatchState.TotalWins);
 
-        core.OnGameFinished += OnDone;
+        core.OnGameFinished += new BattleResultHandler(storage, playerIds, matchConfigSO, ai_id).OnDone;
         core.PhaseManager.Start();
     }
 
@@ -48,8 +48,24 @@ public class BattleScene : MonoBehaviour
         IPhaseEntry red = playerTeam == Team.Red ? player : ai;
         return (blue, red);
     }
+}
 
-    void OnDone(MatchResult result)
+public class BattleResultHandler
+{
+    BanPickStorage storage;
+    Dictionary<Team, int> playerIds;
+    MatchConfigSO matchConfigSO;
+    int ai_id;
+
+    public BattleResultHandler(BanPickStorage storage, Dictionary<Team, int> playerIds, MatchConfigSO matchConfigSO, int ai_id)
+    {
+        this.storage = storage;
+        this.playerIds = playerIds;
+        this.matchConfigSO = matchConfigSO;
+        this.ai_id = ai_id;
+    }
+
+    public void OnDone(MatchResult result)
     {
         bool matchEnd = false;
         if (result.Winner == Team.All) ; // 승자는 후픽으로 설정하기
@@ -59,12 +75,12 @@ public class BattleScene : MonoBehaviour
             matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
         }
 
-        FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
+        Object.FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
 
         if (matchEnd && playerIds[result.Winner] == matchConfigSO.UserId)
         {
             var saver = new JsonMasterySaver();
-            new StageProgressUseCase(new PlayerPrefsStageStorage(), saver.Load(), saver , matchConfigSO.EarnPointByStage).ClearStage(ai_id);
+            new StageProgressUseCase(new PlayerPrefsStageStorage(), saver.Load(), saver, matchConfigSO.EarnPointByStage).ClearStage(ai_id);
         }
 
         GameEndButtonModel CreateGameEndButtonModel(bool isGameEnd)
