@@ -3,12 +3,10 @@ using System;
 
 public static class TutorialEventBinder
 {
-    public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, int totalWins)
+    public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher)
     {
-        if (totalWins == 0) startTutorialOneTime(TutorialType.MatchStart);
-        else startTutorialOneTime(TutorialType.SecondSetEnter);
-
-
+        eventDispatcher.OnPhasePick += (Team team) => startTutorialOneTime(TutorialType.MatchStart);
+        eventDispatcher.OnPhaseBan += (Team team) => startTutorialOneTime(TutorialType.SecondSetEnter);
     }
 }
 
@@ -21,9 +19,9 @@ public enum TutorialType
 
 public class TutorialTrigger
 {
-    readonly System.Action<TutorialType> _showTutorialUI;
+    readonly Action<TutorialType> _showTutorialUI;
 
-    public TutorialTrigger(System.Action<TutorialType> showTutorialUI) => _showTutorialUI = showTutorialUI;
+    public TutorialTrigger(Action<TutorialType> showTutorialUI) => _showTutorialUI = showTutorialUI;
 
     public void TriggerIfFirstTime(TutorialType type)
     {
