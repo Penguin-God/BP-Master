@@ -11,7 +11,6 @@ public class BattleScene : MonoBehaviour
     Dictionary<Team, int> playerIds = new();
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
     [SerializeField] MatchConfigSO matchConfigSO;
-    [SerializeField] TutorialTriggerSO tutorialTriggerSO;
     int ai_id;
     BanPickStorage storage;
     public void GameStart(Team playerTeam)
@@ -37,14 +36,6 @@ public class BattleScene : MonoBehaviour
 
         core.OnGameFinished += OnDone;
         core.PhaseManager.Start();
-
-        MatchTutorial();
-    }
-
-    void MatchTutorial()
-    {
-        if (MatchContext.MatchState.TotalWins == 0) tutorialTriggerSO.StartTutorialOneTime(TutorialType.MatchStart);
-        else tutorialTriggerSO.StartTutorialOneTime(TutorialType.SecondSetEnter);
     }
 
     (IPhaseEntry blue, IPhaseEntry red) CreatePhaseOrchestrator(IPhaseEntry player, IPhaseEntry ai, Team playerTeam)
