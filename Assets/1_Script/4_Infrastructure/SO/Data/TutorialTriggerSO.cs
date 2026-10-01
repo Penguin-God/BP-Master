@@ -14,7 +14,7 @@ public class TutorialTriggerSO : ScriptableObject
     [SerializeField] TutorialEntry[] entries;
     [SerializeField] GameObject _uiTutorial;
 
-    public void StartTutorialOneTime(TutorialType type) => new TutorialTriggerUseCase(Show).TriggerIfFirstTime(type);
+    public void StartTutorialOneTime(TutorialType type) => new TutorialTrigger(Show).TriggerIfFirstTime(type);
 
     void Show(TutorialType type)
     {

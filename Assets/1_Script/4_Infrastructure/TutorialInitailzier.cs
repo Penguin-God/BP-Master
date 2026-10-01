@@ -24,14 +24,11 @@ public enum TutorialType
     MasteryUIEnter
 }
 
-public class TutorialTriggerUseCase
+public class TutorialTrigger
 {
     readonly System.Action<TutorialType> _showTutorialUI;
 
-    public TutorialTriggerUseCase(System.Action<TutorialType> showTutorialUI)
-    {
-        _showTutorialUI = showTutorialUI;
-    }
+    public TutorialTrigger(System.Action<TutorialType> showTutorialUI) => _showTutorialUI = showTutorialUI;
 
     public void TriggerIfFirstTime(TutorialType type)
     {
