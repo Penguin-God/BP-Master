@@ -5,22 +5,22 @@ public static class TutorialEventBinder
 {
     public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher)
     {
-        eventDispatcher.OnPhasePick += (Team team) => startTutorialOneTime(TutorialType.MatchStart);
-        eventDispatcher.OnPhaseBan += (Team team) => startTutorialOneTime(TutorialType.SecondSetEnter);
+        eventDispatcher.OnPhasePick += (Team team) => startTutorialOneTime(TutorialType.Pick);
+        eventDispatcher.OnPhaseBan += (Team team) => startTutorialOneTime(TutorialType.MatchStart);
     }
 }
 
 public enum TutorialType
 {
     MatchStart,
-    SecondSetEnter,
-    MasteryUIEnter
+    MasteryUIEnter,
+    Pick,
+    Swap,
 }
 
 public class TutorialTrigger
 {
     readonly Action<TutorialType> _showTutorialUI;
-
     public TutorialTrigger(Action<TutorialType> showTutorialUI) => _showTutorialUI = showTutorialUI;
 
     public void TriggerIfFirstTime(TutorialType type)

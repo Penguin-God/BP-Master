@@ -10,6 +10,7 @@ public class SwapScene : MonoBehaviour
     [SerializeField] Transform fearlessPanel;
     [SerializeField] UI_DeckCard cardPrefab;
     [SerializeField] ChampionView championView;
+    [SerializeField] TutorialTriggerSO tutorialTriggerSO;
 
     DeckBuildStore store;
 
@@ -29,6 +30,8 @@ public class SwapScene : MonoBehaviour
 
         HashSet<int> ExpectFearLessSet(IEnumerable<int> cards) => new (cards.Except(MatchContext.FearlessLockedCards));
         DrawFearlessCards();
+
+        tutorialTriggerSO.StartTutorialOneTime(TutorialType.Swap);
     }
 
     void OnDestroy()
