@@ -3824,7 +3824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::SwapScene
   nextBattleBtn: {fileID: 927637456}
-  fearlessPanel: {fileID: 1430361544}
+  fearlessPanel: {fileID: 848173679}
   cardPrefab: {fileID: 2108406897110898466, guid: e627ce331227b8149949433afbe3118e, type: 3}
   championView: {fileID: 1057204123}
   tutorialTriggerSO: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
