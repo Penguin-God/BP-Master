@@ -33,10 +33,10 @@ public class ChampionButtonView : MonoBehaviour
     void Start()
     {
         var champions = MatchContext.CurrentDeck.SelectedCards.Select(x => ChampionDataLoder.GetChampionData(x).CreateChampion());
-        defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
-        attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
-        defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
-        speedTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Speed)));
+        //defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
+        //attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
+        //defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
+        //speedTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Speed)));
     }
 
     public void CreateButtons() => CreateButtons(MatchContext.CurrentDeck.SelectedCards);
@@ -90,19 +90,19 @@ public class ChampionButtonView : MonoBehaviour
             btn.onClick.AddListener(() => action(btn.GetComponent<ChampionIdentify>()));
     }
 
-    IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
-    {
-        ChampionSortType.Default => MatchContext.CurrentDeck.SelectedCards,
-        ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
-        ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
-        ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
-        _ => throw new System.NotImplementedException(),
-    };
+    //IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
+    //{
+    //    ChampionSortType.Default => MatchContext.CurrentDeck.SelectedCards,
+    //    ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
+    //    ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
+    //    ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
+    //    _ => throw new System.NotImplementedException(),
+    //};
 
-    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType)
-        => champions
-            .OrderByDescending(c => c.Status.Stat.GetStatValue(statType))
-            .Select(x => x.Id);
+    //IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType)
+    //    => champions
+    //        .OrderByDescending(c => c.Status.Stat.GetStatValue(statType))
+    //        .Select(x => x.Id);
 
     public void InActiveButton(int id)
     {
