@@ -26,12 +26,9 @@ public class AIBattleSimulatorSO : ScriptableObject
             { Team.Red, match.Id2 }
         };
 
-        var core = matchCoreFactorySO.CreateMatchCore(storage, catalog, idByTeam);
-
         var blueEntry = CreateEntry(Team.Blue, match.Id1, core, catalog, storage);
         var redEntry = CreateEntry(Team.Red, match.Id2, core, catalog, storage);
-
-        core.SetupPhaseManager(blueEntry, redEntry);
+        var core = matchCoreFactorySO.CreateMatchCore(storage, catalog, idByTeam, blueEntry, redEntry);
 
         int finalWinnerId = -1;
 

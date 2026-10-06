@@ -25,16 +25,12 @@ public class BattleScene : MonoBehaviour
 
         var championCatalog = ChampionDataLoder.GetCatalog();
         storage = MatchContext.CreateFearlessStorage();
-        var core = matchCoreFactorySO.CreateMatchCore(storage, championCatalog, playerIds);
-
-        var masteryRegistry = core.MasteryRegistry;
-
         var (blue, red) = CreatePhaseOrchestrator(championSelector, ai_main, playerTeam);
-        core.SetupPhaseManager(blue, red);
-        
+        var core = matchCoreFactorySO.CreateMatchCore(storage, championCatalog, playerIds, blue, red);
+
         matchUI_Controller.Init(playerTeam, core, playerIds); // start보다 먼저
 
-        ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, masteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
+        ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
 
         TutorialEventBinder.BindBattleTutorial(tutorialTriggerSO.StartTutorialOneTime, core.PhaseEventDispatcher);
 

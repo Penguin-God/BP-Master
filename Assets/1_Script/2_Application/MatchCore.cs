@@ -30,6 +30,24 @@ public class MatchCore
         TeamBonusCalculator = teamBonusCalculator;
     }
 
+    public MatchCore(
+        MasteryRegistry masteryRegistry,
+        PhaseEventDispatcher phaseEventDispatcher,
+        PhaseAdvancer phaseAdvancer,
+        BanPickHandler banPickHandler,
+        SkillUsecase skillController,
+        PhaseFlowOrchestrator phaseManager,
+        TeamBonusCalculator teamBonusCalculator)
+    {
+        MasteryRegistry = masteryRegistry;
+        PhaseEventDispatcher = phaseEventDispatcher;
+        PhaseAdvancer = phaseAdvancer;
+        BanPickHandler = banPickHandler;
+        SkillController = skillController;
+        PhaseManager = phaseManager;
+        TeamBonusCalculator = teamBonusCalculator;
+    }
+
     public void SetupPhaseManager(IPhaseEntry blueEntry, IPhaseEntry redEntry)
     {
         PhaseManager = new PhaseFlowOrchestrator(PhaseAdvancer, PhaseEventDispatcher, new TeamPhaseEntryDispatcher(blueEntry, redEntry));
@@ -45,6 +63,11 @@ public class MatchCore
     void HandleGameEnd()
     {
         var result = MatchResultCalculator.CalculateResult(TeamBonusCalculator, BanPickHandler.PickSlotFacade.StatusSlots);
+        OnGameFinished?.Invoke(result);
+    }
+
+    public void FinishGame(MatchResult result)
+    {
         OnGameFinished?.Invoke(result);
     }
 }
