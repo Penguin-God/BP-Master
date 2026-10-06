@@ -17,48 +17,51 @@ public class AIBattleSimulatorSO : ScriptableObject
 
     int RunBattle(MatchData match, Action<MatchResult> onSingleGameEnd, Action onMatchEnd)
     {
-        var storage = MatchContext.CreateFearlessStorage();
-        var catalog = ChampionDataLoder.GetCatalog();
-
-        var idByTeam = new Dictionary<Team, int>
-        {
-            { Team.Blue, match.Id1 },
-            { Team.Red, match.Id2 }
-        };
-
-        var blueEntry = CreateEntry(Team.Blue, match.Id1, core, catalog, storage);
-        var redEntry = CreateEntry(Team.Red, match.Id2, core, catalog, storage);
-        var core = matchCoreFactorySO.CreateMatchCore(storage, catalog, idByTeam, blueEntry, redEntry);
-
-        int finalWinnerId = -1;
-
-        core.OnGameFinished += OnDone;
-        core.PhaseManager.Start();
-
-        return finalWinnerId;
+        return 0;
 
 
-        void OnDone(MatchResult result) // 조건에 따라 RunBattle을 호출하는 재귀용 함수
-        {
-            core.OnGameFinished -= OnDone;
-            onSingleGameEnd?.Invoke(result);
+        //var storage = MatchContext.CreateFearlessStorage();
+        //var catalog = ChampionDataLoder.GetCatalog();
 
-            if (result.Winner == Team.All)
-            {
-                finalWinnerId = RunBattle(match, onSingleGameEnd, onMatchEnd);
-                return;
-            }
+        //var idByTeam = new Dictionary<Team, int>
+        //{
+        //    { Team.Blue, match.Id1 },
+        //    { Team.Red, match.Id2 }
+        //};
 
-            int winnerId = result.Winner == Team.Blue ? match.Id1 : match.Id2;
+        //var blueEntry = CreateEntry(Team.Blue, match.Id1, core, catalog, storage);
+        //var redEntry = CreateEntry(Team.Red, match.Id2, core, catalog, storage);
+        //var core = matchCoreFactorySO.CreateMatchCore(storage, catalog, idByTeam, blueEntry, redEntry);
 
-            MatchContext.RecordMatchResult(storage.PickIds.GetAll());
-            if (MatchContext.EndMatch(winnerId))
-            {
-                finalWinnerId = winnerId;
-                onMatchEnd?.Invoke();
-            }
-            else finalWinnerId = RunBattle(match, onSingleGameEnd, onMatchEnd);
-        }
+        //int finalWinnerId = -1;
+
+        //core.OnGameFinished += OnDone;
+        //core.PhaseManager.Start();
+
+        //return finalWinnerId;
+
+
+        //void OnDone(MatchResult result) // 조건에 따라 RunBattle을 호출하는 재귀용 함수
+        //{
+        //    core.OnGameFinished -= OnDone;
+        //    onSingleGameEnd?.Invoke(result);
+
+        //    if (result.Winner == Team.All)
+        //    {
+        //        finalWinnerId = RunBattle(match, onSingleGameEnd, onMatchEnd);
+        //        return;
+        //    }
+
+        //    int winnerId = result.Winner == Team.Blue ? match.Id1 : match.Id2;
+
+        //    MatchContext.RecordMatchResult(storage.PickIds.GetAll());
+        //    if (MatchContext.EndMatch(winnerId))
+        //    {
+        //        finalWinnerId = winnerId;
+        //        onMatchEnd?.Invoke();
+        //    }
+        //    else finalWinnerId = RunBattle(match, onSingleGameEnd, onMatchEnd);
+        //}
     }
 
     AI_Entry CreateEntry(Team team, int id, MatchCore core, ChampionCatalog catalog, BanPickStorage storage) => new AI_Entry(team, id, aiFactory, storage, core.SkillController, catalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
