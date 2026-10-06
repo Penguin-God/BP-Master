@@ -44,9 +44,16 @@ public class MatchCore
 
     void HandleGameEnd()
     {
-        var builder = new MatchResultBuilder(TeamBonusCalculator);
-        MatchResult result = new MatchResultConverter(builder).ToResult(BanPickHandler.PickSlotFacade.StatusSlots);
-
+        var result = MatchResultCalculator.CalculateResult(TeamBonusCalculator, BanPickHandler.PickSlotFacade.StatusSlots);
         OnGameFinished?.Invoke(result);
+    }
+}
+
+public static class MatchResultCalculator
+{
+    public static MatchResult CalculateResult(TeamBonusCalculator teamBonusCalculator, SlotStorage<ChampionStatus> statuses)
+    {
+        var builder = new MatchResultBuilder(teamBonusCalculator);
+        return new MatchResultConverter(builder).ToResult(statuses);
     }
 }

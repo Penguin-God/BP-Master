@@ -8,7 +8,7 @@ public class GamePhaseLoderSO : ScriptableObject
     [SerializeField] DraftTurnSO pick;
     [SerializeField] DraftTurnSO pick2;
 
-    public PhaseData[] LoadPhase()
+    PhaseData[] LoadPhase()
     {
         PhaseData[] phase = new PhaseData[]
         {
