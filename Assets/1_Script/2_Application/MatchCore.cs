@@ -11,24 +11,6 @@ public class MatchCore
     public PhaseFlowOrchestrator PhaseManager { get; private set; }
 
     public event Action<MatchResult> OnGameFinished;
-    public MatchCore(ChampionCatalog catalog, BanPickStorage storage, PhaseAdvancer phaseAdvancer, MasteryRegistry masteryRegistry, TeamBonusCalculator teamBonusCalculator)
-    {
-        MasteryRegistry = masteryRegistry;
-
-        PhaseEventDispatcher = new PhaseEventDispatcher();
-        PhaseAdvancer = phaseAdvancer;
-
-        BanPickHandler = new BanPickHandler(catalog, storage);
-
-        var actionEventDispatcher = new BanPickEventDispatcher();
-        BanPickHandler.BanPickEventDispatcher.OnTeamChampionPick += ApplyMastery;
-
-        SkillController = new SkillUsecase(
-            BanPickHandler.PickSlotFacade.ChampionSlots,
-            new SkillRunner(new SkillActionFactory(actionEventDispatcher, PhaseEventDispatcher), new SkillCondtionFactory())
-        );
-        TeamBonusCalculator = teamBonusCalculator;
-    }
 
     public MatchCore(
         MasteryRegistry masteryRegistry,
@@ -48,28 +30,7 @@ public class MatchCore
         TeamBonusCalculator = teamBonusCalculator;
     }
 
-    public void SetupPhaseManager(IPhaseEntry blueEntry, IPhaseEntry redEntry)
-    {
-        PhaseManager = new PhaseFlowOrchestrator(PhaseAdvancer, PhaseEventDispatcher, new TeamPhaseEntryDispatcher(blueEntry, redEntry));
-
-        SkillController.OnUseSkill += slot => PhaseManager.SubmitAction(slot.Team);
-        BanPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => PhaseManager.SubmitAction(team);
-
-        PhaseEventDispatcher.OnPhaseDone += HandleGameEnd;
-    }
-
-    void ApplyMastery(Champion champion, Team team) => new MasteryApplier(MasteryRegistry.GetTeamMasteryCollection(team)).ApplyMastery(champion.Id, champion.Status);
-
-    void HandleGameEnd()
-    {
-        var result = MatchResultCalculator.CalculateResult(TeamBonusCalculator, BanPickHandler.PickSlotFacade.StatusSlots);
-        OnGameFinished?.Invoke(result);
-    }
-
-    public void FinishGame(MatchResult result)
-    {
-        OnGameFinished?.Invoke(result);
-    }
+    public void FinishGame(MatchResult result) => OnGameFinished?.Invoke(result);
 }
 
 public static class MatchResultCalculator
