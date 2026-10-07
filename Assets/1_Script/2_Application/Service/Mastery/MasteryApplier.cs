@@ -1,8 +1,8 @@
 public class MasteryApplier
 {
-    readonly IMasteryStatProvider _statProvider;
+    readonly MasteryStatCollection _statProvider;
 
-    public MasteryApplier(IMasteryStatProvider statProvider) => _statProvider = statProvider;
+    public MasteryApplier(MasteryStatCollection statProvider) => _statProvider = statProvider;
 
     public void ApplyMastery(int id, ChampionStatus status)
     {

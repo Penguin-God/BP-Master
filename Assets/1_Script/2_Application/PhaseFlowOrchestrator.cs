@@ -2,12 +2,12 @@
 public class PhaseFlowOrchestrator
 {
     readonly PhaseAdvancer phaseAdvancer;
-    readonly IPhaseEvent dispatcher;
+    readonly PhaseEventDispatcher dispatcher;
     readonly TeamPhaseEntryDispatcher entryDispatcher;
 
     public GameFlowData CurrentFlow => phaseAdvancer.CurrentFlow;
 
-    public PhaseFlowOrchestrator(PhaseAdvancer phaseAdvancer, IPhaseEvent dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
+    public PhaseFlowOrchestrator(PhaseAdvancer phaseAdvancer, PhaseEventDispatcher dispatcher, TeamPhaseEntryDispatcher teamPhaseEntryDispatcher)
     {
         this.phaseAdvancer = phaseAdvancer;
         this.dispatcher = dispatcher;

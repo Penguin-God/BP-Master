@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class MasteryStatCollection : IMasteryStatProvider
+public class MasteryStatCollection
 {
     readonly Dictionary<int, ChampionMastery> masteryMap;
     public IEnumerable<ChampionMastery> AllMasteries => masteryMap.Values;

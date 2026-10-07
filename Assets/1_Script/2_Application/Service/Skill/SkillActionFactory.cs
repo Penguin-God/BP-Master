@@ -1,6 +1,6 @@
 using System;
 
-public class SkillActionFactory : ISkillActionFactory
+public class SkillActionFactory
 {
     readonly BanPickEventDispatcher phaseActionEventDispatcher;
     readonly PhaseEventDispatcher phaseEventDispatcher;

@@ -1,6 +1,6 @@
 using System;
 
-public class PhaseEventDispatcher : IPhaseEvent
+public class PhaseEventDispatcher
 {
     public event Action<GameFlowData> OnGameProgress;
     public event Action<Team> OnPhaseBan;

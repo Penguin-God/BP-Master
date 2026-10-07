@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 public class SkillRunner
 {
-    readonly ISkillActionFactory skillActionFactory;
+    readonly SkillActionFactory skillActionFactory;
     readonly SkillCondtionFactory skillCondtionFactory;
-    public SkillRunner(ISkillActionFactory skillActionFactory, SkillCondtionFactory skillCondtionFactory)
+    public SkillRunner(SkillActionFactory skillActionFactory, SkillCondtionFactory skillCondtionFactory)
     {
         this.skillActionFactory = skillActionFactory;
         this.skillCondtionFactory = skillCondtionFactory;

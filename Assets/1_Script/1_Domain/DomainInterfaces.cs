@@ -1,10 +1,5 @@
 using System.Collections.Generic;
 
-public interface ISkillActionFactory
-{
-    ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team);
-}
-
 public interface ISkillAction
 {
     void Do(ChampionStatus target);
@@ -33,14 +28,4 @@ public interface IChampionEvaluator
 public interface ISkillTargetSelector
 {
     IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill);
-}
-
-public interface IMasteryStatProvider
-{
-    ChampionStatData GetMasteryStat(int championId);
-}
-
-public interface IPhaseEvent
-{
-    void Dispatch(GamePhase phase, Team turn);
 }
