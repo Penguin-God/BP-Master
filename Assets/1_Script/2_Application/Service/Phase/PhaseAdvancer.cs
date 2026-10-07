@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-public enum GamePhase { Ban, Pick, Skill, Done }
-
 public readonly struct GameFlowData
 {
     public readonly GamePhase Phase;

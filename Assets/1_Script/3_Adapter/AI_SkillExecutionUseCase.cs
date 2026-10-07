@@ -12,7 +12,7 @@ public class AI_SkillExecutionUseCase
 
     public void UseSkill(SlotData slotData)
     {
-        var teamCount = _skillSlots.GetTeamCounter();
+        var teamCount = Factorys.CreateTeamCounter(_skillSlots);
         var useSkill = _skillSlots.GetSlot(slotData);
 
         var targets = skillTargetService.GetTargets(slotData.Team, useSkill, teamCount);

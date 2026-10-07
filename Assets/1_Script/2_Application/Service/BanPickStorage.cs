@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-public enum Team { Blue, Red, All }
-
 public class BanPickStorage
 {
     public SlotStorage<int> PickIds { get; private set; } = new();

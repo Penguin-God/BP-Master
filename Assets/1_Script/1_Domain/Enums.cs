@@ -1,4 +1,9 @@
+public enum GamePhase { Ban, Pick, Skill, Done }
+public enum Team { Blue, Red, All }
+
 public enum StatType
+
+
 {
     Attack,
     Defense,

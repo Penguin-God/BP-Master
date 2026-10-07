@@ -8,7 +8,7 @@ public static class SkillPreviewer
         if (champion.Skill.IsEmpty) return copiedSlots;
 
         var targets = new SkillTargetService(new HighStatTargetSelector(originSlots))
-            .GetTargets(team, champion.Skill, originSlots.GetTeamCounter())
+            .GetTargets(team, champion.Skill, Factorys.CreateTeamCounter(originSlots))
             .Select(x => copiedSlots.GetSlot(x));
 
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
