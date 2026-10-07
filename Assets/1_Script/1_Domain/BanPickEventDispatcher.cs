@@ -20,4 +20,6 @@ public class BanPickEventDispatcher
         OnTeamBan?.Invoke(team, id);
         OnBan?.Invoke(id);
     }
+
+    public static BanPickEventDispatcher Create() => new BanPickEventDispatcher();
 }
