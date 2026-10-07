@@ -7,7 +7,8 @@
         "Domain",
         "2_Tests",
         "Application",
-        "Adapter"
+        "Adapter",
+        "SKills"
     ],
     "includePlatforms": [
         "Editor"

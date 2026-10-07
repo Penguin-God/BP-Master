@@ -24,3 +24,15 @@ public record MatchSeriesState(MatchParticipant Player1, MatchParticipant Player
         return this; // 무승부거나 잘못된 ID일 경우 원본 그대로 반환
     }
 }
+
+public readonly struct GameFlowData
+{
+    public readonly GamePhase Phase;
+    public readonly Team Turn;
+
+    public GameFlowData(GamePhase phase, Team turn)
+    {
+        Phase = phase;
+        Turn = turn;
+    }
+}

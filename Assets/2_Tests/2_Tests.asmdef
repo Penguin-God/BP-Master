@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "Domain",
         "Application",
-        "Adapter"
+        "Adapter",
+        "SKills"
     ],
     "includePlatforms": [
         "Editor"

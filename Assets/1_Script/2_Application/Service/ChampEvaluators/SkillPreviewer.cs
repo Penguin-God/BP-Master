@@ -12,9 +12,14 @@ public static class SkillPreviewer
             .Select(x => copiedSlots.GetSlot(x));
 
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
-        var skillRunner = SkillRunnerFactory.CreateRunner(new BanPickEventDispatcher(), new PhaseEventDispatcher());
+        var skillRunner = CreateRunner(new BanPickEventDispatcher(), new PhaseEventDispatcher());
         skillRunner.Run(champion.Skill, champion.Status, targets, team);
         return copiedSlots;
+    }
+
+    public static SkillRunner CreateRunner(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
+    {
+        return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher), new SkillCondtionFactory());
     }
 
     static SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)

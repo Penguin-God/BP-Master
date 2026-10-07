@@ -1,17 +1,5 @@
 using System.Collections.Generic;
 
-public readonly struct GameFlowData
-{
-    public readonly GamePhase Phase;
-    public readonly Team Turn;
-
-    public GameFlowData(GamePhase phase, Team turn)
-    {
-        Phase = phase;
-        Turn = turn;
-    }
-}
-
 public class PhaseAdvancer
 {
     readonly Queue<PhaseData> phases;
