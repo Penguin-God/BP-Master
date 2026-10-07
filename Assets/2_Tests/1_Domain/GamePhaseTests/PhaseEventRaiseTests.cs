@@ -4,7 +4,7 @@ using static TestHelper;
 
 public class PhaseEventRaiseTests
 {
-    PhaseEventDispatcher CreateSut() => new PhaseEventDispatcher();
+    PhaseEventDispatcher CreateSut() => PhaseEventDispatcher.Create();
 
     [Test]
     public void 페이즈별_이벤트_발생_확인()

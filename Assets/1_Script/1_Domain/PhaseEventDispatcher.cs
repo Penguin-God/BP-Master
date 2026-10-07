@@ -17,4 +17,6 @@ public class PhaseEventDispatcher
             case GamePhase.Done: OnPhaseDone?.Invoke(); break;
         }
     }
+
+    public static PhaseEventDispatcher Create() => new PhaseEventDispatcher();
 }

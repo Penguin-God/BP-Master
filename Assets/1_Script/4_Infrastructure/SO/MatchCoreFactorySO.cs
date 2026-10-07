@@ -13,7 +13,7 @@ public class MatchCoreFactorySO : ScriptableObject
     {
         var dataProvider = playerDataProviderFactorySO.CreatePlayerDataProvider();
         var phaseAdvancer = gamePhaseLoder.CreateAdvacer();
-        var phaseEventDispatcher = new PhaseEventDispatcher();
+        var phaseEventDispatcher = PhaseEventDispatcher.Create();
         var registry = masteryFactorySO.CreateRegistry(GetBoard(Team.Blue), GetBoard(Team.Red));
         var teamBonusCalculator = bonusDataFactory.CreateTeamBonusCalculator();
 
@@ -24,7 +24,7 @@ public class MatchCoreFactorySO : ScriptableObject
                 .ApplyMastery(champion.Id, champion.Status);
         };
 
-        var actionEventDispatcher = new BanPickEventDispatcher();
+        var actionEventDispatcher = BanPickEventDispatcher.Create();
         var skillRunner = new SkillRunner(
             new SkillActionFactory(actionEventDispatcher, phaseEventDispatcher),
             new SkillCondtionFactory()

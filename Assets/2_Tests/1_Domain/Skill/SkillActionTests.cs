@@ -71,7 +71,7 @@ public class SkillActionTests
     public void 픽한_아군_스탯_변경()
     {
         var champ = new Champion(1, null, TestHelper.CreateStatus());
-        var eventDispatcher = new BanPickEventDispatcher();
+        var eventDispatcher = BanPickEventDispatcher.Create();
 
         var statChanger = new StatChanger(StatType.Attack, new ValueCalculator(100));
         var sut = new PickChampStatChanger(eventDispatcher, statChanger, Team.Blue);
@@ -100,7 +100,7 @@ public class SkillActionTests
     public void 게임_종료_시_자신의_스탯_두배_상승()
     {
         var caster = CreateStatus(100, 100, 100);
-        var dispatcher = new PhaseEventDispatcher();
+        var dispatcher = PhaseEventDispatcher.Create();
         var sut = new FinalStatChanger(caster, dispatcher, new PercentCalculator(1f));
 
         sut.Do(null);

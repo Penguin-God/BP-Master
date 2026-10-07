@@ -52,7 +52,7 @@ public class PhaseTests
     [Test]
     public void 디스패처에서_이벤트_발생()
     {
-        var dispatcher = new PhaseEventDispatcher();
+        var dispatcher = PhaseEventDispatcher.Create();
         bool isCall = false;
         dispatcher.OnPhaseBan += _ => isCall = true;
 
@@ -66,7 +66,7 @@ public class PhaseTests
     public void 페이즈_진입_에이전트_호출()
     {
         var blue = new TestEntry(banCount: 1);
-        var sut = new PhaseFlowOrchestrator(CreatePhaseAdvancer(CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Blue)), new PhaseEventDispatcher(), new TeamPhaseEntryDispatcher(blue, new TestEntry()));
+        var sut = new PhaseFlowOrchestrator(CreatePhaseAdvancer(CreatePhaseData(GamePhase.Ban, Team.Blue, Team.Blue)), PhaseEventDispatcher.Create(), new TeamPhaseEntryDispatcher(blue, new TestEntry()));
         sut.Start();
         sut.SubmitAction(Team.Blue);
 

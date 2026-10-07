@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         selectBtn.onClick.AddListener(NailDownChampion);
     }
 
+    int[] tuto = new int[] { 15, 2, 3 };
+
     int selectId = -1;
     void SelectChampion(ChampionIdentify champion)
     {
@@ -32,6 +35,8 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 
     void NailDownChampion()
     {
+        if (tuto.Contains(selectId) == false) return;
+
         if (banpickHandler.CanSelected(phaseManager.CurrentFlow, selectId))
         {
             ButtonUtil.InActiveButton(selectBtn);
