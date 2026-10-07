@@ -14,16 +14,7 @@ public class TutorialTriggerSO : ScriptableObject
     [SerializeField] TutorialEntry[] entries;
     [SerializeField] GameObject _uiTutorial;
 
-    public void StartTutorialOneTime(TutorialType type) => new TutorialTrigger(Show).TriggerIfFirstTime(type);
+    public void StartTutorialOneTime(TutorialType type) => new TutorialTrigger(GetTutorialDailogues(type), _uiTutorial).TriggerIfFirstTime(type);
 
-    void Show(TutorialType type)
-    {
-        var dialogues = entries.FirstOrDefault(x => x.Type == type)?.Dialogues;
-
-        if (dialogues?.Length > 0)
-        {
-            var clone = Instantiate(_uiTutorial);
-            clone.GetComponent<UI_Tutorial>().StartTutorial(dialogues);
-        }
-    }
+    string[] GetTutorialDailogues(TutorialType type) => entries.FirstOrDefault(x => x.Type == type)?.Dialogues.ToArray();
 }

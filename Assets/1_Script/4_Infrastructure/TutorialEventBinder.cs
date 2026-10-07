@@ -20,8 +20,13 @@ public enum TutorialType
 
 public class TutorialTrigger
 {
-    readonly Action<TutorialType> _showTutorialUI;
-    public TutorialTrigger(Action<TutorialType> showTutorialUI) => _showTutorialUI = showTutorialUI;
+    readonly GameObject _uiTutorial;
+    string[] _dialogues;
+    public TutorialTrigger(string[] dialogues, GameObject uiTutorial)
+    {
+        _uiTutorial = uiTutorial;
+        _dialogues = dialogues;
+    }
 
     public void TriggerIfFirstTime(TutorialType type)
     {
@@ -29,6 +34,6 @@ public class TutorialTrigger
 
         PlayerPrefs.SetInt($"Tutorial_{type}", 1);
         PlayerPrefs.Save();
-        _showTutorialUI(type);
+        GameObject.Instantiate(_uiTutorial).GetComponent<UI_Tutorial>().StartTutorial(_dialogues);
     }
 }
