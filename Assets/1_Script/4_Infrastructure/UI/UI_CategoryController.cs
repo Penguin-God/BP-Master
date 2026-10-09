@@ -34,6 +34,6 @@ public class UI_CategoryController : MonoBehaviour
     {
         stagePanel.SetActive(false);
         deckPanel.SetActive(true);
-        tutorialTrigger.StartTutorialOneTime(TutorialType.MasteryUIEnter);
+        tutorialTrigger.StartTutorialOneTime(TutorialTriggerType.MasteryUIEnter);
     }
 }

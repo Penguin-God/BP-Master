@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class TutorialEventBinder
 {
-    public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher, BanPickStorage banPickStorage)
+    public static void BindBattleTutorial(Action<TutorialTriggerType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher, BanPickStorage banPickStorage)
     {
         eventDispatcher.OnPhasePick += StartPickTutorial;
         eventDispatcher.OnPhaseBan += StartBanTutorial;
@@ -11,7 +11,7 @@ public static class TutorialEventBinder
         void StartBanTutorial(Team team)
         {
             if (Team.Blue != team) return;
-            startTutorialOneTime(TutorialType.MatchStart);
+            startTutorialOneTime(TutorialTriggerType.MatchStart);
         }
 
 
@@ -22,15 +22,15 @@ public static class TutorialEventBinder
             int pickCount = banPickStorage.PickIds.GetTeamCount(Team.Blue);
             switch (pickCount)
             {
-                case 0: startTutorialOneTime(TutorialType.Pick); break;
-                case 1: startTutorialOneTime(TutorialType.MasteryUIEnter); break;
-                case 2: startTutorialOneTime(TutorialType.Swap); break;
+                case 0: startTutorialOneTime(TutorialTriggerType.Pick); break;
+                case 1: startTutorialOneTime(TutorialTriggerType.MasteryUIEnter); break;
+                case 2: startTutorialOneTime(TutorialTriggerType.Swap); break;
             }
         }
     }
 }
 
-public enum TutorialType
+public enum TutorialTriggerType
 {
     MatchStart,
     MasteryUIEnter,
@@ -48,7 +48,7 @@ public class TutorialTrigger
         _dialogues = dialogues;
     }
 
-    public void TriggerIfFirstTime(TutorialType type)
+    public void TriggerIfFirstTime(TutorialTriggerType type)
     {
         if (PlayerPrefs.GetInt($"Tutorial_{type}", 0) == 1) return;
 
