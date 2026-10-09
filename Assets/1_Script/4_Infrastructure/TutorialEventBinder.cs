@@ -1,12 +1,32 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public static class TutorialEventBinder
 {
-    public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher)
+    public static void BindBattleTutorial(Action<TutorialType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher, BanPickStorage banPickStorage)
     {
-        eventDispatcher.OnPhasePick += (Team team) => startTutorialOneTime(TutorialType.Pick);
-        eventDispatcher.OnPhaseBan += (Team team) => startTutorialOneTime(TutorialType.MatchStart);
+        eventDispatcher.OnPhasePick += StartPickTutorial;
+        eventDispatcher.OnPhaseBan += StartBanTutorial;
+
+        void StartBanTutorial(Team team)
+        {
+            if (Team.Blue != team) return;
+            startTutorialOneTime(TutorialType.MatchStart);
+        }
+
+
+        void StartPickTutorial(Team team)
+        {
+            if (Team.Blue != team) return;
+
+            int pickCount = banPickStorage.PickIds.GetTeamCount(Team.Blue);
+            switch (pickCount)
+            {
+                case 0: startTutorialOneTime(TutorialType.Pick); break;
+                case 1: startTutorialOneTime(TutorialType.MasteryUIEnter); break;
+                case 2: startTutorialOneTime(TutorialType.Swap); break;
+            }
+        }
     }
 }
 
