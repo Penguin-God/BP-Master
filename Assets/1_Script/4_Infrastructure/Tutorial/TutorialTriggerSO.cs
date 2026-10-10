@@ -1,8 +1,7 @@
-using UnityEngine;
-using System.Linq;
 using Sirenix.OdinInspector;
 using System;
-
+using System.Linq;
+using UnityEngine;
 
 public enum TutorialType
 {
@@ -13,6 +12,7 @@ public enum TutorialType
 [System.Serializable]
 public class Tutorial_Info
 {
+    [Title("===튜토리얼 정보 시작===")]
     [EnumToggleButtons]
     public TutorialType TutorialType;
 
@@ -41,7 +41,7 @@ public class TutorialTriggerSO : ScriptableObject
     public void StartTutorialOneTime(TutorialTriggerType type) => TutorialActor.StartIfFirstTime(type, CreateTutorial(type));
     public Tutorial_Info GetTutorialInfo(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type);
 
-    Action CreateTutorial(TutorialTriggerType type)
+    public Action CreateTutorial(TutorialTriggerType type)
     {
         var info = GetTutorialInfo(type);
         return () => GameObject.Instantiate(_uiTutorial).GetComponent<UI_Tutorial>().StartTutorial(info.Dialogues);

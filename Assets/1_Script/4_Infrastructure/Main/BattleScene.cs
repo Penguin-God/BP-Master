@@ -12,6 +12,7 @@ public class BattleScene : MonoBehaviour
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] TutorialTriggerSO tutorialTriggerSO;
+    [SerializeField] UI_SelectCheck uI_SelectCheck;
 
     int ai_id;
     BanPickStorage storage;
@@ -32,7 +33,7 @@ public class BattleScene : MonoBehaviour
 
         ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
 
-        TutorialEventBinder.BindBattleTutorial(tutorialTriggerSO.StartTutorialOneTime, core.PhaseEventDispatcher, storage);
+        BattleTutorialEventBinder.BindBattleTutorial(uI_SelectCheck.CreateTutorialAction, core.PhaseEventDispatcher, storage);
 
         core.OnGameFinished += new BattleResultHandler(storage, playerIds, matchConfigSO, ai_id).OnDone;
         core.PhaseManager.Start();

@@ -9,7 +9,7 @@ public class CheckSelectTutorial
 
     public CheckSelectTutorial(IEnumerable<int> answers, Action onSuccess, Action onFailed)
     {
-        _answerSet = new HashSet<int>(answers ?? Array.Empty<int>());
+        _answerSet = new HashSet<int>(answers);
         _onSuccess = onSuccess;
         _onFailed = onFailed;
     }
