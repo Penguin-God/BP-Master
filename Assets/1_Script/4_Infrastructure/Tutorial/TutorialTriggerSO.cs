@@ -10,12 +10,12 @@ public enum TutorialType
 }
 
 [System.Serializable]
-public class TutorialEntry
+public class Tutorial_Info
 {
     [EnumToggleButtons]
     public TutorialType TutorialType;
 
-    public TutorialTriggerType Type;
+    public TutorialTriggerType TriggerType;
     public string[] Dialogues;
 
     [ShowIf(nameof(IsQuiz))]
@@ -34,10 +34,23 @@ public class TutorialEntry
 [CreateAssetMenu(fileName = "TutorialTriggerSO", menuName = "Data/TutorialTriggerSO")]
 public class TutorialTriggerSO : ScriptableObject
 {
-    [SerializeField] TutorialEntry[] entries;
+    [SerializeField] Tutorial_Info[] entries;
     [SerializeField] GameObject _uiTutorial;
 
     public void StartTutorialOneTime(TutorialTriggerType type) => new TutorialTrigger(GetTutorialDailogues(type), _uiTutorial).TriggerIfFirstTime(type);
 
-    string[] GetTutorialDailogues(TutorialTriggerType type) => entries.FirstOrDefault(x => x.Type == type)?.Dialogues.ToArray();
+    string[] GetTutorialDailogues(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type)?.Dialogues;
+
+    Tutorial_Info GetTutorialInfo(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type);
+
+    public void TutorialOneTime(TutorialTriggerType type)
+    {
+        var tutoInfo = GetTutorialInfo(type);
+        new TutorialTrigger(tutoInfo.Dialogues, _uiTutorial).TriggerIfFirstTime(type);
+
+        if (tutoInfo.TutorialType == TutorialType.CheckCardSelect)
+        {
+
+        }
+    }
 }

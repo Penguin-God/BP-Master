@@ -23,21 +23,20 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         selectBtn.onClick.AddListener(NailDownChampion);
     }
 
-    int selectId = -1;
+    public int SelectId { get; private set; } = -1;
     void SelectChampion(ChampionIdentify champion)
     {
-        selectId = champion.Id;
+        SelectId = champion.Id;
         championFocusView.UpdateDisplay(ChampionDataLoder.GetChampionData(champion.Id));
     }
 
-    void NailDownChampion()
+    public void NailDownChampion()
     {
-        if (banpickHandler.CanSelected(phaseManager.CurrentFlow, selectId) == false) return;
-        //if (tuto.Contains(selectId) == false) return;
-
+        if (banpickHandler.CanSelected(phaseManager.CurrentFlow, SelectId) == false) return;
+        
         ButtonUtil.InActiveButton(selectBtn);
         // 시간 커플링. 빈 스킬일 경우 SetupSelectButton이 실행되서 버튼 비활성화가 늦으면 평생 그 상태임
-        banpickHandler.SaveSelect(phaseManager.CurrentFlow, selectId);
+        banpickHandler.SaveSelect(phaseManager.CurrentFlow, SelectId);
         championFocusView.ClearDisplay();
     }
 
@@ -49,5 +48,7 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 
     public void EnterBan() => SetupSelectButton("밴");
     public void EnterPick() => SetupSelectButton("픽");
+
+    public void ActiveSelectButton(bool active) => selectBtn.gameObject.SetActive(active);
 }
 
