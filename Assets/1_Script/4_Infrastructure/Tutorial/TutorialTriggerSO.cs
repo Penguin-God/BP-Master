@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using Sirenix.OdinInspector;
+using System;
 
 
 public enum TutorialType
@@ -37,20 +38,12 @@ public class TutorialTriggerSO : ScriptableObject
     [SerializeField] Tutorial_Info[] entries;
     [SerializeField] GameObject _uiTutorial;
 
-    public void StartTutorialOneTime(TutorialTriggerType type) => new TutorialTrigger(GetTutorialDailogues(type), _uiTutorial).TriggerIfFirstTime(type);
+    public void StartTutorialOneTime(TutorialTriggerType type) => TutorialActor.StartIfFirstTime(type, CreateTutorial(type));
+    public Tutorial_Info GetTutorialInfo(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type);
 
-    string[] GetTutorialDailogues(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type)?.Dialogues;
-
-    Tutorial_Info GetTutorialInfo(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type);
-
-    public void TutorialOneTime(TutorialTriggerType type)
+    Action CreateTutorial(TutorialTriggerType type)
     {
-        var tutoInfo = GetTutorialInfo(type);
-        new TutorialTrigger(tutoInfo.Dialogues, _uiTutorial).TriggerIfFirstTime(type);
-
-        if (tutoInfo.TutorialType == TutorialType.CheckCardSelect)
-        {
-
-        }
+        var info = GetTutorialInfo(type);
+        return () => GameObject.Instantiate(_uiTutorial).GetComponent<UI_Tutorial>().StartTutorial(info.Dialogues);
     }
 }

@@ -1,6 +1,14 @@
 using System;
 using UnityEngine;
 
+public enum TutorialTriggerType
+{
+    MatchStart,
+    MasteryUIEnter,
+    Pick,
+    Swap,
+}
+
 public static class TutorialEventBinder
 {
     public static void BindBattleTutorial(Action<TutorialTriggerType> startTutorialOneTime, PhaseEventDispatcher eventDispatcher, BanPickStorage banPickStorage)
@@ -30,30 +38,14 @@ public static class TutorialEventBinder
     }
 }
 
-public enum TutorialTriggerType
+public static class TutorialActor
 {
-    MatchStart,
-    MasteryUIEnter,
-    Pick,
-    Swap,
-}
-
-public class TutorialTrigger
-{
-    readonly GameObject _uiTutorial;
-    string[] _dialogues;
-    public TutorialTrigger(string[] dialogues, GameObject uiTutorial)
-    {
-        _uiTutorial = uiTutorial;
-        _dialogues = dialogues;
-    }
-
-    public void TriggerIfFirstTime(TutorialTriggerType type)
+    public static void StartIfFirstTime(TutorialTriggerType type, Action tutorial)
     {
         if (PlayerPrefs.GetInt($"Tutorial_{type}", 0) == 1) return;
 
         PlayerPrefs.SetInt($"Tutorial_{type}", 1);
         PlayerPrefs.Save();
-        GameObject.Instantiate(_uiTutorial).GetComponent<UI_Tutorial>().StartTutorial(_dialogues);
+        tutorial?.Invoke();
     }
 }
