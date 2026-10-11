@@ -12,13 +12,6 @@ namespace Match
         public static DeckBuildState CurrentDeck;
         public static HashSet<int> FearlessLockedCards { get; private set; } = new HashSet<int>();
 
-        public static void MatchInit(int id1, int id2, int targetWin, IEnumerable<int> allChampionIds)
-        {
-            MatchState = new MatchSeriesState(new MatchParticipant(id1), new MatchParticipant(id2), targetWin);
-            _allChampionIds = allChampionIds.ToList();
-            FearlessLockedCards.Clear();
-        }
-
         public static void MatchInit(MatchData matchData, int targetWin, IEnumerable<int> allChampionIds)
         {
             MatchState = new MatchSeriesState(new MatchParticipant(matchData.Id1), new MatchParticipant(matchData.Id2), targetWin);
