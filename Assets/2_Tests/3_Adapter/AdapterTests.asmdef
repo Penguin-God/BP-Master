@@ -9,8 +9,7 @@
         "Application",
         "Adapter",
         "SKills",
-        "Mastery",
-        "App"
+        "Mastery"
     ],
     "includePlatforms": [
         "Editor"
