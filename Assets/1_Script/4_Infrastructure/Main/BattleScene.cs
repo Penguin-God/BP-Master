@@ -11,7 +11,6 @@ public class BattleScene : MonoBehaviour
     Dictionary<Team, int> playerIds = new();
     [SerializeField] MatchCoreFactorySO matchCoreFactorySO;
     [SerializeField] MatchConfigSO matchConfigSO;
-    [SerializeField] TutorialTriggerSO tutorialTriggerSO;
     [SerializeField] UI_SelectCheck uI_SelectCheck;
 
     int ai_id;

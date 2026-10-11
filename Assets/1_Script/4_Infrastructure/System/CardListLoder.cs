@@ -21,7 +21,8 @@ public static class CardListLoder
         return list.ToArray();
     }
 
-    public static CardListSO LoadDefault() => Resources.Load<CardListSO>($"{BasePath}/Default");
+    static CardListSO LoadDefault() => Resources.Load<CardListSO>($"{BasePath}/Default");
 
     public static IEnumerable<ChampionSO> LoadStageCards(int stage) => LoadStage(stage).SelectMany(x => x.CardList);
+    public static IEnumerable<int> LoadStageCardIds(int stage) => LoadStageCards(stage).Select(x => x.Id);
 }
