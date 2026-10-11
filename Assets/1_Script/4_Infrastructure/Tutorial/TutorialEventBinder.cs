@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public enum TutorialTriggerType
 {
@@ -21,7 +20,7 @@ public static class BattleTutorialEventBinder
 
         void StartBanTutorial(Team team)
         {
-            if (Team.Blue != team) return;
+            UnityEngine.Debug.Log(team);
             createTutorial(TutorialTriggerType.Ban)();
         }
 

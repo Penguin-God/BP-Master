@@ -13,8 +13,8 @@ public class UI_SelectCheck : MonoBehaviour
     public Action CreateTutorialAction(TutorialTriggerType type)
     {
         var info = tutorialSO.GetTutorialInfo(type);
-        if (info.TutorialType == TutorialType.CheckCardSelect) return () => Do(info);
-        else return () => tutorialSO.CreateTutorial(type);
+        if (info.TutorialType == TutorialType.CheckCardSelect) return () => TutorialActor.StartIfFirstTime(type, () => Do(info));
+        else return () => tutorialSO.StartTutorialOneTime(type);
     }
 
     void Do(Tutorial_Info info)
