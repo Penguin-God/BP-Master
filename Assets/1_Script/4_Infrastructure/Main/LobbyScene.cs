@@ -19,7 +19,6 @@ public class LobbyScene : MonoBehaviour
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
         
         store = new DeckBuildStore(new DeckBuildState(matchConfigSO.BattleCardCount, all.CardIdSet, start.CardIdSet));
-        store.OnStateChanged += Change;
         FindMono<UI_DeckBuilder>().Init(store);
 
         ChampionProfile GetProfile(int id)
@@ -36,16 +35,5 @@ public class LobbyScene : MonoBehaviour
         MatchContext.CurrentDeck = store.State;
         MatchContext.MatchInit(new MatchData(matchConfigSO.UserId, stage), matchConfigSO.TargetWinCount, ChampionDataLoder.AllId);
         SceneLoadHelper.LoadScene(SceneType.Battle);
-    }
-
-    void OnDestroy()
-    {
-        if(store != null)
-            store.OnStateChanged -= Change;
-    }
-
-    void Change(DeckBuildState state)
-    {
-        print("Change");
     }
 }
