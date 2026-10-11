@@ -106,4 +106,12 @@ MonoBehaviour:
     AnswerCards: []
     SuccessDialogues: []
     FailDialogues: []
+  - TutorialType: 0
+    TriggerType: 6
+    Dialogues:
+    - "\uC2A4\uC651"
+    - "\uAD7F"
+    AnswerCards: []
+    SuccessDialogues: []
+    FailDialogues: []
   _uiTutorial: {fileID: 5179135095201166203, guid: 308f008ac867816449398520e64d8d84, type: 3}

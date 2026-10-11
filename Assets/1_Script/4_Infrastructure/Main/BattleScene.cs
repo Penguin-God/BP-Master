@@ -83,7 +83,7 @@ public class BattleResultHandler
         GameEndButtonModel CreateGameEndButtonModel(bool isGameEnd)
         {
             if (isGameEnd) return new GameEndButtonModel("로비로", () => SceneLoadHelper.LoadScene(SceneType.Lobby));
-            else return new GameEndButtonModel("스왑", () => SceneLoadHelper.LoadScene(SceneType.Swap));
+            else return new GameEndButtonModel("다음게임", () => SceneLoadHelper.LoadScene(SceneType.Battle));
         }
     }
 }
