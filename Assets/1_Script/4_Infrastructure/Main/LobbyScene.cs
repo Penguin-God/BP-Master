@@ -32,7 +32,6 @@ public class LobbyScene : MonoBehaviour
 
     void EnterBattle(int stage)
     {
-        MatchContext.CurrentDeck = store.State;
         MatchContext.MatchInit(new MatchData(matchConfigSO.UserId, stage), matchConfigSO.TargetWinCount, ChampionDataLoder.AllId);
         SceneLoadHelper.LoadScene(SceneType.Battle);
     }

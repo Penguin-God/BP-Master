@@ -7,9 +7,7 @@ namespace Match
     public static class MatchContext
     {
         static IEnumerable<int> _allChampionIds = Enumerable.Empty<int>();
-
         public static MatchSeriesState MatchState { get; private set; }
-        public static DeckBuildState CurrentDeck;
         public static HashSet<int> FearlessLockedCards { get; private set; } = new HashSet<int>();
 
         public static void MatchInit(MatchData matchData, int targetWin, IEnumerable<int> allChampionIds)
@@ -44,7 +42,6 @@ namespace Match
             FearlessLockedCards.Clear();
             MatchState = null;
             _allChampionIds = Enumerable.Empty<int>();
-            CurrentDeck = null;
         }
     }
 }

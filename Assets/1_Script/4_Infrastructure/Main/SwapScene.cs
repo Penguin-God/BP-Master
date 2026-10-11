@@ -13,12 +13,11 @@ public class SwapScene : MonoBehaviour
     [SerializeField] TutorialTriggerSO tutorialTriggerSO;
 
     DeckBuildStore store;
-
+    DeckBuildState deck;
     void Awake()
     {
-        if (MatchContext.CurrentDeck == null)
-            MatchContext.CurrentDeck = new DeckBuildState(20, new (ChampionDataLoder.AllId), new());
-        var deckState = new DeckBuildState(MatchContext.CurrentDeck.CardCount, ExpectFearLessSet(MatchContext.CurrentDeck.AvailableCards), ExpectFearLessSet(MatchContext.CurrentDeck.SelectedCards));
+        deck = new DeckBuildState(20, new(CardListLoder.LoadStageCardIds(new PlayerPrefsStageStorage().LoadUnlockedStage())), new());
+        var deckState = new DeckBuildState(deck.CardCount, ExpectFearLessSet(deck.AvailableCards), ExpectFearLessSet(deck.SelectedCards));
         store = new DeckBuildStore(deckState);
         Change(deckState);
         store.OnStateChanged += Change;
@@ -26,7 +25,7 @@ public class SwapScene : MonoBehaviour
         FindAnyObjectByType<UI_DeckBuilder>().Init(store);
 
         nextBattleBtn.onClick.AddListener(() => SceneLoadHelper.LoadScene(SceneType.Battle));
-        nextBattleBtn.interactable = CheckDeckPlayable(MatchContext.CurrentDeck);
+        nextBattleBtn.interactable = CheckDeckPlayable(deck);
 
         HashSet<int> ExpectFearLessSet(IEnumerable<int> cards) => new (cards.Except(MatchContext.FearlessLockedCards));
         DrawFearlessCards();
@@ -52,7 +51,7 @@ public class SwapScene : MonoBehaviour
 
     void Change(DeckBuildState state)
     {
-        MatchContext.CurrentDeck = store.State;
+        deck = store.State;
         nextBattleBtn.interactable = CheckDeckPlayable(state);
     }
 
