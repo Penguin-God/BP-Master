@@ -6,4 +6,5 @@ public class MatchConfigSO : ScriptableObject
     public int UserId;
     public int TargetWinCount;
     public int EarnPointByStage;
+    public int BattleCardCount;
 }

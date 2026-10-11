@@ -15,3 +15,4 @@ MonoBehaviour:
   UserId: 999
   TargetWinCount: 2
   EarnPointByStage: 5
+  BattleCardCount: 20
