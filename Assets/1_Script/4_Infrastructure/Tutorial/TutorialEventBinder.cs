@@ -8,6 +8,7 @@ public enum TutorialTriggerType
     FirstPick,
     SecondPick,
     ThreedPick,
+    Ban,
     Swap,
 }
 
