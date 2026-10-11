@@ -12,14 +12,31 @@ public enum TutorialTriggerType
     Swap,
 }
 
-public static class TutorialActor
+public static class BattleTutorialEventBinder
 {
-    public static void StartIfFirstTime(TutorialTriggerType type, Action tutorial)
+    public static void BindBattleTutorial(Func<TutorialTriggerType, Action> createTutorial, PhaseEventDispatcher eventDispatcher, BanPickStorage banPickStorage)
     {
-        if (PlayerPrefs.GetInt($"Tutorial_{type}", 0) == 1) return;
+        eventDispatcher.OnPhasePick += StartPickTutorial;
+        eventDispatcher.OnPhaseBan += StartBanTutorial;
 
-        PlayerPrefs.SetInt($"Tutorial_{type}", 1);
-        PlayerPrefs.Save();
-        tutorial?.Invoke();
+        void StartBanTutorial(Team team)
+        {
+            if (Team.Blue != team) return;
+            createTutorial(TutorialTriggerType.Ban)();
+        }
+
+
+        void StartPickTutorial(Team team)
+        {
+            if (Team.Blue != team) return;
+
+            int pickCount = banPickStorage.PickIds.GetTeamCount(Team.Blue);
+            switch (pickCount)
+            {
+                case 0: createTutorial(TutorialTriggerType.FirstPick)(); break;
+                case 1: createTutorial(TutorialTriggerType.SecondPick)(); break;
+                case 2: createTutorial(TutorialTriggerType.ThreedPick)(); break;
+            }
+        }
     }
 }

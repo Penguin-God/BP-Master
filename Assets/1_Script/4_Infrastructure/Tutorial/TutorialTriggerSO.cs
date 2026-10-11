@@ -47,3 +47,16 @@ public class TutorialTriggerSO : ScriptableObject
         return () => GameObject.Instantiate(_uiTutorial).GetComponent<UI_Tutorial>().StartTutorial(info.Dialogues);
     }
 }
+
+
+public static class TutorialActor
+{
+    public static void StartIfFirstTime(TutorialTriggerType type, Action tutorial)
+    {
+        if (PlayerPrefs.GetInt($"Tutorial_{type}", 0) == 1) return;
+
+        PlayerPrefs.SetInt($"Tutorial_{type}", 1);
+        PlayerPrefs.Save();
+        tutorial?.Invoke();
+    }
+}
