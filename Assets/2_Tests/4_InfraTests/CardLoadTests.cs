@@ -6,8 +6,8 @@ public class CardLoadTests
     [Test]
     public void 지정된_스테이지의_번호만큼_로드()
     {
-        CardListSO[] result = CardListLoder.LoadStage(3);
-        Assert.AreEqual(4, result.Length);
+        CardListSO[] result = CardListLoder.LoadStage(2);
+        Assert.AreEqual(3, result.Length);
     }
 
     [Test]
