@@ -22,8 +22,8 @@ public class LobbyScene : MonoBehaviour
         FindMono<UI_StageSelection>().Init(stageStorage.LoadUnlockedStage, EnterBattle);
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
 
-        store = new DeckBuildStore(new DeckBuildState(matchConfigSO.BattleCardCount, all.CardIdSet, start.CardIdSet));
-        FindMono<UI_DeckBuilder>().Init(store);
+        // store = new DeckBuildStore(new DeckBuildState(matchConfigSO.BattleCardCount, all.CardIdSet, start.CardIdSet));
+        // FindMono<UI_DeckBuilder>().Init(store);
 
         StageRewardPresenter.ShowStageReward(stageRewardDisplayer, stageStorage.LoadUnlockedStage());
     }
