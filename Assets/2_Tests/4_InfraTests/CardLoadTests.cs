@@ -24,6 +24,6 @@ public class CardLoadTests
         int count1 = result[0].CardIdSet.Count;
         int count2 = result[1].CardIdSet.Count;
 
-        Assert.AreEqual(count1 + count2, CardListLoder.LoadStageCards(1).Count());
+        Assert.AreEqual(count1 + count2, CardListLoder.LoadAllStageCards(1).Count());
     }
 }

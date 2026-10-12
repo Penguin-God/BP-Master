@@ -16,7 +16,7 @@ public class SwapScene : MonoBehaviour
     DeckBuildState deck;
     void Awake()
     {
-        deck = new DeckBuildState(20, new(CardListLoder.LoadStageCardIds(new PlayerPrefsStageStorage().LoadUnlockedStage())), new());
+        deck = new DeckBuildState(20, new(CardListLoder.LoadAllStageCardIds(new PlayerPrefsStageStorage().LoadUnlockedStage())), new());
         var deckState = new DeckBuildState(deck.CardCount, ExpectFearLessSet(deck.AvailableCards), ExpectFearLessSet(deck.SelectedCards));
         store = new DeckBuildStore(deckState);
         Change(deckState);

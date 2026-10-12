@@ -27,7 +27,7 @@ public class MatchUI_Controller : MonoBehaviour
 
         championDrawer.Init(new ChampionButtonStatePresenter(
             GetMasteryIds(playerTeam), GetMasteryIds(EnumCaster.GetOppoentTeam(playerTeam)), MatchContext.CreateFearlessStorage().SelectableIds, ChampionDataLoder.NameCatalog), 
-            CardListLoder.LoadStageCardIds(new PlayerPrefsStageStorage().LoadUnlockedStage()));
+            CardListLoder.LoadAllStageCardIds(new PlayerPrefsStageStorage().LoadUnlockedStage()));
 
         slotViews.InitSlotView(pickSlotFacade.StatusSlots);
         championSelector.Init(banPickHandler, matchCore.PhaseManager);

@@ -1,4 +1,5 @@
 using Match;
+using System.Linq;
 using UnityEngine;
 
 public class LobbyScene : MonoBehaviour
@@ -21,15 +22,20 @@ public class LobbyScene : MonoBehaviour
         store = new DeckBuildStore(new DeckBuildState(matchConfigSO.BattleCardCount, all.CardIdSet, start.CardIdSet));
         FindMono<UI_DeckBuilder>().Init(store);
 
-        ChampionProfile GetProfile(int id)
-        {
-            var so = ChampionDataLoder.GetChampionData(id);
-            return new ChampionProfile(id, so.ChampionName, so.StatData, so.Skill);
-        }
-
         int clearStage = new PlayerPrefsStageStorage().LoadUnlockedStage();
         if (StageRewardPresenter.ShouldShowStageReward(clearStage))
-            print("@");
+        {
+            foreach (var item in CardListLoder.LoadStageCard(clearStage).Select(x => x.ChampionName))
+            {
+                print(item);
+            }
+        }
+    }
+
+    ChampionProfile GetProfile(int id)
+    {
+        var so = ChampionDataLoder.GetChampionData(id);
+        return new ChampionProfile(id, so.ChampionName, so.StatData, so.Skill);
     }
 
     T FindMono<T>() where T : MonoBehaviour => FindAnyObjectByType<T>(FindObjectsInactive.Include);

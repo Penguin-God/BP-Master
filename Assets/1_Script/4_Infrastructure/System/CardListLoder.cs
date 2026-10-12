@@ -23,6 +23,8 @@ public static class CardListLoder
 
     static CardListSO LoadDefault() => Resources.Load<CardListSO>($"{BasePath}/Default");
 
-    public static IEnumerable<ChampionSO> LoadStageCards(int stage) => LoadStage(stage).SelectMany(x => x.CardList);
-    public static IEnumerable<int> LoadStageCardIds(int stage) => LoadStageCards(stage).Select(x => x.Id);
+    public static IEnumerable<ChampionSO> LoadAllStageCards(int stage) => LoadStage(stage).SelectMany(x => x.CardList);
+    public static IEnumerable<int> LoadAllStageCardIds(int stage) => LoadAllStageCards(stage).Select(x => x.Id);
+
+    public static IEnumerable<ChampionSO> LoadStageCard(int stage) => Resources.Load<CardListSO>($"{BasePath}/Stage{stage}").CardList;
 }
