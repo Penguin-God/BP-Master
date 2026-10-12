@@ -15,7 +15,7 @@ public class LobbyScene : MonoBehaviour
         if (inventory == null)
             inventory = new MasteryProfile(startPoints: 15);
 
-        FindMono<UI_StageSelection>().Init(new StageProgressPresenter(new PlayerPrefsStageStorage()), EnterBattle);
+        FindMono<UI_StageSelection>().Init(new PlayerPrefsStageStorage().LoadUnlockedStage, EnterBattle);
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
         
         store = new DeckBuildStore(new DeckBuildState(matchConfigSO.BattleCardCount, all.CardIdSet, start.CardIdSet));

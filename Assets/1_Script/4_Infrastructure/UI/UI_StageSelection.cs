@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,11 +7,11 @@ public class UI_StageSelection : MonoBehaviour
 {
     [SerializeField] Button[] stageButtons;
 
-    StageProgressPresenter _presenter;
+    Func<int> _loadClearStage;
 
-    public void Init(StageProgressPresenter presenter, Action<int> onStageSelected)
+    public void Init(Func<int> loadClearStage, Action<int> onStageSelected)
     {
-        _presenter = presenter;
+        _loadClearStage = loadClearStage;
 
         for (int i = 0; i < stageButtons.Length; i++)
         {
@@ -23,9 +24,9 @@ public class UI_StageSelection : MonoBehaviour
 
     public void RefreshUI()
     {
-        var states = _presenter.GetButtonStates(stageButtons.Length);
+        var buttonInteractables = Enumerable.Range(0, stageButtons.Length).Select(i => i <= _loadClearStage()).ToList();
 
         for (int i = 0; i < stageButtons.Length; i++)
-            stageButtons[i].interactable = states[i];
+            stageButtons[i].interactable = buttonInteractables[i];
     }
 }
