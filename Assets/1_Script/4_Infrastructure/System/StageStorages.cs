@@ -13,3 +13,15 @@ public class PlayerPrefsStageStorage : IStageStorage
         PlayerPrefs.Save();
     }
 }
+
+public static class StageRewardPresenter
+{
+    const string StageProgressKey = "RewardSeenStage";
+
+    public static bool ShouldShowStageReward(int unlockStage)
+    {
+        int seenStage = PlayerPrefs.GetInt(StageProgressKey, defaultValue: 0);
+        
+        return unlockStage > seenStage;
+    }
+}

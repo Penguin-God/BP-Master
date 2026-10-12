@@ -26,6 +26,10 @@ public class LobbyScene : MonoBehaviour
             var so = ChampionDataLoder.GetChampionData(id);
             return new ChampionProfile(id, so.ChampionName, so.StatData, so.Skill);
         }
+
+        int clearStage = new PlayerPrefsStageStorage().LoadUnlockedStage();
+        if (StageRewardPresenter.ShouldShowStageReward(clearStage))
+            print("@");
     }
 
     T FindMono<T>() where T : MonoBehaviour => FindAnyObjectByType<T>(FindObjectsInactive.Include);
