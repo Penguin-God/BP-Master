@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   id: 12
-  championName: "\uB36B\uAFBC"
+  championName: "\uB36B"
   attack: 130
   defense: 130
   speed: 6
