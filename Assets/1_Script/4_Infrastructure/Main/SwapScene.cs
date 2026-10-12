@@ -30,7 +30,7 @@ public class SwapScene : MonoBehaviour
         HashSet<int> ExpectFearLessSet(IEnumerable<int> cards) => new (cards.Except(MatchContext.FearlessLockedCards));
         DrawFearlessCards();
 
-        tutorialTriggerSO.StartTutorialOneTime(TutorialTriggerType.Swap);
+        // tutorialTriggerSO.StartTutorialOneTime(TutorialTriggerType.Swap);
     }
 
     void OnDestroy()

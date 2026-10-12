@@ -8,7 +8,7 @@ public enum TutorialTriggerType
     SecondPick,
     ThreedPick,
     Ban,
-    Swap,
+    Fearless,
 }
 
 public static class BattleTutorialEventBinder
