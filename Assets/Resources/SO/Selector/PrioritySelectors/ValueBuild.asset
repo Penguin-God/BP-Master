@@ -18,7 +18,6 @@ MonoBehaviour:
   picks:
   - {fileID: 11400000, guid: de981b4337927514d81fd75ae700058e, type: 2}
   - {fileID: 11400000, guid: f8affce91ca1c634c8f1c9b128bea301, type: 2}
-  - {fileID: 11400000, guid: 05764b6ed32fca74d93311ab047dd117, type: 2}
   - {fileID: 11400000, guid: fb992e3516fe1cb4abc73e44bf105be7, type: 2}
   - {fileID: 11400000, guid: efc97c7ed14228b44b5409f4547a3892, type: 2}
   - {fileID: 11400000, guid: 68db2d501243ac24a8432076374f5535, type: 2}
