@@ -20,7 +20,6 @@ public static class BattleTutorialEventBinder
 
         void StartBanTutorial(Team team)
         {
-            UnityEngine.Debug.Log(team);
             createTutorial(TutorialTriggerType.Ban)();
         }
 
