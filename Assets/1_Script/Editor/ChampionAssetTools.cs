@@ -64,7 +64,6 @@ public static class ChampionAssetTools
             if (oldPath.Equals(newPath)) continue;                       // 이미 같은 이름이면 스킵
             if (AssetDatabase.LoadAssetAtPath<ChampionSO>(newPath) != null)
             {
-                Debug.LogWarning($"[SKIP] {champion.ChampionName} : 같은 이름의 파일이 이미 존재합니다.");
                 continue;
             }
 
