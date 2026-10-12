@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 7971172421917249915}
   - component: {fileID: 2862668781552700484}
   - component: {fileID: 7953277725049863178}
+  - component: {fileID: 3237711031501096457}
   m_Layer: 5
   m_Name: UI_StageReward
   m_TagString: Untagged
@@ -299,6 +300,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &3237711031501096457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297073029361297908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539b044112a23a1408350bc100298428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::UI_StageRewardDisplayer
+  cardContent: {fileID: 8259912796361358169}
+  closeButton: {fileID: 1773696263440520652}
+  cardPrefab: {fileID: 8033382642434502399, guid: a800959c5b01a5b46b9664e609b38648, type: 3}
 --- !u!1 &1703315726885172413
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +406,7 @@ GameObject:
   - component: {fileID: 3454582661214988587}
   - component: {fileID: 1773696263440520652}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

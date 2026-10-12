@@ -114,7 +114,7 @@ public class ChampionButtonView : MonoBehaviour
 
 public static class ChampionButtonCreator
 {
-    public static IEnumerable<Button> CreateChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject btnPrefab)
+    public static IEnumerable<Button> CreateChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject catdPrefab)
     {
         foreach (Transform child in parent)
             Object.Destroy(child.gameObject);
@@ -122,7 +122,7 @@ public static class ChampionButtonCreator
         var result = new List<Button>();
         foreach (var data in champions)
         {
-            var btn = Object.Instantiate(btnPrefab, parent).GetComponent<Button>();
+            var btn = Object.Instantiate(catdPrefab, parent).GetComponent<Button>();
             btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
             btn.GetOrAddComponent<ChampionIdentify>().Id = data.Id;
             result.Add(btn);

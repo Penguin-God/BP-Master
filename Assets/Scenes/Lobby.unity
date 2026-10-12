@@ -2623,6 +2623,7 @@ MonoBehaviour:
   skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
   start: {fileID: 11400000, guid: 808fdf0d1f6710f469c525568f81f2b5, type: 2}
   all: {fileID: 11400000, guid: 10e022f2405e79749b36703e707058f1, type: 2}
+  stageRewardDisplayer: {fileID: 3237711031501096457, guid: 30ba508d459e54040805afc8f8b2a2ff, type: 3}
 --- !u!1 &1017902839
 GameObject:
   m_ObjectHideFlags: 0
@@ -3151,7 +3152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff457e23fdaa984885993e6d39484f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::StageSaveHelper
-  clearStage: 3
+  clearStage: 2
 --- !u!1 &1365789486
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] SkillTextSO skillTextSO;
     [SerializeField] CardListSO start;
     [SerializeField] CardListSO all;
+    [SerializeField] UI_StageRewardDisplayer stageRewardDisplayer;
+
     DeckBuildStore store;
     void Awake()
     {
@@ -16,20 +18,14 @@ public class LobbyScene : MonoBehaviour
         if (inventory == null)
             inventory = new MasteryProfile(startPoints: 15);
 
-        FindMono<UI_StageSelection>().Init(new PlayerPrefsStageStorage().LoadUnlockedStage, EnterBattle);
+        var stageStorage = new PlayerPrefsStageStorage();
+        FindMono<UI_StageSelection>().Init(stageStorage.LoadUnlockedStage, EnterBattle);
         FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder(), new ChampionStatusTextBuilder()), FindMono<UI_MasteryPoint>(), dataIO), inventory);
-        
+
         store = new DeckBuildStore(new DeckBuildState(matchConfigSO.BattleCardCount, all.CardIdSet, start.CardIdSet));
         FindMono<UI_DeckBuilder>().Init(store);
 
-        int clearStage = new PlayerPrefsStageStorage().LoadUnlockedStage();
-        if (StageRewardPresenter.ShouldShowStageReward(clearStage))
-        {
-            foreach (var item in CardListLoder.LoadStageCard(clearStage).Select(x => x.ChampionName))
-            {
-                print(item);
-            }
-        }
+        StageRewardPresenter.ShowStageReward(stageRewardDisplayer, stageStorage.LoadUnlockedStage());
     }
 
     ChampionProfile GetProfile(int id)

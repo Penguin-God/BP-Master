@@ -60,6 +60,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 83c96aa58ba89314fb2b098b0e0f95b5, type: 2}
     - {fileID: 11400000, guid: 05764b6ed32fca74d93311ab047dd117, type: 2}
     - {fileID: 11400000, guid: 359a53795c7d03f48a42ad9537c89c34, type: 2}
+    - {fileID: 11400000, guid: 550666d0e7409ec41ba97eb5c0577369, type: 2}
     SuccessDialogues:
     - "\uC131\uACF5\uD588\uC2B5\uB2C8\uB2E4. \uC774\uC81C \uC801 \uCE74\uB4DC\uB97C
       \uD074\uB9AD\uD574 \uC2A4\uD0AC\uC744 \uC0AC\uC6A9\uD574\uBCF4\uC138\uC694"

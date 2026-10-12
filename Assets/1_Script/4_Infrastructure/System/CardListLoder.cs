@@ -13,7 +13,7 @@ public static class CardListLoder
 
         for (int i = 1; i <= stage; i++)
         {
-            var cardList = Resources.Load<CardListSO>($"{BasePath}/Stage{i}");
+            var cardList = LoadCardListSO(i);
             if (cardList != null)
                 list.Add(cardList);
         }
@@ -26,5 +26,5 @@ public static class CardListLoder
     public static IEnumerable<ChampionSO> LoadAllStageCards(int stage) => LoadStage(stage).SelectMany(x => x.CardList);
     public static IEnumerable<int> LoadAllStageCardIds(int stage) => LoadAllStageCards(stage).Select(x => x.Id);
 
-    public static IEnumerable<ChampionSO> LoadStageCard(int stage) => Resources.Load<CardListSO>($"{BasePath}/Stage{stage}").CardList;
+    public static CardListSO LoadCardListSO(int stage) => Resources.Load<CardListSO>($"{BasePath}/Stage{stage}");
 }
