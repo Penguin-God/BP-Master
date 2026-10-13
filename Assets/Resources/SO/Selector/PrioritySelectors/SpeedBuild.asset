@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: SpeedBuild
   m_EditorClassIdentifier: App::BuildPrioritySO
   bans:
-  - {fileID: 11400000, guid: ae21cba61378eaf46bfcab2d01e2b721, type: 2}
   - {fileID: 11400000, guid: e492800f37830f841900e48b1185b3a9, type: 2}
-  - {fileID: 11400000, guid: 8784443d42fd77440b0c4cc92e203e8f, type: 2}
-  - {fileID: 11400000, guid: 8f9e41ca17de2ba4e9abdd109a3fdd28, type: 2}
   picks:
   - {fileID: 11400000, guid: 5f5c7591caea4e04b816869d96af3a1f, type: 2}
   - {fileID: 11400000, guid: 0c4abe03433751347b882db35b368f90, type: 2}
@@ -26,4 +23,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 501399a5d79b3944d8ff9848526fa637, type: 2}
   - {fileID: 11400000, guid: 0dc80b517b75a554fb14e80936d977e0, type: 2}
   - {fileID: 11400000, guid: 49809e8e360b92940a2612303a17878e, type: 2}
-  - {fileID: 11400000, guid: 359a53795c7d03f48a42ad9537c89c34, type: 2}

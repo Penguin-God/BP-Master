@@ -13,9 +13,4 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: App::CardListSO
   _cardList:
-  - {fileID: 11400000, guid: 23cad2dd0631ef64d9d44e30de06bb2e, type: 2}
-  - {fileID: 11400000, guid: 49809e8e360b92940a2612303a17878e, type: 2}
-  - {fileID: 11400000, guid: bf1e46797b2102f4995e5dbc047357ab, type: 2}
-  - {fileID: 11400000, guid: eca6152df43791743af3aeb3eae86012, type: 2}
-  - {fileID: 11400000, guid: d7000890dfa10bf4f9ede95f43d04424, type: 2}
-  - {fileID: 11400000, guid: 8f9e41ca17de2ba4e9abdd109a3fdd28, type: 2}
+  - {fileID: 11400000, guid: 8710fb3935eb85045ab9b7b056eaf0b5, type: 2}
