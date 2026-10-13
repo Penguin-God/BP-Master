@@ -16,7 +16,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     {
         Team = team;
 
-        AI_SelectorSO selectorFactory = aiFactory.CreateAI(ai_id, Team, storage, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
+        AI_SelectorSO selectorFactory = aiFactory.CreateAI(ai_id, Team, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
 
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorFactory.CreateBanSelector(), selectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += UseSkill;

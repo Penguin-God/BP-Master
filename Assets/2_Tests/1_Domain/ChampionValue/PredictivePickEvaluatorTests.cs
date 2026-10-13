@@ -11,7 +11,6 @@ public class PredictivePickEvaluatorTests
         var champion = CreateChampion(1, att: 500);
         var champion2 = CreateChampion(2, def: 500);
 
-        var storage = CreateStorage(1, 2, 3);
         var catalog = CreateCaltalog(champion, champion2, CreateChampion(3, att: 0, def: 5000));
 
         var originSlots = new SlotStorage<ChampionStatus>();
@@ -22,7 +21,7 @@ public class PredictivePickEvaluatorTests
 
         var phaseAdvancer = new PhaseAdvancer(new PhaseData[] { new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })) });
         phaseAdvancer.Start(); // 현재 턴 활성화를 위해 Start 호출 필요
-        var sut = new PredictivePickEvaluator(pickValueEvaluator, storage, catalog, phaseAdvancer, Team.Blue, originSlots);
+        var sut = new PredictivePickEvaluator(pickValueEvaluator, catalog, phaseAdvancer, Team.Blue, originSlots);
 
         Assert.AreEqual(-4500, sut.Evaluate(champion));
         Assert.AreEqual(-30000, sut.Evaluate(champion2));
@@ -35,7 +34,6 @@ public class PredictivePickEvaluatorTests
         var champion2 = CreateChampion(2, att: 0, def: 3000);
         var champion3 = CreateChampion(3, att: 700);
 
-        var storage = CreateStorage(1, 2, 3);
         var catalog = CreateCaltalog(champion, champion2, champion3);
 
         var originSlots = new SlotStorage<ChampionStatus>();
@@ -46,7 +44,7 @@ public class PredictivePickEvaluatorTests
         var phaseAdvancer = new PhaseAdvancer(new PhaseData[] { new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Blue })) });
         phaseAdvancer.Start(); // 현재 턴 활성화를 위해 Start 호출 필요
 
-        var sut = new PredictivePickEvaluator(pickValueEvaluator, storage, catalog, phaseAdvancer, Team.Blue, originSlots);
+        var sut = new PredictivePickEvaluator(pickValueEvaluator, catalog, phaseAdvancer, Team.Blue, originSlots);
 
         
         Assert.AreEqual(11200, sut.Evaluate(champion));

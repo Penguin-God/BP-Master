@@ -16,6 +16,5 @@ public static class ChampionDataLoder
     public static IReadOnlyDictionary<int, string> NameCatalog => _allChampion.ToDictionary(x => x.Id, x => x.ChampionName);
 
     public static IEnumerable<int> AllId => AllChampions.Select(x => x.Id);
-    public static ChampionCatalog GetCatalog() => new ChampionCatalog(AllChampions.Select(x => x.CreateChampion()));
     public static ChampionSO GetChampionData(int id) => AllChampions.First(x => x.Id == id);   
 }

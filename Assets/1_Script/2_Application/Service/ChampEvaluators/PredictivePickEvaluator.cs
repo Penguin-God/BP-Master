@@ -3,17 +3,15 @@ using System.Linq;
 public class PredictivePickEvaluator : IChampionEvaluator
 {
     readonly PickValueEvaluator evaluator;
-    readonly BanPickStorage storage;
     readonly ChampionCatalog catalog;
     readonly PhaseAdvancer phaseAdvancer;
 
     readonly Team myTeam;
     readonly SlotStorage<ChampionStatus> currentBoard;
 
-    public PredictivePickEvaluator(PickValueEvaluator evaluator,BanPickStorage storage, ChampionCatalog catalog, PhaseAdvancer phaseAdvancer, Team myTeam, SlotStorage<ChampionStatus> currentBoard)
+    public PredictivePickEvaluator(PickValueEvaluator evaluator, ChampionCatalog catalog, PhaseAdvancer phaseAdvancer, Team myTeam, SlotStorage<ChampionStatus> currentBoard)
     {
         this.evaluator = evaluator;
-        this.storage = storage;
         this.catalog = catalog;
         this.phaseAdvancer = phaseAdvancer;
         this.myTeam = myTeam;
@@ -36,11 +34,8 @@ public class PredictivePickEvaluator : IChampionEvaluator
         evaluator.Change(nextTurnTeam, futureBoard);
 
         int maxNextValue = 0;
-        var candidates = storage.SelectableIds.Where(id => id != myCandidate.Id);
-
-        foreach (var id in candidates)
+        foreach (var champ in catalog.Champions.Where(x => x.Id != myCandidate.Id))
         {
-            var champ = catalog.GetChampion(id);
             int value = evaluator.Evaluate(champ);
 
             if (value > maxNextValue)

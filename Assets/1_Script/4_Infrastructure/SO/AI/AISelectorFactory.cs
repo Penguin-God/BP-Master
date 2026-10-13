@@ -19,7 +19,7 @@ public class AISelectorFactory : ScriptableObject
     [TableList(AlwaysExpanded = true)]
     [SerializeField] AIConfig[] aiConfigs;
 
-    public AI_SelectorSO CreateAI(int id, Team team, BanPickStorage storage, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
+    public AI_SelectorSO CreateAI(int id, Team team, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
     {
         var config = aiConfigs.FirstOrDefault(x => x.Id == id);
         if (config.SelectorFactory == null) 
@@ -31,7 +31,7 @@ public class AISelectorFactory : ScriptableObject
 
         PredictValueSelectorFactory perdictFactory = factory as PredictValueSelectorFactory;
         if(perdictFactory != null)
-            perdictFactory.Inject(storage, phaseAdvancer);
+            perdictFactory.Inject(phaseAdvancer);
         return factory;
     }
 }

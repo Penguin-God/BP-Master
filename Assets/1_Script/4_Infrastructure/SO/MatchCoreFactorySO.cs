@@ -9,7 +9,7 @@ public class MatchCoreFactorySO : ScriptableObject
     [SerializeField] PlayerDataProviderFactorySO playerDataProviderFactorySO;
     [SerializeField] TeamBonusDataSO bonusDataFactory;
 
-    public MatchCore CreateMatchCore(BanPickStorage storage, ChampionCatalog championCatalog, Dictionary<Team, int> playerDatas, IPhaseEntry blueEntry, IPhaseEntry redEntry)
+    public MatchCore CreateMatchCore(BanPickStorage storage, BanPickHandler banPickHandler, Dictionary<Team, int> playerDatas, IPhaseEntry blueEntry, IPhaseEntry redEntry)
     {
         var dataProvider = playerDataProviderFactorySO.CreatePlayerDataProvider();
         var phaseAdvancer = gamePhaseLoder.CreateAdvacer();
@@ -17,7 +17,6 @@ public class MatchCoreFactorySO : ScriptableObject
         var registry = masteryFactorySO.CreateRegistry(GetBoard(Team.Blue), GetBoard(Team.Red));
         var teamBonusCalculator = bonusDataFactory.CreateTeamBonusCalculator();
 
-        var banPickHandler = new BanPickHandler(championCatalog, storage);
         banPickHandler.BanPickEventDispatcher.OnTeamChampionPick += (champion, team) =>
         {
             new MasteryApplier(registry.GetTeamMasteryCollection(team))

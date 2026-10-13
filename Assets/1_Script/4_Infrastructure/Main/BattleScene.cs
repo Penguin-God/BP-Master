@@ -1,5 +1,6 @@
 using Match;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BattleScene : MonoBehaviour
@@ -23,10 +24,10 @@ public class BattleScene : MonoBehaviour
         playerIds.Add(playerTeam, matchConfigSO.UserId);
         playerIds.Add(aiTeam, ai_id);
 
-        var championCatalog = ChampionDataLoder.GetCatalog();
         storage = MatchContext.CreateFearlessStorage();
+        var championCatalog = new ChampionCatalog(storage.SelectableIds.Select(x => ChampionDataLoder.GetChampionData(x).CreateChampion())); // ChampionDataLoder.GetCatalog();
         var (blue, red) = CreatePhaseOrchestrator(championSelector, ai_main, playerTeam);
-        var core = matchCoreFactorySO.CreateMatchCore(storage, championCatalog, playerIds, blue, red);
+        var core = matchCoreFactorySO.CreateMatchCore(storage, new BanPickHandler(championCatalog, storage), playerIds, blue, red);
 
         matchUI_Controller.Init(playerTeam, core, playerIds); // start보다 먼저
 
