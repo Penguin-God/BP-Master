@@ -38,7 +38,8 @@ public class LobbyScene : MonoBehaviour
 
     void EnterBattle(int stage)
     {
-        MatchContext.MatchInit(new MatchData(matchConfigSO.UserId, stage), matchConfigSO.TargetWinCount, ChampionDataLoder.AllId);
+        var stageCardIds = CardListLoder.LoadAllStageCardIds(new PlayerPrefsStageStorage().LoadUnlockedStage());
+        MatchContext.MatchInit(new MatchData(matchConfigSO.UserId, stage), matchConfigSO.TargetWinCount, stageCardIds);
         SceneLoadHelper.LoadScene(SceneType.Battle);
     }
 }
