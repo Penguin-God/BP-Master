@@ -5,18 +5,20 @@ public class UI_CategoryController : MonoBehaviour
 {
     [Header("버튼")]
     [SerializeField] Button stageBtn;
-    [SerializeField] Button deckBtn;
+    [SerializeField] Button masteryBtn;
 
     [Header("패널")]
     [SerializeField] GameObject stagePanel;
-    [SerializeField] GameObject deckPanel;
+    [SerializeField] GameObject masteryPanel;
 
     [SerializeField] TutorialTriggerSO tutorialTrigger;
 
     void Awake()
     {
+        if (1 > new PlayerPrefsStageStorage().LoadUnlockedStage())
+            masteryBtn.interactable = false;
         stageBtn.onClick.AddListener(ShowStage);
-        deckBtn.onClick.AddListener(ShowMastery);
+        masteryBtn.onClick.AddListener(ShowMastery);
     }
 
     void Start()
@@ -27,13 +29,13 @@ public class UI_CategoryController : MonoBehaviour
     void ShowStage()
     {
         stagePanel.SetActive(true);
-        deckPanel.SetActive(false);
+        masteryPanel.SetActive(false);
     }
 
     void ShowMastery()
     {
         stagePanel.SetActive(false);
-        deckPanel.SetActive(true);
+        masteryPanel.SetActive(true);
         tutorialTrigger.StartTutorialOneTime(TutorialTriggerType.MasteryUIEnter);
     }
 }

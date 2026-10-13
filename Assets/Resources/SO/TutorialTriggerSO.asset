@@ -138,4 +138,17 @@ MonoBehaviour:
     AnswerCards: []
     SuccessDialogues: []
     FailDialogues: []
+  - TutorialType: 0
+    TriggerType: 1
+    Dialogues:
+    - "\uC774 \uD654\uBA74\uC5D0\uC11C\uB294 \uCE74\uB4DC\uC758 \uC2A4\uD0EF\uC744
+      \uAC15\uD654\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4"
+    - "\uC2A4\uD0EF\uBCC4\uB85C 1\uBC88\uC529 \uAC15\uD654\uAC00 \uAC00\uB2A5\uD558\uBA70
+      \uD3EC\uC778\uD2B8\uB97C \uC0AC\uC6A9\uD569\uB2C8\uB2E4"
+    - "\uD3EC\uC778\uD2B8\uB294 \uC5B8\uC81C\uB4E0 \uCD08\uAE30\uD654\uAC00 \uAC00\uB2A5\uD569\uB2C8\uB2E4"
+    - "\uAC15\uD654\uD55C \uCE74\uB4DC\uB294 \uAC8C\uC784\uC5D0\uC11C \uD53D\uD55C
+      \uC21C\uAC04\uBD80\uD130 \uAC15\uD654\uB41C \uC2A4\uD0EF\uC774 \uC801\uC6A9\uB429\uB2C8\uB2E4"
+    AnswerCards: []
+    SuccessDialogues: []
+    FailDialogues: []
   _uiTutorial: {fileID: 5179135095201166203, guid: 308f008ac867816449398520e64d8d84, type: 3}
