@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public readonly struct MasteryLevelModel
 {
     public readonly string AttackText;
@@ -20,10 +22,10 @@ public class MasteryPointPresenter
     readonly ChampionTextBuilder _championTextBuilder;
     readonly IMasterySaver _saver;
 
+    public int CurrentPoint => _inventory.AvailablePoints;
     int _currentSelectedId = -1;
 
     public bool HasSelectedChampion => _currentSelectedId != -1;
-
     public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasterySaver saver)
     {
         _inventory = inventory;
@@ -54,6 +56,12 @@ public class MasteryPointPresenter
     {
         _inventory.ResetAll();
         _saver.Save(_inventory);
+    }
+
+    public Color GetButtonColor(int id)
+    {
+        if (_inventory.TryGetBoard(id, out _)) return Color.green;
+        else return Color.white;
     }
 }
 

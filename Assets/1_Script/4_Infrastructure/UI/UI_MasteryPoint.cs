@@ -25,22 +25,20 @@ public class UI_MasteryPoint : MonoBehaviour
     [SerializeField] Button _upAttBtn;
     [SerializeField] Button _upDefBtn;
     [SerializeField] Button _upSpdBtn;
-
+    
     MasteryPointPresenter _presenter;
-    MasteryProfile _masteryProfile;
     IEnumerable<Button> buttons;
 
-    public void Init(MasteryPointPresenter presenter, MasteryProfile masteryProfile)
+    public void Init(MasteryPointPresenter presenter)
     {
         _presenter = presenter;
-        _masteryProfile = masteryProfile;
 
         BindUpgradeButtons();
         CreateAndBindChampionButtons();
         _resetButton.onClick.AddListener(ResetView);
 
         ClearDetailView();
-        UpdatePoint();
+        UpdatePoint(presenter.CurrentPoint);
     }
 
     void BindUpgradeButtons()
@@ -78,7 +76,7 @@ public class UI_MasteryPoint : MonoBehaviour
         RefreshUI();
     }
 
-    public void UpdatePoints(int points)
+    public void UpdatePoint(int points)
     {
         _pointText.text = $"보유 Point : {points}";
         RefreshBtnColor();
@@ -89,8 +87,7 @@ public class UI_MasteryPoint : MonoBehaviour
         foreach (var btn in buttons)
         {
             int id = btn.GetComponent<ChampionIdentify>().Id;
-            if (_masteryProfile.TryGetBoard(id, out _)) ButtonUtil.ChangeButtonColor(btn, Color.green);
-            else ButtonUtil.ChangeButtonColor(btn, Color.white);
+            ButtonUtil.ChangeButtonColor(btn, _presenter.GetButtonColor(id));
         }
     }
 
@@ -98,7 +95,7 @@ public class UI_MasteryPoint : MonoBehaviour
 
     public void RefreshUI(CardUpgradeViewModel model)
     {
-        UpdatePoints(model.UpgradePoint);
+        UpdatePoint(model.UpgradePoint);
 
         var championModel = model.ChampionModel;
         _campionView.UpdateChampionAll(championModel);
@@ -126,8 +123,6 @@ public class UI_MasteryPoint : MonoBehaviour
     {
         _presenter.ResetMastery();
         if (_presenter.HasSelectedChampion) RefreshUI();
-        else UpdatePoint();
+        else UpdatePoint(_presenter.CurrentPoint);
     }
-
-    void UpdatePoint() => UpdatePoints(_masteryProfile.AvailablePoints);
 }

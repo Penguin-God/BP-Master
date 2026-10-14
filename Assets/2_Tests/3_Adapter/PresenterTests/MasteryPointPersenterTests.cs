@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using static TestHelper;
+using UnityEngine;
 
 public class MasteryPointPersenterTests
 {
@@ -27,5 +28,18 @@ public class MasteryPointPersenterTests
 
         Assert.IsTrue(saver.IsSaved);
         Assert.AreEqual(9, point);
+    }
+
+    [Test]
+    public void 업그레이드가_존재하면_초록색_반환()
+    {
+        var inventory = CreateMasteryInventory(10);
+        var sut = CreateSut(inventory, new FakeMasterySaver());
+
+        sut.SelectChampion(1);
+        sut.UpgradeCardStat(StatType.Attack);
+
+        Assert.AreEqual(Color.green, sut.GetButtonColor(1));
+        Assert.AreEqual(Color.white, sut.GetButtonColor(2));
     }
 }

@@ -16,7 +16,7 @@ public class LobbyScene : MonoBehaviour
 
         var stageStorage = new PlayerPrefsStageStorage();
         FindMono<UI_StageSelection>().Init(stageStorage.LoadUnlockedStage, EnterBattle);
-        FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder()), dataIO), inventory);
+        FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder()), dataIO));
 
         StageRewardPresenter.ShowStageReward(stageRewardDisplayer, stageStorage.LoadUnlockedStage());
     }
