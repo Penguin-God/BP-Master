@@ -12,55 +12,47 @@ public readonly struct MasteryLevelModel
     }
 }
 
+public record CardUpgradeViewModel(int UpgradePoint, MasteryLevelModel MasteryModel, ChampionTextModel ChampionModel);
+
 public class MasteryPointPresenter
 {
     readonly MasteryProfile _inventory;
     readonly ChampionTextBuilder _championTextBuilder;
-    readonly IMasteryPointView _view;
     readonly IMasterySaver _saver;
 
     int _currentSelectedId = -1;
 
-    public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasteryPointView view, IMasterySaver saver)
+    public bool HasSelectedChampion => _currentSelectedId != -1;
+
+    public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasterySaver saver)
     {
         _inventory = inventory;
         _championTextBuilder = championTextBuilder;
-        _view = view;
         _saver = saver;
     }
 
-    public void SelectChampion(int id)
-    {
-        _currentSelectedId = id;
-        RefreshDetail();
-    }
+    public void SelectChampion(int id) => _currentSelectedId = id;
 
     public int UpgradeCardStat(StatType statType)
     {
-        if (_currentSelectedId > 0)
+        if (HasSelectedChampion)
         {
             _inventory.Upgrade(_currentSelectedId, statType);
-            RefreshDetail();
             _saver.Save(_inventory);
         }
         return _inventory.AvailablePoints;
     }
 
-
-    void RefreshDetail()
+    public CardUpgradeViewModel CreateModel()
     {
         var champModel = _championTextBuilder.Build(_currentSelectedId);
         var board = _inventory.GetBoard(_currentSelectedId);
-        _view.UpdateChampionDetail(champModel, MasteryLevelModelCreator.CreateModel(board));
+        return new CardUpgradeViewModel(_inventory.AvailablePoints, MasteryLevelModelCreator.CreateModel(board), champModel);
     }
 
     public void ResetMastery()
     {
         _inventory.ResetAll();
-
-        if (_currentSelectedId != -1)
-            RefreshDetail();
-
         _saver.Save(_inventory);
     }
 }

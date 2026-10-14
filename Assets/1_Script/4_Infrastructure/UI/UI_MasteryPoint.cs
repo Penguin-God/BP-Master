@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
+public class UI_MasteryPoint : MonoBehaviour
 {
     [Header("프리팹 및 부모")]
     [AssetsOnly][SerializeField] GameObject btnPrefab;
@@ -29,6 +29,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     MasteryPointPresenter _presenter;
     MasteryProfile _masteryProfile;
     IEnumerable<Button> buttons;
+
     public void Init(MasteryPointPresenter presenter, MasteryProfile masteryProfile)
     {
         _presenter = presenter;
@@ -49,11 +50,12 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         _upSpdBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Speed));
     }
 
-
     void ClickUpgradeBtn(StatType statType)
     {
-        int point = _presenter.UpgradeCardStat(statType);
-        UpdatePoints(point);
+        if (!_presenter.HasSelectedChampion) return;
+
+        _presenter.UpgradeCardStat(statType);
+        RefreshUI();
     }
 
     void CreateAndBindChampionButtons()
@@ -65,9 +67,15 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         foreach (var btn in buttons)
         {
             int id = btn.GetComponent<ChampionIdentify>().Id;
-            btn.onClick.AddListener(() => _presenter.SelectChampion(id));
+            btn.onClick.AddListener(() => SelectChampion(id));
         }
         RefreshBtnColor();
+    }
+
+    void SelectChampion(int id)
+    {
+        _presenter.SelectChampion(id);
+        RefreshUI();
     }
 
     public void UpdatePoints(int points)
@@ -81,24 +89,27 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         foreach (var btn in buttons)
         {
             int id = btn.GetComponent<ChampionIdentify>().Id;
-            if (_masteryProfile.TryGetBoard(id, out var board))
-                ButtonUtil.ChangeButtonColor(btn, Color.green);
-            else
-                ButtonUtil.ChangeButtonColor(btn, Color.white);
+            if (_masteryProfile.TryGetBoard(id, out _)) ButtonUtil.ChangeButtonColor(btn, Color.green);
+            else ButtonUtil.ChangeButtonColor(btn, Color.white);
         }
     }
 
-    public void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel)
+    void RefreshUI() => RefreshUI(_presenter.CreateModel());
+
+    public void RefreshUI(CardUpgradeViewModel model)
     {
-        _campionView.UpdateChampionAll(champModel);
+        UpdatePoints(model.UpgradePoint);
 
-        _baseAttText.text = champModel.StatModel.Attack;
-        _baseDefText.text = champModel.StatModel.Defense;
-        _baseSpdText.text = champModel.StatModel.Speed;
+        var championModel = model.ChampionModel;
+        _campionView.UpdateChampionAll(championModel);
 
-        _masteryAttText.text = masteryModel.AttackText;
-        _masteryDefText.text = masteryModel.DefenseText;
-        _masterySpdText.text = masteryModel.SpeedText;
+        _baseAttText.text = championModel.StatModel.Attack;
+        _baseDefText.text = championModel.StatModel.Defense;
+        _baseSpdText.text = championModel.StatModel.Speed;
+
+        _masteryAttText.text = model.MasteryModel.AttackText;
+        _masteryDefText.text = model.MasteryModel.DefenseText;
+        _masterySpdText.text = model.MasteryModel.SpeedText;
     }
 
     void ClearDetailView()
@@ -114,8 +125,8 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     void ResetView()
     {
         _presenter.ResetMastery();
-        UpdatePoint();
-        RefreshBtnColor();
+        if (_presenter.HasSelectedChampion) RefreshUI();
+        else UpdatePoint();
     }
 
     void UpdatePoint() => UpdatePoints(_masteryProfile.AvailablePoints);
