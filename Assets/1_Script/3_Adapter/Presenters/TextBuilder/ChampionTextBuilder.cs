@@ -39,7 +39,7 @@ public class ChampionTextBuilder
 
     public ChampionTextModel Build(int id)
     {
-        var profile = _profileProvider(id); // 람다 실행
+        var profile = _profileProvider(id);
         var statModel = ChampionStatModelFactory.CreateStatModel(profile.Stat);
         var skillText = _skillTextBuilder.BuildSkillText(profile.Skill.SkillDatas);
 

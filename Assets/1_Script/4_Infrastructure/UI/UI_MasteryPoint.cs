@@ -14,8 +14,6 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     [SerializeField] Button _resetButton;
     [SerializeField] TextMeshProUGUI _pointText;
     [SerializeField] ChampionView _campionView;
-    [SerializeField] TextMeshProUGUI _nameText;
-    [SerializeField] TextMeshProUGUI _skillText;
     [SerializeField] TextMeshProUGUI _baseAttText;
     [SerializeField] TextMeshProUGUI _baseDefText;
     [SerializeField] TextMeshProUGUI _baseSpdText;
@@ -86,8 +84,6 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     public void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel)
     {
         _campionView.UpdateChampionAll(champModel);
-        //_nameText.text = champModel.Name;
-        //_skillText.text = champModel.SkillText;
 
         _baseAttText.text = champModel.StatModel.Attack;
         _baseDefText.text = champModel.StatModel.Defense;
@@ -100,8 +96,6 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
 
     void ClearDetailView()
     {
-        _nameText.text = "챔피언을 선택하세요";
-        _skillText.text = "";
         _baseAttText.text = "공 : -";
         _baseDefText.text = "방 : -";
         _baseSpdText.text = "속 : -";
