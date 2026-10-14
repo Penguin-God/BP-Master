@@ -13,12 +13,12 @@ public readonly struct ChampionStatModel
     }
 }
 
-public static class ChampionStatusTextBuilder
+public static class ChampionStatModelFactory
 {
-    public static ChampionStatModel CreateStatViewModel(ChampionStatData stat) =>
+    public static ChampionStatModel CreateStatModel(ChampionStatData stat) =>
         new ChampionStatModel(
-        $"공 {stat.Attack}",
-        $"방 {stat.Defense}",
-        $"속도 {stat.Speed}"
+            $"공 {stat.Attack}",
+            $"방 {stat.Defense}",
+            $"속도 {stat.Speed}"
     );
 }
