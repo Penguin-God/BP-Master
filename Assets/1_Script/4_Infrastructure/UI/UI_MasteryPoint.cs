@@ -38,15 +38,22 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         CreateAndBindChampionButtons();
         _resetButton.onClick.AddListener(ResetView);
 
-        _presenter.Initialize();
         ClearDetailView();
+        UpdatePoint();
     }
 
     void BindUpgradeButtons()
     {
-        _upAttBtn.onClick.AddListener(() => _presenter.RequestUpgrade(StatType.Attack));
-        _upDefBtn.onClick.AddListener(() => _presenter.RequestUpgrade(StatType.Defense));
-        _upSpdBtn.onClick.AddListener(() => _presenter.RequestUpgrade(StatType.Speed));
+        _upAttBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Attack));
+        _upDefBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Defense));
+        _upSpdBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Speed));
+    }
+
+
+    void ClickUpgradeBtn(StatType statType)
+    {
+        int point = _presenter.UpgradeCardStat(statType);
+        UpdatePoints(point);
     }
 
     void CreateAndBindChampionButtons()
@@ -59,8 +66,8 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
         {
             int id = btn.GetComponent<ChampionIdentify>().Id;
             btn.onClick.AddListener(() => _presenter.SelectChampion(id));
-            RefreshBtnColor();
         }
+        RefreshBtnColor();
     }
 
     public void UpdatePoints(int points)
@@ -107,6 +114,9 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
     void ResetView()
     {
         _presenter.ResetMastery();
+        UpdatePoint();
         RefreshBtnColor();
     }
+
+    void UpdatePoint() => UpdatePoints(_masteryProfile.AvailablePoints);
 }

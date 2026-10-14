@@ -29,46 +29,47 @@ public class MasteryPointPresenter
         _saver = saver;
     }
 
-    public void Initialize() => _view.UpdatePoints(_inventory.AvailablePoints);
-
     public void SelectChampion(int id)
     {
         _currentSelectedId = id;
         RefreshDetail();
     }
 
-    public void RequestUpgrade(StatType statType)
+    public int UpgradeCardStat(StatType statType)
     {
-        if (_currentSelectedId == -1) return;
-
-        _inventory.Upgrade(_currentSelectedId, statType);
-        _view.UpdatePoints(_inventory.AvailablePoints);
-        RefreshDetail();
-        _saver.Save(_inventory);
+        if (_currentSelectedId > 0)
+        {
+            _inventory.Upgrade(_currentSelectedId, statType);
+            RefreshDetail();
+            _saver.Save(_inventory);
+        }
+        return _inventory.AvailablePoints;
     }
+
 
     void RefreshDetail()
     {
         var champModel = _championTextBuilder.Build(_currentSelectedId);
         var board = _inventory.GetBoard(_currentSelectedId);
-
-        var masteryModel = new MasteryLevelModel(
-            $"공 : {board.AttackLevel}",
-            $"방 : {board.DefenseLevel}",
-            $"속 : {board.SpeedLevel}"
-        );
-
-        _view.UpdateChampionDetail(champModel, masteryModel);
+        _view.UpdateChampionDetail(champModel, MasteryLevelModelCreator.CreateModel(board));
     }
 
     public void ResetMastery()
     {
         _inventory.ResetAll();
-        _view.UpdatePoints(_inventory.AvailablePoints);
 
         if (_currentSelectedId != -1)
             RefreshDetail();
 
         _saver.Save(_inventory);
     }
+}
+
+public static class MasteryLevelModelCreator
+{
+    public static MasteryLevelModel CreateModel(MasteryBoard board) => new MasteryLevelModel(
+            $"공 : {board.AttackLevel}",
+            $"방 : {board.DefenseLevel}",
+            $"속 : {board.SpeedLevel}"
+        );
 }
