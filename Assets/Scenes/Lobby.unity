@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1401922177}
   m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 1
+  m_VerticalScrollbarVisibility: 0
   m_HorizontalScrollbarSpacing: -3
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
@@ -2774,6 +2774,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1091174713}
   - component: {fileID: 1091174715}
+  - component: {fileID: 1091174716}
+  - component: {fileID: 1091174717}
   m_Layer: 5
   m_Name: ChampionView
   m_TagString: Untagged
@@ -2811,6 +2813,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091174712}
   m_CullTransparentMesh: 1
+--- !u!114 &1091174716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091174712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4f14d80adc8644ba980210fad17046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::ChampionView
+  nameText: {fileID: 1950163905}
+  statView: {fileID: 1091174717}
+  skillText: {fileID: 1558464910}
+  skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
+--- !u!114 &1091174717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091174712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13101a852206980439635a11a74f03a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::StatView
+  attackText: {fileID: 1797386935}
+  defenseText: {fileID: 767535470}
+  speedText: {fileID: 1192858965}
 --- !u!1 &1111538743
 GameObject:
   m_ObjectHideFlags: 0
@@ -5308,6 +5341,7 @@ MonoBehaviour:
   parent: {fileID: 1111538744}
   _resetButton: {fileID: 2126177464}
   _pointText: {fileID: 485918014}
+  _campionView: {fileID: 1091174716}
   _nameText: {fileID: 1950163905}
   _skillText: {fileID: 1558464910}
   _baseAttText: {fileID: 1797386935}

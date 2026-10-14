@@ -23,8 +23,8 @@ MonoBehaviour:
     SerializationNodes: []
   id: 3
   championName: "\uACF5\uBA85"
-  attack: 90
-  defense: 90
+  attack: 80
+  defense: 80
   speed: 4
   skillDatas:
   - targetSide: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
       Type: 2
       StatType: 0
       ValueAmount: 0
-      PercentValue: 0.2
+      PercentValue: 0.3
       FixValue: 0
     conditionType: 0
     threshold: 0
