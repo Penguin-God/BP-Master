@@ -85,7 +85,7 @@ public class UI_MasteryPoint : MonoBehaviour, IMasteryPointView
 
     public void UpdateChampionDetail(ChampionTextModel champModel, MasteryLevelModel masteryModel)
     {
-        _campionView.UpdateChampion(champModel);
+        _campionView.UpdateChampionAll(champModel);
         //_nameText.text = champModel.Name;
         //_skillText.text = champModel.SkillText;
 

@@ -23,6 +23,14 @@ public class ChampionView : MonoBehaviour
         statView.UpdateStat(model.Stat);
     }
 
+    public void UpdateChampionAll(ChampionTextModel model)
+    {
+        nameText.text = $"{model.Name}";
+        statView.UpdateStat(model.Stat);
+        if (skillText != null)
+            skillText.text = model.SkillText;
+    }
+
     public void ClearDisplay()
     {
         nameText.text = "-";
