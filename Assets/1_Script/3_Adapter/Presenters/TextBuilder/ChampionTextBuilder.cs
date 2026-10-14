@@ -30,19 +30,17 @@ public class ChampionTextBuilder
 {
     readonly Func<int, ChampionProfile> _profileProvider;
     readonly SkillTextBuilder _skillTextBuilder;
-    readonly ChampionStatusTextBuilder _statTextBuilder;
-
-    public ChampionTextBuilder(Func<int, ChampionProfile> profileProvider, SkillTextBuilder skillTextBuilder, ChampionStatusTextBuilder statTextBuilder)
+    
+    public ChampionTextBuilder(Func<int, ChampionProfile> profileProvider, SkillTextBuilder skillTextBuilder)
     {
         _profileProvider = profileProvider;
         _skillTextBuilder = skillTextBuilder;
-        _statTextBuilder = statTextBuilder;
     }
 
     public ChampionTextModel Build(int id)
     {
         var profile = _profileProvider(id); // 람다 실행
-        var statModel = _statTextBuilder.CreateStatViewModel(profile.Stat);
+        var statModel = ChampionStatusTextBuilder.CreateStatViewModel(profile.Stat);
         var skillText = _skillTextBuilder.BuildSkillText(profile.Skill.SkillDatas);
 
         return new ChampionTextModel(profile.Name, statModel, skillText);

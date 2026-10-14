@@ -27,7 +27,7 @@ public class MasteryPointPersenterTests
 
     MasteryPointPresenter CreateSut(MasteryProfile inventory, FakeMasteryPointView view, FakeMasterySaver saver)
     {
-        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(0, 0, 0), CreateSkill()), new SkillTextBuilder(new FakeTextBuilder()), new ChampionStatusTextBuilder());
+        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(0, 0, 0), CreateSkill()), new SkillTextBuilder(new FakeTextBuilder()));
         return new MasteryPointPresenter(inventory, textBuilder, view, saver);
     }
 

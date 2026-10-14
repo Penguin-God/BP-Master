@@ -9,11 +9,9 @@ public class StatView : MonoBehaviour
 
     void Start() => ClearDisplay();
 
-    readonly ChampionStatusTextBuilder StatTextBuilder = new ChampionStatusTextBuilder();
-    
     public void UpdateStat(ChampionStatData statData)
     {
-        ChampionStatModel viewModel = StatTextBuilder.CreateStatViewModel(statData);
+        ChampionStatModel viewModel = ChampionStatusTextBuilder.CreateStatViewModel(statData);
         attackText.text = viewModel.Attack;
         defenseText.text = viewModel.Defense;
         speedText.text = viewModel.Speed;
