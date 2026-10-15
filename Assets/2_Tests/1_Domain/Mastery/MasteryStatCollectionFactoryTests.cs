@@ -8,7 +8,7 @@ public class MasteryStatCollectionFactoryTests
     public void 숙련도_보드_컬랙션을_스탯_컬랙션으로_변환()
     {
         var multiple = new MasteryMultiplier(15, 15, 1);
-        var sut = new MasteryStatCollectionFactory(multiple);
+        var sut = new MasteryCalculator(multiple);
 
         var result = sut.Create(CreateBoardCollection(new() { { 1, new MasteryBoard(1, 1, 1) } }));
         

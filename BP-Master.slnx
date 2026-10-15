@@ -7,8 +7,8 @@
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="2_Tests.csproj" />
   <Project Path="Domain.csproj" />
-  <Project Path="Mastery.csproj" />
   <Project Path="InfraTests.csproj" />
+  <Project Path="Mastery.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="SKills.csproj" />
 </Solution>

@@ -15,7 +15,7 @@ public class MasteryPointPersenterTests
         var textBuilder = new ChampionTextBuilder(
             id => new ChampionProfile(id, "펭귄", CreateStat(100, 0, 0), CreateSkill()),
             new SkillTextBuilder(new FakeTextBuilder()));
-        return new MasteryPointPresenter(inventory, textBuilder, saver, CreateMasteryApplier(CreateMasteryData(1, att: 30)));
+        return new MasteryPointPresenter(inventory, textBuilder, saver, new MasteryMultiplier(30, 0, 0));
     }
 
     [Test]
