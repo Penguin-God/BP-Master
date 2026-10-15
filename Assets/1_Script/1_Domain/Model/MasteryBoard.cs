@@ -15,30 +15,37 @@ public class MasteryBoard
         SpeedLevel = speedLevel;
     }
 
-    public void Upgrade(StatType statType)
+    public bool Upgrade(StatType statType) => ChangeValue(statType, 1);
+    public bool Downgrade(StatType statType) => ChangeValue(statType, -1);
+
+    bool ChangeValue(StatType statType, int delta)
     {
+        int statLevel = GetLevel(statType);
+        int next = CheckValue(statLevel + delta);
+
+        if (statLevel == next) return false;
+
         switch (statType)
         {
-            case StatType.Attack:
-                EnsureCanUpgrade(AttackLevel);
-                AttackLevel++;
-                break;
-            case StatType.Defense:
-                EnsureCanUpgrade(DefenseLevel);
-                DefenseLevel++;
-                break;
-            case StatType.Speed:
-                EnsureCanUpgrade(SpeedLevel);
-                SpeedLevel++;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(statType));
+            case StatType.Attack: AttackLevel = next; break;
+            case StatType.Defense: DefenseLevel = next; break;
+            case StatType.Speed: SpeedLevel = next; break;
         }
+        return true;
     }
 
-    void EnsureCanUpgrade(int currentLevel)
+    int GetLevel(StatType statType) => statType switch
     {
-        if (currentLevel >= MaxLevel)
-            throw new InvalidOperationException($"이미 최대 레벨({MaxLevel})에 도달했습니다.");
+        StatType.Attack => AttackLevel,
+        StatType.Defense => DefenseLevel,
+        StatType.Speed => SpeedLevel,
+        _ => throw new ArgumentOutOfRangeException(nameof(statType))
+    };
+
+    int CheckValue(int newValue)
+    {
+        if (newValue >= MaxLevel) return MaxLevel;
+        else if (newValue < 0) return 0;
+        else return newValue;
     }
 }

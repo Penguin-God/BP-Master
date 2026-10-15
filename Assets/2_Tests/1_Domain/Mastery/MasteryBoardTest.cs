@@ -1,58 +1,63 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 public class MasteryBoardTest
 {
-    MasteryBoard CreateBoard()
-    {
-        return new MasteryBoard();
-    }
+    MasteryBoard CreateBoard() => new MasteryBoard();
 
     [Test]
-    public void 스탯별_숙련도를_올리면_레벨이_오른다()
+    public void 스탯별_숙련도를_올리면_레벨이_오르고_true를_반환한다()
     {
         var board = CreateBoard();
 
-        Assert.AreEqual(0, board.AttackLevel);
+        Assert.IsTrue(board.Upgrade(StatType.Attack));
+        Assert.AreEqual(1, board.AttackLevel);
         Assert.AreEqual(0, board.DefenseLevel);
         Assert.AreEqual(0, board.SpeedLevel);
 
-        board.Upgrade(StatType.Attack);
-        Assert.AreEqual(1, board.AttackLevel);
-
-        board.Upgrade(StatType.Defense);
+        Assert.IsTrue(board.Upgrade(StatType.Defense));
         Assert.AreEqual(1, board.DefenseLevel);
 
-        board.Upgrade(StatType.Speed);
+        Assert.IsTrue(board.Upgrade(StatType.Speed));
         Assert.AreEqual(1, board.SpeedLevel);
     }
 
     [Test]
-    public void 만렙인_1레벨을_초과하여_숙련도를_올리려고_하면_예외를_던진다()
+    public void 스탯별_숙련도를_내리면_레벨이_내려가고_true를_반환한다()
     {
-        var board = CreateBoard();
-        board.Upgrade(StatType.Attack);
+        var board = new MasteryBoard(attackLevel: 1, defenseLevel: 1, speedLevel: 1);
 
-        Assert.Throws<InvalidOperationException>(() => board.Upgrade(StatType.Attack));
+        Assert.IsTrue(board.Downgrade(StatType.Attack));
+        Assert.AreEqual(0, board.AttackLevel);
+        Assert.AreEqual(1, board.DefenseLevel);
+        Assert.AreEqual(1, board.SpeedLevel);
+
+        Assert.IsTrue(board.Downgrade(StatType.Defense));
+        Assert.AreEqual(0, board.DefenseLevel);
+
+        Assert.IsTrue(board.Downgrade(StatType.Speed));
+        Assert.AreEqual(0, board.SpeedLevel);
     }
 
     [Test]
-    public void 보드를_생성자에_넣으면_상태가_반영된다()
+    public void 최대_레벨에서_숙련도를_올리면_레벨이_유지되고_false를_반환한다()
     {
-        var savedBoards = new Dictionary<int, MasteryBoard>
-        {
-            { 101, new MasteryBoard(attackLevel: 1, defenseLevel: 0, speedLevel: 1) },
-            { 102, new MasteryBoard(attackLevel: 0, defenseLevel: 1, speedLevel: 0) }
-        };
-        var inventory = new MasteryProfile(totalPoints: 15, availablePoints: 15, new MasteryBoardCollection(savedBoards));
+        var board = new MasteryBoard(attackLevel: 1);
 
-        var board101 = inventory.GetBoard(101);
-        var board102 = inventory.GetBoard(102);
+        bool isChanged = board.Upgrade(StatType.Attack);
 
-        Assert.AreEqual(15, inventory.AvailablePoints);
-        Assert.AreEqual(1, board101.AttackLevel);
-        Assert.AreEqual(1, board101.SpeedLevel);
-        Assert.AreEqual(1, board102.DefenseLevel);
+        Assert.IsFalse(isChanged);
+        Assert.AreEqual(1, board.AttackLevel);
+    }
+
+    [Test]
+    public void 최소_레벨에서_숙련도를_내리면_레벨이_유지되고_false를_반환한다()
+    {
+        var board = CreateBoard();
+
+        bool isChanged = board.Downgrade(StatType.Attack);
+
+        Assert.IsFalse(isChanged);
+        Assert.AreEqual(0, board.AttackLevel);
     }
 }
