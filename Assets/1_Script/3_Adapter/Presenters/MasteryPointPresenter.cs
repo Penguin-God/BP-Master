@@ -27,12 +27,6 @@ public class MasteryPointPresenter
     int _currentSelectedId = -1;
 
     public bool HasSelectedChampion => _currentSelectedId != -1;
-    public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasterySaver saver)
-    {
-        _inventory = inventory;
-        _championTextBuilder = championTextBuilder;
-        _saver = saver;
-    }
 
     public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasterySaver saver, MasteryMultiplier masteryMultiplier)
     {
