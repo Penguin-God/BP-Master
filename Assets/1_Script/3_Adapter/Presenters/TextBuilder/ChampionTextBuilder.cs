@@ -42,8 +42,7 @@ public class ChampionTextBuilder
     public ChampionTextModel Build(int id, ChampionStatData bonusStat)
     {
         var profile = _profileProvider(id);
-        var finalStat = profile.Stat + bonusStat;
-        var statModel = ChampionStatModelFactory.CreateStatModel(finalStat);
+        var statModel = ChampionStatModelPreserter.CreateStatModel(profile.Stat, bonusStat);
         var skillText = _skillTextBuilder.BuildSkillText(profile.Skill.SkillDatas);
 
         return new ChampionTextModel(profile.Name, statModel, skillText);

@@ -11,7 +11,7 @@ public class StatView : MonoBehaviour
 
     public void UpdateStat(ChampionStatData statData)
     {
-        ChampionStatModel viewModel = ChampionStatModelFactory.CreateStatModel(statData);
+        ChampionStatModel viewModel = ChampionStatModelPreserter.CreateStatModel(statData);
         attackText.text = viewModel.Attack;
         defenseText.text = viewModel.Defense;
         speedText.text = viewModel.Speed;

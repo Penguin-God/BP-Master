@@ -2,7 +2,7 @@ using NUnit.Framework;
 using static TestHelper;
 using UnityEngine;
 
-public class MasteryPointPersenterTests
+public class MasteryPointPresenterTests
 {
     class FakeMasterySaver : IMasterySaver
     {
@@ -46,7 +46,7 @@ public class MasteryPointPersenterTests
     }
 
     [Test]
-    public void 업그레이드한_카드는_스탯이_모델에_반영되어야_함()
+    public void 업그레이드한_카드는_스탯이_모델에_반영되고_색깔도_적용됨()
     {
         var inventory = CreateMasteryInventory(10);
         var sut = CreateSut(inventory, new FakeMasterySaver());
@@ -57,6 +57,8 @@ public class MasteryPointPersenterTests
         var result = sut.CreateModel();
 
         // Assert: 공격력 강화 적용 됐는지 검증(100 + 30)
-        Assert.AreEqual("공 130", result.ChampionModel.StatModel.Attack);
+        Assert.AreEqual("<color=green>공 130</color>", result.ChampionModel.StatModel.Attack);
+        Assert.AreEqual("방 0", result.ChampionModel.StatModel.Defense);
+        Assert.AreEqual("속도 0", result.ChampionModel.StatModel.Speed);
     }
 }
