@@ -5,6 +5,7 @@ public class MasteryBoard
     public int AttackLevel { get; protected set; }
     public int DefenseLevel { get; protected set; }
     public int SpeedLevel { get; protected set; }
+    public bool IsUpgrade => AttackLevel > 0 || DefenseLevel > 0 || SpeedLevel > 0;
 
     const int MaxLevel = 1;
 

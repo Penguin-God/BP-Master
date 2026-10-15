@@ -74,7 +74,7 @@ public class MasteryPointPresenter
 
     public Color GetButtonColor(int id)
     {
-        if (_inventory.TryGetBoard(id, out _)) return Color.green;
+        if (_inventory.GetBoard(id).IsUpgrade) return Color.green;
         else return Color.white;
     }
 }

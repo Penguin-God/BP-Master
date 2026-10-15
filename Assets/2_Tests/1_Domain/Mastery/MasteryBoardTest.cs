@@ -20,6 +20,7 @@ public class MasteryBoardTest
 
         Assert.IsTrue(board.Upgrade(StatType.Speed));
         Assert.AreEqual(1, board.SpeedLevel);
+        Assert.IsTrue(board.IsUpgrade);
     }
 
     [Test]
@@ -59,5 +60,6 @@ public class MasteryBoardTest
 
         Assert.IsFalse(isChanged);
         Assert.AreEqual(0, board.AttackLevel);
+        Assert.IsFalse(board.IsUpgrade);
     }
 }
