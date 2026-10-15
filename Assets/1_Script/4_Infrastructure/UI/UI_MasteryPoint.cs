@@ -18,10 +18,6 @@ public class UI_MasteryPoint : MonoBehaviour
     [SerializeField] TextMeshProUGUI _baseDefText;
     [SerializeField] TextMeshProUGUI _baseSpdText;
 
-    [Header("마스터리 정보 및 버튼")]
-    [SerializeField] TextMeshProUGUI _masteryAttText;
-    [SerializeField] TextMeshProUGUI _masteryDefText;
-    [SerializeField] TextMeshProUGUI _masterySpdText;
     [SerializeField] Button _upAttBtn;
     [SerializeField] Button _upDefBtn;
     [SerializeField] Button _upSpdBtn;
@@ -119,10 +115,6 @@ public class UI_MasteryPoint : MonoBehaviour
         _baseAttText.text = championModel.StatModel.Attack;
         _baseDefText.text = championModel.StatModel.Defense;
         _baseSpdText.text = championModel.StatModel.Speed;
-
-        _masteryAttText.text = model.MasteryModel.AttackText;
-        _masteryDefText.text = model.MasteryModel.DefenseText;
-        _masterySpdText.text = model.MasteryModel.SpeedText;
     }
 
     void ClearDetailView()
@@ -130,9 +122,6 @@ public class UI_MasteryPoint : MonoBehaviour
         _baseAttText.text = "공 : -";
         _baseDefText.text = "방 : -";
         _baseSpdText.text = "속 : -";
-        _masteryAttText.text = "공 : -";
-        _masteryDefText.text = "방 : -";
-        _masterySpdText.text = "속 : -";
     }
 
     void ResetView()

@@ -1,20 +1,6 @@
 using UnityEngine;
 
-public readonly struct MasteryLevelModel
-{
-    public readonly string AttackText;
-    public readonly string DefenseText;
-    public readonly string SpeedText;
-
-    public MasteryLevelModel(string attackText, string defenseText, string speedText)
-    {
-        AttackText = attackText;
-        DefenseText = defenseText;
-        SpeedText = speedText;
-    }
-}
-
-public record CardUpgradeViewModel(int UpgradePoint, MasteryLevelModel MasteryModel, ChampionTextModel ChampionModel);
+public record CardUpgradeViewModel(int UpgradePoint, ChampionTextModel ChampionModel);
 
 public class MasteryPointPresenter
 {
@@ -63,7 +49,7 @@ public class MasteryPointPresenter
         var board = _inventory.GetBoard(_currentSelectedId);
         var bonusStat = MasteryCalculator.CreateMasteryStat(_masteryMultiplier, board);
         var champModel = _championTextBuilder.Build(_currentSelectedId, bonusStat);
-        return new CardUpgradeViewModel(_inventory.AvailablePoints, MasteryLevelModelCreator.CreateModel(board), champModel);
+        return new CardUpgradeViewModel(_inventory.AvailablePoints, champModel);
     }
 
     public void ResetMastery()
@@ -77,13 +63,4 @@ public class MasteryPointPresenter
         if (_inventory.GetBoard(id).IsUpgrade) return Color.green;
         else return Color.white;
     }
-}
-
-public static class MasteryLevelModelCreator
-{
-    public static MasteryLevelModel CreateModel(MasteryBoard board) => new MasteryLevelModel(
-            $"공 : {board.AttackLevel}",
-            $"방 : {board.DefenseLevel}",
-            $"속 : {board.SpeedLevel}"
-        );
 }
