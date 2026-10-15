@@ -2622,6 +2622,7 @@ MonoBehaviour:
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
   skillTextSO: {fileID: 11400000, guid: df3d0897893c4154c89b82401642ec46, type: 2}
   stageRewardDisplayer: {fileID: 3237711031501096457, guid: 30ba508d459e54040805afc8f8b2a2ff, type: 3}
+  mastery: {fileID: 11400000, guid: 083dfcf386aeb5a40a89a1b662859841, type: 2}
 --- !u!1 &1017902839
 GameObject:
   m_ObjectHideFlags: 0

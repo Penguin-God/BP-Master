@@ -6,7 +6,7 @@ public class LobbyScene : MonoBehaviour
     [SerializeField] MatchConfigSO matchConfigSO;
     [SerializeField] SkillTextSO skillTextSO;
     [SerializeField] UI_StageRewardDisplayer stageRewardDisplayer;
-
+    [SerializeField] MasteryRegistryFactorySO mastery;
     void Awake()
     {
         var dataIO = new JsonMasterySaver();
@@ -16,7 +16,7 @@ public class LobbyScene : MonoBehaviour
 
         var stageStorage = new PlayerPrefsStageStorage();
         FindMono<UI_StageSelection>().Init(stageStorage.LoadUnlockedStage, EnterBattle);
-        FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder()), dataIO));
+        FindMono<UI_MasteryPoint>().Init(new MasteryPointPresenter(inventory, new ChampionTextBuilder(GetProfile, skillTextSO.CreateSkillTextBuilder()), dataIO, mastery.CreateMultilpe()));
 
         StageRewardPresenter.ShowStageReward(stageRewardDisplayer, stageStorage.LoadUnlockedStage());
     }
