@@ -21,6 +21,7 @@ public class MasteryPointPresenter
     readonly MasteryProfile _inventory;
     readonly ChampionTextBuilder _championTextBuilder;
     readonly IMasterySaver _saver;
+    readonly MasteryApplier _masteryApplier;
 
     public int CurrentPoint => _inventory.AvailablePoints;
     int _currentSelectedId = -1;
@@ -31,6 +32,14 @@ public class MasteryPointPresenter
         _inventory = inventory;
         _championTextBuilder = championTextBuilder;
         _saver = saver;
+    }
+
+    public MasteryPointPresenter(MasteryProfile inventory, ChampionTextBuilder championTextBuilder, IMasterySaver saver, MasteryApplier masteryApplier)
+    {
+        _inventory = inventory;
+        _championTextBuilder = championTextBuilder;
+        _saver = saver;
+        _masteryApplier = masteryApplier;
     }
 
     public void SelectChampion(int id) => _currentSelectedId = id;
@@ -47,7 +56,8 @@ public class MasteryPointPresenter
 
     public CardUpgradeViewModel CreateModel()
     {
-        var champModel = _championTextBuilder.Build(_currentSelectedId);
+        var bonusStat = _masteryApplier.GetBonusStat(_currentSelectedId);
+        var champModel = _championTextBuilder.Build(_currentSelectedId, bonusStat);
         var board = _inventory.GetBoard(_currentSelectedId);
         return new CardUpgradeViewModel(_inventory.AvailablePoints, MasteryLevelModelCreator.CreateModel(board), champModel);
     }

@@ -50,7 +50,7 @@ public class UI_MasteryPoint : MonoBehaviour
 
     void ClickUpgradeBtn(StatType statType)
     {
-        if (!_presenter.HasSelectedChampion) return;
+        if (_presenter.HasSelectedChampion == false) return;
 
         _presenter.UpgradeCardStat(statType);
         RefreshUI();

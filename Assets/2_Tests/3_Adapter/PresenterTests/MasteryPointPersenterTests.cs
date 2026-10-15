@@ -42,4 +42,25 @@ public class MasteryPointPersenterTests
         Assert.AreEqual(Color.green, sut.GetButtonColor(1));
         Assert.AreEqual(Color.white, sut.GetButtonColor(2));
     }
+
+    [Test]
+    public void 업그레이드한_카드는_스탯이_모델에_반영되어야_함()
+    {
+        int champId = 1;
+        var inventory = CreateMasteryInventory(10);
+        var textBuilder = new ChampionTextBuilder(
+            id => new ChampionProfile(id, "펭귄", CreateStat(150, 0, 0), CreateSkill()),
+            new SkillTextBuilder(new FakeTextBuilder())
+        );
+        var applier = CreateMasteryApplier(CreateMasteryData(champId, att:30));
+        var sut = new MasteryPointPresenter(inventory, textBuilder, new FakeMasterySaver(), applier);
+
+        // Act: 1번 챔피언 선택 후 공격력 업그레이드
+        sut.SelectChampion(champId);
+        sut.UpgradeCardStat(StatType.Attack);
+        var result = sut.CreateModel();
+
+        // Assert: 공격력 강화 적용 됐는지 검증(150 + 30)
+        Assert.AreEqual("공 180", result.ChampionModel.StatModel.Attack);
+    }
 }

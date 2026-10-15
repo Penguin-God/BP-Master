@@ -4,10 +4,11 @@ public class MasteryApplier
 
     public MasteryApplier(MasteryStatCollection statProvider) => _statProvider = statProvider;
 
+    public ChampionStatData GetBonusStat(int id) => _statProvider.GetMasteryStat(id);
+
     public void ApplyMastery(int id, ChampionStatus status)
     {
-        var masteryStat = _statProvider.GetMasteryStat(id);
-        var newStat = status.Stat + masteryStat;
+        var newStat = status.Stat + GetBonusStat(id);
         status.ChangeStat(newStat);
     }
 }
