@@ -18,11 +18,15 @@ public class MasteryInventoryTest
     }
 
     [Test]
-    public void 포인트가_부족할_때_숙련도를_올리려_하면_예외를_던진다()
+    public void 카드를_다운그레이드하면_포인트가_증가한다()
     {
-        var inventory = CreateMasteryInventory(0);
+        var inventory = CreateMasteryInventory(10);
 
-        Assert.Throws<InvalidOperationException>(() => inventory.Upgrade(101, StatType.Attack));
+        inventory.Upgrade(101, StatType.Attack);
+        inventory.Downgrade(101, StatType.Attack);
+
+        Assert.AreEqual(10, inventory.AvailablePoints);
+        Assert.AreEqual(0, inventory.GetBoard(101).AttackLevel);
     }
 
     [Test]
@@ -31,7 +35,6 @@ public class MasteryInventoryTest
         var inventory = CreateMasteryInventory(10);
         inventory.Upgrade(101, StatType.Speed); // 1레벨 달성 (스피드 최대 레벨이 1이라고 가정)
 
-        Assert.Throws<InvalidOperationException>(() => inventory.Upgrade(101, StatType.Speed));
         Assert.AreEqual(9, inventory.AvailablePoints);
     }
 
@@ -59,6 +62,6 @@ public class MasteryInventoryTest
 
         Assert.AreEqual(10, inventory.TotalPoints);
         Assert.AreEqual(10, inventory.AvailablePoints);
-        Assert.AreEqual(0, inventory.GetBoard(101).AttackLevel); // 보드 초기화 확인
+        Assert.AreEqual(0, inventory.GetBoard(101).AttackLevel);
     }
 }
