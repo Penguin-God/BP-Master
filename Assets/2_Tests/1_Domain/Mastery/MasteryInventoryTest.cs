@@ -33,9 +33,19 @@ public class MasteryInventoryTest
     public void 보드의_최대_레벨에_도달하여_실패하면_포인트는_감소하지_않는다()
     {
         var inventory = CreateMasteryInventory(10);
-        inventory.Upgrade(101, StatType.Speed); // 1레벨 달성 (스피드 최대 레벨이 1이라고 가정)
+        inventory.Upgrade(101, StatType.Speed);
+        inventory.Upgrade(101, StatType.Speed);
 
         Assert.AreEqual(9, inventory.AvailablePoints);
+    }
+
+    [Test]
+    public void 보드의_최소_레벨이여서_다운그레이드_실패시__포인트는_증가하지_않는다()
+    {
+        var inventory = CreateMasteryInventory(10);
+        inventory.Downgrade(101, StatType.Speed);
+
+        Assert.AreEqual(10, inventory.AvailablePoints);
     }
 
     [Test]

@@ -6129,6 +6129,9 @@ MonoBehaviour:
   _upAttBtn: {fileID: 1649620305}
   _upDefBtn: {fileID: 271631170}
   _upSpdBtn: {fileID: 1714174139}
+  _downAttBtn: {fileID: 471645019}
+  _downDefBtn: {fileID: 848546710}
+  _downSpdBtn: {fileID: 1373973786}
 --- !u!1 &1857255806
 GameObject:
   m_ObjectHideFlags: 0

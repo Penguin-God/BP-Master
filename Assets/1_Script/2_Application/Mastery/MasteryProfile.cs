@@ -20,15 +20,15 @@ public class MasteryProfile
             throw new InvalidOperationException("포인트가 부족합니다.");
 
         var board = BoardCollection.GetOrCreateBoard(championId);
-        board.Upgrade(statType);
-        return --AvailablePoints;
+        if (board.Upgrade(statType)) AvailablePoints--;
+        return AvailablePoints;
     }
 
     public int Downgrade(int championId, StatType statType)
     {
         var board = BoardCollection.GetOrCreateBoard(championId);
-        board.Downgrade(statType);
-        return ++AvailablePoints;
+        if (board.Downgrade(statType)) AvailablePoints++;
+        return AvailablePoints;
     }
 
     public MasteryBoard GetBoard(int championId) => BoardCollection.TryGetBoard(championId, out var result) ? result : new MasteryBoard();

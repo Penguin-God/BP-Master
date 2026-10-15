@@ -48,6 +48,16 @@ public class MasteryPointPresenter
         return _inventory.AvailablePoints;
     }
 
+    public int DowngradeCardStat(StatType statType)
+    {
+        if (HasSelectedChampion)
+        {
+            _inventory.Downgrade(_currentSelectedId, statType);
+            _saver.Save(_inventory);
+        }
+        return _inventory.AvailablePoints;
+    }
+
     public CardUpgradeViewModel CreateModel()
     {
         var board = _inventory.GetBoard(_currentSelectedId);

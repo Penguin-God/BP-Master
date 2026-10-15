@@ -25,7 +25,11 @@ public class UI_MasteryPoint : MonoBehaviour
     [SerializeField] Button _upAttBtn;
     [SerializeField] Button _upDefBtn;
     [SerializeField] Button _upSpdBtn;
-    
+
+    [SerializeField] Button _downAttBtn;
+    [SerializeField] Button _downDefBtn;
+    [SerializeField] Button _downSpdBtn;
+
     MasteryPointPresenter _presenter;
     IEnumerable<Button> buttons;
 
@@ -46,13 +50,21 @@ public class UI_MasteryPoint : MonoBehaviour
         _upAttBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Attack));
         _upDefBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Defense));
         _upSpdBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Speed));
+
+        _downAttBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Attack));
+        _downDefBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Defense));
+        _downSpdBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Speed));
     }
 
     void ClickUpgradeBtn(StatType statType)
     {
-        if (_presenter.HasSelectedChampion == false) return;
-
         _presenter.UpgradeCardStat(statType);
+        RefreshUI();
+    }
+
+    void ClickDowngradeBtn(StatType statType)
+    {
+        _presenter.DowngradeCardStat(statType);
         RefreshUI();
     }
 
@@ -91,7 +103,11 @@ public class UI_MasteryPoint : MonoBehaviour
         }
     }
 
-    void RefreshUI() => RefreshUI(_presenter.CreateModel());
+    void RefreshUI()
+    {
+        if (_presenter.HasSelectedChampion)
+            RefreshUI(_presenter.CreateModel());
+    }
 
     public void RefreshUI(CardUpgradeViewModel model)
     {
