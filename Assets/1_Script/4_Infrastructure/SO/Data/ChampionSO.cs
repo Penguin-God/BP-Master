@@ -9,7 +9,7 @@ public class TraitDataConfig
 {
     [Header("범위")]
     [EnumToggleButtons] [SerializeField] Side targetSide;
-    [EnumToggleButtons][SerializeField] TargetRange range;
+    [EnumToggleButtons] [SerializeField] TargetRange range;
     SkillTargetRule Rule => new SkillTargetRule(targetSide, range);
 
     [Header("액션")]
@@ -46,4 +46,6 @@ public class ChampionSO : SerializedScriptableObject
     public ChampionTextModel CreateChampionModel() => new ChampionTextModel(championName, StatData);
 
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
+
+    [SerializeField] [PreviewField(70)] Sprite icon;
 }
