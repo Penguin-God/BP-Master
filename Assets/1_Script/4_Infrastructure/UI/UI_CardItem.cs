@@ -10,16 +10,17 @@ public class UI_CardItem : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] Button button;
 
-    public int Id => GetIdentify().Id;
-    public ChampionIdentify Identify => GetIdentify();
+    ChampionSO _cardData;
+    public int Id => _cardData.Id;
 
     ChampionIdentify GetIdentify() => this.GetOrAddComponent<ChampionIdentify>();
 
     public void DrawCard(ChampionSO championSO)
     {
+        _cardData = championSO;
         GetIdentify().Id = championSO.Id;
-        icon.sprite = championSO.Icon;
-        nameText.text = championSO.ChampionName;
+        icon.sprite = _cardData.Icon;
+        nameText.text = _cardData.ChampionName;
     }
 
     public void ApplyState(string name, Color textColor, Color buttonColor, bool isEnabled)
@@ -38,8 +39,5 @@ public class UI_CardItem : MonoBehaviour
         nameText.color = new Color32(60, 60, 60, 255);
     }
 
-    public void AddClickListener(UnityAction<ChampionIdentify> action)
-    {
-        button.onClick.AddListener(() => action(Identify));
-    }
+    public void AddClickListener(UnityAction<ChampionSO> action) => button.onClick.AddListener(() => action(_cardData));
 }

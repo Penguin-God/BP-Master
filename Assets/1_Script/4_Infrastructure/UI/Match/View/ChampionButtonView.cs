@@ -26,7 +26,7 @@ public class ChampionButtonView : MonoBehaviour
     [SerializeField] Button speedTabBtn;
 
     IEnumerable<UI_CardItem> _cards;
-    UnityAction<ChampionIdentify> clickEvent;
+    UnityAction<ChampionSO> clickEvent;
     ChampionButtonStatePresenter _presenter;
     IEnumerable<int> _selectableCards;
 
@@ -66,13 +66,13 @@ public class ChampionButtonView : MonoBehaviour
         }
     }
 
-    public void AddEvent(UnityAction<ChampionIdentify> action)
+    public void AddEvent(UnityAction<ChampionSO> action)
     {
         clickEvent += action;
         ApplyEvent(action);
     }
 
-    void ApplyEvent(UnityAction<ChampionIdentify> action)
+    void ApplyEvent(UnityAction<ChampionSO> action)
     {
         foreach (var card in _cards)
             card.AddClickListener(action);

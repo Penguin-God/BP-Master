@@ -15,7 +15,7 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     {
         gameObject.SetActive(true);
 
-        champBtnView.AddEvent(SelectChampion);
+        champBtnView.AddEvent(championFocusView.UpdateDisplay);
 
         this.banpickHandler = handler;
         phaseManager = pm;
@@ -24,11 +24,6 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     }
 
     public int SelectId { get; private set; } = -1;
-    void SelectChampion(ChampionIdentify champion)
-    {
-        SelectId = champion.Id;
-        championFocusView.UpdateDisplay(ChampionDataLoder.GetChampionData(champion.Id));
-    }
 
     public void NailDownChampion()
     {
