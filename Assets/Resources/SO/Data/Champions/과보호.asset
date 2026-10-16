@@ -40,3 +40,4 @@ MonoBehaviour:
     threshold: 0
     conditionCheckerType: 1
   icon: {fileID: -3281086185610555716, guid: 84a3b8d0f6a6d76459f04ed235e310ae, type: 3}
+  Icon: {fileID: 0}
