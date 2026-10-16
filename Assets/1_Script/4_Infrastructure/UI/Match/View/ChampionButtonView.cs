@@ -25,7 +25,7 @@ public class ChampionButtonView : MonoBehaviour
     [SerializeField] Button defenseTabBtn;
     [SerializeField] Button speedTabBtn;
 
-    IEnumerable<Button> buttons;
+    IEnumerable<UI_CardItem> _cards;
     UnityAction<ChampionIdentify> clickEvent;
     ChampionButtonStatePresenter _presenter;
     IEnumerable<int> _selectableCards;
@@ -47,33 +47,22 @@ public class ChampionButtonView : MonoBehaviour
 
     void CreateButtons(IEnumerable<int> Ids)
     {
-        foreach (Transform child in content) Destroy(child.gameObject);
+        var cardPrefab = championBtnPrefab.GetComponent<UI_CardItem>();
+        _cards = ChampionButtonCreator.CreateCardItems(content, Ids.Select(x => ChampionDataLoder.GetChampionData(x)), cardPrefab);
 
-        buttons = ChampionButtonCreator.CreateChampionButtons(content, Ids.Select(x => ChampionDataLoder.GetChampionData(x)), championBtnPrefab);
-
-        if (clickEvent != null)
-            ApplyEvent(clickEvent);
+        if (clickEvent != null) ApplyEvent(clickEvent);
 
         ApplyStates();
     }
 
-
     void ApplyStates()
     {
-        if (buttons == null || _presenter == null) return;
+        if (_cards == null || _presenter == null) return;
 
-        foreach (var btn in buttons)
+        foreach (var card in _cards)
         {
-            var identify = btn.GetComponent<ChampionIdentify>();
-            var state = _presenter.GetState(identify.Id); // 단일 모델 반환
-
-            var text = btn.GetComponentInChildren<TextMeshProUGUI>();
-            text.text = state.Name;
-            text.color = state.TextColor;
-            ButtonUtil.ChangeButtonColor(btn, state.ButtonColor);
-
-            if (state.IsEnabled == false) ButtonUtil.InActiveButton(btn);
-            else btn.interactable = true;
+            var state = _presenter.GetState(card.Id);
+            card.ApplyState(state.Name, state.TextColor, state.ButtonColor, state.IsEnabled);
         }
     }
 
@@ -85,8 +74,8 @@ public class ChampionButtonView : MonoBehaviour
 
     void ApplyEvent(UnityAction<ChampionIdentify> action)
     {
-        foreach (var btn in buttons)
-            btn.onClick.AddListener(() => action(btn.GetComponent<ChampionIdentify>()));
+        foreach (var card in _cards)
+            card.AddClickListener(action);
     }
 
     IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
@@ -105,10 +94,9 @@ public class ChampionButtonView : MonoBehaviour
 
     public void InActiveButton(int id)
     {
-        var btn = buttons.FirstOrDefault(x => x.GetComponent<ChampionIdentify>().Id == id);
-        if (btn == null) return;
-        ButtonUtil.InActiveButton(btn);
-        btn.GetComponentInChildren<TextMeshProUGUI>().color = new Color32(60, 60, 60, 255);
+        var card = _cards.FirstOrDefault(x => x.Id == id);
+        if (card == null) return;
+        card.InActive();
     }
 }
 
@@ -126,6 +114,21 @@ public static class ChampionButtonCreator
             btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
             btn.GetOrAddComponent<ChampionIdentify>().Id = data.Id;
             result.Add(btn);
+        }
+        return result;
+    }
+
+    public static IEnumerable<UI_CardItem> CreateCardItems(Transform parent, IEnumerable<ChampionSO> champions, UI_CardItem catdPrefab)
+    {
+        foreach (Transform child in parent)
+            Object.Destroy(child.gameObject);
+
+        var result = new List<UI_CardItem>();
+        foreach (var data in champions)
+        {
+            var card = Object.Instantiate(catdPrefab, parent).GetComponent<UI_CardItem>();
+            card.DrawCard(data);
+            result.Add(card);
         }
         return result;
     }

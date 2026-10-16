@@ -48,4 +48,5 @@ public class ChampionSO : SerializedScriptableObject
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
 
     [SerializeField] [PreviewField(70)] Sprite icon;
+    public Sprite Icon => icon;
 }

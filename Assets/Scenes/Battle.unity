@@ -2324,7 +2324,6 @@ MonoBehaviour:
   championSelector: {fileID: 232828601}
   matchCoreFactorySO: {fileID: 11400000, guid: ece550d142cc92345b1438c722aca02e, type: 2}
   matchConfigSO: {fileID: 11400000, guid: 7ba1aa2f5b865d649aea321f4aa6b836, type: 2}
-  tutorialTriggerSO: {fileID: 11400000, guid: 290b5262f2f751447a943b00d37c00ee, type: 2}
   uI_SelectCheck: {fileID: 602318632}
 --- !u!1 &1434020710
 GameObject:
@@ -3559,6 +3558,10 @@ PrefabInstance:
       propertyPath: championManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3029028674170190925, guid: b1a6b3a56370586499590b19617ea30a, type: 3}
+      propertyPath: championBtnPrefab
+      value: 
+      objectReference: {fileID: 7425124587691326854, guid: e7fc92257a3e79a459cedb063600d0d2, type: 3}
     - target: {fileID: 3047375785770310900, guid: b1a6b3a56370586499590b19617ea30a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

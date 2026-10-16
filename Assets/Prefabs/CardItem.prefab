@@ -225,8 +225,9 @@ GameObject:
   - component: {fileID: 7429113526800529777}
   - component: {fileID: 3745491140630505776}
   - component: {fileID: 4111446313226656194}
+  - component: {fileID: 8129740391024524634}
   m_Layer: 5
-  m_Name: CardButton
+  m_Name: CardItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,3 +349,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::ChampionIdentify
   Id: 1
+--- !u!114 &8129740391024524634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7425124587691326854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95acda6274b27d14d9a34c78d09647b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::UI_CardItem
+  icon: {fileID: 1085257484717273885}
+  nameText: {fileID: 3267033718186407502}
+  button: {fileID: 3745491140630505776}
