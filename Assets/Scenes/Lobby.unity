@@ -4619,9 +4619,6 @@ MonoBehaviour:
   _baseAttText: {fileID: 1797386935}
   _baseDefText: {fileID: 1250794124}
   _baseSpdText: {fileID: 1345685306}
-  _masteryAttText: {fileID: 241767989}
-  _masteryDefText: {fileID: 1378295167}
-  _masterySpdText: {fileID: 764440483}
   _upAttBtn: {fileID: 1649620305}
   _upDefBtn: {fileID: 1250794123}
   _upSpdBtn: {fileID: 1345685305}
