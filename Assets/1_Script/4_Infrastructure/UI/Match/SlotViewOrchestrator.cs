@@ -5,7 +5,6 @@ public class SlotViewOrchestrator : MonoBehaviour
     [SerializeField] Transform blueSlotParent;
     [SerializeField] Transform redSlotParent;
     SlotStorage<SlotView> slotViews = new();
-    SlotStorage<ChampionStatusTrackerView> trackerViewSlots = new();
     SlotStorage<ChampionStatus> statusSlots;
 
     [SerializeField] ChampionView mainView;
@@ -13,9 +12,6 @@ public class SlotViewOrchestrator : MonoBehaviour
     {
         slotViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<SlotView>());
         slotViews.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<SlotView>());
-
-        trackerViewSlots.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<ChampionStatusTrackerView>());
-        trackerViewSlots.AddSlots(Team.Red, redSlotParent.GetComponentsInChildren<ChampionStatusTrackerView>());
     }
 
     public void InitSlotView(SlotStorage<ChampionStatus> statuses)
@@ -28,7 +24,6 @@ public class SlotViewOrchestrator : MonoBehaviour
     public void PickChampion(SlotData pickSlot, int id)
     {
         var pickSlotStatus = statusSlots.GetSlot(pickSlot);
-        slotViews.GetSlot(pickSlot).UpdateChampion(pickSlotStatus, id);
-        trackerViewSlots.GetSlot(pickSlot).Init(pickSlotStatus);
+        slotViews.GetSlot(pickSlot).PickCard(pickSlotStatus, id);
     }
 }
