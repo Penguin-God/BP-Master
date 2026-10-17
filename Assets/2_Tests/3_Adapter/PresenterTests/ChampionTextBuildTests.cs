@@ -10,7 +10,7 @@ public class ChampionTextBuildTests
         var profile = new ChampionProfile(1, "펭귄", stat, CreateSkill(CreateValueSkillData(StatType.Attack, 0, rule: SelfAllRule)));
 
         var sut = new ChampionTextBuilder(id => profile, new SkillTextBuilder(new FakeTextBuilder()));
-        var result = sut.Build(1);
+        var result = sut.Build(1, default);
 
         Assert.AreEqual("펭귄", result.Name);
         Assert.AreEqual("공 1", result.StatModel.Attack);

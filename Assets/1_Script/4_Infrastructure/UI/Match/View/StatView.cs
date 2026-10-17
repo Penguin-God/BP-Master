@@ -9,12 +9,13 @@ public class StatView : MonoBehaviour
 
     void Start() => ClearDisplay();
 
-    public void UpdateStat(ChampionStatData statData)
+    public void UpdateStat(ChampionStatData statData) => UpdateStat(ChampionStatModelPreserter.CreateStatModel(statData));
+
+    public void UpdateStat(ChampionStatModel model)
     {
-        ChampionStatModel viewModel = ChampionStatModelPreserter.CreateStatModel(statData);
-        attackText.text = viewModel.Attack;
-        defenseText.text = viewModel.Defense;
-        speedText.text = viewModel.Speed;
+        attackText.text = model.Attack;
+        defenseText.text = model.Defense;
+        speedText.text = model.Speed;
     }
 
     public void ClearDisplay()

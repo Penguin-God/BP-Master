@@ -5,24 +5,14 @@ public record ChampionProfile(int Id, string Name, ChampionStatData Stat, Skill 
 public readonly struct ChampionTextModel
 {
     public readonly string Name;
-    public readonly ChampionStatData Stat;
     public readonly ChampionStatModel StatModel;
     public readonly string SkillText;
-
-    public ChampionTextModel(string name, ChampionStatData stat)
-    {
-        Name = name;
-        Stat = stat;
-        StatModel = default;
-        SkillText = "";
-    }
 
     public ChampionTextModel(string name, ChampionStatModel stat, string skillText)
     {
         Name = name;
         StatModel = stat;
         SkillText = skillText;
-        Stat = default;
     }
 }
 
@@ -36,8 +26,6 @@ public class ChampionTextBuilder
         _profileProvider = profileProvider;
         _skillTextBuilder = skillTextBuilder;
     }
-
-    public ChampionTextModel Build(int id) => Build(id, default);
 
     public ChampionTextModel Build(int id, ChampionStatData bonusStat)
     {

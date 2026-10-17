@@ -11,22 +11,16 @@ public class ChampionView : MonoBehaviour
 
     public void UpdateDisplay(ChampionSO champion)
     {
-        UpdateChampion(champion.CreateChampionModel());
-        skillText.text = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.Skill.SkillDatas);
+        string skillText = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.Skill.SkillDatas);
+        UpdateChampionAll(new ChampionTextModel(champion.ChampionName, ChampionStatModelPreserter.CreateStatModel(champion.StatData), skillText));
     }
 
     public void UpdateDisplay(int id) => UpdateDisplay(ChampionDataLoder.GetChampionData(id));
 
-    public void UpdateChampion(ChampionTextModel model)
-    {
-        nameText.text = $"{model.Name}";
-        statView.UpdateStat(model.Stat);
-    }
-
     public void UpdateChampionAll(ChampionTextModel model)
     {
         nameText.text = $"{model.Name}";
-        statView.UpdateStat(model.Stat);
+        statView.UpdateStat(model.StatModel);
         if (skillText != null)
             skillText.text = model.SkillText;
     }

@@ -43,8 +43,6 @@ public class ChampionSO : SerializedScriptableObject
     [SerializeField] TraitDataConfig[] skillDatas;
     public Skill Skill => new Skill(skillDatas.Select(x => x.CreateSkillData()));
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData);
-    public ChampionTextModel CreateChampionModel() => new ChampionTextModel(championName, StatData);
-
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
 
     [SerializeField] [PreviewField(70)] Sprite icon;
