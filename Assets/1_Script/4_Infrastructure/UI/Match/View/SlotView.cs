@@ -9,23 +9,8 @@ public class SlotView : MonoBehaviour
     [SerializeField] Button slotButton;
     [SerializeField] StatChangeView statChangeView;
 
-    int id;
-    ChampionView championFocusView;
-
-    void Start()
-    {
-        slotButton.onClick.AddListener(DrawTarget);
-        void DrawTarget() => championFocusView.UpdateDisplay(ChampionDataLoder.GetChampionData(id));
-    }
-
-    public void Init(ChampionView championFocusView)
-    {
-        this.championFocusView = championFocusView;
-    }
-
     public void PickCard(ChampionStatus status, int id)
     {
-        this.id = id;
         _nameText.text = ChampionDataLoder.NameCatalog[id];
         _statView.UpdateStat(status.Stat);
         if (statChangeView != null)

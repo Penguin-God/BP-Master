@@ -7,7 +7,6 @@ public class SlotViewOrchestrator : MonoBehaviour
     SlotStorage<SlotView> slotViews = new();
     SlotStorage<ChampionStatus> statusSlots;
 
-    [SerializeField] ChampionView mainView;
     void Start()
     {
         slotViews.AddSlots(Team.Blue, blueSlotParent.GetComponentsInChildren<SlotView>());
@@ -17,8 +16,6 @@ public class SlotViewOrchestrator : MonoBehaviour
     public void InitSlotView(SlotStorage<ChampionStatus> statuses)
     {
         statusSlots = statuses;
-        foreach (var slot in slotViews.GetAllSlotDatas())
-            slotViews.GetSlot(slot).Init(mainView);
     }
 
     public void PickChampion(SlotData pickSlot, int id)
