@@ -1,8 +1,8 @@
 using System;
 
-public class SkillCondtionFactory
+public static class SkillCondtionFactory
 {
-    public IChampionCondition CreateCondition(SkillConditionData data, ChampionStatData useChamp)
+    public static IChampionCondition CreateCondition(SkillConditionData data, ChampionStatData useChamp)
     {
         return data.ConditionType switch
         {

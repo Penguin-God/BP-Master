@@ -19,7 +19,7 @@ public static class SkillPreviewer
 
     public static SkillRunner CreateRunner(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
-        return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher), new SkillCondtionFactory());
+        return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher));
     }
 
     static SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)

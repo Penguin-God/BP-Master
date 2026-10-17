@@ -24,10 +24,7 @@ public class MatchCoreFactorySO : ScriptableObject
         };
 
         var actionEventDispatcher = BanPickEventDispatcher.Create();
-        var skillRunner = new SkillRunner(
-            new SkillActionFactory(actionEventDispatcher, phaseEventDispatcher),
-            new SkillCondtionFactory()
-        );
+        var skillRunner = new SkillRunner(new SkillActionFactory(actionEventDispatcher, phaseEventDispatcher));
         var skillController = new SkillUsecase(banPickHandler.PickSlotFacade.ChampionSlots, skillRunner);
 
         var teamDispatcher = new TeamPhaseEntryDispatcher(blueEntry, redEntry);

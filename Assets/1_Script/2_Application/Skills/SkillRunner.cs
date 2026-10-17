@@ -3,11 +3,9 @@ using System.Collections.Generic;
 public class SkillRunner
 {
     readonly SkillActionFactory skillActionFactory;
-    readonly SkillCondtionFactory skillCondtionFactory;
-    public SkillRunner(SkillActionFactory skillActionFactory, SkillCondtionFactory skillCondtionFactory)
+    public SkillRunner(SkillActionFactory skillActionFactory)
     {
         this.skillActionFactory = skillActionFactory;
-        this.skillCondtionFactory = skillCondtionFactory;
     }
 
     public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> targets, Team team)
@@ -17,7 +15,7 @@ public class SkillRunner
         foreach (var skillData in skill.SkillDatas)
         {
             ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, caster, team);
-            IChampionCondition condition = skillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
+            IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
             SkillExecutor.ExecuteSkill(action, condition, targets);
         }
     }
