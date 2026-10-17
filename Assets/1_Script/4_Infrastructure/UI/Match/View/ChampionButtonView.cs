@@ -30,6 +30,8 @@ public class ChampionButtonView : MonoBehaviour
     ChampionButtonStatePresenter _presenter;
     IEnumerable<int> _selectableCards;
 
+    void Start() => ObjectUtil.DestoryAllChild(content);
+
     public void Init(ChampionButtonStatePresenter presenter, IEnumerable<int> selectableCards)
     {
         _presenter = presenter;
@@ -104,8 +106,7 @@ public static class ChampionButtonCreator
 {
     public static IEnumerable<Button> CreateChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject catdPrefab)
     {
-        foreach (Transform child in parent)
-            Object.Destroy(child.gameObject);
+        ObjectUtil.DestoryAllChild(parent);
 
         var result = new List<Button>();
         foreach (var data in champions)
@@ -120,8 +121,7 @@ public static class ChampionButtonCreator
 
     public static IEnumerable<UI_CardItem> CreateCardItems(Transform parent, IEnumerable<ChampionSO> champions, UI_CardItem catdPrefab)
     {
-        foreach (Transform child in parent)
-            Object.Destroy(child.gameObject);
+        ObjectUtil.DestoryAllChild(parent);
 
         var result = new List<UI_CardItem>();
         foreach (var data in champions)
