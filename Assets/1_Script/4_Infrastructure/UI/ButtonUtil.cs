@@ -28,3 +28,12 @@ public static class ButtonUtil
         btn.colors = colors;
     }
 }
+
+public static class ObjectUtil
+{
+    public static void DestoryAllChild(Transform parent)
+    {
+        foreach (Transform child in parent)
+            Object.Destroy(child.gameObject);
+    }
+}
