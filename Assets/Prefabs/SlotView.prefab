@@ -654,6 +654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fbe9939760a9547bf369ccbdbfbdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nameText: {fileID: 3313022715216232836}
+  _statView: {fileID: 2865069792005043793}
   championView: {fileID: 922761530011916858}
   slotButton: {fileID: 1343732211533317347}
 --- !u!114 &922761530011916858
@@ -716,8 +718,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statChangeView: {fileID: 6107222167726110637}
-  increaseRateText: {fileID: 0}
-  decreaseRateText: {fileID: 0}
 --- !u!114 &50506760632782602
 MonoBehaviour:
   m_ObjectHideFlags: 0
