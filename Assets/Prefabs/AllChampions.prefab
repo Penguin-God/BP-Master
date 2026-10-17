@@ -794,7 +794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a27498091c0b84c905b0e577b75df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championBtnPrefab: {fileID: 8033382642434502399, guid: a800959c5b01a5b46b9664e609b38648, type: 3}
+  cardPrefab: {fileID: 8129740391024524634, guid: e7fc92257a3e79a459cedb063600d0d2, type: 3}
   content: {fileID: 3797546741682119918}
   defaultTabBtn: {fileID: 9107865164381291946}
   attackTabBtn: {fileID: 9210283361659313826}

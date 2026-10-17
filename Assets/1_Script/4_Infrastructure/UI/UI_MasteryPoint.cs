@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_MasteryPoint : MonoBehaviour
 {
     [Header("프리팹 및 부모")]
-    [AssetsOnly][SerializeField] GameObject btnPrefab;
+    [AssetsOnly][SerializeField] UI_CardItem cardPrefab;
     [SerializeField] Transform parent;
 
     [Header("포인트 및 챔피언 정보")]
@@ -27,7 +27,7 @@ public class UI_MasteryPoint : MonoBehaviour
     [SerializeField] Button _downSpdBtn;
 
     MasteryPointPresenter _presenter;
-    IEnumerable<Button> buttons;
+    IEnumerable<UI_CardItem> _cards;
 
     public void Init(MasteryPointPresenter presenter)
     {
@@ -66,15 +66,10 @@ public class UI_MasteryPoint : MonoBehaviour
 
     void CreateAndBindChampionButtons()
     {
-        foreach (Transform child in parent) Destroy(child.gameObject);
+        _cards = ChampionButtonCreator.CreateCardItems(parent, ChampionDataLoder.AllChampions, cardPrefab);
 
-        buttons = ChampionButtonCreator.CreateChampionButtons(parent, ChampionDataLoder.AllChampions, btnPrefab);
-
-        foreach (var btn in buttons)
-        {
-            int id = btn.GetComponent<ChampionIdentify>().Id;
-            btn.onClick.AddListener(() => SelectChampion(id));
-        }
+        foreach (var card in _cards)
+            card.AddClickListener(champ => SelectChampion(champ.Id));
         RefreshBtnColor();
     }
 
@@ -92,11 +87,9 @@ public class UI_MasteryPoint : MonoBehaviour
 
     void RefreshBtnColor()
     {
-        foreach (var btn in buttons)
-        {
-            int id = btn.GetComponent<ChampionIdentify>().Id;
-            ButtonUtil.ChangeButtonColor(btn, _presenter.GetButtonColor(id));
-        }
+        if (_cards == null) return;
+        foreach (var card in _cards)
+            card.SetButtonColor(_presenter.GetButtonColor(card.Id));
     }
 
     void RefreshUI()

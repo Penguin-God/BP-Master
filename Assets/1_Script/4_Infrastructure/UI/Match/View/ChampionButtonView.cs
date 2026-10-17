@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,7 +14,7 @@ public enum ChampionSortType
 
 public class ChampionButtonView : MonoBehaviour
 {
-    [SerializeField] GameObject championBtnPrefab;
+    [SerializeField] UI_CardItem cardPrefab;
     [SerializeField] Transform content;
 
     [Header("Tab Buttons")]
@@ -49,7 +47,6 @@ public class ChampionButtonView : MonoBehaviour
 
     void CreateButtons(IEnumerable<int> Ids)
     {
-        var cardPrefab = championBtnPrefab.GetComponent<UI_CardItem>();
         _cards = ChampionButtonCreator.CreateCardItems(content, Ids.Select(x => ChampionDataLoder.GetChampionData(x)), cardPrefab);
 
         if (clickEvent != null) ApplyEvent(clickEvent);
@@ -104,29 +101,14 @@ public class ChampionButtonView : MonoBehaviour
 
 public static class ChampionButtonCreator
 {
-    public static IEnumerable<Button> CreateChampionButtons(Transform parent, IEnumerable<ChampionSO> champions, GameObject catdPrefab)
-    {
-        ObjectUtil.DestoryAllChild(parent);
-
-        var result = new List<Button>();
-        foreach (var data in champions)
-        {
-            var btn = Object.Instantiate(catdPrefab, parent).GetComponent<Button>();
-            btn.GetComponentInChildren<TextMeshProUGUI>().text = data.ChampionName;
-            btn.GetOrAddComponent<ChampionIdentify>().Id = data.Id;
-            result.Add(btn);
-        }
-        return result;
-    }
-
-    public static IEnumerable<UI_CardItem> CreateCardItems(Transform parent, IEnumerable<ChampionSO> champions, UI_CardItem catdPrefab)
+    public static IEnumerable<UI_CardItem> CreateCardItems(Transform parent, IEnumerable<ChampionSO> champions, UI_CardItem cardPrefab)
     {
         ObjectUtil.DestoryAllChild(parent);
 
         var result = new List<UI_CardItem>();
         foreach (var data in champions)
         {
-            var card = Object.Instantiate(catdPrefab, parent).GetComponent<UI_CardItem>();
+            var card = Object.Instantiate(cardPrefab, parent);
             card.DrawCard(data);
             result.Add(card);
         }

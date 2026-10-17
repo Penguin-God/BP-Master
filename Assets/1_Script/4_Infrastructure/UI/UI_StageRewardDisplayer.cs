@@ -6,7 +6,7 @@ public class UI_StageRewardDisplayer : MonoBehaviour
 {
     [SerializeField] Transform cardContent;
     [SerializeField] Button closeButton;
-    [SerializeField] GameObject cardPrefab;
+    [SerializeField] UI_CardItem cardPrefab;
 
     void Awake()
     {
@@ -16,7 +16,7 @@ public class UI_StageRewardDisplayer : MonoBehaviour
     public void Draw(IEnumerable<ChampionSO> cards)
     {
         if (cards == null) return;
-        ChampionButtonCreator.CreateChampionButtons(cardContent, cards, cardPrefab);
+        ChampionButtonCreator.CreateCardItems(cardContent, cards, cardPrefab);
     }
 
     void Close() => Destroy(gameObject);

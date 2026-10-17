@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -13,12 +12,9 @@ public class UI_CardItem : MonoBehaviour
     ChampionSO _cardData;
     public int Id => _cardData.Id;
 
-    ChampionIdentify GetIdentify() => this.GetOrAddComponent<ChampionIdentify>();
-
     public void DrawCard(ChampionSO championSO)
     {
         _cardData = championSO;
-        GetIdentify().Id = championSO.Id;
         icon.sprite = _cardData.Icon;
         nameText.text = _cardData.ChampionName;
     }
@@ -27,10 +23,15 @@ public class UI_CardItem : MonoBehaviour
     {
         nameText.text = name;
         nameText.color = textColor;
-        ButtonUtil.ChangeButtonColor(button, buttonColor);
+        SetButtonColor(buttonColor);
 
-        if (isEnabled == false) ButtonUtil.InActiveButton(button);
-        else button.interactable = true;
+        if (isEnabled) ButtonUtil.ActiveButton(button);
+        else ButtonUtil.InActiveButton(button);
+    }
+
+    public void SetButtonColor(Color color)
+    {
+        ButtonUtil.ChangeButtonColor(button, color);
     }
 
     public void InActive()

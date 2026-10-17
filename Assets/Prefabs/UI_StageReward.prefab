@@ -56,7 +56,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 100}
+  m_CellSize: {x: 180, y: 180}
   m_Spacing: {x: 15, y: 15}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::UI_StageRewardDisplayer
   cardContent: {fileID: 8259912796361358169}
   closeButton: {fileID: 1773696263440520652}
-  cardPrefab: {fileID: 8033382642434502399, guid: a800959c5b01a5b46b9664e609b38648, type: 3}
+  cardPrefab: {fileID: 8129740391024524634, guid: e7fc92257a3e79a459cedb063600d0d2, type: 3}
 --- !u!1 &1703315726885172413
 GameObject:
   m_ObjectHideFlags: 0
