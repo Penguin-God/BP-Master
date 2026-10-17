@@ -22,13 +22,13 @@ public class SkillExcluder : ISkillAction
     public void Do(ChampionStatus target) => target.TraitExcluded();
 }
 
-public class DefenseAbsorber : ISkillAction
+public class StatAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
     readonly ISkillAmountCalculator AmountCalculator; // 기존 로직용
     readonly StatType StatType;
 
-    public DefenseAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator, StatType statType)
+    public StatAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator, StatType statType)
     {
         User = user;
         AmountCalculator = amountCalculator;

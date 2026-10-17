@@ -5,7 +5,7 @@ using System;
 public class SkillFactoryTests
 {
     [TestCase(SkillType.TraitExcluder, typeof(SkillExcluder))]
-    [TestCase(SkillType.StatAbsorber, typeof(DefenseAbsorber))]
+    [TestCase(SkillType.StatAbsorber, typeof(StatAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
     [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     [TestCase(SkillType.PickBuffer, typeof(PickChampStatChanger))]

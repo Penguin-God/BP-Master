@@ -35,7 +35,7 @@ public class SkillActionTests
     {
         var user = TestHelper.CreateStatus();
         var target = TestHelper.CreateStatus(att: 100);
-        var sut = new DefenseAbsorber(user, new PercentCalculator(0.5f), StatType.Attack);
+        var sut = new StatAbsorber(user, new PercentCalculator(0.5f), StatType.Attack);
 
         sut.Do(target);
 

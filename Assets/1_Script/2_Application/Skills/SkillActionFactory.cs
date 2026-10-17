@@ -18,7 +18,7 @@ public class SkillActionFactory
         return actionType switch
         {
             SkillType.StatChanger => statChanger,
-            SkillType.StatAbsorber => new DefenseAbsorber(caster, amountCalculator, amountData.StatType),
+            SkillType.StatAbsorber => new StatAbsorber(caster, amountCalculator, amountData.StatType),
             SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
             SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
