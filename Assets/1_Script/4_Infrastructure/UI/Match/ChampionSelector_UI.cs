@@ -14,8 +14,7 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
     public void Init(BanPickHandler handler, PhaseFlowOrchestrator pm)
     {
         gameObject.SetActive(true);
-
-        champBtnView.AddEvent(championFocusView.UpdateDisplay);
+        champBtnView.AddEvent(ClickBtn);
 
         this.banpickHandler = handler;
         phaseManager = pm;
@@ -35,6 +34,12 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         championFocusView.ClearDisplay();
     }
 
+    void ClickBtn(ChampionSO championSO)
+    {
+        SelectId = championSO.Id;
+        championFocusView.UpdateDisplay(championSO);
+    }
+
     void SetupSelectButton(string label)
     {
         ButtonUtil.ActiveButton(selectBtn);
@@ -46,4 +51,3 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
 
     public void ActiveSelectButton(bool active) => selectBtn.gameObject.SetActive(active);
 }
-
