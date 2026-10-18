@@ -31,7 +31,7 @@ public class ValueSelectorLog : IChampionSelector
     }
 }
 
-public record ChampionValueLog(int Id, int Value);
+public record CardValue(int Id, int Value);
 
 public class ValueLogger
 {
@@ -47,7 +47,7 @@ public class ValueLogger
     public void LogValue(HashSet<int> ids)
     {
         var logs = ids
-            .Select(id => new ChampionValueLog(id, evaluator.Evaluate(catalog.GetChampion(id))))
+            .Select(id => new CardValue(id, evaluator.Evaluate(catalog.GetChampion(id))))
             .OrderByDescending(x => x.Value)
             .Select(x => $"Id : {x.Id}, Value : {x.Value}");
         UnityEngine.Debug.Log(string.Join("\n", logs));

@@ -13,4 +13,6 @@ public class ChampionRanker
     }
 
     public IEnumerable<int> GetChampionRank(IEnumerable<int> candidateIds) => candidateIds.OrderByDescending(x => evaluator.Evaluate(catalog.GetChampion(x)));
+
+    public IEnumerable<CardValue> CreateCardValueList(IEnumerable<int> candidateIds) => candidateIds.Select(id => new CardValue(id, evaluator.Evaluate(catalog.GetChampion(id))));
 }
