@@ -4,7 +4,7 @@ public class PickValueEvaluator
     readonly ChampionStatValueCalculator statCalculator;
     readonly ChampionValueCalculator championValueCalculator;
     readonly BonusDeltaCalculator bonusDeltaCalculator;
-    public PickValueEvaluator(ChampionStatValueCalculator statCalculator, ChampionValueCalculator championValueCalculator, BonusDeltaCalculator bonusDeltaCalculator, Team myTeam, SlotStorage<ChampionStatus> originStats)
+    public PickValueEvaluator(ChampionStatValueCalculator statCalculator, ChampionValueCalculator championValueCalculator, BonusDeltaCalculator bonusDeltaCalculator)
     {
         this.statCalculator = statCalculator;
         this.championValueCalculator = championValueCalculator;

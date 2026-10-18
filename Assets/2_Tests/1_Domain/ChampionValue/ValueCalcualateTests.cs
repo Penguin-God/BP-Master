@@ -3,14 +3,12 @@ using static TestHelper;
 
 public class ValueCalcualateTests
 {
-    int CHAMP_ID = 1;
-    PickValueEvaluator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0, int att = 0)
+    const int CHAMP_ID = 1;
+    PickValueEvaluator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
     {
-        var originSlots = CreateTwoSlotStatus(att);
-
         var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus, Team.Blue, originSlots);
+        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus);
     }
 
     [Test]
@@ -31,7 +29,7 @@ public class ValueCalcualateTests
     {
         var skillData = CreateAttackChangeSkill(-100, rule: OpponentAllRule);
         var champion = CreateChampion(CHAMP_ID, skillData: skillData);
-        var sut = CreateSut(CreateBonus(100, 30000), masteryLevel: 0, att: 100);
+        var sut = CreateSut(CreateBonus(100, 30000), masteryLevel: 0);
 
         int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(100));
 
