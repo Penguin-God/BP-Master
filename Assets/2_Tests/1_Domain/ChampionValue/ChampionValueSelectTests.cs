@@ -15,3 +15,8 @@ public class ChampionValueSelectTests
         Assert.AreEqual(3, result);
     }
 }
+
+public class ID_Evaluator : IChampionEvaluator
+{
+    public int Evaluate(Champion champion) => champion.Id;
+}
