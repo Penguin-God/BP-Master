@@ -12,7 +12,7 @@ public class ValueSelectSO : AI_SelectorSO
         Team opponentTeam = EnumCaster.GetOppoentTeam(team);
         var selector = CreateValueSelector(opponentTeam);
 
-        if (enableLogging) return new ValueSelectorLog(selector, CreateValueLogger(opponentTeam));
+        if (enableLogging) return new ValueSelectorLog(selector);
         else return selector;
     }
 
@@ -20,7 +20,7 @@ public class ValueSelectSO : AI_SelectorSO
     {
         var selector = CreateValueSelector(team);
 
-        if (enableLogging) return new ValueSelectorLog(selector, CreateValueLogger(team));
+        if (enableLogging) return new ValueSelectorLog(selector);
         else return selector;
     }
 
@@ -31,7 +31,5 @@ public class ValueSelectSO : AI_SelectorSO
         return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus), team, statusSlots);
     }
 
-    ValueSelector CreateValueSelector(Team team) => new ValueSelector(championCatalog, CreateEvaluator(team));
-
-    ValueLogger CreateValueLogger(Team team) => new ValueLogger(championCatalog, CreateEvaluator(team));
+    ValueSelector CreateValueSelector(Team team) => new (championCatalog, CreateEvaluator(team));
 }
