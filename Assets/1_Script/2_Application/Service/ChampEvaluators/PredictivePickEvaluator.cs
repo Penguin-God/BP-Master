@@ -1,6 +1,6 @@
 using System.Linq;
 
-public class PredictivePickEvaluator : IChampionEvaluator
+public class PredictivePickEvaluator
 {
     readonly PickValueEvaluator evaluator;
     readonly ChampionCatalog catalog;

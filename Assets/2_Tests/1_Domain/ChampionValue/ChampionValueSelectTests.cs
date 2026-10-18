@@ -8,15 +8,12 @@ public class ChampionValueSelectTests
     public void 가장_가치가_높은_챔피언_픽()
     {
         ChampionCatalog catalog = CreateCaltalog(CreateChampion(id: 1), CreateChampion(id: 2), CreateChampion(id: 3));
-        var sut = new ValueSelector(catalog, new ID_Evaluator());
+        var sut = new ValueSelector(catalog, Evaluate);
 
         int result = sut.Select(new HashSet<int>() { 1, 2, 3 });
 
         Assert.AreEqual(3, result);
-    }
-}
 
-public class ID_Evaluator : IChampionEvaluator
-{
-    public int Evaluate(Champion champion) => champion.Id;
+        int Evaluate(Champion champion) => champion.Id;
+    }
 }

@@ -1,5 +1,5 @@
 
-public class PickValueEvaluator : IChampionEvaluator
+public class PickValueEvaluator
 {
     readonly ChampionStatValueCalculator statCalculator;
     readonly ChampionValueCalculator championValueCalculator;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,16 +10,16 @@ public class RandomSelector : IChampionSelector
 public class ValueSelector : IChampionSelector
 {
     readonly ChampionCatalog catalog;
-    readonly IChampionEvaluator evaluator;
+    readonly Func<Champion, int> evaluator;
 
-    public ValueSelector(ChampionCatalog catalog, IChampionEvaluator evaluator)
+    public ValueSelector(ChampionCatalog catalog, Func<Champion, int> evaluator)
     {
         this.catalog = catalog;
         this.evaluator = evaluator;
     }
     public int Select(HashSet<int> ids) => CreateCardValueList(ids).First().Id;
     public IEnumerable<CardValue> CreateCardValueList(IEnumerable<int> candidateIds) 
-        => candidateIds.Select(id => new CardValue(id, evaluator.Evaluate(catalog.GetChampion(id)))).OrderByDescending(x => x.Value);
+        => candidateIds.Select(id => new CardValue(id, evaluator(catalog.GetChampion(id)))).OrderByDescending(x => x.Value);
 }
 
 public class ValueSelectorLog : IChampionSelector
