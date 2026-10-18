@@ -25,6 +25,16 @@ public class PickValueEvaluator
         return champPickValue + bonusValue;
     }
 
+    public int Evaluate(Champion champion, Team team, SlotStorage<ChampionStatus> originStats)
+    {
+        var before = ScoreConvertor.Convert(originStats);
+        var pickApplyinfo = championValueCalculator.Calculate(team, champion, originStats);
+        int champPickValue = statCalculator.CalcualteTeamStatValue(pickApplyinfo, team);
+
+        int bonusValue = bonusDeltaCalculator.Calculate(before, before + pickApplyinfo, team);
+        return champPickValue + bonusValue;
+    }
+
     public void Change(Team targetTeam, SlotStorage<ChampionStatus> targetStats)
     {
         team = targetTeam;

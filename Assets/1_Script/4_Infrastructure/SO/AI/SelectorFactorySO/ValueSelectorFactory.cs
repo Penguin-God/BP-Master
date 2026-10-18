@@ -31,5 +31,5 @@ public class ValueSelectSO : AI_SelectorSO
         return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus), team, statusSlots);
     }
 
-    ValueSelector CreateValueSelector(Team team) => new (championCatalog, CreateEvaluator(team).Evaluate);
+    ValueSelector CreateValueSelector(Team team) => new (championCatalog, (card) => CreateEvaluator(team).Evaluate(card, team, statusSlots));
 }
