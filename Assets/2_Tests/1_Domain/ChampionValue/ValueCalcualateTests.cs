@@ -6,9 +6,8 @@ public class ValueCalcualateTests
     const int CHAMP_ID = 1;
     PickValueEvaluator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
     {
-        var statCalculator = new ChampionStatValueCalculator(speedValue: 0);
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus);
+        return new PickValueEvaluator(speedValue: 0, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus);
     }
 
     [Test]

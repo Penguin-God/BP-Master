@@ -26,9 +26,8 @@ public class ValueSelectSO : AI_SelectorSO
 
     public PickValueEvaluator CreateEvaluator(Team team)
     {
-        var statCalculator = new ChampionStatValueCalculator(speedValue);
         var masteryAppiler = new MasteryApplier(masteryManager);
-        return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus));
+        return new PickValueEvaluator(speedValue, new ChampionValueCalculator(masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus));
     }
 
     ValueSelector CreateValueSelector(Team team) => new (championCatalog, (card) => CreateEvaluator(team).Evaluate(card, team, statusSlots));

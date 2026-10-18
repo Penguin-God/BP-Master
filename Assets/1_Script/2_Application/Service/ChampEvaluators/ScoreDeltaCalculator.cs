@@ -14,6 +14,17 @@ public record GameScoreInfo(ScoreInfo Blue, ScoreInfo Red)
 
 public static class ScoreDeltaCalculator
 {
+    public static int CalculateScoreDelta(GameScoreInfo data, Team myTeam, int speedValue)
+    {
+        int blueScore = CalculateRawValue(data.Blue);
+        int redScore = CalculateRawValue(data.Red);
+
+        if (myTeam == Team.Blue) return blueScore - redScore;
+        else return redScore - blueScore;
+
+        int CalculateRawValue(ScoreInfo info) => info.Att + info.Def + (info.Speed * speedValue);
+    }
+
     public static GameScoreInfo CalculateStatDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after)
     {
         ScoreInfo blueDelta = CalculateTeamDelta(origin, after, Team.Blue);

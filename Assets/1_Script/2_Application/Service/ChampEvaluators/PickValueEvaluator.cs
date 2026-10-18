@@ -1,12 +1,13 @@
 
 public class PickValueEvaluator
 {
-    readonly ChampionStatValueCalculator statCalculator;
     readonly ChampionValueCalculator championValueCalculator;
     readonly BonusDeltaCalculator bonusDeltaCalculator;
-    public PickValueEvaluator(ChampionStatValueCalculator statCalculator, ChampionValueCalculator championValueCalculator, BonusDeltaCalculator bonusDeltaCalculator)
+    readonly int SpeedValue;
+
+    public PickValueEvaluator(int speedValue, ChampionValueCalculator championValueCalculator, BonusDeltaCalculator bonusDeltaCalculator)
     {
-        this.statCalculator = statCalculator;
+        SpeedValue = speedValue;
         this.championValueCalculator = championValueCalculator;
         this.bonusDeltaCalculator = bonusDeltaCalculator;
     }
@@ -15,7 +16,7 @@ public class PickValueEvaluator
     {
         var before = ScoreConvertor.Convert(originStats);
         var pickApplyinfo = championValueCalculator.Calculate(team, champion, originStats);
-        int champPickValue = statCalculator.CalcualteTeamStatValue(pickApplyinfo, team);
+        int champPickValue = ScoreDeltaCalculator.CalculateScoreDelta(pickApplyinfo, team, SpeedValue);
 
         int bonusValue = bonusDeltaCalculator.Calculate(before, before + pickApplyinfo, team);
         return champPickValue + bonusValue;
