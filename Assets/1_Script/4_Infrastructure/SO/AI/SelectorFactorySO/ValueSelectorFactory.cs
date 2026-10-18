@@ -10,7 +10,7 @@ public class ValueSelectSO : AI_SelectorSO
     public override IChampionSelector CreateBanSelector()
     {
         Team opponentTeam = EnumCaster.GetOppoentTeam(team);
-        var selector = new ValueSelector(CreateRanker(opponentTeam));
+        var selector = CreateValueSelector(opponentTeam);
 
         if (enableLogging) return new ValueSelectorLog(selector, CreateValueLogger(opponentTeam));
         else return selector;
@@ -18,7 +18,7 @@ public class ValueSelectSO : AI_SelectorSO
 
     public override IChampionSelector CreatePickSelector()
     {
-        var selector = new ValueSelector(CreateRanker(team));
+        var selector = CreateValueSelector(team);
 
         if (enableLogging) return new ValueSelectorLog(selector, CreateValueLogger(team));
         else return selector;
@@ -31,7 +31,7 @@ public class ValueSelectSO : AI_SelectorSO
         return new PickValueEvaluator(statCalculator, new ChampionValueCalculator(masteryAppiler), new BonusDeltaCalculator(bonusDataFactory.TeamBonus), team, statusSlots);
     }
 
-    ChampionRanker CreateRanker(Team team) => new ChampionRanker(championCatalog, CreateEvaluator(team));
+    ValueSelector CreateValueSelector(Team team) => new ValueSelector(championCatalog, CreateEvaluator(team));
 
     ValueLogger CreateValueLogger(Team team) => new ValueLogger(championCatalog, CreateEvaluator(team));
 }

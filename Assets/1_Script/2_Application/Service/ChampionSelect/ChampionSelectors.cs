@@ -8,9 +8,16 @@ public class RandomSelector : IChampionSelector
 
 public class ValueSelector : IChampionSelector
 {
-    readonly ChampionRanker ranker;
-    public ValueSelector(ChampionRanker ranker) => this.ranker = ranker;
-    public int Select(HashSet<int> ids) => ranker.GetChampionRank(ids).First();
+    readonly ChampionCatalog catalog;
+    readonly IChampionEvaluator evaluator;
+
+    public ValueSelector(ChampionCatalog catalog, IChampionEvaluator evaluator)
+    {
+        this.catalog = catalog;
+        this.evaluator = evaluator;
+    }
+    public int Select(HashSet<int> ids) => CreateCardValueList(ids).OrderByDescending(x => x.Value).First().Id;
+    public IEnumerable<CardValue> CreateCardValueList(IEnumerable<int> candidateIds) => candidateIds.Select(id => new CardValue(id, evaluator.Evaluate(catalog.GetChampion(id))));
 }
 
 public class ValueSelectorLog : IChampionSelector

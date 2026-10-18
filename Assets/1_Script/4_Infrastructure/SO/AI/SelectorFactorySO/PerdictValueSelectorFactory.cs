@@ -7,7 +7,7 @@ public class PredictValueSelectorFactory : AI_SelectorSO
 
     public override IChampionSelector CreateBanSelector() => valueSelectSO.CreateBanSelector();
 
-    public override IChampionSelector CreatePickSelector() => new ValueSelector(CreateRanker(team));
+    public override IChampionSelector CreatePickSelector() => new ValueSelector(championCatalog, CreateEvaluator(team));
 
     PhaseAdvancer phaseAdvancer;
     public void Inject(PhaseAdvancer phaseAdvancer)
@@ -17,6 +17,4 @@ public class PredictValueSelectorFactory : AI_SelectorSO
     }
 
     PredictivePickEvaluator CreateEvaluator(Team team) => new PredictivePickEvaluator(valueSelectSO.CreateEvaluator(team), championCatalog, phaseAdvancer, team, statusSlots);
-
-    ChampionRanker CreateRanker(Team team) => new ChampionRanker(championCatalog, CreateEvaluator(team));
 }
