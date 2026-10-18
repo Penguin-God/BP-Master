@@ -17,7 +17,7 @@ public static class SkillPreviewer
         return copiedSlots;
     }
 
-    public static SkillRunner CreateRunner(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
+    static SkillRunner CreateRunner(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
         return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher));
     }

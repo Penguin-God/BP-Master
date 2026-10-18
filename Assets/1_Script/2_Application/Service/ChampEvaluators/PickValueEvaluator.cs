@@ -14,11 +14,11 @@ public class PickValueEvaluator
 
     public int Evaluate(Champion champion, Team team, SlotStorage<ChampionStatus> originStats)
     {
-        var before = ScoreConvertor.Convert(originStats);
-        var pickApplyinfo = championValueCalculator.Calculate(team, champion, originStats);
-        int champPickValue = ScoreDeltaCalculator.CalculateScoreDelta(pickApplyinfo, team, SpeedValue);
+        var beforeScore = ScoreConvertor.Convert(originStats);
+        var pickApplyScore = championValueCalculator.Calculate(team, champion, originStats);
+        int cardPickDeltaValue = ScoreDeltaCalculator.CalculateScoreDelta(pickApplyScore, team, SpeedValue);
 
-        int bonusValue = bonusDeltaCalculator.Calculate(before, before + pickApplyinfo, team);
-        return champPickValue + bonusValue;
+        int bonusDeltaValue = bonusDeltaCalculator.Calculate(beforeScore, beforeScore + pickApplyScore, team);
+        return cardPickDeltaValue + bonusDeltaValue;
     }
 }

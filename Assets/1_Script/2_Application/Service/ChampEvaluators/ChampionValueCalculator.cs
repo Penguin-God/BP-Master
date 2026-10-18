@@ -11,11 +11,10 @@ public class ChampionValueCalculator
         masteryApplier.ApplyMastery(champion.Id, champion.Status);
         var afterSlots = SkillPreviewer.PreviewSkill(team, champion, before);
         var result = ScoreDeltaCalculator.CalculateStatDelta(before, afterSlots);
-        var blue = GetTeamAddStatScore(Team.Blue);
-        var red = GetTeamAddStatScore(Team.Red);
-        result += new GameScoreInfo(blue, red);
+        if (Team.Blue == team) result = result with { Blue = result.Blue + CreateStatScore() };
+        else if(Team.Red == team) result = result with { Red = result.Red + CreateStatScore() };
         return result;
 
-        ScoreInfo GetTeamAddStatScore(Team statTeam) => team == statTeam ? new ScoreInfo(champion.Status.Stat.Attack, champion.Status.Stat.Defense, champion.Status.Stat.Speed) : new ScoreInfo(0, 0, 0);
+        ScoreInfo CreateStatScore() => new ScoreInfo(champion.Status.Stat.Attack, champion.Status.Stat.Defense, champion.Status.Stat.Speed);
     }
 }
