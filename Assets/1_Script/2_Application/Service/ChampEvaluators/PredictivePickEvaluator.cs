@@ -17,22 +17,20 @@ public class PredictivePickEvaluator
         this.myTeam = myTeam;
         this.currentBoard = currentBoard;
     }
-    public int Evaluate(Champion myCandidate)
+    public int Evaluate(Champion evaluateCard)
     {
-        int myPickValue = evaluator.Evaluate(myCandidate, myTeam, currentBoard);
-
+        int defaultValue = evaluator.Evaluate(evaluateCard, myTeam, currentBoard);
         var nextFlow = phaseAdvancer.PeekNextFlow();
 
         if (nextFlow.Phase != GamePhase.Pick) // 픽 페이즈가 끝나면 1번만
-            return myPickValue;
+            return defaultValue;
 
-        var futureBoard = SkillPreviewer.PreviewSkill(myTeam, myCandidate, currentBoard);
-        futureBoard.AddSlot(myTeam, myCandidate.Status.DeepCopy());
+        var futureBoard = SkillPreviewer.PreviewSkill(myTeam, evaluateCard, currentBoard);
+        futureBoard.AddSlot(myTeam, evaluateCard.Status.DeepCopy());
         Team nextTurnTeam = nextFlow.Turn;
 
-
         int maxNextValue = 0;
-        foreach (var champ in catalog.Champions.Where(x => x.Id != myCandidate.Id))
+        foreach (var champ in catalog.Champions.Where(x => x.Id != evaluateCard.Id))
         {
             int value = evaluator.Evaluate(champ, nextTurnTeam, futureBoard);
 
@@ -40,10 +38,9 @@ public class PredictivePickEvaluator
                 maxNextValue = value;
         }
 
-
         if (nextTurnTeam == myTeam)
-            return myPickValue + maxNextValue;
+            return defaultValue + maxNextValue;
         else
-            return myPickValue - maxNextValue;
+            return defaultValue - maxNextValue;
     }
 }
