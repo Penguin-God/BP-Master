@@ -20,7 +20,7 @@ public class ValueCalcualateTests
         var champion = CreateChampion(CHAMP_ID, skillData: skillData);
         var sut = CreateSut(CreateBonus(0, 0), masteryLevel: 0);
 
-        int score = sut.Evaluate(champion);
+        int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(0));
 
         // 내 팀(Blue) 기준에서 적(Red)의 스탯이 올랐으므로 점수는 마이너스여야 함
         Assert.AreEqual(-200, score);
@@ -33,7 +33,7 @@ public class ValueCalcualateTests
         var champion = CreateChampion(CHAMP_ID, skillData: skillData);
         var sut = CreateSut(CreateBonus(100, 30000), masteryLevel: 0, att: 100);
 
-        int score = sut.Evaluate(champion);
+        int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(100));
 
         Assert.AreEqual(30200, score);
     }
@@ -47,7 +47,7 @@ public class ValueCalcualateTests
         var champion = CreateChampion(CHAMP_ID, att: 100, skillData: skillData);
         var sut = CreateSut(CreateBonus(bounsNeed, 100), masteryLevel: 10);
 
-        int score = sut.Evaluate(champion);
+        int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(0));
 
         Assert.AreEqual(result, score);
     }

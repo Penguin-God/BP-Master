@@ -19,8 +19,7 @@ public class PredictivePickEvaluator
     }
     public int Evaluate(Champion myCandidate)
     {
-        evaluator.Change(myTeam, currentBoard);
-        int myPickValue = evaluator.Evaluate(myCandidate);
+        int myPickValue = evaluator.Evaluate(myCandidate, myTeam, currentBoard);
 
         var nextFlow = phaseAdvancer.PeekNextFlow();
 
@@ -31,18 +30,16 @@ public class PredictivePickEvaluator
         futureBoard.AddSlot(myTeam, myCandidate.Status.DeepCopy());
         Team nextTurnTeam = nextFlow.Turn;
 
-        evaluator.Change(nextTurnTeam, futureBoard);
 
         int maxNextValue = 0;
         foreach (var champ in catalog.Champions.Where(x => x.Id != myCandidate.Id))
         {
-            int value = evaluator.Evaluate(champ);
+            int value = evaluator.Evaluate(champ, nextTurnTeam, futureBoard);
 
             if (value > maxNextValue)
                 maxNextValue = value;
         }
 
-        evaluator.Change(myTeam, currentBoard);
 
         if (nextTurnTeam == myTeam)
             return myPickValue + maxNextValue;
