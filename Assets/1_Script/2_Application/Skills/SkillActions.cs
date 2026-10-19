@@ -17,11 +17,6 @@ public class StatChanger : ISkillAction
     }
 }
 
-public class SkillExcluder : ISkillAction
-{
-    public void Do(ChampionStatus target) => target.TraitExcluded();
-}
-
 public class StatAbsorber : ISkillAction
 {
     readonly ChampionStatus User;

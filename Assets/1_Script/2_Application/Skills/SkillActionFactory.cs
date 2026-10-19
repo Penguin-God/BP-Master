@@ -24,7 +24,6 @@ public class SkillActionFactory
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             SkillType.Doppelganger => new Doppelganger(caster),
             SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
-            SkillType.TraitExcluder => new SkillExcluder(),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }

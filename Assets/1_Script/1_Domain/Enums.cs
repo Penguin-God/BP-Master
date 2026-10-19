@@ -25,7 +25,6 @@ public enum SkillType
 {
     None = 0,
     StatChanger = 2,
-    TraitExcluder = 7,
     StatAbsorber = 8,
     Resonance = 9,
     AmplifyChanger = 10,

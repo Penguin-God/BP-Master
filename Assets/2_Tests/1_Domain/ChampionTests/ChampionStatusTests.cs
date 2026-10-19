@@ -88,7 +88,6 @@ public class ChampionStatusTests
     {
         var original = new ChampionStatus(CreateStat(10, 20, 30));
         original.AddUpRate(0.5f);
-        original.TraitExcluded();
 
         bool flag = false;
         original.OnStatChanged += (_, __) => flag = true;
@@ -96,7 +95,6 @@ public class ChampionStatusTests
         var copy = original.DeepCopy();
 
         Assert.AreEqual(original.Stat, copy.Stat);
-        Assert.AreEqual(original.IsSkillExcluded, copy.IsSkillExcluded);
         Assert.AreEqual(original.UpRate, copy.UpRate, delta: 1e-6f);
         Assert.AreEqual(original.DownRate, copy.DownRate, delta: 1e-6f);
 

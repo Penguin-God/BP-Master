@@ -20,17 +20,6 @@ public class SkillActionTests
     }
 
     [Test]
-    public void 특성_제외시키기()
-    {
-        var target = TestHelper.CreateStatus(0, 0, 7);
-        var sut = new SkillExcluder();
-
-        sut.Do(target);
-
-        Assert.IsTrue(target.IsSkillExcluded);
-    }
-
-    [Test]
     public void 퍼센트_스탯_흡수()
     {
         var user = TestHelper.CreateStatus();
