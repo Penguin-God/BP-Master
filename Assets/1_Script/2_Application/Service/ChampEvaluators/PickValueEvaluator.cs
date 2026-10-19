@@ -18,10 +18,16 @@ public class PickValueEvaluator
         var evaluatedChampion = new Champion(champion.Id, champion.Skill, appliedStatus);
 
         var beforeScore = ScoreConvertor.Convert(originStats);
-        var pickApplyScore = ChampionValueCalculator.Calculate(team, evaluatedChampion, originStats);
+        var pickApplyScore = GetPlicApplyScore(team, evaluatedChampion, originStats);
         int cardPickDeltaValue = ScoreDeltaCalculator.CalculateScoreDelta(pickApplyScore, team, SpeedValue);
 
         int bonusDeltaValue = bonusDeltaCalculator.Calculate(beforeScore, beforeScore + pickApplyScore, team);
         return cardPickDeltaValue + bonusDeltaValue;
+    }
+
+    GameScoreInfo GetPlicApplyScore(Team team, Champion champion, SlotStorage<ChampionStatus> before)
+    {
+        var afterSlots = SkillPreviewer.SimulatePickCard(team, champion, before);
+        return ScoreDeltaCalculator.CalculateStatDelta(before, afterSlots);
     }
 }
