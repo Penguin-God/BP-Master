@@ -19,13 +19,13 @@ public class UI_CardItem : MonoBehaviour
         nameText.text = _cardData.ChampionName;
     }
 
-    public void ApplyState(string name, Color textColor, Color buttonColor, bool isEnabled)
+    public void DrawModel(CardViewModel model)
     {
-        nameText.text = name;
-        nameText.color = textColor;
-        if (isEnabled) ButtonUtil.ActiveButton(button);
+        nameText.text = model.Name;
+        nameText.color = model.TextColor;
+        if (model.IsEnabled) ButtonUtil.ActiveButton(button);
         else ButtonUtil.InActiveButton(button);
-        SetButtonColor(buttonColor); // ActiveButton에 색깔 변경 있어서 마지막
+        SetButtonColor(model.ButtonColor); // ActiveButton에 색깔 변경 있어서 마지막
     }
 
     public void SetButtonColor(Color color)

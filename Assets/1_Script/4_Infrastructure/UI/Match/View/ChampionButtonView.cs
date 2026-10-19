@@ -33,8 +33,6 @@ public class ChampionButtonView : MonoBehaviour
     public void Init(ChampionButtonStatePresenter presenter, IEnumerable<int> selectableCards)
     {
         _presenter = presenter;
-        ApplyStates();
-
         _selectableCards = selectableCards;
         CreateButtons(_selectableCards);
 
@@ -51,18 +49,8 @@ public class ChampionButtonView : MonoBehaviour
 
         if (clickEvent != null) ApplyEvent(clickEvent);
 
-        ApplyStates();
-    }
-
-    void ApplyStates()
-    {
-        if (_cards == null || _presenter == null) return;
-
         foreach (var card in _cards)
-        {
-            var state = _presenter.GetState(card.Id);
-            card.ApplyState(state.Name, state.TextColor, state.ButtonColor, state.IsEnabled);
-        }
+            card.DrawModel(_presenter.GetCardModel(card.Id));
     }
 
     public void AddEvent(UnityAction<ChampionSO> action)

@@ -12,7 +12,7 @@ public class ChampionButtonStatePresenterTests
     {
         var sut = CreatePresenter(new[] { 1 }, new int[0], new[] { 1 }, CreateNameCatalog());
 
-        var result = sut.GetState(1);
+        var result = sut.GetCardModel(1);
 
         Assert.AreEqual(ChampionButtonPalette.MyMastery, result.ButtonColor);
     }
@@ -22,7 +22,7 @@ public class ChampionButtonStatePresenterTests
     {
         var sut = CreatePresenter(new int[0], new[] { 1 }, new[] { 1 }, CreateNameCatalog());
 
-        var result = sut.GetState(1);
+        var result = sut.GetCardModel(1);
 
         Assert.AreEqual(ChampionButtonPalette.OpponentMastery, result.ButtonColor);
     }
@@ -32,7 +32,7 @@ public class ChampionButtonStatePresenterTests
     {
         var sut = CreatePresenter(new[] { 1 }, new[] { 1 }, new[] { 1 }, CreateNameCatalog());
 
-        var result = sut.GetState(1);
+        var result = sut.GetCardModel(1);
 
         Assert.AreEqual(ChampionButtonPalette.BothMastered, result.ButtonColor);
     }
@@ -42,7 +42,7 @@ public class ChampionButtonStatePresenterTests
     {
         var sut = CreatePresenter(new int[0], new int[0], new int[0], CreateNameCatalog());
 
-        var result = sut.GetState(1);
+        var result = sut.GetCardModel(1);
 
         Assert.IsFalse(result.IsEnabled);
         Assert.AreEqual(ChampionButtonPalette.InactiveText, result.TextColor);
@@ -53,7 +53,7 @@ public class ChampionButtonStatePresenterTests
     {
         var sut = CreatePresenter(new int[0], new int[0], new[] { 1 }, CreateNameCatalog());
 
-        var result = sut.GetState(1);
+        var result = sut.GetCardModel(1);
 
         Assert.AreEqual("펭귄갓", result.Name);
     }

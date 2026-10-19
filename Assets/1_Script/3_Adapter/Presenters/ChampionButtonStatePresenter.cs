@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public record ChampionButtonStateModel(string Name, Color32 ButtonColor, Color32 TextColor, bool IsEnabled);
+public record CardViewModel(string Name, Color32 ButtonColor, Color32 TextColor, bool IsEnabled);
 
 public static class ChampionButtonPalette
 {
@@ -29,7 +29,7 @@ public class ChampionButtonStatePresenter
         _nameCatalog = nameCatalog;
     }
 
-    public ChampionButtonStateModel GetState(int championId)
+    public CardViewModel GetCardModel(int championId)
     {
         string name = _nameCatalog.TryGetValue(championId, out var n) ? n : "Unknown";
         bool isEnabled = _selectableIds.Contains(championId);
@@ -37,7 +37,7 @@ public class ChampionButtonStatePresenter
         Color32 textColor = isEnabled ? ChampionButtonPalette.ActiveText : ChampionButtonPalette.InactiveText;
         Color32 buttonColor = DetermineButtonColor(championId);
 
-        return new ChampionButtonStateModel(name, buttonColor, textColor, isEnabled);
+        return new CardViewModel(name, buttonColor, textColor, isEnabled);
     }
 
     Color32 DetermineButtonColor(int championId)
