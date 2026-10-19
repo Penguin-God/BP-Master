@@ -25,8 +25,7 @@ public class PredictivePickEvaluator
         if (nextFlow.Phase != GamePhase.Pick) // 픽 페이즈가 끝나면 1번만
             return defaultValue;
 
-        var futureBoard = SkillPreviewer.PreviewSkill(myTeam, evaluateCard, currentBoard);
-        futureBoard.AddSlot(myTeam, evaluateCard.Status.DeepCopy());
+        var futureBoard = SkillPreviewer.SimulatePickCard(myTeam, evaluateCard, currentBoard);
         Team nextTurnTeam = nextFlow.Turn;
 
         int maxNextValue = 0;

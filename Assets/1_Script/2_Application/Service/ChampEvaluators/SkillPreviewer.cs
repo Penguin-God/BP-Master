@@ -2,21 +2,6 @@ using System.Linq;
 
 public static class SkillPreviewer
 {
-    public static SlotStorage<ChampionStatus> PreviewSkill(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
-    {
-        var copiedSlots = CloneSlots(originSlots);
-        if (champion.Skill.IsEmpty) return copiedSlots;
-
-        var targets = new SkillTargetService(new HighStatTargetSelector(originSlots))
-            .GetTargets(team, champion.Skill, Factorys.CreateTeamCounter(originSlots))
-            .Select(x => copiedSlots.GetSlot(x));
-
-        // 비어있는 PhaseActionEventDispatcher를 사용해야 함
-        var skillRunner = CreateRunner(BanPickEventDispatcher.Create(), PhaseEventDispatcher.Create());
-        skillRunner.Run(champion.Skill, champion.Status, targets, team);
-        return copiedSlots;
-    }
-
     public static SlotStorage<ChampionStatus> SimulatePickCard(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
     {
         var copiedSlots = CloneSlots(originSlots);
@@ -31,15 +16,12 @@ public static class SkillPreviewer
             .Select(x => copiedSlots.GetSlot(x));
 
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
-        var skillRunner = CreateRunner(BanPickEventDispatcher.Create(), PhaseEventDispatcher.Create());
+        var skillRunner = CreateRunner();
         skillRunner.Run(skill, copyStatus, targets, team);
         return copiedSlots;
     }
 
-    static SkillRunner CreateRunner(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
-    {
-        return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher));
-    }
+    static SkillRunner CreateRunner() => new (new SkillActionFactory(BanPickEventDispatcher.Create(), PhaseEventDispatcher.Create()));
 
     static SlotStorage<ChampionStatus> CloneSlots(SlotStorage<ChampionStatus> origin)
     {
