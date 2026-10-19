@@ -35,21 +35,9 @@ public static class ScoreDeltaCalculator
 
     static ScoreInfo CalculateTeamDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after, Team team)
     {
-        int totalAtt = 0;
-        int totalDef = 0;
-        int totalSpd = 0;
-
-        var teamSlots = origin.GetAllSlotDatas().Where(s => s.Team == team);
-
-        foreach (var slotData in teamSlots)
-        {
-            ChampionStatus beforeStatus = origin.GetSlot(slotData);
-            ChampionStatus afterStatus = after.GetSlot(slotData);
-
-            totalAtt += afterStatus.Stat.Attack - beforeStatus.Stat.Attack;
-            totalDef += afterStatus.Stat.Defense - beforeStatus.Stat.Defense;
-            totalSpd += afterStatus.Stat.Speed - beforeStatus.Stat.Speed;
-        }
+        int totalAtt = after.GetTeam(team).Sum(x => x.Stat.Attack) - origin.GetTeam(team).Sum(x => x.Stat.Attack);
+        int totalDef = after.GetTeam(team).Sum(x => x.Stat.Defense) - origin.GetTeam(team).Sum(x => x.Stat.Defense);
+        int totalSpd = after.GetTeam(team).Sum(x => x.Stat.Speed) - origin.GetTeam(team).Sum(x => x.Stat.Speed);
 
         return new ScoreInfo(totalAtt, totalDef, totalSpd);
     }
