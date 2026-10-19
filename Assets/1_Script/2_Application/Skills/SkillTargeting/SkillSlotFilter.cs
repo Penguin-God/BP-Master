@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+public record TeamCount(int Blue, int Red)
+{
+    public int Sum => Blue + Red;
+    public int GetTeamCount(Team team) => team == Team.Blue ? Blue : Red;
+}
+
 public readonly struct TargetCountCalculator
 {
     readonly int BlueCount;
@@ -33,9 +39,22 @@ public readonly struct TargetCountCalculator
         return GetTargetableCount(team, rule);
     }
 
+    public static int CalculateTargetCount(Team team, SkillTargetRule rule, TeamCount teamCount)
+    {
+        if (rule.TargetRange == TargetRange.All)
+        {
+            if (rule.TargetSide == Side.All) return teamCount.Sum;
+            else return GetTargetTeamCount();
+        }
+
+        return Math.Min(GetTargetTeamCount(), CalculateFixedCount(rule.TargetRange));
+
+        int GetTargetTeamCount() => teamCount.GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
+    }
+
     int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
 
-    int CalculateFixedCount(TargetRange targetRange) => targetRange switch
+    static int CalculateFixedCount(TargetRange targetRange) => targetRange switch
     {
         TargetRange.Single => 1,
         TargetRange.Double => 2,
