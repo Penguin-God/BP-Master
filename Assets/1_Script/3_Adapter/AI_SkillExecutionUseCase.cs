@@ -2,20 +2,19 @@ public class AI_SkillExecutionUseCase
 {
     readonly SlotStorage<Skill> _skillSlots;
     readonly SkillUsecase _skillUseController;
-    readonly SkillTargetService skillTargetService;
-    public AI_SkillExecutionUseCase(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, SkillTargetService targetService)
+    readonly ISkillTargetSelector _targetSelector;
+
+    public AI_SkillExecutionUseCase(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, ISkillTargetSelector targetSelector)
     {
         _skillSlots = skillSlots;
         _skillUseController = skillUseController;
-        skillTargetService = targetService;
+        _targetSelector = targetSelector;
     }
 
     public void UseSkill(SlotData slotData)
     {
-        var teamCount = Factorys.CreateTeamCounter(_skillSlots);
         var useSkill = _skillSlots.GetSlot(slotData);
-
-        var targets = skillTargetService.GetTargets(slotData.Team, useSkill, teamCount);
+        var targets = Factorys.CreateTeamCounter(_skillSlots).GetTargets(slotData.Team, useSkill, _targetSelector);
 
         _skillUseController.UseSkill(slotData, targets);
     }
