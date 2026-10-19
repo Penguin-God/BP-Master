@@ -6,24 +6,21 @@ public class SkillTargetSelector
     readonly HashSet<SlotData> selected = new HashSet<SlotData>();
     public IEnumerable<SlotData> Targets => selected;
 
-    readonly Team Team;
-    readonly SkillTargetRule Rule;
-    readonly TargetCountCalculator targetCounter;
-    public SkillTargetSelector(Team team, TargetCountCalculator skillTargetCounter, SkillTargetRule rule)
+    readonly TargetFindContext context;
+
+    public SkillTargetSelector(TargetFindContext context)
     {
-        Team = team;
-        targetCounter = skillTargetCounter;
-        Rule = rule;
+        this.context = context;
     }
 
-    public bool IsFull => selected.Count >= targetCounter.CalculateTargetCount(Team, Rule);
+    public bool IsFull => selected.Count >= TargetCountCalculator.CalculateTargetCount(context);
 
     bool CanSelected(SlotData target) => selected.Contains(target) == false && IsFull == false;
     public void Select(SlotData target)
     {
         if (CanSelected(target) == false) return;
 
-        if (Rule.TargetRange == TargetRange.All) SelectAll(target);
+        if (context.Rule.TargetRange == TargetRange.All) SelectAll(target);
         else selected.Add(target);
     }
 
@@ -31,7 +28,7 @@ public class SkillTargetSelector
     {
         selected.Clear();
 
-        if (Rule.TargetSide == Side.All) SelectAdds(AllTeamSlots);
+        if (context.Rule.TargetSide == Side.All) SelectAdds(AllTeamSlots);
         else SelectAdds(TeamSlots(target.Team));
     }
 
@@ -41,6 +38,6 @@ public class SkillTargetSelector
             selected.Add(s);
     }
 
-    IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, targetCounter.GetTeamCount(team)).Select(i => new SlotData(team, i));
+    IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, context.TeamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
     IEnumerable<SlotData> AllTeamSlots => TeamSlots(Team.Blue).Concat(TeamSlots(Team.Red));
 }

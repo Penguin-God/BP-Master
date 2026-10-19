@@ -8,6 +8,8 @@ public record TeamCount(int Blue, int Red)
     public int GetTeamCount(Team team) => team == Team.Blue ? Blue : Red;
 }
 
+public record TargetFindContext(Team Team, SkillTargetRule Rule, TeamCount TeamCount);
+
 public readonly struct TargetCountCalculator
 {
     readonly int BlueCount;
@@ -19,6 +21,8 @@ public readonly struct TargetCountCalculator
         RedCount = redCount;
     }
 
+    public TeamCount TeamCount => new TeamCount(BlueCount, RedCount);
+
     public IEnumerable<SlotData> GetTargets(Team casterTeam, Skill skill, ISkillTargetSelector selector)
     {
         int count = CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
@@ -28,31 +32,20 @@ public readonly struct TargetCountCalculator
 
     public int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
 
-    public int CalculateTargetCount(Team team, SkillTargetRule rule)
-    {
-        if (rule.TargetRange == TargetRange.All)
-        {
-            if (rule.TargetSide == Side.All) return BlueCount + RedCount;
-            else return GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
-        }
+    public int CalculateTargetCount(Team team, SkillTargetRule rule) => CalculateTargetCount(new TargetFindContext(team, rule, TeamCount));
 
-        return GetTargetableCount(team, rule);
-    }
-
-    public static int CalculateTargetCount(Team team, SkillTargetRule rule, TeamCount teamCount)
+    public static int CalculateTargetCount(TargetFindContext context)
     {
-        if (rule.TargetRange == TargetRange.All)
+        if (context.Rule.TargetRange == TargetRange.All)
         {
-            if (rule.TargetSide == Side.All) return teamCount.Sum;
+            if (context.Rule.TargetSide == Side.All) return context.TeamCount.Sum;
             else return GetTargetTeamCount();
         }
 
-        return Math.Min(GetTargetTeamCount(), CalculateFixedCount(rule.TargetRange));
+        return Math.Min(GetTargetTeamCount(), CalculateFixedCount(context.Rule.TargetRange));
 
-        int GetTargetTeamCount() => teamCount.GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide));
+        int GetTargetTeamCount() => context.TeamCount.GetTeamCount(EnumCaster.GetTargetTeam(context.Team, context.Rule.TargetSide));
     }
-
-    int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
 
     static int CalculateFixedCount(TargetRange targetRange) => targetRange switch
     {

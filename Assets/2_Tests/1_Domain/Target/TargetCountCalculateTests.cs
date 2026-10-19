@@ -3,77 +3,75 @@ using static TestHelper;
 
 public class TargetCountCalculateTests
 {
-    TargetCountCalculator CreateSut(int blue = 3, int red = 2) => new TargetCountCalculator(blue, red);
-
-    SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule (side, range);
-    int CalculateTargetCount(TargetCountCalculator sut, Team team, SkillTargetRule targetRule) => sut.CalculateTargetCount(team, targetRule);
-
-    TeamCount CreateTeamCount(int blue = 3, int red = 2) => new TeamCount(blue, red);
-    int CalculateTargetCount(TeamCount teamCount, Team team, SkillTargetRule targetRule) => TargetCountCalculator.CalculateTargetCount(team, targetRule, teamCount);
+    TargetFindContext CreateSut(Team team, SkillTargetRule rule, int blue = 3, int red = 2) => new TargetFindContext(team, rule, new TeamCount(blue, red));
+    SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule(side, range);
+    int Calculate(TargetFindContext sut) => TargetCountCalculator.CalculateTargetCount(sut);
 
     [Test]
-    public void GetTeamCount_팀별_카운트_정상반환()
+    public void 팀카운트_팀별_수량_반환()
     {
-        var sut = CreateSut(blue: 3, red: 2);
-
+        var sut = new TeamCount(3, 2);
         Assert.AreEqual(3, sut.GetTeamCount(Team.Blue));
         Assert.AreEqual(2, sut.GetTeamCount(Team.Red));
     }
 
     [Test]
+    public void 타겟_컨텍스트를_기반으로_최대_선택_가능_수량을_올바르게_계산한다()
+    {
+        var sut = CreateSut(Team.Blue, SelfSingleRule, 3, 2);
+        Assert.AreEqual(1, Calculate(sut));
+    }
+
+    [Test]
     public void All범위_All사이드면_양팀_전체합을_반환()
     {
-        var sut = CreateTeamCount(blue: 3, red: 2);
         var rule = CreateRule(TargetRange.All, Side.All);
+        var sut = CreateSut(Team.Blue, rule, 3, 2);
+        Assert.AreEqual(5, Calculate(sut));
 
-        var countBlue = CalculateTargetCount(sut, Team.Blue, rule);
-        var countRed = CalculateTargetCount(sut, Team.Red, rule);
-
-        Assert.AreEqual(5, countBlue);
-        Assert.AreEqual(5, countRed);
+        sut = CreateSut(Team.Red, rule, 3, 2);
+        Assert.AreEqual(5, Calculate(sut));
     }
 
     [Test]
     public void All범위_Self사이드면_자기팀_카운트_반환()
     {
-        var sut = CreateTeamCount(blue: 3, red: 2);
         var rule = CreateRule(TargetRange.All, Side.Self);
+        var sut = CreateSut(Team.Blue, rule, 3, 2);
+        Assert.AreEqual(3, Calculate(sut));
 
-        var fromBlue = CalculateTargetCount(sut, Team.Blue, rule);
-        var fromRed = CalculateTargetCount(sut, Team.Red, rule);
-
-        Assert.AreEqual(3, fromBlue); // Blue 자기 자신
-        Assert.AreEqual(2, fromRed);  // Red 자기 자신
+        sut = CreateSut(Team.Red, rule, 3, 2);
+        Assert.AreEqual(2, Calculate(sut));
     }
 
     [Test]
     public void All범위_Opponent사이드면_상대팀_카운트_반환()
     {
-        var sut = CreateTeamCount(blue: 3, red: 2);
         var rule = CreateRule(TargetRange.All, Side.Opponent);
+        var sut = CreateSut(Team.Blue, rule, 3, 2);
+        Assert.AreEqual(2, Calculate(sut));
 
-        var fromBlue = CalculateTargetCount(sut, Team.Blue, rule);
-        var fromRed = CalculateTargetCount(sut, Team.Red, rule);
-
-        Assert.AreEqual(2, fromBlue); // Blue의 상대 = Red
-        Assert.AreEqual(3, fromRed);  // Red의 상대 = Blue
+        sut = CreateSut(Team.Red, rule, 3, 2);
+        Assert.AreEqual(3, Calculate(sut));
     }
 
     [Test]
     public void Single_Double_Triple_범위는_고정값을_반환()
     {
-        var sut = CreateTeamCount(blue: 10, red: 10);
+        var sut = CreateSut(Team.Blue, SelfSingleRule, 10, 10);
+        Assert.AreEqual(1, Calculate(sut));
 
-        Assert.AreEqual(1, CalculateTargetCount(sut, Team.Blue, SelfSingleRule));
-        Assert.AreEqual(2, CalculateTargetCount(sut, Team.Red, SelfDouble));
-        Assert.AreEqual(3, CalculateTargetCount(sut, Team.Blue, SelfTriple));
+        sut = CreateSut(Team.Red, SelfDouble, 10, 10);
+        Assert.AreEqual(2, Calculate(sut));
+
+        sut = CreateSut(Team.Blue, SelfTriple, 10, 10);
+        Assert.AreEqual(3, Calculate(sut));
     }
 
     [Test]
     public void 고정값이_팀_카운트를_넘기면_팀_수를_반환()
     {
-        var sut = CreateTeamCount(blue: 2, red: 1);
-
-        Assert.AreEqual(1, CalculateTargetCount(sut, Team.Blue, OpponentDoubleRule));
+        var sut = CreateSut(Team.Blue, OpponentDoubleRule, 2, 1);
+        Assert.AreEqual(1, Calculate(sut));
     }
 }

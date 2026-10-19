@@ -6,7 +6,7 @@ public class SkillTargetSelectTests
 {
     SkillTargetRule CreateDoubleRule(Side side) => new SkillTargetRule(side, TargetRange.Double);
     void Select(SkillTargetSelector sut, SlotData slot) => sut.Select(slot);
-    SkillTargetSelector CreateSut(Team team, int blueSize, int redSize, SkillTargetRule rule) => new SkillTargetSelector(team, new TargetCountCalculator(blueSize, redSize), rule);
+    SkillTargetSelector CreateSut(Team team, int blueSize, int redSize, SkillTargetRule rule) => new SkillTargetSelector(new TargetFindContext(team, rule, new TeamCount(blueSize, redSize)));
 
     [Test]
     public void 전체_All은_전부_넣음()
