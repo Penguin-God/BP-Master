@@ -45,15 +45,15 @@ public readonly struct TargetCountCalculator
         return Math.Min(GetTargetTeamCount(), CalculateFixedCount(context.Rule.TargetRange));
 
         int GetTargetTeamCount() => context.TeamCount.GetTeamCount(EnumCaster.GetTargetTeam(context.Team, context.Rule.TargetSide));
-    }
 
-    static int CalculateFixedCount(TargetRange targetRange) => targetRange switch
-    {
-        TargetRange.Single => 1,
-        TargetRange.Double => 2,
-        TargetRange.Triple => 3,
-        _ => 0
-    };
+        int CalculateFixedCount(TargetRange targetRange) => targetRange switch
+        {
+            TargetRange.Single => 1,
+            TargetRange.Double => 2,
+            TargetRange.Triple => 3,
+            _ => 0
+        };
+    }
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {
@@ -62,6 +62,15 @@ public readonly struct TargetCountCalculator
 
         if (targetTeam == Team.All) return GetAllSlots();
         else return GetTeamSlots(targetTeam);
+    }
+
+    public static IEnumerable<T> FilterTargets<T>(SlotStorage<T> storage, Team team, IEnumerable<Side> sides)
+    {
+        var side = EnumCaster.MergeSide(sides);
+        Team targetTeam = EnumCaster.GetTargetTeam(team, side);
+
+        if (targetTeam == Team.All) return storage.GetAll();
+        return storage.GetTeam(targetTeam);
     }
 
     IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(GetTeamSlots);

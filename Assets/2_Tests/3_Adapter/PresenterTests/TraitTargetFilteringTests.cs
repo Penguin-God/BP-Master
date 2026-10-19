@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 public class TraitTargetFilteringTests
@@ -33,5 +34,44 @@ public class TraitTargetFilteringTests
         Assert.AreEqual(5, slots.Count());
         Assert.AreEqual(3, slots.Count(x => x.Team == Team.Blue));
         Assert.AreEqual(2, slots.Count(x => x.Team == Team.Red));
+    }
+
+
+    [Test]
+    public void 아군_지정_시_시전자_팀의_슬롯_아이템만_반환된다()
+    {
+        var sut = CreateSut(new[] { "Blue1", "Blue2" }, new[] { "Red1" });
+
+        var result = TargetCountCalculator.FilterTargets(sut, Team.Blue, new[] { Side.Self }).ToList();
+
+        CollectionAssert.AreEqual(new[] { "Blue1", "Blue2" }, result);
+    }
+
+    [Test]
+    public void 적군_지정_시_상대_팀의_슬롯_아이템만_반환된다()
+    {
+        var sut = CreateSut(new[] { "Blue1" }, new[] { "Red1", "Red2" });
+
+        var result = TargetCountCalculator.FilterTargets(sut, Team.Blue, new[] { Side.Opponent }).ToList();
+
+        CollectionAssert.AreEqual(new[] { "Red1", "Red2" }, result);
+    }
+
+    [Test]
+    public void 전체_지정_시_양팀의_모든_슬롯_아이템이_순서대로_반환된다()
+    {
+        var sut = CreateSut(new[] { "Blue1" }, new[] { "Red1" });
+
+        var result = TargetCountCalculator.FilterTargets(sut, Team.Blue, new[] { Side.All }).ToList();
+
+        CollectionAssert.AreEqual(new[] { "Blue1", "Red1" }, result);
+    }
+
+    SlotStorage<string> CreateSut(IEnumerable<string> blueItems, IEnumerable<string> redItems)
+    {
+        var storage = new SlotStorage<string>();
+        storage.AddSlots(Team.Blue, blueItems);
+        storage.AddSlots(Team.Red, redItems);
+        return storage;
     }
 }
