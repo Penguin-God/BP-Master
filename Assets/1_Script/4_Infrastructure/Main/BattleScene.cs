@@ -27,7 +27,8 @@ public class BattleScene : MonoBehaviour
         storage = MatchContext.CreateFearlessStorage();
         var championCatalog = new ChampionCatalog(storage.SelectableIds.Select(x => ChampionDataLoder.GetChampionData(x).CreateChampion())); // ChampionDataLoder.GetCatalog();
         var (blue, red) = CreatePhaseOrchestrator(championSelector, ai_main, playerTeam);
-        var core = matchCoreFactorySO.CreateMatchCore(storage, new BanPickHandler(championCatalog, storage), playerIds, blue, red);
+        var banPickDispatcher = new BanPickEventDispatcher();
+        var core = matchCoreFactorySO.CreateMatchCore(storage, new BanPickHandler(championCatalog, storage, banPickDispatcher), playerIds, blue, red);
 
         matchUI_Controller.Init(playerTeam, core, playerIds); // start보다 먼저
 

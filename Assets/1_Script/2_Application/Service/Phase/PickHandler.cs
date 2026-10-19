@@ -7,13 +7,14 @@ public class BanPickHandler
     readonly ChampionCatalog championCatalog;
     public readonly PickSlotFacade PickSlotFacade = new();
     readonly BanPickStorage storage;
-    public readonly BanPickEventDispatcher BanPickEventDispatcher = new();
+    public readonly BanPickEventDispatcher BanPickEventDispatcher;
     readonly IEnumerable<GamePhase> VaildPhases = new GamePhase[] { GamePhase.Ban, GamePhase.Pick };
 
-    public BanPickHandler(ChampionCatalog championCatalog, BanPickStorage storage)
+    public BanPickHandler(ChampionCatalog championCatalog, BanPickStorage storage, BanPickEventDispatcher eventDispatcher)
     {
         this.championCatalog = championCatalog;
         this.storage = storage;
+        BanPickEventDispatcher = eventDispatcher;
     }
 
     void Pick(Team team, int id)

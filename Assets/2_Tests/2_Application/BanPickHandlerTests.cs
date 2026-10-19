@@ -25,7 +25,7 @@ public class BanPickHandlerTests
 
         var catalog = new ChampionCatalog(new[] { champion });
         var storage = new BanPickStorage(new[] { CHAMP_ID });
-        var sut = new BanPickHandler(catalog, storage);
+        var sut = new BanPickHandler(catalog, storage, new BanPickEventDispatcher());
 
         SlotChampion eventResult = null;
         sut.BanPickEventDispatcher.OnChampionPick += (pc) => eventResult = pc;
@@ -61,6 +61,6 @@ public class BanPickHandlerTests
         var champion = new Champion(selectableId, null, CreateStatus());
         var catalog = new ChampionCatalog(new[] { champion });
         var storage = new BanPickStorage(new[] { selectableId });
-        return new BanPickHandler(catalog, storage);
+        return new BanPickHandler(catalog, storage, new BanPickEventDispatcher());
     }
 }

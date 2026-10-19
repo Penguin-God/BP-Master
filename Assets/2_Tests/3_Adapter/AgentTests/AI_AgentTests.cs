@@ -11,7 +11,7 @@ public class AI_AgentTests
         public int Select(HashSet<int> ids) => ids.First();
     }
 
-    AI_BanPickAgent CreateFirstSelectSut(Team team, BanPickStorage storage) => new AI_BanPickAgent(team, storage, new FirstSelect(), new FirstSelect(), new BanPickHandler(CreateCaltalog(DefualtChampion), storage));
+    AI_BanPickAgent CreateFirstSelectSut(Team team, BanPickStorage storage) => new AI_BanPickAgent(team, storage, new FirstSelect(), new FirstSelect(), new BanPickHandler(CreateCaltalog(DefualtChampion), storage, new BanPickEventDispatcher()));
     const int ID = 1;
     Champion DefualtChampion => CreateChampion(id: ID);
 
