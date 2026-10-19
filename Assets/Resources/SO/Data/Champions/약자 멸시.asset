@@ -23,9 +23,9 @@ MonoBehaviour:
     SerializationNodes: []
   id: 22
   championName: "\uC57D\uC790 \uBA78\uC2DC"
-  attack: 110
-  defense: 110
-  speed: 3
+  attack: 120
+  defense: 70
+  speed: 4
   skillDatas:
   - targetSide: 1
     range: 4
@@ -33,22 +33,10 @@ MonoBehaviour:
     skillAmount:
       Type: 1
       StatType: 0
-      ValueAmount: -35
+      ValueAmount: -75
       PercentValue: 0
       FixValue: 0
     conditionType: 3
-    threshold: 0
-    conditionCheckerType: 2
-  - targetSide: 1
-    range: 4
-    skillType: 2
-    skillAmount:
-      Type: 1
-      StatType: 1
-      ValueAmount: -35
-      PercentValue: 0
-      FixValue: 0
-    conditionType: 1
     threshold: 0
     conditionCheckerType: 2
   icon: {fileID: 21300000, guid: de10e35274d74963844ed382061ba2f3, type: 3}

@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   id: 49
-  championName: "\uCD95\uBCF5\uC758 \uB545"
+  championName: "\uCC28\uAE30 \uAC15\uD654"
   attack: 130
   defense: 80
   speed: 5
@@ -39,3 +39,4 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
+  icon: {fileID: 0}
