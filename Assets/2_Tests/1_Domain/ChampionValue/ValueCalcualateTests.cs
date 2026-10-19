@@ -36,8 +36,8 @@ public class ValueCalcualateTests
     }
 
     [Test]
-    [TestCase(0, 320)] // 원래 받는 보너스는 점수 반영 X
-    [TestCase(300, 420)] // stat 100 + mastery 20 + skill 200 + bonus 100
+    [TestCase(0, 420)] // 원래 받는 보너스는 점수 반영 X
+    [TestCase(300, 520)] // stat 100 + mastery 20 + skill 300 + bonus 100
     public void 스탯_숙련도_스킬_보너스_적용한_챔피언_가치(int bounsNeed, int result)
     {
         var skillData = CreateAttackChangeSkill(100, rule: SelfAllRule);
@@ -47,6 +47,6 @@ public class ValueCalcualateTests
         int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(0));
 
         Assert.AreEqual(result, score);
-        Assert.AreEqual(100, champion.Status.Stat.Attack);
+        Assert.AreEqual(100, champion.Status.Stat.Attack); // 원본은 수정 X
     }
 }

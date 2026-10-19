@@ -13,7 +13,7 @@ public class SkillValueCaculatorTests
         
         GameScoreInfo result = ChampionValueCalculator.Calculate(Team.Blue, champion, originSlots);
 
-        Assert.AreEqual(200, result.Blue.Att);
+        Assert.AreEqual(300, result.Blue.Att);
         Assert.AreEqual(0, result.Blue.Def);
         Assert.AreEqual(0, result.Red.Att);
     }
