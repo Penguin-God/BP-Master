@@ -31,6 +31,7 @@ public enum SkillType
     PickBuffer = 11,
     Doppelganger = 12,
     FinalStatChanger = 13,
+    OppentPickStatChanger = 14,
 }
 
 public enum ConditionType

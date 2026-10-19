@@ -19,11 +19,12 @@ public class SkillActionFactory
         {
             SkillType.StatChanger => statChanger,
             SkillType.StatAbsorber => new StatAbsorber(caster, amountCalculator, amountData.StatType),
-            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
             SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
             SkillType.AmplifyChanger => new AmplifyChanger(amountData.PercentValue),
             SkillType.Doppelganger => new Doppelganger(caster),
             SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
+            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
+            SkillType.OppentPickStatChanger => new OppentPickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }

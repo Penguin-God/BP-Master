@@ -1,4 +1,5 @@
 using System;
+
 public class StatChanger : ISkillAction
 {
     readonly StatType StatType;
@@ -20,7 +21,7 @@ public class StatChanger : ISkillAction
 public class StatAbsorber : ISkillAction
 {
     readonly ChampionStatus User;
-    readonly ISkillAmountCalculator AmountCalculator; // 기존 로직용
+    readonly ISkillAmountCalculator AmountCalculator;
     readonly StatType StatType;
 
     public StatAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator, StatType statType)
@@ -37,6 +38,7 @@ public class StatAbsorber : ISkillAction
         target.ChangeStat(amount * -1, StatType);
     }
 }
+
 public class Resonance : ISkillAction
 {
     readonly ChampionStatus User;
@@ -86,6 +88,28 @@ public class PickChampStatChanger : ISkillAction
     void ChangeStat(Champion champion, Team team)
     {
         if(Team == team)
+            _statChanger.Do(champion.Status);
+    }
+}
+
+public class OppentPickChampStatChanger : ISkillAction
+{
+    readonly BanPickEventDispatcher eventDispatcher;
+    readonly StatChanger _statChanger;
+    readonly Team Team;
+
+    public OppentPickChampStatChanger(BanPickEventDispatcher eventDispatcher, StatChanger statChanger, Team team)
+    {
+        this.eventDispatcher = eventDispatcher;
+        this._statChanger = statChanger;
+        this.Team = team;
+    }
+
+    public void Do(ChampionStatus target) => eventDispatcher.OnTeamChampionPick += ChangeStat;
+
+    void ChangeStat(Champion champion, Team team)
+    {
+        if (Team != team)
             _statChanger.Do(champion.Status);
     }
 }
