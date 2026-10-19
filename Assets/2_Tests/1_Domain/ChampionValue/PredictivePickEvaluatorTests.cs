@@ -16,7 +16,7 @@ public class PredictivePickEvaluatorTests
         var originSlots = new SlotStorage<ChampionStatus>();
         originSlots.AddSlot(Team.Blue, CreateStatus(500));
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(CreateBonus(100, 30000), CreateBonus(0, 0), CreateBonus(0, 0)));
-        var pickValueEvaluator = new PickValueEvaluator(speedValue: 0, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0))), bonus);
+        var pickValueEvaluator = new PickValueEvaluator(speedValue: 0, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0)), bonus);
 
         var phaseAdvancer = new PhaseAdvancer(new PhaseData[] { new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Red })) });
         phaseAdvancer.Start(); // 현재 턴 활성화를 위해 Start 호출 필요
@@ -37,7 +37,7 @@ public class PredictivePickEvaluatorTests
 
         var originSlots = new SlotStorage<ChampionStatus>();
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(CreateBonus(1000, 10000), CreateBonus(0, 0), CreateBonus(0, 0)));
-        var pickValueEvaluator = new PickValueEvaluator(speedValue:0, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0))), bonus);
+        var pickValueEvaluator = new PickValueEvaluator(speedValue:0, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, 0)), bonus);
 
         var phaseAdvancer = new PhaseAdvancer(new PhaseData[] { new PhaseData(GamePhase.Pick, new Phase(new Team[] { Team.Blue, Team.Blue })) });
         phaseAdvancer.Start(); // 현재 턴 활성화를 위해 Start 호출 필요

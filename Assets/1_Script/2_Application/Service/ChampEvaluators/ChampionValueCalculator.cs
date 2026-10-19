@@ -1,14 +1,7 @@
-public class ChampionValueCalculator
+public static class ChampionValueCalculator
 {
-    readonly MasteryApplier masteryApplier;
-    public ChampionValueCalculator(MasteryApplier masteryApplier)
+    public static GameScoreInfo Calculate(Team team, Champion champion, SlotStorage<ChampionStatus> before)
     {
-        this.masteryApplier = masteryApplier;
-    }
-
-    public GameScoreInfo Calculate(Team team, Champion champion, SlotStorage<ChampionStatus> before)
-    {
-        masteryApplier.ApplyMastery(champion.Id, champion.Status);
         var afterSlots = SkillPreviewer.PreviewSkill(team, champion, before);
         var result = ScoreDeltaCalculator.CalculateStatDelta(before, afterSlots);
         if (Team.Blue == team) result = result with { Blue = result.Blue + CreateStatScore() };

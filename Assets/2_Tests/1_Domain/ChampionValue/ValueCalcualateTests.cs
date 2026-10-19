@@ -7,7 +7,7 @@ public class ValueCalcualateTests
     PickValueEvaluator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
     {
         var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueEvaluator(speedValue: 0, new ChampionValueCalculator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel))), bonus);
+        return new PickValueEvaluator(speedValue: 0, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel)), bonus);
     }
 
     [Test]
@@ -47,5 +47,6 @@ public class ValueCalcualateTests
         int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(0));
 
         Assert.AreEqual(result, score);
+        Assert.AreEqual(100, champion.Status.Stat.Attack);
     }
 }
