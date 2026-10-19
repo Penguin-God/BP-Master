@@ -7,11 +7,7 @@ public class SkillTargetSelector
     public IEnumerable<SlotData> Targets => selected;
 
     readonly TargetFindContext context;
-
-    public SkillTargetSelector(TargetFindContext context)
-    {
-        this.context = context;
-    }
+    public SkillTargetSelector(TargetFindContext context) => this.context = context;
 
     public bool IsFull => selected.Count >= TargetCountCalculator.CalculateTargetCount(context);
 

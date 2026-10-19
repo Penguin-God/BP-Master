@@ -11,10 +11,9 @@ public static class SkillPreviewer
         copiedSlots.AddSlot(team, copyStatus);
         if (skill.IsEmpty) return copiedSlots;
 
-        var targets = Factorys.CreateTeamCounter(copiedSlots)
-            .GetTargets(team, skill, new HighStatTargetSelector(copiedSlots))
-            .Select(x => copiedSlots.GetSlot(x));
-
+        var targets = TargetCountCalculator.FilterTargets(copiedSlots, team, skill.Sides);
+        targets = TargetSelector.Select(targets, TargetOrders.StatOrder(skill.SkillDatas.First().AmountData.StatType), Factorys.CreateFindContext(team, skill, copiedSlots));
+        
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
         var skillRunner = CreateRunner();
         skillRunner.Run(skill, copyStatus, targets, team);

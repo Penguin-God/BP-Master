@@ -32,11 +32,14 @@ public class HighStatTargetSelector : ISkillTargetSelector
 public static class TargetSelector
 {
     public static IEnumerable<ChampionStatus> Select(IEnumerable<ChampionStatus> candidates, Func<ChampionStatus, int> sortFun, int count) => candidates.OrderByDescending(sortFun).Take(count);
+
+    public static IEnumerable<ChampionStatus> Select(IEnumerable<ChampionStatus> candidates, Func<ChampionStatus, int> sortFun, TargetFindContext context) 
+        => candidates.OrderByDescending(sortFun).Take(TargetCountCalculator.CalculateTargetCount(context));
 }
 
 
 public static class TargetOrders
 {
-    public static Func<ChampionStatus, int> GetSortKeySelector(StatType statType) => status => status.GetStatAmount(statType);
-    public static Func<ChampionStatus, int> GetSortKeySelector() => _ => Guid.NewGuid().GetHashCode();
+    public static Func<ChampionStatus, int> StatOrder(StatType statType) => status => status.GetStatAmount(statType);
+    public static Func<ChampionStatus, int> RandomOrder() => _ => Guid.NewGuid().GetHashCode();
 }
