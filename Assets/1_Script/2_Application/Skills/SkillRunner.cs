@@ -1,4 +1,6 @@
+using Sirenix.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SkillRunner
 {
@@ -16,7 +18,12 @@ public class SkillRunner
         {
             ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, caster, team);
             IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-            SkillExecutor.ExecuteSkill(action, condition, targets);
+            ExecuteSkill(action, condition, targets);
         }
     }
+
+    void ExecuteSkill(ISkillAction action, IChampionCondition condition, IEnumerable<ChampionStatus> targets)
+        => targets
+            .Where(condition.Check)
+            .ForEach(target => action.Do(target));
 }
