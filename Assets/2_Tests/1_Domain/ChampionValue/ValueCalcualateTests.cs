@@ -1,4 +1,7 @@
 using NUnit.Framework;
+using System.Data;
+using UnityEditor.Graphs;
+using UnityEngine;
 using static TestHelper;
 
 public class ValueCalcualateTests
@@ -48,5 +51,16 @@ public class ValueCalcualateTests
 
         Assert.AreEqual(result, score);
         Assert.AreEqual(100, champion.Status.Stat.Attack); // 원본은 수정 X
+    }
+
+    [Test]
+    public void 도플갱어_평가_테스트()
+    {
+        var champion = CreateChampion(CHAMP_ID, skillData: new SkillData(SkillType.Doppelganger, CreateSkillAmount(AmountType.None, StatType.Attack), CreateConditionData(ConditionType.None), OpponentSingleRule));
+        var sut = CreateSut(CreateBonus(0, 0));
+
+        int score = sut.Evaluate(champion, Team.Blue, CreateOneSlotStatus(100));
+
+        Assert.AreEqual(100, score);
     }
 }
