@@ -23,10 +23,9 @@ public class UI_CardItem : MonoBehaviour
     {
         nameText.text = name;
         nameText.color = textColor;
-        SetButtonColor(buttonColor);
-
         if (isEnabled) ButtonUtil.ActiveButton(button);
         else ButtonUtil.InActiveButton(button);
+        SetButtonColor(buttonColor); // ActiveButton에 색깔 변경 있어서 마지막
     }
 
     public void SetButtonColor(Color color)
