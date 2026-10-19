@@ -23,8 +23,7 @@ public class MatchCoreFactorySO : ScriptableObject
                 .ApplyMastery(champion.Id, champion.Status);
         };
 
-        var actionEventDispatcher = BanPickEventDispatcher.Create();
-        var skillRunner = new SkillRunner(new SkillActionFactory(actionEventDispatcher, phaseEventDispatcher));
+        var skillRunner = new SkillRunner(new SkillActionFactory(banPickHandler.BanPickEventDispatcher, phaseEventDispatcher));
         var skillController = new SkillUsecase(banPickHandler.PickSlotFacade.ChampionSlots, skillRunner);
 
         var teamDispatcher = new TeamPhaseEntryDispatcher(blueEntry, redEntry);

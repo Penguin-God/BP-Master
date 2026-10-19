@@ -24,6 +24,7 @@ public class MatchUI_Controller : MonoBehaviour
         team = playerTeam;
         var banPickHandler = matchCore.BanPickHandler;
         var pickSlotFacade = banPickHandler.PickSlotFacade;
+        var eventDispatcher = banPickHandler.BanPickEventDispatcher;
 
         championDrawer.Init(new ChampionButtonStatePresenter(
             GetMasteryIds(playerTeam), GetMasteryIds(EnumCaster.GetOppoentTeam(playerTeam)), MatchContext.CreateFearlessStorage().SelectableIds, ChampionDataLoder.NameCatalog), 
@@ -36,13 +37,13 @@ public class MatchUI_Controller : MonoBehaviour
         redMasteryTooltipTrigger.Inject(matchCore.MasteryRegistry);
         blueMasteryTooltipTrigger.Inject(matchCore.MasteryRegistry);
 
-        banPickHandler.BanPickEventDispatcher.OnTeamBan += banView.UpdateBanList;
-        banPickHandler.BanPickEventDispatcher.OnPick += slotViews.PickChampion;
+        eventDispatcher.OnTeamBan += banView.UpdateBanList;
+        eventDispatcher.OnPick += slotViews.PickChampion;
 
-        banPickHandler.BanPickEventDispatcher.OnBan += championDrawer.InActiveButton;
-        banPickHandler.BanPickEventDispatcher.OnPick += (_, id) => championDrawer.InActiveButton(id);
+        eventDispatcher.OnBan += championDrawer.InActiveButton;
+        eventDispatcher.OnPick += (_, id) => championDrawer.InActiveButton(id);
 
-        banPickHandler.BanPickEventDispatcher.OnPick += OnPick;
+        eventDispatcher.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);
         skillButtonView.Init(playerTeam);
