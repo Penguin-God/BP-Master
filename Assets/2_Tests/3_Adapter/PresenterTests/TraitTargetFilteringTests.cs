@@ -3,7 +3,7 @@ using System.Linq;
 
 public class TraitTargetFilteringTests
 {
-    SkillTargetFilter CreateSut(int blueCount = 3, int redCount = 2) => new SkillTargetFilter(new TargetCountCalculator(blueCount, redCount));
+    TargetCountCalculator CreateSut(int blueCount = 3, int redCount = 2) => new TargetCountCalculator(blueCount, redCount);
     [Test]
     public void Self_사이드면_자기팀_슬롯만_반환()
     {

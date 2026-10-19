@@ -12,8 +12,7 @@ public class SkillTargetService
     public IEnumerable<SlotData> GetTargets(Team casterTeam, Skill skill, TargetCountCalculator calculator)
     {
         int count = calculator.CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
-        var filter = new SkillTargetFilter(calculator);
-        var candidates = filter.FilteringTargetSlots(casterTeam, skill.Sides);
+        var candidates = calculator.FilteringTargetSlots(casterTeam, skill.Sides);
 
         return selector.SelectTargets(candidates, count, skill);
     }

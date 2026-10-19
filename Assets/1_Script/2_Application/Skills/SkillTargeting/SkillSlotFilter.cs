@@ -13,9 +13,9 @@ public readonly struct TargetCountCalculator
         RedCount = redCount;
     }
 
-    public readonly int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
+    public int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
 
-    public readonly int CalculateTargetCount(Team team, SkillTargetRule rule)
+    public int CalculateTargetCount(Team team, SkillTargetRule rule)
     {
         if (rule.TargetRange == TargetRange.All)
         {
@@ -26,21 +26,16 @@ public readonly struct TargetCountCalculator
         return GetTargetableCount(team, rule);
     }
 
-    readonly int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
+    int GetTargetableCount(Team team, SkillTargetRule rule) => Math.Min(GetTeamCount(EnumCaster.GetTargetTeam(team, rule.TargetSide)), CalculateFixedCount(rule.TargetRange));
 
-    readonly int CalculateFixedCount(TargetRange targetRange) => targetRange switch
+    int CalculateFixedCount(TargetRange targetRange) => targetRange switch
     {
         TargetRange.Single => 1,
         TargetRange.Double => 2,
         TargetRange.Triple => 3,
         _ => 0
     };
-}
 
-public class SkillTargetFilter
-{
-    readonly TargetCountCalculator TeamCounter;
-    public SkillTargetFilter(TargetCountCalculator teamCounter) => TeamCounter = teamCounter;
 
     public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
     {
@@ -51,6 +46,6 @@ public class SkillTargetFilter
         else return GetTeamSlots(targetTeam);
     }
 
-    IEnumerable<SlotData> GetTeamSlots(Team team) => Enumerable.Range(0, TeamCounter.GetTeamCount(team)).Select(i => new SlotData(team, i));
-    IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(x => GetTeamSlots(x));
+    IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(GetTeamSlots);
+    IEnumerable<SlotData> GetTeamSlots(Team team) => Enumerable.Range(0, GetTeamCount(team)).Select(i => new SlotData(team, i));
 }
