@@ -16,6 +16,18 @@ public class SkillPreviewTests
     }
 
     [Test]
+    public void 카드_픽과_스킬_사용_시뮬()
+    {
+        var slots = CreateOneSlotStatus();
+        var result = SkillPreviewer.SimulatePickCard(Team.Blue, CreateChampion(1, skillData: CreateValueSkillData(StatType.Attack, 100, rule: SelfAllRule)), slots);
+
+        Assert.AreEqual(0, slots.GetSlot(BlueZeroSlot).Stat.Attack); // 원본 스탯은 그대로
+
+        Assert.AreEqual(100, result.GetSlot(BlueZeroSlot).Stat.Attack);
+        Assert.AreEqual(100, result.GetSlot(BlueOneSlot).Stat.Attack); // 새로운 카드 픽
+    }
+
+    [Test]
     public void 스탯_슬롯_전후_점수차_계산()
     {
         var originSlots = CreateTwoSlotStatus(att: 1000, def: 100, speed:5);

@@ -17,6 +17,22 @@ public static class SkillPreviewer
         return copiedSlots;
     }
 
+    public static SlotStorage<ChampionStatus> SimulatePickCard(Team team, Champion champion, SlotStorage<ChampionStatus> originSlots)
+    {
+        var copiedSlots = CloneSlots(originSlots);
+        copiedSlots.AddSlot(team, champion.Status.DeepCopy());
+        if (champion.Skill.IsEmpty) return copiedSlots;
+
+        var targets = new SkillTargetService(new HighStatTargetSelector(copiedSlots))
+            .GetTargets(team, champion.Skill, Factorys.CreateTeamCounter(copiedSlots))
+            .Select(x => copiedSlots.GetSlot(x));
+
+        // 비어있는 PhaseActionEventDispatcher를 사용해야 함
+        var skillRunner = CreateRunner(BanPickEventDispatcher.Create(), PhaseEventDispatcher.Create());
+        skillRunner.Run(champion.Skill, champion.Status, targets, team);
+        return copiedSlots;
+    }
+
     static SkillRunner CreateRunner(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
         return new SkillRunner(new SkillActionFactory(phaseActionEventDispatcher, phaseEventDispatcher));
