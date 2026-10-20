@@ -23,4 +23,18 @@ public class SkillUsecase
 
         OnUseSkill?.Invoke(skillSlot);
     }
+
+    public void AutoUseSkill(SlotData skillSlot, Func<ChampionStatus, int> sortCriteria)
+    {
+        var champion = pickChampions.GetSlot(skillSlot);
+        var rule = EnumCaster.MergeRule(champion.Skill.Rules);
+        var teamCount = new TeamCount(pickChampions.GetTeamCount(Team.Blue), pickChampions.GetTeamCount(Team.Red));
+        var context = new TargetFindContext(skillSlot.Team, rule, teamCount);
+
+        var candidateStatuses = TargetCountCalculator.FilterTargets(pickChampions, skillSlot.Team, champion.Skill.Sides).Select(c => c.Status);
+        var targets = TargetSelector.Select(candidateStatuses, sortCriteria, context);
+
+        _skillRunner.Run(champion.Skill, champion.Status, targets, skillSlot.Team);
+        OnUseSkill?.Invoke(skillSlot);
+    }
 }

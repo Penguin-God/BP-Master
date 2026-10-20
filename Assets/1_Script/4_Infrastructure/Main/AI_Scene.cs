@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 public class AI_Scene : MonoBehaviour
@@ -49,7 +50,6 @@ public class AI_Entry : IPhaseEntry
 {
     readonly Team Team;
     readonly AI_BanPickAgent banPickAgent;
-    readonly AI_SkillExecutionUseCase skillUseCase;
 
     public void EnterBan() => banPickAgent.Ban(Team);
     public void EnterPick() => banPickAgent.Pick(Team);
@@ -60,12 +60,12 @@ public class AI_Entry : IPhaseEntry
         AI_SelectorSO selectorFactory = aiFactory.CreateAI(ai_id, Team, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorFactory.CreateBanSelector(), selectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += UseSkill;
-        skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new HighStatTargetSelector(banPickHandler.PickSlotFacade.StatusSlots));
-    }
-
-    void UseSkill(SlotData slotData, int id)
-    {
-        if (slotData.Team != Team) return;
-        skillUseCase.UseSkill(slotData);
+        
+        void UseSkill(SlotData slotData, int id)
+        {
+            if (slotData.Team != Team) return;
+            var usecase = new AI_SkillExecutionUseCase(skillUseController, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slotData)));
+            usecase.UseSkill(slotData);
+        }
     }
 }

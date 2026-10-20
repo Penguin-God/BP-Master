@@ -7,8 +7,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     [SerializeField] AISelectorFactory aiFactory;
 
     AI_BanPickAgent banPickAgent;
-    AI_SkillExecutionUseCase skillUseCase;
-
+    
     public void EnterBan() => StartCoroutine(CoBan());
     public void EnterPick() => banPickAgent.Pick(Team);
 
@@ -20,24 +19,24 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
 
         banPickAgent = new AI_BanPickAgent(Team, storage, selectorFactory.CreateBanSelector(), selectorFactory.CreatePickSelector(), banPickHandler);
         banPickHandler.BanPickEventDispatcher.OnPick += UseSkill;
-        skillUseCase = new AI_SkillExecutionUseCase(banPickHandler.PickSlotFacade.SkillSlots, skillUseController, new HighStatTargetSelector(banPickHandler.PickSlotFacade.StatusSlots));
+
+        void UseSkill(SlotData slotData, int id)
+        {
+            if (slotData.Team != Team) return;
+            StartCoroutine(Co_UseSkill(slotData));
+        }
+
+        IEnumerator Co_UseSkill(SlotData slot)
+        {
+            yield return new WaitForSeconds(1.5f);
+            var skillUseCase = new AI_SkillExecutionUseCase(skillUseController, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slot)));
+            skillUseCase.UseSkill(slot);
+        }
     }
 
     IEnumerator CoBan()
     {
         yield return new WaitForSeconds(0.5f);
         banPickAgent.Ban(Team);
-    }
-
-    void UseSkill(SlotData slotData, int id)
-    {
-        if (slotData.Team != Team) return;
-        StartCoroutine(Co_UseSkill(slotData));
-    }
-
-    IEnumerator Co_UseSkill(SlotData slot)
-    {
-        yield return new WaitForSeconds(1.5f);
-        skillUseCase.UseSkill(slot);
     }
 }

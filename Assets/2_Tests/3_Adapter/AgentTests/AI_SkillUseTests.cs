@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using static TestHelper;
 
 public class AI_SkillUseTests
@@ -12,22 +11,11 @@ public class AI_SkillUseTests
         pickChampions.AddSlot(Team.Blue, new Champion(0, skill, CreateStatus()));
 
         var skillUseController = new SkillUsecase(pickChampions, CreateSkillRunner());
-        var skills = new SlotStorage<Skill>();
-        skills.AddSlot(Team.Blue, skill);
-        var stubSelector = new FakeTargetSelector(new[] { BlueZeroSlot });
-
-        var sut = new AI_SkillExecutionUseCase(skills, skillUseController, stubSelector);
+ 
+        var sut = new AI_SkillExecutionUseCase(skillUseController, (status) => status.Stat.Attack); // attack 순으로 정렬
 
         sut.UseSkill(BlueZeroSlot);
 
         Assert.AreEqual(10, pickChampions.GetSlot(BlueZeroSlot).Status.Stat.Attack);
-    }
-    
-
-    class FakeTargetSelector : ISkillTargetSelector
-    {
-        private readonly IEnumerable<SlotData> _fixedTargets;
-        public FakeTargetSelector(IEnumerable<SlotData> targets) => _fixedTargets = targets;
-        public IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill) => _fixedTargets;
     }
 }

@@ -40,6 +40,7 @@ public static class TargetSelector
 
 public static class TargetOrders
 {
+    public static Func<ChampionStatus, int> StatOrder(Skill skill) => status => status.GetStatAmount(skill.SkillDatas.First().AmountData.StatType);
     public static Func<ChampionStatus, int> StatOrder(StatType statType) => status => status.GetStatAmount(statType);
     public static Func<ChampionStatus, int> RandomOrder() => _ => Guid.NewGuid().GetHashCode();
 }

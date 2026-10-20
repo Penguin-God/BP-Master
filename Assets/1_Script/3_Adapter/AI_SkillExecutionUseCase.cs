@@ -1,21 +1,15 @@
+using System;
+
 public class AI_SkillExecutionUseCase
 {
-    readonly SlotStorage<Skill> _skillSlots;
     readonly SkillUsecase _skillUseController;
-    readonly ISkillTargetSelector _targetSelector;
+    readonly Func<ChampionStatus, int> _targetOrder;
 
-    public AI_SkillExecutionUseCase(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController, ISkillTargetSelector targetSelector)
+    public AI_SkillExecutionUseCase(SkillUsecase skillUseController, Func<ChampionStatus, int> targetOrder)
     {
-        _skillSlots = skillSlots;
         _skillUseController = skillUseController;
-        _targetSelector = targetSelector;
+        _targetOrder = targetOrder;
     }
 
-    public void UseSkill(SlotData slotData)
-    {
-        var useSkill = _skillSlots.GetSlot(slotData);
-        var targets = Factorys.CreateTeamCounter(_skillSlots).GetTargets(slotData.Team, useSkill, _targetSelector);
-
-        _skillUseController.UseSkill(slotData, targets);
-    }
+    public void UseSkill(SlotData slotData) => _skillUseController.AutoUseSkill(slotData, _targetOrder);
 }

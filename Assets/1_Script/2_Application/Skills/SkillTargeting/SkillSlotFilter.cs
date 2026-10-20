@@ -21,18 +21,13 @@ public readonly struct TargetCountCalculator
         RedCount = redCount;
     }
 
-    public TeamCount TeamCount => new TeamCount(BlueCount, RedCount);
-
     public IEnumerable<SlotData> GetTargets(Team casterTeam, Skill skill, ISkillTargetSelector selector)
     {
         int count = CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
         var candidates = FilteringTargetSlots(casterTeam, skill.Sides);
         return selector.SelectTargets(candidates, count, skill);
     }
-
-    public int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
-
-    public int CalculateTargetCount(Team team, SkillTargetRule rule) => CalculateTargetCount(new TargetFindContext(team, rule, TeamCount));
+    int CalculateTargetCount(Team team, SkillTargetRule rule) => CalculateTargetCount(new TargetFindContext(team, rule, new TeamCount(BlueCount, RedCount)));
 
     public static int CalculateTargetCount(TargetFindContext context)
     {
@@ -75,4 +70,5 @@ public readonly struct TargetCountCalculator
 
     IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(GetTeamSlots);
     IEnumerable<SlotData> GetTeamSlots(Team team) => Enumerable.Range(0, GetTeamCount(team)).Select(i => new SlotData(team, i));
+    int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
 }
