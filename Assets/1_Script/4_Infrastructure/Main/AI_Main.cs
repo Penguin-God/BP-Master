@@ -29,8 +29,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
         IEnumerator Co_UseSkill(SlotData slot)
         {
             yield return new WaitForSeconds(1.5f);
-            var skillUseCase = new AI_SkillExecutionUseCase(skillUseController, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slot)));
-            skillUseCase.UseSkill(slot);
+            skillUseController.AutoUseSkill(slot, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slot)));
         }
     }
 

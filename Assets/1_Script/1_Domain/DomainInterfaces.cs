@@ -19,8 +19,3 @@ public interface IChampionSelector
 {
     int Select(HashSet<int> ids);
 }
-
-public interface ISkillTargetSelector
-{
-    IEnumerable<SlotData> SelectTargets(IEnumerable<SlotData> candidates, int count, Skill skill);
-}

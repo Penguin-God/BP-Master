@@ -64,8 +64,7 @@ public class AI_Entry : IPhaseEntry
         void UseSkill(SlotData slotData, int id)
         {
             if (slotData.Team != Team) return;
-            var usecase = new AI_SkillExecutionUseCase(skillUseController, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slotData)));
-            usecase.UseSkill(slotData);
+            skillUseController.AutoUseSkill(slotData, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slotData)));
         }
     }
 }
