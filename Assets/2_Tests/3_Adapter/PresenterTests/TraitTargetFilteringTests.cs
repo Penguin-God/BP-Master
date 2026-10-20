@@ -4,14 +4,23 @@ using System.Linq;
 
 public class TraitTargetFilteringTests
 {
-    TargetCountCalculator CreateSut(int blueCount = 3, int redCount = 2) => new TargetCountCalculator(blueCount, redCount);
+    TeamCount CreateSut(int blueCount = 3, int redCount = 2) => new TeamCount(blueCount, redCount);
+    SlotStorage<string> CreateSut(IEnumerable<string> blueItems, IEnumerable<string> redItems)
+    {
+        var storage = new SlotStorage<string>();
+        storage.AddSlots(Team.Blue, blueItems);
+        storage.AddSlots(Team.Red, redItems);
+        return storage;
+    }
+
     [Test]
     public void Self_사이드면_자기팀_슬롯만_반환()
     {
         var sut = CreateSut(3, 2);
 
-        var blueSlots = sut.FilteringTargetSlots(Team.Blue, new[] { Side.Self }).ToArray();
-        Assert.AreEqual(3, blueSlots.Count());
+        var blueSlots = TargetCountCalculator.FilteringTargetSlots(Team.Blue, new[] { Side.Self }, sut).ToArray();
+
+        Assert.AreEqual(3, blueSlots.Length);
     }
 
     [Test]
@@ -19,9 +28,9 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var fromBlue = sut.FilteringTargetSlots(Team.Blue, new[] { Side.Opponent }).ToArray();
+        var fromBlue = TargetCountCalculator.FilteringTargetSlots(Team.Blue, new[] { Side.Opponent }, sut).ToArray();
 
-        Assert.AreEqual(2, fromBlue.Count());
+        Assert.AreEqual(2, fromBlue.Length);
     }
 
     [Test]
@@ -29,13 +38,12 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var slots = sut.FilteringTargetSlots(Team.Blue, new[] { Side.Self, Side.Opponent });
+        var slots = TargetCountCalculator.FilteringTargetSlots(Team.Blue, new[] { Side.Self, Side.Opponent }, sut).ToArray();
 
-        Assert.AreEqual(5, slots.Count());
+        Assert.AreEqual(5, slots.Length);
         Assert.AreEqual(3, slots.Count(x => x.Team == Team.Blue));
         Assert.AreEqual(2, slots.Count(x => x.Team == Team.Red));
     }
-
 
     [Test]
     public void 아군_지정_시_시전자_팀의_슬롯_아이템만_반환된다()
@@ -65,13 +73,5 @@ public class TraitTargetFilteringTests
         var result = TargetCountCalculator.FilterTargets(sut, Team.Blue, new[] { Side.All }).ToList();
 
         CollectionAssert.AreEqual(new[] { "Blue1", "Red1" }, result);
-    }
-
-    SlotStorage<string> CreateSut(IEnumerable<string> blueItems, IEnumerable<string> redItems)
-    {
-        var storage = new SlotStorage<string>();
-        storage.AddSlots(Team.Blue, blueItems);
-        storage.AddSlots(Team.Red, redItems);
-        return storage;
     }
 }

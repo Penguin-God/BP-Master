@@ -24,10 +24,10 @@ public class SkillButtonView : MonoBehaviour
             ButtonUtil.InActiveButton(btn);
     }
 
-    public void ActiveTargets(TargetCountCalculator skillTargetFilter, Skill skill, IEnumerable<SlotData> currentTargets)
+    public void ActiveTargets(TeamCount teamCount, Skill skill, IEnumerable<SlotData> currentTargets)
     {
         InActiveAllBtns();
-        var slots = skillTargetFilter.FilteringTargetSlots(team, skill.Sides).Except(currentTargets);
+        var slots = TargetCountCalculator.FilteringTargetSlots(team, skill.Sides, teamCount).Except(currentTargets);
         foreach (var slot in slots)
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }

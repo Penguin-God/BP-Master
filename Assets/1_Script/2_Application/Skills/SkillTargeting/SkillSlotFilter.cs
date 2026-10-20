@@ -10,17 +10,8 @@ public record TeamCount(int Blue, int Red)
 
 public record TargetFindContext(Team Team, SkillTargetRule Rule, TeamCount TeamCount);
 
-public readonly struct TargetCountCalculator
+public static class TargetCountCalculator
 {
-    readonly int BlueCount;
-    readonly int RedCount;
-
-    public TargetCountCalculator(int blueCount, int redCount)
-    {
-        BlueCount = blueCount;
-        RedCount = redCount;
-    }
-
     public static int CalculateTargetCount(TargetFindContext context)
     {
         if (context.Rule.TargetRange == TargetRange.All)
@@ -42,13 +33,16 @@ public readonly struct TargetCountCalculator
         };
     }
 
-    public IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides)
+    public static IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides, TeamCount teamCount)
     {
         var side = EnumCaster.MergeSide(sides);
         Team targetTeam = EnumCaster.GetTargetTeam(team, side);
 
-        if (targetTeam == Team.All) return GetAllSlots();
-        else return GetTeamSlots(targetTeam);
+        if (targetTeam == Team.All) return GetAllSlots(teamCount);
+        else return GetTeamSlots(targetTeam, teamCount);
+
+        static IEnumerable<SlotData> GetAllSlots(TeamCount teamCount) => new[] { Team.Blue, Team.Red }.SelectMany(t => GetTeamSlots(t, teamCount));
+        static IEnumerable<SlotData> GetTeamSlots(Team team, TeamCount teamCount) => Enumerable.Range(0, teamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
     }
 
     public static IEnumerable<T> FilterTargets<T>(SlotStorage<T> storage, Team team, IEnumerable<Side> sides)
@@ -59,8 +53,4 @@ public readonly struct TargetCountCalculator
         if (targetTeam == Team.All) return storage.GetAll();
         return storage.GetTeam(targetTeam);
     }
-
-    IEnumerable<SlotData> GetAllSlots() => new[] { Team.Blue, Team.Red }.SelectMany(GetTeamSlots);
-    IEnumerable<SlotData> GetTeamSlots(Team team) => Enumerable.Range(0, GetTeamCount(team)).Select(i => new SlotData(team, i));
-    int GetTeamCount(Team team) => team == Team.Blue ? BlueCount : RedCount;
 }
