@@ -1,4 +1,3 @@
-using System.Linq;
 
 public static class SkillPreviewer
 {
@@ -12,7 +11,7 @@ public static class SkillPreviewer
         if (skill.IsEmpty) return copiedSlots;
 
         var targets = TargetCountCalculator.FilterTargets(copiedSlots, team, skill.Sides);
-        targets = TargetSelector.Select(targets, TargetOrders.StatOrder(skill.SkillDatas.First().AmountData.StatType), Factorys.CreateFindContext(team, skill, copiedSlots));
+        targets = TargetSelector.Select(targets, TargetOrders.StatOrder(skill), Factorys.CreateFindContext(team, skill, copiedSlots));
         
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
         var skillRunner = CreateRunner();

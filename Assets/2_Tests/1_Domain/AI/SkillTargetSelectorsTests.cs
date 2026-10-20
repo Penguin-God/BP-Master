@@ -5,44 +5,16 @@ using static TestHelper;
 public class SkillTargetSelectorsTests
 {
     [Test]
-    public void 요청한_개수만큼_랜덤_선택()
+    public void 지정된_스탯_순으로_정렬하는_함수_반환()
     {
-        var targetSlots = CreateBlueSlots(0, 1, 2, 3, 4);
-        int targetCount = 2;
-        var sut = new RandomSkillTargetSelector();
-
-        var result = sut.SelectTargets(targetSlots, targetCount, null).ToList();
-
-        Assert.AreEqual(targetCount, result.Count);
-        CollectionAssert.AllItemsAreUnique(result);
-        CollectionAssert.IsSubsetOf(result, targetSlots);
-    }
-
-    [Test]
-    public void 지정된_스탯_순으로_정렬후_뽑음()
-    {
-        var targetSlots = CreateBlueSlots(0, 1, 2, 3, 4);
         var statusSlots = new SlotStorage<ChampionStatus>();
-        statusSlots.AddSlots(Team.Blue, new ChampionStatus[] { CreateStatus(100), CreateStatus(200), CreateStatus(500), CreateStatus(400), CreateStatus(300) });
-        int targetCount = 2;
-        var sut = new HighStatTargetSelector(statusSlots);
+        statusSlots.AddSlots(Team.Blue, new ChampionStatus[] { CreateStatus(100), CreateStatus(200), CreateStatus(300) });
+        var sut = TargetOrders.StatOrder(StatType.Attack);
 
-        var result = sut.SelectTargets(targetSlots, targetCount, CreateSkill(CreateConditionFreeSkill(StatType.Attack, targetCount))).ToList();
+        var result = statusSlots.GetTeam(Team.Blue).OrderByDescending(sut).ToArray();
 
-        CollectionAssert.AreEqual(new SlotData[] { CreateBlueSlot(2), CreateBlueSlot(3) }, result);
-    }
-
-    [Test]
-    public void 스킬이_없으면_타겟도_비어있는거_반환()
-    {
-        var targetSlots = CreateBlueSlots(0, 1, 2, 3, 4);
-        var statusSlots = new SlotStorage<ChampionStatus>();
-        statusSlots.AddSlots(Team.Blue, new ChampionStatus[] { CreateStatus(100), CreateStatus(200), CreateStatus(500), CreateStatus(400), CreateStatus(300) });
-        int targetCount = 2;
-        var sut = new HighStatTargetSelector(statusSlots);
-
-        var result = sut.SelectTargets(targetSlots, targetCount, CreateSkill()).ToList();
-
-        CollectionAssert.AreEqual(new SlotData[] {}, result);
+        Assert.AreEqual(300, result[0].Stat.Attack);
+        Assert.AreEqual(200, result[1].Stat.Attack);
+        Assert.AreEqual(100, result[2].Stat.Attack);
     }
 }

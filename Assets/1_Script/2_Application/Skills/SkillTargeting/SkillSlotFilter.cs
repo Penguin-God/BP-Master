@@ -21,14 +21,6 @@ public readonly struct TargetCountCalculator
         RedCount = redCount;
     }
 
-    public IEnumerable<SlotData> GetTargets(Team casterTeam, Skill skill, ISkillTargetSelector selector)
-    {
-        int count = CalculateTargetCount(casterTeam, EnumCaster.MergeRule(skill.Rules));
-        var candidates = FilteringTargetSlots(casterTeam, skill.Sides);
-        return selector.SelectTargets(candidates, count, skill);
-    }
-    int CalculateTargetCount(Team team, SkillTargetRule rule) => CalculateTargetCount(new TargetFindContext(team, rule, new TeamCount(BlueCount, RedCount)));
-
     public static int CalculateTargetCount(TargetFindContext context)
     {
         if (context.Rule.TargetRange == TargetRange.All)
