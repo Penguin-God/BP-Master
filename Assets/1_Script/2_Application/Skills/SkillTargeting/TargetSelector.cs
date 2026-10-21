@@ -24,14 +24,8 @@ public class SkillTargetSelector
     {
         selected.Clear();
 
-        if (context.Rule.TargetSide == Side.All) SelectAdds(AllTeamSlots);
-        else SelectAdds(TeamSlots(target.Team));
-    }
-
-    void SelectAdds(IEnumerable<SlotData> slots)
-    {
-        foreach (var s in slots)
-            selected.Add(s);
+        if (context.Rule.TargetSide == Side.All) selected.UnionWith(AllTeamSlots);
+        else selected.UnionWith(TeamSlots(target.Team));
     }
 
     IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, context.TeamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
