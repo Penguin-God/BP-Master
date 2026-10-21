@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,6 +11,9 @@ public class TraitDataConfig
     [EnumToggleButtons] [SerializeField] TargetRange range;
     CardSelectRule Rule => new CardSelectRule(targetSide, range);
 
+    [EnumToggleButtons][SerializeField] SkillApplyType applyType;
+    [EnumToggleButtons][SerializeField] SkillValueType valueType;
+
     [Header("액션")]
     [SerializeField] SkillType skillType;
     [SerializeField] SkillAmount skillAmount;
@@ -22,7 +24,7 @@ public class TraitDataConfig
     [SerializeField] ConditionType conditionCheckerType;
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
-    public SkillData CreateSkillData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
+    public SkillData CreateSkillData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule, applyType, valueType);
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "Data/Champion")]

@@ -1,7 +1,4 @@
 using NUnit.Framework;
-using System.Data;
-using UnityEditor.Graphs;
-using UnityEngine;
 using static TestHelper;
 
 public class ValueCalcualateTests
