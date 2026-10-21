@@ -24,14 +24,14 @@ public class SkillRunnerTest
     public void 스탯_계산_후_스킬_조건에_따라_사용()
     {
         var caster = CreateStatus(100, 100, 100);
-        var target = CreateStatus(100, 100, 100);
+        var target = CreateStatus(0, 200, 0);
 
-        var skill = CreateAttackChangeSkill(100, rule: OpponentAllRule);
+        var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default));
         var sut = CreateSkillRunner();
 
-        sut.Run(new Skill(new[] { skill }), caster, new[] { target }, Team.Blue, SkillApplyTargetType.OneSelf);
+        sut.Run(skill, caster, new[] { target }, Team.Blue, SkillApplyTargetType.OneSelf);
 
-        Assert.AreEqual(200, caster.Stat.Attack);
+        Assert.AreEqual(140, caster.Stat.Defense);
     }
 
     [Test]
