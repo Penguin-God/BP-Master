@@ -20,6 +20,23 @@ public class StatChanger : ISkillAction
     }
 }
 
+public class StatChanger2 : ISkillAction
+{
+    readonly StatType StatType;
+    readonly int Value;
+    public StatChanger2(StatType statType, int value)
+    {
+        StatType = statType;
+        Value = value;
+    }
+
+    public void Do(ChampionStatus target)
+    {
+        // 액션
+        target.ChangeStat(Value, StatType);
+    }
+}
+
 public class StatAbsorber : ISkillAction
 {
     readonly ChampionStatus User;

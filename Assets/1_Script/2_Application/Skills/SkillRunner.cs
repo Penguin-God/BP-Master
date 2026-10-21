@@ -30,17 +30,17 @@ public class SkillRunner
 
         foreach (var skillData in skill.SkillDatas)
         {
-            ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, caster, team);
             IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-            ExecuteSkill(action, condition, selectTargets, skillData.AmountData, caster, skillApplyTargetType);
+            ExecuteSkill(condition, selectTargets, skillData, caster, skillApplyTargetType, team);
         }
     }
 
-    void ExecuteSkill(ISkillAction action, IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillAmountData skillAmountData, ChampionStatus caster, SkillApplyTargetType skillApplyTargetType)
+    void ExecuteSkill(IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillData skillData, ChampionStatus caster, SkillApplyTargetType skillApplyTargetType, Team team)
     {
         foreach (var selectCard in selectCards.Where(condition.Check))
         {
-            int skillValue = SkillAmountCalculatorFactory.Create(skillAmountData, selectCard.Stat).Calculate(selectCard.Stat.Attack);
+            ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, new StatChanger2(skillData.AmountData.StatType, 
+                SkillAmountCalculatorFactory.Create(skillData.AmountData, selectCard.Stat).Calculate(selectCard.GetStatAmount(skillData.AmountData.StatType))), caster, team);
             if (SkillApplyTargetType.Select == skillApplyTargetType) action.Do(selectCard);
             else action.Do(caster);
         }
