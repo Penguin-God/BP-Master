@@ -16,16 +16,18 @@ public class SkillTargetSelector
     {
         if (CanSelected(target) == false) return;
 
-        if (context.Rule.TargetRange == TargetRange.All) SelectAll(target);
+        if (context.Rule.TargetRange == TargetRange.All)
+        {
+            selected.Clear();
+            selected.UnionWith(SelectAll(target));
+        }
         else selected.Add(target);
     }
 
-    void SelectAll(SlotData target)
+    IEnumerable<SlotData> SelectAll(SlotData target)
     {
-        selected.Clear();
-
-        if (context.Rule.TargetSide == Side.All) selected.UnionWith(AllTeamSlots);
-        else selected.UnionWith(TeamSlots(target.Team));
+        if (context.Rule.TargetSide == Side.All) return AllTeamSlots;
+        return TeamSlots(target.Team);
     }
 
     IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, context.TeamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
