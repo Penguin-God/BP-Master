@@ -40,4 +40,13 @@ public static class SkillAmountCalculatorFactory
             AmountType.Fix => new FixCalculator(amountData.FixValue),
             _ => null,
         };
+
+    public static ISkillAmountCalculator Create(SkillAmountData amountData, ChampionStatData referenceStat)
+        => amountData.Type switch
+    {
+        AmountType.Value => new ValueCalculator(amountData.ValueAmount),
+        AmountType.Percent => new PercentCalculator(amountData.PercentValue),
+        AmountType.Fix => new FixCalculator(amountData.FixValue),
+        _ => null,
+    };
 }

@@ -13,7 +13,9 @@ public class StatChanger : ISkillAction
 
     public void Do(ChampionStatus target)
     {
+        // 계산
         int changeAmount = Calculator.Calculate(target.GetStatAmount(StatType));
+        // 액션
         target.ChangeStat(changeAmount, StatType);
     }
 }
@@ -58,16 +60,6 @@ public class Resonance : ISkillAction
         int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
         target.AddDefenseWithRate(defAmount);
     }
-}
-
-
-public class AmplifyChanger : ISkillAction
-{
-    readonly float amount;
-
-    public AmplifyChanger(float amount) => this.amount = amount;
-
-    public void Do(ChampionStatus target) => target.AddUpRate(amount);
 }
 
 public class PickChampStatChanger : ISkillAction
@@ -177,4 +169,13 @@ public class FinalStatChanger : ISkillAction
         _caster.AddDefenseWithRate(_calculator.Calculate(s.Defense));
         _caster.AddSpeedWithRate(_calculator.Calculate(s.Speed));
     }
+}
+
+public class AmplifyChanger : ISkillAction
+{
+    readonly float amount;
+
+    public AmplifyChanger(float amount) => this.amount = amount;
+
+    public void Do(ChampionStatus target) => target.AddUpRate(amount);
 }
