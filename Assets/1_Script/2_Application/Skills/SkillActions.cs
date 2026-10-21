@@ -114,11 +114,41 @@ public class OppentPickChampStatChanger : ISkillAction
     }
 }
 
+public class 복리 : ISkillAction
+{
+    readonly BanPickEventDispatcher eventDispatcher;
+    readonly StatChanger _statChanger;
+    readonly Team Team;
+    readonly ChampionStatus _caster;
+    public 복리(ChampionStatus caster, BanPickEventDispatcher eventDispatcher, StatChanger statChanger, Team team)
+    {
+        _caster = caster;
+        this.eventDispatcher = eventDispatcher;
+        this._statChanger = statChanger;
+        this.Team = team;
+    }
+
+    public void Do(ChampionStatus target) => eventDispatcher.OnTeamChampionPick += ChangeStat;
+
+    void ChangeStat(Champion champion, Team team)
+    {
+        if (Team != team)
+            _statChanger.Do(_caster);
+    }
+}
+
 public class Doppelganger : ISkillAction
 {
     readonly ChampionStatus caster;
     public Doppelganger(ChampionStatus caster) => this.caster = caster;
     public void Do(ChampionStatus target) => caster.ChangeStat(target.Stat);
+}
+
+public class Hypocrisy : ISkillAction
+{
+    readonly ChampionStatus caster;
+    public Hypocrisy(ChampionStatus caster) => this.caster = caster;
+    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat + caster.Stat);
 }
 
 public class FinalStatChanger : ISkillAction
