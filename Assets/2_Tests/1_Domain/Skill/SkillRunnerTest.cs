@@ -21,17 +21,31 @@ public class SkillRunnerTest
     }
 
     [Test]
-    public void 스탯_계산_후_스킬_조건에_따라_사용()
+    public void 선택_스탯_참조로_본인에_사용()
     {
         var caster = CreateStatus(100, 100, 100);
         var target = CreateStatus(0, 200, 0);
 
-        var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default));
+        var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default, SkillApplyType.OneSelf, SkillValueType.SelectRef));
         var sut = CreateSkillRunner();
 
-        sut.Run(skill, caster, new[] { target }, Team.Blue, SkillApplyType.OneSelf);
+        sut.Run(skill, caster, new[] { target });
 
         Assert.AreEqual(140, caster.Stat.Defense);
+    }
+
+    [Test]
+    public void 스탯_본인_참조로_선택에_적용()
+    {
+        var caster = CreateStatus(100, 100, 100);
+        var select = CreateStatus(0, 200, 0);
+
+        var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default, SkillApplyType.Select, SkillValueType.SelfRef));
+        var sut = CreateSkillRunner();
+
+        sut.Run(skill, caster, new[] { select });
+
+        Assert.AreEqual(220, select.Stat.Defense);
     }
 
     [Test]

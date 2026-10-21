@@ -22,27 +22,37 @@ public class SkillRunner
         }
     }
 
-    public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets, Team team, SkillApplyType skillApplyTargetType)
+    public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets)
     {
         if (skill.IsEmpty) return;
 
         foreach (var skillData in skill.SkillDatas)
         {
             IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-            ExecuteSkill(condition, selectTargets, skillData, caster, skillApplyTargetType);
+            ExecuteSkill(condition, selectTargets, skillData, caster);
         }
     }
 
-    void ExecuteSkill(IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillData skillData, ChampionStatus caster, SkillApplyType skillApplyTargetType)
+    void ExecuteSkill(IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillData skillData, ChampionStatus caster)
     {
         foreach (var selectCard in selectCards.Where(condition.Check))
         {
-            int value = SkillAmountCalculatorFactory.Create(skillData.AmountData, selectCard.Stat).Calculate(selectCard.GetStatAmount(skillData.AmountData.StatType));
-            if (SkillApplyType.Select == skillApplyTargetType) selectCard.ChangeStat(value, skillData.AmountData.StatType);
-            else caster.ChangeStat(value, skillData.AmountData.StatType);
+            int value = 0;
+
+            switch (skillData.SkillValueType)
+            {
+                case SkillValueType.SelfRef: value = caster.GetStatAmount(skillData.AmountData.StatType); break;
+                case SkillValueType.SelectRef: value = selectCard.GetStatAmount(skillData.AmountData.StatType); break;
+            }
+
+            int applyValue = SkillAmountCalculatorFactory.Create(skillData.AmountData, selectCard.Stat).Calculate(value);
+
+            if (SkillApplyType.Select == skillData.SkillApplyType) selectCard.ChangeStat(applyValue, skillData.AmountData.StatType);
+            else caster.ChangeStat(applyValue, skillData.AmountData.StatType);
+
+
         }
     }
-
 
     void ExecuteSkill(ISkillAction action, IChampionCondition condition, IEnumerable<ChampionStatus> targets)
         => targets
