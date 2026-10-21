@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using static TestHelper;
 
 public class TraitTargetFilteringTests
 {
@@ -19,7 +20,7 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var blueSlots = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, Side.Self , sut).ToArray();
+        var blueSlots = TargetCountCalculator.CreateTargetingableSlots(BlueZeroSlot, Side.Self , sut).ToArray();
 
         Assert.AreEqual(3, blueSlots.Length);
     }
@@ -29,10 +30,20 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var fromBlue = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, Side.Opponent , sut).ToArray();
+        var fromBlue = TargetCountCalculator.CreateTargetingableSlots(BlueZeroSlot, Side.Opponent , sut).ToArray();
 
         Assert.AreEqual(2, fromBlue.Length);
     }
+
+    //[Test]
+    //public void OneSelf면_자기_자신만_반환()
+    //{
+    //    var sut = CreateSut(3, 2);
+
+    //    var fromBlue = TargetCountCalculator.CreateTargetingableSlots(BlueOneSlot, Side.Opponent, sut).ToArray();
+
+    //    Assert.AreEqual(BlueOneSlot, fromBlue[0]);
+    //}
 
     [Test]
     public void 아군_지정_시_시전자_팀의_슬롯_아이템만_반환된다()
