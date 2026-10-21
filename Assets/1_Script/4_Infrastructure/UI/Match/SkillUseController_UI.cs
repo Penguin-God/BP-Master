@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SkillUseController_UI : MonoBehaviour
 {
-    [SerializeField] Transform blueParent;
-    [SerializeField] Transform redParent;
     SkillButtonView skillButtonView;
-
     SlotStorage<Skill> skillSlots;
     SkillUsecase skillUseController;
-
     SkillTargetSelector targetSelector;
     SlotData useSlot;
 
@@ -20,25 +15,18 @@ public class SkillUseController_UI : MonoBehaviour
         this.skillSlots = skillSlots;
         this.skillUseController = skillUseController;
 
-        SetupChampionButtons(blueParent.GetComponentsInChildren<Button>(), Team.Blue);
-        SetupChampionButtons(redParent.GetComponentsInChildren<Button>(), Team.Red);
         skillButtonView = GetComponent<SkillButtonView>();
-    }
+        skillButtonView.Init();
 
-    void SetupChampionButtons(Button[] btns, Team buttonTeam)
-    {
-        for (int i = 0; i < btns.Length; i++)
-        {
-            int index = i; // 클로저 캡처 방지
-            btns[i].onClick.AddListener(() => OnClickSkillSlot(new SlotData(buttonTeam, index)));
-        }
+        foreach (var slot in skillButtonView.ButtonSlots.GetAllSlotDatas())
+            skillButtonView.ButtonSlots.GetSlot(slot).onClick.AddListener(() => OnClickSkillSlot(slot));
     }
 
     void OnClickSkillSlot(SlotData clickSlot)
     {
         targetSelector.Select(clickSlot);
         ActiveValidTargets();
-        if (targetSelector.IsFull) ExecuteSkill(new SlotData[] { });
+        if (targetSelector.IsFull) ExecuteSkill(targetSelector.Targets);
     }
 
     public void UseSkill(SlotData useSlot)
@@ -50,8 +38,8 @@ public class SkillUseController_UI : MonoBehaviour
         }
 
         this.useSlot = useSlot;
-        var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
-        targetSelector = new SkillTargetSelector(new TargetFindContext(useSlot.Team, rule, Factorys.CreateTeamCount(skillSlots)));
+        targetSelector = new SkillTargetSelector(Factorys.CreateFindContext(useSlot.Team, skillSlots.GetSlot(useSlot), skillSlots));
+
         ActiveValidTargets();
         // 타겟이 없는 경우
         if (targetSelector.IsFull) ExecuteSkill(new SlotData[] { });

@@ -11,7 +11,6 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ScoreView scoreView;
     
     [SerializeField] GameFlowView gameFlowView;
-    [SerializeField] SkillButtonView skillButtonView;
     [SerializeField] BanView banView;
     
     [SerializeField] MasteryTooltipTrigger redMasteryTooltipTrigger;
@@ -46,7 +45,6 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnPick += OnPick;
 
         skillUseView.gameObject.SetActive(false);
-        skillButtonView.Init(playerTeam);
         skillUseView.Init(pickSlotFacade.SkillSlots, matchCore.SkillController);
 
         gameFlowView.Init(pickSlotFacade.IdSlots);

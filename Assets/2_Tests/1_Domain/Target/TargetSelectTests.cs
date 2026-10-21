@@ -73,6 +73,8 @@ public class SkillTargetSelectTests
         var sut = CreateSut(Team.Blue, 3, 0, SelfTriple);
         var selectedSlot = new SlotData(Team.Blue, 0);
 
+        Assert.AreEqual(3, sut.GetSelectableTarget().ToArray().Length);
+
         sut.Select(selectedSlot);
         var result = sut.GetSelectableTarget().ToArray();
 
