@@ -13,12 +13,13 @@ public class TraitTargetFilteringTests
         return storage;
     }
 
+
     [Test]
     public void Self_사이드면_자기팀_슬롯만_반환()
     {
         var sut = CreateSut(3, 2);
 
-        var blueSlots = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, new[] { Side.Self }, sut).ToArray();
+        var blueSlots = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, Side.Self , sut).ToArray();
 
         Assert.AreEqual(3, blueSlots.Length);
     }
@@ -28,21 +29,9 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var fromBlue = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, new[] { Side.Opponent }, sut).ToArray();
+        var fromBlue = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, Side.Opponent , sut).ToArray();
 
         Assert.AreEqual(2, fromBlue.Length);
-    }
-
-    [Test]
-    public void Self와_Opponent가_섞이면_All로_머지되어_양팀_슬롯_모두_반환()
-    {
-        var sut = CreateSut(3, 2);
-
-        var slots = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, new[] { Side.Self, Side.Opponent }, sut).ToArray();
-
-        Assert.AreEqual(5, slots.Length);
-        Assert.AreEqual(3, slots.Count(x => x.Team == Team.Blue));
-        Assert.AreEqual(2, slots.Count(x => x.Team == Team.Red));
     }
 
     [Test]

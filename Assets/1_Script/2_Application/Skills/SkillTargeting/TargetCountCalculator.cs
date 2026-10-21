@@ -33,9 +33,6 @@ public static class TargetCountCalculator
         };
     }
 
-    public static IEnumerable<SlotData> CreateTargetingableSlots(Team team, IEnumerable<Side> sides, TeamCount teamCount)
-            => CreateTargetingableSlots(team, EnumCaster.MergeSide(sides), teamCount);
-
     public static IEnumerable<SlotData> CreateTargetingableSlots(Team team, Side side, TeamCount teamCount)
     {
         Team targetTeam = EnumCaster.GetTargetTeam(team, side);
