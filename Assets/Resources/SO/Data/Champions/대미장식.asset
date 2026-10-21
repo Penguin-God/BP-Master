@@ -21,13 +21,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 7
+  id: 8
   championName: "\uB300\uBBF8\uC7A5\uC2DD"
   attack: 50
   defense: 50
   speed: 2
   skillDatas:
-  - targetSide: 0
+  - targetSide: 3
     range: 1
     skillType: 13
     skillAmount:

@@ -36,22 +36,12 @@ public static class TargetCountCalculator
     public static IEnumerable<SlotData> CreateTargetingableSlots(SlotData oneSelf, Side side, TeamCount teamCount)
     {
         Team targetTeam = EnumCaster.GetTargetTeam(oneSelf.Team, side);
-
+        UnityEngine.Debug.Log(targetTeam);
+        UnityEngine.Debug.Log(side);
         if (targetTeam == Team.All) return CreateAllSlots(teamCount);
         else if(side == Side.OneSelf) return new[] { oneSelf };
         else return CreateTeamSlots(targetTeam, teamCount);
 
-
-        static IEnumerable<SlotData> CreateAllSlots(TeamCount teamCount) => new[] { Team.Blue, Team.Red }.SelectMany(t => CreateTeamSlots(t, teamCount));
-        static IEnumerable<SlotData> CreateTeamSlots(Team team, TeamCount teamCount) => Enumerable.Range(0, teamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
-    }
-
-    public static IEnumerable<SlotData> CreateTargetingableSlots(Team team, Side side, TeamCount teamCount)
-    {
-        Team targetTeam = EnumCaster.GetTargetTeam(team, side);
-
-        if (targetTeam == Team.All) return CreateAllSlots(teamCount);
-        else return CreateTeamSlots(targetTeam, teamCount);
 
         static IEnumerable<SlotData> CreateAllSlots(TeamCount teamCount) => new[] { Team.Blue, Team.Red }.SelectMany(t => CreateTeamSlots(t, teamCount));
         static IEnumerable<SlotData> CreateTeamSlots(Team team, TeamCount teamCount) => Enumerable.Range(0, teamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
