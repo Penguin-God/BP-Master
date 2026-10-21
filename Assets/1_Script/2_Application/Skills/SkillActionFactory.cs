@@ -28,15 +28,6 @@ public class SkillActionFactory
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }
-
-    public ISkillAction CreateAction(SkillType actionType, StatChanger2 statChanger, ChampionStatus caster, Team team)
-    {
-        return actionType switch
-        {
-            SkillType.StatChanger => statChanger,
-            _ => throw new NotImplementedException($"Action not implemented: {actionType}")
-        };
-    }
 }
 
 public static class SkillAmountCalculatorFactory
