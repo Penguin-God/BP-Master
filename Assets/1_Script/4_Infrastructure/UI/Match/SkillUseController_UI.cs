@@ -4,15 +4,13 @@ using UnityEngine;
 public class SkillUseController_UI : MonoBehaviour
 {
     SkillButtonView skillButtonView;
-    SlotStorage<Skill> skillSlots;
     SkillUsecase skillUseController;
     SkillTargetSelector targetSelector;
     SlotData useSlot;
 
-    public void Init(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController)
+    public void Init(SkillUsecase skillUseController)
     {
         gameObject.SetActive(true);
-        this.skillSlots = skillSlots;
         this.skillUseController = skillUseController;
 
         skillButtonView = GetComponent<SkillButtonView>();
@@ -29,16 +27,17 @@ public class SkillUseController_UI : MonoBehaviour
         if (targetSelector.IsFull) ExecuteSkill(targetSelector.Targets);
     }
 
-    public void UseSkill(SlotData useSlot)
+    public void UseSkill(SlotStorage<Champion> championSlot, SlotData useSlot)
     {
-        if (skillSlots.GetSlot(useSlot).IsEmpty)
+        var skill = championSlot.GetSlot(useSlot).Skill;
+        if (skill.IsEmpty)
         {
             ExecuteSkill(new SlotData[] { });
             return;
         }
 
         this.useSlot = useSlot;
-        targetSelector = new SkillTargetSelector(Factorys.CreateFindContext(useSlot.Team, skillSlots.GetSlot(useSlot), skillSlots));
+        targetSelector = new SkillTargetSelector(Factorys.CreateFindContext(useSlot.Team, skill, championSlot));
 
         ActiveValidTargets();
         // 타겟이 없는 경우

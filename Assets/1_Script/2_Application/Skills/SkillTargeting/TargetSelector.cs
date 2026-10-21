@@ -19,15 +19,15 @@ public class SkillTargetSelector
         if (context.Rule.TargetRange == TargetRange.All)
         {
             selected.Clear();
-            selected.UnionWith(SelectAll(target));
+            selected.UnionWith(SelectAll(target.Team));
         }
         else selected.Add(target);
     }
 
-    IEnumerable<SlotData> SelectAll(SlotData target)
+    IEnumerable<SlotData> SelectAll(Team team)
     {
         if (context.Rule.TargetSide == Side.All) return AllTeamSlots;
-        return TeamSlots(target.Team);
+        return TeamSlots(team);
     }
 
     IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, context.TeamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));

@@ -42,10 +42,10 @@ public class MatchUI_Controller : MonoBehaviour
         eventDispatcher.OnBan += championDrawer.InActiveButton;
         eventDispatcher.OnPick += (_, id) => championDrawer.InActiveButton(id);
 
-        eventDispatcher.OnPick += OnPick;
+        eventDispatcher.OnStorageAdd += OnPick;
 
         skillUseView.gameObject.SetActive(false);
-        skillUseView.Init(pickSlotFacade.SkillSlots, matchCore.SkillController);
+        skillUseView.Init(matchCore.SkillController);
 
         gameFlowView.Init(pickSlotFacade.IdSlots);
         matchCore.SkillController.OnUseSkill += gameFlowView.UpdateUseSkill;
@@ -56,9 +56,9 @@ public class MatchUI_Controller : MonoBehaviour
         IEnumerable<int> GetMasteryIds(Team team) => matchCore.MasteryRegistry.GetTeamMasteryCollection(team).AllMasteryIds;
     }
 
-    void OnPick(SlotData slotData, int id)
+    void OnPick(SlotStorage<Champion> slotStorage, SlotData slotData)
     {
         if (slotData.Team != team) return;
-        skillUseView.UseSkill(slotData);
+        skillUseView.UseSkill(slotStorage, slotData);
     }
 }

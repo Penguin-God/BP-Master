@@ -23,6 +23,7 @@ public class BanPickHandler
         var slotData = storage.Pick(team, id);
         PickSlotFacade.Add(slotData.Team, champion);
         BanPickEventDispatcher.RaisePick(champion, slotData);
+        BanPickEventDispatcher.RaisePick(PickSlotFacade.ChampionSlots, slotData);
     }
 
     void Ban(Team team, int id)

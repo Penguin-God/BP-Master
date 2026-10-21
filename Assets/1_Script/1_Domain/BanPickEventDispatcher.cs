@@ -5,6 +5,7 @@ public class BanPickEventDispatcher
     public event Action<Champion, Team> OnTeamChampionPick;
     public event Action<SlotChampion> OnChampionPick;
     public event Action<SlotData, int> OnPick;
+    public event Action<SlotStorage<Champion>, SlotData> OnStorageAdd;
 
     public void RaisePick(Champion champion, SlotData slotData)
     {
@@ -12,6 +13,12 @@ public class BanPickEventDispatcher
         OnChampionPick?.Invoke(new SlotChampion(champion, slotData));
         OnPick?.Invoke(slotData, champion.Id);
     }
+
+    public void RaisePick(SlotStorage<Champion> slotStorage, SlotData slotData)
+    {
+        OnStorageAdd?.Invoke(slotStorage, slotData);
+    }
+
 
     public event Action<Team, int> OnTeamBan;
     public event Action<int> OnBan;

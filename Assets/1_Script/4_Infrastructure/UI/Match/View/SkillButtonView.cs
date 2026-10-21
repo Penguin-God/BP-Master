@@ -22,6 +22,7 @@ public class SkillButtonView : MonoBehaviour
 
     public void ActiveTargets(IEnumerable<SlotData> targets)
     {
+        InActiveAllBtns();
         foreach (var slot in targets)
             ButtonUtil.ActiveButton(ButtonSlots.GetSlot(slot));
     }
