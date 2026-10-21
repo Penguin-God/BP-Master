@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,11 +23,17 @@ public class SkillButtonView : MonoBehaviour
             ButtonUtil.InActiveButton(btn);
     }
 
-    public void ActiveTargets(TeamCount teamCount, Skill skill, IEnumerable<SlotData> currentTargets)
+    //public void ActiveTargets(TeamCount teamCount, Skill skill, IEnumerable<SlotData> currentTargets)
+    //{
+    //    InActiveAllBtns();
+    //    var slots = TargetCountCalculator.CreateTargetingableSlots(team, skill.Sides, teamCount).Except(currentTargets);
+    //    foreach (var slot in slots)
+    //        ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
+    //}
+
+    public void ActiveTargets(IEnumerable<SlotData> targets)
     {
-        InActiveAllBtns();
-        var slots = TargetCountCalculator.FilteringTargetSlots(team, skill.Sides, teamCount).Except(currentTargets);
-        foreach (var slot in slots)
+        foreach (var slot in targets)
             ButtonUtil.ActiveButton(buttonSlots.GetSlot(slot));
     }
 }

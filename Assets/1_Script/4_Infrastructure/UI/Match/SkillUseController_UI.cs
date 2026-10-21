@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +10,9 @@ public class SkillUseController_UI : MonoBehaviour
 
     SlotStorage<Skill> skillSlots;
     SkillUsecase skillUseController;
+
+    SkillTargetSelector targetSelector;
+    SlotData useSlot;
 
     public void Init(SlotStorage<Skill> skillSlots, SkillUsecase skillUseController)
     {
@@ -34,34 +37,30 @@ public class SkillUseController_UI : MonoBehaviour
     void OnClickSkillSlot(SlotData clickSlot)
     {
         targetSelector.Select(clickSlot);
-        RefeshButton();
-        if (targetSelector.IsFull)
-        {
-            skillUseController.UseSkill(useSlot, targetSelector.Targets);
-            skillButtonView.InActiveAllBtns();
-        }
+        ActiveValidTargets();
+        if (targetSelector.IsFull) ExecuteSkill(new SlotData[] { });
     }
 
-    SkillTargetSelector targetSelector;
-    SlotData useSlot;
     public void UseSkill(SlotData useSlot)
     {
         if (skillSlots.GetSlot(useSlot).IsEmpty)
         {
-            skillUseController.UseSkill(useSlot, new SlotData[] { });
+            ExecuteSkill(new SlotData[] { });
             return;
         }
 
         this.useSlot = useSlot;
         var rule = EnumCaster.MergeRule(skillSlots.GetSlot(useSlot).Rules);
         targetSelector = new SkillTargetSelector(new TargetFindContext(useSlot.Team, rule, Factorys.CreateTeamCount(skillSlots)));
-        RefeshButton();
+        ActiveValidTargets();
         // 타겟이 없는 경우
-        if (targetSelector.IsFull)
-        {
-            skillUseController.UseSkill(useSlot, new SlotData[] { });
-        }
+        if (targetSelector.IsFull) ExecuteSkill(new SlotData[] { });
+    }
+    void ExecuteSkill(IEnumerable<SlotData> targets)
+    {
+        skillUseController.UseSkill(useSlot, targets);
+        skillButtonView.InActiveAllBtns();
     }
 
-    void RefeshButton() => skillButtonView.ActiveTargets(Factorys.CreateTeamCount(skillSlots), skillSlots.GetSlot(useSlot), targetSelector.Targets);
+    void ActiveValidTargets() => skillButtonView.ActiveTargets(targetSelector.GetSelectableTarget());
 }

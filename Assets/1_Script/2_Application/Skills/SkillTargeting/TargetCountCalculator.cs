@@ -33,16 +33,18 @@ public static class TargetCountCalculator
         };
     }
 
-    public static IEnumerable<SlotData> FilteringTargetSlots(Team team, IEnumerable<Side> sides, TeamCount teamCount)
+    public static IEnumerable<SlotData> CreateTargetingableSlots(Team team, IEnumerable<Side> sides, TeamCount teamCount)
+            => CreateTargetingableSlots(team, EnumCaster.MergeSide(sides), teamCount);
+
+    public static IEnumerable<SlotData> CreateTargetingableSlots(Team team, Side side, TeamCount teamCount)
     {
-        var side = EnumCaster.MergeSide(sides);
         Team targetTeam = EnumCaster.GetTargetTeam(team, side);
 
-        if (targetTeam == Team.All) return GetAllSlots(teamCount);
-        else return GetTeamSlots(targetTeam, teamCount);
+        if (targetTeam == Team.All) return CreateAllSlots(teamCount);
+        else return CreateTeamSlots(targetTeam, teamCount);
 
-        static IEnumerable<SlotData> GetAllSlots(TeamCount teamCount) => new[] { Team.Blue, Team.Red }.SelectMany(t => GetTeamSlots(t, teamCount));
-        static IEnumerable<SlotData> GetTeamSlots(Team team, TeamCount teamCount) => Enumerable.Range(0, teamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
+        static IEnumerable<SlotData> CreateAllSlots(TeamCount teamCount) => new[] { Team.Blue, Team.Red }.SelectMany(t => CreateTeamSlots(t, teamCount));
+        static IEnumerable<SlotData> CreateTeamSlots(Team team, TeamCount teamCount) => Enumerable.Range(0, teamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
     }
 
     public static IEnumerable<T> FilterTargets<T>(SlotStorage<T> storage, Team team, IEnumerable<Side> sides)

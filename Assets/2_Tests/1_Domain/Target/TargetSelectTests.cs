@@ -67,22 +67,16 @@ public class SkillTargetSelectTests
         Assert.IsTrue(sut.IsFull);
     }
 
-
     [Test]
-    public void 타겟_범위가_없을_경우_빈_슬롯_반환()
+    public void 이미_선택된_슬롯은_선택_가능_목록에서_제외된다()
     {
+        var sut = CreateSut(Team.Blue, 3, 0, SelfTriple);
+        var selectedSlot = new SlotData(Team.Blue, 0);
 
-    }
+        sut.Select(selectedSlot);
+        var result = sut.GetSelectableTarget().ToArray();
 
-    [Test]
-    public void 타겟_범위가_전체인_경우_자동_선택()
-    {
-
-    }
-
-    [Test]
-    public void 타겟_선택_시_저장()
-    {
-
+        Assert.AreEqual(2, result.Length);
+        Assert.IsFalse(result.Contains(selectedSlot));
     }
 }

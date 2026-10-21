@@ -32,4 +32,6 @@ public class SkillTargetSelector
 
     IEnumerable<SlotData> TeamSlots(Team team) => Enumerable.Range(0, context.TeamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));
     IEnumerable<SlotData> AllTeamSlots => TeamSlots(Team.Blue).Concat(TeamSlots(Team.Red));
+
+    public IEnumerable<SlotData> GetSelectableTarget() => TargetCountCalculator.CreateTargetingableSlots(context.Team, context.Rule.TargetSide, context.TeamCount).Except(Targets);
 }

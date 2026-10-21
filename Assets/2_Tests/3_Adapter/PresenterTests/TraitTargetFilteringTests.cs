@@ -18,7 +18,7 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var blueSlots = TargetCountCalculator.FilteringTargetSlots(Team.Blue, new[] { Side.Self }, sut).ToArray();
+        var blueSlots = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, new[] { Side.Self }, sut).ToArray();
 
         Assert.AreEqual(3, blueSlots.Length);
     }
@@ -28,7 +28,7 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var fromBlue = TargetCountCalculator.FilteringTargetSlots(Team.Blue, new[] { Side.Opponent }, sut).ToArray();
+        var fromBlue = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, new[] { Side.Opponent }, sut).ToArray();
 
         Assert.AreEqual(2, fromBlue.Length);
     }
@@ -38,7 +38,7 @@ public class TraitTargetFilteringTests
     {
         var sut = CreateSut(3, 2);
 
-        var slots = TargetCountCalculator.FilteringTargetSlots(Team.Blue, new[] { Side.Self, Side.Opponent }, sut).ToArray();
+        var slots = TargetCountCalculator.CreateTargetingableSlots(Team.Blue, new[] { Side.Self, Side.Opponent }, sut).ToArray();
 
         Assert.AreEqual(5, slots.Length);
         Assert.AreEqual(3, slots.Count(x => x.Team == Team.Blue));
