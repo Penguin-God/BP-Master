@@ -35,15 +35,15 @@ public class TraitTargetFilteringTests
         Assert.AreEqual(2, fromBlue.Length);
     }
 
-    //[Test]
-    //public void OneSelf면_자기_자신만_반환()
-    //{
-    //    var sut = CreateSut(3, 2);
+    [Test]
+    public void OneSelf면_자기_자신만_반환()
+    {
+        var sut = CreateSut(3, 2);
 
-    //    var fromBlue = TargetCountCalculator.CreateTargetingableSlots(BlueOneSlot, Side.Opponent, sut).ToArray();
+        var fromBlue = TargetCountCalculator.CreateTargetingableSlots(BlueOneSlot, Side.OneSelf, sut).ToArray();
 
-    //    Assert.AreEqual(BlueOneSlot, fromBlue[0]);
-    //}
+        CollectionAssert.AreEqual(new[] { BlueOneSlot }, fromBlue);
+    }
 
     [Test]
     public void 아군_지정_시_시전자_팀의_슬롯_아이템만_반환된다()

@@ -38,7 +38,9 @@ public static class TargetCountCalculator
         Team targetTeam = EnumCaster.GetTargetTeam(oneSelf.Team, side);
 
         if (targetTeam == Team.All) return CreateAllSlots(teamCount);
+        else if(side == Side.OneSelf) return new[] { oneSelf };
         else return CreateTeamSlots(targetTeam, teamCount);
+
 
         static IEnumerable<SlotData> CreateAllSlots(TeamCount teamCount) => new[] { Team.Blue, Team.Red }.SelectMany(t => CreateTeamSlots(t, teamCount));
         static IEnumerable<SlotData> CreateTeamSlots(Team team, TeamCount teamCount) => Enumerable.Range(0, teamCount.GetTeamCount(team)).Select(i => new SlotData(team, i));

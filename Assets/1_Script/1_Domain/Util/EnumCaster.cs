@@ -11,6 +11,7 @@ public static class EnumCaster
         (Team.Red, Side.Self) => Team.Red,
         (Team.Red, Side.Opponent) => Team.Blue,
         (_, Side.All) => Team.All,
+        (_, Side.OneSelf) => selfTeam,
 
         _ => throw new ArgumentOutOfRangeException(nameof(side), $"없는 조합: {selfTeam}, {side}")
     };

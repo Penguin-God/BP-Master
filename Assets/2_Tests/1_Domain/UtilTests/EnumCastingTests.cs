@@ -8,6 +8,7 @@ public class EnumCastingTests
     {
         Assert.AreEqual(Team.Blue, EnumCaster.GetTargetTeam(Team.Blue, Side.Self));
         Assert.AreEqual(Team.Red, EnumCaster.GetTargetTeam(Team.Blue, Side.Opponent));
+        Assert.AreEqual(Team.Red, EnumCaster.GetTargetTeam(Team.Red, Side.OneSelf));
     }
 
     [Test]
