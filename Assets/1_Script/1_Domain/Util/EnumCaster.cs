@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class EnumCaster
 {
@@ -18,14 +18,17 @@ public static class EnumCaster
 
     public static Side MergeSide(IEnumerable<Side> sides)
     {
-        if (sides.All(s => s == Side.Self)) return Side.Self;
-        else if (sides.All(s => s == Side.Opponent)) return Side.Opponent;
-        else return Side.All;
+        if(sides.Count() == 1) return sides.First();
+        else if (sides.Contains(Side.Self) && sides.Contains(Side.Opponent)) return Side.All;
+        else if(sides.Contains(Side.All)) return Side.All;
+        else if (sides.Distinct().Count() > 1) throw new Exception($"허용되지 않는 Side 조합 : {string.Join(", ", sides)}");
+        else return sides.First();
     }
 
     public static SkillTargetRule MergeRule(IEnumerable<SkillTargetRule> rules)
     {
-        if(rules.Select(x => x.TargetRange).Distinct().Count() > 1) throw new Exception($"range가 통일되지 않음 : {string.Join(", ", rules.Select(x => x.TargetRange))}");
+        if (rules.Count() == 1) return rules.First();
+        if (rules.Select(x => x.TargetRange).Distinct().Count() > 1) throw new Exception($"range가 통일되지 않음 : {string.Join(", ", rules.Select(x => x.TargetRange))}");
         if (rules.Count() == 0) return default;
         return new SkillTargetRule(MergeSide(rules.Select(x => x.TargetSide)), rules.First().TargetRange);
     }
