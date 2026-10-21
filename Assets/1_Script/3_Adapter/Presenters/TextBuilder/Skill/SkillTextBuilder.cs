@@ -20,7 +20,7 @@ public class SkillTextBuilder
         var conditoin = ConditionTextBuilder.BuildConditionText(skillData.ConditionData);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
-        var target = BuildTargetRuleText(skillData.TargetRule.TargetSide, skillData.TargetRule.TargetRange);
+        var target = BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
         var action = actionTextBuilder.BuildText(skillData.SkillType, skillData.AmountData);
 
         return $"{conditoin}{space}{target} {action}";

@@ -25,12 +25,12 @@ public static class EnumCaster
         else return sides.First();
     }
 
-    public static SkillTargetRule MergeRule(IEnumerable<SkillTargetRule> rules)
+    public static CardSelectRule MergeRule(IEnumerable<CardSelectRule> rules)
     {
         if (rules.Count() == 1) return rules.First();
         if (rules.Select(x => x.TargetRange).Distinct().Count() > 1) throw new Exception($"range가 통일되지 않음 : {string.Join(", ", rules.Select(x => x.TargetRange))}");
         if (rules.Count() == 0) return default;
-        return new SkillTargetRule(MergeSide(rules.Select(x => x.TargetSide)), rules.First().TargetRange);
+        return new CardSelectRule(MergeSide(rules.Select(x => x.TargetSide)), rules.First().TargetRange);
     }
 
     public static Team GetOppoentTeam(Team team)

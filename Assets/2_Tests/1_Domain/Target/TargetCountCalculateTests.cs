@@ -3,8 +3,8 @@ using static TestHelper;
 
 public class TargetCountCalculateTests
 {
-    TargetFindContext CreateSut(Team team, SkillTargetRule rule, int blue = 3, int red = 2) => new TargetFindContext(team, rule, new TeamCount(blue, red));
-    SkillTargetRule CreateRule(TargetRange range, Side side) => new SkillTargetRule(side, range);
+    TargetFindContext CreateSut(Team team, CardSelectRule rule, int blue = 3, int red = 2) => new TargetFindContext(team, rule, new TeamCount(blue, red));
+    CardSelectRule CreateRule(TargetRange range, Side side) => new CardSelectRule(side, range);
     int Calculate(TargetFindContext sut) => TargetCountCalculator.CalculateTargetCount(sut);
 
     [Test]

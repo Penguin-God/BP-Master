@@ -8,7 +8,7 @@ public record TeamCount(int Blue, int Red)
     public int GetTeamCount(Team team) => team == Team.Blue ? Blue : Red;
 }
 
-public record TargetFindContext(Team Team, SkillTargetRule Rule, TeamCount TeamCount);
+public record TargetFindContext(Team Team, CardSelectRule Rule, TeamCount TeamCount);
 
 public static class TargetCountCalculator
 {

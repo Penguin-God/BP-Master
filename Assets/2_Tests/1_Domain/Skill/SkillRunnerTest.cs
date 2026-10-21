@@ -29,7 +29,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default));
         var sut = CreateSkillRunner();
 
-        sut.Run(skill, caster, new[] { target }, Team.Blue, SkillApplyTargetType.OneSelf);
+        sut.Run(skill, caster, new[] { target }, Team.Blue, SkillApplyType.OneSelf);
 
         Assert.AreEqual(140, caster.Stat.Defense);
     }

@@ -29,8 +29,8 @@ public class EnumCastingTests
     {
         var rules = new[]
         {
-            new SkillTargetRule(Side.Self, TargetRange.All),
-            new SkillTargetRule(Side.Opponent, TargetRange.All)
+            new CardSelectRule(Side.Self, TargetRange.All),
+            new CardSelectRule(Side.Opponent, TargetRange.All)
         };
 
         var result = EnumCaster.MergeRule(rules);
@@ -43,8 +43,8 @@ public class EnumCastingTests
     {
         var rules = new[]
         {
-            new SkillTargetRule(Side.Self, TargetRange.Single),
-            new SkillTargetRule(Side.Opponent, TargetRange.All)
+            new CardSelectRule(Side.Self, TargetRange.Single),
+            new CardSelectRule(Side.Opponent, TargetRange.All)
         };
 
         var ex = Assert.Throws<Exception>(() => EnumCaster.MergeRule(rules));

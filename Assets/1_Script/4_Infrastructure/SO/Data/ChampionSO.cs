@@ -10,7 +10,7 @@ public class TraitDataConfig
     [Header("범위")]
     [EnumToggleButtons] [SerializeField] Side targetSide;
     [EnumToggleButtons] [SerializeField] TargetRange range;
-    SkillTargetRule Rule => new SkillTargetRule(targetSide, range);
+    CardSelectRule Rule => new CardSelectRule(targetSide, range);
 
     [Header("액션")]
     [SerializeField] SkillType skillType;

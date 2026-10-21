@@ -5,9 +5,9 @@ using static TestHelper;
 
 public class SkillTargetSelectTests
 {
-    SkillTargetRule CreateDoubleRule(Side side) => new SkillTargetRule(side, TargetRange.Double);
+    CardSelectRule CreateDoubleRule(Side side) => new CardSelectRule(side, TargetRange.Double);
     TargetSelection Select(TargetSelection sut, SlotData slot) => TargetSelectionRules.Select(sut, slot);
-    TargetSelection CreateSut(Team team, int blueSize, int redSize, SkillTargetRule rule) => new TargetSelection(new SlotData(team, 0), new TargetFindContext(team, rule, new TeamCount(blueSize, redSize)), new HashSet<SlotData>());
+    TargetSelection CreateSut(Team team, int blueSize, int redSize, CardSelectRule rule) => new TargetSelection(new SlotData(team, 0), new TargetFindContext(team, rule, new TeamCount(blueSize, redSize)), new HashSet<SlotData>());
 
     [Test]
     public void 필드_전체_룰은_모든_요소_반환()

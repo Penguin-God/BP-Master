@@ -2,8 +2,6 @@ using Sirenix.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum SkillApplyTargetType { Select, OneSelf, }
-
 public class SkillRunner
 {
     readonly SkillActionFactory skillActionFactory;
@@ -24,7 +22,7 @@ public class SkillRunner
         }
     }
 
-    public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets, Team team, SkillApplyTargetType skillApplyTargetType)
+    public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets, Team team, SkillApplyType skillApplyTargetType)
     {
         if (skill.IsEmpty) return;
 
@@ -35,12 +33,12 @@ public class SkillRunner
         }
     }
 
-    void ExecuteSkill(IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillData skillData, ChampionStatus caster, SkillApplyTargetType skillApplyTargetType)
+    void ExecuteSkill(IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillData skillData, ChampionStatus caster, SkillApplyType skillApplyTargetType)
     {
         foreach (var selectCard in selectCards.Where(condition.Check))
         {
             int value = SkillAmountCalculatorFactory.Create(skillData.AmountData, selectCard.Stat).Calculate(selectCard.GetStatAmount(skillData.AmountData.StatType));
-            if (SkillApplyTargetType.Select == skillApplyTargetType) selectCard.ChangeStat(value, skillData.AmountData.StatType);
+            if (SkillApplyType.Select == skillApplyTargetType) selectCard.ChangeStat(value, skillData.AmountData.StatType);
             else caster.ChangeStat(value, skillData.AmountData.StatType);
         }
     }

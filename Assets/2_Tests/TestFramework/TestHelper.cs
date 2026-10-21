@@ -32,34 +32,34 @@ public static class TestHelper
     public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
     public static SkillData[] CreateSkillDatas(params SkillData[] skills) => skills;
 
-    public static SkillData CreateConditionFreeSkill(StatType statType, int amount, SkillTargetRule rule = default) => CreateValueSkillData(statType, amount, default, rule);
+    public static SkillData CreateConditionFreeSkill(StatType statType, int amount, CardSelectRule rule = default) => CreateValueSkillData(statType, amount, default, rule);
 
-    public static SkillData CreateValueSkillData(StatType statType, int value, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+    public static SkillData CreateValueSkillData(StatType statType, int value, SkillConditionData conditionData = default, CardSelectRule rule = default)
         => new SkillData(SkillType.StatChanger, CreateSkillAmount(AmountType.Value, statType, value: value), conditionData, rule);
 
-    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, SkillTargetRule rule = default) => CreateValueSkillData(StatType.Attack, value, conditionData, rule);
+    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, CardSelectRule rule = default) => CreateValueSkillData(StatType.Attack, value, conditionData, rule);
 
     public static SkillAmountData CreateSkillAmount(AmountType amountType, StatType statType = StatType.Attack, int value = 0, float percent = 0, int fix = 0)
         => new SkillAmountData(amountType, statType, value, percent, fix);
 
-    public static Skill CreateValueSkill(StatType statType, int amount, SkillConditionData conditionData = default, SkillTargetRule rule = default)
+    public static Skill CreateValueSkill(StatType statType, int amount, SkillConditionData conditionData = default, CardSelectRule rule = default)
         => new Skill(CreateSkillDatas(CreateValueSkillData(statType, amount, conditionData, rule)));
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
     public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);
     public static SkillConditionData CreateConditionData(ConditionType conditionType, StatConditionType statType = StatConditionType.None, int threshold = 0) => new SkillConditionData(statType, threshold, conditionType);
 
-    static SkillTargetRule CreateRule(Side side, TargetRange range) => new SkillTargetRule(side, range);
-    public static SkillTargetRule SelfSingleRule => CreateRule(Side.Self, TargetRange.Single);
-    public static SkillTargetRule SelfDouble => CreateRule(Side.Self, TargetRange.Double);
-    public static SkillTargetRule SelfTriple => CreateRule(Side.Self, TargetRange.Triple);
-    public static SkillTargetRule SelfAllRule => CreateRule(Side.Self, TargetRange.All);
+    static CardSelectRule CreateRule(Side side, TargetRange range) => new CardSelectRule(side, range);
+    public static CardSelectRule SelfSingleRule => CreateRule(Side.Self, TargetRange.Single);
+    public static CardSelectRule SelfDouble => CreateRule(Side.Self, TargetRange.Double);
+    public static CardSelectRule SelfTriple => CreateRule(Side.Self, TargetRange.Triple);
+    public static CardSelectRule SelfAllRule => CreateRule(Side.Self, TargetRange.All);
 
-    public static SkillTargetRule OpponentSingleRule => CreateRule(Side.Opponent, TargetRange.Single);
-    public static SkillTargetRule OpponentDoubleRule => CreateRule(Side.Opponent, TargetRange.Double);
-    public static SkillTargetRule OpponentAllRule => CreateRule(Side.Opponent, TargetRange.All);
+    public static CardSelectRule OpponentSingleRule => CreateRule(Side.Opponent, TargetRange.Single);
+    public static CardSelectRule OpponentDoubleRule => CreateRule(Side.Opponent, TargetRange.Double);
+    public static CardSelectRule OpponentAllRule => CreateRule(Side.Opponent, TargetRange.All);
 
-    public static SkillTargetRule AllRule => CreateRule(Side.All, TargetRange.All);
+    public static CardSelectRule AllRule => CreateRule(Side.All, TargetRange.All);
 
     public static SlotData RedZeroSlot => CreateRedSlot(0);
     public static SlotData RedOneSlot => CreateRedSlot(1);
