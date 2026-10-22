@@ -31,13 +31,13 @@ public class SkillActionFactory
 
         int AmountProvider()
         {
-            int refValue = skillData.Calculator is FixCalculator ? TargetProvider().GetStatAmount(statType) 
-                : skillData.SkillValueType switch
-                {
-                    SkillValueType.SelfRef => caster.GetStatAmount(statType),
-                    SkillValueType.SelectRef => select.GetStatAmount(statType),
-                    _ => TargetProvider().GetStatAmount(statType)
-                };
+            int refValue = skillData.SkillValueType switch
+            {
+                SkillValueType.SelfRef => caster.GetStatAmount(statType),
+                SkillValueType.SelectRef => select.GetStatAmount(statType),
+                _ => TargetProvider().GetStatAmount(statType)
+            };
+
             return skillData.Calculator.Calculate(refValue);
         };
 
