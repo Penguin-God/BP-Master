@@ -55,10 +55,10 @@ public class Resonance : ISkillAction
     {
         if (target == User) return; // 자신은 제외
         int attAmount = (int)Math.Round(User.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
-        target.AddAttackWithRate(attAmount);
+        target.AddAttack(attAmount);
 
         int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        target.AddDefenseWithRate(defAmount);
+        target.AddDefense(defAmount);
     }
 }
 
@@ -165,17 +165,8 @@ public class FinalStatChanger : ISkillAction
     {
         _dispatcher.OnPhaseDone -= ChangeStat;
         var s = _caster.Stat;
-        _caster.AddAttackWithRate(_calculator.Calculate(s.Attack));
-        _caster.AddDefenseWithRate(_calculator.Calculate(s.Defense));
-        _caster.AddSpeedWithRate(_calculator.Calculate(s.Speed));
+        _caster.AddAttack(_calculator.Calculate(s.Attack));
+        _caster.AddDefense(_calculator.Calculate(s.Defense));
+        _caster.AddSpeed(_calculator.Calculate(s.Speed));
     }
-}
-
-public class AmplifyChanger : ISkillAction
-{
-    readonly float amount;
-
-    public AmplifyChanger(float amount) => this.amount = amount;
-
-    public void Do(ChampionStatus target) => target.AddUpRate(amount);
 }

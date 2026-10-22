@@ -6,7 +6,6 @@ public class SkillFactoryTests
 {
     [TestCase(SkillType.StatAbsorber, typeof(StatAbsorber))]
     [TestCase(SkillType.Resonance, typeof(Resonance))]
-    [TestCase(SkillType.AmplifyChanger, typeof(AmplifyChanger))]
     [TestCase(SkillType.PickBuffer, typeof(PickChampStatChanger))]
     [TestCase(SkillType.Doppelganger, typeof(Doppelganger))]
     [TestCase(SkillType.FinalStatChanger, typeof(FinalStatChanger))]

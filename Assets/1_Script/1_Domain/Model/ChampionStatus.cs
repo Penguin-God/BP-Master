@@ -5,33 +5,16 @@ public class ChampionStatus
     public ChampionStatData Stat;
     public event Action<ChampionStatData, ChampionStatData> OnStatChanged;
 
-    public float UpRate { get; private set; } = 1f;
-    public float DownRate { get; private set; } = 1f;
-    public ChampionStatus(ChampionStatData statData) : this(statData, 1f, 1f) { }
-
-    ChampionStatus(ChampionStatData statData, float upRate, float downRate)
+    public ChampionStatus(ChampionStatData statData)
     {
         Stat = statData;
-        UpRate = upRate;
-        DownRate = downRate;
     }
 
-    public void AddUpRate(float upRate) => UpRate += upRate;
-    public void AddDownRate(float downRate) => DownRate += downRate;
+    public ChampionStatus DeepCopy() => new ChampionStatus(Stat);
 
-    public ChampionStatus DeepCopy() => new ChampionStatus(Stat, UpRate, DownRate);
-
-    public void AddAttackWithRate(int att) => ChangeStatWithRate(Stat.ChangeAttack(att + Stat.Attack));
-    public void AddDefenseWithRate(int def) => ChangeStatWithRate(Stat.ChangeDefense(def + Stat.Defense));
-    public void AddSpeedWithRate(int speed) => ChangeStatWithRate(Stat.ChangeSpeed(speed + Stat.Speed));
-    public void ChangeStatWithRate(ChampionStatData desiredStat)
-    {
-        int newAttack = ApplyRate(Stat.Attack, desiredStat.Attack);
-        int newDefense = ApplyRate(Stat.Defense, desiredStat.Defense);
-        int newSpeed = ApplyRate(Stat.Speed, desiredStat.Speed);
-
-        ChangeStat(new ChampionStatData(newAttack, newDefense, newSpeed));
-    }
+    public void AddAttack(int att) => ChangeStat(Stat.ChangeAttack(att + Stat.Attack));
+    public void AddDefense(int def) => ChangeStat(Stat.ChangeDefense(def + Stat.Defense));
+    public void AddSpeed(int speed) => ChangeStat(Stat.ChangeSpeed(speed + Stat.Speed));
 
     public void ChangeStat(ChampionStatData newStat)
     {
@@ -58,16 +41,4 @@ public class ChampionStatus
         StatType.Speed => Stat.ChangeSpeed(Stat.Speed + amount),
         _ => Stat
     };
-
-    int ApplyRate(int current, int desired)
-    {
-        int delta = desired - current;
-        if (delta == 0) return current;
-
-        float rate = delta > 0 ? UpRate : DownRate;
-        int scaled = RoundAwayFromZero(delta * rate);
-        return current + scaled;
-    }
-
-    int RoundAwayFromZero(float value) => (int)Math.Round(value, MidpointRounding.AwayFromZero);
 }

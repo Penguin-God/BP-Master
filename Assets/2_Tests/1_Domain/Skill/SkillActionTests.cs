@@ -46,17 +46,6 @@ public class SkillActionTests
     }
 
     [Test]
-    public void 증폭율_변경()
-    {
-        var target = TestHelper.CreateStatus();
-        var sut = new AmplifyChanger(0.5f);
-
-        sut.Do(target);
-
-        Assert.AreEqual(1.5f, target.UpRate);
-    }
-
-    [Test]
     public void 픽한_아군_스탯_변경()
     {
         var champ = new Champion(1, null, TestHelper.CreateStatus());
