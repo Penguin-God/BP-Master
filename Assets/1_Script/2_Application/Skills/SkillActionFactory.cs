@@ -12,14 +12,13 @@ public class SkillActionFactory
 
     public ISkillAction CreateAction(SkillData skillData, ChampionStatus caster, ChampionStatus target, Team team)
     {
-        var amountData = skillData.AmountData;
         var statChanger = CreateStatChangerActor(skillData, caster, target);
 
         return skillData.SkillType switch
         {
             SkillType.StatChanger => statChanger,
-            SkillType.StatAbsorber => new StatAbsorber(caster, skillData.Calculator, amountData.StatType),
-            SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
+            SkillType.StatAbsorber => new StatAbsorber(caster, skillData.Calculator, skillData.StatType),
+            SkillType.Resonance => new Resonance(caster, 0.2f),
             SkillType.Doppelganger => new Doppelganger(caster),
             SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, skillData.Calculator),
             SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),

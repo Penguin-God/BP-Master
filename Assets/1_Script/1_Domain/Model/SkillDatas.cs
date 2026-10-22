@@ -53,19 +53,6 @@ public readonly struct SkillData
         StatType = 0;
     }
 
-    public SkillData(SkillType skillType, SkillAmountData amountData, SkillConditionData conditionData, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType)
-    {
-        SkillType = skillType;
-        AmountData = amountData;
-        SelectRule = selectRule;
-        ConditionData = conditionData;
-        SkillApplyType = skillApplyType;
-        SkillValueType = skillValueType;
-        Calculator = null;
-        Condition = null;
-        StatType = 0;
-    }
-
     public SkillData(SkillType skillType, ISkillAmountCalculator calculator, IChampionCondition condition, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType)
     {
         SkillType = skillType;

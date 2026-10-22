@@ -9,7 +9,7 @@ public class ValueCalculator : ISkillAmountCalculator
 
 public class PercentCalculator : ISkillAmountCalculator
 {
-    readonly float Percent;
+    public readonly float Percent;
     public PercentCalculator(float percent) => this.Percent = percent;
 
     public int Calculate(int currentValue)
