@@ -32,18 +32,19 @@ public static class TestHelper
     public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
     public static SkillData[] CreateSkillDatas(params SkillData[] skills) => skills;
 
-    public static SkillData CreateConditionFreeSkill(StatType statType, int amount, CardSelectRule rule = default) => CreateValueSkillData(statType, amount, default, rule);
+    public static SkillData CreateConditionFreeSkill(StatType statType, int amount, CardSelectRule rule = default) => CreateValueSkillData(statType, amount, rule);
 
-    public static SkillData CreateValueSkillData(StatType statType, int value, SkillConditionData conditionData = default, CardSelectRule rule = default)
-        => new SkillData(SkillType.StatChanger, CreateSkillAmount(AmountType.Value, statType, value: value), conditionData, rule);
+    public static SkillData CreateValueSkillData(StatType statType, int value, CardSelectRule rule = default)
+        => new SkillData(SkillType.StatChanger, CalculatorFactory.CreateValue(value), SkillCondtionFactory.CreateNull(), rule, SkillApplyType.Select, SkillValueType.SelectRef, statType);
 
-    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, CardSelectRule rule = default) => CreateValueSkillData(StatType.Attack, value, conditionData, rule);
+    public static SkillData CreateSelectSkill(SkillType skillType, StatType statType, int value, CardSelectRule rule = default)
+        => new SkillData(skillType, CalculatorFactory.CreateValue(value), SkillCondtionFactory.CreateNull(), rule, SkillApplyType.Select, SkillValueType.SelectRef, statType);
 
+    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, CardSelectRule rule = default)  => CreateValueSkillData(StatType.Attack, value, rule);
     public static SkillAmountData CreateSkillAmount(AmountType amountType, StatType statType = StatType.Attack, int value = 0, float percent = 0, int fix = 0)
         => new SkillAmountData(amountType, statType, value, percent, fix);
 
-    public static Skill CreateValueSkill(StatType statType, int amount, SkillConditionData conditionData = default, CardSelectRule rule = default)
-        => new Skill(CreateSkillDatas(CreateValueSkillData(statType, amount, conditionData, rule)));
+    public static Skill CreateValueSkill(StatType statType, int amount, CardSelectRule rule = default) => new Skill(CreateSkillDatas(CreateValueSkillData(statType, amount, rule)));
 
     public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
     public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);

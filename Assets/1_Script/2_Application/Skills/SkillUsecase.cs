@@ -19,7 +19,7 @@ public class SkillUsecase
         var champion = pickChampions.GetSlot(skillSlot);
         var targets = targetSlots.Select(x => pickChampions.GetSlot(x).Status);
 
-        _skillRunner.Run(champion.Skill, champion.Status, targets, skillSlot.Team);
+        _skillRunner.Run2(champion.Skill, champion.Status, targets, skillSlot.Team);
 
         OnUseSkill?.Invoke(skillSlot);
     }
@@ -34,7 +34,7 @@ public class SkillUsecase
         var candidateStatuses = TargetCountCalculator.FilterTargets(pickChampions, skillSlot.Team, champion.Skill.Sides).Select(c => c.Status);
         var targets = TargetSelector.Select(candidateStatuses, sortCriteria, context);
 
-        _skillRunner.Run(champion.Skill, champion.Status, targets, skillSlot.Team);
+        _skillRunner.Run2(champion.Skill, champion.Status, targets, skillSlot.Team);
         OnUseSkill?.Invoke(skillSlot);
     }
 }

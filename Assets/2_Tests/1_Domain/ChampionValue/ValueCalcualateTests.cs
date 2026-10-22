@@ -53,7 +53,7 @@ public class ValueCalcualateTests
     [Test]
     public void 도플갱어_평가_테스트()
     {
-        var champion = CreateChampion(CHAMP_ID, skillData: new SkillData(SkillType.Doppelganger, CreateSkillAmount(AmountType.None, StatType.Attack), CreateConditionData(ConditionType.None), OpponentSingleRule));
+        var champion = CreateChampion(CHAMP_ID, skillData: CreateSelectSkill(SkillType.Doppelganger, StatType.Speed, 10, OpponentSingleRule));
         var sut = CreateSut(CreateBonus(0, 0));
 
         int score = sut.Evaluate(champion, Team.Blue, CreateOneSlotStatus(100));
