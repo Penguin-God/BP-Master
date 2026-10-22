@@ -7,7 +7,7 @@ public class ChampionTextBuildTests
     public void Id를_받으면_데이터_조회_후_텍스트를_생성한다()
     {
         var stat = CreateStat(1, 2, 3);
-        var profile = new ChampionProfile(1, "펭귄", stat, CreateSkill(CreateValueSkillData(StatType.Attack, 0, rule: SelfAllRule)));
+        var profile = new ChampionProfile(1, "펭귄", stat, CreateSkillViewModels(CreateSkillViewModel(rule: SelfAllRule)));
 
         var sut = new ChampionTextBuilder(id => profile, new SkillTextBuilder(new FakeTextBuilder()));
         var result = sut.Build(1, default);

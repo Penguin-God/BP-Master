@@ -31,6 +31,8 @@ public static class TestHelper
     public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
     public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
     public static SkillData[] CreateSkillDatas(params SkillData[] skills) => skills;
+    public static SkillViewModel CreateSkillViewModel(SkillType skillType = SkillType.StatChanger, SkillAmountData amountData = null, SkillConditionData conditionData = default, CardSelectRule rule = default) => new SkillViewModel(skillType, amountData, conditionData, rule);
+    public static SkillViewModel[] CreateSkillViewModels(params SkillViewModel[] skills) => skills;
 
     public static SkillData CreateConditionFreeSkill(StatType statType, int amount, CardSelectRule rule = default) => CreateValueSkillData(statType, amount, rule);
 

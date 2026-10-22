@@ -27,14 +27,13 @@ public readonly struct SkillConditionData
     }
 }
 public record SkillAmountData(AmountType Type, StatType StatType, int ValueAmount, float PercentValue, int FixValue);
+public record SkillViewModel(SkillType SkillType, SkillAmountData AmountData, SkillConditionData ConditionData, CardSelectRule SelectRule);
 
 public readonly struct SkillData
 {
     public readonly SkillType SkillType;
-    public readonly SkillAmountData AmountData;
     public readonly ISkillAmountCalculator Calculator;
     public readonly StatType StatType;
-    public readonly SkillConditionData ConditionData;
     public readonly IChampionCondition Condition;
     public readonly CardSelectRule SelectRule;
     public readonly SkillApplyType SkillApplyType;
@@ -43,10 +42,8 @@ public readonly struct SkillData
     public SkillData(SkillType skillType, ISkillAmountCalculator calculator, IChampionCondition condition, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType)
     {
         SkillType = skillType;
-        AmountData = null;
         Calculator = calculator;
         SelectRule = selectRule;
-        ConditionData = default;
         Condition = condition;
         SkillApplyType = skillApplyType;
         SkillValueType = skillValueType;

@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 
-public record ChampionProfile(int Id, string Name, ChampionStatData Stat, Skill Skill);
+public record ChampionProfile(int Id, string Name, ChampionStatData Stat, IEnumerable<SkillViewModel> Skills);
 
 public readonly struct ChampionTextModel
 {
@@ -20,7 +21,7 @@ public class ChampionTextBuilder
 {
     readonly Func<int, ChampionProfile> _profileProvider;
     readonly SkillTextBuilder _skillTextBuilder;
-    
+
     public ChampionTextBuilder(Func<int, ChampionProfile> profileProvider, SkillTextBuilder skillTextBuilder)
     {
         _profileProvider = profileProvider;
@@ -31,7 +32,7 @@ public class ChampionTextBuilder
     {
         var profile = _profileProvider(id);
         var statModel = ChampionStatModelPreserter.CreateStatModel(profile.Stat, bonusStat);
-        var skillText = _skillTextBuilder.BuildSkillText(profile.Skill.SkillDatas);
+        var skillText = _skillTextBuilder.BuildSkillText(profile.Skills);
 
         return new ChampionTextModel(profile.Name, statModel, skillText);
     }

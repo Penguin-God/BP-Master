@@ -13,9 +13,9 @@ public class SkillTextBuilder
 
     public SkillTextBuilder(ISkillActionTextBuilder actionTextBuilder) => this.actionTextBuilder = actionTextBuilder;
 
-    public string BuildSkillText(IEnumerable<SkillData> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
+    public string BuildSkillText(IEnumerable<SkillViewModel> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
 
-    string BuildSkillText(SkillData skillData)
+    string BuildSkillText(SkillViewModel skillData)
     {
         var conditoin = ConditionTextBuilder.BuildConditionText(skillData.ConditionData);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";

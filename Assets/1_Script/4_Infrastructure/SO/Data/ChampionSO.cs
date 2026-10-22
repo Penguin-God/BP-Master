@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ public class TraitDataConfig
     public SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
     public SkillData CreateSkillData() => new SkillData(skillType, CalculatorFactory.Create(skillAmount.ToData()), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmount.ToData().StatType);
+    public SkillViewModel CreateViewModel() => new SkillViewModel(skillType, GetValueData(), Condition, Rule);
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "Data/Champion")]
@@ -46,8 +48,11 @@ public class ChampionSO : SerializedScriptableObject
     [Header("스킬")]
     [SerializeField] TraitDataConfig[] skillDatas;
     public Skill Skill => new Skill(skillDatas.Select(x => x.CreateSkillData()));
+    public IEnumerable<SkillViewModel> SkillViewModels => skillDatas.Select(x => x.CreateViewModel());
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData);
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
+
+    public ChampionProfile CreateProfile() => new ChampionProfile(Id, championName, StatData, SkillViewModels);
 
     [SerializeField] [PreviewField(70)] Sprite icon;
     public Sprite Icon => icon;

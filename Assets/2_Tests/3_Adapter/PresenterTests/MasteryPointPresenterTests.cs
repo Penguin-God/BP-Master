@@ -12,9 +12,7 @@ public class MasteryPointPresenterTests
 
     MasteryPointPresenter CreateSut(MasteryProfile inventory, FakeMasterySaver saver)
     {
-        var textBuilder = new ChampionTextBuilder(
-            id => new ChampionProfile(id, "펭귄", CreateStat(100, 0, 0), CreateSkill()),
-            new SkillTextBuilder(new FakeTextBuilder()));
+        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(100, 0, 0), System.Array.Empty<SkillViewModel>()), new SkillTextBuilder(new FakeTextBuilder()));
         return new MasteryPointPresenter(inventory, textBuilder, saver, new MasteryMultiplier(30, 0, 0));
     }
 
@@ -51,12 +49,10 @@ public class MasteryPointPresenterTests
         var inventory = CreateMasteryInventory(10);
         var sut = CreateSut(inventory, new FakeMasterySaver());
 
-        // Act: 1번 챔피언 선택 후 공격력 업그레이드
         sut.SelectChampion(1);
         sut.UpgradeCardStat(StatType.Attack);
         var result = sut.CreateModel();
 
-        // Assert: 공격력 강화 적용 됐는지 검증(100 + 30)
         Assert.AreEqual("<color=green>공 130</color>", result.ChampionModel.StatModel.Attack);
         Assert.AreEqual("방 0", result.ChampionModel.StatModel.Defense);
         Assert.AreEqual("속도 0", result.ChampionModel.StatModel.Speed);

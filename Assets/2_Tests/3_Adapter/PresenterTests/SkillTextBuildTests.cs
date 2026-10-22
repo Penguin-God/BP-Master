@@ -13,7 +13,7 @@ public class SkillTextBuildTests
     {
         var sut = new SkillTextBuilder(new FakeTextBuilder());
 
-        var result = sut.BuildSkillText(CreateSkillDatas(CreateValueSkillData(StatType.Attack, 0, rule: SelfAllRule)));
+        var result = sut.BuildSkillText(CreateSkillViewModels(CreateSkillViewModel(rule: SelfAllRule)));
 
         Assert.AreEqual("아군 전체 액숀", result);
     }
