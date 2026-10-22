@@ -29,7 +29,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default, SkillApplyType.OneSelf, SkillValueType.SelectRef));
         var sut = CreateSkillRunner();
 
-        sut.Run(skill, caster, new[] { target });
+        sut.Run2(skill, caster, new[] { target }, 0);
 
         Assert.AreEqual(140, caster.Stat.Defense);
     }
@@ -43,7 +43,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default, SkillApplyType.Select, SkillValueType.SelfRef));
         var sut = CreateSkillRunner();
 
-        sut.Run(skill, caster, new[] { select });
+        sut.Run2(skill, caster, new[] { select }, 0);
 
         Assert.AreEqual(220, select.Stat.Defense);
     }

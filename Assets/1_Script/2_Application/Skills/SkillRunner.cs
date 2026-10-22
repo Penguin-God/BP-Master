@@ -22,7 +22,7 @@ public class SkillRunner
         }
     }
 
-    public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets)
+    public void Run2(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets, Team team)
     {
         if (skill.IsEmpty) return;
 
@@ -49,8 +49,6 @@ public class SkillRunner
 
             if (SkillApplyType.Select == skillData.SkillApplyType) selectCard.ChangeStat(applyValue, skillData.AmountData.StatType);
             else caster.ChangeStat(applyValue, skillData.AmountData.StatType);
-
-
         }
     }
 
