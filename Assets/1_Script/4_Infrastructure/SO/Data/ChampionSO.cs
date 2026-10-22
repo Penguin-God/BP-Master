@@ -9,20 +9,22 @@ public class TraitDataConfig
     [Header("범위")]
     [EnumToggleButtons] [SerializeField] Side targetSide;
     [EnumToggleButtons] [SerializeField] TargetRange range;
-    CardSelectRule Rule => new CardSelectRule(targetSide, range);
+    public CardSelectRule Rule => new CardSelectRule(targetSide, range);
 
     [EnumToggleButtons][SerializeField] SkillApplyType applyType;
     [EnumToggleButtons][SerializeField] SkillValueType valueType;
 
     [Header("액션")]
     [SerializeField] SkillType skillType;
+    public SkillType SkillType => skillType;
     [SerializeField] SkillAmount skillAmount;
+    public SkillAmountData GetValueData() => skillAmount.ToData();
 
     [Header("조건")]
     [SerializeField] StatConditionType conditionType;
     [SerializeField] int threshold;
     [SerializeField] ConditionType conditionCheckerType;
-    SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
+    public SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
     public SkillData CreateSkillData() => new SkillData(skillType, CalculatorFactory.Create(skillAmount.ToData()), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmount.ToData().StatType);
 }

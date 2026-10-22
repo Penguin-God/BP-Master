@@ -18,8 +18,7 @@ public class ValueSelector : IChampionSelector
         this.evaluator = evaluator;
     }
     public int Select(HashSet<int> ids) => CreateCardValueList(ids).First().Id;
-    public IEnumerable<CardValue> CreateCardValueList(IEnumerable<int> candidateIds) 
-        => candidateIds.Select(id => new CardValue(id, evaluator(catalog.GetChampion(id)))).OrderByDescending(x => x.Value);
+    public IEnumerable<CardValue> CreateCardValueList(IEnumerable<int> candidateIds)  => candidateIds.Select(id => new CardValue(id, evaluator(catalog.GetChampion(id)))).OrderByDescending(x => x.Value);
 }
 
 public class ValueSelectorLog : IChampionSelector
