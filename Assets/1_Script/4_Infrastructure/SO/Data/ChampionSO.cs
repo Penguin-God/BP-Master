@@ -24,7 +24,7 @@ public class TraitDataConfig
     [SerializeField] ConditionType conditionCheckerType;
     SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
-    public SkillData CreateSkillData() => new SkillData(skillType, skillAmount.ToData(), Condition, Rule);
+    public SkillData CreateSkillData() => new SkillData(skillType, CalculatorFactory.Create(skillAmount.ToData()), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmount.ToData().StatType);
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "Data/Champion")]

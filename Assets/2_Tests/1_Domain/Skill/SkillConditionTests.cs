@@ -6,7 +6,7 @@ public class SkillConditionTests // StatThresholdChecker는 이상, 이하. Stat
     public void None은_무조건_참() => Assert.IsTrue(Check(StatConditionType.None, 0, default));
 
     [Test]
-    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(TestHelper.CreateStatus()));
+    public void NullChecker은_무조건_참() => Assert.IsTrue(new NullChecker().Check(TestHelper.CreateStatus(), TestHelper.CreateStatus()));
 
     [Test]
     [TestCase(StatConditionType.AttackBelow)]
@@ -33,7 +33,7 @@ public class SkillConditionTests // StatThresholdChecker는 이상, 이하. Stat
         Assert.IsFalse(Check(type, threshold, Stat(80, 80, 80)));
     }
 
-    bool Check(StatConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(TestHelper.CreateStatus(target.Attack, target.Defense, target.Speed));
+    bool Check(StatConditionType type, int threshold, ChampionStatData target) => new StatThresholdChecker(type, threshold).Check(TestHelper.CreateStatus(target.Attack, target.Defense, target.Speed), TestHelper.CreateStatus());
 
     [Test]
     [TestCase(StatConditionType.AttackAtLeast)]
@@ -43,8 +43,8 @@ public class SkillConditionTests // StatThresholdChecker는 이상, 이하. Stat
     {
         var targetStat = Stat(10, 10, 10);
 
-        Assert.IsTrue(Check(type, Stat(3, 8, 0), targetStat));
-        Assert.IsFalse(Check(type, Stat(12, 10, 22), targetStat));
+        Assert.IsTrue(Check(type, TestHelper.CreateStatus(3, 8, 0), targetStat));
+        Assert.IsFalse(Check(type, TestHelper.CreateStatus(12, 10, 22), targetStat));
     }
 
     [Test]
@@ -55,11 +55,11 @@ public class SkillConditionTests // StatThresholdChecker는 이상, 이하. Stat
     {
         var targetStat = Stat(10, 10, 10);
 
-        Assert.IsTrue(Check(type, Stat(12, 11, 19), targetStat));
-        Assert.IsFalse(Check(type, Stat(0, 4, 10), targetStat));
+        Assert.IsTrue(Check(type, TestHelper.CreateStatus(12, 11, 19), targetStat));
+        Assert.IsFalse(Check(type, TestHelper.CreateStatus(0, 4, 10), targetStat));
     }
 
-    bool Check(StatConditionType type, ChampionStatData user, ChampionStatData target) => new StatComparisonChecker(type, user).Check(TestHelper.CreateStatus(target.Attack, target.Defense, target.Speed));
+    bool Check(StatConditionType type, ChampionStatus user, ChampionStatData target) => new StatComparisonChecker(type).Check(TestHelper.CreateStatus(target.Attack, target.Defense, target.Speed), user);
 
     ChampionStatData Stat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
 }

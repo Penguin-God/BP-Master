@@ -5,14 +5,9 @@ public interface ISkillAction
     void Do(ChampionStatus target);
 }
 
-public interface ISkillActor
-{
-    void Do();
-}
-
 public interface IChampionCondition
 {
-    bool Check(ChampionStatus target);
+    bool Check(ChampionStatus target, ChampionStatus caster);
 }
 
 public interface ISkillAmountCalculator

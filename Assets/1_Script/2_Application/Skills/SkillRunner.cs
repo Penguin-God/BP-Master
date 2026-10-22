@@ -17,8 +17,8 @@ public class SkillRunner
         foreach (var skillData in skill.SkillDatas)
         {
             ISkillAction action = skillActionFactory.CreateAction(skillData.SkillType, skillData.AmountData, caster, team);
-            IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-            ExecuteSkill(action, condition, targets);
+            IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData);
+            // ExecuteSkill(action, condition, targets);
         }
     }
 
@@ -28,13 +28,13 @@ public class SkillRunner
 
         foreach (var skillData in skill.SkillDatas)
         {
-            foreach (var target in selectTargets.Where(skillData.Condition.Check))
+            foreach (var target in selectTargets.Where((x) => skillData.Condition.Check(x, caster)))
                 skillActionFactory.CreateAction(skillData, caster, target, team).Do(target);
         }
     }
 
-    void ExecuteSkill(ISkillAction action, IChampionCondition condition, IEnumerable<ChampionStatus> targets)
-        => targets
-            .Where(condition.Check)
-            .ForEach(target => action.Do(target));
+    //void ExecuteSkill(ISkillAction action, IChampionCondition condition, IEnumerable<ChampionStatus> targets)
+    //    => targets
+    //        .Where(condition.Check)
+    //        .ForEach(target => action.Do(target));
 }
