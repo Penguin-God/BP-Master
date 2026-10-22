@@ -27,6 +27,36 @@ public class SkillActionFactory
             _ => throw new NotImplementedException($"Action not implemented: {actionType}")
         };
     }
+
+    public ISkillActor CreateActor(SkillData skillData, ChampionStatus caster, ChampionStatus target, Team team)
+    {
+        return skillData.SkillType switch
+        {
+            SkillType.StatChanger => CreateStatChangerActor(skillData, caster, target),
+            _ => throw new NotImplementedException($"Actor not yet migrated: {skillData.SkillType}")
+        };
+    }
+
+    StatChanger CreateStatChangerActor(SkillData skillData, ChampionStatus caster, ChampionStatus target)
+    {
+        var statType = skillData.AmountData.StatType;
+
+        Func<int> amountProvider = () =>
+        {
+            int refValue = skillData.SkillValueType switch
+            {
+                SkillValueType.SelfRef => caster.GetStatAmount(statType),
+                SkillValueType.SelectRef => target.GetStatAmount(statType),
+                _ => 0
+            };
+            return SkillAmountCalculatorFactory.Create(skillData.AmountData, target.Stat).Calculate(refValue);
+        };
+
+        Func<ChampionStatus> targetProvider = () =>
+            skillData.SkillApplyType == SkillApplyType.Select ? target : caster;
+
+        return new StatChanger(statType, amountProvider, targetProvider);
+    }
 }
 
 public static class SkillAmountCalculatorFactory
@@ -47,5 +77,16 @@ public static class SkillAmountCalculatorFactory
         AmountType.Percent => new PercentCalculator(amountData.PercentValue),
         AmountType.Fix => new FixCalculator(amountData.FixValue),
         _ => null,
+    };
+}
+
+
+public static class SkillValueProvider
+{
+    public static int GetReferenceValue(SkillValueType valueType, StatType statType, ChampionStatus caster, ChampionStatus target) => valueType switch
+    {
+        SkillValueType.SelfRef => caster.GetStatAmount(statType),
+        SkillValueType.SelectRef => target.GetStatAmount(statType),
+        _ => 0
     };
 }

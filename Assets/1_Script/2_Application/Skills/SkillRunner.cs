@@ -29,26 +29,9 @@ public class SkillRunner
         foreach (var skillData in skill.SkillDatas)
         {
             IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-            ExecuteSkill(condition, selectTargets, skillData, caster);
-        }
-    }
 
-    void ExecuteSkill(IChampionCondition condition, IEnumerable<ChampionStatus> selectCards, SkillData skillData, ChampionStatus caster)
-    {
-        foreach (var selectCard in selectCards.Where(condition.Check))
-        {
-            int value = 0;
-
-            switch (skillData.SkillValueType)
-            {
-                case SkillValueType.SelfRef: value = caster.GetStatAmount(skillData.AmountData.StatType); break;
-                case SkillValueType.SelectRef: value = selectCard.GetStatAmount(skillData.AmountData.StatType); break;
-            }
-
-            int applyValue = SkillAmountCalculatorFactory.Create(skillData.AmountData, selectCard.Stat).Calculate(value);
-
-            if (SkillApplyType.Select == skillData.SkillApplyType) selectCard.ChangeStat(applyValue, skillData.AmountData.StatType);
-            else caster.ChangeStat(applyValue, skillData.AmountData.StatType);
+            foreach (var target in selectTargets.Where(condition.Check))
+                skillActionFactory.CreateActor(skillData, caster, target, team).Do();
         }
     }
 

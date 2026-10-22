@@ -1,6 +1,6 @@
 using System;
 
-public class StatChanger : ISkillAction
+public class StatChanger : ISkillAction, ISkillActor
 {
     readonly StatType StatType;
     readonly ISkillAmountCalculator Calculator;
@@ -11,12 +11,25 @@ public class StatChanger : ISkillAction
         Calculator = calculator;
     }
 
+    readonly StatType statType;
+    readonly Func<int> _amountProvider;
+    readonly Func<ChampionStatus> _targetProvider;
+    public StatChanger(StatType statType, Func<int> amountProvider, Func<ChampionStatus> targetProvider)
+    {
+        this.statType = statType;
+        _amountProvider = amountProvider;
+        _targetProvider = targetProvider;
+    }
+
     public void Do(ChampionStatus target)
     {
-        // 계산
         int changeAmount = Calculator.Calculate(target.GetStatAmount(StatType));
-        // 액션
         target.ChangeStat(changeAmount, StatType);
+    }
+
+    public void Do()
+    {
+        _targetProvider().ChangeStat(_amountProvider(), statType);
     }
 }
 
