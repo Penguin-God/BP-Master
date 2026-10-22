@@ -1,6 +1,6 @@
 using System;
 
-public class StatChanger : ISkillAction, ISkillActor
+public class StatChanger : ISkillAction
 {
     readonly StatType StatType;
     readonly ISkillAmountCalculator Calculator;
@@ -23,13 +23,14 @@ public class StatChanger : ISkillAction, ISkillActor
 
     public void Do(ChampionStatus target)
     {
+        if(_targetProvider != null)
+        {
+            _targetProvider().ChangeStat(_amountProvider(), statType);
+            return;
+        }
+
         int changeAmount = Calculator.Calculate(target.GetStatAmount(StatType));
         target.ChangeStat(changeAmount, StatType);
-    }
-
-    public void Do()
-    {
-        _targetProvider().ChangeStat(_amountProvider(), statType);
     }
 }
 
