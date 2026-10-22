@@ -26,7 +26,7 @@ public class SkillRunnerTest
         var caster = CreateStatus(100, 100, 100);
         var target = CreateStatus(0, 200, 0);
 
-        var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default, SkillApplyType.OneSelf, SkillValueType.SelectRef));
+        var skill = CreateSkill(new SkillData(SkillType.StatChanger, CalculatorFactory.CreatePercent(0.2f), default, default, SkillApplyType.OneSelf, SkillValueType.SelectRef, StatType.Defense));
         var sut = CreateSkillRunner();
 
         sut.Run2(skill, caster, new[] { target }, 0);
@@ -40,7 +40,7 @@ public class SkillRunnerTest
         var caster = CreateStatus(100, 100, 100);
         var select = CreateStatus(0, 200, 0);
 
-        var skill = CreateSkill(new SkillData(SkillType.StatChanger, new SkillAmountData(AmountType.Percent, StatType.Defense, 0, PercentValue: 0.2f, 0), default, default, SkillApplyType.Select, SkillValueType.SelfRef));
+        var skill = CreateSkill(new SkillData(SkillType.StatChanger, CalculatorFactory.CreatePercent(0.2f), default, default, SkillApplyType.Select, SkillValueType.SelfRef, StatType.Defense));
         var sut = CreateSkillRunner();
 
         sut.Run2(skill, caster, new[] { select }, 0);
