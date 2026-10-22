@@ -32,6 +32,7 @@ public readonly struct SkillData
 {
     public readonly SkillType SkillType;
     public readonly SkillAmountData AmountData;
+    public readonly ISkillAmountCalculator Calculator;
     public readonly SkillConditionData ConditionData;
     public readonly CardSelectRule SelectRule;
     public readonly SkillApplyType SkillApplyType;
@@ -45,12 +46,25 @@ public readonly struct SkillData
         ConditionData = conditionData;
         SkillApplyType = 0;
         SkillValueType = 0;
+        Calculator = null;
     }
 
     public SkillData(SkillType skillType, SkillAmountData amountData, SkillConditionData conditionData, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType)
     {
         SkillType = skillType;
         AmountData = amountData;
+        SelectRule = selectRule;
+        ConditionData = conditionData;
+        SkillApplyType = skillApplyType;
+        SkillValueType = skillValueType;
+        Calculator = null;
+    }
+
+    public SkillData(SkillType skillType, ISkillAmountCalculator calculator, SkillConditionData conditionData, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType)
+    {
+        SkillType = skillType;
+        AmountData = null;
+        Calculator = calculator;
         SelectRule = selectRule;
         ConditionData = conditionData;
         SkillApplyType = skillApplyType;

@@ -33,7 +33,7 @@ public class SkillFactoryTests
     [TestCase(AmountType.Fix, typeof(FixCalculator))]
     public void 타입에_맞는_계산기_객체_생성(AmountType amountType, Type expectedType)
     {
-        ISkillAmountCalculator result = SkillAmountCalculatorFactory.Create(CreateSkillAmount(amountType, StatType.Attack, 1, 1, 1));
+        ISkillAmountCalculator result = CalculatorFactory.Create(CreateSkillAmount(amountType, StatType.Attack, 1, 1, 1));
         result.Calculate(100); // 에러만 체크
         Assert.IsInstanceOf(expectedType, result);
     }

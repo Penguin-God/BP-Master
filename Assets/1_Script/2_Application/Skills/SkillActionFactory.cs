@@ -13,7 +13,7 @@ public class SkillActionFactory
     public ISkillAction CreateAction(SkillData skillData, ChampionStatus caster, ChampionStatus target, Team team)
     {
         var amountData = skillData.AmountData;
-        var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
+        var amountCalculator = CalculatorFactory.Create(amountData);
         // var statChanger = new StatChanger(amountData.StatType, amountCalculator);
         var statChanger = CreateStatChangerActor(skillData, caster, target);
 
@@ -32,7 +32,7 @@ public class SkillActionFactory
 
     public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team)
     {
-        var amountCalculator = SkillAmountCalculatorFactory.Create(amountData);
+        var amountCalculator = CalculatorFactory.Create(amountData);
         var statChanger = new StatChanger(amountData.StatType, amountCalculator);
 
         return actionType switch
@@ -60,7 +60,7 @@ public class SkillActionFactory
                 SkillValueType.SelectRef => target.GetStatAmount(statType),
                 _ => 0
             };
-            return SkillAmountCalculatorFactory.Create(skillData.AmountData, target.Stat).Calculate(refValue);
+            return CalculatorFactory.Create(skillData.AmountData, target.Stat).Calculate(refValue);
         };
 
         Func<ChampionStatus> targetProvider = () => skillData.SkillApplyType == SkillApplyType.Select ? target : caster;
@@ -69,7 +69,7 @@ public class SkillActionFactory
     }
 }
 
-public static class SkillAmountCalculatorFactory
+public static class CalculatorFactory
 {
     public static ISkillAmountCalculator Create(SkillAmountData amountData)
         => amountData.Type switch
@@ -88,4 +88,8 @@ public static class SkillAmountCalculatorFactory
         AmountType.Fix => new FixCalculator(amountData.FixValue),
         _ => null,
     };
+
+    public static ISkillAmountCalculator CreateValue(int value) => new ValueCalculator(value);
+    public static ISkillAmountCalculator CreateFix(int fixValue) => new FixCalculator(fixValue);
+    public static ISkillAmountCalculator CreatePercent(float percent) => new PercentCalculator(percent);
 }
