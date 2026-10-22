@@ -2,15 +2,6 @@ using System;
 
 public class StatChanger : ISkillAction
 {
-    readonly StatType StatType;
-    readonly ISkillAmountCalculator Calculator;
-
-    public StatChanger(StatType statType, ISkillAmountCalculator calculator)
-    {
-        StatType = statType;
-        Calculator = calculator;
-    }
-
     readonly StatType statType;
     readonly Func<int> _amountProvider;
     readonly Func<ChampionStatus> _targetProvider;
@@ -21,59 +12,7 @@ public class StatChanger : ISkillAction
         _targetProvider = targetProvider;
     }
 
-    public void Do(ChampionStatus target)
-    {
-        if(_targetProvider != null)
-        {
-            _targetProvider().ChangeStat(_amountProvider(), statType);
-            return;
-        }
-
-        int changeAmount = Calculator.Calculate(target.GetStatAmount(StatType));
-        target.ChangeStat(changeAmount, StatType);
-    }
-}
-
-public class StatAbsorber : ISkillAction
-{
-    readonly ChampionStatus User;
-    readonly ISkillAmountCalculator AmountCalculator;
-    readonly StatType StatType;
-
-    public StatAbsorber(ChampionStatus user, ISkillAmountCalculator amountCalculator, StatType statType)
-    {
-        User = user;
-        AmountCalculator = amountCalculator;
-        StatType = statType;
-    }
-
-    public void Do(ChampionStatus target)
-    {
-        int amount = AmountCalculator.Calculate(target.GetStatAmount(StatType));
-        User.ChangeStat(amount, StatType);
-        target.ChangeStat(amount * -1, StatType);
-    }
-}
-
-public class Resonance : ISkillAction
-{
-    readonly ChampionStatus User;
-    readonly float Percent;
-    public Resonance(ChampionStatus user, float percent)
-    {
-        User = user;
-        Percent = percent;
-    }
-
-    public void Do(ChampionStatus target)
-    {
-        if (target == User) return; // 자신은 제외
-        int attAmount = (int)Math.Round(User.Stat.Attack * Percent, MidpointRounding.AwayFromZero);
-        target.AddAttack(attAmount);
-
-        int defAmount = (int)Math.Round(User.Stat.Defense * Percent, MidpointRounding.AwayFromZero);
-        target.AddDefense(defAmount);
-    }
+    public void Do(ChampionStatus target) => _targetProvider().AddStat(_amountProvider(), statType);
 }
 
 public class PickChampStatChanger : ISkillAction
@@ -141,20 +80,6 @@ public class 복리 : ISkillAction
         if (Team != team)
             _statChanger.Do(_caster);
     }
-}
-
-public class Doppelganger : ISkillAction
-{
-    readonly ChampionStatus caster;
-    public Doppelganger(ChampionStatus caster) => this.caster = caster;
-    public void Do(ChampionStatus target) => caster.ChangeStat(target.Stat);
-}
-
-public class Hypocrisy : ISkillAction
-{
-    readonly ChampionStatus caster;
-    public Hypocrisy(ChampionStatus caster) => this.caster = caster;
-    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat + caster.Stat);
 }
 
 public class FinalStatChanger : ISkillAction

@@ -17,31 +17,10 @@ public class SkillActionFactory
         return skillData.SkillType switch
         {
             SkillType.StatChanger => statChanger,
-            SkillType.StatAbsorber => new StatAbsorber(caster, skillData.Calculator, skillData.StatType),
-            SkillType.Resonance => new Resonance(caster, 0.2f),
-            SkillType.Doppelganger => new Doppelganger(caster),
             SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, skillData.Calculator),
             SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
             SkillType.OppentPickStatChanger => new OppentPickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
             _ => throw new NotImplementedException($"생성에 가정되지 않는 스킬 : {skillData.SkillType}")
-        };
-    }
-
-    public ISkillAction CreateAction(SkillType actionType, SkillAmountData amountData, ChampionStatus caster, Team team)
-    {
-        var amountCalculator = CalculatorFactory.Create(amountData);
-        var statChanger = new StatChanger(amountData.StatType, amountCalculator);
-
-        return actionType switch
-        {
-            SkillType.StatChanger => statChanger,
-            SkillType.StatAbsorber => new StatAbsorber(caster, amountCalculator, amountData.StatType),
-            SkillType.Resonance => new Resonance(caster, amountData.PercentValue),
-            SkillType.Doppelganger => new Doppelganger(caster),
-            SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, amountCalculator),
-            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
-            SkillType.OppentPickStatChanger => new OppentPickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
-            _ => throw new NotImplementedException($"생성에 가정되지 않는 스킬 : {actionType}")
         };
     }
 

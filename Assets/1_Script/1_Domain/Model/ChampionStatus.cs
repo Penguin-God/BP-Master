@@ -24,7 +24,7 @@ public class ChampionStatus
         Stat = newStat;
     }
 
-    public void ChangeStat(int changeAmount, StatType statType) => ChangeStat(GetChangeStat(changeAmount, statType));
+    public void AddStat(int changeAmount, StatType statType) => ChangeStat(GetChangeStat(changeAmount, statType));
 
     public int GetStatAmount(StatType statType) => statType switch
     {

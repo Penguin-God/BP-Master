@@ -9,7 +9,7 @@ public class SkillRunner
         this.skillActionFactory = skillActionFactory;
     }
 
-    public void Run2(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets, Team team)
+    public void Run(Skill skill, ChampionStatus caster, IEnumerable<ChampionStatus> selectTargets, Team team)
     {
         if (skill.IsEmpty) return;
 

@@ -16,11 +16,7 @@ public enum SkillType
 {
     None = 0,
     StatChanger = 2,
-    StatAbsorber = 8,
-    Resonance = 9,
-    AmplifyChanger = 10,
     PickBuffer = 11,
-    Doppelganger = 12,
     FinalStatChanger = 13,
     OppentPickStatChanger = 14,
 }

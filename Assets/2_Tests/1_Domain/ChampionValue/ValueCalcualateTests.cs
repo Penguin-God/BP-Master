@@ -49,15 +49,4 @@ public class ValueCalcualateTests
         Assert.AreEqual(result, score);
         Assert.AreEqual(100, champion.Status.Stat.Attack); // 원본은 수정 X
     }
-
-    [Test]
-    public void 도플갱어_평가_테스트()
-    {
-        var champion = CreateChampion(CHAMP_ID, skillData: CreateSelectSkill(SkillType.Doppelganger, StatType.Speed, 10, OpponentSingleRule));
-        var sut = CreateSut(CreateBonus(0, 0));
-
-        int score = sut.Evaluate(champion, Team.Blue, CreateOneSlotStatus(100));
-
-        Assert.AreEqual(100, score);
-    }
 }

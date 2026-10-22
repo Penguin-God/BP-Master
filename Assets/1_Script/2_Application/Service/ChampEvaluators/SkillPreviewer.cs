@@ -15,7 +15,7 @@ public static class SkillPreviewer
         
         // 비어있는 PhaseActionEventDispatcher를 사용해야 함
         var skillRunner = CreateRunner();
-        skillRunner.Run2(skill, copyStatus, targets, team);
+        skillRunner.Run(skill, copyStatus, targets, team);
         return copiedSlots;
     }
 

@@ -15,7 +15,7 @@ public class SkillRunnerTest
         var skill = CreateMultiAttackSkill(firstAmount, secondAmount);
         var sut = CreateSkillRunner();
 
-        sut.Run2(skill, caster, new[] { target }, Team.Blue);
+        sut.Run(skill, caster, new[] { target }, Team.Blue);
 
         Assert.AreEqual(expectedAttack, target.Stat.Attack);
     }
@@ -29,7 +29,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, CalculatorFactory.CreatePercent(0.2f), SkillCondtionFactory.CreateNull(), default, SkillApplyType.OneSelf, SkillValueType.SelectRef, StatType.Defense));
         var sut = CreateSkillRunner();
 
-        sut.Run2(skill, caster, new[] { target }, 0);
+        sut.Run(skill, caster, new[] { target }, 0);
 
         Assert.AreEqual(140, caster.Stat.Defense);
     }
@@ -43,7 +43,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, CalculatorFactory.CreatePercent(0.2f), SkillCondtionFactory.CreateNull(), default, SkillApplyType.Select, SkillValueType.SelfRef, StatType.Defense));
         var sut = CreateSkillRunner();
 
-        sut.Run2(skill, caster, new[] { select }, 0);
+        sut.Run(skill, caster, new[] { select }, 0);
 
         Assert.AreEqual(220, select.Stat.Defense);
     }
@@ -57,7 +57,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, CalculatorFactory.CreateFix(5), SkillCondtionFactory.CreateNull(), default, SkillApplyType.Select, SkillValueType.Value, StatType.Speed));
         var sut = CreateSkillRunner();
 
-        sut.Run2(skill, caster, new[] { target }, Team.Blue);
+        sut.Run(skill, caster, new[] { target }, Team.Blue);
 
         Assert.AreEqual(5, target.Stat.Speed);
     }
@@ -70,7 +70,7 @@ public class SkillRunnerTest
         var skill = CreateSkill(new SkillData(SkillType.StatChanger, CalculatorFactory.CreateFix(5), SkillCondtionFactory.CreateNull(), default, SkillApplyType.OneSelf, SkillValueType.Value, StatType.Speed));
         var sut = CreateSkillRunner();
 
-        sut.Run2(skill, caster, new[] { caster }, Team.Blue);
+        sut.Run(skill, caster, new[] { caster }, Team.Blue);
 
         Assert.AreEqual(5, caster.Stat.Speed);
     }
@@ -81,7 +81,7 @@ public class SkillRunnerTest
         var target = CreateStatus(100, 100, 100);
         var sut = CreateSkillRunner();
 
-        sut.Run2(CreateSkill(), null, new[] { target }, Team.Blue);
+        sut.Run(CreateSkill(), null, new[] { target }, Team.Blue);
 
         Assert.AreEqual(100, target.Stat.Attack);
     }
