@@ -35,6 +35,7 @@ public readonly struct SkillData
     public readonly ISkillAmountCalculator Calculator;
     public readonly StatType StatType;
     public readonly SkillConditionData ConditionData;
+    public readonly IChampionCondition Condition;
     public readonly CardSelectRule SelectRule;
     public readonly SkillApplyType SkillApplyType;
     public readonly SkillValueType SkillValueType;
@@ -48,6 +49,7 @@ public readonly struct SkillData
         SkillApplyType = 0;
         SkillValueType = 0;
         Calculator = null;
+        Condition = null;
         StatType = 0;
     }
 
@@ -60,16 +62,18 @@ public readonly struct SkillData
         SkillApplyType = skillApplyType;
         SkillValueType = skillValueType;
         Calculator = null;
+        Condition = null;
         StatType = 0;
     }
 
-    public SkillData(SkillType skillType, ISkillAmountCalculator calculator, SkillConditionData conditionData, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType)
+    public SkillData(SkillType skillType, ISkillAmountCalculator calculator, IChampionCondition condition, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType)
     {
         SkillType = skillType;
         AmountData = null;
         Calculator = calculator;
         SelectRule = selectRule;
-        ConditionData = conditionData;
+        ConditionData = default;
+        Condition = condition;
         SkillApplyType = skillApplyType;
         SkillValueType = skillValueType;
         StatType = statType;

@@ -28,9 +28,7 @@ public class SkillRunner
 
         foreach (var skillData in skill.SkillDatas)
         {
-            IChampionCondition condition = SkillCondtionFactory.CreateCondition(skillData.ConditionData, caster.Stat);
-
-            foreach (var target in selectTargets.Where(condition.Check))
+            foreach (var target in selectTargets.Where(skillData.Condition.Check))
                 skillActionFactory.CreateAction(skillData, caster, target, team).Do(target);
         }
     }

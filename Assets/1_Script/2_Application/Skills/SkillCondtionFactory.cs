@@ -12,4 +12,8 @@ public static class SkillCondtionFactory
             _ => throw new NotImplementedException($"Action not implemented: {data.ConditionType}")
         };
     }
+
+    public static IChampionCondition CreateNull() => new NullChecker();
+    public static IChampionCondition CreateThreshold(StatConditionType compareType, int threshold) => new StatThresholdChecker(compareType, threshold);
+    public static IChampionCondition CreateCompare(StatConditionType compareType, ChampionStatData useChamp) => new StatComparisonChecker(compareType, useChamp);
 }
