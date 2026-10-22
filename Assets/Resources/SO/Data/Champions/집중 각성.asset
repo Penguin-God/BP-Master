@@ -29,6 +29,8 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 0
     range: 1
+    applyType: 0
+    valueType: 2
     skillType: 2
     skillAmount:
       Type: 2

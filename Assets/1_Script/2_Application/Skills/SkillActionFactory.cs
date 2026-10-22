@@ -45,22 +45,22 @@ public class SkillActionFactory
         };
     }
 
-    StatChanger CreateStatChangerActor(SkillData skillData, ChampionStatus caster, ChampionStatus target)
+    StatChanger CreateStatChangerActor(SkillData skillData, ChampionStatus caster, ChampionStatus select)
     {
         var statType = skillData.StatType;
+        ChampionStatus TargetProvider() => skillData.SkillApplyType == SkillApplyType.Select ? select : caster;
 
         int AmountProvider()
         {
-            int refValue = skillData.SkillValueType switch
-            {
-                SkillValueType.SelfRef => caster.GetStatAmount(statType),
-                SkillValueType.SelectRef => target.GetStatAmount(statType),
-                _ => 0
-            };
+            int refValue = skillData.Calculator is FixCalculator ? TargetProvider().GetStatAmount(statType) 
+                : skillData.SkillValueType switch
+                {
+                    SkillValueType.SelfRef => caster.GetStatAmount(statType),
+                    SkillValueType.SelectRef => select.GetStatAmount(statType),
+                    _ => TargetProvider().GetStatAmount(statType)
+                };
             return skillData.Calculator.Calculate(refValue);
         };
-
-        ChampionStatus TargetProvider() => skillData.SkillApplyType == SkillApplyType.Select ? target : caster;
 
         return new StatChanger(statType, AmountProvider, TargetProvider);
     }

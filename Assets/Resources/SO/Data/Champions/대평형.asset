@@ -29,6 +29,8 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 0
     range: 2
+    applyType: 0
+    valueType: 2
     skillType: 2
     skillAmount:
       Type: 3
@@ -41,6 +43,8 @@ MonoBehaviour:
     conditionCheckerType: 0
   - targetSide: 0
     range: 2
+    applyType: 0
+    valueType: 2
     skillType: 2
     skillAmount:
       Type: 3
