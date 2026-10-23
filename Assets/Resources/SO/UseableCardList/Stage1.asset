@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec981c2c515ad44fa58b2ab55e57113, type: 3}
   m_Name: Stage1
   m_EditorClassIdentifier: App::CardListSO
-  _cardList:
-  - {fileID: 11400000, guid: 8710fb3935eb85045ab9b7b056eaf0b5, type: 2}
-  - {fileID: 11400000, guid: c24d32b1925174a42941eb69f276b813, type: 2}
-  - {fileID: 11400000, guid: 47cbdfbadd5a0c645a101cb0c10d2a00, type: 2}
+  _cardList: []
