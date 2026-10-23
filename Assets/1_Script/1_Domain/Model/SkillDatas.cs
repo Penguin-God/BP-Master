@@ -10,7 +10,7 @@ public readonly struct CardSelectRule
     }
 }
 
-public enum SkillApplyType { Select, OneSelf, }
+public enum SkillApplyType { Select, OneSelf, Triggered }
 public enum SkillValueType { Value, SelfRef, SelectRef }
 
 public readonly struct SkillConditionData

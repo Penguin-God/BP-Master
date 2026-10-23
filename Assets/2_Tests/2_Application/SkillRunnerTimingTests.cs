@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using static TestHelper;
+using System;
 
 [TestFixture]
 public class SkillRunnerTimingTests
@@ -32,7 +33,22 @@ public class SkillRunnerTimingTests
             StatType.Attack,
             timing
         );
-        return CreateSkill(data);
+        return TestHelper.CreateSkill(data);
+    }
+
+    Skill CreateSkill(SkillUseTimingType timing, SkillApplyType applyType, int amount)
+    {
+        var data = new SkillData(
+            SkillType.StatChanger,
+            CalculatorFactory.CreateValue(amount),
+            SkillCondtionFactory.CreateNull(),
+            default,
+            applyType,
+            SkillValueType.Value,
+            StatType.Attack,
+            timing
+        );
+        return TestHelper.CreateSkill(data);
     }
 
     [Test]
@@ -55,5 +71,33 @@ public class SkillRunnerTimingTests
 
         phaseDispatcher.Dispatch(GamePhase.Done, Team.All);
         Assert.AreEqual(120, target.Stat.Attack);
+    }
+
+    [Test]
+    public void 아군_픽_순간_자신에게_스킬_적용()
+    {
+        var sut = CreateSut();
+        var caster = CreateStatus(100, 100, 100);
+        var skill = CreateSkill(SkillUseTimingType.OnSelfPick, SkillApplyType.OneSelf, 25);
+
+        sut.Run(skill, caster, Array.Empty<ChampionStatus>(), Team.Blue);
+        bpDispatcher.RaisePick(CreateChampion(), new SlotData(Team.Blue, 0));
+
+        Assert.AreEqual(125, caster.Stat.Attack);
+    }
+
+    [Test]
+    public void 적군_픽_순간_그_카드에게_스킬_적용()
+    {
+        var sut = CreateSut();
+        var caster = CreateStatus(100, 100, 100);
+        var skill = CreateSkill(SkillUseTimingType.OnOpponentPick, SkillApplyType.Triggered, -20);
+
+        sut.Run(skill, caster, Array.Empty<ChampionStatus>(), Team.Blue);
+
+        var opponentChampion = CreateChampion(att:100);
+        bpDispatcher.RaisePick(opponentChampion, new SlotData(Team.Red, 0));
+
+        Assert.AreEqual(80, opponentChampion.Status.Stat.Attack);
     }
 }
