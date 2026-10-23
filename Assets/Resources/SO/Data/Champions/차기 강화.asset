@@ -27,9 +27,12 @@ MonoBehaviour:
   defense: 80
   speed: 5
   skillDatas:
-  - targetSide: 0
+  - targetSide: 3
     range: 1
-    skillType: 11
+    applyType: 2
+    valueType: 0
+    timingType: 1
+    skillType: 2
     skillAmount:
       Type: 1
       StatType: 0

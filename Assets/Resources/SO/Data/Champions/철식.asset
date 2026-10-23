@@ -31,6 +31,7 @@ MonoBehaviour:
     range: 1
     applyType: 1
     valueType: 2
+    timingType: 0
     skillType: 2
     skillAmount:
       Type: 2
@@ -45,6 +46,7 @@ MonoBehaviour:
     range: 1
     applyType: 0
     valueType: 2
+    timingType: 0
     skillType: 2
     skillAmount:
       Type: 2

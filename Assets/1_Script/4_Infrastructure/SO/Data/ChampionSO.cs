@@ -14,6 +14,7 @@ public class TraitDataConfig
 
     [EnumToggleButtons][SerializeField] SkillApplyType applyType;
     [EnumToggleButtons][SerializeField] SkillValueType valueType;
+    [EnumToggleButtons][SerializeField] SkillUseTimingType timingType;
 
     [Header("액션")]
     [SerializeField] SkillType skillType;
@@ -27,7 +28,7 @@ public class TraitDataConfig
     [SerializeField] ConditionType conditionCheckerType;
     public SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
-    public SkillData CreateSkillData() => new SkillData(skillType, CalculatorFactory.Create(skillAmount.ToData()), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmount.ToData().StatType);
+    public SkillData CreateSkillData() => new SkillData(skillType, CalculatorFactory.Create(skillAmount.ToData()), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmount.ToData().StatType, timingType);
     public SkillViewModel CreateViewModel() => new SkillViewModel(skillType, GetValueData(), Condition, Rule);
 }
 

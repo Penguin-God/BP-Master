@@ -2699,7 +2699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff457e23fdaa984885993e6d39484f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::StageSaveHelper
-  clearStage: 2
+  clearStage: 3
 --- !u!1001 &1345685302
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,7 +29,10 @@ MonoBehaviour:
   skillDatas:
   - targetSide: 0
     range: 1
-    skillType: 14
+    applyType: 2
+    valueType: 0
+    timingType: 2
+    skillType: 2
     skillAmount:
       Type: 1
       StatType: 0
@@ -41,7 +44,10 @@ MonoBehaviour:
     conditionCheckerType: 0
   - targetSide: 0
     range: 1
-    skillType: 14
+    applyType: 2
+    valueType: 0
+    timingType: 2
+    skillType: 2
     skillAmount:
       Type: 1
       StatType: 1

@@ -57,7 +57,7 @@ public readonly struct SkillData
         SkillApplyType = skillApplyType;
         SkillValueType = skillValueType;
         StatType = statType;
-        SkillUseTimingType = 0;
+        SkillUseTimingType = SkillUseTimingType.Immediate;
     }
 
     public SkillData(SkillType skillType, ISkillAmountCalculator calculator, IChampionCondition condition, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType, SkillUseTimingType skillUseTimingType)
