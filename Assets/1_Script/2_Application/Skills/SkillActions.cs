@@ -15,6 +15,44 @@ public class StatChanger : ISkillAction
     public void Do(ChampionStatus target) => _targetProvider().AddStat(_amountProvider(), statType);
 }
 
+public interface ISkillTrigger
+{
+    void Register(Action execute);
+}
+
+public class ImmediateTrigger : ISkillTrigger
+{
+    public void Register(Action execute) => execute();
+}
+
+public class OnPickChampionTrigger : ISkillTrigger
+{
+    readonly BanPickEventDispatcher eventDispatcher;
+    readonly Func<Team, bool> teamCondition;
+
+    public OnPickChampionTrigger(BanPickEventDispatcher eventDispatcher, Func<Team, bool> teamCondition)
+    {
+        this.eventDispatcher = eventDispatcher;
+        this.teamCondition = teamCondition;
+    }
+
+    public void Register(Action execute)
+    {
+        eventDispatcher.OnTeamChampionPick += (champion, team) =>
+        {
+            if (teamCondition(team))
+                execute();
+        };
+    }
+}
+
+public class OnPhaseDoneTrigger : ISkillTrigger
+{
+    readonly PhaseEventDispatcher dispatcher;
+    public OnPhaseDoneTrigger(PhaseEventDispatcher dispatcher) => this.dispatcher = dispatcher;
+    public void Register(Action execute) => dispatcher.OnPhaseDone += execute;
+}
+
 public class PickChampStatChanger : ISkillAction
 {
     readonly BanPickEventDispatcher eventDispatcher;

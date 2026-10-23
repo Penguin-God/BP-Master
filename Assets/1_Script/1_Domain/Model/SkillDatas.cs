@@ -29,6 +29,11 @@ public readonly struct SkillConditionData
 public record SkillAmountData(AmountType Type, StatType StatType, int ValueAmount, float PercentValue, int FixValue);
 public record SkillViewModel(SkillType SkillType, SkillAmountData AmountData, SkillConditionData ConditionData, CardSelectRule SelectRule);
 
+public enum SkillUseTimingType
+{
+
+}
+
 public readonly struct SkillData
 {
     public readonly SkillType SkillType;
@@ -38,6 +43,7 @@ public readonly struct SkillData
     public readonly CardSelectRule SelectRule;
     public readonly SkillApplyType SkillApplyType;
     public readonly SkillValueType SkillValueType;
+    public readonly SkillUseTimingType SkillUseTimingType;
 
     public SkillData(SkillType skillType, ISkillAmountCalculator calculator, IChampionCondition condition, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType)
     {
@@ -48,5 +54,18 @@ public readonly struct SkillData
         SkillApplyType = skillApplyType;
         SkillValueType = skillValueType;
         StatType = statType;
+        SkillUseTimingType = 0;
+    }
+
+    public SkillData(SkillType skillType, ISkillAmountCalculator calculator, IChampionCondition condition, CardSelectRule selectRule, SkillApplyType skillApplyType, SkillValueType skillValueType, StatType statType, SkillUseTimingType skillUseTimingType)
+    {
+        SkillType = skillType;
+        Calculator = calculator;
+        SelectRule = selectRule;
+        Condition = condition;
+        SkillApplyType = skillApplyType;
+        SkillValueType = skillValueType;
+        StatType = statType;
+        SkillUseTimingType = skillUseTimingType;
     }
 }
