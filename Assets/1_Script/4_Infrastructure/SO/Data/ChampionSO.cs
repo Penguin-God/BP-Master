@@ -18,7 +18,6 @@ public class TraitDataConfig
 
     [Header("액션")]
     [SerializeField] SkillType skillType;
-    public SkillType SkillType => skillType;
     [SerializeField] SkillAmount skillAmount;
     public SkillAmountData GetValueData() => skillAmount.ToData();
 
