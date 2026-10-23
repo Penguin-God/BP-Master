@@ -4,11 +4,15 @@ public class SkillActionFactory
 {
     readonly BanPickEventDispatcher phaseActionEventDispatcher;
     readonly PhaseEventDispatcher phaseEventDispatcher;
+
     public SkillActionFactory(BanPickEventDispatcher phaseActionEventDispatcher, PhaseEventDispatcher phaseEventDispatcher)
     {
         this.phaseActionEventDispatcher = phaseActionEventDispatcher;
         this.phaseEventDispatcher = phaseEventDispatcher;
     }
+
+    public ISkillTrigger CreateTrigger(SkillUseTimingType timingType, Team team)
+        => SkillTriggerFactory.Create(timingType, phaseActionEventDispatcher, phaseEventDispatcher, team);
 
     public ISkillAction CreateAction(SkillData skillData, ChampionStatus caster, ChampionStatus target, Team team)
     {
@@ -39,10 +43,24 @@ public class SkillActionFactory
             };
 
             return skillData.Calculator.Calculate(refValue);
-        };
+        }
 
         return new StatChanger(statType, AmountProvider, TargetProvider);
     }
+}
+
+
+public static class SkillTriggerFactory
+{
+    public static ISkillTrigger Create(SkillUseTimingType timingType,BanPickEventDispatcher bpDispatcher,PhaseEventDispatcher phaseDispatcher,Team team) 
+        => timingType switch
+        {
+            SkillUseTimingType.Immediate => new ImmediateTrigger(),
+            SkillUseTimingType.OnSelfPick => new OnAllyPickChampionTrigger(bpDispatcher, team),
+            SkillUseTimingType.OnOpponentPick => new OnOpponentPickChampionTrigger(bpDispatcher, team),
+            SkillUseTimingType.OnPhaseDone => new OnPhaseDoneTrigger(phaseDispatcher),
+            _ => new ImmediateTrigger()
+        };
 }
 
 public static class CalculatorFactory

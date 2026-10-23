@@ -4,6 +4,7 @@ using System.Linq;
 public class SkillRunner
 {
     readonly SkillActionFactory skillActionFactory;
+
     public SkillRunner(SkillActionFactory skillActionFactory)
     {
         this.skillActionFactory = skillActionFactory;
@@ -15,8 +16,13 @@ public class SkillRunner
 
         foreach (var skillData in skill.SkillDatas)
         {
-            foreach (var target in selectTargets.Where((x) => skillData.Condition.Check(x, caster)))
-                skillActionFactory.CreateAction(skillData, caster, target, team).Do(target);
+            var trigger = skillActionFactory.CreateTrigger(skillData.SkillUseTimingType, team);
+
+            trigger.Register(() =>
+            {
+                foreach (var target in selectTargets.Where(x => skillData.Condition.Check(x, caster)))
+                    skillActionFactory.CreateAction(skillData, caster, target, team).Do(target);
+            });
         }
     }
 }
