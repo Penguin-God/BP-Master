@@ -29,23 +29,23 @@ public class SkillActionFactory
     }
 
     StatChanger CreateStatChangerActor(SkillData skillData, ChampionStatus caster, ChampionStatus select)
+        =>  new StatChanger(skillData.StatType, SkillFuncProvider.AmountProvider(skillData, select, caster), SkillFuncProvider.TargetProvider(skillData, select, caster));
+}
+
+public static class SkillFuncProvider
+{
+    public static Func<ChampionStatus> TargetProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster) => () => skillData.SkillApplyType == SkillApplyType.Select ? select : caster;
+
+    public static Func<int> AmountProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster)
     {
-        var statType = skillData.StatType;
-        ChampionStatus TargetProvider() => skillData.SkillApplyType == SkillApplyType.Select ? select : caster;
-
-        int AmountProvider()
+        int refValue = skillData.SkillValueType switch
         {
-            int refValue = skillData.SkillValueType switch
-            {
-                SkillValueType.SelfRef => caster.GetStatAmount(statType),
-                SkillValueType.SelectRef => select.GetStatAmount(statType),
-                _ => TargetProvider().GetStatAmount(statType)
-            };
+            SkillValueType.SelfRef => caster.GetStatAmount(skillData.StatType),
+            SkillValueType.SelectRef => select.GetStatAmount(skillData.StatType),
+            _ => TargetProvider(skillData, select, caster)().GetStatAmount(skillData.StatType)
+        };
 
-            return skillData.Calculator.Calculate(refValue);
-        }
-
-        return new StatChanger(statType, AmountProvider, TargetProvider);
+        return () => skillData.Calculator.Calculate(refValue);
     }
 }
 
