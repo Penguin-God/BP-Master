@@ -28,19 +28,19 @@ public class SkillActionFactory
         };
     }
 
-    StatChanger CreateStatChangerActor(SkillData skillData, ChampionStatus caster, ChampionStatus select)
-        =>  new StatChanger(skillData.StatType, SkillFuncProvider.AmountProvider(skillData, select, caster), SkillFuncProvider.TargetProvider(skillData, select, caster));
+    StatChanger CreateStatChangerActor(SkillData skillData, ChampionStatus caster, ChampionStatus select) => new StatChanger(skillData.StatType, SkillFuncProvider.AmountProvider(skillData, select, caster));
 }
 
 public static class SkillFuncProvider
 {
-    public static Func<ChampionStatus> TargetProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster)
-        => () => skillData.SkillApplyType switch
-        {
-            SkillApplyType.Select => select,
-            SkillApplyType.Triggered => select, // 이벤트로 전달받은 챔피언이 select로 들어옴
-            _ => caster
-        };
+    public static ChampionStatus ResolveTarget(SkillData skillData, ChampionStatus select, ChampionStatus caster)
+            => skillData.SkillApplyType switch
+            {
+                SkillApplyType.Select => select,
+                SkillApplyType.Triggered => select,
+                SkillApplyType.OneSelf => caster,
+                _ => throw new NotImplementedException()
+            };
 
     public static Func<int> AmountProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster)
     {
@@ -48,7 +48,7 @@ public static class SkillFuncProvider
         {
             SkillValueType.SelfRef => caster.GetStatAmount(skillData.StatType),
             SkillValueType.SelectRef => select.GetStatAmount(skillData.StatType),
-            _ => TargetProvider(skillData, select, caster)().GetStatAmount(skillData.StatType)
+            _ => ResolveTarget(skillData, select, caster).GetStatAmount(skillData.StatType)
         };
 
         return () => skillData.Calculator.Calculate(refValue);

@@ -4,16 +4,16 @@ public class StatChanger : ISkillAction
 {
     readonly StatType statType;
     readonly Func<int> _amountProvider;
-    readonly Func<ChampionStatus> _targetProvider;
-    public StatChanger(StatType statType, Func<int> amountProvider, Func<ChampionStatus> targetProvider)
+
+    public StatChanger(StatType statType, Func<int> amountProvider)
     {
         this.statType = statType;
         _amountProvider = amountProvider;
-        _targetProvider = targetProvider;
     }
 
-    public void Do(ChampionStatus target) => _targetProvider().AddStat(_amountProvider(), statType);
+    public void Do(ChampionStatus target) => target.AddStat(_amountProvider(), statType);
 }
+
 public interface ISkillTrigger
 {
     void Register(Action<ChampionStatus> execute);

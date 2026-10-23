@@ -20,11 +20,13 @@ public class SkillRunner
 
             trigger.Register(triggeredChampion =>
             {
-                // Triggered 타입이면 이벤트로 넘어온 챔피언 1개만 대상, 아니면 기존 선택 대상들 사용
-                var actualTargets = skillData.SkillApplyType == SkillApplyType.Triggered && triggeredChampion != null ? new[] { triggeredChampion } : selectTargets;
+                var candidateTargets = skillData.SkillApplyType == SkillApplyType.Triggered && triggeredChampion != null ? new[] { triggeredChampion } : selectTargets;
 
-                foreach (var target in actualTargets.Where(x => skillData.Condition.Check(x, caster)))
-                    skillActionFactory.CreateAction(skillData, caster, target, team).Do(target);
+                foreach (var select in candidateTargets.Where(x => skillData.Condition.Check(x, caster)))
+                {
+                    var actualTarget = SkillFuncProvider.ResolveTarget(skillData, select, caster);
+                    skillActionFactory.CreateAction(skillData, caster, select, team).Do(actualTarget);
+                }
             });
         }
     }

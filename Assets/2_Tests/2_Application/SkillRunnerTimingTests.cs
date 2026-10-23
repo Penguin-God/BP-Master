@@ -80,7 +80,7 @@ public class SkillRunnerTimingTests
         var caster = CreateStatus(100, 100, 100);
         var skill = CreateSkill(SkillUseTimingType.OnSelfPick, SkillApplyType.OneSelf, 25);
 
-        sut.Run(skill, caster, Array.Empty<ChampionStatus>(), Team.Blue);
+        sut.Run(skill, caster, new[] { caster }, Team.Blue);
         bpDispatcher.RaisePick(CreateChampion(), new SlotData(Team.Blue, 0));
 
         Assert.AreEqual(125, caster.Stat.Attack);
@@ -93,7 +93,7 @@ public class SkillRunnerTimingTests
         var caster = CreateStatus(100, 100, 100);
         var skill = CreateSkill(SkillUseTimingType.OnOpponentPick, SkillApplyType.Triggered, -20);
 
-        sut.Run(skill, caster, Array.Empty<ChampionStatus>(), Team.Blue);
+        sut.Run(skill, caster, new[] { caster }, Team.Blue);
 
         var opponentChampion = CreateChampion(att:100);
         bpDispatcher.RaisePick(opponentChampion, new SlotData(Team.Red, 0));
