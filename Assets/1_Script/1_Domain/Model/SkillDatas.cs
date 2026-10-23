@@ -31,7 +31,10 @@ public record SkillViewModel(SkillType SkillType, SkillAmountData AmountData, Sk
 
 public enum SkillUseTimingType
 {
-
+    Immediate,
+    OnSelfPick,
+    OnOpponentPick,
+    OnPhaseDone
 }
 
 public readonly struct SkillData

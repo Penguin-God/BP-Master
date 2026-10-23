@@ -25,22 +25,43 @@ public class ImmediateTrigger : ISkillTrigger
     public void Register(Action execute) => execute();
 }
 
-public class OnPickChampionTrigger : ISkillTrigger
+public class OnAllyPickChampionTrigger : ISkillTrigger
 {
     readonly BanPickEventDispatcher eventDispatcher;
-    readonly Func<Team, bool> teamCondition;
+    readonly Team team;
 
-    public OnPickChampionTrigger(BanPickEventDispatcher eventDispatcher, Func<Team, bool> teamCondition)
+    public OnAllyPickChampionTrigger(BanPickEventDispatcher eventDispatcher, Team team)
     {
         this.eventDispatcher = eventDispatcher;
-        this.teamCondition = teamCondition;
+        this.team = team;
     }
 
     public void Register(Action execute)
     {
-        eventDispatcher.OnTeamChampionPick += (champion, team) =>
+        eventDispatcher.OnTeamChampionPick += (champion, pickedTeam) =>
         {
-            if (teamCondition(team))
+            if (pickedTeam == team)
+                execute();
+        };
+    }
+}
+
+public class OnOpponentPickChampionTrigger : ISkillTrigger
+{
+    readonly BanPickEventDispatcher eventDispatcher;
+    readonly Team team;
+
+    public OnOpponentPickChampionTrigger(BanPickEventDispatcher eventDispatcher, Team team)
+    {
+        this.eventDispatcher = eventDispatcher;
+        this.team = team;
+    }
+
+    public void Register(Action execute)
+    {
+        eventDispatcher.OnTeamChampionPick += (champion, pickedTeam) =>
+        {
+            if (pickedTeam != team)
                 execute();
         };
     }
