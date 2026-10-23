@@ -14,15 +14,21 @@ public class StatChanger : ISkillAction
 
     public void Do(ChampionStatus target) => _targetProvider().AddStat(_amountProvider(), statType);
 }
-
 public interface ISkillTrigger
 {
-    void Register(Action execute);
+    void Register(Action<ChampionStatus> execute);
 }
 
 public class ImmediateTrigger : ISkillTrigger
 {
-    public void Register(Action execute) => execute();
+    public void Register(Action<ChampionStatus> execute) => execute(null);
+}
+
+public class OnPhaseDoneTrigger : ISkillTrigger
+{
+    readonly PhaseEventDispatcher dispatcher;
+    public OnPhaseDoneTrigger(PhaseEventDispatcher dispatcher) => this.dispatcher = dispatcher;
+    public void Register(Action<ChampionStatus> execute) => dispatcher.OnPhaseDone += () => execute(null);
 }
 
 public class OnAllyPickChampionTrigger : ISkillTrigger
@@ -36,12 +42,12 @@ public class OnAllyPickChampionTrigger : ISkillTrigger
         this.team = team;
     }
 
-    public void Register(Action execute)
+    public void Register(Action<ChampionStatus> execute)
     {
         eventDispatcher.OnTeamChampionPick += (champion, pickedTeam) =>
         {
             if (pickedTeam == team)
-                execute();
+                execute(champion.Status);
         };
     }
 }
@@ -57,23 +63,15 @@ public class OnOpponentPickChampionTrigger : ISkillTrigger
         this.team = team;
     }
 
-    public void Register(Action execute)
+    public void Register(Action<ChampionStatus> execute)
     {
         eventDispatcher.OnTeamChampionPick += (champion, pickedTeam) =>
         {
             if (pickedTeam != team)
-                execute();
+                execute(champion.Status);
         };
     }
 }
-
-public class OnPhaseDoneTrigger : ISkillTrigger
-{
-    readonly PhaseEventDispatcher dispatcher;
-    public OnPhaseDoneTrigger(PhaseEventDispatcher dispatcher) => this.dispatcher = dispatcher;
-    public void Register(Action execute) => dispatcher.OnPhaseDone += execute;
-}
-
 public class PickChampStatChanger : ISkillAction
 {
     readonly BanPickEventDispatcher eventDispatcher;

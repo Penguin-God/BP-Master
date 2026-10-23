@@ -34,7 +34,13 @@ public class SkillActionFactory
 
 public static class SkillFuncProvider
 {
-    public static Func<ChampionStatus> TargetProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster) => () => skillData.SkillApplyType == SkillApplyType.Select ? select : caster;
+    public static Func<ChampionStatus> TargetProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster)
+        => () => skillData.SkillApplyType switch
+        {
+            SkillApplyType.Select => select,
+            SkillApplyType.Triggered => select, // 이벤트로 전달받은 챔피언이 select로 들어옴
+            _ => caster
+        };
 
     public static Func<int> AmountProvider(SkillData skillData, ChampionStatus select, ChampionStatus caster)
     {
