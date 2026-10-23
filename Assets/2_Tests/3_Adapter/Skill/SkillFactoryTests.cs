@@ -5,8 +5,6 @@ using System;
 public class SkillFactoryTests
 {
     [TestCase(SkillType.StatChanger, typeof(StatChanger))]
-    [TestCase(SkillType.PickBuffer, typeof(PickChampStatChanger))]
-    [TestCase(SkillType.FinalStatChanger, typeof(FinalStatChanger))]
     public void Type에_맞는_Action_객체_생성(SkillType type, Type expectedType)
     {
         var skillData = new SkillData(type, CalculatorFactory.CreateValue(100), SkillCondtionFactory.CreateNull(), default, 0, 0, StatType.Attack);

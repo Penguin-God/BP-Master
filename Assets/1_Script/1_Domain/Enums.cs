@@ -16,9 +16,6 @@ public enum SkillType
 {
     None = 0,
     StatChanger = 2,
-    PickBuffer = 11,
-    FinalStatChanger = 13,
-    OppentPickStatChanger = 14,
 }
 
 public enum ConditionType

@@ -11,7 +11,7 @@ public class SkillActionFactory
         this.phaseEventDispatcher = phaseEventDispatcher;
     }
 
-    public ISkillTrigger CreateTrigger(SkillUseTimingType timingType, Team team)
+    public ISkillRegister CreateTrigger(SkillUseTimingType timingType, Team team)
         => SkillTriggerFactory.Create(timingType, phaseActionEventDispatcher, phaseEventDispatcher, team);
 
     public ISkillAction CreateAction(SkillData skillData, ChampionStatus caster, ChampionStatus target, Team team)
@@ -21,9 +21,6 @@ public class SkillActionFactory
         return skillData.SkillType switch
         {
             SkillType.StatChanger => statChanger,
-            SkillType.FinalStatChanger => new FinalStatChanger(caster, phaseEventDispatcher, skillData.Calculator),
-            SkillType.PickBuffer => new PickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
-            SkillType.OppentPickStatChanger => new OppentPickChampStatChanger(phaseActionEventDispatcher, statChanger, team),
             _ => throw new NotImplementedException($"생성에 가정되지 않는 스킬 : {skillData.SkillType}")
         };
     }
@@ -58,7 +55,7 @@ public static class SkillFuncProvider
 
 public static class SkillTriggerFactory
 {
-    public static ISkillTrigger Create(SkillUseTimingType timingType,BanPickEventDispatcher bpDispatcher,PhaseEventDispatcher phaseDispatcher,Team team) 
+    public static ISkillRegister Create(SkillUseTimingType timingType,BanPickEventDispatcher bpDispatcher,PhaseEventDispatcher phaseDispatcher,Team team) 
         => timingType switch
         {
             SkillUseTimingType.Immediate => new ImmediateTrigger(),

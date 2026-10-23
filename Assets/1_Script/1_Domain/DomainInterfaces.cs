@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public interface ISkillAction
@@ -13,6 +14,11 @@ public interface IChampionCondition
 public interface ISkillAmountCalculator
 {
     int Calculate(int currentValue);
+}
+
+public interface ISkillRegister
+{
+    void Register(Action<ChampionStatus> execute);
 }
 
 public interface IChampionSelector
