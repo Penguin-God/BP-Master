@@ -1,13 +1,13 @@
-public class SkillConditionTextBuilder
+public static class SkillConditionTextBuilder
 {
-    public string BuildConditionText(SkillConditionData conditionData) => conditionData.ConditionType switch
+    public static string BuildConditionText(SkillConditionData conditionData) => conditionData.ConditionType switch
     {
         ConditionType.None => "",
         ConditionType.Threshold => BuildThresholdText(conditionData.StatType, conditionData.Threshold),
         ConditionType.Compare => BuildCompareText(conditionData.StatType),
     };
 
-    string BuildThresholdText(StatConditionType conditionType, int threshold) => conditionType switch
+    static string BuildThresholdText(StatConditionType conditionType, int threshold) => conditionType switch
     {
         StatConditionType.None => "",
         StatConditionType.AttackAtLeast => $"공격력 {threshold} 이상인",
@@ -19,7 +19,7 @@ public class SkillConditionTextBuilder
         _ => ""
     };
 
-    string BuildCompareText(StatConditionType conditionType) => conditionType switch
+    static string BuildCompareText(StatConditionType conditionType) => conditionType switch
     {
         StatConditionType.None => "",
         StatConditionType.AttackAtLeast => $"공격력이 자신보다 높은",

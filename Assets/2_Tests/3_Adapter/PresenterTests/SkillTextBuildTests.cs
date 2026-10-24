@@ -21,9 +21,7 @@ public class SkillTextBuildTests
     [Test]
     public void 조건_타입과_인자값에_맞는_텍스트_생성()
     {
-        var sut = new SkillConditionTextBuilder();
-
-        string GetText(SkillConditionData conditionData) => sut.BuildConditionText(conditionData);
+        string GetText(SkillConditionData conditionData) => SkillConditionTextBuilder.BuildConditionText(conditionData);
 
         Assert.AreEqual("방어력이 자신보다 높은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.DefenseAtLeast)));
         Assert.AreEqual("방어력이 자신보다 낮은", GetText(CreateConditionData(ConditionType.Compare, statType: StatConditionType.DefenseBelow)));

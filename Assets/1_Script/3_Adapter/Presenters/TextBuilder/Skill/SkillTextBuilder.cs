@@ -8,7 +8,6 @@ public interface ISkillActionTextBuilder
 
 public class SkillTextBuilder
 {
-    readonly SkillConditionTextBuilder ConditionTextBuilder = new SkillConditionTextBuilder();
     readonly ISkillActionTextBuilder actionTextBuilder;
 
     public SkillTextBuilder(ISkillActionTextBuilder actionTextBuilder) => this.actionTextBuilder = actionTextBuilder;
@@ -17,7 +16,7 @@ public class SkillTextBuilder
 
     string BuildSkillText(SkillViewModel skillData)
     {
-        var conditoin = ConditionTextBuilder.BuildConditionText(skillData.ConditionData);
+        var conditoin = SkillConditionTextBuilder.BuildConditionText(skillData.ConditionData);
         var space = string.IsNullOrEmpty(conditoin) ? "" : " ";
 
         var target = BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
