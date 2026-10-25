@@ -6,7 +6,7 @@ public class SkillTextConverterTests
     [Test]
     public void 딕셔너리로_받은_템플릿을_실제_텍스트로_변환()
     {
-        SkillConvertKeyRecord keyRecord = new SkillConvertKeyRecord("{Value}", "{Action}", "{Stat}");
+        var keyRecord = new SkillConvertKey("Condition", "Rule", "{Stat}", "{Value}", "{Action}");
         Dictionary<SkillType, string> textBySkill = new Dictionary<SkillType, string>();
         textBySkill.Add(SkillType.StatChanger, $"{keyRecord.Stat} {keyRecord.Value} {keyRecord.Action}");
         SkillAmountData data = TestHelper.CreateSkillAmount(AmountType.Value, StatType.Attack, value: 100);

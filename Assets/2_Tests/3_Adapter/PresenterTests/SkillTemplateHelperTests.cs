@@ -10,7 +10,7 @@ public class SkillTemplateHelperTests
         var values = new[] { "공격력 120 이상인", "아군 전체", "방어력", "10", "증가" };
         var template = "{Condition} {Rule} {Stat} {Value} {Action}";
 
-        var result = SkillTemplateHelper.ReplaceTemplate(template, keys.Keys, values);
+        var result = SkillTemplateHelper.ReplaceTemplate(template, keys.Values, values);
 
         Assert.AreEqual("공격력 120 이상인 아군 전체 방어력 10 증가", result);
     }
@@ -21,7 +21,7 @@ public class SkillTemplateHelperTests
         var values = new[] { "", "적군 전체", "", "", "" };
         var template = "{Condition} {Rule} {Stat} {Value} {Action}";
 
-        var result = SkillTemplateHelper.ReplaceTemplate(template, keys.Keys, values);
+        var result = SkillTemplateHelper.ReplaceTemplate(template, keys.Values, values);
 
         Assert.AreEqual("적군 전체", result);
     }
