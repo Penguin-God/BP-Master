@@ -1,21 +1,25 @@
 using NUnit.Framework;
 using static TestHelper;
 
-public class FakeTextBuilder : ISkillActionTextBuilder
-{
-    public string BuildText(SkillType skillType, SkillAmountData data) => "액숀";
-}
-
 public class SkillTextBuildTests
 {
+    SkillTextBuilder CreateSut(string template = "{Condition} {Rule} {Stat} {Value} {Action}")
+    {
+        var statChangeData = new StatChangeTextData("증가", "감소", "고정");
+        var convertKey = new SkillConvertKey("{Condition}", "{Rule}", "{Stat}", "{Value}", "{Action}");
+        return new SkillTextBuilder(template, statChangeData, convertKey);
+    }
+
     [Test]
     public void 스킬_텍스트_전체_생성()
     {
-        var sut = new SkillTextBuilder(new FakeTextBuilder());
+        var sut = CreateSut();
+        var amount = CreateSkillAmount(AmountType.Value, statType: StatType.Attack, value: 20);
+        var model = CreateSkillViewModel(rule: SelfAllRule, amountData: amount);
 
-        var result = sut.BuildSkillText(CreateSkillViewModels(CreateSkillViewModel(rule: SelfAllRule)));
+        var result = sut.BuildSkillText(CreateSkillViewModels(model));
 
-        Assert.AreEqual("아군 전체 액숀", result);
+        Assert.AreEqual("아군 전체 공격력 20 증가", result);
     }
 
     [Test]

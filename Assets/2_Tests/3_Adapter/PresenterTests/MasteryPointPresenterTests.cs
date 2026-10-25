@@ -12,7 +12,14 @@ public class MasteryPointPresenterTests
 
     MasteryPointPresenter CreateSut(MasteryProfile inventory, FakeMasterySaver saver)
     {
-        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(100, 0, 0), System.Array.Empty<SkillViewModel>()), new SkillTextBuilder(new FakeTextBuilder()));
+        var statChangeData = new StatChangeTextData("증가", "감소", "고정");
+        var convertKey = new SkillConvertKey("{Condition}", "{Rule}", "{Stat}", "{Value}", "{Action}");
+        var skillTextBuilder = new SkillTextBuilder("{Condition} {Rule} {Stat} {Value} {Action}", statChangeData, convertKey);
+
+        var textBuilder = new ChampionTextBuilder(
+            id => new ChampionProfile(id, "펭귄", CreateStat(100, 0, 0), System.Array.Empty<SkillViewModel>()),
+            skillTextBuilder
+        );
         return new MasteryPointPresenter(inventory, textBuilder, saver, new MasteryMultiplier(30, 0, 0));
     }
 

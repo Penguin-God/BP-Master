@@ -15,10 +15,9 @@ MonoBehaviour:
   increaseText: "\uC99D\uAC00"
   decreaseText: "\uAC10\uC18C"
   fixText: "\uC73C\uB85C \uACE0\uC815"
+  conditionKey: '{Conditoin}'
+  ruleKey: '{Rule}'
   valueKey: '{Value}'
   actionKey: '{Action}'
   statKey: '{Stat}'
-  template: '{Stat} {Value} {Action}'
-  skillActionTextFields:
-  - Type: 2
-    Text: '{Stat} {Value} {Action}'
+  template: '{Conditoin} {Rule} {Stat} {Value} {Action}'
