@@ -7,7 +7,7 @@ public class SkillTextConverterTests
     {
         var keyRecord = new SkillConvertKey("Condition", "Rule", "{Stat}", "{Value}", "{Action}");
         SkillAmountData data = TestHelper.CreateSkillAmount(AmountType.Value, StatType.Attack, value: 100);
-        var sut = new ActionTextConverter($"{keyRecord.Stat} {keyRecord.Value} {keyRecord.Action}", new SkillAmountTextBuilder(new AmountTextData("증가", "감소", "고정")), keyRecord);
+        var sut = new ActionTextConverter($"{keyRecord.Stat} {keyRecord.Value} {keyRecord.Action}", new StatChangeTextData("증가", "감소", "고정"), keyRecord);
 
         string result = sut.BuildText(SkillType.StatChanger, data);
 

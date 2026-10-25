@@ -1,6 +1,8 @@
+using Codice.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 
 public interface ISkillActionTextBuilder
 {
@@ -22,12 +24,33 @@ public static class SkillTemplateHelper
         return Regex.Replace(template, @"\s+", " ").Trim();
     }
 }
-
 public class SkillTextBuilder
 {
     readonly ISkillActionTextBuilder actionTextBuilder;
 
+    // 새 생성자에서 사용할 필드
+    readonly string Template;
+    readonly SkillConvertKey skillConvertKey;
+
     public SkillTextBuilder(ISkillActionTextBuilder actionTextBuilder) => this.actionTextBuilder = actionTextBuilder;
+
+    public SkillTextBuilder(string template, SkillConvertKey skillConvertKey)
+    {
+        Template = template;
+        this.skillConvertKey = skillConvertKey;
+    }
+
+    string _BuildSkillText(SkillViewModel skillData)
+    {
+        string conditoin = SkillConditionTextBuilder.BuildConditionText(skillData.ConditionData);
+        string target = BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
+        string stat = AmountTextBuilder.BuildStatText(skillData.AmountData.StatType);
+        string amount = AmountTextBuilder.BuildAmountText(skillData.AmountData);
+        string change = AmountTextBuilder.BuildChangeText(skillData.AmountData, default);
+
+        var replaceValue = new SkillConvertKey(conditoin, target, stat, amount, change);
+        return SkillTemplateHelper.ReplaceTemplate(Template, skillConvertKey.Values, replaceValue.Values);
+    }
 
     public string BuildSkillText(IEnumerable<SkillViewModel> skillDatas) => string.Join(", ", skillDatas.Select(x => BuildSkillText(x)));
 

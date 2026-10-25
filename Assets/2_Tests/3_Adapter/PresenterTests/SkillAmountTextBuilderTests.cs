@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using static TestHelper;
+using static AmountTextBuilder;
 
 public class SkillAmountTextBuilderTests
 {
@@ -9,9 +10,7 @@ public class SkillAmountTextBuilderTests
     [TestCase(StatType.Speed, "속도")]
     public void 스탯_종류에_따른_텍스트_반환_확인(StatType statType, string expected)
     {
-        var sut = CreateBuilder();
-
-        var result = sut.BuildStatText(statType);
+        var result = BuildStatText(statType);
 
         Assert.AreEqual(expected, result);
     }
@@ -23,9 +22,7 @@ public class SkillAmountTextBuilderTests
     public void 타입에_따른_값을_텍스트로_반환(AmountType amountType, string expected)
     {
         SkillAmountData data = CreateSkillAmount(amountType, value: 100, percent: 0.5f, fix: 120);
-        var sut = CreateBuilder();
-
-        string result = sut.BuildAmountText(data);
+        string result = BuildAmountText(data);
 
         Assert.AreEqual(expected, result);
     }
@@ -36,17 +33,9 @@ public class SkillAmountTextBuilderTests
     [TestCase(AmountType.Fix, "고정")]
     public void 값에_따라_변경_텍스트_반환(AmountType amountType, string expected)
     {
-        var sut = CreateBuilder();
-
         SkillAmountData data = CreateSkillAmount(amountType, value: -100, percent: 0.5f, fix: 120);
-        string result = sut.BuildChangeText(data);
+        string result = BuildChangeText(data, new StatChangeTextData("증가", "감소", "고정"));
 
         Assert.AreEqual(expected, result);
-    }
-
-    SkillAmountTextBuilder CreateBuilder()
-    {
-        var dummyData = new AmountTextData("증가", "감소", "고정");
-        return new SkillAmountTextBuilder(dummyData);
     }
 }

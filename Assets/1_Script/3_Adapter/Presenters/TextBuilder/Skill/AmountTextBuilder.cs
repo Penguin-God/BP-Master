@@ -1,10 +1,10 @@
-public readonly struct AmountTextData
+public readonly struct StatChangeTextData
 {
     public readonly string Increased;
     public readonly string Decreased;
     public readonly string Fix;
 
-    public AmountTextData(string increased, string decreased, string fix)
+    public StatChangeTextData(string increased, string decreased, string fix)
     {
         Increased = increased;
         Decreased = decreased;
@@ -12,13 +12,9 @@ public readonly struct AmountTextData
     }
 }
 
-public class SkillAmountTextBuilder
+public static class AmountTextBuilder
 {
-    readonly AmountTextData changeText;
-
-    public SkillAmountTextBuilder(AmountTextData changeText) => this.changeText = changeText;
-
-    public string BuildAmountText(SkillAmountData data) => data.Type switch
+    public static string BuildAmountText(SkillAmountData data) => data.Type switch
     {
         AmountType.Value => data.ValueAmount.ToString(),
         AmountType.Percent => $"{ToPercentInt(data.PercentValue)}%",
@@ -26,7 +22,9 @@ public class SkillAmountTextBuilder
         _ => ""
     };
 
-    public string BuildChangeText(SkillAmountData data) => data.Type switch
+    static int ToPercentInt(float value) => (int)System.MathF.Round(value * 100f);
+
+    public static string BuildChangeText(SkillAmountData data, StatChangeTextData changeText) => data.Type switch
     {
         AmountType.Fix => changeText.Fix,
         AmountType.Value => data.ValueAmount < 0 ? changeText.Decreased : changeText.Increased,
@@ -34,13 +32,11 @@ public class SkillAmountTextBuilder
         _ => ""
     };
 
-    public string BuildStatText(StatType statType) => statType switch
+    public static string BuildStatText(StatType statType) => statType switch
     {
         StatType.Attack => "공격력",
         StatType.Defense => "방어력",
         StatType.Speed => "속도",
         _ => ""
     };
-
-    int ToPercentInt(float value) => (int)System.MathF.Round(value * 100f);
 }
