@@ -21,7 +21,7 @@ public class SkillAmountTextBuilderTests
     [TestCase(AmountType.Fix, "120")]
     public void 타입에_따른_값을_텍스트로_반환(AmountType amountType, string expected)
     {
-        SkillAmountData data = CreateSkillAmount(amountType, value: 100, percent: 0.5f, fix: 120);
+        SkillAmountData data = CreateSkillAmount(amountType, value: -100, percent: -0.5f, fix: 120);
         string result = BuildAmountText(data);
 
         Assert.AreEqual(expected, result);

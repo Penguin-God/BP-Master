@@ -17,7 +17,7 @@ public class SkillTextSO : ScriptableObject
 
 
     StatChangeTextData StatChangeText => new(increaseText, decreaseText, fixText);
-    SkillConvertKey SkillConvertKey => new("", "", statKey, valueKey, actionKey);
+    SkillConvertKey SkillConvertKey => new(conditionKey, ruleKey, statKey, valueKey, actionKey);
 
     public SkillTextBuilder CreateSkillTextBuilder() => new SkillTextBuilder(template, StatChangeText, SkillConvertKey);
 }

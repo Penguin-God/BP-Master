@@ -1,3 +1,5 @@
+using System;
+
 public readonly struct StatChangeTextData
 {
     public readonly string Increased;
@@ -16,8 +18,8 @@ public static class AmountTextBuilder
 {
     public static string BuildAmountText(SkillAmountData data) => data.Type switch
     {
-        AmountType.Value => data.ValueAmount.ToString(),
-        AmountType.Percent => $"{ToPercentInt(data.PercentValue)}%",
+        AmountType.Value => MathF.Abs(data.ValueAmount).ToString(),
+        AmountType.Percent => $"{ToPercentInt(MathF.Abs(data.PercentValue))}%",
         AmountType.Fix => data.FixValue.ToString(),
         _ => ""
     };
