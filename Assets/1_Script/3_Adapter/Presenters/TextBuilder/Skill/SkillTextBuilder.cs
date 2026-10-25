@@ -1,27 +1,29 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 public interface ISkillActionTextBuilder
 {
     string BuildText(SkillType skillType, SkillAmountData data);
 }
 
-public record SkillConvertKey(string Condition, string Rule, string Value, string Action, string Stat)
+
+public record SkillConvertKey(string Condition, string Rule, string Stat, string Value, string Action)
 {
-    public IReadOnlyList<string> Keys = new List<string> { Condition, Rule, Value, Action, Stat };
+    public IReadOnlyList<string> Keys => new[] { Condition, Rule, Stat, Value, Action };
+
+    public static SkillConvertKey Default => new("{Condition}", "{Rule}", "{Stat}", "{Value}", "{Action}");
 }
 
-public static class MyClass
+public static class SkillTemplateHelper
 {
-    public static string A(string template, IReadOnlyList<string> Keys, IReadOnlyList<string> Values)
+    public static string ReplaceTemplate(string template, IReadOnlyList<string> keys, IReadOnlyList<string> values)
     {
-        string result = string.Empty;
-        for (var i = 0; i < template.Length; i++)
-            template.Replace(Keys[i], Values[i]);
-        return result;
+        for (var i = 0; i < keys.Count; i++)
+            template = template.Replace(keys[i], values[i]);
+        return Regex.Replace(template, @"\s+", " ").Trim();
     }
 }
-
 
 public class SkillTextBuilder
 {
