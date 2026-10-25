@@ -2,12 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public interface ISkillActionTextBuilder
-{
-    string BuildText(SkillType skillType, SkillAmountData data);
-}
-
-
 public record SkillConvertKey(string Condition, string Rule, string Stat, string Value, string Action)
 {
     public IReadOnlyList<string> Values => new[] { Condition, Rule, Stat, Value, Action };
