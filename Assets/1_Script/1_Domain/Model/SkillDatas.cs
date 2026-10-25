@@ -27,7 +27,7 @@ public readonly struct SkillConditionData
     }
 }
 public record SkillAmountData(AmountType Type, StatType StatType, int ValueAmount, float PercentValue, int FixValue);
-public record SkillViewModel(SkillType SkillType, SkillAmountData AmountData, SkillConditionData ConditionData, CardSelectRule SelectRule);
+public record SkillViewModel(SkillType SkillType, SkillAmountData AmountData, SkillConditionData ConditionData, CardSelectRule SelectRule, string CustomTemplate = null);
 
 public enum SkillUseTimingType
 {

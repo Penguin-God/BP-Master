@@ -42,6 +42,8 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
+    isSpecialText: 1
+    specialTemplate: "\uB09C \uBC8C\uB808\uB2E4~"
   - targetSide: 0
     range: 1
     applyType: 2
@@ -57,4 +59,6 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
+    isSpecialText: 0
+    specialTemplate: 
   icon: {fileID: 21300000, guid: cc66d0bd208848c894c4f389a14e3437, type: 3}

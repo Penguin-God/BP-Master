@@ -28,7 +28,11 @@ public class TraitDataConfig
     public SkillConditionData Condition => new SkillConditionData(conditionType, threshold, conditionCheckerType);
 
     public SkillData CreateSkillData() => new SkillData(skillType, CalculatorFactory.Create(skillAmount.ToData()), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmount.ToData().StatType, timingType);
-    public SkillViewModel CreateViewModel() => new SkillViewModel(skillType, GetValueData(), Condition, Rule);
+    public SkillViewModel CreateViewModel() => new SkillViewModel(skillType, GetValueData(), Condition, Rule, specialTemplate?.Trim());
+
+    [SerializeField] bool isSpecialText;
+    [ShowIf(nameof(isSpecialText))]
+    [SerializeField] string specialTemplate;
 }
 
 [CreateAssetMenu(fileName = "ChampionSO", menuName = "Data/Champion")]

@@ -39,7 +39,9 @@ public class SkillTextBuilder
         string change = AmountTextBuilder.BuildChangeText(skillData.AmountData, StatChangeData);
 
         var replaceValue = new SkillConvertKey(conditoin, target, stat, amount, change);
-        return SkillTemplateHelper.ReplaceTemplate(Template, skillConvertKey.Values, replaceValue.Values);
+
+        string templateToUse = string.IsNullOrEmpty(skillData.CustomTemplate) ? Template : skillData.CustomTemplate;
+        return SkillTemplateHelper.ReplaceTemplate(templateToUse, skillConvertKey.Values, replaceValue.Values);
     }
 
     public string BuildSkillText(IEnumerable<SkillViewModel> skillDatas) => string.Join(", ", skillDatas.Select(x => BuildSkillText(x)));
