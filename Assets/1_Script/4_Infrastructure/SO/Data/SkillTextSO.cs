@@ -18,12 +18,13 @@ public class SkillTextSO : ScriptableObject
     [SerializeField] string valueKey;
     [SerializeField] string actionKey;
     [SerializeField] string statKey;
+    [SerializeField] string template;
 
     [SerializeField] SkillActionTextField[] skillActionTextFields;
 
 
     SkillAmountTextBuilder CreateAmountBuilder() => new SkillAmountTextBuilder(new AmountTextData(increaseText, decreaseText, fixText));
-    ActionTextConverter CreateSkillConverter() => new ActionTextConverter(skillActionTextFields.ToDictionary(x => x.Type, x => x.Text), CreateAmountBuilder(), new SkillConvertKey("", "", valueKey, actionKey, statKey));
+    ActionTextConverter CreateSkillConverter() => new ActionTextConverter(template, CreateAmountBuilder(), new SkillConvertKey("", "", valueKey, actionKey, statKey));
 
     public SkillTextBuilder CreateSkillTextBuilder() => new SkillTextBuilder(CreateSkillConverter());
 }

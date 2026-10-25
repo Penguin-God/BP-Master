@@ -18,6 +18,7 @@ MonoBehaviour:
   valueKey: '{Value}'
   actionKey: '{Action}'
   statKey: '{Stat}'
+  template: '{Stat} {Value} {Action}'
   skillActionTextFields:
   - Type: 2
     Text: '{Stat} {Value} {Action}'
