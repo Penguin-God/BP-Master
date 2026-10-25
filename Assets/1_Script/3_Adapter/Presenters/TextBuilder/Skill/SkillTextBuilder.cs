@@ -6,13 +6,30 @@ public interface ISkillActionTextBuilder
     string BuildText(SkillType skillType, SkillAmountData data);
 }
 
+public record SkillConvertKey(string Condition, string Rule, string Value, string Action, string Stat)
+{
+    public IReadOnlyList<string> Keys = new List<string> { Condition, Rule, Value, Action, Stat };
+}
+
+public static class MyClass
+{
+    public static string A(string template, IReadOnlyList<string> Keys, IReadOnlyList<string> Values)
+    {
+        string result = string.Empty;
+        for (var i = 0; i < template.Length; i++)
+            template.Replace(Keys[i], Values[i]);
+        return result;
+    }
+}
+
+
 public class SkillTextBuilder
 {
     readonly ISkillActionTextBuilder actionTextBuilder;
 
     public SkillTextBuilder(ISkillActionTextBuilder actionTextBuilder) => this.actionTextBuilder = actionTextBuilder;
 
-    public string BuildSkillText(IEnumerable<SkillViewModel> traitDatas) => string.Join(", ", traitDatas.Select(x => BuildSkillText(x)));
+    public string BuildSkillText(IEnumerable<SkillViewModel> skillDatas) => string.Join(", ", skillDatas.Select(x => BuildSkillText(x)));
 
     string BuildSkillText(SkillViewModel skillData)
     {
