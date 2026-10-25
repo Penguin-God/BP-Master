@@ -39,17 +39,12 @@ public static class TestHelper
     public static SkillData CreateValueSkillData(StatType statType, int value, CardSelectRule rule = default)
         => new SkillData(SkillType.StatChanger, CalculatorFactory.CreateValue(value), SkillCondtionFactory.CreateNull(), rule, SkillApplyType.Select, SkillValueType.SelectRef, statType);
 
-    public static SkillData CreateSelectSkill(SkillType skillType, StatType statType, int value, CardSelectRule rule = default)
-        => new SkillData(skillType, CalculatorFactory.CreateValue(value), SkillCondtionFactory.CreateNull(), rule, SkillApplyType.Select, SkillValueType.SelectRef, statType);
-
     public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, CardSelectRule rule = default)  => CreateValueSkillData(StatType.Attack, value, rule);
     public static SkillAmountData CreateSkillAmount(AmountType amountType, StatType statType = StatType.Attack, int value = 0, float percent = 0, int fix = 0)
         => new SkillAmountData(amountType, statType, value, percent, fix);
 
     public static Skill CreateValueSkill(StatType statType, int amount, CardSelectRule rule = default) => new Skill(CreateSkillDatas(CreateValueSkillData(statType, amount, rule)));
 
-    public static SkillConditionData CreateThresholdCondition(StatConditionType type, int threshold) => CreateConditionData(ConditionType.Threshold, statType: type, threshold: threshold);
-    public static SkillConditionData CreateCompareCondition(StatConditionType type) => CreateConditionData(ConditionType.Compare, statType: type);
     public static SkillConditionData CreateConditionData(ConditionType conditionType, StatConditionType statType = StatConditionType.None, int threshold = 0) => new SkillConditionData(statType, threshold, conditionType);
 
     static CardSelectRule CreateRule(Side side, TargetRange range) => new CardSelectRule(side, range);
@@ -83,20 +78,11 @@ public static class TestHelper
     public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
 
     public static BonusCalculator CreateBonus(int needScore, int bonus) => new BonusCalculator(new SortedDictionary<int, int>() { { needScore, bonus } });
-    public static TeamBonusCalculator CreateTeamBonus() => new TeamBonusCalculator(CreateBonus(0, 0), CreateBonus(0, 0), CreateBonus(0, 0));
 
     public static ChampionMastery CreateMasteryData(int id, int att = 0, int def = 0, int speed = 0) => new ChampionMastery(id, CreateStat(att, def, speed));
     public static MasteryApplier CreateMasteryApplier(params ChampionMastery[] masteries) => new MasteryApplier(new MasteryStatCollection(masteries));
     public static MasteryProfile CreateMasteryInventory(int point) => new MasteryProfile(point);
     public static MasteryBoardCollection CreateBoardCollection(Dictionary<int, MasteryBoard> boards) => new MasteryBoardCollection(boards);
-}
-
-public class TestAttackChangeAction : ISkillAction
-{
-    readonly int Amount;
-    public TestAttackChangeAction(int amount) => Amount = amount;
-
-    public void Do(ChampionStatus target) => target.ChangeStat(target.Stat.ChangeAttack(target.Stat.Attack + Amount));
 }
 
 public class TestEntry : IPhaseEntry
