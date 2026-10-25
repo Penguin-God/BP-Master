@@ -11,8 +11,6 @@ public interface ISkillActionTextBuilder
 public record SkillConvertKey(string Condition, string Rule, string Stat, string Value, string Action)
 {
     public IReadOnlyList<string> Keys => new[] { Condition, Rule, Stat, Value, Action };
-
-    public static SkillConvertKey Default => new("{Condition}", "{Rule}", "{Stat}", "{Value}", "{Action}");
 }
 
 public static class SkillTemplateHelper
