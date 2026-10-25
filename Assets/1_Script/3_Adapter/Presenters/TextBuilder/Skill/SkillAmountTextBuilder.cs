@@ -16,10 +16,13 @@ public class SkillAmountTextBuilder
 {
     readonly AmountTextData changeText;
 
-    public SkillAmountTextBuilder(AmountTextData changeText)
-    {
-        this.changeText = changeText;
-    }
+    public SkillAmountTextBuilder(AmountTextData changeText) => this.changeText = changeText;
+
+    public string ReplaceTemplate(string template, SkillAmountData data, SkillConvertKeyRecord skillConvertKey) => 
+        template
+            .Replace(skillConvertKey.Value, BuildAmountText(data))
+            .Replace(skillConvertKey.Action, BuildChangeText(data))
+            .Replace(skillConvertKey.Stat, BuildStatText(data.StatType));
 
     public string BuildAmountText(SkillAmountData data) => data.Type switch
     {

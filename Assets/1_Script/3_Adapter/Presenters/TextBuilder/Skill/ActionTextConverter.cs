@@ -17,13 +17,6 @@ public class ActionTextConverter : ISkillActionTextBuilder
     public string BuildText(SkillType skillType, SkillAmountData data)
     {
         if (textBySkill.TryGetValue(skillType, out var template) == false) return "";
-
-        string valueText = skillAmountTextBuilder.BuildAmountText(data).Replace("-", string.Empty);
-        string actionText = skillAmountTextBuilder.BuildChangeText(data);
-
-        return template
-            .Replace(skillConvertKey.Value, valueText)
-            .Replace(skillConvertKey.Action, actionText)
-            .Replace(skillConvertKey.Stat, skillAmountTextBuilder.BuildStatText(data.StatType));
+        return skillAmountTextBuilder.ReplaceTemplate(template, data, skillConvertKey);
     }
 }
