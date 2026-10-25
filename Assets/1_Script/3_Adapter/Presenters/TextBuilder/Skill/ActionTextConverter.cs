@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 public record SkillConvertKeyRecord(string Value, string Action, string Stat);
 
-public class SkillTextConverter : ISkillActionTextBuilder
+public class ActionTextConverter : ISkillActionTextBuilder
 {
     readonly IReadOnlyDictionary<SkillType, string> textBySkill;
     readonly SkillAmountTextBuilder skillAmountTextBuilder;
     readonly SkillConvertKeyRecord skillConvertKey;
-    public SkillTextConverter(IReadOnlyDictionary<SkillType, string> textBySkill, SkillAmountTextBuilder skillAmountTextBuilder, SkillConvertKeyRecord skillConvertKey)
+    public ActionTextConverter(IReadOnlyDictionary<SkillType, string> textBySkill, SkillAmountTextBuilder skillAmountTextBuilder, SkillConvertKeyRecord skillConvertKey)
     {
         this.textBySkill = textBySkill;
         this.skillAmountTextBuilder = skillAmountTextBuilder;

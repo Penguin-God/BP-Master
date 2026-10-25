@@ -10,7 +10,7 @@ public class SkillTextConverterTests
         Dictionary<SkillType, string> textBySkill = new Dictionary<SkillType, string>();
         textBySkill.Add(SkillType.StatChanger, $"{keyRecord.Stat} {keyRecord.Value} {keyRecord.Action}");
         SkillAmountData data = TestHelper.CreateSkillAmount(AmountType.Value, StatType.Attack, value: 100);
-        var sut = new SkillTextConverter(textBySkill, new SkillAmountTextBuilder(new AmountTextData("증가", "감소", "고정")), keyRecord);
+        var sut = new ActionTextConverter(textBySkill, new SkillAmountTextBuilder(new AmountTextData("증가", "감소", "고정")), keyRecord);
 
         string result = sut.BuildText(SkillType.StatChanger, data);
 
