@@ -20,9 +20,9 @@ public readonly struct ChampionTextModel
 public class ChampionTextBuilder
 {
     readonly Func<int, ChampionProfile> _profileProvider;
-    readonly SkillTextBuilder _skillTextBuilder;
+    readonly Func<IEnumerable<SkillViewModel>, string> _skillTextBuilder;
 
-    public ChampionTextBuilder(Func<int, ChampionProfile> profileProvider, SkillTextBuilder skillTextBuilder)
+    public ChampionTextBuilder(Func<int, ChampionProfile> profileProvider, Func<IEnumerable<SkillViewModel>, string> skillTextBuilder)
     {
         _profileProvider = profileProvider;
         _skillTextBuilder = skillTextBuilder;
@@ -32,7 +32,7 @@ public class ChampionTextBuilder
     {
         var profile = _profileProvider(id);
         var statModel = ChampionStatModelPreserter.CreateStatModel(profile.Stat, bonusStat);
-        var skillText = _skillTextBuilder.BuildSkillText(profile.Skills);
+        var skillText = _skillTextBuilder(profile.Skills);
 
         return new ChampionTextModel(profile.Name, statModel, skillText);
     }

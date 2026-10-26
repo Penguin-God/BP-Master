@@ -42,6 +42,8 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
+    isSpecialText: 1
+    specialTemplate: '{Stat}'
   - targetSide: 3
     range: 1
     applyType: 1
@@ -57,4 +59,6 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
+    isSpecialText: 1
+    specialTemplate: '{Stat}'
   icon: {fileID: 21300000, guid: f8756e0d53274a779864003090bd7da9, type: 3}
