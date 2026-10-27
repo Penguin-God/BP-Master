@@ -51,7 +51,11 @@ public class SkillTextBuilder
 
     public string BuildSkillText(IEnumerable<SkillViewModel> skillDatas) => string.Join(", ", skillDatas.Select(x => BuildSkillText(x)));
 
-    string BuildTargetRuleText(Side side, TargetRange range) => range == TargetRange.All ? $"{SideText(side)} 전체" : $"{SideText(side)} {CountText(range)}의";
+    string BuildTargetRuleText(Side side, TargetRange range) => range switch
+    {
+        TargetRange.All => $"{SideText(side)}의 모든 카드",
+        _ => $"{SideText(side)}에서 선택한 카드 {CountText(range)}의"
+    };
 
     string SideText(Side side) => side switch
     {
