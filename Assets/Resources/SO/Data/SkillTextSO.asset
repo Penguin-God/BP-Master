@@ -22,6 +22,9 @@ MonoBehaviour:
   opponentSideText: "\uC0C1\uB300\uD300\uC758"
   allSideText: "\uC591\uD300 \uC804\uCCB4\uC758"
   noneSideText: 
+  allCardsText: "\uCE74\uB4DC"
+  selectCardsPrefix: "\uC120\uD0DD\uD55C \uCE74\uB4DC"
+  selectCardsSuffix: "\uC758"
   conditionKey: '{Conditoin}'
   ruleKey: '{Rule}'
   statKey: '{Stat}'

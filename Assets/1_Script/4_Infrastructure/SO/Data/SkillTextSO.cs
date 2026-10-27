@@ -19,6 +19,11 @@ public class SkillTextSO : ScriptableObject
     [SerializeField] string allSideText;
     [SerializeField] string noneSideText;
 
+    [Header("타깃 룰(TargetRule) 텍스트")]
+    [SerializeField] string allCardsText;
+    [SerializeField] string selectCardsPrefix;
+    [SerializeField] string selectCardsSuffix;
+
     [Header("템플릿 및 치환 키")]
     [SerializeField] string conditionKey;
     [SerializeField] string ruleKey;
@@ -29,7 +34,7 @@ public class SkillTextSO : ScriptableObject
 
     StatChangeTextData StatChangeText => new(increaseText, decreaseText, fixText);
     StatTextData StatText => new(attackText, defenseText, speedText);
-    SideTextData SideText => new(selfSideText, opponentSideText, allSideText, noneSideText);
+    SideTextData SideText => new(selfSideText, opponentSideText, allSideText, noneSideText, allCardsText, selectCardsPrefix, selectCardsSuffix);
     SkillConvertKey SkillConvertKey => new(conditionKey, ruleKey, statKey, valueKey, actionKey);
 
     public SkillTextBuilder CreateSkillTextBuilder()

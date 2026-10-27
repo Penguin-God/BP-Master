@@ -17,7 +17,6 @@ public static class SkillTemplateHelper
     }
 }
 
-
 public class SkillTextBuilder
 {
     readonly string Template;
@@ -38,7 +37,7 @@ public class SkillTextBuilder
     string BuildSkillText(SkillViewModel skillData)
     {
         string conditoin = SkillConditionTextBuilder.BuildConditionText(skillData.ConditionData);
-        string target = BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
+        string target = sideTextData.BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
         string stat = AmountTextBuilder.BuildStatText(skillData.AmountData.StatType, statTextData);
         string amount = AmountTextBuilder.BuildAmountText(skillData.AmountData);
         string change = AmountTextBuilder.BuildChangeText(skillData.AmountData, statChangeData);
@@ -50,26 +49,4 @@ public class SkillTextBuilder
     }
 
     public string BuildSkillText(IEnumerable<SkillViewModel> skillDatas) => string.Join(", ", skillDatas.Select(x => BuildSkillText(x)));
-
-    string BuildTargetRuleText(Side side, TargetRange range) => range switch
-    {
-        TargetRange.All => $"{SideText(side)}의 모든 카드",
-        _ => $"{SideText(side)}에서 선택한 카드 {CountText(range)}의"
-    };
-
-    string SideText(Side side) => side switch
-    {
-        Side.Self => sideTextData.Self,
-        Side.Opponent => sideTextData.Opponent,
-        Side.All => sideTextData.All,
-        _ => sideTextData.None
-    };
-
-    string CountText(TargetRange range) => range switch
-    {
-        TargetRange.Single => "하나",
-        TargetRange.Double => "둘",
-        TargetRange.Triple => "셋",
-        _ => string.Empty
-    };
 }

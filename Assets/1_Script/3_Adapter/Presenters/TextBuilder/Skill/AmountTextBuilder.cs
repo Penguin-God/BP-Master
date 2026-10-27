@@ -28,20 +28,29 @@ public readonly struct StatTextData
     }
 }
 
-public readonly struct SideTextData
+public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsText, string SelectCardsPrefix, string SelectCardsSuffix)
 {
-    public readonly string Self;
-    public readonly string Opponent;
-    public readonly string All;
-    public readonly string None;
-
-    public SideTextData(string self, string opponent, string all, string none = "대상 없음")
+    public string BuildTargetRuleText(Side side, TargetRange range) => range switch
     {
-        Self = self;
-        Opponent = opponent;
-        All = all;
-        None = none;
-    }
+        TargetRange.All => $"{SideText(side)}{AllCardsText}",
+        _ => $"{SideText(side)}{SelectCardsPrefix}{CountText(range)}{SelectCardsSuffix}"
+    };
+
+    public string SideText(Side side) => side switch
+    {
+        Side.Self => Self,
+        Side.Opponent => Opponent,
+        Side.All => All,
+        _ => None
+    };
+
+    static string CountText(TargetRange range) => range switch
+    {
+        TargetRange.Single => "하나",
+        TargetRange.Double => "둘",
+        TargetRange.Triple => "셋",
+        _ => string.Empty
+    };
 }
 
 public static class AmountTextBuilder
