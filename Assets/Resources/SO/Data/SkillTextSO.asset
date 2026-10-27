@@ -18,13 +18,13 @@ MonoBehaviour:
   attackText: "\uACF5"
   defenseText: "\uBC29"
   speedText: "\uC18D\uB3C4"
-  selfSideText: "\uB0B4"
-  opponentSideText: "\uC0C1\uB300\uD300\uC758"
-  allSideText: "\uC591\uD300 \uC804\uCCB4\uC758"
+  selfSideText: "\uB0B4 \uC2AC\uB86F"
+  opponentSideText: "\uC0C1\uB300 \uC2AC\uB86F"
+  allSideText: "\uC591\uD300 \uC2AC\uB86F"
   noneSideText: 
-  allCardsText: "\uCE74\uB4DC"
+  allCardsText: "\uC758 \uBAA8\uB4E0 \uCE74\uB4DC"
   selectCardsPrefix: "\uC120\uD0DD\uD55C \uCE74\uB4DC"
-  selectCardsSuffix: "\uC758"
+  selectCardsSuffix: "\uC5D0\uC11C"
   conditionKey: '{Conditoin}'
   ruleKey: '{Rule}'
   statKey: '{Stat}'

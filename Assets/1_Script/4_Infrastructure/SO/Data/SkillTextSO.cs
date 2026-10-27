@@ -37,6 +37,5 @@ public class SkillTextSO : ScriptableObject
     SideTextData SideText => new(selfSideText, opponentSideText, allSideText, noneSideText, allCardsText, selectCardsPrefix, selectCardsSuffix);
     SkillConvertKey SkillConvertKey => new(conditionKey, ruleKey, statKey, valueKey, actionKey);
 
-    public SkillTextBuilder CreateSkillTextBuilder()
-        => new SkillTextBuilder(template, StatChangeText, StatText, SideText, SkillConvertKey);
+    public SkillTextBuilder CreateSkillTextBuilder() => new SkillTextBuilder(template, StatChangeText, StatText, SideText, SkillConvertKey);
 }

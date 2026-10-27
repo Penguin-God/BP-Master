@@ -37,7 +37,7 @@ public class SkillTextBuilder
     string BuildSkillText(SkillViewModel skillData)
     {
         string conditoin = SkillConditionTextBuilder.BuildConditionText(skillData.ConditionData);
-        string target = sideTextData.BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
+        string target = sideTextData.BuildSelectRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
         string stat = AmountTextBuilder.BuildStatText(skillData.AmountData.StatType, statTextData);
         string amount = AmountTextBuilder.BuildAmountText(skillData.AmountData);
         string change = AmountTextBuilder.BuildChangeText(skillData.AmountData, statChangeData);

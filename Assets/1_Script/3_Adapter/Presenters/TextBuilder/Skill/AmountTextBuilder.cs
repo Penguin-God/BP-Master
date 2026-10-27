@@ -28,15 +28,15 @@ public readonly struct StatTextData
     }
 }
 
-public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsText, string SelectCardsPrefix, string SelectCardsSuffix)
+public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsSuffix, string SelectCardsPrefix, string SelectCardsSuffix)
 {
-    public string BuildTargetRuleText(Side side, TargetRange range) => range switch
+    public string BuildSelectRuleText(Side side, TargetRange range) => range switch
     {
-        TargetRange.All => $"{SideText(side)}{AllCardsText}",
-        _ => $"{SideText(side)}{SelectCardsPrefix}{CountText(range)}{SelectCardsSuffix}"
+        TargetRange.All => $"{SideText(side)}{AllCardsSuffix}",
+        _ => $"{SideText(side)}{SelectCardsSuffix} {SelectCardsPrefix} {CountText(range)}"
     };
 
-    public string SideText(Side side) => side switch
+    string SideText(Side side) => side switch
     {
         Side.Self => Self,
         Side.Opponent => Opponent,
