@@ -15,9 +15,16 @@ MonoBehaviour:
   increaseText: "\uC99D\uAC00"
   decreaseText: "\uAC10\uC18C"
   fixText: "\uC73C\uB85C \uACE0\uC815"
+  attackText: "\uACF5"
+  defenseText: "\uBC29"
+  speedText: "\uC18D\uB3C4"
+  selfSideText: "\uB0B4"
+  opponentSideText: "\uC0C1\uB300\uD300\uC758"
+  allSideText: "\uC591\uD300 \uC804\uCCB4\uC758"
+  noneSideText: 
   conditionKey: '{Conditoin}'
   ruleKey: '{Rule}'
+  statKey: '{Stat}'
   valueKey: '{Value}'
   actionKey: '{Action}'
-  statKey: '{Stat}'
   template: '{Conditoin} {Rule} {Stat} {Value} {Action}'

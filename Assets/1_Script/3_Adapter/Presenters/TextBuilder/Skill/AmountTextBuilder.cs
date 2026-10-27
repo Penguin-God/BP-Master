@@ -14,6 +14,36 @@ public readonly struct StatChangeTextData
     }
 }
 
+public readonly struct StatTextData
+{
+    public readonly string Attack;
+    public readonly string Defense;
+    public readonly string Speed;
+
+    public StatTextData(string attack, string defense, string speed)
+    {
+        Attack = attack;
+        Defense = defense;
+        Speed = speed;
+    }
+}
+
+public readonly struct SideTextData
+{
+    public readonly string Self;
+    public readonly string Opponent;
+    public readonly string All;
+    public readonly string None;
+
+    public SideTextData(string self, string opponent, string all, string none = "대상 없음")
+    {
+        Self = self;
+        Opponent = opponent;
+        All = all;
+        None = none;
+    }
+}
+
 public static class AmountTextBuilder
 {
     public static string BuildAmountText(SkillAmountData data) => data.Type switch
@@ -24,7 +54,7 @@ public static class AmountTextBuilder
         _ => ""
     };
 
-    static int ToPercentInt(float value) => (int)System.MathF.Round(value * 100f);
+    static int ToPercentInt(float value) => (int)MathF.Round(value * 100f);
 
     public static string BuildChangeText(SkillAmountData data, StatChangeTextData changeText) => data.Type switch
     {
@@ -34,11 +64,11 @@ public static class AmountTextBuilder
         _ => ""
     };
 
-    public static string BuildStatText(StatType statType) => statType switch
+    public static string BuildStatText(StatType statType, StatTextData statText) => statType switch
     {
-        StatType.Attack => "공격력",
-        StatType.Defense => "방어력",
-        StatType.Speed => "속도",
+        StatType.Attack => statText.Attack,
+        StatType.Defense => statText.Defense,
+        StatType.Speed => statText.Speed,
         _ => ""
     };
 }

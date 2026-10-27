@@ -10,7 +10,7 @@ public class SkillAmountTextBuilderTests
     [TestCase(StatType.Speed, "속도")]
     public void 스탯_종류에_따른_텍스트_반환_확인(StatType statType, string expected)
     {
-        var result = BuildStatText(statType);
+        var result = BuildStatText(statType, new StatTextData("공격력", "방어력", "속도"));
 
         Assert.AreEqual(expected, result);
     }

@@ -17,16 +17,21 @@ public static class SkillTemplateHelper
     }
 }
 
+
 public class SkillTextBuilder
 {
     readonly string Template;
     readonly SkillConvertKey skillConvertKey;
-    readonly StatChangeTextData StatChangeData;
+    readonly StatChangeTextData statChangeData;
+    readonly StatTextData statTextData;
+    readonly SideTextData sideTextData;
 
-    public SkillTextBuilder(string template, StatChangeTextData statChangeData, SkillConvertKey skillConvertKey)
+    public SkillTextBuilder(string template, StatChangeTextData statChangeData, StatTextData statTextData, SideTextData sideTextData, SkillConvertKey skillConvertKey)
     {
         Template = template;
-        StatChangeData = statChangeData;
+        this.statChangeData = statChangeData;
+        this.statTextData = statTextData;
+        this.sideTextData = sideTextData;
         this.skillConvertKey = skillConvertKey;
     }
 
@@ -34,9 +39,9 @@ public class SkillTextBuilder
     {
         string conditoin = SkillConditionTextBuilder.BuildConditionText(skillData.ConditionData);
         string target = BuildTargetRuleText(skillData.SelectRule.TargetSide, skillData.SelectRule.TargetRange);
-        string stat = AmountTextBuilder.BuildStatText(skillData.AmountData.StatType);
+        string stat = AmountTextBuilder.BuildStatText(skillData.AmountData.StatType, statTextData);
         string amount = AmountTextBuilder.BuildAmountText(skillData.AmountData);
-        string change = AmountTextBuilder.BuildChangeText(skillData.AmountData, StatChangeData);
+        string change = AmountTextBuilder.BuildChangeText(skillData.AmountData, statChangeData);
 
         var replaceValue = new SkillConvertKey(conditoin, target, stat, amount, change);
 
@@ -50,10 +55,10 @@ public class SkillTextBuilder
 
     string SideText(Side side) => side switch
     {
-        Side.Self => "아군",
-        Side.Opponent => "적군",
-        Side.All => "양팀",
-        _ => "대상 없음"
+        Side.Self => sideTextData.Self,
+        Side.Opponent => sideTextData.Opponent,
+        Side.All => sideTextData.All,
+        _ => sideTextData.None
     };
 
     string CountText(TargetRange range) => range switch
