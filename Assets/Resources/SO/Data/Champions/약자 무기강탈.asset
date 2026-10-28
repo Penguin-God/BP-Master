@@ -52,29 +52,4 @@ MonoBehaviour:
     conditionCheckerType: 1
     isSpecialText: 0
     specialTemplate: 
-  - targetSide: 1
-    range: 4
-    applyType: 0
-    valueType: 2
-    timingType: 0
-    skillType: 2
-    skillAmount:
-      Type: 2
-      StatType: 0
-      ValueAmount: 0
-      PercentValue: -1
-      FixValue: 0
-    actions:
-    - skillType: 2
-      skillAmount:
-        Type: 2
-        StatType: 0
-        ValueAmount: 0
-        PercentValue: -1
-        FixValue: 0
-    conditionType: 3
-    threshold: 80
-    conditionCheckerType: 1
-    isSpecialText: 0
-    specialTemplate: 
   icon: {fileID: 21300000, guid: 0e12944657704be9b2cea14e733583e3, type: 3}

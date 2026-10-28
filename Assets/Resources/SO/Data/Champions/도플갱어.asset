@@ -47,24 +47,6 @@ MonoBehaviour:
         ValueAmount: 0
         PercentValue: 1
         FixValue: 0
-    conditionType: 0
-    threshold: 0
-    conditionCheckerType: 0
-    isSpecialText: 0
-    specialTemplate: 
-  - targetSide: 1
-    range: 1
-    applyType: 1
-    valueType: 2
-    timingType: 0
-    skillType: 2
-    skillAmount:
-      Type: 2
-      StatType: 1
-      ValueAmount: 0
-      PercentValue: 1
-      FixValue: 0
-    actions:
     - skillType: 2
       skillAmount:
         Type: 2

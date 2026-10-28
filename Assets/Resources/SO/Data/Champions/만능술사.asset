@@ -47,6 +47,20 @@ MonoBehaviour:
         ValueAmount: 15
         PercentValue: 0
         FixValue: 0
+    - skillType: 2
+      skillAmount:
+        Type: 1
+        StatType: 1
+        ValueAmount: 15
+        PercentValue: 0
+        FixValue: 0
+    - skillType: 2
+      skillAmount:
+        Type: 1
+        StatType: 2
+        ValueAmount: 1
+        PercentValue: 0
+        FixValue: 0
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
