@@ -20,8 +20,8 @@ public class ChampionSO : SerializedScriptableObject
     [Header("스킬")]
     [SerializeField] TraitDataConfig[] skillDatas;
 
-    public Skill Skill => new Skill(skillDatas.Select(x => x.CreateSkillData()));
-    public IEnumerable<SkillViewModel> SkillViewModels => skillDatas.Select(x => x.CreateViewModel());
+    public Skill Skill => CreateMergedSkill();
+    public IEnumerable<SkillViewModel> SkillViewModels => CreateMergedSkillViewModels();
     public ChampionStatus CreateStatus() => new ChampionStatus(StatData);
     public Champion CreateChampion() => new Champion(Id, Skill, CreateStatus());
     public ChampionProfile CreateProfile() => new ChampionProfile(Id, championName, StatData, SkillViewModels);
