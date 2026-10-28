@@ -39,7 +39,17 @@ MonoBehaviour:
       ValueAmount: 0
       PercentValue: 0
       FixValue: 99
+    actions:
+    - skillType: 2
+      skillAmount:
+        Type: 3
+        StatType: 1
+        ValueAmount: 0
+        PercentValue: 0
+        FixValue: 99
     conditionType: 1
     threshold: 99
     conditionCheckerType: 1
+    isSpecialText: 0
+    specialTemplate: 
   icon: {fileID: 21300000, guid: 10e4ba702f7c40d797ef334acd21352c, type: 3}

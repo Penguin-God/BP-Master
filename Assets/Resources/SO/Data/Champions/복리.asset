@@ -39,6 +39,14 @@ MonoBehaviour:
       ValueAmount: 0
       PercentValue: 0.3
       FixValue: 0
+    actions:
+    - skillType: 2
+      skillAmount:
+        Type: 2
+        StatType: 0
+        ValueAmount: 0
+        PercentValue: 0.3
+        FixValue: 0
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
@@ -56,6 +64,14 @@ MonoBehaviour:
       ValueAmount: 0
       PercentValue: 0.3
       FixValue: 0
+    actions:
+    - skillType: 2
+      skillAmount:
+        Type: 2
+        StatType: 1
+        ValueAmount: 0
+        PercentValue: 0.3
+        FixValue: 0
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0

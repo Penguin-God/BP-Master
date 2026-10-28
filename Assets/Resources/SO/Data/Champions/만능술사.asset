@@ -39,37 +39,17 @@ MonoBehaviour:
       ValueAmount: 15
       PercentValue: 0
       FixValue: 0
+    actions:
+    - skillType: 2
+      skillAmount:
+        Type: 1
+        StatType: 0
+        ValueAmount: 15
+        PercentValue: 0
+        FixValue: 0
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-  - targetSide: 0
-    range: 4
-    applyType: 0
-    valueType: 0
-    timingType: 0
-    skillType: 2
-    skillAmount:
-      Type: 1
-      StatType: 1
-      ValueAmount: 15
-      PercentValue: 0
-      FixValue: 0
-    conditionType: 0
-    threshold: 0
-    conditionCheckerType: 0
-  - targetSide: 0
-    range: 4
-    applyType: 0
-    valueType: 0
-    timingType: 0
-    skillType: 2
-    skillAmount:
-      Type: 1
-      StatType: 2
-      ValueAmount: 1
-      PercentValue: 0
-      FixValue: 0
-    conditionType: 0
-    threshold: 0
-    conditionCheckerType: 0
+    isSpecialText: 0
+    specialTemplate: 
   icon: {fileID: 21300000, guid: 4c368f9261c741abb5e07612ac7533c6, type: 3}

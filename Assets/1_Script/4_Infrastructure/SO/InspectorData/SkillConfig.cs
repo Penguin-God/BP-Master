@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public struct SkillActionConfig
+public class SkillActionConfig
 {
-    [SerializeField] SkillType skillType;
+    [SerializeField] SkillType skillType = SkillType.StatChanger;
     [SerializeField] SkillAmount skillAmount;
 
     public SkillType SkillType => skillType;
