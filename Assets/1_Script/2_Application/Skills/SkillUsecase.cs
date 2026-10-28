@@ -27,6 +27,12 @@ public class SkillUsecase
     public void AutoUseSkill(SlotData skillSlot, Func<ChampionStatus, int> sortCriteria)
     {
         var champion = pickChampions.GetSlot(skillSlot);
+        if (champion.Skill.IsEmpty)
+        {
+            OnUseSkill?.Invoke(skillSlot);
+            return;
+        }
+
         var rule = EnumCaster.MergeRule(champion.Skill.Rules);
         var teamCount = new TeamCount(pickChampions.GetTeamCount(Team.Blue), pickChampions.GetTeamCount(Team.Red));
         var context = new TargetFindContext(skillSlot.Team, rule, teamCount);

@@ -7,5 +7,5 @@ public class Skill
     public Skill(IEnumerable<SkillData> skillDatas) => this.SkillDatas = skillDatas;
     public IEnumerable<CardSelectRule> Rules => SkillDatas.Select(x => x.SelectRule);
     public IEnumerable<Side> Sides => Rules.Select(x => x.TargetSide);
-    public bool IsEmpty => SkillDatas.Count() == 0;
+    public bool IsEmpty => SkillDatas.Count() == 0 || SkillDatas.All(x => x.SkillType == SkillType.None);
 }
