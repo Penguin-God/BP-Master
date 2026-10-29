@@ -21,7 +21,6 @@ public class Tutorial_Info
 
     [ShowIf(nameof(IsQuiz))]
     [Title("문제 설정")]
-    public ChampionSO[] AnswerCards;
 
     [ShowIf(nameof(IsQuiz))]
     [EnumToggleButtons]

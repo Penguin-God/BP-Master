@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
 public class CheckSelectTutorialTests
 {
-    CheckSelectTutorial CreateSut(IEnumerable<int> answers, Action onSuccess, Action onFailed) => new CheckSelectTutorial(answers, onSuccess, onFailed);
     CheckSelectTutorial CreateSut(TutorialQuizConditionData conditionData, Action onSuccess, Action onFailed) => new CheckSelectTutorial(TutorialQuizConditionFactory.Create(conditionData), onSuccess, onFailed);
 
     Champion CreateChampion(int id = 1, int speed = 5, params Side[] targetSides)
@@ -23,36 +21,6 @@ public class CheckSelectTutorialTests
         var skill = new Skill(skillDatas);
         var status = new ChampionStatus(new ChampionStatData(10, 10, speed));
         return new Champion(id, skill, status);
-    }
-
-    [Test]
-    public void 선택이_정답이면_성공_콜백_실행()
-    {
-        int[] answers = { 1, 2, 3 };
-        bool isSuccessCalled = false;
-        bool isFailedCalled = false;
-
-        var sut = CreateSut(answers, () => isSuccessCalled = true, () => isFailedCalled = true);
-
-        sut.Select(2);
-
-        Assert.IsTrue(isSuccessCalled);
-        Assert.IsFalse(isFailedCalled);
-    }
-
-    [Test]
-    public void 선택이_오답이면_실패_콜백_실행()
-    {
-        int[] answers = { 1, 2, 3 };
-        bool isSuccessCalled = false;
-        bool isFailedCalled = false;
-
-        var sut = CreateSut(answers, () => isSuccessCalled = true, () => isFailedCalled = true);
-
-        sut.Select(999);
-
-        Assert.IsFalse(isSuccessCalled);
-        Assert.IsTrue(isFailedCalled);
     }
 
     [Test]
