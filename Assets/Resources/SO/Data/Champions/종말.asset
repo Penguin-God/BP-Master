@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  id: 24
+  id: 25
   championName: "\uC885\uB9D0"
   attack: 130
   defense: 130
@@ -33,22 +33,14 @@ MonoBehaviour:
     valueType: 2
     timingType: 0
     skillType: 2
-    skillAmount:
-      Type: 2
-      StatType: 0
-      ValueAmount: -60
-      PercentValue: -0.5
-      FixValue: 0
     actions:
-    - skillType: 2
-      skillAmount:
+    - skillAmount:
         Type: 2
         StatType: 0
         ValueAmount: -60
         PercentValue: -0.5
         FixValue: 0
-    - skillType: 2
-      skillAmount:
+    - skillAmount:
         Type: 2
         StatType: 1
         ValueAmount: 0

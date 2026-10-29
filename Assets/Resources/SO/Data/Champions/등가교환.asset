@@ -33,22 +33,14 @@ MonoBehaviour:
     valueType: 0
     timingType: 0
     skillType: 2
-    skillAmount:
-      Type: 2
-      StatType: 0
-      ValueAmount: 0
-      PercentValue: -0.5
-      FixValue: 0
     actions:
-    - skillType: 2
-      skillAmount:
+    - skillAmount:
         Type: 2
         StatType: 1
         ValueAmount: 0
         PercentValue: 0.5
         FixValue: 0
-    - skillType: 2
-      skillAmount:
+    - skillAmount:
         Type: 2
         StatType: 0
         ValueAmount: 0
