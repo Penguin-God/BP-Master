@@ -28,12 +28,12 @@ public readonly struct StatTextData
     }
 }
 
-public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsSuffix, string SelectCardsMiddle, string SelectCardsSuffix)
+public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsSuffix, string SelectCardsSuffix)
 {
     public string BuildSelectRuleText(Side side, TargetRange range) => range switch
     {
         TargetRange.All => $"{SideText(side)}{AllCardsSuffix}",
-        _ => $"{SideText(side)}{SelectCardsSuffix} {SelectCardsMiddle} {CountText(range)}"
+        _ => $"{SideText(side)}{SelectCardsSuffix} {CountText(range)}"
     };
 
     string SideText(Side side) => side switch
@@ -46,9 +46,9 @@ public record SideTextData(string Self, string Opponent, string All, string None
 
     static string CountText(TargetRange range) => range switch
     {
-        TargetRange.Single => "하나",
-        TargetRange.Double => "둘",
-        TargetRange.Triple => "셋",
+        TargetRange.Single => "한 장",
+        TargetRange.Double => "두 장",
+        TargetRange.Triple => "세 장",
         _ => string.Empty
     };
 }

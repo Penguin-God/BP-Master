@@ -7,7 +7,7 @@ public class SkillTextBuildTests
     {
         var statChangeData = new StatChangeTextData("증가", "감소", "고정");
         var statTextData = new StatTextData("공격력", "방어력", "속도");
-        var sideTextData = new SideTextData("본인 슬롯", "상대 슬롯", "양쪽 슬롯", "대상 없음", "의 모든 카드", "선택한 카드 ", "에서");
+        var sideTextData = new SideTextData("본인 슬롯", "상대 슬롯", "양쪽 슬롯", "대상 없음", "의 모든 카드", "에서 선택한 카드");
         var convertKey = new SkillConvertKey("{Condition}", "{Rule}", "{Stat}", "{Value}", "{Action}");
 
         return new SkillTextBuilder(template, statChangeData, statTextData, sideTextData, convertKey);
@@ -34,7 +34,7 @@ public class SkillTextBuildTests
 
         var result = sut.BuildGroupedSkillText(CreateSkillViewModels(model));
 
-        Assert.AreEqual("본인 슬롯에서 선택한 카드 둘 공격력 20 증가", result);
+        Assert.AreEqual("본인 슬롯에서 선택한 카드 두 장 공격력 20 증가", result);
     }
 
     [Test]
@@ -62,6 +62,6 @@ public class SkillTextBuildTests
 
         var result = sut.BuildGroupedSkillText(new[] { skill1, skill2 });
 
-        Assert.AreEqual("본인 슬롯에서 선택한 카드 둘 공격력 100 고정, 방어력 100 고정", result);
+        Assert.AreEqual("본인 슬롯에서 선택한 카드 두 장 공격력 100 고정, 방어력 100 고정", result);
     }
 }
