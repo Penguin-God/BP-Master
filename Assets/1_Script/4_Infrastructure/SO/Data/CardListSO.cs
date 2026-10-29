@@ -13,6 +13,7 @@ public class CardListSO : ScriptableObject
 
     void RemoveDuplicates() => _cardList = _cardList.Where(x => x != null).Distinct().ToArray();
 
+#if UNITY_EDITOR
     [ContextMenu("Load Champions From Folder")]
     [Button("폴더에서 챔피언 SO 채우기", ButtonSizes.Medium)]
     void LoadChampionsFromFolder()
@@ -41,4 +42,5 @@ public class CardListSO : ScriptableObject
 
         Debug.Log($"[{name}] {folderPath} 경로에서 {loadedList.Length}개의 챔피언 SO를 로드했습니다.");
     }
+#endif
 }
