@@ -11,7 +11,7 @@ public class ChampionView : MonoBehaviour
 
     public void UpdateDisplay(ChampionSO champion)
     {
-        string skillText = skillTextSO.CreateSkillTextBuilder().BuildSkillText(champion.SkillViewModels);
+        string skillText = skillTextSO.CreateSkillTextBuilder().BuildGroupedSkillText(champion.SkillViewModels);
         UpdateChampionAll(new ChampionTextModel(champion.ChampionName, ChampionStatModelPreserter.CreateStatModel(champion.StatData), skillText));
     }
 

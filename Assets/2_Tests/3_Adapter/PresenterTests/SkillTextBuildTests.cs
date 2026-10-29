@@ -20,7 +20,7 @@ public class SkillTextBuildTests
         var amount = CreateSkillAmount(AmountType.Value, statType: StatType.Attack, value: 20);
         var model = CreateSkillViewModel(rule: SelfAllRule, amountData: amount);
 
-        var result = sut.BuildSkillText(CreateSkillViewModels(model));
+        var result = sut.BuildGroupedSkillText(CreateSkillViewModels(model));
 
         Assert.AreEqual("본인 슬롯의 모든 카드 공격력 20 증가", result);
     }
@@ -32,7 +32,7 @@ public class SkillTextBuildTests
         var amount = CreateSkillAmount(AmountType.Value, statType: StatType.Attack, value: 20);
         var model = CreateSkillViewModel(rule: SelfDouble, amountData: amount);
 
-        var result = sut.BuildSkillText(CreateSkillViewModels(model));
+        var result = sut.BuildGroupedSkillText(CreateSkillViewModels(model));
 
         Assert.AreEqual("본인 슬롯에서 선택한 카드 둘 공격력 20 증가", result);
     }

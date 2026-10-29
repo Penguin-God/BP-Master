@@ -63,10 +63,8 @@ public class SkillTextBuilder
         return SkillTemplateHelper.ReplaceTemplate(templateToUse, skillConvertKey.Values, replaceValue.Values);
     }
 
-    // 기존 동작 보존
     public string BuildSkillText(IEnumerable<SkillViewModel> skillDatas) => string.Join(", ", skillDatas.Select(x => BuildSkillText(x)));
 
-    // 신규 메서드: 동일한 조건과 타깃 룰을 가진 스킬들을 묶어서 중복 문구를 제거한 텍스트 생성
     public string BuildGroupedSkillText(IEnumerable<SkillViewModel> skillDatas)
     {
         if (skillDatas == null) return string.Empty;
