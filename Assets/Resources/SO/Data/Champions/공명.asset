@@ -49,6 +49,6 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    isSpecialText: 0
-    specialTemplate: 
+    isSpecialText: 1
+    specialTemplate: "{Rule} \uACF5\uBA85\uC758 {Stat} {Value}\uB9CC\uD07C {Action}"
   icon: {fileID: 21300000, guid: fe91572af7cb4ae2b49fc5a4f3a58207, type: 3}

@@ -49,8 +49,8 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    isSpecialText: 0
-    specialTemplate: 
+    isSpecialText: 1
+    specialTemplate: "{Rule} {Stat} {Value} \uD761\uC218"
   - targetSide: 1
     range: 4
     applyType: 0
@@ -73,6 +73,6 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    isSpecialText: 0
+    isSpecialText: 1
     specialTemplate: 
   icon: {fileID: 21300000, guid: fd5b4f823e3a4f68827c99895cb60b4e, type: 3}

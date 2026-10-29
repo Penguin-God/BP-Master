@@ -43,6 +43,6 @@ MonoBehaviour:
     conditionType: 3
     threshold: 80
     conditionCheckerType: 1
-    isSpecialText: 0
-    specialTemplate: 
+    isSpecialText: 1
+    specialTemplate: "{Condition} {Rule} {Stat} \uD761\uC218"
   icon: {fileID: 21300000, guid: 0e12944657704be9b2cea14e733583e3, type: 3}

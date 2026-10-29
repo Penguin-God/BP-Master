@@ -61,6 +61,6 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    isSpecialText: 0
-    specialTemplate: 
+    isSpecialText: 1
+    specialTemplate: "\uB3D9\uC2DC\uC5D0 \uC704\uC120\uC758 {Stat} {Value} {Action}"
   icon: {fileID: 0}
