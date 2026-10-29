@@ -28,12 +28,12 @@ public readonly struct StatTextData
     }
 }
 
-public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsSuffix, string SelectCardsPrefix, string SelectCardsSuffix)
+public record SideTextData(string Self, string Opponent, string All, string None, string AllCardsSuffix, string SelectCardsMiddle, string SelectCardsSuffix)
 {
     public string BuildSelectRuleText(Side side, TargetRange range) => range switch
     {
         TargetRange.All => $"{SideText(side)}{AllCardsSuffix}",
-        _ => $"{SideText(side)}{SelectCardsSuffix} {SelectCardsPrefix} {CountText(range)}"
+        _ => $"{SideText(side)}{SelectCardsSuffix} {SelectCardsMiddle} {CountText(range)}"
     };
 
     string SideText(Side side) => side switch

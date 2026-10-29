@@ -31,10 +31,6 @@ MonoBehaviour:
       AttackLevel: 0
       DefenseLevel: 1
       SpeedLevel: 0
-    - Champion: {fileID: 11400000, guid: f8affce91ca1c634c8f1c9b128bea301, type: 2}
-      AttackLevel: 0
-      DefenseLevel: 1
-      SpeedLevel: 0
     - Champion: {fileID: 11400000, guid: e1a3b2221509f4f41a0ba6f414d92291, type: 2}
       AttackLevel: 0
       DefenseLevel: 1

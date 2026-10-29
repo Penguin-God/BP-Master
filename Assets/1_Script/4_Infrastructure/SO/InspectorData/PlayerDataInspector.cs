@@ -21,7 +21,9 @@ public class PlayerDataInspector
     public string Name;
     [TableList(ShowIndexLabels = true, AlwaysExpanded = true)] [SerializeField] MasteryBoardData[] _masteryBoardDatas;
 
-    public MasteryBoardCollection CreateBoardCollection() => new MasteryBoardCollection(_masteryBoardDatas.ToDictionary(x => x.Champion.Id, x => x.CreateBoard()));
+    MasteryBoardCollection CreateBoardCollection() => new MasteryBoardCollection(_masteryBoardDatas.ToDictionary(x => x.Champion.Id, x => x.CreateBoard()));
+
+
 
     public PlayerData ToData() => new PlayerData(Id, Name, CreateBoardCollection());
 }
