@@ -50,8 +50,7 @@ MonoBehaviour:
     threshold: 0
     conditionCheckerType: 0
     isSpecialText: 1
-    specialTemplate: "{Rule} \uBCF8\uC778 \uC2A4\uD0EF\uC758 {Value}\uB9CC\uD07C
-      \uC804\uB2EC"
+    specialTemplate: "{Rule} \uD5CC\uC2E0 {Stat}\uC758 {Value}\uB9CC\uD07C \uC804\uB2EC"
   - targetSide: 0
     range: 1
     applyType: 1
@@ -74,6 +73,6 @@ MonoBehaviour:
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0
-    isSpecialText: 0
+    isSpecialText: 1
     specialTemplate: 
   icon: {fileID: 0}

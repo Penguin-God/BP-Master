@@ -15,19 +15,18 @@ MonoBehaviour:
   increaseText: "\uC99D\uAC00"
   decreaseText: "\uAC10\uC18C"
   fixText: "\uC73C\uB85C \uACE0\uC815"
-  attackText: "\uACF5"
-  defenseText: "\uBC29"
+  attackText: "\uACF5\uACA9"
+  defenseText: "\uBC29\uC5B4"
   speedText: "\uC18D\uB3C4"
-  selfSideText: "\uB0B4 \uC2AC\uB86F"
-  opponentSideText: "\uC0C1\uB300 \uC2AC\uB86F"
-  allSideText: "\uC591\uD300 \uC2AC\uB86F"
+  selfSideText: "\uBCF8\uC778"
+  opponentSideText: "\uC0C1\uB300\uBC29"
+  allSideText: "\uC591\uD300"
   noneSideText: 
   allCardsText: "\uC758 \uBAA8\uB4E0 \uCE74\uB4DC"
-  selectCardsPrefix: "\uC120\uD0DD\uD55C \uCE74\uB4DC"
-  selectCardsSuffix: "\uC5D0\uC11C"
-  conditionKey: '{Conditoin}'
+  selectCardsMiddle: "\uC774 \uD53D\uD55C \uCE74\uB4DC \uC911"
+  conditionKey: '{Condition}'
   ruleKey: '{Rule}'
   statKey: '{Stat}'
   valueKey: '{Value}'
   actionKey: '{Action}'
-  template: '{Conditoin} {Rule} {Stat} {Value} {Action}'
+  template: '{Condition} {Rule} {Stat} {Value} {Action}'
