@@ -43,16 +43,20 @@ public class TraitDataConfig
     public SkillData CreateSkillData(SkillAmountData skillAmountData) => new SkillData(skillType, CalculatorFactory.Create(skillAmountData), SkillCondtionFactory.CreateCondition(Condition), Rule, applyType, valueType, skillAmountData.StatType, timingType);
     public SkillViewModel CreateViewModel(SkillAmountData skillAmountData) => new SkillViewModel(skillType, skillAmountData, Condition, Rule, specialTemplate?.Trim());
 
+    bool ExistSkill => actions != null && actions.Length > 0;
+
     public IEnumerable<SkillData> CreateSkillDatas()
     {
-        if (actions != null && actions.Length > 0) return actions.Select(action => CreateSkillData(action.GetValueData()));
+        if (ExistSkill) return actions.Select(action => CreateSkillData(action.GetValueData()));
 
         return Array.Empty<SkillData>();
     }
 
     public IEnumerable<SkillViewModel> CreateViewModels()
     {
-        if (actions != null && actions.Length > 0) return actions.Select(action => CreateViewModel(action.GetValueData()));
+        if(isSpecialText && string.IsNullOrEmpty(specialTemplate)) return Array.Empty<SkillViewModel>();
+
+        if (ExistSkill) return actions.Select(action => CreateViewModel(action.GetValueData()));
 
         return Array.Empty<SkillViewModel>();
     }
