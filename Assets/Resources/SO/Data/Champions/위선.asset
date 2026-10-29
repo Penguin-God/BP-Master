@@ -63,4 +63,4 @@ MonoBehaviour:
     conditionCheckerType: 0
     isSpecialText: 1
     specialTemplate: "\uB3D9\uC2DC\uC5D0 \uC704\uC120\uC758 {Stat} {Value} {Action}"
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fd829a4112194eedbec1adcf48cf996c, type: 3}

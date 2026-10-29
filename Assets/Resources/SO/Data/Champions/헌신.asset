@@ -75,4 +75,4 @@ MonoBehaviour:
     conditionCheckerType: 0
     isSpecialText: 1
     specialTemplate: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4d34712e0d214c97a97f05086a971030, type: 3}
