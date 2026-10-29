@@ -42,6 +42,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0dc80b517b75a554fb14e80936d977e0, type: 2}
     - {fileID: 11400000, guid: 7ce020f57f367594380e9010092c1b2e, type: 2}
     - {fileID: 11400000, guid: f8affce91ca1c634c8f1c9b128bea301, type: 2}
+    QuizType: 2
+    MinSpeed: 0
     SuccessDialogues:
     - "\uC131\uACF5\uC785\uB2C8\uB2E4. \uCCAB \uBC88\uC9F8 \uD53D\uC740 \uC0C1\uB300\uBC29\uC774
       \uC5C6\uAE30 \uB54C\uBB38\uC5D0 \uC801\uC5D0\uAC8C \uB514\uBC84\uD504\uB97C
@@ -73,6 +75,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5845e19649f08d247b70aac6efe18d8f, type: 2}
     - {fileID: 11400000, guid: eca6152df43791743af3aeb3eae86012, type: 2}
     - {fileID: 11400000, guid: d7000890dfa10bf4f9ede95f43d04424, type: 2}
+    QuizType: 1
+    MinSpeed: 0
     SuccessDialogues:
     - "\uC131\uACF5\uD588\uC2B5\uB2C8\uB2E4. \uC774\uC81C \uC801 \uCE74\uB4DC\uB97C
       \uD074\uB9AD\uD574 \uC2A4\uD0AC\uC744 \uC0AC\uC6A9\uD574\uBCF4\uC138\uC694"
@@ -97,6 +101,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 68db2d501243ac24a8432076374f5535, type: 2}
     - {fileID: 11400000, guid: a497d423f384741408ba842e548208a9, type: 2}
     - {fileID: 11400000, guid: 603c87e43456fd44286208c78097ee82, type: 2}
+    QuizType: 0
+    MinSpeed: 6
     SuccessDialogues:
     - "\uC131\uACF5\uC785\uB2C8\uB2E4. \uD654\uBA74 \uC704\uC5D0 \uBCF4\uB108\uC2A4
       \uAE30\uC900\uC744 \uD655\uC778\uD574\uC11C \uCD5C\uB300\uD55C \uB9CE\uC740
@@ -117,6 +123,8 @@ MonoBehaviour:
     - "\uC774\uB7F0 \uAC83\uB4E4\uC744 \uD655\uC778\uD558\uACE0 \uBC34\uC744 \uD558\uBA74
       \uC88B\uC2B5\uB2C8\uB2E4"
     AnswerCards: []
+    QuizType: 0
+    MinSpeed: 0
     SuccessDialogues: []
     FailDialogues: []
   - TutorialType: 0
@@ -131,6 +139,8 @@ MonoBehaviour:
     - "\uD2B9\uC815 \uCE74\uB4DC\uAC00 \uBE60\uC9C4 \uAC83\uC744 \uC774\uC6A9\uD574
       \uB354 \uAC15\uB825\uD55C \uC804\uB7B5\uC744 \uC2E4\uD589\uD558\uC138\uC694"
     AnswerCards: []
+    QuizType: 0
+    MinSpeed: 0
     SuccessDialogues: []
     FailDialogues: []
   - TutorialType: 0
@@ -144,6 +154,8 @@ MonoBehaviour:
     - "\uAC15\uD654\uD55C \uCE74\uB4DC\uB294 \uAC8C\uC784\uC5D0\uC11C \uD53D\uD55C
       \uC21C\uAC04\uBD80\uD130 \uAC15\uD654\uB41C \uC2A4\uD0EF\uC774 \uC801\uC6A9\uB429\uB2C8\uB2E4"
     AnswerCards: []
+    QuizType: 0
+    MinSpeed: 0
     SuccessDialogues: []
     FailDialogues: []
   _uiTutorial: {fileID: 5179135095201166203, guid: 308f008ac867816449398520e64d8d84, type: 3}

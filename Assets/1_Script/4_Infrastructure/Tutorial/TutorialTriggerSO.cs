@@ -9,7 +9,7 @@ public enum TutorialType
     CheckCardSelect,
 }
 
-[System.Serializable]
+[Serializable]
 public class Tutorial_Info
 {
     [Title("===튜토리얼 정보 시작===")]
@@ -24,14 +24,23 @@ public class Tutorial_Info
     public ChampionSO[] AnswerCards;
 
     [ShowIf(nameof(IsQuiz))]
+    [EnumToggleButtons]
+    public TutorialQuizType QuizType;
+
+    [ShowIf(nameof(IsSpeedQuiz))]
+    public int MinSpeed;
+
+    [ShowIf(nameof(IsQuiz))]
     public string[] SuccessDialogues;
 
     [ShowIf(nameof(IsQuiz))]
     public string[] FailDialogues;
 
     bool IsQuiz => TutorialType == TutorialType.CheckCardSelect;
-}
+    bool IsSpeedQuiz => IsQuiz && QuizType == TutorialQuizType.SpeedAtLeast;
 
+    public TutorialQuizConditionData CreateQuizConditionData() => new TutorialQuizConditionData(QuizType, MinSpeed);
+}
 [CreateAssetMenu(fileName = "TutorialTriggerSO", menuName = "Data/TutorialTriggerSO")]
 public class TutorialTriggerSO : ScriptableObject
 {
@@ -41,7 +50,7 @@ public class TutorialTriggerSO : ScriptableObject
     public void StartTutorialOneTime(TutorialTriggerType type) => TutorialActor.StartIfFirstTime(type, CreateTutorial(type));
     public Tutorial_Info GetTutorialInfo(TutorialTriggerType type) => entries.FirstOrDefault(x => x.TriggerType == type);
 
-    public Action CreateTutorial(TutorialTriggerType type)
+    Action CreateTutorial(TutorialTriggerType type)
     {
         var info = GetTutorialInfo(type);
         return () => GameObject.Instantiate(_uiTutorial).GetComponent<UI_Tutorial>().StartTutorial(info.Dialogues);

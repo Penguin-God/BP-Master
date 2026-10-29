@@ -34,8 +34,8 @@ public class BattleScene : MonoBehaviour
 
         ai_main.Init(ai_id, aiTeam, storage, core.SkillController, championCatalog, core.MasteryRegistry, core.BanPickHandler, core.PhaseAdvancer);
 
-        BattleTutorialEventBinder.BindBattleTutorial(uI_SelectCheck.CreateTutorialAction, core.PhaseEventDispatcher, storage);
-        if (MatchContext.MatchState.TotalWins > 0) uI_SelectCheck.CreateTutorialAction(TutorialTriggerType.Fearless)();
+        BattleTutorialEventBinder.BindBattleTutorial(uI_SelectCheck.CreateConditionTutorialAction, core.PhaseEventDispatcher, storage);
+        if (MatchContext.MatchState.TotalWins > 0) uI_SelectCheck.CreateConditionTutorialAction(TutorialTriggerType.Fearless)();
 
 
         core.OnGameFinished += new BattleResultHandler(storage, playerIds, matchConfigSO, ai_id).OnDone;
