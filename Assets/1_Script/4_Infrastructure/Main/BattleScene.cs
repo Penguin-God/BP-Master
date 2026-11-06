@@ -25,7 +25,7 @@ public class BattleScene : MonoBehaviour
         playerIds.Add(aiTeam, ai_id);
 
         storage = MatchContext.CreateFearlessStorage();
-        var championCatalog = new ChampionCatalog(storage.SelectableIds.Select(x => ChampionDataLoder.GetChampionData(x).CreateChampion())); // ChampionDataLoder.GetCatalog();
+        var championCatalog = new ChampionCatalog(storage.SelectableIds.Select(x => ChampionDataLoder.GetChampionData(x).CreateChampion()));
         var (blue, red) = CreatePhaseOrchestrator(championSelector, ai_main, playerTeam);
         var banPickDispatcher = new BanPickEventDispatcher();
         var core = matchCoreFactorySO.CreateMatchCore(storage, new BanPickHandler(championCatalog, storage, banPickDispatcher), playerIds, blue, red);
@@ -69,11 +69,7 @@ public class BattleResultHandler
     {
         bool matchEnd = false;
         if (result.Winner == Team.All) ; // 승자는 후픽으로 설정하기
-        else
-        {
-            MatchContext.RecordMatchResult(storage.PickIds.GetAll());
-            matchEnd = MatchContext.EndMatch(playerIds[result.Winner]);
-        }
+        else matchEnd = MatchContext.RecordMatchResult(playerIds[result.Winner], storage.PickIds.GetAll());
 
         Object.FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
 

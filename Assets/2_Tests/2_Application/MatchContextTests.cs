@@ -30,7 +30,7 @@ public class MatchContextTests
         var allIds = new[] { 10, 20, 30 };
         MatchInit(allIds);
 
-        MatchContext.RecordMatchResult(new int[] { 10 });
+        MatchContext.RecordMatchResult(0, new int[] { 10 });
         var result = MatchContext.CreateFearlessStorage().SelectableIds;
 
         CollectionAssert.DoesNotContain(result, 10);
@@ -40,10 +40,11 @@ public class MatchContextTests
     [Test]
     public void 승수를_채워서_매치가_끝나면_모든_상태를_비운다()
     {
+        var values = System.Array.Empty<int>();
         MatchInit(10);
 
-        Assert.IsFalse(MatchContext.EndMatch(1), "1승이므로 아직 게임이 끝나지 않아야 합니다.");
-        Assert.IsTrue(MatchContext.EndMatch(1), "2승(TargetWin)을 달성했으므로 게임이 끝나고 상태가 초기화되어야 합니다.");
+        Assert.IsFalse(MatchContext.RecordMatchResult(1, values), "1승이므로 아직 게임이 끝나지 않아야 합니다.");
+        Assert.IsTrue(MatchContext.RecordMatchResult(1, values), "2승(TargetWin)을 달성했으므로 게임이 끝나고 상태가 초기화되어야 합니다.");
 
         Assert.IsNull(MatchContext.MatchState, "Clear 호출 시 CurrentSeries는 null이 되어야 합니다.");
         Assert.IsEmpty(MatchContext.FearlessLockedCards, "Clear 호출 시 피어리스 잠금 목록도 비워져야 합니다.");

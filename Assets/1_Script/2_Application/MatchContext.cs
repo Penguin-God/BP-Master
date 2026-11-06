@@ -17,8 +17,9 @@ namespace Match
             FearlessLockedCards.Clear();
         }
 
-        public static bool EndMatch(int winner)
+        public static bool RecordMatchResult(int winner, IEnumerable<int> pickIds)
         {
+            FearlessLockedCards.AddRange(pickIds);
             MatchState = MatchState.AddWin(winner);
 
             if (MatchState.IsMatchFinished)
@@ -28,11 +29,6 @@ namespace Match
             }
 
             return false;
-        }
-
-        public static void RecordMatchResult(IEnumerable<int> pickIds)
-        {
-            FearlessLockedCards.AddRange(pickIds);
         }
 
         public static BanPickStorage CreateFearlessStorage() => new BanPickStorage(_allChampionIds.Except(FearlessLockedCards));
