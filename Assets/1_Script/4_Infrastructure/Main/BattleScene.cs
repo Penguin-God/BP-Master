@@ -67,13 +67,12 @@ public class BattleResultHandler
 
     public void OnDone(MatchResult result)
     {
-        bool matchEnd = false;
-        if (result.Winner == Team.All) MatchContext.RecordMatchResult(playerIds[Team.Red], storage.PickIds.GetAll());
-        else matchEnd = MatchContext.RecordMatchResult(playerIds[result.Winner], storage.PickIds.GetAll());
+        int winnerId = BattleResultLogic.GetWinnerId(playerIds, result.Winner);
+        bool matchEnd = MatchContext.RecordMatchResult(winnerId, storage.PickIds.GetAll());
 
         Object.FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
 
-        if (matchEnd && playerIds[result.Winner] == matchConfigSO.UserId)
+        if (matchEnd && winnerId == matchConfigSO.UserId)
         {
             var saver = new JsonMasterySaver();
             new StageProgressUseCase(new PlayerPrefsStageStorage(), saver.Load(), saver, matchConfigSO.EarnPointByStage).ClearStage(ai_id);

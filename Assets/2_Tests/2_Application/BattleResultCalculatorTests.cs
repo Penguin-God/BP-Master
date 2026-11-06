@@ -16,7 +16,7 @@ public class BattleResultCalculatorTests
     {
         var playerIds = CreatePlayerIds(blueId: 10, redId: 20);
 
-        var winnerId = BattleResultLogic.GetWinnerPlayerId(playerIds, winner);
+        var winnerId = BattleResultLogic.GetWinnerId(playerIds, winner);
 
         Assert.AreEqual(expectedId, winnerId);
     }
