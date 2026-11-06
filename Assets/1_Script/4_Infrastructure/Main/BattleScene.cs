@@ -68,7 +68,7 @@ public class BattleResultHandler
     public void OnDone(MatchResult result)
     {
         bool matchEnd = false;
-        if (result.Winner == Team.All) ; // 승자는 후픽으로 설정하기
+        if (result.Winner == Team.All) MatchContext.RecordMatchResult(playerIds[Team.Red], storage.PickIds.GetAll());
         else matchEnd = MatchContext.RecordMatchResult(playerIds[result.Winner], storage.PickIds.GetAll());
 
         Object.FindAnyObjectByType<MatchResultView>(FindObjectsInactive.Include).DrawResult(result, CreateGameEndButtonModel(matchEnd));
