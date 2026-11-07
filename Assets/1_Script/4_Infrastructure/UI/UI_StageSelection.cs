@@ -24,7 +24,7 @@ public class UI_StageSelection : MonoBehaviour
 
     public void RefreshUI()
     {
-        var buttonInteractables = Enumerable.Range(0, stageButtons.Length).Select(i => i <= _loadClearStage()).ToList();
+        var buttonInteractables = Enumerable.Range(0, stageButtons.Length).Select(i => StageUnlockChecker.IsUnlocked(i, _loadClearStage())).ToList();
 
         for (int i = 0; i < stageButtons.Length; i++)
             stageButtons[i].interactable = buttonInteractables[i];

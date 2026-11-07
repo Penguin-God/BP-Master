@@ -122,33 +122,6 @@ public class UI_DeckBuilder : MonoBehaviour
 
 public static class DeckCardDrawer
 {
-    public static List<UI_DeckCard> DrawCards(
-        Transform panel,
-        UI_DeckCard cardPrefab,
-        IEnumerable<int> cardIds,
-        Func<int, string> getCardName,
-        Action<CardIdentity> onCardClicked,
-        Action<CardIdentity> onCardDoubleClicked = null)
-    {
-        foreach (Transform child in panel)
-            GameObject.Destroy(child.gameObject);
-
-        var cards = new List<UI_DeckCard>();
-
-        foreach (var id in cardIds)
-        {
-            var card = GameObject.Instantiate(cardPrefab, panel);
-
-            card.Init(
-                new CardIdentity(id),
-                getCardName(id),
-                Color.white,
-                onCardClicked,
-                onCardDoubleClicked);
-
-            cards.Add(card);
-        }
-
-        return cards;
-    }
+    public static List<UI_DeckCard> DrawCards(Transform panel, UI_DeckCard cardPrefab, IEnumerable<int> cardIds, Func<int, string> getCardName, Action<CardIdentity> onCardClicked, Action<CardIdentity> onCardDoubleClicked = null)
+        => ObjectUtil.SpawnItems(panel, cardPrefab, cardIds, (card, id) => card.Init(new CardIdentity(id), getCardName(id), Color.white, onCardClicked, onCardDoubleClicked));
 }

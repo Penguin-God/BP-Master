@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public static class ButtonUtil
 {
@@ -35,5 +38,19 @@ public static class ObjectUtil
     {
         foreach (Transform child in parent)
             Object.Destroy(child.gameObject);
+    }
+
+    public static List<TView> SpawnItems<TData, TView>(Transform parent, TView prefab, IEnumerable<TData> dataList, Action<TView, TData> onInit) where TView : Component
+    {
+        DestoryAllChild(parent);
+
+        var result = new List<TView>();
+        foreach (var data in dataList)
+        {
+            var item = Object.Instantiate(prefab, parent);
+            onInit(item, data);
+            result.Add(item);
+        }
+        return result;
     }
 }

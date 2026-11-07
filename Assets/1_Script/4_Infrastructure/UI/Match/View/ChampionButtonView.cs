@@ -4,14 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum ChampionSortType
-{
-    Default,
-    Attack,
-    Defense,
-    Speed
-}
-
 public class ChampionButtonView : MonoBehaviour
 {
     [SerializeField] UI_CardItem cardPrefab;
@@ -65,19 +57,9 @@ public class ChampionButtonView : MonoBehaviour
             card.AddClickListener(action);
     }
 
-    IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => sortType switch
-    {
-        ChampionSortType.Default => _selectableCards,
-        ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
-        ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
-        ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
-        _ => throw new System.NotImplementedException(),
-    };
+    IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => ChampionSortHelper.GetTabIds(allChampions, sortType, _selectableCards);
 
-    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType)
-        => champions
-            .OrderByDescending(c => c.Status.Stat.GetStatValue(statType))
-            .Select(x => x.Id);
+    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType) => ChampionSortHelper.SortByStat(champions, statType);
 
     public void InActiveButton(int id)
     {
@@ -90,16 +72,5 @@ public class ChampionButtonView : MonoBehaviour
 public static class ChampionButtonCreator
 {
     public static IEnumerable<UI_CardItem> CreateCardItems(Transform parent, IEnumerable<ChampionSO> champions, UI_CardItem cardPrefab)
-    {
-        ObjectUtil.DestoryAllChild(parent);
-
-        var result = new List<UI_CardItem>();
-        foreach (var data in champions)
-        {
-            var card = Object.Instantiate(cardPrefab, parent);
-            card.DrawCard(data);
-            result.Add(card);
-        }
-        return result;
-    }
+        => ObjectUtil.SpawnItems(parent, cardPrefab, champions, (card, data) => card.DrawCard(data));
 }
