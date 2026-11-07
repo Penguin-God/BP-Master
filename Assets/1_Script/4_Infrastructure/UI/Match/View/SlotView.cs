@@ -1,12 +1,10 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SlotView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _nameText;
     [SerializeField] StatView _statView;
-    [SerializeField] Button slotButton;
     [SerializeField] StatChangeView statChangeView;
 
     public void PickCard(ChampionStatus status, int id)
