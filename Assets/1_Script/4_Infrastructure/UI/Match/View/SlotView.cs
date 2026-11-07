@@ -6,6 +6,7 @@ public class SlotView : MonoBehaviour
     [SerializeField] TextMeshProUGUI _nameText;
     [SerializeField] StatView _statView;
     [SerializeField] StatChangeView statChangeView;
+    [SerializeField] UI_CardItem cardItem;
 
     public void PickCard(ChampionStatus status, int id)
     {
@@ -13,5 +14,6 @@ public class SlotView : MonoBehaviour
         _statView.UpdateStat(status.Stat);
         if (statChangeView != null)
             status.OnStatChanged += (be, af) => statChangeView.ChangeStat(new StatChangeData(be, af));
+        cardItem.DrawCard(ChampionDataLoder.GetChampionData(id));
     }
 }

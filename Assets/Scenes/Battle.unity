@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::SkillButtonView
   blueParent: {fileID: 5473993181323107713}
-  redParent: {fileID: 0}
+  redParent: {fileID: 1269506337}
 --- !u!114 &1164166381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::SlotViewOrchestrator
   blueSlotParent: {fileID: 5473993181323107713}
-  redSlotParent: {fileID: 0}
+  redSlotParent: {fileID: 1269506337}
 --- !u!1 &1213870341
 GameObject:
   m_ObjectHideFlags: 0

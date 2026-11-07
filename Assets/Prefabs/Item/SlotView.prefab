@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95acda6274b27d14d9a34c78d09647b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::UI_CardItem
-  icon: {fileID: 0}
-  nameText: {fileID: 0}
+  icon: {fileID: 8932457066765889309}
+  nameText: {fileID: 3313022715216232836}
   button: {fileID: 0}
 --- !u!1 &1282988850653968337
 GameObject:
@@ -814,6 +814,7 @@ MonoBehaviour:
   _nameText: {fileID: 3313022715216232836}
   _statView: {fileID: 9075995005665379285}
   statChangeView: {fileID: 3041524551070525025}
+  cardItem: {fileID: 4888505852311213734}
 --- !u!114 &50506760632782602
 MonoBehaviour:
   m_ObjectHideFlags: 0
