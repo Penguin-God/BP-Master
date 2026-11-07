@@ -16,12 +16,15 @@ public class UI_CardItem : MonoBehaviour
     {
         _cardData = championSO;
         icon.sprite = _cardData.Icon;
-        nameText.text = _cardData.ChampionName;
+        ChangeName(_cardData.ChampionName);
+        ActiveIcon(true);
     }
 
+    public void ChangeName(string name) => nameText.text = name;
+    public void ActiveIcon(bool isActive) => icon.gameObject.SetActive(isActive);
     public void DrawModel(CardViewModel model)
     {
-        nameText.text = model.Name;
+        ChangeName(model.Name);
         nameText.color = model.TextColor;
         if (model.IsEnabled)
         {

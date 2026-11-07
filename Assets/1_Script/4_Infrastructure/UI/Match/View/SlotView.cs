@@ -8,6 +8,12 @@ public class SlotView : MonoBehaviour
     [SerializeField] StatChangeView statChangeView;
     [SerializeField] UI_CardItem cardItem;
 
+    void Start()
+    {
+        cardItem.ChangeName("-");
+        cardItem.ActiveIcon(false);
+    }
+
     public void PickCard(ChampionStatus status, int id)
     {
         _nameText.text = ChampionDataLoder.NameCatalog[id];
