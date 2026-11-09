@@ -44,7 +44,10 @@ public class SkillUseController_UI : MonoBehaviour
         ActiveValidTargets();
 
         if (currentSelection.IsFull)
+        {
+            SoundPlayer.Play("UseSkill");
             ExecuteSkill(currentSelection.Caster, currentSelection.Selected);
+        }
     }
 
     void ExecuteSkill(SlotData caster, IEnumerable<SlotData> targets)

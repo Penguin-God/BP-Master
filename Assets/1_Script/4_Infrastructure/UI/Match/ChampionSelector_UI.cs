@@ -32,6 +32,7 @@ public class ChampionSelector_UI : MonoBehaviour, IPhaseEntry
         // 시간 커플링. 빈 스킬일 경우 SetupSelectButton이 실행되서 버튼 비활성화가 늦으면 평생 그 상태임
         banpickHandler.SaveSelect(phaseManager.CurrentFlow, SelectId);
         championFocusView.ClearDisplay();
+        SoundPlayer.Play("CardPick");
     }
 
     void ClickBtn(ChampionSO championSO)

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class ChampionButtonView : MonoBehaviour
@@ -40,6 +41,7 @@ public class ChampionButtonView : MonoBehaviour
         _cards = ChampionButtonCreator.CreateCardItems(content, Ids.Select(x => ChampionDataLoder.GetChampionData(x)), cardPrefab);
 
         if (clickEvent != null) ApplyEvent(clickEvent);
+        ApplyEvent(_ => SoundPlayer.Play("CardClick", 0.7f));
 
         foreach (var card in _cards)
             card.DrawModel(_presenter.GetCardModel(card.Id));
@@ -58,8 +60,6 @@ public class ChampionButtonView : MonoBehaviour
     }
 
     IEnumerable<int> GetTabIds(IEnumerable<Champion> allChampions, ChampionSortType sortType) => ChampionSortHelper.GetTabIds(allChampions, sortType, _selectableCards);
-
-    IEnumerable<int> SortByStat(IEnumerable<Champion> champions, StatType statType) => ChampionSortHelper.SortByStat(champions, statType);
 
     public void InActiveButton(int id)
     {
