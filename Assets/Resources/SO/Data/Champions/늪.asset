@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 6
   championName: "\uB2AA"
   attack: 100
-  defense: 120
-  speed: 4
+  defense: 360
   skillDatas:
   - targetSide: 0
     range: 1
@@ -43,7 +42,7 @@ MonoBehaviour:
     - skillAmount:
         Type: 1
         StatType: 1
-        ValueAmount: -25
+        ValueAmount: -75
         PercentValue: 0
         FixValue: 0
     conditionType: 0

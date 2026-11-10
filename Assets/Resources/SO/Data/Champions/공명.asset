@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 2
   championName: "\uACF5\uBA85"
   attack: 80
-  defense: 80
-  speed: 4
+  defense: 240
   skillDatas:
   - targetSide: 0
     range: 4

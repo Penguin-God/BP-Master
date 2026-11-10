@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 29
   championName: "\uCCA0\uC2DD"
   attack: 100
-  defense: 0
-  speed: 4
+  defense: 1
   skillDatas:
   - targetSide: 1
     range: 1

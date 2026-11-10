@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 5
   championName: "\uAD11\uC804\uC0AC"
   attack: 150
-  defense: 100
-  speed: 5
+  defense: 300
   skillDatas:
   - targetSide: 0
     range: 4
@@ -37,7 +36,7 @@ MonoBehaviour:
     - skillAmount:
         Type: 1
         StatType: 1
-        ValueAmount: -70
+        ValueAmount: -210
         PercentValue: 0
         FixValue: 0
     - skillAmount:

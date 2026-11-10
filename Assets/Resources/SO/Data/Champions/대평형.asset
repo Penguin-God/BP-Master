@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 8
   championName: "\uB300\uD3C9\uD615"
   attack: 100
-  defense: 100
-  speed: 5
+  defense: 300
   skillDatas:
   - targetSide: 0
     range: 2
@@ -45,7 +44,7 @@ MonoBehaviour:
         StatType: 1
         ValueAmount: 0
         PercentValue: 0
-        FixValue: 100
+        FixValue: 300
     conditionType: 0
     threshold: 0
     conditionCheckerType: 0

@@ -23,9 +23,8 @@ MonoBehaviour:
     SerializationNodes: []
   id: 22
   championName: "\uC57D\uD0C8\uC790"
-  attack: 0
-  defense: 0
-  speed: 3
+  attack: 1
+  defense: 1
   skillDatas:
   - targetSide: 1
     range: 4

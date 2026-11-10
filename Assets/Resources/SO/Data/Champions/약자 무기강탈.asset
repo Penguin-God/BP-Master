@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 21
   championName: "\uC57D\uC790 \uBB34\uAE30\uAC15\uD0C8"
   attack: 60
-  defense: 100
-  speed: 4
+  defense: 300
   skillDatas:
   - targetSide: 1
     range: 4
@@ -41,7 +40,7 @@ MonoBehaviour:
         PercentValue: 1
         FixValue: 0
     conditionType: 3
-    threshold: 80
+    threshold: 240
     conditionCheckerType: 1
     isSpecialText: 1
     specialTemplate: "{Condition} {Rule} {Stat} \uD761\uC218"

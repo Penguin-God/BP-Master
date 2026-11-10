@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 24
   championName: "\uC758\uC0AC"
   attack: 110
-  defense: 99
-  speed: 7
+  defense: 299
   skillDatas:
   - targetSide: 0
     range: 4
@@ -39,9 +38,9 @@ MonoBehaviour:
         StatType: 1
         ValueAmount: 0
         PercentValue: 0
-        FixValue: 99
+        FixValue: 299
     conditionType: 1
-    threshold: 99
+    threshold: 299
     conditionCheckerType: 1
     isSpecialText: 0
     specialTemplate: 

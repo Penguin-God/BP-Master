@@ -24,8 +24,7 @@ MonoBehaviour:
   id: 24
   championName: "\uC1E0\uC57D \uC800\uC8FC"
   attack: 90
-  defense: 120
-  speed: 5
+  defense: 360
   skillDatas:
   - targetSide: 1
     range: 4
@@ -33,18 +32,11 @@ MonoBehaviour:
     valueType: 0
     timingType: 0
     skillType: 2
-    skillAmount:
-      Type: 1
-      StatType: 1
-      ValueAmount: -40
-      PercentValue: 0
-      FixValue: 0
     actions:
-    - skillType: 2
-      skillAmount:
+    - skillAmount:
         Type: 1
         StatType: 1
-        ValueAmount: -40
+        ValueAmount: -120
         PercentValue: 0
         FixValue: 0
     conditionType: 0
