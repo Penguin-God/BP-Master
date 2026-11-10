@@ -2498,7 +2498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::StatView
   attackText: {fileID: 1797386935}
   defenseText: {fileID: 1250794124}
-  speedText: {fileID: 1345685306}
+  speedText: {fileID: 0}
 --- !u!1 &1111538743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,7 +2610,6 @@ RectTransform:
   m_Children:
   - {fileID: 1797386934}
   - {fileID: 1250794121}
-  - {fileID: 1345685303}
   m_Father: {fileID: 1091174713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -2842,149 +2841,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: App::StageSaveHelper
   clearStage: 3
---- !u!1001 &1345685302
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1135467796}
-    m_Modifications:
-    - target: {fileID: 438931734801065453, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_Name
-      value: SpeedText
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6260906620254567080, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_Name
-      value: SpeedUpgradeBtn
-      objectReference: {fileID: 0}
-    - target: {fileID: 8629991686719397955, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-      propertyPath: m_Name
-      value: SpeedDownBtn
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
---- !u!224 &1345685303 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5277781660767202962, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-  m_PrefabInstance: {fileID: 1345685302}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1345685304 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6262094826966530782, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-  m_PrefabInstance: {fileID: 1345685302}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1345685305 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1774486507330238853, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-  m_PrefabInstance: {fileID: 1345685302}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1345685306 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4840705808648499072, guid: 1be01ef8c9c30e24294a184a6c52a531, type: 3}
-  m_PrefabInstance: {fileID: 1345685302}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1365789486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,13 +4411,13 @@ MonoBehaviour:
   _campionView: {fileID: 1091174716}
   _baseAttText: {fileID: 1797386935}
   _baseDefText: {fileID: 1250794124}
-  _baseSpdText: {fileID: 1345685306}
+  _baseSpdText: {fileID: 0}
   _upAttBtn: {fileID: 1649620305}
   _upDefBtn: {fileID: 1250794123}
-  _upSpdBtn: {fileID: 1345685305}
+  _upSpdBtn: {fileID: 0}
   _downAttBtn: {fileID: 471645019}
   _downDefBtn: {fileID: 1250794122}
-  _downSpdBtn: {fileID: 1345685304}
+  _downSpdBtn: {fileID: 0}
 --- !u!1 &1877720417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4927,7 +4783,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uC2A4\uD0EF\uB2F9 \uCD5C\uB300 1\uBC88\uC529 \uAC15\uD654 \uAC00\uB2A5\n1\uD3EC\uC778\uD2B8\uC5D0
-    \uACF5, \uBC29 15, \uC18D\uB3C4 1 \uC99D\uAC00"
+    \uACF515, \uBC29 15 \uC99D\uAC00"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6be753b50a214cf4a858731bd5a25fe2, type: 2}
   m_sharedMaterial: {fileID: -6326918841155640024, guid: 6be753b50a214cf4a858731bd5a25fe2, type: 2}
