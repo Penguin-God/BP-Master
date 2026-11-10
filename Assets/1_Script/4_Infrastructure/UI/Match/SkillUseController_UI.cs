@@ -9,8 +9,10 @@ public class SkillUseController_UI : MonoBehaviour
     TargetSelection currentSelection;
     Action<SlotData> slotClickHandler;
     Action onSkillCompleted;
+    Action<IEnumerable<SlotData>> onTargetsConfirmed;
 
     public SkillButtonView SkillButtonView => skillButtonView;
+    public SkillUsecase SkillUseController => skillUseController;
 
     public void Init(SkillUsecase skillUseController)
     {
@@ -30,11 +32,32 @@ public class SkillUseController_UI : MonoBehaviour
         skillButtonView.ActiveTargets(selectableSlots);
     }
 
+    public void SelectSkillTargets(SlotStorage<Champion> championSlot, SlotData useSlot, Action<IEnumerable<SlotData>> onConfirmed)
+    {
+        slotClickHandler = null;
+        onSkillCompleted = null;
+        onTargetsConfirmed = onConfirmed;
+
+        var skill = championSlot.GetSlot(useSlot).Skill;
+        if (TurnActionFlowHelper.ShouldSkipSkill(skill))
+        {
+            CompleteTargetConfirmation(Array.Empty<SlotData>());
+            return;
+        }
+
+        var context = Factorys.CreateFindContext(useSlot.Team, skill, championSlot);
+        currentSelection = TargetSelection.Create(useSlot, context);
+
+        if (currentSelection.IsFull) CompleteTargetConfirmation(Array.Empty<SlotData>());
+        else ActiveValidTargets();
+    }
+
     public void UseSkill(SlotStorage<Champion> championSlot, SlotData useSlot) => UseSkill(championSlot, useSlot, null);
 
     public void UseSkill(SlotStorage<Champion> championSlot, SlotData useSlot, Action onCompleted)
     {
         slotClickHandler = null;
+        onTargetsConfirmed = null;
         onSkillCompleted = onCompleted;
         var skill = championSlot.GetSlot(useSlot).Skill;
         if (TurnActionFlowHelper.ShouldSkipSkill(skill))
@@ -73,9 +96,24 @@ public class SkillUseController_UI : MonoBehaviour
 
         if (currentSelection.IsFull)
         {
+            if (onTargetsConfirmed != null)
+            {
+                CompleteTargetConfirmation(currentSelection.Selected);
+                return;
+            }
+
             SoundPlayer.Play("UseSkill");
             ExecuteSkill(currentSelection.Caster, currentSelection.Selected);
         }
+    }
+
+    void CompleteTargetConfirmation(IEnumerable<SlotData> selectedTargets)
+    {
+        var callback = onTargetsConfirmed;
+        onTargetsConfirmed = null;
+        skillButtonView.InActiveAllBtns();
+        currentSelection = null;
+        callback?.Invoke(selectedTargets);
     }
 
     void ExecuteSkill(SlotData caster, IEnumerable<SlotData> targets)

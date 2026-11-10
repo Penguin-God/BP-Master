@@ -50,7 +50,7 @@ public class MatchUI_Controller : MonoBehaviour
 
         skillUseView.gameObject.SetActive(false);
         skillUseView.Init(matchCore.SkillController);
-        pickTurnCoordinator = new PickTurnActionCoordinator(pickSlotFacade, skillUseView);
+        pickTurnCoordinator = new PickTurnActionCoordinator(pickSlotFacade, skillUseView, slotViews);
 
         gameFlowView.Init(pickSlotFacade.IdSlots);
         matchCore.SkillController.OnUseSkill += gameFlowView.UpdateUseSkill;
