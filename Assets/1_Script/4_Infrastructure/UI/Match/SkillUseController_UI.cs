@@ -7,6 +7,10 @@ public class SkillUseController_UI : MonoBehaviour
     SkillButtonView skillButtonView;
     SkillUsecase skillUseController;
     TargetSelection currentSelection;
+    Action<SlotData> slotClickHandler;
+    Action onSkillCompleted;
+
+    public SkillButtonView SkillButtonView => skillButtonView;
 
     public void Init(SkillUsecase skillUseController)
     {
@@ -17,13 +21,23 @@ public class SkillUseController_UI : MonoBehaviour
         skillButtonView.Init();
 
         foreach (var slot in skillButtonView.ButtonSlots.GetAllSlotDatas())
-            skillButtonView.ButtonSlots.GetSlot(slot).onClick.AddListener(() => OnClickSkillSlot(slot));
+            skillButtonView.ButtonSlots.GetSlot(slot).onClick.AddListener(() => OnClickSlot(slot));
     }
 
-    public void UseSkill(SlotStorage<Champion> championSlot, SlotData useSlot)
+    public void BeginTargetSelection(IEnumerable<SlotData> selectableSlots, Action<SlotData> onSelected)
     {
+        slotClickHandler = onSelected;
+        skillButtonView.ActiveTargets(selectableSlots);
+    }
+
+    public void UseSkill(SlotStorage<Champion> championSlot, SlotData useSlot) => UseSkill(championSlot, useSlot, null);
+
+    public void UseSkill(SlotStorage<Champion> championSlot, SlotData useSlot, Action onCompleted)
+    {
+        slotClickHandler = null;
+        onSkillCompleted = onCompleted;
         var skill = championSlot.GetSlot(useSlot).Skill;
-        if (skill.IsEmpty)
+        if (TurnActionFlowHelper.ShouldSkipSkill(skill))
         {
             ExecuteSkill(useSlot, Array.Empty<SlotData>());
             return;
@@ -34,6 +48,20 @@ public class SkillUseController_UI : MonoBehaviour
 
         if (currentSelection.IsFull) ExecuteSkill(currentSelection.Caster, Array.Empty<SlotData>());
         else ActiveValidTargets();
+    }
+
+    void OnClickSlot(SlotData clickSlot)
+    {
+        if (slotClickHandler != null)
+        {
+            var handler = slotClickHandler;
+            slotClickHandler = null;
+            skillButtonView.InActiveAllBtns();
+            handler.Invoke(clickSlot);
+            return;
+        }
+
+        OnClickSkillSlot(clickSlot);
     }
 
     void OnClickSkillSlot(SlotData clickSlot)
@@ -52,9 +80,12 @@ public class SkillUseController_UI : MonoBehaviour
 
     void ExecuteSkill(SlotData caster, IEnumerable<SlotData> targets)
     {
+        var callback = onSkillCompleted;
+        onSkillCompleted = null;
         skillUseController.UseSkill(caster, targets);
         skillButtonView.InActiveAllBtns();
         currentSelection = null;
+        callback?.Invoke();
     }
 
     void ActiveValidTargets() => skillButtonView.ActiveTargets(currentSelection.GetSelectableTargets());

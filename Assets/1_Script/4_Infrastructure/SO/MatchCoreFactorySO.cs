@@ -29,7 +29,6 @@ public class MatchCoreFactorySO : ScriptableObject
         var teamDispatcher = new TeamPhaseEntryDispatcher(blueEntry, redEntry);
         var phaseManager = new PhaseFlowOrchestrator(phaseAdvancer, phaseEventDispatcher, teamDispatcher);
 
-        skillController.OnUseSkill += slot => phaseManager.SubmitAction(slot.Team);
         banPickHandler.BanPickEventDispatcher.OnTeamBan += (team, _) => phaseManager.SubmitAction(team);
 
         var matchCore = new MatchCore(
@@ -44,8 +43,7 @@ public class MatchCoreFactorySO : ScriptableObject
 
         phaseEventDispatcher.OnPhaseDone += () =>
         {
-            var result = MatchResultCalculator.CalculateResult(
-                teamBonusCalculator,
+            var result = SurvivalScoreCalculator.Calculate(
                 banPickHandler.PickSlotFacade.StatusSlots
             );
             matchCore.FinishGame(result);

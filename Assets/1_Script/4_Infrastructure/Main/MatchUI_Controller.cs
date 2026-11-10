@@ -18,9 +18,13 @@ public class MatchUI_Controller : MonoBehaviour
     [SerializeField] ParticipantView participantView;
 
     Team team;
+    MatchCore matchCore;
+    PickTurnActionCoordinator pickTurnCoordinator;
+
     public void Init(Team playerTeam, MatchCore matchCore, Dictionary<Team, int> playerIds)
     {
         team = playerTeam;
+        this.matchCore = matchCore;
         var banPickHandler = matchCore.BanPickHandler;
         var pickSlotFacade = banPickHandler.PickSlotFacade;
         var eventDispatcher = banPickHandler.BanPickEventDispatcher;
@@ -46,6 +50,7 @@ public class MatchUI_Controller : MonoBehaviour
 
         skillUseView.gameObject.SetActive(false);
         skillUseView.Init(matchCore.SkillController);
+        pickTurnCoordinator = new PickTurnActionCoordinator(pickSlotFacade, skillUseView);
 
         gameFlowView.Init(pickSlotFacade.IdSlots);
         matchCore.SkillController.OnUseSkill += gameFlowView.UpdateUseSkill;
@@ -59,6 +64,6 @@ public class MatchUI_Controller : MonoBehaviour
     void OnPick(SlotStorage<Champion> slotStorage, SlotData slotData)
     {
         if (slotData.Team != team) return;
-        skillUseView.UseSkill(slotStorage, slotData);
+        pickTurnCoordinator.StartAction(slotData, onDone: () => matchCore.PhaseManager.SubmitAction(team));
     }
 }

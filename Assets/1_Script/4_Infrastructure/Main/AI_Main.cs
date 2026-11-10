@@ -11,7 +11,7 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
     public void EnterBan() => StartCoroutine(CoBan());
     public void EnterPick() => banPickAgent.Pick(Team);
 
-    public void Init(int ai_id, Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
+    public void Init(int ai_id, Team team, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer, PhaseFlowOrchestrator phaseManager = null)
     {
         Team = team;
 
@@ -28,8 +28,11 @@ public class AI_Main : MonoBehaviour, IPhaseEntry
 
         IEnumerator Co_UseSkill(SlotData slot)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
             skillUseController.AutoUseSkill(slot, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slot)));
+            yield return new WaitForSeconds(0.5f);
+            CardAttackService.AttackFirstAliveTarget(slot, banPickHandler.PickSlotFacade.StatusSlots);
+            phaseManager?.SubmitAction(slot.Team);
         }
     }
 

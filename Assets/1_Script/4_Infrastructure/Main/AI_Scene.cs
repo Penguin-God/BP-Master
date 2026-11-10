@@ -53,7 +53,7 @@ public class AI_Entry : IPhaseEntry
     public void EnterBan() => banPickAgent.Ban(Team);
     public void EnterPick() => banPickAgent.Pick(Team);
 
-    public AI_Entry(Team team, int ai_id, AISelectorFactory aiFactory, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer)
+    public AI_Entry(Team team, int ai_id, AISelectorFactory aiFactory, BanPickStorage storage, SkillUsecase skillUseController, ChampionCatalog championCatalog, MasteryRegistry masteryRegistry, BanPickHandler banPickHandler, PhaseAdvancer phaseAdvancer, PhaseFlowOrchestrator phaseManager = null)
     {
         Team = team;
         AI_SelectorSO selectorFactory = aiFactory.CreateAI(ai_id, Team, championCatalog, masteryRegistry, banPickHandler, phaseAdvancer);
@@ -64,6 +64,8 @@ public class AI_Entry : IPhaseEntry
         {
             if (slotData.Team != Team) return;
             skillUseController.AutoUseSkill(slotData, TargetOrders.StatOrder(banPickHandler.PickSlotFacade.SkillSlots.GetSlot(slotData)));
+            CardAttackService.AttackFirstAliveTarget(slotData, banPickHandler.PickSlotFacade.StatusSlots);
+            phaseManager?.SubmitAction(slotData.Team);
         }
     }
 }
