@@ -12,8 +12,8 @@ public class MasteryPointPresenterTests
 
     MasteryPointPresenter CreateSut(MasteryProfile inventory, FakeMasterySaver saver)
     {
-        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(100, 0, 0), System.Array.Empty<SkillViewModel>()), skills => "");
-        return new MasteryPointPresenter(inventory, textBuilder, saver, new MasteryMultiplier(30, 0, 0));
+        var textBuilder = new ChampionTextBuilder(id => new ChampionProfile(id, "펭귄", CreateStat(100, 0), System.Array.Empty<SkillViewModel>()), skills => "");
+        return new MasteryPointPresenter(inventory, textBuilder, saver, new MasteryMultiplier(30, 0));
     }
 
     [Test]
@@ -55,6 +55,5 @@ public class MasteryPointPresenterTests
 
         Assert.AreEqual("<color=green>공 130</color>", result.ChampionModel.StatModel.Attack);
         Assert.AreEqual("방 0", result.ChampionModel.StatModel.Defense);
-        Assert.AreEqual("속도 0", result.ChampionModel.StatModel.Speed);
     }
 }

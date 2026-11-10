@@ -6,8 +6,8 @@ public class ValueCalcualateTests
     const int CHAMP_ID = 1;
     PickValueEvaluator CreateSut(BonusCalculator bonusCalculator, int masteryLevel = 0)
     {
-        var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator, bonusCalculator));
-        return new PickValueEvaluator(speedValue: 0, CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel)), bonus);
+        var bonus = new BonusDeltaCalculator(new TeamBonusCalculator(bonusCalculator, bonusCalculator));
+        return new PickValueEvaluator(CreateMasteryApplier(new ChampionMastery(CHAMP_ID, masteryLevel)), bonus);
     }
 
     [Test]
@@ -19,7 +19,6 @@ public class ValueCalcualateTests
 
         int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(0));
 
-        // 내 팀(Blue) 기준에서 적(Red)의 스탯이 올랐으므로 점수는 마이너스여야 함
         Assert.AreEqual(-200, score);
     }
 
@@ -36,8 +35,8 @@ public class ValueCalcualateTests
     }
 
     [Test]
-    [TestCase(0, 420)] // 원래 받는 보너스는 점수 반영 X
-    [TestCase(300, 520)] // stat 100 + mastery 20 + skill 300 + bonus 100
+    [TestCase(0, 420)]
+    [TestCase(300, 520)]
     public void 스탯_숙련도_스킬_보너스_적용한_챔피언_가치(int bounsNeed, int result)
     {
         var skillData = CreateAttackChangeSkill(100, rule: SelfAllRule);
@@ -47,6 +46,6 @@ public class ValueCalcualateTests
         int score = sut.Evaluate(champion, Team.Blue, CreateTwoSlotStatus(0));
 
         Assert.AreEqual(result, score);
-        Assert.AreEqual(100, champion.Status.Stat.Attack); // 원본은 수정 X
+        Assert.AreEqual(100, champion.Status.Stat.Attack);
     }
 }

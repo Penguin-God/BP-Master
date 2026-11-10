@@ -8,18 +8,16 @@ public readonly struct TeamScoreInfo
 
     public int AttackBonus { get; }
     public int DefenseBonus { get; }
-    public int SpeedBonus { get; }
-    public int BonusScore => AttackBonus + DefenseBonus + SpeedBonus;
+    public int BonusScore => AttackBonus + DefenseBonus;
 
     public int Total => DefaultScore + BonusScore;
 
-    public TeamScoreInfo(int attackTotal, int defenseTotal, int attackBonus, int defenseBonus, int speedBonus)
+    public TeamScoreInfo(int attackTotal, int defenseTotal, int attackBonus = 0, int defenseBonus = 0)
     {
         AttackTotal = attackTotal;
         DefenseTotal = defenseTotal;
         AttackBonus = attackBonus;
         DefenseBonus = defenseBonus;
-        SpeedBonus = speedBonus;
     }
 }
 
@@ -63,7 +61,6 @@ public class MatchResultBuilder
         ScoreCalculator.CalculateAttack(team),
         ScoreCalculator.CalculateDefense(team),
         teamBonusCalculator.CalculateAttackBonus(team),
-        teamBonusCalculator.CalculateDefenseBonus(team),
-        teamBonusCalculator.CalculateSpeedBonus(team)
+        teamBonusCalculator.CalculateDefenseBonus(team)
         );
 }

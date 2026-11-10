@@ -7,28 +7,28 @@ public static class TestHelper
     public static SlotData CreateBlueSlot(int index) => CreateSlot(Team.Blue, index);
     public static SlotData CreateRedSlot(int index) => CreateSlot(Team.Red, index);
 
-    public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0, int speed = 0)
+    public static SlotStorage<ChampionStatus> CreateOneSlotStatus(int att = 0, int def = 0)
     {
         SlotStorage<ChampionStatus> result = new();
-        result.AddSlot(Team.Blue, CreateStatus(att, def, speed));
-        result.AddSlot(Team.Red, CreateStatus(att, def, speed));
+        result.AddSlot(Team.Blue, CreateStatus(att, def));
+        result.AddSlot(Team.Red, CreateStatus(att, def));
         return result;
     }
 
-    public static SlotStorage<ChampionStatus> CreateTwoSlotStatus(int att = 0, int def = 0, int speed = 0)
+    public static SlotStorage<ChampionStatus> CreateTwoSlotStatus(int att = 0, int def = 0)
     {
-        SlotStorage<ChampionStatus> result = CreateOneSlotStatus(att, def, speed);
-        result.AddSlot(Team.Blue, CreateStatus(att, def, speed));
-        result.AddSlot(Team.Red, CreateStatus(att, def, speed));
+        SlotStorage<ChampionStatus> result = CreateOneSlotStatus(att, def);
+        result.AddSlot(Team.Blue, CreateStatus(att, def));
+        result.AddSlot(Team.Red, CreateStatus(att, def));
         return result;
     }
 
     public static IEnumerable<SlotData> CreateBlueSlots(params int[] indexs) => indexs.Select(index => CreateBlueSlot(index));
     public static IEnumerable<SlotData> CreateRedSlots(params int[] indexs) => indexs.Select(index => CreateRedSlot(index));
 
-    public static ChampionStatData CreateStat(int att = 0, int def = 0, int speed = 0) => new ChampionStatData(att, def, speed);
+    public static ChampionStatData CreateStat(int att = 0, int def = 0) => new ChampionStatData(att, def);
 
-    public static ChampionStatus CreateStatus(int att = 0, int def = 0, int speed = 0) => new ChampionStatus(CreateStat(att, def, speed));
+    public static ChampionStatus CreateStatus(int att = 0, int def = 0) => new ChampionStatus(CreateStat(att, def));
     public static Skill CreateSkill(params SkillData[] skills) => new Skill(skills);
     public static SkillData[] CreateSkillDatas(params SkillData[] skills) => skills;
     public static SkillViewModel CreateSkillViewModel(SkillType skillType = SkillType.StatChanger, SkillAmountData amountData = null, SkillConditionData conditionData = default, CardSelectRule rule = default) => new SkillViewModel(skillType, amountData, conditionData, rule);
@@ -39,7 +39,7 @@ public static class TestHelper
     public static SkillData CreateValueSkillData(StatType statType, int value, CardSelectRule rule = default)
         => new SkillData(SkillType.StatChanger, CalculatorFactory.CreateValue(value), SkillCondtionFactory.CreateNull(), rule, SkillApplyType.Select, SkillValueType.SelectRef, statType);
 
-    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, CardSelectRule rule = default)  => CreateValueSkillData(StatType.Attack, value, rule);
+    public static SkillData CreateAttackChangeSkill(int value, SkillConditionData conditionData = default, CardSelectRule rule = default) => CreateValueSkillData(StatType.Attack, value, rule);
     public static SkillAmountData CreateSkillAmount(AmountType amountType, StatType statType = StatType.Attack, int value = 0, float percent = 0, int fix = 0)
         => new SkillAmountData(amountType, statType, value, percent, fix);
 
@@ -74,12 +74,12 @@ public static class TestHelper
     public static SkillActionFactory CreateSkillActionFactory() => new SkillActionFactory(BanPickEventDispatcher.Create(), PhaseEventDispatcher.Create());
     public static SkillRunner CreateSkillRunner() => new SkillRunner(CreateSkillActionFactory());
 
-    public static Champion CreateChampion(int id = 0, int att = 0, int def = 0, int speed = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def, speed));
+    public static Champion CreateChampion(int id = 0, int att = 0, int def = 0, params SkillData[] skillData) => new Champion(id, new Skill(skillData), CreateStatus(att, def));
     public static ChampionCatalog CreateCaltalog(params Champion[] champions) => new ChampionCatalog(champions);
 
     public static BonusCalculator CreateBonus(int needScore, int bonus) => new BonusCalculator(new SortedDictionary<int, int>() { { needScore, bonus } });
 
-    public static ChampionMastery CreateMasteryData(int id, int att = 0, int def = 0, int speed = 0) => new ChampionMastery(id, CreateStat(att, def, speed));
+    public static ChampionMastery CreateMasteryData(int id, int att = 0, int def = 0) => new ChampionMastery(id, CreateStat(att, def));
     public static MasteryApplier CreateMasteryApplier(params ChampionMastery[] masteries) => new MasteryApplier(new MasteryStatCollection(masteries));
     public static MasteryProfile CreateMasteryInventory(int point) => new MasteryProfile(point);
     public static MasteryBoardCollection CreateBoardCollection(Dictionary<int, MasteryBoard> boards) => new MasteryBoardCollection(boards);

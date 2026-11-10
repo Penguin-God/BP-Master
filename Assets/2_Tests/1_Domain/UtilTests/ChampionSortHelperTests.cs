@@ -7,14 +7,13 @@ public class ChampionSortHelperTests
 {
     List<Champion> CreateSut() => new List<Champion>
     {
-        CreateChampion(id: 1, att: 10, def: 30, speed: 20),
-        CreateChampion(id: 2, att: 30, def: 10, speed: 30),
-        CreateChampion(id: 3, att: 20, def: 20, speed: 10),
+        CreateChampion(id: 1, att: 10, def: 30),
+        CreateChampion(id: 2, att: 30, def: 10),
+        CreateChampion(id: 3, att: 20, def: 20),
     };
 
     [TestCase(StatType.Attack, new[] { 2, 3, 1 })]
     [TestCase(StatType.Defense, new[] { 1, 3, 2 })]
-    [TestCase(StatType.Speed, new[] { 2, 1, 3 })]
     public void 스탯별_내림차순_정렬시_올바른_ID_순서가_반환된다(StatType statType, int[] expectedIds)
     {
         var sut = CreateSut();
@@ -27,7 +26,6 @@ public class ChampionSortHelperTests
     [TestCase(ChampionSortType.Default, new[] { 1, 2, 3 })]
     [TestCase(ChampionSortType.Attack, new[] { 2, 3, 1 })]
     [TestCase(ChampionSortType.Defense, new[] { 1, 3, 2 })]
-    [TestCase(ChampionSortType.Speed, new[] { 2, 1, 3 })]
     public void 정렬_탭_타입에_따라_올바른_ID_목록이_반환된다(ChampionSortType sortType, int[] expectedIds)
     {
         var sut = CreateSut();

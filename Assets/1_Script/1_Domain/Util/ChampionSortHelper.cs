@@ -6,8 +6,7 @@ public enum ChampionSortType
 {
     Default,
     Attack,
-    Defense,
-    Speed
+    Defense
 }
 
 public static class ChampionSortHelper
@@ -17,7 +16,6 @@ public static class ChampionSortHelper
         ChampionSortType.Default => defaultIds ?? allChampions.Select(x => x.Id),
         ChampionSortType.Attack => SortByStat(allChampions, StatType.Attack),
         ChampionSortType.Defense => SortByStat(allChampions, StatType.Defense),
-        ChampionSortType.Speed => SortByStat(allChampions, StatType.Speed),
         _ => throw new NotImplementedException(),
     };
 

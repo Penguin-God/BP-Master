@@ -31,13 +31,11 @@ public class StatChangeViewModel
 {
     public StatDeltaViewModel Attack { get; }
     public StatDeltaViewModel Defense { get; }
-    public StatDeltaViewModel Speed { get; }
 
-    public StatChangeViewModel(StatDeltaViewModel attack, StatDeltaViewModel defense, StatDeltaViewModel speed)
+    public StatChangeViewModel(StatDeltaViewModel attack, StatDeltaViewModel defense)
     {
         Attack = attack;
         Defense = defense;
-        Speed = speed;
     }
 }
 
@@ -56,9 +54,8 @@ public class StatChangePresenter
     {
         var attackView = BuildDeltaView(data.Before.Attack, data.After.Attack);
         var defenseView = BuildDeltaView(data.Before.Defense, data.After.Defense);
-        var speedView = BuildDeltaView(data.Before.Speed, data.After.Speed);
 
-        return new StatChangeViewModel(attackView, defenseView, speedView);
+        return new StatChangeViewModel(attackView, defenseView);
     }
 
     StatDeltaViewModel BuildDeltaView(int before, int after)

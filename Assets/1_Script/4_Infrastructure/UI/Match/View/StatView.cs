@@ -15,13 +15,13 @@ public class StatView : MonoBehaviour
     {
         attackText.text = model.Attack;
         defenseText.text = model.Defense;
-        speedText.text = model.Speed;
+        if (speedText != null) speedText.gameObject.SetActive(false);
     }
 
     public void ClearDisplay()
     {
         attackText.text = "공격 : -";
         defenseText.text = "방어 : -";
-        speedText.text = "속도 : -";
+        if (speedText != null) speedText.gameObject.SetActive(false);
     }
 }

@@ -2,11 +2,9 @@ public class PickValueEvaluator
 {
     readonly MasteryApplier masteryApplier;
     readonly BonusDeltaCalculator bonusDeltaCalculator;
-    readonly int SpeedValue;
 
-    public PickValueEvaluator(int speedValue, MasteryApplier masteryApplier, BonusDeltaCalculator bonusDeltaCalculator)
+    public PickValueEvaluator(MasteryApplier masteryApplier, BonusDeltaCalculator bonusDeltaCalculator)
     {
-        SpeedValue = speedValue;
         this.masteryApplier = masteryApplier;
         this.bonusDeltaCalculator = bonusDeltaCalculator;
     }
@@ -19,7 +17,7 @@ public class PickValueEvaluator
 
         var beforeScore = ScoreConvertor.Convert(originStats);
         var pickApplyScore = GetPlicApplyScore(team, evaluatedChampion, originStats);
-        int cardPickDeltaValue = ScoreDeltaCalculator.CalculateScoreDelta(pickApplyScore, team, SpeedValue);
+        int cardPickDeltaValue = ScoreDeltaCalculator.CalculateScoreDelta(pickApplyScore, team);
 
         int bonusDeltaValue = bonusDeltaCalculator.Calculate(beforeScore, beforeScore + pickApplyScore, team);
         return cardPickDeltaValue + bonusDeltaValue;

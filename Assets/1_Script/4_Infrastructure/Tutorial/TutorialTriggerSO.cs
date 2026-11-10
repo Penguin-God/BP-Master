@@ -26,8 +26,8 @@ public class Tutorial_Info
     [EnumToggleButtons]
     public TutorialQuizType QuizType;
 
-    [ShowIf(nameof(IsSpeedQuiz))]
-    public int MinSpeed;
+    [ShowIf(nameof(IsAttackQuiz))]
+    public int MinAttack;
 
     [ShowIf(nameof(IsQuiz))]
     public string[] SuccessDialogues;
@@ -36,9 +36,9 @@ public class Tutorial_Info
     public string[] FailDialogues;
 
     bool IsQuiz => TutorialType == TutorialType.CheckCardSelect;
-    bool IsSpeedQuiz => IsQuiz && QuizType == TutorialQuizType.SpeedAtLeast;
+    bool IsAttackQuiz => IsQuiz && QuizType == TutorialQuizType.AttackAtLeast;
 
-    public TutorialQuizConditionData CreateQuizConditionData() => new TutorialQuizConditionData(QuizType, MinSpeed);
+    public TutorialQuizConditionData CreateQuizConditionData() => new TutorialQuizConditionData(QuizType, MinAttack);
 }
 [CreateAssetMenu(fileName = "TutorialTriggerSO", menuName = "Data/TutorialTriggerSO")]
 public class TutorialTriggerSO : ScriptableObject

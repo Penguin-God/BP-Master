@@ -5,6 +5,7 @@ public static class SkillConditionTextBuilder
         ConditionType.None => "",
         ConditionType.Threshold => BuildThresholdText(conditionData.StatType, conditionData.Threshold),
         ConditionType.Compare => BuildCompareText(conditionData.StatType),
+        _ => ""
     };
 
     static string BuildThresholdText(StatConditionType conditionType, int threshold) => conditionType switch
@@ -14,8 +15,6 @@ public static class SkillConditionTextBuilder
         StatConditionType.AttackBelow => $"공격력 {threshold} 이하인",
         StatConditionType.DefenseAtLeast => $"방어력 {threshold} 이상인",
         StatConditionType.DefenseBelow => $"방어력 {threshold} 이하인",
-        StatConditionType.SpeedAtLeast => $"속도 {threshold} 이상인",
-        StatConditionType.SpeedBelow => $"속도 {threshold} 이하인",
         _ => ""
     };
 
@@ -26,8 +25,6 @@ public static class SkillConditionTextBuilder
         StatConditionType.AttackBelow => $"공격력이 자신보다 낮은",
         StatConditionType.DefenseAtLeast => $"방어력이 자신보다 높은",
         StatConditionType.DefenseBelow => $"방어력이 자신보다 낮은",
-        StatConditionType.SpeedAtLeast => $"속도가 자신보다 높은",
-        StatConditionType.SpeedBelow => $"속도가 자신보다 낮은",
         _ => ""
     };
 }

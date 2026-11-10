@@ -19,7 +19,6 @@ public class StatChangeView : MonoBehaviour
 
         ViewStatChange(changeViewModel.Attack, attChangeText);
         ViewStatChange(changeViewModel.Defense, defChangeText);
-        ViewStatChange(changeViewModel.Speed, speedChangeText);
 
         StartCoroutine(ApplyStatChangeAfterDelay(changeData.After));
     }
@@ -36,7 +35,7 @@ public class StatChangeView : MonoBehaviour
     {
         attChangeText.gameObject.SetActive(false);
         defChangeText.gameObject.SetActive(false);
-        speedChangeText.gameObject.SetActive(false);
+        if (speedChangeText != null) speedChangeText.gameObject.SetActive(false);
     }
 
     void ViewStatChange(StatDeltaViewModel deltaViewModel, TextMeshProUGUI text)

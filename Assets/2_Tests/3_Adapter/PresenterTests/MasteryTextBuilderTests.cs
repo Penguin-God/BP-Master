@@ -10,7 +10,7 @@ public class MasteryTextBuilderTests
         List<ChampionMastery> masteries = new List<ChampionMastery>()
         {
             CreateMasteryData(1, att: 2, def: 12),
-            CreateMasteryData(2, att: 32, speed: 3)
+            CreateMasteryData(2, att: 32, def: 3)
         };
 
         Dictionary<int, string> nameCatalog = new Dictionary<int, string>()
@@ -26,7 +26,7 @@ public class MasteryTextBuilderTests
         string expected =
             "닉스 : 공 2, 방 12" +
             "\n" +
-            "아르카나 : 공 32, 속도 3";
+            "아르카나 : 공 32, 방 3";
 
         Assert.AreEqual(expected, result);
     }

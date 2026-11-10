@@ -17,7 +17,6 @@ public class ChampionStatus
 
     public void AddAttack(int att) => ChangeStat(Stat.ChangeAttack(att + Stat.Attack));
     public void AddDefense(int def) => ChangeStat(Stat.ChangeDefense(def + Stat.Defense));
-    public void AddSpeed(int speed) => ChangeStat(Stat.ChangeSpeed(speed + Stat.Speed));
 
     public void ChangeStat(ChampionStatData newStat)
     {
@@ -33,7 +32,6 @@ public class ChampionStatus
     {
         StatType.Attack => Stat.Attack,
         StatType.Defense => Stat.Defense,
-        StatType.Speed => Stat.Speed,
         _ => 0
     };
 
@@ -41,7 +39,6 @@ public class ChampionStatus
     {
         StatType.Attack => Stat.ChangeAttack(Stat.Attack + amount),
         StatType.Defense => Stat.ChangeDefense(Stat.Defense + amount),
-        StatType.Speed => Stat.ChangeSpeed(Stat.Speed + amount),
         _ => Stat
     };
 }

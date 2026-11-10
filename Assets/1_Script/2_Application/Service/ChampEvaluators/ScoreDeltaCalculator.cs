@@ -1,20 +1,20 @@
 using System.Linq;
 
-public record ScoreInfo(int Att, int Def, int Speed)
+public record ScoreInfo(int Att, int Def)
 {
-    public static ScoreInfo operator +(ScoreInfo a, ScoreInfo b) => new(a.Att + b.Att, a.Def + b.Def, a.Speed + b.Speed);
-    public static ScoreInfo operator -(ScoreInfo a, ScoreInfo b) => new(a.Att - b.Att, a.Def - b.Def, a.Speed - b.Speed);
+    public static ScoreInfo operator +(ScoreInfo a, ScoreInfo b) => new(a.Att + b.Att, a.Def + b.Def);
+    public static ScoreInfo operator -(ScoreInfo a, ScoreInfo b) => new(a.Att - b.Att, a.Def - b.Def);
 }
 
 public record GameScoreInfo(ScoreInfo Blue, ScoreInfo Red)
 {
-    public static GameScoreInfo operator +(GameScoreInfo a, GameScoreInfo b)=> new(a.Blue + b.Blue, a.Red + b.Red);
+    public static GameScoreInfo operator +(GameScoreInfo a, GameScoreInfo b) => new(a.Blue + b.Blue, a.Red + b.Red);
     public static GameScoreInfo operator -(GameScoreInfo a, GameScoreInfo b) => new(a.Blue - b.Blue, a.Red - b.Red);
 }
 
 public static class ScoreDeltaCalculator
 {
-    public static int CalculateScoreDelta(GameScoreInfo data, Team myTeam, int speedValue)
+    public static int CalculateScoreDelta(GameScoreInfo data, Team myTeam)
     {
         int blueScore = CalculateRawValue(data.Blue);
         int redScore = CalculateRawValue(data.Red);
@@ -22,7 +22,7 @@ public static class ScoreDeltaCalculator
         if (myTeam == Team.Blue) return blueScore - redScore;
         else return redScore - blueScore;
 
-        int CalculateRawValue(ScoreInfo info) => info.Att + info.Def + (info.Speed * speedValue);
+        int CalculateRawValue(ScoreInfo info) => info.Att + info.Def;
     }
 
     public static GameScoreInfo CalculateStatDelta(SlotStorage<ChampionStatus> origin, SlotStorage<ChampionStatus> after)
@@ -37,8 +37,7 @@ public static class ScoreDeltaCalculator
     {
         int totalAtt = after.GetTeam(team).Sum(x => x.Stat.Attack) - origin.GetTeam(team).Sum(x => x.Stat.Attack);
         int totalDef = after.GetTeam(team).Sum(x => x.Stat.Defense) - origin.GetTeam(team).Sum(x => x.Stat.Defense);
-        int totalSpd = after.GetTeam(team).Sum(x => x.Stat.Speed) - origin.GetTeam(team).Sum(x => x.Stat.Speed);
 
-        return new ScoreInfo(totalAtt, totalDef, totalSpd);
+        return new ScoreInfo(totalAtt, totalDef);
     }
 }

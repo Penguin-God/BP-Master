@@ -15,8 +15,8 @@ public class SkillRunnerTimingTests
     {
         bpDispatcher = new BanPickEventDispatcher();
         phaseDispatcher = new PhaseEventDispatcher();
-        caster = CreateStatus(100, 100, 100);
-        target = CreateStatus(100, 100, 100);
+        caster = CreateStatus(100, 100);
+        target = CreateStatus(100, 100);
     }
 
     SkillRunner CreateSut() => new SkillRunner(new SkillActionFactory(bpDispatcher, phaseDispatcher));
@@ -77,7 +77,7 @@ public class SkillRunnerTimingTests
     public void 아군_픽_순간_자신에게_스킬_적용()
     {
         var sut = CreateSut();
-        var caster = CreateStatus(100, 100, 100);
+        var caster = CreateStatus(100, 100);
         var skill = CreateSkill(SkillUseTimingType.OnSelfPick, SkillApplyType.OneSelf, 25);
 
         sut.Run(skill, caster, new[] { caster }, Team.Blue);
@@ -90,7 +90,7 @@ public class SkillRunnerTimingTests
     public void 적군_픽_순간_그_카드에게_스킬_적용()
     {
         var sut = CreateSut();
-        var caster = CreateStatus(100, 100, 100);
+        var caster = CreateStatus(100, 100);
         var skill = CreateSkill(SkillUseTimingType.OnOpponentPick, SkillApplyType.Triggered, -20);
 
         sut.Run(skill, caster, new[] { caster }, Team.Blue);

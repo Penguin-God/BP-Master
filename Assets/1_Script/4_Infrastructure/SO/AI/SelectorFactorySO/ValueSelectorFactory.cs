@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ValueSelectSO", menuName = "AI/Selector//Value")]
 public class ValueSelectSO : AI_SelectorSO
 {
-    [SerializeField] int speedValue;
     [SerializeField] TeamBonusDataSO bonusDataFactory;
     [SerializeField] bool enableLogging;
 
@@ -27,8 +26,8 @@ public class ValueSelectSO : AI_SelectorSO
     public PickValueEvaluator CreateEvaluator(Team team)
     {
         var masteryAppiler = new MasteryApplier(masteryManager);
-        return new PickValueEvaluator(speedValue, masteryAppiler, new BonusDeltaCalculator(bonusDataFactory.TeamBonus));
+        return new PickValueEvaluator(masteryAppiler, new BonusDeltaCalculator(bonusDataFactory.TeamBonus));
     }
 
-    ValueSelector CreateValueSelector(Team team) => new (championCatalog, (card) => CreateEvaluator(team).Evaluate(card, team, statusSlots));
+    ValueSelector CreateValueSelector(Team team) => new(championCatalog, (card) => CreateEvaluator(team).Evaluate(card, team, statusSlots));
 }

@@ -45,11 +45,11 @@ public class UI_MasteryPoint : MonoBehaviour
     {
         _upAttBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Attack));
         _upDefBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Defense));
-        _upSpdBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Speed));
+        if (_upSpdBtn != null) _upSpdBtn.gameObject.SetActive(false);
 
         _downAttBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Attack));
         _downDefBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Defense));
-        _downSpdBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Speed));
+        if (_downSpdBtn != null) _downSpdBtn.gameObject.SetActive(false);
     }
 
     void ClickUpgradeBtn(StatType statType)
@@ -107,14 +107,14 @@ public class UI_MasteryPoint : MonoBehaviour
 
         _baseAttText.text = championModel.StatModel.Attack;
         _baseDefText.text = championModel.StatModel.Defense;
-        _baseSpdText.text = championModel.StatModel.Speed;
+        if (_baseSpdText != null) _baseSpdText.gameObject.SetActive(false);
     }
 
     void ClearDetailView()
     {
         _baseAttText.text = "공 : -";
         _baseDefText.text = "방 : -";
-        _baseSpdText.text = "속 : -";
+        if (_baseSpdText != null) _baseSpdText.gameObject.SetActive(false);
     }
 
     void ResetView()

@@ -9,10 +9,7 @@ public class TeamBonusDataSO : ScriptableObject
     [SerializeField] BonusDataSO defenseBonus;
     public BonusDataSO DefenseBonus => defenseBonus;
 
-    [SerializeField] BonusDataSO speedBonus;
-    public BonusDataSO SpeedBonus => speedBonus;
+    public TeamBonusCalculator TeamBonus => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus);
 
-    public TeamBonusCalculator TeamBonus => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, speedBonus.Bonus);
-
-    public TeamBonusCalculator CreateTeamBonusCalculator() => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus, speedBonus.Bonus);
+    public TeamBonusCalculator CreateTeamBonusCalculator() => new TeamBonusCalculator(attackBonus.Bonus, defenseBonus.Bonus);
 }

@@ -6,7 +6,7 @@ public class CheckSelectTutorialTests
 {
     CheckSelectTutorial CreateSut(TutorialQuizConditionData conditionData, Action onSuccess, Action onFailed) => new CheckSelectTutorial(TutorialQuizConditionFactory.Create(conditionData), onSuccess, onFailed);
 
-    Champion CreateChampion(int id = 1, int speed = 5, params Side[] targetSides)
+    Champion CreateChampion(int id = 1, int attack = 5, params Side[] targetSides)
     {
         var skillDatas = targetSides.Select(side => new SkillData(
             SkillType.StatChanger,
@@ -19,33 +19,33 @@ public class CheckSelectTutorialTests
         ));
 
         var skill = new Skill(skillDatas);
-        var status = new ChampionStatus(new ChampionStatData(10, 10, speed));
+        var status = new ChampionStatus(new ChampionStatData(attack, 10));
         return new Champion(id, skill, status);
     }
 
     [Test]
-    public void 속도_조건_이상인_챔피언_선택시_성공_콜백_실행()
+    public void 공격력_조건_이상인_챔피언_선택시_성공_콜백_실행()
     {
         bool isSuccessCalled = false;
         bool isFailedCalled = false;
-        var conditionData = new TutorialQuizConditionData(TutorialQuizType.SpeedAtLeast, 6);
+        var conditionData = new TutorialQuizConditionData(TutorialQuizType.AttackAtLeast, 6);
         var sut = CreateSut(conditionData, () => isSuccessCalled = true, () => isFailedCalled = true);
 
-        sut.SelectChampion(CreateChampion(speed: 6));
+        sut.SelectChampion(CreateChampion(attack: 6));
 
         Assert.IsTrue(isSuccessCalled);
         Assert.IsFalse(isFailedCalled);
     }
 
     [Test]
-    public void 속도_조건_미만인_챔피언_선택시_실패_콜백_실행()
+    public void 공격력_조건_미만인_챔피언_선택시_실패_콜백_실행()
     {
         bool isSuccessCalled = false;
         bool isFailedCalled = false;
-        var conditionData = new TutorialQuizConditionData(TutorialQuizType.SpeedAtLeast, 6);
+        var conditionData = new TutorialQuizConditionData(TutorialQuizType.AttackAtLeast, 6);
         var sut = CreateSut(conditionData, () => isSuccessCalled = true, () => isFailedCalled = true);
 
-        sut.SelectChampion(CreateChampion(speed: 5));
+        sut.SelectChampion(CreateChampion(attack: 5));
 
         Assert.IsFalse(isSuccessCalled);
         Assert.IsTrue(isFailedCalled);
@@ -56,7 +56,7 @@ public class CheckSelectTutorialTests
     {
         bool isSuccessCalled = false;
         bool isFailedCalled = false;
-        var conditionData = new TutorialQuizConditionData(TutorialQuizType.TargetOpponent, 0);
+        var conditionData = new TutorialQuizConditionData(TutorialQuizType.TargetOpponent);
         var sut = CreateSut(conditionData, () => isSuccessCalled = true, () => isFailedCalled = true);
 
         sut.SelectChampion(CreateChampion(targetSides: Side.Opponent));
@@ -70,7 +70,7 @@ public class CheckSelectTutorialTests
     {
         bool isSuccessCalled = false;
         bool isFailedCalled = false;
-        var conditionData = new TutorialQuizConditionData(TutorialQuizType.TargetSelf, 0);
+        var conditionData = new TutorialQuizConditionData(TutorialQuizType.TargetSelf);
         var sut = CreateSut(conditionData, () => isSuccessCalled = true, () => isFailedCalled = true);
 
         sut.SelectChampion(CreateChampion(targetSides: Side.Self));

@@ -1,10 +1,9 @@
-using System.Linq;
 using NUnit.Framework;
 using static TestHelper;
 
 public class CardAttackTests
 {
-    ChampionStatus CreateSut(int attack, int defense, int speed = 0) => CreateStatus(attack, defense, speed);
+    ChampionStatus CreateSut(int attack, int defense) => CreateStatus(attack, defense);
 
     [TestCase(10, 30, 20)]
     [TestCase(25, 25, 0)]
@@ -74,10 +73,10 @@ public class CardAttackTests
     public void 사망한_카드는_생존_점수_계산에서_완전히_제외된다()
     {
         var sut = new SlotStorage<ChampionStatus>();
-        sut.AddSlot(Team.Blue, CreateSut(50, 0, 100));
-        sut.AddSlot(Team.Blue, CreateSut(20, 30, 50));
-        sut.AddSlot(Team.Red, CreateSut(100, 0, 100));
-        sut.AddSlot(Team.Red, CreateSut(10, 15, 50));
+        sut.AddSlot(Team.Blue, CreateSut(50, 0));
+        sut.AddSlot(Team.Blue, CreateSut(20, 30));
+        sut.AddSlot(Team.Red, CreateSut(100, 0));
+        sut.AddSlot(Team.Red, CreateSut(10, 15));
 
         var result = SurvivalScoreCalculator.Calculate(sut);
 
@@ -95,8 +94,8 @@ public class CardAttackTests
     public void 양_팀_생존_카드의_공방_점수에_따라_올바른_승리_팀이_판정된다(int blueAtt, int blueDef, int redAtt, int redDef, Team expectedWinner)
     {
         var sut = new SlotStorage<ChampionStatus>();
-        sut.AddSlot(Team.Blue, CreateSut(blueAtt, blueDef, 999));
-        sut.AddSlot(Team.Red, CreateSut(redAtt, redDef, 1));
+        sut.AddSlot(Team.Blue, CreateSut(blueAtt, blueDef));
+        sut.AddSlot(Team.Red, CreateSut(redAtt, redDef));
 
         var result = SurvivalScoreCalculator.Calculate(sut);
 

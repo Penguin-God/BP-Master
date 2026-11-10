@@ -33,7 +33,7 @@ public class ChampionButtonView : MonoBehaviour
         defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
         attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
         defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
-        speedTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Speed)));
+        if (speedTabBtn != null) speedTabBtn.gameObject.SetActive(false);
     }
 
     void CreateButtons(IEnumerable<int> Ids)

@@ -2,18 +2,18 @@ using NUnit.Framework;
 
 public class MatchResultCalculateTests
 {
-    ChampionStatData CreateStat(int atk = 0, int def = 0, int spd = 0) => new ChampionStatData(atk, def, spd);
+    ChampionStatData CreateStat(int atk = 0, int def = 0) => new ChampionStatData(atk, def);
 
     BonusCalculator CreateEmptyBonus() => new BonusCalculator(new System.Collections.Generic.SortedDictionary<int, int>());
-    
+
     [Test]
     public void 스코어_합_계산()
     {
-        TeamScoreInfo sut = new TeamScoreInfo(10, 10, 2, 2, 2);
+        TeamScoreInfo sut = new TeamScoreInfo(10, 10, 2, 2);
 
         Assert.AreEqual(20, sut.DefaultScore);
-        Assert.AreEqual(6, sut.BonusScore);
-        Assert.AreEqual(26, sut.Total);
+        Assert.AreEqual(4, sut.BonusScore);
+        Assert.AreEqual(24, sut.Total);
     }
 
     [Test]
@@ -22,14 +22,14 @@ public class MatchResultCalculateTests
         var blue = new[]
         {
             CreateStat(12, 4),
-            CreateStat(7,  8),
+            CreateStat(7, 8),
         };
         var red = new[]
         {
             CreateStat(10, 6),
             CreateStat(10, 6),
         };
-        var sut = new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+        var sut = new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus()));
 
         MatchResult result = sut.CalculateResult(blue, red);
 
@@ -43,10 +43,10 @@ public class MatchResultCalculateTests
     {
         var team = new[]
         {
-            CreateStat(10, 10, 5),
-            CreateStat(8,  12, 6),
+            CreateStat(10, 10),
+            CreateStat(8, 12),
         };
-        var sut = new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus()));
+        var sut = new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus()));
 
         MatchResult result = sut.CalculateResult(team, team);
 
@@ -63,7 +63,7 @@ public class MatchResultCalculateTests
         data.AddSlot(Team.Red, TestHelper.CreateStatus(10, 6));
         data.AddSlot(Team.Red, TestHelper.CreateStatus(10, 6));
 
-        var sut = new MatchResultConverter(new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus(), CreateEmptyBonus())));
+        var sut = new MatchResultConverter(new MatchResultBuilder(new TeamBonusCalculator(CreateEmptyBonus(), CreateEmptyBonus())));
 
         MatchResult result = sut.ToResult(data);
 

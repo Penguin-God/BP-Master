@@ -1,5 +1,3 @@
-using System;
-
 public class NullChecker : IChampionCondition
 {
     public bool Check(ChampionStatus status, ChampionStatus caster) => true;
@@ -28,10 +26,7 @@ public class StatThresholdChecker : IChampionCondition // 이상, 이하
             StatConditionType.AttackBelow => stat.Attack <= Threshold,
             StatConditionType.AttackAtLeast => stat.Attack >= Threshold,
 
-            StatConditionType.SpeedBelow => stat.Speed <= Threshold,
-            StatConditionType.SpeedAtLeast => stat.Speed >= Threshold,
-
-            _ => throw new NotImplementedException($"Condition not implemented: {Type}")
+            _ => true
         };
     }
 }
@@ -55,10 +50,7 @@ public class StatComparisonChecker : IChampionCondition // 초과, 미만
             StatConditionType.AttackAtLeast => casterStat.Attack < targetStat.Attack,
             StatConditionType.AttackBelow => casterStat.Attack > targetStat.Attack,
 
-            StatConditionType.SpeedAtLeast => casterStat.Speed < targetStat.Speed,
-            StatConditionType.SpeedBelow => casterStat.Speed > targetStat.Speed,
-            
-            _ => throw new NotImplementedException($"Condition not implemented: {Type}")
+            _ => true
         };
     }
 }

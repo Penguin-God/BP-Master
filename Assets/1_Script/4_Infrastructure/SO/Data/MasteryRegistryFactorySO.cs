@@ -5,7 +5,6 @@ public class MasteryRegistryFactorySO : ScriptableObject
 {
     [SerializeField] int atkMultiplier;
     [SerializeField] int hpMultiplier;
-    [SerializeField] int speedMultiplier;
 
     public MasteryRegistry CreateRegistry(MasteryBoardCollection blueBoard, MasteryBoardCollection redBoard)
     {
@@ -18,5 +17,5 @@ public class MasteryRegistryFactorySO : ScriptableObject
         return new MasteryRegistry(blueMastery, redMastery);
     }
 
-    public MasteryMultiplier CreateMultilpe() => new MasteryMultiplier(atkMultiplier, hpMultiplier, speedMultiplier);
+    public MasteryMultiplier CreateMultilpe() => new MasteryMultiplier(atkMultiplier, hpMultiplier);
 }

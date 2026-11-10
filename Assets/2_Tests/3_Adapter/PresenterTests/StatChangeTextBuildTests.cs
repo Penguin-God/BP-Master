@@ -7,7 +7,7 @@ public class StatChangeTextBuildTests
     public void 스탯_변경_데이터_뷰모델로_변환()
     {
         StatChangePresenter sut = new(Color.green, Color.red);
-        StatChangeData data = new StatChangeData(new ChampionStatData(20, 20, 0), new ChampionStatData(38, 15, 0));
+        StatChangeData data = new StatChangeData(new ChampionStatData(20, 20), new ChampionStatData(38, 15));
 
         var result = sut.CreateViewModel(data);
 
@@ -18,9 +18,5 @@ public class StatChangeTextBuildTests
         Assert.IsTrue(result.Defense.IsChange);
         Assert.AreEqual(Color.red, result.Defense.DeltaTextColor);
         Assert.AreEqual("-5", result.Defense.DeltaText);
-
-        Assert.IsFalse(result.Speed.IsChange);
-        Assert.AreEqual(Color.white, result.Speed.DeltaTextColor);
-        Assert.AreEqual("", result.Speed.DeltaText);
     }
 }

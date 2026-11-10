@@ -5,7 +5,7 @@ public readonly struct ChampionMastery
     public ChampionMastery(int championId, int level)
     {
         ChampionId = championId;
-        MasteryStat = new ChampionStatData(level, level, 0);
+        MasteryStat = new ChampionStatData(level, level);
     }
 
     public ChampionMastery(int championId, ChampionStatData masteryStat)

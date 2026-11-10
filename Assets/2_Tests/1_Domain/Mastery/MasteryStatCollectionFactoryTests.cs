@@ -7,12 +7,12 @@ public class MasteryStatCollectionFactoryTests
     [Test]
     public void 숙련도_보드_컬랙션을_스탯_컬랙션으로_변환()
     {
-        var multiple = new MasteryMultiplier(15, 15, 1);
+        var multiple = new MasteryMultiplier(15, 15);
         var sut = new MasteryCalculator(multiple);
 
-        var result = sut.Create(CreateBoardCollection(new() { { 1, new MasteryBoard(1, 1, 1) } }));
+        var result = sut.Create(CreateBoardCollection(new() { { 1, new MasteryBoard(1, 1) } }));
         
-        Assert.AreEqual(CreateStat(15, 15, 1), result.GetMasteryStat(1));
+        Assert.AreEqual(CreateStat(15, 15), result.GetMasteryStat(1));
         Assert.AreEqual(CreateStat(), result.GetMasteryStat(100));
     }
 }

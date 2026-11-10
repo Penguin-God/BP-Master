@@ -11,7 +11,6 @@ public class SkillTextSO : ScriptableObject
     [Header("스탯 텍스트")]
     [SerializeField] string attackText;
     [SerializeField] string defenseText;
-    [SerializeField] string speedText;
 
     [Header("진영(Side) 텍스트")]
     [SerializeField] string selfSideText;
@@ -32,7 +31,7 @@ public class SkillTextSO : ScriptableObject
     [SerializeField] string template;
 
     StatChangeTextData StatChangeText => new(increaseText, decreaseText, fixText);
-    StatTextData StatText => new(attackText, defenseText, speedText);
+    StatTextData StatText => new(attackText, defenseText);
     SideTextData SideText => new(selfSideText, opponentSideText, allSideText, noneSideText, allCardsText, selectCardsMiddle);
     SkillConvertKey SkillConvertKey => new(conditionKey, ruleKey, statKey, valueKey, actionKey);
 

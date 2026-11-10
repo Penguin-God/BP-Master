@@ -15,8 +15,7 @@ public static class ScoreConvertor
         var stats = storage.GetTeam(team).Select(x => x.Stat);
         int totalAtt = ScoreCalculator.CalculateAttack(stats);
         int totalDef = ScoreCalculator.CalculateDefense(stats);
-        int totalSpd = ScoreCalculator.CalculateSpeed(stats);
 
-        return new ScoreInfo(totalAtt, totalDef, totalSpd);
+        return new ScoreInfo(totalAtt, totalDef);
     }
 }

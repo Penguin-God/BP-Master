@@ -18,13 +18,11 @@ public readonly struct StatTextData
 {
     public readonly string Attack;
     public readonly string Defense;
-    public readonly string Speed;
 
-    public StatTextData(string attack, string defense, string speed)
+    public StatTextData(string attack, string defense)
     {
         Attack = attack;
         Defense = defense;
-        Speed = speed;
     }
 }
 
@@ -77,7 +75,6 @@ public static class AmountTextBuilder
     {
         StatType.Attack => statText.Attack,
         StatType.Defense => statText.Defense,
-        StatType.Speed => statText.Speed,
         _ => ""
     };
 }

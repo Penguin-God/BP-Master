@@ -9,9 +9,8 @@ public struct MasteryBoardSaveData
     public int Id;
     public int AttackLevel;
     public int DefenseLevel;
-    public int SpeedLevel;
 
-    public MasteryBoard CreateBoard() => new MasteryBoard(AttackLevel, DefenseLevel, SpeedLevel);
+    public MasteryBoard CreateBoard() => new MasteryBoard(AttackLevel, DefenseLevel);
 }
 
 [Serializable]
@@ -43,8 +42,7 @@ public class JsonMasterySaver : IMasterySaver
             {
                 Id = kvp.Key,
                 AttackLevel = kvp.Value.AttackLevel,
-                DefenseLevel = kvp.Value.DefenseLevel,
-                SpeedLevel = kvp.Value.SpeedLevel
+                DefenseLevel = kvp.Value.DefenseLevel
             });
         }
 

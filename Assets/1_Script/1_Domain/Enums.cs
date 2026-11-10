@@ -1,6 +1,6 @@
 public enum GamePhase { Ban, Pick, Skill, Done }
 public enum Team { Blue, Red, All }
-public enum StatType { Attack, Defense, Speed }
+public enum StatType { Attack, Defense }
 
 public enum Side { Self, Opponent, All, OneSelf }
 public enum TargetRange
@@ -37,7 +37,4 @@ public enum StatConditionType
 
     AttackBelow,
     AttackAtLeast,
-
-    SpeedBelow,
-    SpeedAtLeast,
 }
