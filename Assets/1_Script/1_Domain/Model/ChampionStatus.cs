@@ -4,6 +4,7 @@ public class ChampionStatus
 {
     public ChampionStatData Stat;
     public event Action<ChampionStatData, ChampionStatData> OnStatChanged;
+    public bool IsDead => Stat.Defense <= 0;
 
     public ChampionStatus(ChampionStatData statData)
     {
@@ -11,6 +12,8 @@ public class ChampionStatus
     }
 
     public ChampionStatus DeepCopy() => new ChampionStatus(Stat);
+
+    public void TakeDamage(int damage) => ChangeStat(Stat.ChangeDefense(Math.Max(0, Stat.Defense - damage)));
 
     public void AddAttack(int att) => ChangeStat(Stat.ChangeAttack(att + Stat.Attack));
     public void AddDefense(int def) => ChangeStat(Stat.ChangeDefense(def + Stat.Defense));
