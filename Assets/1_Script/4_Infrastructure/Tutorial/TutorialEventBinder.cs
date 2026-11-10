@@ -33,7 +33,7 @@ public static class BattleTutorialEventBinder
             {
                 case 0: createTutorial(TutorialTriggerType.FirstPick)(); break;
                 case 1: createTutorial(TutorialTriggerType.SecondPick)(); break;
-                case 2: createTutorial(TutorialTriggerType.ThreedPick)(); break;
+                // case 2: createTutorial(TutorialTriggerType.ThreedPick)(); break;
             }
         }
     }

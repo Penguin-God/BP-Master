@@ -26,7 +26,7 @@ public class StatThresholdChecker : IChampionCondition // 이상, 이하
             StatConditionType.AttackBelow => stat.Attack <= Threshold,
             StatConditionType.AttackAtLeast => stat.Attack >= Threshold,
 
-            _ => true
+            _ => throw new System.ArgumentOutOfRangeException()
         };
     }
 }
@@ -50,7 +50,7 @@ public class StatComparisonChecker : IChampionCondition // 초과, 미만
             StatConditionType.AttackAtLeast => casterStat.Attack < targetStat.Attack,
             StatConditionType.AttackBelow => casterStat.Attack > targetStat.Attack,
 
-            _ => true
+            _ => throw new System.ArgumentOutOfRangeException()
         };
     }
 }

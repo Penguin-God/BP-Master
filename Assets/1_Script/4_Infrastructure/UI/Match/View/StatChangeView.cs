@@ -7,7 +7,6 @@ public class StatChangeView : MonoBehaviour
     [SerializeField] StatView statView;
     [SerializeField] TextMeshProUGUI attChangeText;
     [SerializeField] TextMeshProUGUI defChangeText;
-    [SerializeField] TextMeshProUGUI speedChangeText;
 
     StatChangePresenter statChangePresenter = new StatChangePresenter(Color.green, Color.red);
 
@@ -35,7 +34,6 @@ public class StatChangeView : MonoBehaviour
     {
         attChangeText.gameObject.SetActive(false);
         defChangeText.gameObject.SetActive(false);
-        if (speedChangeText != null) speedChangeText.gameObject.SetActive(false);
     }
 
     void ViewStatChange(StatDeltaViewModel deltaViewModel, TextMeshProUGUI text)

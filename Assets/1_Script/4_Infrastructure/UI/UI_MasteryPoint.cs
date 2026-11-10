@@ -16,15 +16,12 @@ public class UI_MasteryPoint : MonoBehaviour
     [SerializeField] ChampionView _campionView;
     [SerializeField] TextMeshProUGUI _baseAttText;
     [SerializeField] TextMeshProUGUI _baseDefText;
-    [SerializeField] TextMeshProUGUI _baseSpdText;
 
     [SerializeField] Button _upAttBtn;
     [SerializeField] Button _upDefBtn;
-    [SerializeField] Button _upSpdBtn;
 
     [SerializeField] Button _downAttBtn;
     [SerializeField] Button _downDefBtn;
-    [SerializeField] Button _downSpdBtn;
 
     MasteryPointPresenter _presenter;
     IEnumerable<UI_CardItem> _cards;
@@ -45,11 +42,9 @@ public class UI_MasteryPoint : MonoBehaviour
     {
         _upAttBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Attack));
         _upDefBtn.onClick.AddListener(() => ClickUpgradeBtn(StatType.Defense));
-        if (_upSpdBtn != null) _upSpdBtn.gameObject.SetActive(false);
 
         _downAttBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Attack));
         _downDefBtn.onClick.AddListener(() => ClickDowngradeBtn(StatType.Defense));
-        if (_downSpdBtn != null) _downSpdBtn.gameObject.SetActive(false);
     }
 
     void ClickUpgradeBtn(StatType statType)
@@ -107,14 +102,12 @@ public class UI_MasteryPoint : MonoBehaviour
 
         _baseAttText.text = championModel.StatModel.Attack;
         _baseDefText.text = championModel.StatModel.Defense;
-        if (_baseSpdText != null) _baseSpdText.gameObject.SetActive(false);
     }
 
     void ClearDetailView()
     {
         _baseAttText.text = "공 : -";
         _baseDefText.text = "방 : -";
-        if (_baseSpdText != null) _baseSpdText.gameObject.SetActive(false);
     }
 
     void ResetView()

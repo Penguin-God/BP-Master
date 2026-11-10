@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class ChampionButtonView : MonoBehaviour
@@ -14,7 +13,6 @@ public class ChampionButtonView : MonoBehaviour
     [SerializeField] Button defaultTabBtn;
     [SerializeField] Button attackTabBtn;
     [SerializeField] Button defenseTabBtn;
-    [SerializeField] Button speedTabBtn;
 
     IEnumerable<UI_CardItem> _cards;
     UnityAction<ChampionSO> clickEvent;
@@ -33,7 +31,6 @@ public class ChampionButtonView : MonoBehaviour
         defaultTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Default)));
         attackTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Attack)));
         defenseTabBtn.onClick.AddListener(() => CreateButtons(GetTabIds(champions, ChampionSortType.Defense)));
-        if (speedTabBtn != null) speedTabBtn.gameObject.SetActive(false);
     }
 
     void CreateButtons(IEnumerable<int> Ids)
