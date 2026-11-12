@@ -1,16 +1,15 @@
 using static TestHelper;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 public class BonusDeltaCalculateTests
 {
     [Test]
     public void 보너스_오르는거_계산하기()
     {
-        TeamBonusCalculator teamBonusCalculator = new TeamBonusCalculator(new BonusCalculator(new SortedDictionary<int, int>() { { 100, 100 }, { 200, 200 } }), CreateBonus(0, 0));
+        TeamBonusCalculator teamBonusCalculator = new TeamBonusCalculator(new BonusCalculator(new() { { 100, 100 }, { 200, 200 } }), CreateBonus(0, 0));
         var sut = new BonusDeltaCalculator(teamBonusCalculator);
 
-        var before = new GameScoreInfo(new ScoreInfo(100, 100), new ScoreInfo(100, 100));
+        var before = new GameScoreInfo(new ScoreInfo(0, 100), new ScoreInfo(100, 100));
         var after = new GameScoreInfo(new ScoreInfo(200, 100), new ScoreInfo(0, 100));
 
         int result = sut.Calculate(before, after, Team.Blue);
